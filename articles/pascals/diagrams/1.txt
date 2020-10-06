@@ -1,0 +1,17 @@
+~triangle O_1 O_2 O_3
+X := (O_2+2*O_3)/3
+Y := (2*O_2+O_3)/3
+Z := (O_1+O_3)/2
+A := IP3(CP(O_2,X),CP(O_3,Y),1)
+B := IP3(CP(O_2,X),CP(O_3,Y),2)
+C := IP3(CP(O_2,X),CP(O_1,Z),1)
+D := IP3(CP(O_2,X),CP(O_1,Z),2)
+E := IP3(CP(O_1,Z),CP(O_3,Y),1)
+F := IP3(CP(O_1,Z),CP(O_3,Y),2)
+
+CP(O_1,Z)
+CP(O_2,X)
+CP(O_3,Y)
+A--B
+C--D
+E--F

@@ -1,0 +1,779 @@
+\documentclass[11pt,paper=letter]{scrartcl}
+\usepackage[wide,boxthm]{cjquines}
+
+\begin{document}
+
+\title{2018--19 in review}
+\author{Carl Joshua Quines}
+\date{February 26, 2019}
+\maketitle
+
+\begin{abstract}
+  I review some of the Philippine high school math contests in the 2018--19 season. My top ten favorite problems from this year are discussed, as well as some honorable mentions. I give some comments for each competition.
+\end{abstract}
+
+\section{Top ten favorites}
+
+\begin{enumerate}
+  \item[10.] Find all integer values of $x$ such that $x^2 + 19x + 88$ is a perfect square.
+
+  \item[9.] Solve for $x$: $(1234x-1)^3+(567x-2)^3=(1801x-3)^3$.
+
+  \item[8.] When Kobie goes to school, he walks half the time and runs half the time. When he comes home from school, he walks half the distance and runs half the distance. If he runs twice as fast as he walks, find the ratio of the time it takes for him to get to school, to the time it takes for him to come home from school.
+
+  \item[7.] What is the value of $$\sum_{m=1}^{\infty} \sum_{n=1}^{\infty} \frac{m^2n}{3^m \del{n3^m + m3^n}}?$$
+
+  \item[6.] Let $a$, $b$, and $c$ be integers from $0$ to $9$, inclusive. How many triples $(a, b, c)$ are there such that the three-digit number $\overline{abc}$ is a prime and the function $f(x) = ax^2 + bx + c$ has at least one rational zero?
+
+  \item[5.] In triangle $ABC$, $D$ and $E$ are points on sides $AB$ and $AC$ respectively, such that $BE$ is perpendicular to $CD$. Let $X$ be a point inside the triangle such that $\angle XBC = \angle EBA$ and $\angle XCB = \angle DCA$. If $\angle A = 54\dg$, what is the measure of $\angle EXD$?
+
+  \item[4.] Let $\cbr{a_n}$ be an infinite sequence of integers such that for $n \geq 1$, $$a_{n+2} = 7a_{n+1}^2 + a_n$$ where $a_1 = 1$ and $a_2 = 25$. What is the remainder when $a_{2018!}$ is divided by $41$?
+
+  \item[3.] Find the smallest positive integer that is $20\%$ larger than one integer and $19\%$ smaller than another.
+
+  \item[2.] Let $ABCD$ be a quadrilateral such that $AB$ and $CD$ have lengths $15$ and $27$, respectively. Suppose $X_1$ and $X_2$ lie on the side $DA$ such that $AX_1 = X_1X_2 = X_2D$ and that $Y_1$ and $Y_2$ lie on the side $BC$ such that $BY_1 = Y_1Y_2 = Y_2C$. If $X_1Y_1$ has length $16$, then what is the length of $X_2Y_2$?
+
+  \item[1.] For each positive integer $n$, let $\phi(n)$ be the number of positive integers from $1$ to $n$ that are relatively prime to $n$. Evaluate $$\sum_{n=1}^{\infty} \frac{\phi(n)4^n}{7^n - 4^n}.$$
+\end{enumerate}
+
+\subsection{Discussion}
+
+\begin{probboxed}
+  [LOTM JHS Team Finals 1] Find all integer values of $x$ such that $x^2 + 19x + 88$ is a perfect square.
+\end{probboxed}
+
+A charming problem! Perhaps not the best problem to start a round with, but definitely a strong problem on its own. 
+
+Let $m^2 = x^2 + 19x + 88$, for some $m$. The key idea is to \bluebf{consider the discriminant}, which must be a perfect square, say, $n^2$. We get $19^2 - 4(88 - m^2) = n^2$, which simplifies to $(n - 2m)(n + 2m) = 9$. 
+
+The only ugly thing about this problem is the case bash: you now have to go through six cases to find $m = -2, 0, 2$. From this, we find that $x = -7, -8, -11, -12$ all work.\footnote{Sir Eden informs me of a way without bashing: If $m^2$ is a perfect square, then so is $4m^2 = (2x+19)^2 - 9$. So you have two perfect squares differing by $9$; you immediately recover $2x + 19 = \pm5, \pm3$. Thanks!}
+
+\begin{probboxed}
+  [MMC Individual Finals 10B/II.4] Solve for $x$: $(1234x-1)^3+(567x-2)^3=(1801x-3)^3$.
+\end{probboxed}
+
+Yes, you read that right: an \emph{MMC} problem made my favorites. This means that MMC problems are gradually getting better, if not immediately getting better. In particular, this problem made my favorites because \bluebf{it's completely unlike MMC to give a nice problem like this}, hence why it's one of my favorites!
+
+Observe that $\del{1234x - 1} + \del{567x- 2} = 1801x-3$. So this inspires us to make the substitutions $a = 1234x - 1$ and $b = 567x - 2$, resulting in $a^3 + b^3 = (a + b)^3$. This simplifies to $3ab(a + b) = 0$, and thus either $a = 0$, $b = 0$, or $a + b = 0$. Thus, $$x = \dfrac1{1234}, \dfrac2{567}, \dfrac3{1801}$$ by the zero factor theorem. The well-read reader will recognize this as $a^3 + b^3 + c^3 = 3abc$ when $a + b + c = 0$; indeed, my favorite proof is to substitute $c = -(a + b)$.
+
+Note that this is part of Individual Finals Part II, which means solutions are required. A fun way to write the solution is to simply give the three solutions of the cubic, show that they work when substituted, and argue that there can't be any more solutions because it's a cubic polynomial.
+
+\begin{probboxed}
+  [\href{http://cjquines.com/files/sipnayan2018jhs.pdf}{Sipnayan JHS Semifinals A E4}] When Kobie goes to school, he walks half the time and runs half the time. When he comes home from school, he walks half the distance and runs half the distance. If he runs twice as fast as he walks, find the ratio of the time it takes for him to get to school, to the time it takes for him to come home from school.
+\end{probboxed}
+
+This shows that \bluebf{a problem doesn't have to be \emph{hard} in order to be \emph{nice}}. This also shows that a problem can be about a simple, easy topic, while still being creative. If I remember correctly, this problem is by my good friend Matthew (Isidro), so good job Matthew (or whoever the author is) for writing this!
+
+Without loss of generality, suppose that it takes Kobie $2$ hours to go to school, and that his walking speed is $1\,\text{kph}$. Then the distance would be $3\,\text{km}$. It would take him $$\dfrac{1.5\,\text{km}}{1\,\frac{\text{km}}{\text{hr}}} = 1.5\,\text{hr}$$ to walk half of the distance, and another $$\dfrac{1.5\,\text{km}}{2\,\frac{\text{km}}{\text{hr}}} = 0.75\,\text{hr}$$ to run the other half of the distance. In total, it takes him $2.25$ hours, and the ratio is $2 : 2.25 = 8 : 9$.
+
+Of course, it's possible to do this problem in full generality, and you'd still get the same answer. The problem is nice not because of a witty solution, but because of its simple, elegant statement. \emph{Dear MMC:} can we have more problems like these?
+
+\begin{probboxed}
+  [LOTM SHS Semifinals 15] What is the value of $$\sum_{m=1}^{\infty} \sum_{n=1}^{\infty} \frac{m^2n}{3^m \del{n3^m + m3^n}}?$$
+\end{probboxed}
+
+By symmetry, this is the same sum as $$\sum_{m=1}^{\infty} \sum_{n=1}^{\infty} \frac{mn^2}{3^n \del{n3^m + m3^n}}.$$ So we add the two summations! The inner term becomes
+\begin{align*}
+  \frac{m^2n}{3^m \del{n3^m + m3^n}} + \frac{mn^2}{3^n \del{n3^m + m3^n}} &= \frac{mn}{n3^m + m3^n}\del{\frac{m}{3^m} + \frac{n}{3^n}} \\
+  &= \frac{1}{\frac{n3^m + m3^n}{mn}}\del{\frac{m}{3^m} + \frac{n}{3^n}} \\
+  &= \frac{1}{\frac{3^m}{m} + \frac{3^n}{n}}\del{\frac{m}{3^m} + \frac{n}{3^n}}
+\end{align*}
+which suggests the substitution $a_m = \dfrac{m}{3^m}$ and $a_n = \dfrac{n}{3^n}$:
+\begin{align*}
+  \sum_{m=1}^{\infty} \sum_{n=1}^{\infty} \frac{1}{\frac{3^m}{m} + \frac{3^n}{n}}\del{\frac{m}{3^m} + \frac{n}{3^n}} &= \sum_{m=1}^{\infty} \sum_{n=1}^{\infty} \frac{a_m+a_n}{\frac{1}{a_m} + \frac{1}{a_n}} \\
+  &= \sum_{m=1}^{\infty} \sum_{n=1}^{\infty} a_ma_n \\
+  &= \del{\sum_{m=1}^{\infty} a_m}\del{\sum_{n=1}^{\infty} a_n},
+\end{align*}
+which simplifies (with standard methods) to $\dfrac9{16}$. Remembering that we added the two summations, the final summation is equal to $\dfrac9{32}$.
+
+Really, \bluebf{the idea of using symmetry is amazing}. Compare this problem to,\footnote{Ankan points out that this problem is \href{https://artofproblemsolving.com/community/c7h513428p2882541}{Putnam 1999/A4}.} for example, \href{https://s3.amazonaws.com/hmmt-archive/february/2019/HMMTFebruary2019AlgebraandNumberTheoryTest.pdf}{HMMT Algebra and Number Theory 2019/7}, which is finding
+$$\sum_{a=1}^{\infty}\sum_{b=1}^{\infty}\sum_{c=1}^{\infty} \frac{ab(3a+c)}{4^{a+b+c}(a+b)(b+c)(c+a)}.$$
+
+\begin{probboxed}
+  [LOTM SHS Eliminations A4] Let $a$, $b$, and $c$ be integers from $0$ to $9$, inclusive. How many triples $(a, b, c)$ are there such that the three-digit number $\overline{abc}$ is a prime and the function $f(x) = ax^2 + bx + c$ has at least one rational zero?
+\end{probboxed}
+
+This reminds me of an MMC---yes, an \emph{MMC} problem, back when I was in Grade 7 or Grade 8. It was along the lines of ``Given $6x^2 + 47x + 77 = (2x + 11)(3x + 7)$, factorize $64\,777$.'' Similar to that problem, \bluebf{the key idea is to consider $f(10)$}!
+
+If $f$ did have at least one rational zero, then it can be written as $(mx + n)(px + q)$ for some $m$, $n$, $p$, $q$, and then you'd get $\overline{abc} = \overline{mn} \cdot \overline{pq}$. Now, if $a \neq 0$, then both $m \neq 0$ and $p \neq 0$, so these are two two-digit numbers multiplying to a prime, contradiction!
+
+The only remaining case is when $a = 0$. Then $f(x) = bx + c$ always has the zero $-\dfrac cb$, unless $b = 0$. There are $21$ primes $\overline{bc}$ between $10$ and $99$ when $b \neq 0$, so that gives $21$ triples. If $b = 0$, then we have another triple $(0, 0, 0)$. The final count is $22$ triples.
+
+So yes. Even after five or six years, I'm still a sucker for ``relate polynomials to base-$n$ representations''. Some people just never change.
+
+\begin{probboxed}
+  [\href{http://cjquines.com/files/pmo2019quals.pdf}{PMO Qualifying III.4}] In triangle $ABC$, $D$ and $E$ are points on sides $AB$ and $AC$ respectively, such that $BE$ is perpendicular to $CD$. Let $X$ be a point inside the triangle such that $\angle XBC = \angle EBA$ and $\angle XCB = \angle DCA$. If $\angle A = 54\dg$, what is the measure of $\angle EXD$?
+\end{probboxed}
+
+There are two reasons I like this problem. The first reason is that everyone I know who solved it on the test hacked it. And by \emph{hack}, I mean \emph{got the correct answer without solving it}. This is the subject of \href{https://cjquines.com/files/drafts/hacking.pdf}{a handout I'm writing right now}, so stay tuned! 
+
+Anyway, the bad hacky solution for this problem is to draw a careful diagram and then measure $\angle EXD$. This is \emph{not a good idea}, because precision error is a thing! At least one person I know got the wrong answer because they measured $30\dg$ instead of $36\dg$. Press F to pay respects.
+
+The \emph{good} hacky solution is to \bluebf{take the limit as $D$ approaches $A$}. Then $E$ approaches the foot from $B$ to $AC$, and $X$ coincides with $B$. Thus $\angle EXD$ becomes $\angle EBA$. But $\triangle BEA$ is right, so $\angle EBA = 90\dg - \angle EAB = 36\dg$. 
+
+The second reason I like this problem is because the magical solution is extremely magical. I've discussed this in a different document, so I'll only sketch it here. \bluebf{Let $Z$ be the foot from $X$ to $BC$.} Prove that $\triangle DYB \sim \triangle XZB$ and $\triangle EYC \sim \triangle XZC$, and then you're done. 
+
+It's beautiful, it's magical, it's straight from the book, and it's too good for us. \emph{Too good}. We don't \emph{deserve} such awe-inspiring solutions.
+
+\begin{probboxed}
+  [\href{http://cjquines.com/files/sipnayan2018shs.pdf}{Sipnayan SHS Written V1}] Let $\cbr{a_n}$ be an infinite sequence of integers such that for $n \geq 1$, $$a_{n+2} = 7a_{n+1}^2 + a_n$$ where $a_1 = 1$ and $a_2 = 25$. What is the remainder when $a_{2018!}$ is divided by $41$?
+\end{probboxed}
+
+A very nice problem by Kyle (Dulay), if I remember correctly. It would be very boring if it was another problem that used the fact that an integer recurrence is periodic modulo anything. This problem is nice because \bluebf{it uses a well-known fact in a creative manner}.
+
+We'll consider the sequence modulo $41$. Note that $a_{n+2}$ depends only on $a_{n+1}$ and $a_n$. But there are a finite number of ordered pairs $\del{a_n, a_{n+1}}$, so it will eventually be periodic. In particular, as there are $41^2 = 1681$ such ordered pairs, \bluebf{the period is at most $1681$}.
+
+So the period can be anything from $2$ to $1681$. Either way, the period divides $2018!$. So that means that $a_{2018!}$ is the same as $a_0$, modulo $41$! It remains to use the recurrence at $n = 0$ to find $a_0 = a_2 - 7a_1^2 = 18$, which is the answer.
+
+It's a very pretty idea to not only use the fact that the sequence is periodic, but that the period is less than a certain number. On top of that, you also need to have the idea of \bluebf{extending the sequence backwards}. So the solution, when written out, is deceptively simple, but the combination of these ideas make the problem challenging.
+
+\begin{probboxed}
+  [PMO National Orals E7] Find the smallest positive integer that is $20\%$ larger than one integer and $19\%$ smaller than another.
+\end{probboxed}
+
+This may be a surprising choice, but I think this is the year's best example of \bluebf{a problem doesn't have in order to be hard to be nice}. It would make a strong opening problem for any problem set: it's easy but elegant. Elegant in the sense that it's both \emph{new}, as in different to a lot of existing problems, and yet \emph{simple}. 
+
+Suppose the positive integer is $b$, which is $20\%$ larger than $a$ and $19\%$ smaller than $c$. This means that
+$$\frac{120}{100}a = b = \frac{81}{100}c.$$
+The first equation gives $a = \frac56 b$, and the second equation gives $c = \frac{100}{81}b$, so $b$ is both divisible by $6$ and $81$. The smallest such $b$ is $162$, which is the answer. Again, PMO gives us another problem we don't deserve. 
+
+\begin{probboxed}
+  [Sipnayan SHS Finals V-PW] Let $ABCD$ be a quadrilateral such that $AB$ and $CD$ have lengths $15$ and $27$, respectively. Suppose $X_1$ and $X_2$ lie on the side $DA$ such that $AX_1 = X_1X_2 = X_2D$ and that $Y_1$ and $Y_2$ lie on the side $BC$ such that $BY_1 = Y_1Y_2 = Y_2C$. If $X_1Y_1$ has length $16$, then what is the length of $X_2Y_2$?
+\end{probboxed}
+
+This is on my list for two different reasons again. Because of the way Sipnayan works, the category for this problem was announced before the actual problem was read. It was categorized as a ``geometry problem written by Kyle Dulay.''
+
+Teams were then given the opportunity to raise a flag before the question was read: if they raised the flag, they would get twice the number of points if they are correct, but they would be deducted the points alloted if they are wrong. None of the teams raised their flags. That's the first reason.
+
+The second reason is because one solution is elegant. Kyle's solution, a cosine law bash, is ugly. But there's a nice, motivated solution that very neatly solves the problem. Despite being motivated, it's still pretty hard to think of.
+
+\bluebf{A good choice of variables nearly solves the problem.} Position $ABCD$ in the plane, and project $AB$ to the $x$- and $y$-axes. Suppose the lengths of its projections are $a$ and $b$, such that $a^2 + b^2 = AB^2$. We can similarly project $X_1Y_1$ with lengths $a + c$ and $b + d$, and get $(a + c)^2 + (b + d)^2 = X_1Y_1^2$.
+
+Why this choice of coordinates? Because if we project $X_2Y_2$, then the lengths would then be $a + 2c$ and $b + 2d$. Similarly, if we project $CD$, then the lengths would be $a + 3c$ and $b + 3d$. This neat choice of lengths solves the problem! We can set up the system of equations as
+\begin{align*}
+  a^2 + b^2 &= 225 \\
+  (a + c)^2 + (b + d)^2 &= 256 \\
+  (a + 2c)^2 + (b + 2d)^2 &= x \\
+  (a + 3c)^2 + (b + 3d)^2 &= 729.
+\end{align*}
+From here, we need to find $x$. And here comes the second very nice idea: \bluebf{use finite differences}. Indeed, we can consider the polynomial
+$$f(n) = (a + nc)^2 + (b + nd)^2,$$
+which is a quadratic in terms of $n$. And we're given the values $f(0) = 225$, $f(1) = 256$, and $f(3) = 729$. Now when we compute the differences, we get
+\begin{center}
+\begin{tabular}{ccccccc}
+  225 & & 256 & & $x$ & & 729 \\
+  & 31 & & $x - 256$ & & $729 - x$ & \\
+  & & $x - 287$ & & $985 - 2x$ & &
+\end{tabular}
+\end{center}
+Because this is a quadratic, the second differences are the same. Equating the two second differences we get $985 - 2x = x - 287$, so $x = 424$. The answer is now $\sqrt{x} = 2\sqrt{106}$. Isn't that such a nice problem?
+
+\begin{probboxed}
+  [PMO National Orals D5] For each positive integer $n$, let $\varphi(n)$ be the number of positive integers from $1$ to $n$ that are relatively prime to $n$. Evaluate $$\sum_{n=1}^{\infty} \frac{\varphi(n)4^n}{7^n - 4^n}.$$
+\end{probboxed}
+
+And now we come to this, which is my favorite problem this year. This is similar to \href{http://www.cmimc.org/docs/past-tests/2018_NumberTheory.pdf}{CMIMC Number Theory 2018/9}, but I'm pretty sure this was written independently of that problem.
+
+Like almost all summation problems, the main idea is to \emph{switch the order of summation}. And since we only have one summation, we'll have to \bluebf{introduce more summations}. The $7^n - 4^n$ suggests introducing an infinite geometric series by dividing the numerator and denominator by $7^n$:
+$$\sum_{n=1}^{\infty} \frac{\varphi(n)4^n}{7^n - 4^n} = \sum_{n=1}^{\infty} \varphi(n) \del{\frac{\del{\frac47}^n}{1 - \del{\frac47}^n}} = \sum_{n=1}^{\infty} \varphi(n) \sum_{m=1}^{\infty} \del{\frac47}^{mn}.$$
+Now we \bluebf{change the order of summation}. Somehow, we want to use the well-known summation $\sum_{d\mid n}\varphi(d) = n$. The good candidate for that is to use $n \mid mn$. So instead of summing over $m$ and $n$, we'll instead sum over $mn$. Letting $mn = s$, $n$ can then be any divisor of $s$:
+$$\sum_{n=1}^{\infty} \varphi(n) \sum_{m=1}^{\infty} \del{\frac47}^{mn} = \sum_{s=1}^{\infty} \del{\frac47}^{s} \sum_{n \mid s}^{\infty} \varphi(n) = \sum_{s=1}^{\infty} \del{\frac47}^{s}\del{s}.$$
+And this final sum can be determined using standard methods: it's $\dfrac{28}{3}$.
+
+\subsection{Honorable mentions}
+
+Here are twelve problems (sorted roughly by difficulty) that didn't quite make the cut, along with some (short!) commentary:
+
+\begin{probboxed}
+  [\href{http://cjquines.com/files/mathira2019.pdf}{Mathira Orals T2-1}] The $n$th term of an arithmetic sequence is $m$ and the $m$th term is $n$. Find the $(m+n)$th term.
+\end{probboxed}
+
+The statement as is isn't quite correct; we need to have $m \neq n$. It's a nice and elegant problem, but perhaps too easy for its context. One of the better Mathira questions this year, which, given the qualify of this question, is a bit sad.
+
+\begin{probboxed}
+  [PMO Qualifying I11] The points $(0, -1)$, $(1, 1)$, and $(a, b)$ are distinct collinear points on the graph of $y^2 = x^3 - x + 1$. Find $a + b$.
+\end{probboxed}
+
+I only like this problem because it's the \href{https://en.wikipedia.org/wiki/Elliptic_curve\#The_group_law}{group law on an elliptic curve}, kind of. It's nice flavor for an otherwise boring problem. Flashbacks to MOSC with Sir Dimabayao, I think, discussing what the BSD conjecture was. 
+
+\begin{probboxed}
+  [LOTM SHS Eliminations A7] Find the largest possible value of the five-digit number $\overline{PUMaC}$ in the cryptarithm shown below. Here, identical letters represent the same digits and distinct letters represent distinct digits.
+  \begin{center}
+    \begin{tabular}{ccccc}
+      & $N$ & $I$ & $M$ & $O$ \\
+      $+$ & $H$ & $M$ & $M$ & $T$ \\ \hline
+      $P$ & $U$ & $M$ & $a$ & $C$
+    \end{tabular}
+  \end{center}
+\end{probboxed}
+
+Like the previous problem, I like this one more for the flavor than the actual problem. I mean, come on! $NIMO + HMMT = PUMaC$? Isn't that the apotheosis of LOTM, the contest known for copying problems from other contests?
+
+\begin{probboxed}
+  [Pitagoras Finals W23] $PTGR$ is a regular tetrahedron with side length $2020$. What is the area of the cross section of $PTGR$ cut by the plane that passes through the midpoints $PT$, $PG$, and $GR$?
+\end{probboxed}
+
+One of the few problems in Pitagoras that are interesting, even if not completely new. I feel that it's easier than its placement on the contest: it's just that three-dimensional geometry is unfamiliar to most contestants, making this look harder than it actually is.
+
+Here's a hint: four vertices of a cube, no two of which are adjacent, form a regular tetrahedron. Now what is the figure formed by the midpoints of $PT$, $PG$, and $GR$? \bluebf{In general, a good trick to deal with regular tetrahedra is to inscribe them in a cube.}
+
+\begin{probboxed}
+  [MMC Individual Finals 10B/II.1] A cubic polynomial $P(x)$ satisfies $P(3)=3,P(5)=5,P(7)=7,P(10)=5$. Find $P(12)$.
+\end{probboxed}
+
+MMC takes another stride towards having better problems, even if they may not be completely suited to the contest itself. This would work better in Part III rather than Part II. As a hint, consider the cubic polynomial $Q(x) = P(x) - x$: what are its roots? How can you find its leading coefficient?
+
+\begin{probboxed}
+  [Mathira Orals T12-3] Let $w = a + b + c + d$, $x = d - c + b - a$, $y = a^2 + b^2 + c^2 + d^2$, and $z = \dfrac{a+c}{b+d}$, where $a$, $b$, $c$, and $d$ are rational numbers. If the set $S = \cbr{w, x, y, z}$ is arranged in increasing order, then the resulting set is $T = \cbr{\dfrac{29}{68}, \dfrac{13}7, \dfrac{97}{21}, \dfrac{2735}{441}}$. Find the value of $ab + ac + ad + bc + bd + cd$.
+\end{probboxed}
+
+A great problem from Mathira---this one only barely missed my top ten favorites. My gripe with this problem that it's a tad too easy for its placement, as the last problem in the orals. That aside, \bluebf{it's the kind of creative problem that I love Mathira for}, and I'd love to see more problems like it next year.
+
+Here's the solution. It's easy to identify that $z$ is the first number and that $y$ is the last number, based on the denominators. That leaves $w$ and $x$, and you know that $w > x$, so it must be the third number. Then the answer is $\frac12\del{w^2 - y}$.
+
+\begin{probboxed}
+  [Sipnayan JHS Finals D-RL] Find the greatest common divisor of $2^{2018} + 2072$ and $2^{2019} + 2128$.
+\end{probboxed}
+
+Thank you, Sipnayan, for reminding our high school students that the \href{https://en.wikipedia.org/wiki/Euclidean_algorithm}{Euclidean algorithm} is a thing that exists. Indeed:
+\begin{align*}
+  \del{2^{2019} + 2128, 2^{2018} + 2072}
+  &= \del{2^{2018} + 2072, 2^{2019} + 2128 - 2\del{2^{2018} + 2072}} \\
+  &= \del{2^{2018} + 2072, -2016}.
+\end{align*}
+Now $2^{2018} + 2072$ is clearly divisible by $2^3$ but not $2^4$, is divisible by $3$ but not $9$, and is not divisible by $7$. As $2016 = 2^5 \cdot 3^2 \cdot 7$, the greatest common divisor is thus $2^3 \cdot 3 = 24$.
+
+\begin{probboxed}
+  [LOTM SHS Semifinals 12] In a class of $10$ students, the probability that exactly $i$ ($i$ from $0$ to $10$) students passed an exam is directly proportional to $i^2$. If a student is selected at random, find the probability that s/he passed the exam.
+\end{probboxed}
+
+Conditional probability is something that many contestants will be familiar with, and it's not hard to find a problem from a recent local contest that involves conditional probability. But this is a great problem because \bluebf{it uses an often-used concept in a creative manner}.
+
+For the solution. Let $P\del{N_i} = ki^2$ be the probability that exactly $i$ students passed, for some constant $k$, which can be easily solved. Then $P(A) = \sum P\del{A \mid N_i}P\del{N_i}$. But $P\del{A \mid N_i} = \frac i{10}$, so this sum becomes $\frac k{10} \sum i^3$. 
+
+Note that the work in this problem can be split independently to two people: one to solve for $k$ and the other to find the probability in terms of $k$. It's good if \bluebf{team problems can be solved in parallel by the members of the team}, since that's the point of a team competition anyway!
+
+\begin{probboxed}
+  [Mathira Orals T10-1] The diagram below shows a grid with $n$ rows, with the $k$th row being composed of $2k-1$ identical equilateral triangles for all $k \in \cbr{1, \ldots, n}$. If there are $513$ different rhombuses each made up of two adjacent smaller triangles in the grid, what must be the value of $n$?
+  \begin{center}
+    \begin{asy}
+      size(5cm);
+      int k = 4;
+      pair A = (-0.5, -sqrt(3)/2);
+      void f(pair x) {
+        draw(x--(x+A)--(x+A+(1,0))--x);
+      }
+      void g(pair x) {
+        draw(x--(x+A)--(x+A+(1,0))--x, dashed);
+      }
+      pair O = (0, 0);
+      for (int i = 0; i < k; ++i) {
+        for (int j = 0; j <= i; ++j) {
+          f(O+(j,0));
+        }
+        O = O + A;
+      }
+      for (int j = 0; j <= k; ++j) {
+        g(O+(j,0));
+      }
+      O = O+A;
+      for (int j = 0; j <= k+1; ++j) {
+        f(O+(j,0));
+      }
+      draw((-0.25,0)--O+A+(-0.25,0));
+      label((O+A)/2 + (-0.5, 0), "$n$");
+    \end{asy}
+  \end{center}
+\end{probboxed}
+
+I like this problem because an estimate will get you the right answer. I think that \bluebf{estimation skills, in general, are underutilized}. There are $n^2$ triangles in total. Each triangle is a part of approximately three rhombuses, and each rhombus is made from two triangles, so there are about $\frac32n^2$ rhombuses. Equating to $513$ and solving, we get $n \approx 18.49$.
+
+Now, is the answer $18$ or $19$? ``Approximately three rhombuses'' is in fact ``at most three rhombuses'', so we actually have $513 < \frac32n^2$. Hence this is $n > 18.49$, and we guess $n = 19$. Which is the correct answer!
+
+\begin{probboxed}
+  [Sipnayan JHS Semifinals A A2] How many ordered triples of integers $(a, b, c)$ are there such that the least common multiple of $a$, $b$, and $c$ is $2016$?
+\end{probboxed}
+
+This feels like the kind of problem that's been done before. The kind of problem that's copied from another source, or in some really old test from at least a decade ago. But a cursory search does not reveal any sources. So really, \bluebf{this is a problem that's new yet simple}---exactly the same reason why PMO National Orals E7 is my top three favorite this year.
+
+As a hint to solve this problem, consider the exponents of $2$, $3$, and $5$ in the prime factorization of $a$, $b$, and $c$.
+
+\begin{probboxed}
+  [PMO National Orals D4] In acute triangle $ABC$, $M$ and $N$ are the midpoints of sides $AB$ and $BC$, respectively. The tangents to the circumcircle of triangle $BMN$ at $M$ and $N$ meet at $P$. Suppose that $AP$ is parallel to $BC$, $AP = 9$, and $PN = 15$. Find $AC$.
+\end{probboxed}
+
+This is an absolutely magical problem. For the solution, let $PN$ intersect $BC$ at $Q$. Then $BQAP$ is a parallelogram, so $QN = NP = 15$ and $BQ = AP = 9$. Power of a point on $Q$, as $QN$ is tangent to $(BMN)$, yields $BM = 16$. Then Apollonius's theorem on triangle $QMN$ gives $MN$, which is half of $AC$. 
+
+The motivation does seem pretty non-existent. But well, you have \bluebf{midpoints and parallel lines}, which definitely clues you in to doing something that's either projective, or to construct a parallelogram. After all: \href{http://web.evanchen.cc/handouts/BMC_Parallelograms/BMC_Parallelograms.pdf}{all you have to do is construct a parallelogram!}
+
+\begin{probboxed}
+  [\href{http://cjquines.com/files/pmo2019areas.pdf}{PMO Areas I20}] Suppose that $a, b, c$ are real numbers such that $$\frac1a + \frac1b + \frac1c = 4\del{\frac1{a+b} + \frac1{b+c} + \frac1{c+a}} = \frac c{a+b} + \frac a{b+c} + \frac b{c+a} = 4.$$ Determine the value of $abc$.
+\end{probboxed}
+
+This is such a nice problem! It's a bit of an algebra bash, and it feels a bit standard, which is why it didn't make my top ten. The main idea of the solution is pretty simple: we want to use Vieta's, so we need to relate $a + b + c$, $ab + bc + ca$, and $abc$ to each other. That way we can construct a polynomial or something.
+
+The other main idea is also nice, albeit a bit overdone: \bluebf{if the numerator and denominator sum to something nice, add $1$ to the fraction}. Some day I'm going to collect all of the problems where the ``add $1$ to a fraction'' trick helps, because I really can't pin down exactly \emph{when} it's useful. 
+
+I won't give the whole solution here; you can find it in my \href{http://cjquines.com/files/pmo2019areas.pdf}{areas write-up}.
+
+\section{Competition comments}
+
+Let me start with a disclaimer: \bluebf{everything that follows is opinion. In particular, I expect you to disagree with about thirty percent of this.} Even though this is the same format as my other writing, it's not intended to be as authoritative. I've never run a competition before. Take everything with a grain of salt.
+
+Here's another disclaimer: a lot of the comments here will be negative. That doesn't mean I disliked the contests: in fact, \bluebf{I think most of the contests this year did a really good job}. This is because I already gave all the positive comments I could in the previous section. Please don't misread this document: I'm trying to give \emph{friendly, constructive criticism}.
+
+This year, I was able to watch both Sipnayan Junior and Senior High, Lord of the Math, PMO Nationals, and Mathirang Mathibay. I don't really have much to comment on GMATIC, Pitagoras, or MMC, where I was unable to go.
+
+\subsection{GMATIC}
+
+From what I've heard from the contestants, it seems that the problems have similar issues to ones I pointed out in the previous GMATIC. In particular, they report that some problems had unclear or ambiguous phrasing, and a significant number of problems were taken from other sources.
+
+\subsection{Sipnayan}
+
+\subsubsection*{Problem quality}
+
+\bluebf{The problem quality in Sipnayan improved a lot} from when I last joined, as evidenced by the lots of Sipnayan problems I listed among my favorite problems. My main comment is that \bluebf{a few of the problems have unnecessarily large numbers}. Although this is typical for Mathirang Mathibay, it's unusual for Sipnayan to have problems like these:
+
+\begin{probboxed}
+  [JHS Semifinals B E5] Two numbers have a sum of $195$. If the greatest common factor of the numbers is $15$ and their least common multiple is $540$, find the sum of their squares.
+\end{probboxed}
+
+If you've seen something similar before, the method should be pretty clear. The product of the two numbers is $15 \cdot 540 = 8100$. Then we can find the sum of their squares: $195^2 - 2 \cdot 8100 = 21825$. Here, the main difficulty wasn't coming up with the solution, but with the arithmetic. Another example:
+
+\begin{probboxed}
+  [SHS Finals A-TM] Given the system \begin{align*}
+    \del{x + y}\del{x^2 - xy + y^2} &= 13832 \\
+    xy(x + y) &= 13680,
+  \end{align*} find all ordered pairs $\del{x ,y}$ such that $x < y$. 
+\end{probboxed}
+
+The method for this one is also pretty clear. We let $s = x + y$ and $p = xy$. The equations then become
+\begin{align*}
+  s(s^2 - 3p) = s^3 - 3sp &= 13832 \\
+  sp &= 13680.
+\end{align*}
+Substituting the second equation to the first equation, we find $s^3 = 54902$. So $s = 38$, and from the second equation, $p = 360$, and then we can find $x$ and $y$. Again, arithmetic: how do you compute the cube root of $54902$ quickly?
+
+The above two problems wouldn't be any easier if there were smaller numbers instead, so why use large numbers? Here's a \emph{good example}, one that looks computational at first but is actually very nice:
+
+\begin{probboxed}
+  [JHS Written D1] Find the last $4$ digits of $7^{65}$.
+\end{probboxed}
+
+The main idea is to use binary exponentiaton: we keep squaring $7$ until we get $7^{64}$. We can compute $7^4 = 2401$. Now
+$$(100n + 1)^2 \equiv 10\,000n^2 + 200n + 1 \equiv 200n + 1, \pmod{10\,000}$$
+so the squaring is actually very nice:
+\begin{align*}
+  7^8 &\equiv \del{7^4}^2 \equiv \del{2400 + 1}^2 \equiv 4801 & \pmod{10\,000} \\
+  7^{16} &\equiv \del{7^8}^2 \equiv \del{4800 + 1}^2 \equiv 9601 & \pmod{10\,000} \\
+  7^{32} &\equiv \del{7^{16}}^2 \equiv \del{9600 + 1}^2 \equiv 9201 & \pmod{10\,000} \\
+  7^{64} &\equiv \del{7^{32}}^2 \equiv \del{9200 + 1}^2 \equiv 8401 & \pmod{10\,000} \\
+  7^{65} &\equiv 7 \cdot 7^{64} \equiv 7 \cdot 8401 \equiv 8807, & \pmod{10\,000}
+\end{align*}
+which doesn't involve much computation at all! This is because the main challenge of the problem was to figure out how to make the computations easier. In summary: \bluebf{it's okay to ask contestants to do arithmetic, as long as it's the main difficulty of a problem}.
+
+\subsubsection*{Coverage and balance}
+
+There are a few issues with problem balance too. \bluebf{Sipnayan SHS doesn't have any calculus questions}, unlike the previous two years. As Sipnayan is the only high school competition I know that has calculus problems, I'd love to see them include some more in the next year. \emph{Problem writers:} for inspiration, HMMT used to have a \href{https://www.hmmt.co/static/archive/february/problems/2010/pcalc10f.pdf}{calculus subject test}.
+
+I think it was Vincent (Carabbay, not Dela Cruz) who first pointed out to me that the SHS Written Round had only one geometry problem. Now that I look at the all the problems, \bluebf{there are less geometry problems than there usually are}, even in JHS and the oral rounds. Usually, a quarter of the problems are geometry, but this year it looks more like a tenth.
+
+On the other hand, \bluebf{the geometry problems that exist are really really good}. I already mentioned my favorites earlier, but here's yet another example:
+
+\begin{probboxed}
+  [Sipnayan SHS Semifinals A D1] In $\triangle ABC$, $D$ and $E$ lie on sides $CA$ and $AB$ such that $BE = 6$ and $CD = 10$. Let $M$ and $N$ be the midpoints of segments $BD$ and $CE$, respectively. If $MN = 7$, then what is the measure of $\angle BAC$?
+\end{probboxed}
+
+As always, \bluebf{Sipnayan problems are pretty balanced in terms of difficulty:} there aren't a lot of problems that everyone or no one solves, and scores were cleanly separated at the end of the contest. Great job!
+
+\subsubsection*{Problem phrasing}
+
+I know Sipnayan's known for its long problem statements, but \bluebf{I think they should work on making them shorter}:
+
+\begin{probboxed}
+  [SHS Written VD3] Thor and Loki were directed by Odin to connect $2018$ realms by Rainbow Bridges. Initially, the realms are completely isolated from each other. Thor and Loki create $2017$ Rainbow Bridges, each of which will directly connect only two realms, and such that it should then be possible to travel between any two realms through a network of bridges. Afterwards, Odin will give each realm an official Asgardian banner, with each containing exactly one of the $20$ Royal Symbols. Odin will do this in such a way that any two realms directly connected by a Rainbow Bridge will receive different Royal Symbols. He is then expected to count the number of ways $N$ of assigning the realms to banners. If Thor had his way, he would assign the bridges so that $N$ is as large as possible. Let's call this maximum value $N_{max}$. If Loki had his way, he would assign the bridges so that $N$ is as small as possible. Let's call this minimum value $N_{min}$. Find $N_{max} + N_{min}$, expressed as a product of prime powers.
+\end{probboxed}
+
+This was thankfully not an oral round problem, otherwise the quizmasters would have run out of breath. 
+
+The \bluebf{problem templating can also be better}. By templating, I mean the proper phrasing involved in writing the problem statement. This is a common problem in contests over here. Consider an innocent looking problem like this one:
+
+\begin{probboxed}
+  [SHS Semifinals A E1] Find the number of factors of $6^{10} + 2 \cdot 6^{12}$.
+\end{probboxed}
+
+The issue is the term ``factor''. A well-written problem would have used the better phrase \emph{positive integer factor}, or \emph{positive divisor}. It's a minor issue, but misunderstanding a problem can be the difference between first and second place.
+
+\subsubsection*{Mechanics}
+
+One thing that disappointed me this year was the mechanics of the final round, because they are about the same as last year's, which were similar to two years ago. It would be great if \bluebf{mechanics changed more substantially}.
+
+To recap: there are twenty questions: one easy, average, difficult, and very difficult question of five categories: Mind Stone, Power Stone, Time Stone, Reality Stone, and Soul Stone. Each category has different rules:
+
+\begin{itemize}
+  \item \emph{Mind Stone} questions give teams the option to get twice the alloted points if they get it correct. But they can only use this option for two Mind Stone questions.
+
+  \item \emph{Power Stone} questions give teams the option to get twice the alloted points if they are correct. However, if they choose this option, they get deducted the number of alloted points if they are wrong.
+
+  \item \emph{Time Stone} questions reward teams who submit their answers before the time expires, with the risk of getting points deducted if they are wrong.
+
+  \item \emph{Reality Stone} questions don't have any weird mechanics.
+
+  \item \emph{Soul Stone} questions give teams the option to have a randomly chosen team member to sit out, for $2.5$ times the alloted points if they get it correct.
+\end{itemize}
+
+But these categories are mostly the same as in previous years, with different names:
+
+\begin{center}
+\begin{tabular}{c | c | c}
+  2018 & 2017 & 2016 \\ \hline
+  Power Stone & Gravity Falls & Space Invaders \\
+  Time Stone & Jimmy Neutron & Sonic \\
+  Soul Stone & Phineas and Ferb & Pacman \\
+  Mind Stone & Fairly Odd Parents & --- \\
+  --- & Spongebob & Pong \\
+  Reality Stone & --- & --- \\
+  --- & --- & Tetris
+\end{tabular}
+\end{center}
+
+On the other hand, I keep hearing from older contestants that there used to be king-of-the-hill or first-past-the-post rules, with a completely different format each year. Rules that allowed strategizing based on other teams, rather than just asking ``how fast can we solve this problem'' or ``how sure are we that the answer is correct''.
+
+It's great that Sipnayan's found a format that's balanced. But \bluebf{Sipnayan is known for having substantially different final rounds}. I understand it's difficult coming up with good mechanics on top of great questions, but it would be nice if the mechanics were a bit more different than the last three years.
+
+\subsubsection*{Logistics}
+
+The logistics this year were as \bluebf{great as always}. Improvement: the auditorium was opened \emph{on time} after the lunch break, unlike previous years where it was delayed by several minutes. The program, venue, contestant flow, shirts, and pubmats, were all great, with no major problems.
+
+\subsection{Lord of the Math}
+
+\subsubsection*{Problem quality}
+
+In general, \bluebf{the problems in Lord of the Math are really high-quality}. They're pretty transparent in lifting problems from other material, with the booklet containing a disclaimer at the end:
+
+\begin{quote}
+  \textbf{Disclaimer:} Not all of the problems here are original. Some are lifted from, or based on, other material. All information provided here is for educational purposes only.
+\end{quote}
+
+Even though they do base problems from other contests, it's not really an issue. I've yet to see a contestant claim that they've seen an LOTM problem before. The problems that I do recognize are substantially changed.
+
+Similar to my comments on the Sipnayan problems, I have the minor comment that \bluebf{some problems are too bashy}:
+
+\begin{probboxed}
+  [JHS Team Finals 9] There are $20$ different amino acids in the human body, three of which have a positive charge $(+1)$, two have a negative charge $(-1)$, and the rest have no charge $(0)$. A protein is an ordered sequence of amino acids whose charge is equal to the sum of the charges of its amino acids. How many proteins with negative charge are there that are four amino acids long?
+\end{probboxed}
+
+The intended solution is to add over all six possible combinations of four amino acids with negative charge, the final sum ending up as $33\,352$. It's certainly \emph{doable}, but it's an unappealing bookkeeping problem. Similarly, consider
+
+\begin{probboxed}
+  [JHS Team Finals 15] Two chimpanzees are playing a variation of tic-tac-toe. Instead of stopping when someone has formed a line, they continue and fill up the whole $3 \times 3$ grid. A chimpanzee wins if and only if it is able to form a line and the other is unable to. The game ends in a draw if either both or none of them form a line. Assuming these two chimpanzees have an equal chance of picking any of the empty squares available, and that a chimpanzee won, what is the probability that the first chimpanzee won?
+\end{probboxed}
+
+Yes, the intended solution is enumerating all possible outcomes where one player wins. \emph{All possible outcomes}. And this was the last problem in the JHS Team Finals! I don't really think this is a strong problem to end a problem set with.
+
+LOTM is also known for its tricky problems. They once gave a problem asking for the product of the number of fingers over all humans in the world, with the answer being $0$. \bluebf{It's good that this year didn't have any trick questions}, except for maybe this one:
+
+\begin{probboxed}
+  [SHS Eliminations E3] A car ran five full laps on a circular track whose radius is $20\text{ km}$, for $1$ hour at a uniform speed. Find the average velocity of the car.
+\end{probboxed}
+
+The answer for this one was supposed to be $0\text{ kph}$, since the displacement is zero. I still think this is a pretty silly question. If LOTM wants to include a trick question, it should be one that \emph{doesn't} involve external knowledge, like the difference between speed and velocity, or the existence of people with no fingers. I think this one is a good example:
+
+\begin{probboxed}
+  [JHS Eliminations E3] How many seven-digit numbers have at most seven $7$'s?
+\end{probboxed}
+
+\subsubsection*{Coverage and balance}
+
+One thing I love about Lord of the Math is that \bluebf{the problems use techniques not seen in other local contests}. For example:
+
+\begin{probboxed}
+  [SHS Semifinals 9] Let $a_k$ be the sum of the coefficients of $x^{4n}$, where $n$ is an integer from $0$ to $\dfrac k4$, inclusive, in the expansion of $(x + 1)^k$. Find $a_{2019} - 2a_{2018}$.
+\end{probboxed}
+
+This is a pretty direct application of the roots of unity filter. Despite being a pretty standard technique, I don't think I've seen a local problem that uses it before. Here's another example with expected value:
+
+\begin{probboxed}
+  [JHS Eliminations A7] Jane rolls a fair, standard six-sided die repeatedly until she rolls a $1$. She begins with a score of $1$, and each time she rolls $x$, her score is divided by $x$. What is the expected value of her final score?
+\end{probboxed}
+
+This is obscure enough that when an expected value problem came out in \href{http://cjquines.com/files/pmo2018areas.pdf}{PMO Area Stage in 2018}, it was the last problem in Part I. And it generated \emph{a lot} of discussion, since problems like it are unheard of in the local literature. LOTM is doing a good job of filling up that gap, and \bluebf{it would be great if other contests slowly expand the range of techniques used}.
+
+LOTM still insists on including questions that require statistics knowledge, to what I believe to be Nathanael Balete's insistence:
+
+\begin{probboxed}
+  [SHS Semifinals 1] The sum of squares of deviations of $10$ observations from the mean $50$ is $250$. What is the coefficient of variation? Express as a percentage.
+\end{probboxed}
+
+If you didn't know that the coefficient of variation is the ratio of the standard deviation to the mean, it's impossible to solve this problem. I get that LOTM wants to use statistics because other contests haven't explored it yet, and I get that the contest wants to reward contestants with statistics knowledge. But \bluebf{it's possible to give statistics problems that don't rely on knowing definitions}.
+
+For example, a problem can ask for $\mathbb{E}\sbr{\del{X - \mathbb{E}\sbr{X}}^2}$ for some random variable $X$: a biased die roll, number of fixed points of a permutation, whatever. A contestant unfamiliar with statistics can compute it the long way, so it doesn't require knowing definitions. Yet this still rewards the contestant who recognizes this as variance, as using the formula $\mathbb{E}\sbr{X^2} - \mathbb{E}\sbr{X}^2$ makes computation simpler.
+
+The JHS problems are evenly divided between algebra, geometry, combinatorics, and number theory. The SHS problems seem to substitute trigonometry for actual geometry, but overall, the problems are roughly balanced in categories.
+
+However, \bluebf{LOTM problems are pretty unbalanced difficulty-wise}. It's a shame, because a lot of good problems like
+
+\begin{probboxed}
+  [JHS Individual Finals 14] If the answer to this question is a real number $x$, find the value of $$\sum_{k=0}^{\infty}\sum_{j=0}^k\sum_{i=0}^{k-j} \frac{k!x^{-k}}{i!j!(k-i-j)!}.$$
+\end{probboxed}
+
+\noindent ended up having no solvers. The proportion of problems that no contestant solves is lower than last year's, but is still too high: roughly thirty percent of the problems in the oral rounds. Personally, I think that ten percent of the problems is a good number.
+
+\subsubsection*{Problem phrasing}
+
+The LOTM \bluebf{problems have no major phrasing issues}: they're careful enough to use \emph{positive integral factor} rather than just \emph{factor}. They're even technical enough to use \emph{domain of definition} rather than just \emph{domain}. 
+
+There's one problem that could have been phrased better, however:
+
+\begin{probboxed}
+  [JHS Eliminations E9] Suppose a soccer game ends with a score of $7-5$. How many possible half-time scores are there? (In soccer, the score is the number of goals each team scored.)
+\end{probboxed}
+
+Vincent (Dela Cruz) reported to me that he was unfamiliar with the rules of soccer, and did not know that the number of goals scored does not relate to when half-time is declared at all. I imagine other contestants have had the same issue.
+
+\subsubsection*{Mechanics}
+
+Mechanics are reasonable as always, except for JHS Finals. Here's a recap of the JHS Finals scoring rules. Suppose that there are $N$ contestants, and $n$ of them solve a problem. Then the problem is worth $N - n$ points. 
+
+I have a few comments on this. First, I don't think variable scoring is an excuse for unsorted problems (sorry Balete-senpai). \bluebf{Problems should still be roughly sorted by difficulty}, because it's an oral round---people watch it, and it's more exciting if the problems are sorted.
+
+Second, \bluebf{the variable scoring gives too much weight to difficult problems}. If $N = 20$, then a problem solved by one contestant is worth \emph{nineteen times} a problem solved by nineteen contestants, which I think is too much of advantage. Perhaps something proportional to $\ln N - \ln n$ would be better. \href{http://www.hmmt.co/static/scoring-algorithm.pdf}{HMMT}, with roughly $N = 900$, uses a weight function of $\max\cbr{8 - \floor{\ln n}, 2}$.
+
+\subsubsection*{Logistics}
+
+Good logistics as always. \bluebf{I love how LOTM distributes booklets containing all the problems and their solutions to contestants.} Can other contests start doing this, please? At least, if not the solutions, then the problems? Or maybe post them online somewhere people can find it? Thanks.
+
+\subsection{PMO}
+
+\subsubsection*{Problem quality}
+
+This year, \bluebf{the PMO problem quality is really good}, as always. The problems are consistently good now, and each year manages to produce some really good, pretty original problems! So great job to the test development committee for that.
+
+That said, \bluebf{a handful of problems are heavily similar to existing problems}. \emph{This is not necessarily an issue,} like I pointed out in my LOTM comments. I'm pretty sure this is intentional in some cases, such as
+
+\begin{probboxed}
+  [Areas II2] In $\triangle ABC$, $AB > AC$ and the incenter is $I$. The incircle of the triangle is tangent to sides $BC$ and $AC$ at points $D$ and $E$, respectively. Let $P$ be the intersection of the lines $AI$ and $DE$, and let $M$ and $N$ be the midpoints of sides $BC$ and $AB$, respectively. Prove that $M$, $N$, and $P$ are collinear.
+\end{probboxed}
+
+I know that this is because PMO is supposed to be similar to an entrance exam. Stuff like the above problem, the right angle on incenter chord lemma, should be something that most olympiad contests should know going in. In some cases, I think it's unintentional:
+
+\begin{probboxed}
+  [Qualifying II9] A real number $x$ is chosen randomly from the interval $(0, 1)$. What is the probability that $\floor{\log_5(3x)} = \floor{\log_5 x}$? (Here, $\floor{x}$ denotes the greatest integer less than or equal to $x$.)
+\end{probboxed}
+\vspace{-10pt}
+\begin{probboxed}
+  [National Orals E13] Find the largest real number $x$ such that $\cbrt x + \cbrt{4-x} = 1$.
+\end{probboxed}
+
+I spoke to the proposer of the first question, and they were unaware of its similarity to \href{https://artofproblemsolving.com/wiki/index.php/2006_AMC_12B_Problems/Problem_20}{AMC 12B 2006/20}. The second is similar to \href{http://services.artofproblemsolving.com/download.php?id=YXR0YWNobWVudHMvYy80LzBkNzcyN2M0ZmJkYjhiMTAxZjA1NGZjZWIyYzBjZmE4ZTJmNmVk&rn=VGhvbWFzTWlsZG9yZkFpbWVzLnBkZg==}{Mildorf Mock AIME 1/5}, and I'm pretty sure this is a coincidence too. I think these are fine: the first is substantially different, and the second was for an oral round. But consider
+
+\begin{probboxed}
+  [Areas I19] How many distinct numbers are there in the sequence $\floor{\dfrac{1^2}{2018}}, \floor{\dfrac{2^2}{2018}}, \ldots, \floor{\dfrac{2018^2}{2018}}$?
+\end{probboxed}
+
+This is a pretty much direct copy of Mathirang Mathibay 2018 Finals W3-3. In my opinion, \bluebf{this disadvantages contestants who haven't been to the contest}. Considering that mostly NCR students join Mathirang Mathibay, what about the students from other areas, who haven't seen the problem before?
+
+That said, \emph{this is a pretty minor issue}. I understand that it's unrealistic to expect the test developers to be familiar with all the problems in the literature, and I doubt that it substantially affected the results.
+
+\subsubsection*{Coverage and balance}
+
+The PMO problems are evenly distributed between the categories of algebra, combinatorics, geometry, and number theory, unlike in Sipnayan. There's a \emph{just right} proportion of trigonometry questions, unlike in LOTM. A wide variety of required knowledge is needed, unlike in Mathirang Mathibay; I'll write about this more later.
+
+By that, I mean \bluebf{the qualifying and area stages are comprehensive}: like an entrance exam, it tests everything you'd expect a contestant to know. There is a question requiring the binomial theorem, logarithms, complementary counting, Fermat's little theorem, similar triangles. I can only list a handful of topics that aren't tested in the PMO this year. It's stunning how \emph{complete} the exams are.
+
+A somewhat minor comment, but I feel \bluebf{the qualifying stage might be too difficult}. I get that PMO isn't fully intended for outreach because of MMC, but MMC is becoming harder this year. If it were up to me, I'd swap in word problems and easier counting problems for Part I, and leave balls-and-urns and harder geometry problems for Part II.
+
+The area stage is improving: I used to say that it felt like a test of endurance, but \bluebf{the difficulty of area stage problems has more variance now}, which is a good thing. It used to be the case that the Part I problems were all roughly medium, and now it feels like it actually progresses from easy to hard.
+
+\subsubsection*{Problem phrasing}
+
+There are \bluebf{no major phrasing issues}, a byproduct of being an established, professional contest. I have a small comment about this problem:
+
+\begin{probboxed}
+  [Areas II1] For a positive integer $n$, let $\phi(n)$ denote the number of positive integers less than and relatively prime to $n$. Let $\displaystyle S_k = \sum_n \frac{\phi(n)}{n}$, where $n$ runs through all positive divisors of $42^k$. Find the largest positive integer $k < 1000$ such that $S_k$ is an integer.
+\end{probboxed}
+
+I think it's pretty silly if you're going to introduce $\phi(n)$ in a problem, and make it agree with the standard definition \emph{except} when $n = 1$. It just feels like the kind of thing that belongs in a more computational competition, rather than the PMO.
+
+\subsubsection*{Mechanics and logistics}
+
+An established format, a large number of staff, and the benefit of years of experience, all make the PMO run \bluebf{as smooth as a well-oiled machine}. It'd be great if area results came out earlier, but this isn't really a big issue.
+
+% Leaning on wishful thinking, as I doubt the PMO has the staff to do this, but it'd be nice if students got feedback on the qualifying stage. The American Mathematics Competitions does this by sending students their scores; the Australian Mathematics Competitions even sends students a whole document of their answers. I get that sending five thousand personalized emails is nigh-impossible
+
+\subsection{Pitagoras}
+
+I guess Pitagoras needs introduction since I've never talked about it before. Pitagoras is hosted by the Mathematical Society of the University of Santo Tomas, open to junior high school students. It used to be known for its buzzer-style questions, lending a large speed element to the competition, but I don't know what the mechanics are now.
+
+The problems look okay. Nothing too special, no egregious mistakes. There are way more algebra problems that everything else, but I think that's usual for the contest. 
+
+\subsection{Mathirang Mathibay}
+
+\subsubsection*{Problem quality}
+
+I'll confess being disappointed with this year's problems. I feel that, generally, \bluebf{the problem quality this year is worse than previously}, or at least worse than all the times I joined Mathira. Hence why only a few of my top problems this year are from Mathira.
+
+The first issue is Mathira's longstanding issue of \bluebf{unnecessarily large numbers}. This is similar to my comment for Sipnayan. Unlike Sipnayan, Mathira has had this issue for a long time, so they're \emph{definitely} doing this intentionally. An example:
+
+\begin{probboxed}
+  [Eliminations D4] Let $F_n$ be the $n$th Fibonacci number. Then the sequence $(F_n)_{n\ge 1}$ is given by
+  $$1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377, \ldots.$$
+  Find the sum of all $n \le 2019$ such that $F_n$ is a multiple of $8$.
+\end{probboxed}
+
+It's quick to note that $F_n$ is a multiple of $8$ if and only if $n$ is a multiple of $6$. So the problem becomes ``find the sum of all multiples of $6$ at most $2019$'', which is much harder than the observation needed to solve the problem! 
+
+Since UP MMC does not seem intent to change this any time soon, let me move to my other comments. \bluebf{A big issue is the problem reuse.} It would be fine if no one noticed it, but a lot of contestants told me that they recognized at least one of the following five problems:
+
+\begin{probboxed}
+  [Eliminations E9] Trampoline Park Philippines has a safe that is locked using a three digit-code. Jayson forget the said code, and thus asked his superior Joe about it. According to Joe, the sum of the digits of a three-digit number is $10$. Also, the hundreds digit is one more than thrice the tens digit. Lastly, when its digits are reversed, the number is decreased by $594$. What is the code to the safe?
+\end{probboxed}
+\vspace{-10pt}
+\begin{probboxed}
+  [Orals T5-1] Find the set of real values satisfying $$\dfrac{x+8}{x+7} - \dfrac{x+9}{x+8} = \dfrac{x+10}{x+9} - \dfrac{x+11}{x+10}.$$
+\end{probboxed}
+\vspace{-10pt}
+\begin{probboxed}
+  [Orals T9-3] The sequence of numbers $$12233334444455555666666777777788888888\ldots$$ is formed by writing the positive integers in order in such a way that each integer $n$ is written $n$ times. Give an ordered pair $(x, y)$ where $x$ and $y$ are the $2018$th and $2019$th digits in the sequence respectively.
+\end{probboxed}
+\vspace{-10pt}
+\begin{probboxed}
+  [Finals W2-2] Judylou takes the sum of $6$ consecutive powers of $2$ starting from the $i$th power. Mary Ann takes the sum of $3$ consecutive powers of $3$ starting from the $j$th power. Sean takes the sum of consecutive integers from $1$ to $n$. The minimum value that Judylou and Sean can get in common is $x$, and the minimum value that Mary Ann and Sean can get in common is $y$. Find $x - y$.
+\end{probboxed}
+\vspace{-10pt}
+\begin{probboxed}
+  [Finals W4-1] Four coins are arranged in such a way that all coins are tangent to the other three. If three of them are identical, what is the ratio of the radius of the bigger coin to the smaller coin?
+\end{probboxed}
+
+\bluebf{All five problems appeared in Mathira last year}, all during \href{http://cjquines.com/files/mathira2018orals.pdf}{clinchers for the oral rounds}. Of course, contestants were reviewing the previous year's problems just before the competition began, so many of them recognized both of the problems when they appeared. Worse is
+
+\begin{probboxed}
+  [Eliminations D2 / Finals W4-2] Let $a_1, a_2, b_1, b_2$ be real numbers. The graph of a cubic polynomial function $P(x) = x^3 + 43x^2 + a_1x + b_1$ with (complex) zeros $p$, $q$, $r$ intersects the graph of a quadratic polynomial function $Q(x) = x^2 + a_2x + b_2$ with (complex) zeros $r$, $s$ exactly once. Find the value of $p + q + pq + s$.
+\end{probboxed}
+
+This problem was \bluebf{reused during the competition itself}, both in the elimination round and the finals. My last comment is about this eliminations problem:
+
+\begin{probboxed}[Eliminations E3]
+  \begin{align*}
+    0000 &= 4 & 1521 &= 0 & 8888 &= 8 & 3333 &= 0 \\
+    2018 &= 3 & 1234 &= 1 & 2048 &= 4 & 6789 &= 4 \\
+    1111 &= 0 & 5678 &= 3 & 4096 &= 4 & 1949 &= 3.
+  \end{align*}
+  \begin{center}
+    $2019 =\,?$
+  \end{center}
+\end{probboxed}
+
+Frankly, I was really disappointed by this problem. I don't think it should belong to a math contest, because \bluebf{it is not a math problem}. This is on top of the abuse of notation, with the misuse of the equals sign. Leave these problems to the Facebook pages trying to garner likes, not in a math contest.
+
+% Lastly, and this is probably my most subjective comment, but \bluebf{it feels like the problems this year lack inspiration}. Of course, not every problem can be elegant or beautiful. But last year's Mathira had good filler problems:
+
+% \begin{probboxed}
+%   [Mathirang Mathibay 2018 Eliminations 9] $101$ balls marked $1$ to $101$ are partitioned into two baskets $A$ and $B$. Ball $40$ is transferred from bakset $A$ to $B$. This increased the average of the numbers of the balls in each basket by $\dfrac14$. Find the number of balls that are originally in basket $A$.
+% \end{probboxed}
+
+% \begin{probboxed}
+%   [Mathirang Mathibay 2018 Orals T2-3] Consider a unit circle centered at the origin. A random point $(a, b)$ is selected among the points of this circle. Given that $(a, b)$ is a point of the arc intercepted by a central angle with measure $0 \leq \theta < 2\pi$ such that $\cos \theta \geq -\dfrac12$, what is the probability that $b \geq \abs a$?
+% \end{probboxed}
+
+% \begin{probboxed}
+%   [Mathirang Mathibay 2018 Orals T8-3] Let $f(x)$ be a quadratic function satisfying the following conditions:
+%   \begin{enumerate}
+%     \item $f(x + 2) = f(x) + 3x + 2$,
+%     \item $f(2) = 2$.
+%   \end{enumerate}
+%   Find the coefficient of $x^3$ in $f(f(x))$.
+% \end{probboxed}
+
+% These weren't the hardest problems of the contest, nor the most original. I wouldn't even call these my favorite problems that year. But you can tell that these are \emph{inspired} problems, these are problems that feel genuinely \emph{different}, even if they may be easy or have elements copied from other problems.
+
+% In my opinion, the problems this year feel completely different:
+
+% \begin{probboxed}
+%   [Orals T8-2] Define a sequence $P = \cbr{p_n}$ using the following: $p_1 = 2$, $p_2 = 2^2$, $p_n = p_{n-1} \cdot p_{n-2}$ for all natural numbers $n$. What is the units digit of $p_{2019}$?
+% \end{probboxed}
+
+% \begin{probboxed}
+%   [Finals W3-1] Given $x = 3 - \sqrt{2}$, find $$y = (x - 3)^2\del{\dfrac{x^4 - 6x^3 + 43x - 79}{x^2 - 6x + 13}}.$$
+% \end{probboxed}
+
+% \begin{probboxed}
+%   [Orals T11-2] Find three prime numbers such that their sum is $122$ and their product is $6862$.
+% \end{probboxed}
+
+\subsubsection*{Coverage and balance}
+
+My main comment is that \bluebf{almost all of the number theory was find $x$ modulo $y$}. The only ones that weren't were:
+\begin{itemize}
+  \item Eliminations D4, as mentioned earlier, which is actually an arithmetic problem and not a number theory one,
+  \item Eliminations D7, find all $n$ such that $\dfrac{2692n + 333}{2019n + 250}$ is a positive integer, which isn't really a hard problem,
+  \item Tier 10-3, find the number of positive integral factors of $\dfrac{2018^2 - 1298^2 - 80^3}{64} - 100$, which is actually an algebra problem,
+  \item and Finals W2-2, which, as mentioned earlier, was \emph{reused from last year}.
+\end{itemize}
+So really, there was only one other ``real'' number theory problem. There is more to number theory than ``find $x$ modulo $y$'', as Mathira showed us \href{http://cjquines.com/files/mathira2018orals.pdf}{last year}:
+\begin{probboxed}
+  [Mathirang Mathibay 2018 Eliminations 14] Find all triples $(x, y, z)$ of positive integers, $z$ being minimized, such that there exist positive integers $a, b, c, d$ such that $x^y = a^b = c^d$, $x > a > c$, $z = ab = cd$, and $x + y = a + b$.
+\end{probboxed}
+\vspace{-10pt}
+\begin{probboxed}
+  [Mathirang Mathibay 2018 Orals T11-2] Let $\dfrac pq$ be a ratio of positive integers where $q < 2018$ such that $\dfrac pq$ is the closest number to but not equal to $\dfrac{17}{55}$. Find $p + q$.
+\end{probboxed}
+\vspace{-10pt}
+\begin{probboxed}
+  [Mathirang Mathibay 2018 Finals W4-3] Find the last two digits of the least common multiple of $2018!^{1024} - 1$ and
+  $$\del{2019!^{1009} + 2019^{1009}}\del{2018!^{1008} + 2018!^{1007} + 2018!^{1006} + \cdots + 2018!^2 + 2018! + 1}.$$
+\end{probboxed}
+
+In terms of balance, \bluebf{the eliminations didn't have any difficult problems}. I mentioned Eliminations D4 and D7 earlier, and these were probably the hardest problems in the eliminations round. At least two teams told me that they finished the round thirty minutes before the round actually ended.
+
+This is in contrast to the previous years, where the eliminations had much harder problems, and no team finished all of them during the time.\footnote{Although, this is partly because one of the answers in the answer key was incorrect.} I think it'd be better if they took one of the harder finals questions and placed it in the eliminations instead. \bluebf{Teams shouldn't be left without something to solve}: it'd probably be better if the last problem was something only two or three teams could solve.
+
+Generally, the \bluebf{oral round problems are easier, and that's a good thing}. Last Mathira, there were too many oral round problems that no team got correct. This led to so many ties that clinchers had to be held \emph{thrice}. The scores of the teams this year, in contrast, were always separated by at least a problem.
+
+\subsubsection*{Problem phrasing}
+
+There were some major phrasing issues this year, not all of which were corrected. Eliminations 8, for example, talked about a function ``with domain $f(x) \geq 0$.'' And then there's
+
+\begin{probboxed}
+  [Finals W4-3] If $a + b + c = abc$, and $\dfrac1{\sqrt{1 + a^2}} + \dfrac1{\sqrt{1 + b^2}} + \dfrac1{\sqrt{1 + c^2}} > k$, find the value of $k$.
+\end{probboxed}
+
+The phrasing here is completely unclear. It should be something like
+
+\begin{probboxed}
+  Let $k$ be a real number. Suppose that for all real numbers satisfying $a + b + c = abc$, it is true that $\dfrac1{\sqrt{1 + a^2}} + \dfrac1{\sqrt{1 + b^2}} + \dfrac1{\sqrt{1 + c^2}} > k$. Determine the maximum value of $k$.
+\end{probboxed}
+
+\subsubsection*{Mechanics}
+
+\bluebf{The format of the eliminations is better.} Last year, the answer key for the eliminations round was wrong, and it was impossible to correct due to the format of the round. This led to some teams not getting the points they deserved.
+
+It's great that UP MMC took steps to prevent that this year with the current format. It's less exciting, but it's definitely more practical. However, I still think \bluebf{it's possible to have a ``live'' eliminations round with room for protests}. Maybe by recording a team's final answer and the time they submitted it, and giving more points to teams who answered faster. It's a possibility.
+
+The minor change in the oral round scoring, by including a table instead of an explicit formula, is easier to understand and is more transparent. It also made it easier for both contestant and audience to understand the scoring, so that's good.
+
+\subsubsection*{Logistics}
+
+Like last year, \bluebf{there are still issues with answers being revealed prematurely}. One step to prevent this would be letting the judges announce the answers to the problem, rather than the quizmasters, as is the usual practice. Better still, the quizmasters shouldn't have a copy of the answers.
+
+There was an inconvenient break held during the oral round as the judges had an official function. This was unavoidable, of course, but the eliminated teams should have been announced as the judges left, not when they returned. 
+
+\subsection{MMC}
+
+A few words on MMC. It seems that the problems have become much harder. The scores in the oral rounds are much lower, and there top scores in the elimination rounds are becoming lower too. Of course, I think it's good that MMC is becoming harder, \bluebf{good enough that some problems are my favorites} this year! But if you have a problem like
+
+\begin{probboxed}
+  [Grade 10 Division D6] The lengths (in cm) of the sides of a triangle are the roots of the equation $x^3 + 84x = 16x^2 + 144$. Find the area of the triangle. 
+\end{probboxed}
+
+\noindent in the \emph{division level}, even if it's the hardest problem, isn't that too much?\footnote{By the way, it's possible to solve this problem without finding the roots! As a hint, think about the factored form and use Heron's formula.} \bluebf{MMC problems should be accessible.} It's a contest that's primarily concerned with outreach. I'd suggest to restrict the hard problems to at most two or three per round, and leave them for the regional and national levels.
+
+\section{Conclusions}
+
+I'll repeat myself: the thoughts in this document are opinions, not the absolute, immutable truth. I'm afraid that even with the long disclaimer, people might still misinterpret this article as a baseless attack on local competitions. But that is not what this document is meant for: it's meant to be constructive criticism, placed somewhere public so that people can \emph{choose} to (not necessarily have to) take action on it.
+
+Well, that, and I also want to share what I thought were the cool problems this year. Overall, the quality of contests is trending upwards, which is a great thing. I may not be able to join or even spectate the actual contests in the future, but \bluebf{I will always look forward to reading the problems}.
+
+Thanks to the Grace Mathineers, the AMS, the Stephanian Math Society, the MSP, the UST MathSoc, the UP MMC, and the staff behind MMC for running all of these contests. Good problems should be appreciated, so consider this as appreciation.
+
+\end{document}

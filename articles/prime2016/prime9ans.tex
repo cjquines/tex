@@ -1,0 +1,67 @@
+\documentclass[10pt,paper=letter]{scrartcl}
+\usepackage[alttitle]{cjquines}
+
+\begin{document}
+
+\title{VCSMS PRIME}
+\subtitle{Session 9: Geometry 2}
+\author{compiled by Carl Joshua Quines}
+\date{October 19, 2016}
+
+\maketitle
+
+\subsubsection*{Ad hoc}
+
+\begin{enumerate}
+
+\item Let $BC = 1$, $AB = 2$. Then $AC = \sqrt5$, and $CD = DA = BD = \dfrac{\sqrt5}2$ by Thales's. Since $CD = DA$ and they share the same altitude from $B$, $[BCD] = [BDA] = \dfrac12[ABC] = \dfrac12$. But $[BCD] = \dfrac12CE\cdot BD$, so $CE = \dfrac{2\sqrt5}5$. Using the Pythagorean theorem gives $BE$ and $ED$, then $BE : ED = 2 : 3$.
+
+\item Let the center of the circle be $O$, the intersection of the diagonals of the square $ABCD$ be $E$. Let the tangents from $A$ to the circle be $AR$ and $AS$, with $R$ lying on $AE$. Let $EO$ intersect the square at $T$, and let $RE = x$.
+
+Then $AR = \sqrt2 - x$ as $AE = \sqrt2$, and $AS = AR$ as they are both tangents from $A$. But clearly $ATOS$ is a rectangle, so $AS = TO$, whence $EO = ET + TO = 1 + \sqrt2 - x$. From Pythagorean on $ERO$, we have $EO^2 = RE^2 + RO^2$ or $\del{1 + \sqrt2 - x}^2 = x^2 + 1$, giving $x = 1$ by inspection.
+
+Then $TO = \sqrt2 - 1$, and $PO = 1$, so by Pythagorean $PT = \sqrt{2\sqrt2 - 2}$. $PQ$ is double this, or $2\sqrt{2\sqrt2 - 2} = \sqrt{8\del{\sqrt2 - 1}}$.
+
+\item Let the perpendicular bisectors of $AP$ and $BP$ intersect at $O$, and let $OP$ intersect $CD$ again at $F$. Then $\angle CPF = \angle APO$ due to vertical angles. However, $\angle ABP = \dfrac12\angle AOP = \dfrac12\del{180\dg - 2\angle APO}$ since $AO = OP$ due to it being the circumcenter, and thus $AOP$ is isosceles. This makes $\angle ABP = 90\dg - \angle APO = 90\dg - \angle CPF$. But $\angle ABP = \angle DCP$ since $\triangle ABP \cong \triangle DCP$ by SAS. Thus $\angle DCP = \angle FCP = 90\dg - \angle CPF$, so $\angle FCP + \angle CPF = 90\dg$ and thus $\angle PFC = 90\dg$, which is what we wanted.
+
+\item Let $AB = a, BC = b, CD = c, DA = d, PD = p$. Then $[CPD] = \dfrac12 cp\sin D$, and $[ABCP] = [ABC] + [ACD] - [CPD] = \dfrac12ab \sin B + \dfrac12cd \sin D - \dfrac12cp \sin D$, but $\sin B = \sin D$ since it is a cyclic quadrilateral. Factoring out, $[CPD] = [ABCP]$ implies $cp = ab + cd - cp$, or $2cp = ab + cd$. Equal perimeters imply $2p = a + b - c + d$, substituting yields $ac + bc - c^2 + cd = ab + cd$, which factors as $(c - a)(c - b) = 0$. Thus either $c = a$ or $c = b$.
+
+\item There is a solution using similar triangles, as the official solution: from $PBC \sim PDB$ implies $BC/BD = BP/DP$ and from $PAC \sim PDA$ implies $AC/AD = AP/DP$. Since $AP = BP$, we get $BC/AC = BD/AD$. But from $AEB \sim ABC$, $BC/AC = BE/AB$ and from $AFB \sim ABD$ we get $BD/AD = BF/AB$. Thus $BE/AB = BF/AB$ and $BE = BF$.
+
+But projective is much nicer. Since $AA$, $BB$ and $CD$ concur, then $ACBD$ is a harmonic quadrilateral, and $-1 = (A, B; C, D)$. Taking a perspectivity through $A$ to line $EF$ gives us $-1 = (T, B; E, F)$, where $T$ is the point on infinity on $EF$, from whence $B$ is the midpoint.
+
+\end{enumerate}
+
+\subsubsection*{Triangles}
+
+\begin{enumerate}
+
+\item We can construct a lot of altitudes, but trigonometry is cleaner: $DE^2 = DC^2 + EC^2 - 2DC\cdot EC \cos \angle DCE$, but $\cos \angle DCE = \cos \angle ACB = \dfrac45$. Thus $CE = \dfrac83$, so the perimeter of $ABED$ is $\dfrac{28}3$.
+
+\item Let $BC = x$, from which $AB = AF = 2x$ as they are both tangents, $BC = CD = x$ as they are both tangents. For the perimeter to be $36$, we must have $EF = DF = 18 - 3x$. Using Pythagorean on $ACE$ gives $x = 0, 3$, where $0$ is obviously extraneous. Then $CE = 18-2x = 12$.
+
+\item Since $AQC \sim QEC$, we get $AC / QC = QC / EC$, or $QC^2 = EC \cdot AC$. Similarly, $PC^2 = DC \cdot BC$. As $\angle AEB = \angle ADB = 90\dg$ then $ABDE$ is cyclic and $EC \cdot AC = DC \cdot BC$ by power of a point through $C$, whence $PC^2 = QC^2$ and $PC = QC$.
+
+\item WLOG $AB < AC$. Use Ptolemy's, Pythagorean, and the given identity to show that $2 \cdot DF (AB + AC) = BC \cdot AC - BC \cdot AB$. Since $EF = EC - FC$, we can find $EC$ using angle bisector theorem and $FC$ is half of $BC$. Simplifying shows $DF = EF$.
+
+\item Let $Z$ be the midpoint of $BC$. Since $XYZ \sim ABC$, then $\angle XZY = \angle BAC = \angle XDY$ so $XDZY$ is cyclic. But $\angle XDB = 180\dg - \angle XDZ = \angle XYZ = \angle ABC$ again since $XYZ \sim ABC$. This implies $XA = XB = XD$, and thus $AB$ is a diameter of $(ABD)$, from which $\angle ADB = 90\dg$.
+
+\end{enumerate}
+
+\subsubsection*{Coordinate geometry}
+
+\begin{enumerate}
+
+\item Let the center of the circle be $Q(0, 2)$ and let $P$ be a point on the circle. From the equation, it has radius $1$. When $P$ is on the upper semicircle, the tangent line clearly intersects the y-axis above the circle, so it has a positive y-intercept.
+
+Consider the point $P$ such that the tangent line through $Q$ passes through the origin $O(0, 0)$. Since it is a tangent, $\angle QPO = 90\dg$, since it is a radius, $QP = 1$ and we know the distance $QO = 2$. Thus triangle $QPO$ is a $30-60-90$ triangle. Then $\angle PQO = 60\dg$.
+
+There is a $60\dg$ arc from either side in the lower half, and in this arc everything has non-negative y-intercept. There is the whole upper half from earlier, which makes a total of $60\dg + 60\dg + 180\dg = 300\dg$. The length of the arcs is thus $\dfrac{300\dg}{360\dg} 2\pi r = \dfrac53 \pi$.
+
+\item Shoelace formula gives $144$.
+
+\item Assign a mass of $1A$, $1B$ and $2C$. Let $E$ be the midpoint of $AB$, and $G$ be the intersection of $CE$ and $AP$. Then $1A + 1B = 2E$, and since $BP : PC = 2 : 1$, we have $1B + 2C = 3P$. Then $4G = 1A + 3P = 2E + 2C$, making $G$ the midpoint of $EC$.
+
+\end{enumerate}
+
+\end{document}

@@ -1,0 +1,89 @@
+\documentclass[10pt,paper=letter]{scrartcl}
+\usepackage[alttitle]{cjquines}
+
+\begin{document}
+
+\title{VCSMS PRIME}
+\subtitle{Program for Inducing Mathematical Excellence}
+\author{Session 7: Sequences and Inequalities}
+\date{October 5, 2017}
+
+\maketitle
+\setlength{\unitlength}{1in}
+\begin{picture}(0,0)
+  \put(5.5,0.5){\hbox{\includegraphics[width=0.9in]{logo.png}}}
+\end{picture}
+\vspace{-3.5em}
+
+\subsubsection*{Lecture problems}
+
+\begin{enumerate}
+  \item (QI10) An infinite geometric series has first term $7$ and sum between $8$ and $9$, inclusive. Find the sum of the smallest and largest possible values of its common ratio.
+  \item (AI4) Suppose that $S_k$ is the sum of the first $k$ terms of an arithmetic sequence with common difference $3$. If the value of $S_{3n}/S_n$ does not depend on $n$, what is the $100$th term of the sequence?
+  \item (QII6) What is the $100$th digit of the following sequence: $1\;4\;9\;16\;25\;36\;49\;64\;81\;100\;\ldots$
+  \item (QI15) A positive integer $n$ is a \emph{triangular number} if there exists some positive integer $k$ for which it is the sum of the first $k$ positive integers, that is $n = 1 + 2 + \cdots + (k-1) + k$. How many triangular numbers are there which are less than $2016$?
+  \item (8N4) Let $f(x) = \dfrac{2008^{2x}}{2008 + 2008^{2x}}$. Find $f(1/2007) + f(2/2007) + \cdots + f(2006/2007)$.
+  \item (Mock AIME 2 2007/5) Find all complex $z$ such that $iz^2 = 1 + 2/z + 3/z^2 + 4/z^3 + \cdots$.
+  \item (Stanford 2011) Evaluate $\sum_{n \geq 1} \dfrac{7n + 32}{n(n+2)} \cdot \del{\dfrac34}^n$.
+  \item Find the minimum value of $x^4 + 4x + 4$.
+  \item (QII4) If $b > 1$, find the minimum value of $\dfrac{9b^2 - 18b + 13}{b - 1}$.
+  \item Find the maximum value of $(1-x)(2-y)^2(x+y)$, if $x < 1$, $y < 2$ and $x + y > 0$.
+\end{enumerate}
+
+\subsubsection*{Arithmetic and geometric}
+
+\begin{itemize}
+  \item You should be familiar with these. For arithmetic, $a_n = a_1 + (n-1)d$, with sum $S_n = \frac{n}{2}\del{a_1 + a_n}$. For geometric, $a_n = a_1r^{n-1}$ with sum $S_n = a_1(r^n-1)/(r-1)$. The limit as $n \to \infty$ for $\abs{r} < 1$ gives the sum of an infinite geometric series $a/(r-1)$.
+  \item Problem 1: If the ratio is $r$, then $8 \leq 7/(r-1) \leq 9$. Reciprocal function is monotonic decreasing over positive reals, so valid to say $1/9 \leq (r-1)/7 \leq 1/8$. 
+  \item Problem 2: Abuse degrees of freedom: $n = 1$ and $n = 3$ to make $S_3^2 = S_1S_9$. Quadratic term cancels.
+\end{itemize}
+
+\subsubsection*{Digits and sequences}
+
+\begin{itemize}
+  \item Common theme: ``find the $x$th digit after the decimal point'', or ``find the $x$th digit in the following sequence''. Technique is to separate: when is the sequence one-digit, two-digit, etc. For ``find the sum of the first $x$ digits'', we usually separate sum of ones-digits, tens-digits, etc.
+  \item Problem 3: There are three one-digit squares. Then there are six two-digit squares. Squares from $10^2$ to $31^2$ are three-digits. There are nineteen digits more: $32^2, 33^2, 34^2$ and $35^2$ each have four digits, so it's the third digit of $36^2$, which is $9$.
+\end{itemize}
+
+\newpage
+
+\subsubsection*{Sequence hacking}
+
+\begin{itemize}
+  \item If the $d$th difference is constant, then the sequence formula is a polynomial of degree $d$.
+  \item Problem 4: Pretend we didn't know the formula for $0, 1, 3, 6, 10, \ldots$. The first differences are $1, 2, 3, 4, \ldots$ and the second differences are $1, 1, 1, \ldots$. This is constant, so we let $a_x = ax^2 + bx + c$ and suppose $a_0 = 0$, $a_1 = 1$, and $a_2 = 3$ to find the terms.
+  \item Newton interpolation: Let $\Delta^k$ be the $k$th difference starting at zero. Then the polynomial through $(0, a_0), \ldots, (n, a_n)$ is $\sum_{k \geq 0} \binom{x}{k}\Delta^k$. For example, for $1, 3, 8, 16, \ldots$, the zeroth difference is $1$, the first difference is $3 - 1 = 2$, and the second difference is $(8 - 3) - (3 - 1) = 3$. So the interpolating polynomial is $\binom{x}{0}\cdot 1 + \binom{x}{1} \cdot 2 + \binom{x}{2} \cdot 3$.
+\end{itemize}
+
+\subsubsection*{Abusing symmetry}
+
+\begin{itemize}
+  \item Symmetry can come as pairing up first and last terms, or manipulating to shift the terms to the right. Sometimes we pair up subsets and their complements. Also in arithmetic and geometric sequences: we usually write in terms of middle term to become nicer.
+  \item Problem 5: Pair up first and last terms, they have constant sum.
+  \item Problem 6: Multiply by $z$ to shift the terms to the right. This is an arithmetico-geometric sequence.
+\end{itemize}
+
+\subsubsection*{Forcing telescopes}
+
+\begin{itemize}
+  \item Whenever we see a polynomial denominator in a sum, we should decompose to partial fractions. Factor the denominator and then rewrite as sum of fractions with the denominators as factors.
+  \item Problem 7: After partial fraction decomposition, we use $9 = (3/4)^2 \cdot 16$ to get stuff to telescope.
+\end{itemize}
+
+\subsubsection*{Basic inequalities}
+
+\begin{itemize}
+  \item The only real inequality is the trivial one: $x^2 \geq 0$, equality iff $x = 0$. For quadratics, we write in vertex form: $(x - h)^2 + k$, and the quadratic is thus always greater than $k$. Works also for, say, $x^2 + x - 12 > 0$ (or $ < 0$), but factoring is nicer.
+  \item Problem 8: This is $(x^2 - 1)^2 + 2(x - 1)^2 + 2$, so its minimum value is $2$ when $x = -1$.
+  \item Separate variables if you can: if you have $2x + 3y = 1$ then you can state $y$ in terms of $x$. If you have to find the minimum of $a^6 + b^4 - a^3 - b + 1$, separate to finding the minimum of $a^6 - a^3$ and $b^4 - b$.
+\end{itemize}
+
+\subsubsection*{AM-GM is life}
+
+\begin{itemize}
+  \item AM--GM is the single most important inequality in PMO. If you have a sum and you are finding the minimum, find a way to make the denominator cancel out so the right-hand-side is constant. Same thing for numerator.
+  \item Problem 9: We want to cancel out the denominator. We long divide to get $9(b-1) + 12/(b-1)$. By AM--GM this is at least $12\sqrt2$.
+  \item Problem 10: To get the product we want, we do $(1-x) + (2-y) + (2-y) + (x+y)$ for the LHS. Equality is when $1-x = 2-y = x+y$ or $x = 0, y = 1$. 
+\end{itemize}
+
+\end{document}

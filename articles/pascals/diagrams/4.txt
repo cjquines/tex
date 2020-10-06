@@ -1,0 +1,18 @@
+P = (-0.9,1.5)
+Q = (-3,-0.5)
+A = tangent P unitcircle 0
+C = tangent P unitcircle 1
+B = tangent Q unitcircle 0
+D = tangent Q unitcircle 1
+R = IP(Line(A,B,10),Line(C,D,10))
+S = IP(Line(A,D,10),Line(B,C,10))
+
+circle A B C
+A--B--C--D--A
+A--P--C
+B--Q--D
+A--B--R--A
+C--D--R--C
+A--D--S--A
+B--C--S--B
+P--Q--R--S dashed

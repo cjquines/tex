@@ -1,0 +1,19 @@
+A = dir(135)
+B = dir(260)
+C = dir(45)
+D = dir(170)
+E = dir(80)
+F = dir(-30)
+X .= IP A--B D--E
+Y .= IP B--C E--F
+Z .= IP C--D F--A
+
+circle A B C
+A--B--C--D--E--F--A
+X--Y--Z
+A--B--X--A dotted
+D--E--X--D dotted
+B--C--Y--B dotted
+E--F--Y--E dotted
+C--D--Z--C dotted
+F--A--Z--F dotted

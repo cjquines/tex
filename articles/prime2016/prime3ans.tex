@@ -1,0 +1,143 @@
+\documentclass[10pt,paper=letter]{scrartcl}
+\usepackage[alttitle]{cjquines}
+
+\begin{document}
+
+\title{VCSMS PRIME}
+\subtitle{Session 3: Number theory}
+\author{compiled by Carl Joshua Quines}
+\date{September 28, 2016}
+
+\maketitle
+
+\subsubsection*{Ad hoc}
+
+\begin{enumerate}
+
+\item Each factor of $5$ in $126!$ has a corresponding factor of $2$ to produce a trailing zero, so we only need to count the number of factors of $5$. It is well-known to be, by Legendre's formula, $\floor{\dfrac{126}5} + \floor{\dfrac{126}{25}} + \floor{\dfrac{126}{125}} = 25 + 5 + 1 = 31$.
+
+\item By Legendre's, $\floor{\dfrac{27}2} + \floor{\dfrac{27}4} + \floor{\dfrac{27}8} + \floor{\dfrac{27}{16}} = 13 + 6 + 3 + 1 = 23$.
+
+\item The answer is $26$. Selecting all $25$ even numbers has no two relatively prime; by Pigeonhole, selecting $26$ will guarantee two consecutive numbers are selected, which are relatively prime.
+
+\item It is easy to verify the cases $n = 0, 1$ to not produce perfect squares. Suppose $n \geq 2$ and factor out $7^2$ to produce $7^2\del{7^{n-2} + 9}$. Since the first factor is a perfect square, so should the second.
+
+Let $m^2 = 7^{n-2} + 9$, so $7^{n-2} = m^2 - 3^2 = (m-3)(m+3)$. Then both $m-3$ and $m+3$ are two powers of $7$ differing by $6$, and since the difference between consecutive powers of $7$ increases, the only possible choice is $m = 4$, giving $n = 3$. The answer is $1$.
+
+\item Factoring out $2^8$ gives $2^8\del{1 + 2^3} + 2^n = 2^n + 2^83^2$. Let $m^2 = 2^n + 2^83^2$, and transposing and using the difference of two squares gives $2^n = (m - 48)(m + 48)$. Then $m - 48$ and $m + 48$ are two powers of two that differ by $96$, the only possible pair being $32$ and $128$, giving $n = 12$.
+
+\item Since $abcde$ is divisible by $5$, the only choice for $e$ must be $5$. There are only three even-numbered digits, and $b, e, f$ must all be even, so they match to $b, e, f$ in some order. This leaves $1$ and $3$ for $a$ and $c$.
+
+Wishing to maximize, we try $a = 3$. Then $c = 1$, and the number so far is $3b1d5f$. The condition of $ab$ being divisible by $2$ is guaranteed, and so is the condition of $abcdef$ being divisible by $6$; we are concerned about $abc$ being divisible by $3$ and $abcd$ being divisible by $4$. The first forces $b = 2$ and the second forces $d = 6$, so the number is $321654$.
+
+\item The number $N$ should be the largest power of $2$ dividing $10!$. By Legendre's formula, the largest power is $\floor{\dfrac{10}2} + \floor{\dfrac{10}4} + \floor{\dfrac{10}8} = 5 + 2 + 1 = 8$, so $N = 2^8$. Thus $2x + y = 2^8$, and we maximize $x^2y^2$, or $\del{x(2^8-2x)}^2$. The base is a quadratic with vertex at $x = 2^6$, with value $2^{13}$, and its square is thus $2^{26}$
+
+\item Since $P$ is divisible by all prime numbers less than $90$, for $P+n$ to have a prime factor less than $90$, so must $n$. All $n < 90$ work for trivial reasons, and so do $90, \ldots, 96$, failing at $n = 97$ since it is a prime. Thus the largest $N$ is $96$.
+
+\end{enumerate}
+
+\subsubsection*{Factors}
+
+\begin{enumerate}
+
+\item The fifth largest divisor corresponds to the fifth smallest divisor upon division. $2{,}015{,}000{,}000 = 2015 \cdot 10^6 = 5 \cdot 13 \cdot 31 \cdot 2^6 \cdot 5^6$, and its smallest divisors are, in order, $1, 2, 4, 5, 8$. Dividing the number by $2^3$ leaves $5 \cdot 13 \cdot 31 \cdot 2^3 \cdot 5^6 = 251{,}875{,}000$.
+
+\item The even positive divisors of $1152$ are precisely the positive divisors of $1152 \div 2 = 576$ times two, so it remains to find the sum of all its divisors. Since $576 = 2^63^2$, the well-known formula for the sum of divisors gives $\del{1 + 2 + \cdots + 2^6}\del{1 + 3 + 3^2} = \del{2^7 - 1}\del{13} = 1651$, multiplying by $2$ gives $3302$.
+
+\item By the formula for the number of divisors, the number must either be a product of two primes or the cube of a prime. The first three numbers are $6, 8, 10$, and the fourth is $14$.
+
+\item The power of $5$ in the LHS is $2$, which means that the power of $5$ in the RHS is $2$ as well, so $y = 2$. Then power of $3$ in the RHS is $2$, so the power of $3$ in the LHS, $2x$, should equal to $2$. Thus $x = 1$.
+
+\item The highest power of $7$ less than one million is $7^7$, so there are $8$ factors smaller than a million. The rest of the $10{,}000$ factors are larger, so there are $9992$ such factors.
+
+\item Factoring out $5^x$ gives $5^x\del{1 + 2\cdot5} = 5^x11$. The number of factors formula gives $(x+1)2 = 2x + 2$ factors. 
+
+\item Multiplying the two equations and taking the square root gives $p = 2^2 \cdot 5^3 \cdot 7^2 \cdot 11$, which has $(2+1)(3+1)(2+1)(1+1) = 72$ divisors.
+
+\item For each factor of $n^2$ less than $n$, dividing through $n^2$ gives a corresponding factor greater than $n$. Thus the number of factors of $n^2$, minus one to account for $n$, divided by $2$, gives the number of its factors less than $n$. Then we subtract the number of factors of $n$.
+
+In this case, $n^2 = 2^{62}3^{38}$ which has $(62+1)(38+1) = 2457$ factors, $\dfrac{2457 - 1}2 = 1228$ of which are less than $n$. The number $n$ itself has $(31+1)(19+1) = 640$ factors, so subtracting gives $1228 - 640 = 588$ factors.
+
+\item The number is $300^3 + 1 = (300 + 1)(300^2 - 300 + 1)$. The former, $301$, factors as $7 \cdot 43$. The latter factor is $300^2 - 300 + 1 = 300^2 + 600 + 1 - 900 = (300 + 1)^2 - 30^2 = (301 - 30)(301 + 30)$, and both $271$ and $331$ are prime. The sum is $7 + 43 + 271 + 331 = 652$.
+
+\item Factor out $3^19$ from the first two terms to leave $3^19\del{3 + 1} - 12$. Factor out $12$ to leave $12\del{3^18 - 1}$, which factors by repeatedly using difference of two squares and cubes as $(3-1)(3^2 + 3 + 1)(3^6 + 3^3 + 1)(3 + 1)(3^2 - 3 + 1)(3^6 - 3^3 + 1)$. After tedious checking, the factorization is $2^5 \cdot 3 \cdot 7 \cdot 13 \cdot 19 \cdot 37 \cdot 757$.
+
+\item The number $360{,}000 = 2^6 \cdot 3^2 \cdot 5^4$ has $(6+1)(2+1)(4+1) = 105$ factors. Since the factors of $360{,}000$ pair up, each of them multiplying to $360{,}000$, and there being $\dfrac{105}2$ pairs, the product of all the factors is $\del{360{,}000}^{\dfrac{105}2}$. Expanding, $\del{2^6 \cdot 3^2 \cdot 5^4}^{\dfrac{105}2}$ has sum of exponents $\dfrac{105}2\del{6 + 2+ 4} = 630$.
+
+\item Suppose $f(r) = 0$ for some integer $r$, and then $f(x) = (x-r)g(x)$ for some polynomial $g(x)$. Let the four integers be $a, b, c, d$. Substituting $a$ gives $f(a) = p = (a-r)g(a)$, so $a-r$ is a factor of $p$. Similarly, $b-r, c-r, d-r$ are all factors of $p$. Since these are all distinct, they must be $-p, -1, 1, p$ in some order.
+
+Then, from above, $f(-p+r) = p = (-p)g(-p+r)$ implies $g(-p+r) = -1$; similarly, $f(p+r) = p = pg(p+r)$, so $g(p+r) = 1$. However, it is well-known that $a - b$ is a factor of $f(a) - f(b)$; applying this shows $(p+r) - (-p+r) = 2p$ is a factor of $1 - (-1) = 2$, which is impossible.
+
+\end{enumerate}
+
+\subsubsection*{Divisibility}
+
+\begin{enumerate}
+
+\item Dividing gives $\dfrac{n+3}{n-1} = 1 + \dfrac4{n-1}$, so we must have $n-1|4$. Since $4$ has factors $-4, -2, -1, 1, 2, 4$, the number of possible values of $n$ is the same, $6$.
+
+\item Dividing gives $2n^2 - n + 1 \dfrac{31}{3n + 1}$. As $31$ is a prime, $3n + 1$ must equal either $-31, -1, 1$ or $31$, which happens only for integers $n = 0, 10$.
+
+\item The greatest common factor of $7^4 - 1 = 2^5 \cdot 3 \cdot 5^2$ and $11^4 - 1 = 2^4 \cdot 3 \cdot 5 \cdot 61$ is $2^4 \cdot 3 \cdot 5$. We show that all $p^4 - 1$ are divisible by $2^4 \cdot 3 \cdot 5$. Note that $p^4 - 1 = (p^2 + 1)(p - 1)(p + 1)$.
+
+Since $p$ is odd, $p^2 + 1$ is even, and $p-1, p+1$ are consecutive even integers, so their product is divisible by $8$. When divided by $3$, $p$ gives a remainder of $1$ or $2$; in the former, $3|p-1$, in the latter, $3|p+1$. Similarly, it is always divisible by $5$, as $5|p-1$ and $5|p+1$ when it has remainder $1$ or $4$, and $5|p^2 + 1$ otherwise. The greatest common factor is thus $2^4 \cdot 3 \cdot 5 = 240$.
+
+\item Rationalizing the denominator gives $\dfrac{2013ab - bc + \del{b^2 - ac}\sqrt{2013}}{2013b^2 - c^2}$. For this to be rational, the irrational part must be zero, so $b^2 = ac$. Thus $a, b, c$ are in geometric sequence. Rewrite $a, b, c$ as $a, ar, ar^2$.
+
+Then $\dfrac{a^2 + b^2 + c^2}{a + b + c} = \dfrac{a^2 + a^2r^2 + a^2r^4}{a + ar + ar^2} = a(r^2 - r + 1)$ after long division. Similarly, $\dfrac{a^3 - 2b^3 + c^3}{a + b + c} = a^2(r^4 - r^3 - r + 1)$. These are both integers.
+
+\item Multiply both sides by $x+y$ and transpose to obtain $xy - 1000x - 1000y = 0$. Add $1{,}000{,}000$ to both sides and factor to get $(x - 1000)(y - 1000) = 1{,}000{,}000$. It is easy to rule out the case where both factors in the LHS are negative: they cannot both be $-1000$, and one must be smaller than $-1000$, meaning either $x$ or $y$ must be negative.
+
+Thus both are positive, and each factor of $1{,}000{,}000 = 2^6\cdot 5^6$ corresponds to one positive integer pair. Since it has $6+1)(6+1) = 49$ factors, then there are $49$ pairs.
+
+\item It is well-known that all primes greater than $3$ are either $1$ or $-1$ modulo $6$. Note that a number that is $-1$ modulo $6$ cannot be divisible by $2$ or $3$. If none of its prime factors were $-1$ modulo $6$, then all of its prime factors are $1$, and their product would be $1$ as well, contradiction. Therefore there must be a prime that is $-1$ modulo $6$ that divides it.
+
+Suppose finitely many primes existed that are $-1$ modulo $6$; multiplying them and adding either $4$ or $6$ (depending on number of primes) produces a new number that is also $-1$ modulo $6$. This number must be composite, and by the above, divisible by a prime that is $-1$ modulo $6$. But when divided by any such prime, it leaves a remainder of either $4$ or $6$, contradiction.
+
+\end{enumerate}
+
+\subsubsection*{Diophantine equations}
+
+\begin{enumerate}
+
+\item Since both $2x$ and $100$ are even, so is $5y$, and thus $y$ is even as well. Any even $y$ produces an integer solution, the ones that give positive solutions are $y = 2, 4, \ldots, 18$. Thus there are $9$ ordered pairs.
+
+\item Since $2^{3x} + 5^{3y} = \del{2^x + 5^y}{2^{2x} - 2^x \cdot 5^y + 5^{2y}} = 189$. The factors of $189$ are $1 \cdot 189, 3 \cdot 63, 7 \cdot 27, 9 \cdot 21$. The only pair that works is $9 \cdot 21$, giving the only values $x = 2$, $y = 1$.
+
+\item Adding twice the second equation to the first gives $5x = 56 - 3a$, and subtracting the second equation from twice the first gives $5y = 4a - 13$. Since $56 - 3a$ and $4a - 13$ are integers divisible by $5$, their sum, $a + 43$, is divisible by $5$, so $a$ is an integer as well, and it is $2$ modulo $5$. Both $56 - 3a$ and $4a - 13$ have to be positive, so $a$ is at least $4$ and at most $18$. The only integers in this range that are $2$ modulo $5$ are $7, 12, 17$.
+
+\item This is $2xy - 2x + y = 43$ and subtracting $1$ to both sides completes the rectangle, giving $(2x + 1)(y - 1) = 42$. Then $2x + 1$ is an odd factor of $42$, so it is either $3, 7, 21$, giving $x = 1, 3, 10$, with corresponding $y = 15, 7, 3$. The largest $x + y$ is thus $16$.
+
+\item Adding $1$ to both sides in each equation completes the rectangle, making $(a+1)(b+1) = 16, (b+1)(c+1) = 100$, and $(c+1)(a+1) = 400$. Taking the product of all equations and its square root gives $(a+1)(b+1)(c+1) = 800$. Dividing with second equation gives $a+1 = 8$, so $a = 7$. Similarly, $b = 1$ and $c = 49$.
+
+\item Adding twice the first equation to the second gives $16x + 13y = 77$, which has only one nonnegative integer solution, $x = 4, y = 1$. Substituting to either equation gives $z = 2$.
+
+\item Cheat: it must be constant. One such soution is $(3, -4)$, and $\floor{y/x} = -1$. In fact, the rest of the solutions are $(3-4k, 7k-4)$ for integral $k$, and indeed $\floor{y/x} = -1$.
+
+\item Dividing both sides by $xyz$ gives $x^{y^z - 1}y^{z^x - 1}z^{x^y - 1} = 3$. One of $x, y, z$ must be $3$, so WLOG $x = 3$. Then $y^z - 1 = 1$, which only happens for $y = 2$ and $z = 1$, giving $(3, 2, 1)$, which works, and so does its cycles, giving $3$ triples.
+
+\item Note that $\dfrac{15}{2013} = \del{1 - \dfrac1{x_1}}\cdots\del{1 - \dfrac1{x_n}} \geq \del{1 - \dfrac12}\cdots\del{1 - \dfrac1{n+1}} = \dfrac1{n+1}$, showing $n \geq 134$. To prove this is achievable, set $x_1, \ldots, x_{133}$ to $2, \ldots, 134$ and $x_{134} = 671$. This gives us the value $\del{1 - \dfrac12}\cdots\del{1 - \dfrac1{134}}\del{1 - \dfrac1{671}} = \dfrac1{134} \cdots \dfrac{670}{671} = \dfrac{15}{2013}$. The minimum value is thus $134$.
+
+\end{enumerate}
+
+\subsubsection*{Modulo}
+
+\begin{enumerate}
+
+\item The highest power of $5$ dividing $16$ is, by Legendre's, $\floor{\dfrac{16}5} = 3$, so we take out $8$ and three factors of $5$ and compute modulo $100$ the product $1 \cdot 2 \cdot 3 \cdot 4 \cdot 1 \cdot 6 \cdot 7 \cdot 1 \cdot 9 \cdot 2 \cdot 11 \cdot 12 \cdot 13 \cdot 14 \cdot 3 \cdot 16 = 96$. 
+
+\item (The remainder when divided by $5$ should be $4$.) Since $n + 5\equiv 3 \pmod 4$, $n \equiv 3 - 5 \equiv -2 \equiv 2 \pmod 4$. Similarly, $n \equiv 0 \pmod 5$. We check $5, 10, 15$ if any give a remainder of $2$ when divided by $4$, and $10$ works. Then $10 + 6 \equiv 16 \pmod 20$, so the remainder is $16$.
+
+\item Note that $n = 1$ works, but we require it to be greater than one. By CRT, the solutions to any linear system of moduli differ by the LCM of the moduli. The LCM of $3, 4, 5, 6$ is $60$, so the next solution is $1 + 60 = 61$. 
+
+\item Taking modulo $11$, by Fermat's Little Theorem, we only need to consider the exponent modulo $10$. However, $5! \equiv 0 \pmod 10$, so by Fermat's Little Theorem, $3!^{5!^{\cdots}} \equiv \del{3!^{10}}^{\cdots} \equiv 1^{\cdots} \equiv 1 \pmod {11}$. The remainder is $1$.
+
+\item Since $96 = 3 \cdot 32$, we take modulo $3$ and modulo $32$. Modulo $3$ the expression is $1^{15} - (-1)^{15} - 1^{15} - (-1)^{15} - 1^{15} \equiv 1$. Modulo $32$, everything evaporates except for $-1^{15} \equiv -1$. It is $1$ modulo $3$ and $-1$ modulo $32$, combining both gives the expression as $31$ modulo $96$.
+
+\item Since $7, 8, 9$ are relatively prime, $739ABC$ is divisible by $504$. It is $739000 + ABC \equiv 136 + ABC \equiv 0 \pmod {504}$, giving only the choices $ABC = 368, 872$.
+
+\item If $p \mid a^p$, then $p \mid a^p \mid a^q$. Suppose $p \mid a^q$ and $p \nmid a^p$, then there exists some prime power $r^n$ such that $r^n \mid p$ and $r^n \nmid a^p$. Then $r^n \mid p \mid a^q$ so $r \mid a$, and $r^n \mid a^n$. However, since $r^n \nmid a^p$, then $p < n$. Then $r^p \mid r^n \mid p$, but this implies $r^p < p$, contradiction.
+
+\end{enumerate}
+
+\end{document}

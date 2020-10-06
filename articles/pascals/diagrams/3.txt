@@ -1,0 +1,6 @@
+A = dir(10)
+B = dir(0)
+C := dir(45)
+
+circle A B C
+Line(A,B,10)

@@ -1,0 +1,95 @@
+\documentclass[10pt,paper=letter]{scrartcl}
+\usepackage[alttitle]{cjquines}
+
+\begin{document}
+
+\title{VCSMS PRIME}
+\subtitle{Program for Inducing Mathematical Excellence}
+\author{Session 2: Functions}
+\date{September 15, 2017}
+
+\maketitle
+\setlength{\unitlength}{1in}
+\begin{picture}(0,0)
+  \put(5.5,0.5){\hbox{\includegraphics[width=0.9in]{logo.png}}}
+\end{picture}
+\vspace{-3.5em}
+
+\subsubsection*{Lecture problems}
+
+\begin{enumerate}
+  \item (QI1) If $27^3 + 27^3 + 27^3 = 27^x$, what is the value of $x$?
+  \item (AI11) How many real numbers $x$ satisfy the equation $$\del{\abs{x^2 - 12x + 20}^{\log x^2}}^{-1 + \log x} = \abs{x^2 - 12x + 20}^{1 + \log(1/x)}?$$
+  \item (QI2) Let $a, b > 0$. If $\abs{x- a} \leq a + b$, what is the minimum value of $x$?
+  \item (QIII4) Let $f(x) = \sqrt{-x^2 + 20x + 400} + \sqrt{x^2 - 20x}$. How many elements in the range of $f$ are integers?
+  \item (AI2) Let $f$ be a real-valued function such that $f(x-f(y)) = f(x) - xf(y)$ for any real numbers $x$ and $y$. If $f(0) = 3,$ determine $f(2016) - f(2013)$.
+  \item (AI8) For each $x \in \RR$, let $\cbr{x}$ be the fractional part of $x$ in its decimal representation. For instance, $\cbr{3.4} = 3.4 -3 = 0.4$, $\cbr{2} = 0$, and $\cbr{-2.7} = -2.7 - (-3) = 0.3$. Find the sum of all real numbers $x$ for which $\cbr{x} = \dfrac{1}{5}x$.
+\end{enumerate}
+
+\subsubsection*{Exponents}
+
+\begin{itemize}
+  \item $b^e = x$. If $b > 0$ (and not $1$) then $e \in \RR$. If $b = 0$, then $e > 0$. If $b = 1$, then range is just $1$. The negative case is very complicated. Range is all real numbers, except $b \leq 0$ and $b = 1$. Monotonic, so if $e \in [c, d]$ then $x \in [b^c, b^d]$.
+  \item Write everything in the same base and hope it works!
+  \item If we can't make the bases the same, we can make the exponents the same: $11^8$ and $16^7$.
+  \item If $a, b, c \in \RR$, and $a \geq 0$ then $a^b = a^c$ implies one of either: \textbf{a)} $a = 0, b, c > 0$, \textbf{b)} $a > 0, b = c$, \textbf{c)} $a = 1$. The case of negative base is complicated again.
+\end{itemize}
+
+\subsubsection*{Logarithms}
+
+\begin{itemize}
+  \item $\log_b x = e$. Must have $b > 0$ and $x > 0$, but range is any $e \in \RR$. Monotonic, so if $x \in [c, d]$ then $e \in [\log_b c, \log_b d]$.
+  \item Write everything in the same base and hope it works!
+  \item Spam $\log_b x = e \iff x = b^e$. Think of ``raising both sides to the $b$th power'' and ``cancelling the logarithm:'' $b^{\log_b x} = x$. Since logarithms are monotonic, inequalities work too.
+  \item Recall the rules of logarithms: the most important are $\log_b x + \log_b y = \log_b xy$, $c\log_b x = \log_b x^c$, and $\log_b x = \frac{\log_c x}{\log_c b}$, the rest can be derived.
+\end{itemize}
+
+\newpage
+
+\subsubsection*{Surds}
+
+\begin{itemize}
+  \item $y = \sqrt{x}$. Must have $x \geq 0$. Monotonic, so if $x \in [a, b]$ then $y \in [\sqrt{a}, \sqrt{b}]$.
+  \item Rationalize the denominator, often with $x^2 - y^2 = (x-y)(x+y)$ or $x^3 \pm y^3 = (x\pm y)(x^2 \mp xy + y^2)$.
+  \item If you have $\sqrt{a + \sqrt{b}}$, maybe you can simplify it to $x + \sqrt{y}$. Equate and square both sides. Same thing with cube roots. 
+  \item If you have conjugates, like $x = \sqrt{a} + \sqrt{b}$ and $y = \sqrt{a} - \sqrt{b}$, you can often write $y$ in terms of $x$.
+\end{itemize}
+
+\subsubsection*{Floor, ceiling, fractional}
+
+\begin{itemize}
+  \item $\floor{x}$ is the integer part of $x$. If $\floor{x} = c$, then $c \leq x < c + 1$. Monotonic.
+  \item $\ceil{x}$ is ceiling, if $\ceil{x} = c$ then $c < x \leq c + 1$. Monotonic.
+  \item $\cbr{x}$ is fractional part or $x - \floor{x}$. \emph{Not monotonic}. Always has $0 \leq \cbr{x} < 1$.
+  \item One technique is to substitute $x = n + r$ where $n = \floor{x}$ and $r = \cbr{x}$. Use the fact that $0 \leq r < 1$ to find values of $n$. 
+  \item Another technique is to replace all $\cbr{x}$ with $x - \floor{x}$.
+\end{itemize}
+
+\subsubsection*{Absolute value}
+
+\begin{itemize}
+  \item $y = \abs{x}$ is always split into two cases: when $x < 0$, $\abs{x} = -x$ and when $x > 0$, $\abs{x} = x$. 
+  \item \emph{Not monotonic}, so we have to be careful with inequalities: if you have $\abs{x} \leq y$ then you split it into $-y \leq x \leq y$. If $\abs{x} \geq y$ then $x \leq -y$ or $x \geq y$. 
+  \item Sums of absolute values: if you're minimizing $\abs{x-a} + \abs{x-b} + \abs{x-c}$, the minimum value is when $x$ is the median of $a, b, c$. If even number of values, then any $x$ between the two median values works.
+\end{itemize}
+
+\subsubsection*{Rational functions and limits}
+
+\begin{itemize}
+  \item $y = \frac{f(x)}{g(x)}$. Must have $g(x) \neq 0$.
+  \item Very common to find the range, as in $\frac{x^4 + 3}{2x^4 + 1}$. Find the fastest growing term and consider that. What happens if $x \to \infty$, or $x \to -\infty$? What makes it the smallest value?
+  \item From slow growing to fast: constants, logarithms, polynomials, exponents. (This is towards positive infinity.)
+\end{itemize}
+
+\subsubsection*{Functional equations}
+
+\begin{itemize}
+  \item Treat it as a system of equations machine and find stuff.
+  \item Substitution: To find $f(0)$ or $f(1)$ or whatever, get stuff to cancel. Try substituting all $0$ or all $1$.
+  \item Involutions: if we have $f(x)$ and $f(a-x)$ and we're finding $f(c)$, then substituting $x = c$ and $x = a - c$ gives two equations. Similar: $f(x)$ and $f(1/x)$ means substituting $x = c$ and $1/c$. Functions where $f \circ f(x) = x$ are called \emph{involutions}.
+  \item Induction: if we have $f(x)$ and $f(x+1)$ and you know $f(0)$, you can find any $f(n)$ for any natural $n$. 
+  \item Cheat: if only one function satisfies the conditions (i.e. there's only one possible answer), then just find one and use that. Try linear functions, constants, etc.
+  \item Cauchy FE: if $f(x+y) = f(x) + f(y)$ for $x, y \in \QQ$ then $f(x) = kx$ for some constant $k$. Making it reals is harder, it works if you have either bounding, monotonicity, or continuity.
+\end{itemize}
+
+\end{document}

@@ -1,0 +1,138 @@
+\documentclass[11pt,paper=letter]{scrartcl}
+\usepackage[alttitle]{cjquines}
+
+\begin{document}
+
+\title{Report on PRIME 2017}
+\author{Carl Joshua Quines}
+\date{October 27, 2017}
+
+\maketitle
+
+\begin{abstract}
+  The Program for Inducing Mathematical Excellence (PRIME) trained a bunch of students for the PMO qualifying stage. I give an overview, discuss its history, the philosophy behind it, what happened, and things I'd change if I did it again.
+\end{abstract}
+
+\section{Course description}
+
+PRIME consisted of twelve two-hour sessions. Each session has a wide topic like ``Angles and Areas'', and a corresponding handout. The handout consists of around a half-dozen to a dozen problems, along with notes explaining the ideas behind the solutions to the problems and the lecture material.
+
+A session would begin with around forty minutes of problem-solving, where I'd go around and check how people are doing and give hints or so. I'd suggest for each to try based on my knowledge of their skill. The remaining time is spent going through most of the problems and their solutions, presenting the necessary background, like principles or theorems. 
+
+This is where the PRIME philosophy comes in, explained in a later section. The explanation is mostly object-level, but I'd point out meta-level stuff. As an example, if a problem would involve completing the square, I'd point out the more general idea of manipulating and factoring out, and the even more general idea of making things easier. 
+
+Sessions are twice a week, and a homework set is assigned for each week. Homework consists of four sets of about a dozen problems each, and in general the sets are sorted by difficulty. Students pick two sets to solve, and submit only answers for the first set, and solutions for the second. 
+
+The twelfth session was special, and there was no class the day it was held. It was the day directly before the PMO qualifying stage. The topic was meta-solving, which involved how to guess efficiently, working neatly, and some theory on problem-solving. This was followed by the final exam, intended as a mock PMO qualifying stage and held for two-and-a-half hours. 
+
+Due to the amount of work, I talked to their math teachers to assign them less work, and in return, provide the work they accomplished for PRIME. Students were informed of this as incentive for completing homework. Grades were computed from a combination of mostly homework, along with attendance and the final exam. Math teachers used the grade as they saw fit, usually in lieu of whatever activities they missed in class.
+
+The materials of PRIME, including a syllabus, the weekly handouts, and the final exam, are all posted on my website, \url{http://cjquines.com/math.html}.
+
+\section{History}
+
+Competition math is a thing in the Philippines. The main organizations used to be the Mathematics Teachers Association of the Philippines (MTAP), the Mathematical Society of the Philippines (MSP) and the Mathematics Trainers Guild (MTG). Of these, MTAP hosts a competition that sticks closely to curriculum math and emphasizes speed, while the MSP runs the Philippine Mathematical Olympiad, the qualifier to the IMO, as well as the selection camp. 
+
+This leaves the MTG, which used to be the sole organization that explicitly aims at training students for competition math. Students from our school, the Valenzuela City School of Mathematics and Science (VCSMS), used to be funded by the government to participate in its programs. Prohibitive pricing, however, led to withdrawal of government support starting 2013. Since then, VCSMS has focused on training its students for competition math internally.
+
+A program formally began in 2014 as the Enhanced Training Program for Mathematical Excellence (ETPME), a year-round enrichment program. It had several discrete tracks.
+
+From June to July, ETPME aims to screen potential contestants from grades 7 and 8, and crash courses through algebra. August to September is aimed at the Australian Mathematics Competition, and thus more focus is given in discrete math, which the curriculum lacks.
+
+September to October is aimed at the qualifying stage of the Philippine Mathematical Olympiad, focusing on crashing through higher math like trigonometry, logarithms, etc. From October to February, short-answer oral contests are the focus, due to AdMU's Sipnayan, UST's Pythagoras, UP's Mathirang Mathibay. From January to March it is the Metrobank--MTAP--DepEd Mathematics Competition, which is intense as VCSMS has a track record to maintain.
+
+The ETPME was renamed as the Enhanced Training Program in Mathematics in 2015. Finally, in 2016, the third track -- the one aimed at the Philippine Mathematical Olympiad -- split off under my direction as the Program for Improving Mathematical Excellence (PRIME). ``Improving'' was changed to ``Inducing'' in 2017.
+
+\section{Philosophy}
+
+An overview: Philippine contests emphasize speed over ingenuity, so PRIME emphasizes object-level over meta-level stuff. 
+
+\subsubsection*{The state of Philippine math competitions}
+
+Let's start with the state of math contests here in the Philippines. Ideally, with the emphasis on problem-solving, original thought, and whatnot, a mathematics competition should reward creativity and originality, instead of tricks. And this does happen with a couple of contests, like PMO nationals, or some programs like PEM.\footnote{The PMO qualifying stage has more time now, so perhaps this approach needs to be changed slightly. I still contend the general ideas hold.}
+
+But the vast majority of competitions do not. Most short-answer math contests in the Philippines are fast. There is not enough time to figure out how to wittily solve a problem from scratch. The quantity of problems also means that many ideas come up again and again, which rewards contestants who have seen similar ideas before.
+
+This is not necessarily bad, nor does it mean that a contestant who knows a bunch of formulas would necessarily do well. But it means that the system can be gamed. Let's examine part I of last year's PMO areas.
+
+\subsubsection*{Anatomy of a math problem}
+
+Consider problem 4, asking to find the hundredth term of an arithmetic progression with common difference $3$, which has the property that the ratio of the sum of the first $3k$ to the sum of the first $k$ terms is constant. Now consider solving this problem.
+
+First, you'd set a variable for the first term of the sequence. Then, you'd write out the sums of the first $3k$ and first $k$ terms using the formula, and simplify it. You realize that this number should not depend on $k$, so you choose the first term such that the $k$ disappears.
+
+A lot of problems are like this: they involve perhaps one or two ideas that don't appear a lot, with the rest of the problem being standard. In problem 19, recognizing $OI^2 = R^2 - 2Rr$ turns the problem to finding $R$ and $r$, which is standard. This happens becomes problems that are really novel are hard to write, like problem 18, which is understandable.
+
+\subsubsection*{Two problem-solvers}
+
+Suppose we have two problem-solvers, who happened to both do the solution given above. The first problem-solver is creative but inexperienced. On the other hand, the second problem-solver has slower intuition but stronger experience.\footnote{I do not want to imply there are only two kinds of problem-solvers; many good problem-solvers both have strong intuition and experience.}
+
+The first student might not consider setting a variable for the first term of the sequence at first. She might have to derive the formula for the sum of the first $n$ terms. However, her advantage is that she would likely see that the ratio should not depend on $k$. Given enough time, she would very likely solve the problem.
+
+Now, the second student sets a variable for the first term and writes out the formulas nearly immediately, since these are both standard. He would still need to have the creativity to see that the ratio should not depend on $k$. He would be slower than the first student in doing this, and he is not as likely to solve it. 
+
+Which of the students would do better? If this were the AMC, students would have more time per problem, and as a result, the first student has an advantage, since she is likely to solve many problems she comes across. But remember Philippine contests are fast. A contestant able to work quickly, able to save intuition for the harder problems, would have an advantage. The second student would do better.
+
+\subsubsection*{Object-level and meta-level}
+
+Students can't \emph{just} rely on tricks, since ingenuity is needed too. On the other hand, creativity without raw material is slow. The goal of PRIME, then, is to strike a compromise. For this reason, PRIME focuses on \emph{object-level} heuristics, then steps back and points out \emph{meta-level} patterns.
+
+The distinction is pretty well-recognized, as in P\'olya. Zeitz, in his book The Art and Craft of Problem Solving, calls these strategy, tactics, and tools. Meta-level, in this case, is similar to strategy and tactics; object-level is similar to tools.
+
+In brief, object-level refers to low-level tools: completing the square, angle chasing, setting up recurrences, using FLT. In contrast, meta-level refers to more abstract stuff, like drawing figures, working backwards, wishful thinking, thinking about constraints.
+
+\subsubsection*{What PRIME does}
+
+Now, the essence of PRIME is to focus more on object-level than meta-level stuff. The aim is to train students to be like the second problem-solver. This does not mean PRIME neglects meta-level stuff, since that's important too, as outlined above. 
+
+In brief: the approach of PRIME is to \emph{teach object-level stuff first, then step back, and point out meta-level patterns}. As above, this approach was made to game typical Philippine math contest problems. Teaching object-level stuff allows seeing meta-level patterns easier when it's pointed out later.
+
+There is another reason why object-level stuff is taught first, and it's because of background. Many of the students in PRIME have comparatively stronger intuition than mathematical knowledge, since much competition math lies outside the curriculum, and no one else has taught them. 
+
+To finish with an analogy: problem-solving is like building a house, and the students come in with tools. It is the job of PRIME to supply raw material.
+
+\section{Narration}
+
+I'll try to detail what happened per session, just to remember the parts that the students weren't familiar with, and what to change next time.
+
+Preparation for PRIME began about a week before, consisting of talking to all the math teachers and the math coordinator. We talked about where it would be held, the schedule, and whatnot. I prepared the syllabus, and the handouts for the first week.
+
+The orientation in the first session was only five minutes long. I was expecting it to be longer, so I intentionally made the session short. The facts about trapezoids, even if they came up frequently in MMC, weren't generally known by the students.
+
+The concept of monotonicity, like why it's valid to conclude if $b^x > b^y$ then $x > y$ given $b > 0$, was unfamiliar. Lots of people snoozed in the FE discussion. Everyone passed their homework for the first week.
+
+Around this time I write the handouts and problem set for the second week. For the third session, students had no idea what multinomial coefficients were. The third handout had a fill-in portion for the twelvefold way, which really engaged the students, so I reminded myself to do similar things if possible. 
+
+For session four, the students can use Bayes without the formula. But were still surprised by the results, after the typical cancer and cancer test problem. Discussing the formula and derivation got a lot of bored faces, should skip that next time since the students could use Bayes just fine without knowing the formula.
+
+Around this point I finish the rest of the handouts, until the twelfth session. This explains the stark difference between the first two handouts and the rest of the material. Everyone passed the second set of homework as well, though less people have completed both sets.
+
+Encouraged by the fill-in in session three, I do another fill-in for trig identities in session five, which was fun. For session six, students were surprised the British Flag Theorem held even if the point was outside the rectangle or in the third dimension. In session seven, Newton interpolation of a sequence was not well-known. 
+
+Session eight was different. Our usual room was taken, so I was forced to take a different approach and do problem-solving for the whole period, which was also nice. Consider having sessions next time that are just free-form problem-solving, which are good learning experiences.
+
+Only two people submitted their homework for the third and fourth weeks. It was pretty discouraging, since there was a lot of schoolwork being poured on everyone, and all of us were quite busy. I had lots of absences in the fourth and fifth weeks.
+
+Not a lot of people knew facts about the rarer conics, but that was okay considering they're not tested often, so consider removing it next time. Session ten was a lot of unfamiliar material to many, so maybe split it into two sessions next time. The stuff about manipulating Vieta's comes up a lot, but many students weren't familiar with the tricks related to it.
+
+There was only one number theory session, the elventh one, which was the last regular session. For good reason, since most hard number theory that comes up is hard because it involves meticulous bookkeeping, casework, or bashing.
+
+I developed a practice exam from existing questions, which is intentionally much harder than the final exam, which in turn, is intentionally much harder than the qualifying round. I described the process of developing the final exam in the solutions, so check that.
+
+Then the last session happened, and I realize I should have given the problem-solving talk sooner. Like, first session or something. Anyway, the final exam went as expected, with the scores low, as expected, and then I gave course evaluations and reminders for the PMO.
+
+\section{Things I would change}
+
+A list:
+
+\begin{itemize}
+  \item More time! We were quite restricted in terms of time, because of school and everything, and if anything I'd split some sessions into two, and possibly meet only once a week. This can be possible if the program started earlier.
+
+  \item Less homework. It was generally agreed that there was too much homework given out, and I think so as well. Either that, or I should let them do homework in class. That actually doesn't seem that bad of an idea.
+
+  \item Less coverage. In particular, cutting out the more obscure topics and spending more time talking about meta-level stuff, in consideration of the changes to the PMO qualifying stage. Being wide in scope is important, but perhaps this year went a little too wide.
+
+  \item Might consider splitting into tracks. The variance in skill levels going in is a bit too high, so maybe some other mechanism of dispensing knowledge to the younger students can be better.
+\end{itemize}
+
+\end{document}

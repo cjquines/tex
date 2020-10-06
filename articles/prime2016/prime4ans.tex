@@ -1,0 +1,115 @@
+\documentclass[10pt,paper=letter]{scrartcl}
+\usepackage[alttitle]{cjquines}
+
+\begin{document}
+
+\title{VCSMS PRIME}
+\subtitle{Session 4: Combinatorics 1}
+\author{compiled by Carl Joshua Quines}
+\date{September 30, 2016}
+
+\maketitle
+
+\subsubsection*{Ad hoc}
+
+\begin{enumerate}
+
+\item The single-digit numbers account for $1 + 2 + \cdots + 9 = 45$ of the digits, the remaining $2015 - 45 = 1970$ digits are accounted for by two-digit numbers, which have two digits each. Thus we must have $2\del{10 + 11 + \cdots + n} \leq 1970$, the maximum value is $n = 44$. Thus the $1936$th digit onwards is $454545\ldots$, so the $2015$th is $5$.
+
+\item There are only four possible sets: $\cbr{6, 1, 0}, \cbr{5, 2, 0}, \cbr{4, 3, 0}, \cbr{4, 2, 1}$. Multiplying by $3!$ to account for permutations gives $24$.
+
+\item A vertically arranged block is determined by its topmost letter, which can appear anywhere in the top $10 \times 12$ part of the array, so there are $120$ of them. Similarly, the horizontal blocks are determined by its leftmost letter, anywhere among the left $10 \times 12 = 120$ letters. Similarly for the diagonal blocks, but for two $10 \times 10$ blocks depending on its orientation. The total is $120 + 120 + 100 + 100 = 440$.
+
+\item The cardinalities are $1, 3, \ldots$, so we must have $1 + 3 + \cdots + (2n - 1) \leq 2009$, which has the largest possible value of $n = 44$. Thus $2009$ appears in $A_{45}$.
+
+\item Each diagonal has $5$ skew diagonals, and there are $12$ diagonals. We divide by $2$ for overcounting: $5 \times 12 \div 2 = 30$.
+
+\item Each number appears in $2^15$ subsets, depending on whether each of the other $15$ numbers appear or no. Thus the sum is $2^15 \del{1 + 2 + \cdots + 16} = 4456448$.
+
+\item The one-digit numbers take $9$ digits and the two-digit numbers take $180$ digits, so we stop at $\dfrac{2016 - 189}3 + 99 = 708$. 
+
+From $0$ to $99$, in the ones place the sum is $10(0 + 1 + \cdots + 9)$ and in the tens place the sum is $10(0 + 1 + \cdots + 9)$, so the total sum is $20(45) = 900$. From $100$ to $699$, there are $6$ $0$ to $99$s and $100$ occurences of $0$ to $6$ in the hundreds place, so $100(0 + 1 + \cdots + 6) + 6(900) = 7500$. Then $700, \ldots, 708$ have a sum of $99$, so the total is $900 + 7500 + 99 = 8499$.
+
+\item On the main diagonal is $0$, then above and below there are two diagonals, each with $n-1$ $1$s, above and below are two diagonals, each with $n-2$ $2$s, etc. The summation is $\sum 2(n-i)i$ from $i = 1$ to $n$, or $2\del{n \sum i - \sum i^2} = \dfrac13 n^3 - \dfrac13n$. Thus $n^3 - n = 7980$, and we observe that only $n = 20$ works. 
+
+\item The first digit has to be $1$, then onwards, the digits have to be either $0$ or $9$. The only choices are $1999, 1099, 1009, 1000$, and the smallest is $\dfrac{1099}{19}$.
+
+\item Burnside's, or bloody casework. We do casework on the number of white vertices. For $0$ or $1$ white vertices there is clearly one different way each. For $2$ white vertices there are three ways: both connected by an edge, both on the same face but not adjacent, and on opposite vertices. For $3$ white vertices there are four ways, all on the same face, all on opposite vertices, and two when two are connected. For $4$ white vertices there are six ways: all on the same face, four where three share the same face, and one with two pairs opposite each other.
+
+The $5, 6, 7, 8$ white vertices are analogous to there being $3, 2, 1, 0$ black vertices, so there are the same number of ways. That makes a total of $1 + 1 + 3 +4 + 6 + 4 + 3 + 1 + 1 = 24$.
+
+\end{enumerate}
+
+\subsubsection*{Inclusion-Exclusion}
+
+\begin{enumerate}
+
+\item Of the $100$ people, $60$ claim to be good, so $100 - 60 = 40$ deny to be good. Of these, $30$ correctly deny, so the rest must be people who are good at math but refuse to admit it: $40 - 30 = 10$.
+
+\item There are $\floor{\dfrac{2015}3} = 671$ numbers less than $2015$ divisible by $3$. Of these, $\floor{\dfrac{671}5} = 134$ are divisible by $5$ and $\floor{\dfrac{671}7} = 95$ are divisible by $7$, with $\floor{\dfrac{671}{35}} = 19$ divisible by $35$. By PIE, the answer is $671 - 134 - 95 + 19 = 461$.
+
+\item This is $\phi(10000) - 1 = 10000\del{1 - \dfrac12}\del{1 - \dfrac15} - 1 = 3999$.
+
+\item There are $638$ numbers divisible by $3$, $239$ divisible by $8$, $79$ divisible by $24$, and $319$ divisible by $6$ in the range $[100, 2015]$. The answer is $638 + 239 - 79 - 319 = 479$.
+
+\item By PIE: $\floor{\dfrac{999}{10}} + \floor{\dfrac{999}{15}} + \floor{\dfrac{999}{35}} + \floor{\dfrac{999}{55}} - \floor{\dfrac{999}{30}} - \floor{\dfrac{999}{70}} - \floor{\dfrac{999}{110}} - \floor{\dfrac{999}{105}} - \floor{\dfrac{999}{165}} - \floor{\dfrac{999}{385}} + \floor{\dfrac{999}{210}} + \floor{\dfrac{999}{330}} + \floor{\dfrac{999}{770}} = 146$.
+
+\end{enumerate}
+
+\subsubsection*{Permutations}
+
+\begin{enumerate}
+
+\item Casework: only $100$ has a sum of $1$ and $999$ has a sum of $27$. By balls and urns, there are $\binom{10}8 = 45$ that sum to $8$, except $9$ of these start with $0$. The sum is $1 + 1 + 45 - 9 = 38$.
+
+\item There are $\dfrac{10!}{2!}$ permutations, since I is repeated. Except we overcount: we want to consider only AIIU out of its $\dfrac{4!}{2!} = 12$ possible permutations. So we divide by $12$. This gives $\dfrac{10!}{12 \cdot 2!} = 151200$.
+
+\item In a line, this is $2 \times 6! \times 6!$ -- pick either girl or boy to go first and alternate, then multiply by the number of ways to permute per gender. Divide by $12$ to account for rotation in a circle: $2 \times 6! \times 6! \div 12 = 86400$.
+
+\item There are $\dfrac{7!}{2!} = 2520$ permutations since $A$ is repeated. However, we want to consider only AEA out of its $3$ permutations, so divide by $3$ to get $840$.
+
+\item Since $33750 = 2 \cdot 3^3 \cdot 5^4$, we split to four cases: all prime numbers, which is $\dfrac{8!}{4!3!} = 280$, one of them is $6$, which is $\dfrac{7!}{4!2!} = 105$, one of them is $9$, which is $\dfrac{7!}{4!} = 210$, and when both $6$ and $9$ are present, $\dfrac{6!}{4!} = 30$. The sum is $280 + 105 + 210 + 30 = 625$.
+
+\item There are $4!$ starting with A, $4!$ with M, $4!$ with R, a total of $72$. Then $3!$ start with SA, a total of $78$. The first starting with SM is SMART, so that must be the $79$th.
+
+\item There are $\dfrac{7!}{2!2!2!} = 630$ ways without restriction. There are $\dfrac{5!}{2!} = 60$ ways where PHI appears and also $\dfrac{5!}{2!} = 60$ ways where ILL appears. For strings with both PHI and ILL, it can be either as PHILL, I, P which is $3! = 6$ ways, or as PHI, ILL and P for another $3! = 6$ ways. By PIE, there are $630 - 60 - 60 +6 + 6 = 522$ ways.
+
+\item We use PIE. There are $\dfrac{6!}{2!2!2!} = 90$ ways to arrange MURMUR. By symmetry, when two Ms, Us, or Rs are together, there are $\dfrac{5!}{2!2!} = 30$ ways. Similarly, if two pairs of letters are together, there are $\dfrac{4!}{2!} = 12$ ways. Finally there are $3!$ ways when each pair is together. By PIE, there are $90 - 30 - 30 - 30 + 12 + 12 + 12 - 6 = 30$ ways.
+
+\end{enumerate}
+
+\subsubsection*{Combinations}
+
+\begin{enumerate}
+
+\item There are $2^n$ subsets, $1$ with no elements and $n$ with one element. Thus $2^n - n - 1 = 57$, which only has the solution $n = 6$.
+
+\item One of the numbers chosen has to be $7$, another has to be either $3, 6$ or $9$, the last number can be anything. This gives $1 \cdot 3 \cdot 7 = 21$, but we overcounted when the last number is also divisible by $3$, which happens $6$ ways, when we only want to count it $3$ times. So $21 - 6 + 3 = 18$.
+
+\item Order the boys arbitrarily, then there are $6! = 720$ ways to arrange the girls to form pairs.
+
+\end{enumerate}
+
+\subsubsection*{Balls and urns}
+
+\begin{enumerate}
+
+\item Let Amy, Bob and Charlie receive $a, b, c$ cookies respectively; we have $a + b + c = 15$, or $(a - 4) + b + c = 11$. Now each of $a-4, b, c$ are positive integers, so this is balls and urns. There are $10$ slots in between and we pick $2$ of them, so $\binom{10}2 = 45$ ways.
+
+\item Balls and urns directly: $\binom{12}2 = 66$.
+
+\item Consider $(x - 1000) + (y - 600) + (z - 400) = 16$, where each variable is now a positive integer, so by balls and urns there are $\binom{15}2 = 105$ ways.
+
+\item Consider the $6$ integers that are left. You are placing four integers such that no two are adjacent, so you have to place them in-between, in front, or behind the $6$ integers, giving $7$ slots. Each slot can only go to one integer so no two are adjacent, giving $\binom{7}4 = 35$ ways.
+
+\item Consider the $7$ books that are left. You are placing $5$ books so that no two of them are adjacent, so you have to place them in-between, in front, or behind the $7$ books, giving $8$ slots. Each slot can only go to one book so no two are adjacent, so that's $\binom{8}{5} = 56$ ways.
+
+\item Similar as above, there are $\binom{8}{5} = 56$ ways in a row. However, we overcount: we don't want to count the $\binom{6}{3} = 20$ ways when a book is placed in front and behind. This is $56 - 20 = 36$ ways.
+
+\item Bloody casework on $a + b$. When $a + b = 0$, there is $1$ solution for $(a, b)$. Then either $c + d + e = 0$, with $\binom22$ solutions, $c + d + e = 1$ with $\binom32$ solutions, etc., up to $c + d + e = 4$ with $\binom62$ solutions, all by balls and urns. This is thus $\binom22 + \binom32 + \cdots + \binom62 = \binom73 = 35$.
+
+Similarly, $a + b = 1$ has $\binom21 = 2$ solutions, and the hockeystick sum is $\binom22 + \cdots + \binom52 = \binom63 = 20$, so there are $2 \times 20 = 40$ ways. When $a + b = 2$ then the sum is $\binom31 \times \del{\binom22 + \cdots + \binom42} = 30$. The sum of all cases is $105$.
+
+\end{enumerate}
+
+\end{document}

@@ -1,0 +1,161 @@
+\documentclass[10pt,paper=letter]{scrartcl}
+\usepackage[alttitle]{cjquines}
+
+\begin{document}
+
+\title{VCSMS PRIME}
+\subtitle{Session 8: Algebra 3}
+\author{compiled by Carl Joshua Quines}
+\date{October 14, 2016}
+
+\maketitle
+
+\subsubsection*{Manipulation}
+
+\begin{enumerate}
+
+\item The first equation is $\dfrac{x^2 + y^2}{xy} = \dfrac{(x+y)^2 - 2xy}{xy} = 4$, giving $(x+y)^2 = 18$. Then $xy(x+y)^2 - 2(xy)^2 = 3\cdot18 - 2\cdot3^2 = 36$.
+
+\item The required expression is $2\del{x^2 + y^2 + z^2 + xy + yz + zx}$. Squaring the first equation and transposing $yz$ gives $x^2 + yz = 2013$, similarly, $y^2 + zx = 2014$ and $z^2 + xy = 2015$. Addding all expressions and multiplying by $2$ gives the answer, $12084$.
+
+\item Substitute $2n \to k$ to get $m^3 - 3mk^2 = 40$ and $k^3 - 3m^2k = 20$, we are looking for $m^2 + k^2$. It reminds us of the triple angle formulas for sine and cosine, so substitute $m = r\cos\theta$ and $k = r\sin\theta$, now we are looking for $r^2$. The equations become $r^3\del{cos^3\theta - 3\sin^2\theta\cos\theta} = 40$ and $r^3\del{sin^3\theta - 3\sin\theta\cos^2\theta} = 20$. It is a good idea to write each in terms of only one trigonometric function: substituting the Pythagorean identity shows us that the first equation is actually $r^3\del{4\cos^3\theta  - 3\cos\theta} = r^3\cos3\theta = 40$. Similarly, the second equation is $r^3\sin3\theta = 20$. Squaring both equations and adding gives $r^6 = 2000$, from whence $r^2 = \cbrt{2000} = 10\cbrt{2}$.
+
+More motivated but more high-powered: after substituting, notice $m^3 - 3mk^2 = 40$ and $k^3 - 3m^2k = 20$ look like the expressions from $(m - k)^3$, except the middle terms. We can fix this by making it $(m - ki)^3$; multiply the second equation by $i$ and add to the first to get $m^3 - 3m^2ki - 3mk^2 + k^3i = 40 + 20i = (m - ki)^3$. Taking the modulus of both sides and using de Moivre's gives $\abs{m - ki}^3 = \sqrt{40^2 + 20^2}$, so $m^2 + k^2 = \abs{m - ki}^2 = 10\cbrt2$. 
+
+\item Abuse degrees of freedom by setting $x = y$. The condition is $x^2 + 2x - 1 = 0$, and the expression needed is $x^2 + \dfrac1{x^2} - 2$. From the condition, $x^2 = 1 - 2x$ and dividing both sides of the condition by $x^2$, $\dfrac1{x^2} = 1 + \dfrac2x$, so the expression is now $\dfrac2x - 2x = 2\del{\dfrac1x - x} = 2\del{\dfrac{1 - x^2}{x}}$. But from the condition, $1 - x^2 = 2x$, so $2\del{\dfrac{1 - x^2}{x}} = 4$.
+
+(The legit solution is to clear denominators, factor the numerator, expand to get it as $(xy + x + y + 1)(xy - x - y + 1)$. The first term is $2$, the second term, when divided by $xy$, is the condition divided by $xy$.)
+
+\item Cross-multiply the condition and divide both sides by $a$ to get $a + \dfrac1a = 3$. Divide both numerator and denominator of the expression by $a^3$; the numerator becomes $1$ and the denominator becomes $\del{a^3 + \dfrac1{a^3}} + \del{a^2 + \dfrac1{a^2}} + \del{a + \dfrac1a} + 1$. But from $a + \dfrac1a = 3$, we get $a^2 + \dfrac1{a^2} = 7$ after squaring both sides, and $a^3 + \dfrac1{a^3} = 18$ after cubing and subtracting the original expression. The denominator is thus $18 + 7 + 3 + 1 = 29$, so the fraction is $\dfrac1{29}$.
+
+\item Dividing both sides by $4$ gives $\dfrac14 + \dfrac1{16} + \dfrac1{36} + \cdots = \dfrac{\pi^2}{24}$. Subtracting from the original equation gives $1 + \dfrac19 + \dfrac1{25} + \cdots = \dfrac{\pi^2}8$.
+
+\item Squaring both sides and subtracting $2$ gives $x^2 + x^{-2} = 7$. Repeating gives $x^{2^2} + x^{-2^2} = 47$, etc. The last two digits are $3, 7, 47, 7, 47, \ldots$. The pattern repeats, so the last two digits are $07$.
+
+\item Multiply the equations by $a, b, c$ respectively, and subtract pairwise and transpose to get $(a+bc)x = (b+ca)y = (c+ab)z$. The required ratio is $\del{\dfrac{x}y - 1}\del{\dfrac{y}z - 1}\del{\dfrac{z}x - 1}$, to get these we divide the equations with each other and simplify: $\dfrac{(a-1)(b-1)(c-1)(a-b)(b-c)(c-a)}{(a+bc)(b+ca)(c+ab)}$.
+
+\end{enumerate}
+
+\subsubsection*{Surds}
+
+\begin{enumerate}
+
+\item Multiplying numerator and denominator by $\cbrt{8} - \cbrt{2}$ and using the difference of two cubes, then cancelling out the factor $6$, leaves $2 - \cbrt{2}$.
+
+\item Expanding the right-hand side gives $2a^2 + 3b^2 + c^2 + 2ac\sqrt{2} + 2bc\sqrt{3} + 2ab\sqrt{6}$. Equating coefficients gives $ac = -2, bc = -3, ab = 6$. Multiplying all equations and taking the square root gives $abc = 6$, from whence $a = -2, b = -3, c = 1$ upon division by the three equations. Then $a^2 + b^2 + c^2 = 14$.
+
+\item Squaring both sides gives $2x + 2\sqrt{x^2 - 3x - 6} = 36$, or $\sqrt{x^2 - 3x - 6} = 18 - x$. Squaring both sides again gives $x^2 - 3x - 6 = x^2 - 36x + 324$, whence $x = 10$.
+
+\item Cubing both sides and using the binomial theorem, the terms which would end up with $\sqrt5$ in the expansion would have odd exponent for $\sqrt5$. If this were negative, then it would multiply out -- so the value must be $12 - \sqrt5$.
+
+\item Note that $a = 4 + \sqrt{15}$ and $b = 4 - \sqrt{15}$ after rationalizing denominators. Then $a + b = 8$ and $ab = 1$. However, $a^4 + b^4 = \del{a^2 + b^2}^2 - 2\del{ab}^2 = \del{\del{a + b}^2 - 2ab}^2 - 2\del{ab}^2$. Substituting everything yields $7938$.
+
+\item Observe $2 = \del{1 + \sqrt[n]2 - 1}^n \geq 1 + \binom{n}{2}\del{\sqrt[n]2 - 1}$ by the binomial theorem. The inequality follows.
+
+\end{enumerate}
+
+\subsubsection*{Sequences}
+
+\begin{enumerate}
+
+\item If there were perfect squares, the $150$th term would be $150$; except we skipped $12$ terms, so it should be $162$. 
+
+\item Abuse degrees of freedom: one such sequence is $0, 2, 2, 4, 4, \ldots, 98, 98, 100$, so the average of the first and hundredth terms is $50$.
+
+The legit method is to write $a_1 + a_2 = 2$, $a_2 + a_3 = 4$, \dots, $a_{99} + a_{100} = 198$. Take the sum of the odd-numbered equations to find $a_1 + a_2 + \cdots + a_{100}$ and the sum of the even-numbered equations to find $a_2 + a_3 + \cdots + a_{99}$; taking their difference yields $a_1 + a_{100} = 100$, so the average is $50$.
+
+\item Add $1$ to both sides of the recursion to get $b_{n+1} + 1 = \dfrac2{1 + b_n}$, or $\del{b_n + 1}\del{b_{n+1} + 1} = 2$. So the terms alternate $\dfrac13, \dfrac12, \dfrac13, \dfrac12, \ldots$, so $b_{2010} - b_{2009} = \dfrac12 - \dfrac13 = \dfrac16$.
+
+\item From the geometric sequence, $16y^2 = 15xz$ and $\dfrac2y = \dfrac1x + \dfrac1z$, or $\dfrac2y = \dfrac{x+z}{xz}$. Substituting the first equation gives $\dfrac{32}{15}y = x+z$. The desired expression is $\dfrac{x^2 + z^2}{xz} = \dfrac{\del{x+z}^2 - 2xz}{xz} = \dfrac{\del{x+z}^2}{xz} - 2$. Substituting the previous values for $xz$ and $x+z$ makes the $y$ cancel, giving $\dfrac{34}{15}$.
+
+\item It is clear that the terms in the sequence $1, 3, 7, 13, 21$ are quadratic. The method of differences or Newton interpolation yields the formula $n^2 - n + 1$, and continuing to $2015$ means the sum is taken from $n = 1$ to $45$. The sum is then $\sum n^2 - \sum n + 45$, or $30405$.
+
+\item The condition is equivalent to $\dfrac1{a_{n+1}} = \dfrac1{a_n} + c$, so the reciprocals of the terms are arithmetic. With this in mind, $c = 183$.
+
+\item It can be easily proven, say, with induction, that $a_n = \dfrac1{n!}$. Or prove $a_{n-1}/a_n = n$ with induction. The required sum is $1 + 2 + \cdots + 2009 = 2019045$.
+
+\end{enumerate}
+
+\subsubsection*{Series}
+
+\begin{enumerate}
+
+\item There were $17n+1$ numbers on the board originally, making the original sum $602n$ plus whatever number was erased. Estimate $1 + 2 + \cdots + 17n + (17n + 1) \geq 602n$ to get $n = 4$, the sum is $1 + 2 + \cdots + 69 = 2415$, and $602n = 2408$. The erased number was $2415 - 2408 = 7$.
+
+\item Adding the first $n$ and the last $m-n$ numbers gives the sum of the first $m$ numbers being $7140$. Solving $1 + 2 + \ldots + m = \dfrac{m(m+1)}2 = 7140$ is to estimate $\sqrt{2 \times 7140} = \sqrt{14280} \approx 120$, checking, $m = 119$ works.
+
+\item The sum of the first series is $\dfrac{\frac{a}b}{1 - \frac1b} = \dfrac{a}{b -1} = 4$, so $a = 4b - 4$. The second series is $\dfrac{\frac{a}{a+b}}{1 - \frac1{a+b}} = \dfrac{a}{a + b - 1}$. Substituting $a = 4b - 4$, factoring out $b - 1$, and cancelling gives its value as $\dfrac54$.
+
+\item Let the sum be $S$. Then $2S = 2 + 2 + 3\del{\dfrac12} + 4\del{\dfrac12}^2 + 5\del{\dfrac12}^3 + \cdots$, and subtracting the original equation from it yields $S = 2 + (2 - 1) + \del{3\del{\dfrac12} - 1} + \del{4\del{\dfrac12}^2 - 3\del{\dfrac12}^2} + \del{5\del{\dfrac12}^3 - 4\del{\dfrac12}^3} + \cdots$, or $S = 2 + 1 + \dfrac12 + \dfrac1{2^2} + \dfrac1{2^3} + \cdots$. Then $S$ is an infinite geometric series, with sum $S = \dfrac2{1-\frac12} = 4$.
+
+\item This is $\dfrac1{1\times3} + \dfrac1{3\times5} + \cdots + \dfrac1{13\times15}$, which telescopes as $\dfrac12\del{1 - \dfrac13} + \dfrac12\del{\dfrac13 - \dfrac15} + \cdots + \dfrac12\del{\dfrac1{13} - \dfrac1{15}}$. The sum is $\dfrac7{15}$.
+
+\item The telescope is $\dfrac1{n(n-2)} = \dfrac12\del{\dfrac1{n-2} - \dfrac1n}$. Multiply both sides of the sum by $2$ and expand the two telescopes to get $\dfrac13 + \dfrac14 - \dfrac1{N-1} - \dfrac1N < \dfrac12$, or $\dfrac1{N-1} + \dfrac1N > \dfrac1{12}$. The maximum that satisfies this is when $N = 24$.
+
+\item From $i = 1$ to $99$, the value is $0$. From $i = 100$ to $399$, the value is $1$, so the subtotal is $300$. From $i = 400$ to $899$, the value is $2$, the subtotal is $1000$. From $i = 900$ to $1599$, the value is $3$, the subtotal is $2100$. From $i = 1600$ to $2015$, the value is $4$, so the subtotal is $1664$. The total sum is $300 + 1000 + 2100 + 1664 = 5064$.
+
+\item Expand to prove $f(x) + f(1-x) = 1$, so pairing up terms in the series gives $1006$.
+
+\item Take the derivative of both sides of $(1 + x)^{19} = \sum \binom{19}k x^k$ to get $19(1 + x)^{18} = \sum k\binom{19}k x^{k-1}$. Substitute $x = 1$ to get $19 \cdot 2^{18}$.
+
+Alternatively, there is a combinatorial proof involving choosing a subset of $19$ people and making choosing $1$ to be the leader: either you pick the subset first and choose $1$ then, giving the sum, or you pick one to be the leader first and each of the $18$ others are either in the subset or not.
+
+\end{enumerate}
+
+\subsubsection*{Inequalities}
+
+\begin{enumerate}
+
+\item The inequality $x^2 + x - 12 > 0$ is $(x + 4)(x - 3) > 0$. For it to have solution set $(-4, 3)$, the sign should be reversed -- so we must have $k(x^2 + 6x - k) < 0$ for all $x$. Then $k$ should be negative and $x^2 + 6x - k$ should have negative discriminant, or $k < -9$. Thus $k \in (-\infty, 9]$ works.
+
+\item By Cauchy--Schwarz, $(x^2 + y^2 + z^2)^2 \leq (1^2 + 1^2 + 1^2)(x^4 + y^4 + z^4)$, giving $k = 3$.
+
+\item From AM-GM, $S - a_1 = a_2 + a_3 + a_4 + a_5 \geq 4\sqrt[4]{a_2a_3a_4a_5}$, taking the cyclic product gives $k = 4^5 = 1024$.
+
+\item By Cauchy--Schwarz, $\del{1^2 + \del{\dfrac{a}{\sqrt{\sin x}}}^2} + \del{1^2 + \del{\dfrac{b}{\sqrt{\cos x}}}^2} \geq \del{1 + \del{\dfrac{ab}{\sqrt{\sin x\cos x}}}^2}$, and using the equality $\sin 2x = 2\sin x \cos x$, the right-hand side can be manipulated to give the right-hand side of the inequality.
+
+\item The inequality clearly does not hold when $k < 2$, for example, when $a = b = c = 1$. To show it is true for $k = 2$, it is equivalent to $(2+a)(2+b) + (2+b)(2+c) + (2+c)(2+a) \leq (2+a)(2+b)(2+c)$ after clearing denominators. Expanding and cancelling many terms, then using $1 = abc$, gives $ab + bc + ca \geq 3$ which is true by AM-GM as follows: $ab + bc + ca \geq 3\cbr{a^2b^2c^2} = 3$. The steps are reversible.
+
+\end{enumerate}
+
+\subsubsection*{Single-variable extrema}
+
+\begin{enumerate}
+
+\item By AM-GM, since both terms are positive, $(7-x)^4(2+x)^5 \leq \del{\dfrac{(7-x)+\cdots+(7-x)+(2+x)+\cdots+(2+x)}9}^9$. The numerator simplifies to $38 + x$, and since we want equality, we let $7-x = 2+x$ or $x = 2.5$, making the maximum $(4.5)^9$.
+
+\item We have $4x - x^4 - 1 = -(x^4 - 2x^2 + 1) - 2x^2 + 4x - 1 + 1 = -(x^2 - 1)^2 - 2(x^2 - 2x + 1) + 2 = -(x^2 - 1)^2 - 2(x - 1)^2 + 2 \leq 2$ by the trivial inequality, equality at $x = 1$. Thus the maximum is $2$.
+
+\item Let $A(4, 2), B(2, -4)$, and $O$ be a point on $y = x^3$. We then wish to maximize $AO - BO$, which occurs when $O$ lies on the line $AB$ past either end, which does indeed intersect the graph of $y = x^3$. Then $AO - BO = AB$, and the distance is $2\sqrt{10}$.
+
+\item By Cauchy--Schwarz, $\del{2(x-1) + 4(2y)}^2 \leq (2^2 + 4^2)\del{(x-1)^2 + 4y^2}$. The left-hand-side is $2x + 8y - 2 = 1$, so we get $x^2 + 4y^2 - 2x \geq -\dfrac{19}{20}$.
+
+\item Scrapped.
+
+\end{enumerate}
+
+\subsubsection*{Multi-variable extrema}
+
+\begin{enumerate}
+
+\item $x$ and $y$ are independent, so we want to minimize $x$ and maximize $y$. This happens when $x = -1$ and $y = 4$, whence $x - y = -5$.
+
+\item Clearly we must want all the terms to be positive, by AM-GM the sum is at least $2014\sqrt[2014]{\displaystyle \prod_{i=1}^{2014} \sin \theta_i \cos \theta_i} = 2014\sqrt[2014]{\displaystyle \prod_{i=1}^{2014} \dfrac12\sin2\theta_i} \geq 2014\sqrt[2014]{\displaystyle \prod_{i=1}^{2014} \dfrac12} = 1007$, the last inequality from $\sin \theta \geq 1$. Equality is achievable when $\sin 2\theta_i = 1$, or when all the $\theta_i = 45\dg$, giving the maximum as $1007$.
+
+\item Distributing the product and the square root shows it is equivalent to $\sqrt{1 + \dfrac{b}a} + \sqrt{1 + \dfrac{a}b}$, which by AM-GM is at least $2\sqrt[4]{2 + \dfrac{b}a + \dfrac{a}b}$, and by AM-GM again is at least $2\sqrt[4]{2 + 2} = 2\sqrt2$. 
+
+\item This is $\del{2a^8 + a^4 - 2a^2} + \del{2b^6 - b^3 - 2}$, so it suffices to minimize each independently. This can be done through calculus, the legit way is slower. Take $u = a^2$ and the derivative, to get minimum as $-\dfrac58$; the second is just a quadratic with vertex at $-\dfrac{17}8$. Their sum is $-\dfrac{11}4$.
+
+\item The legit solution is to manipulate cleverly and use AM--GM. The cheating solution is to convert it to a single-variable problem by substituting $x = 8 -2y$ and using calculus, the minimum is attained at $y = 3$, giving the value $8$. 
+
+\item We factor out the $2$ from $2-y$ and the $3$ from $3-z$ to get $6(1-x)\del{1-\dfrac{y}2}\del{1-\dfrac{z}3}\del{x + \dfrac{y}2 + \dfrac{z}3}$ which by AM-GM is at most $6\del{\dfrac{\del{1-x} + \del{1-\frac{y}2} + \del{1 - \frac{z}3} + \del{x + \frac{y}2 + \frac{z}3}}4}^4 = \dfrac{3^5}{2^7} = \dfrac{243}{128}$.
+
+\item Substituting $x \to 1-x$ gives a system of linear equations, from which $f(x) = \dfrac{5(x-1)}{x^2 - x + 1} = \dfrac5{(x-1) + 1 + \dfrac1{x-1}}$, and by AM-GM this is maximized when $x-1 = \dfrac1{x-1}$ or $x = 2$. Then $f(2) = \dfrac53$.
+
+\item The denominator is $(x^2 + y^2)^3 + 3x^3y^3$, dividing numerator and denominator by $x^3y^3$ and simplifying makes the expression $\dfrac{1}{\del{\frac{x}{y} + \frac{y}{x}}^3 + 3}$. We need to maximize $\dfrac{x}{y} + \dfrac{y}{x}$, which occurs when $x = \dfrac12$ and $y = \dfrac32$, making the minimum $\dfrac{27}{1081}$.
+
+\item Let $r + s = a$ and $rs = b$. The given is $(a - b)(a + b) = b$, so $b^2 + b = a^2 \geq 4b$ by AM-GM. Hence $b \geq 3$ and $a \geq 2\sqrt3$, which makes the minimum of $r+s-rs = a-b$ as $2\sqrt3 - 3$ and the minimum of $r+s+rs = a+b$ as $2\sqrt3 + 3$, which are achievable.
+
+\end{enumerate}
+
+\end{document}

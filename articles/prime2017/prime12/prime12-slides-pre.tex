@@ -1,0 +1,209 @@
+\documentclass[serif, mathserif, professionalfont]{beamer}
+
+\usepackage[nodefault]{cjquines}
+\usetheme{Rochester}
+
+\newcommand{\fivech}[5]{
+        \vspace{0.8em}
+        \begin{tabular}{*{5}{@{}p{0.19\textwidth}}}
+(a)~#1 & (b)~#2 & (c)~#3 & (d)~#4 & (e)~#5
+        \end{tabular}}
+
+\title{VCSMS PRIME}
+\author{Program for Inducing Mathematical Excellence}
+\institute{October 27, 2017}
+\date{Session 12: Metasolving}
+
+\begin{document}
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\begin{frame}
+  \frametitle{Best practice}
+  \begin{enumerate}
+    \item<2-> Reread the question.
+    \item<3-> Work cleanly.
+    \item<4-> Be aware of your time.
+    \item<5-> Check your work.
+    \item<6-> Learn how to guess.
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}
+  \frametitle{How to read}
+  \begin{itemize}
+    \item<2-> Most common source of mistakes is misreading.
+    \item<3-> Details: integer vs.~positive integer, complex vs.~real.
+    \item<4-> Can't make progress? Reread.
+    \item<5-> Remember all details: most likely all will be used.
+    \item<6-> Reread after answering. Proper format? Correct units?
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{How to write}
+  \begin{itemize}
+    \item<2-> Next most common source of mistakes is misreading\dots
+    \item<3-> \dots your own handwriting.
+    \item<4-> Write neatly and legibly.
+    \item<5-> And unambiguously: $\ell$ vs.~$l$, $1$ vs.~$7$, $x$ vs.~$y$.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Time management}
+  \begin{itemize}
+    \item<2-> Trade-off: how much time solving vs.~ checking your work?
+    \item<3-> Always know how much time is left.
+    \item<4-> Wear a watch.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Checking}
+  \begin{itemize}
+    \item<2-> Correcting a mistake is faster than solving.
+    \item<3-> Fast checking methods: plugging in, different method, examples.
+    \item<4-> Mark unsure problems.
+    \item<5-> Do not repeat solutions.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Meta on checking}
+  \begin{itemize}
+    \item<2-> Finish the exam early: check.
+    \item<3-> When you have a few minutes left: check.
+    \item<4-> Rarely catch your own mistakes? Don't check.
+    \item<5-> Usually more efficient to check than solve.
+    \item<6-> Error-prone? More checking time.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Guessing}
+  The sum of four two-digit numbers is $221$, none of the eight digits are $0$, and no two digits are the same. Which of these are not included among the eight digits?
+
+  \fourch{2}{4}{6}{8}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Guessing}
+  A digital watch displays hours and minutes with AM and PM. What is the largest possible sum of digits in the display?
+  
+  \fourch{17}{19}{21}{23}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Meta-guessing}
+  \pause
+  \fivech{$(-2,1)$}{$(-1, 2)$}{$(2, -1)$}{$(1, -2)$}{$(4, 4)$}
+
+  \pause
+  \fivech{$\dfrac49$}{$\dfrac23$}{$\dfrac32$}{$\dfrac56$}{$\dfrac94$}
+
+  \pause
+  \fivech{$-2$}{$-\dfrac12$}{$\dfrac13$}{$\dfrac12$}{$2$}
+
+  \pause
+  \fivech{$2$}{$\dfrac12\pi$}{$\pi$}{$2\pi$}{$4\pi$}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Abuse}
+  Two non-zero real numbers $a$ and $b$ satisfy $ab = a - b$. Find a possible value of $a/b + b/a - ab$.
+  
+  \fivech{$-2$}{$-\dfrac12$}{$\dfrac13$}{$\dfrac12$}{$2$}
+  % by example
+\end{frame}
+
+\begin{frame}
+  \frametitle{Abuse}
+  Let $a, b, c$ be real numbers such that $a - 7b + 8c = 4$ and $8a + 4b - c = 7$. Find $a^2 - b^2 + c^2$.
+  
+  \fivech{$0$}{$1$}{$4$}{$7$}{$8$}
+  % degrees of freedom less equations than variables
+\end{frame}
+
+\begin{frame}
+  \frametitle{Abuse}
+  In triangle $ABC$, $BD$ is the angle bisector of $\angle ABC$, and $AB = BD$. Moreover, $E$ is a point on $AB$ such that $AE = AD$. If $\angle ACB = 36\dg$, find $\angle BDE$.
+  
+  \fourch{$24\dg$}{$18\dg$}{$15\dg$}{$12\dg$}
+  % work backwards from choices
+\end{frame}
+
+\begin{frame}
+  \frametitle{Elimination}
+  How many ordered triples $(a, b, c)$ of non-negative integers satisfy $a + b + c = 6$?
+  
+  \fivech{$22$}{$25$}{$27$}{$28$}{$29$}
+  % partial knowledge
+\end{frame}
+
+\begin{frame}
+  \frametitle{Elimination}
+  Let $n$ be a five-digit number. Suppose that when $n$ is divided by $100$, its quotient is $q$ and the remainder is $r$. For how many values of $n$ is $q + r$ divisible by $11$?
+  
+  \fivech{$8180$}{$8181$}{$8182$}{$9000$}{$9090$}
+  % estimation
+\end{frame}
+
+\begin{frame}
+  \frametitle{Elimination}
+  What non-zero value of $x$ satisfies $(7x)^{14} = (14x)^7$?
+  
+  \fivech{$\dfrac17$}{$\dfrac27$}{$1$}{$7$}{$14$}
+  % putting it altogether
+\end{frame}
+
+\begin{frame}
+  \frametitle{Problem solving}
+  \begin{enumerate}
+    \item<2-> What is problem-solving, really?
+    \item<3-> Can we make ourselves better problem-solvers?
+    \item<4-> How do people solve problems anyway?
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Two parts}
+  \begin{itemize}
+    \item<2-> Exploration and motivation.
+    \item<3-> Explore: read and understand problem, draw diagrams, small cases, make tables, get hands dirty.
+    \item<4-> Motivation is the ``magic'', ``lightbulb moment'', ``sudden realization'', ``intuition''.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Intuition}
+  \begin{itemize}
+    \item<2-> Mostly intuition: ``hard to describe'', ``unknown''. Often cause of doubt: ``is it legit''?
+    \item<3-> ``It's ust gut feeling, maybe even luck when you put it into context.''
+    \item<4-> ``It's the invisible guiding force in a mathematician's attempts to solve problems.''
+    \item<5-> ``It's pattern recognition from previous problems you've solved.''
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Motivation}
+  \begin{itemize}
+    \item<2-> \emph{Intuition is recognition!}
+    \item<3-> Simplifying the problem,
+    \item<4-> making things easier,
+    \item<5-> noticing something.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Can we be better problem solvers?}
+  \begin{itemize}
+    \item<2-> Answer: \emph{yes}! Schoenfeld 1985.
+    \item<3-> Exposure produces recognition. Example.
+    \item<4-> Not just practice, but also thinking about practice.
+  \end{itemize}
+\end{frame}
+
+\end{document}

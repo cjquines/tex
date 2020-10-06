@@ -1,0 +1,13 @@
+O = origin
+B = dir(120)
+A = dir(180)
+C = dir(0)
+P = (-1, 1.3)
+D = IP(Line(P,B,100),circle(A,B,C))
+X = dir(-60)
+E = extension A X C D
+
+circle(A,B,C)
+A--B--C--A
+A--P--B--D
+A--X--E

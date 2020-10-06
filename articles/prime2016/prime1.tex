@@ -1,0 +1,170 @@
+\documentclass[10pt,paper=letter]{scrartcl}
+\usepackage[alttitle]{cjquines}
+
+\begin{document}
+
+\title{VCSMS PRIME}
+\subtitle{Session 1: Algebra 1}
+\author{compiled by Carl Joshua Quines}
+\date{September 21, 2016}
+
+\maketitle
+
+\subsubsection*{Domain and range}
+
+\begin{enumerate}
+
+\item (11AI9) Find the range of $2^{x^2 - 4x + 1}$ as $x$ ranges over the real numbers.
+
+\item (13QII6) Find the domain and range of $f(x) = \dfrac{6}{5\sqrt{x^2 - 10x + 29} - 2}.$
+
+\item (13NA3) Find the area of the domain of $f(x, y) = \sqrt{25 - x^2 - y^2} - \sqrt{\abs{x} - y}.$
+
+\item (11NA4) Find the domain of $f(x) = \dfrac{1}{\floor{x^2-x-2}}.$
+
+\item (13QIII3, 14QII1) Find the range of $f(x) = \dfrac{2 \cdot 3^{-x} -1}{3^{-x} - 2}$ and $g(x) = \dfrac{4^{x+1} - 3}{4^x + 1}.$
+
+\item (15AI12) Suppose that $1-y = \dfrac{9e^x + 2}{12e^x + 3}.$ Find the integer $m$ such that $m < \dfrac{1}{y} < m+1$ for all real $x$.
+
+\item (16NE3) Let $f(x) = \ln x$. What are the values of $x$ in the domain of $(f \circ f \circ f \circ f \circ f)(x)$?
+
+% \item (AIME 1991/4) How many real numbers $x$ satisfy $\dfrac{1}{5}\log_2 x = \sin(5\pi x)$?
+
+% \item (AIME I 2013/8) The domain of $f(x) = \sin^{-1}(\log_m nx)$ is a closed interval with length $\dfrac{1}{2013}$. There exists integers $m, n$ that satisfy this, $m > 1$. Find the minimum value of $m+n$.
+
+\item (13QIII5) Find the range of the following function, where $a, b, c$ are distinct real numbers. $$f(x) = \frac{(x-a)(x-b)}{(c-a)(c-b)} + \frac{(x-b)(x-c)}{(a-b)(a-c)} + \frac{(x-c)(x-a)}{(b-c)(b-a)}.$$
+
+\end{enumerate}
+
+\subsubsection*{Logarithms}
+
+\begin{enumerate}
+
+\item (13QII1) Find $\log_2 \left(2^3 \cdot 4^4 \cdot 8^5 \cdot \cdots \cdot (2^{20})^{22} \right)$.
+
+\item (9QI7) How many real roots does $\log_{(x^2-3x)^3}4 = \dfrac{2}{3}$ have?
+
+\item (10NE14) How many times does the graph of $y = \abs{\log_{\frac{1}{2}} \abs{x}}-1$ cross the x-axis?
+
+% \item (AIME I 2004/12) Find the area of the graph of $$S = \{(x, y) \in \RR^2, x, y \in (0, 1], \floor{\log_2\dfrac{1}{x}} \equiv \floor{\log_5\dfrac{1}{y}} \equiv 0 \pmod{2}\}.$$
+
+\item (15AI13) The product of two roots of $\sqrt{2014}x^{\log_{2014} x} = x^{2014}$ is an integer. Find its units digit.
+
+\item (13QI3) Given $xy = 10^a, yz = 10^b, zx = 10^c$, find $\log x + \log y + \log z$.
+
+\item (10NE10) Given $a = \log_{14} 16,$ express $\log_8 14$ in terms of $a$.
+
+\end{enumerate}
+
+\subsubsection*{Exponents}
+
+\begin{enumerate}
+
+\item Solve for $x$:
+
+\begin{enumerate}
+
+\item (11QI3) $2^{2^x} = 4^3$
+
+\item (9QI14) $x^x = x^2$
+
+\item (9AI6) $x^{x^x} = (x^x)^x$
+
+\item (10NE3) $x^{x^{2010}} = x^{2010}$
+
+\end{enumerate}
+
+\item (10NE1) Find the smallest integer $n$ such that $n^{300} > 3^{500}.$
+
+\item (16QII7) Arrange from least to greatest: $25^{12}, 16^{14}, 11^{16}$.
+
+\item (11QII9) Given $9^{2x} - 9^{2x - 1} = 8\sqrt{3}$, find $(2x - 1)^{2x}$.
+
+\end{enumerate}
+
+\subsubsection*{More logarithms}
+
+\begin{enumerate}
+
+% \item (AIME 1984/5) Find $ab$ given that $\log_8 a + \log_4 b^2 = 5, \log_8 b + \log_4 a^2 = 7$.
+
+% \item (AIME 1988/3) Find $(\log_2 x)^2$ given $\log_2(\log_8 x) = \log_8(\log_2 x)$.
+
+\item (15AII1) Arrange in ascending order: $\log_3 2, \log_5 3, \log_{625} 75, \dfrac{2}{3}$.
+
+\item (13QI12) Given $\dfrac{\log_2 x}{\log_2 2x - \log_8 2} = 3,$ find $1 + x + x^2 + \cdots$.
+
+% \item (11AI12) Suppose that $\{s_n\}$ is a sequence such that $s_1 = 2^{2010}$ and $$s_{n+1} = \begin{cases} \log_{\sqrt{2}} s_n & s_n > 0 \\ 0 & s_n \leq 0\end{cases}.$$ Find the smallest integer $n$ such that $s_n \in [4, 6]$.
+
+\item (9NA6) Suppose that $a \geq b > 1$. Find the maximum value of $\log_a \dfrac{a}{b} + \log_b \dfrac{b}{a}$.
+
+\item (11NE6) There exists positive integers $k, m, n$ whose greatest common divisor is 1 such that $k\log_{400} 5 + m\log_{400} 2 = n$. Find $k + m + n$.
+
+\item (11NE12) Let $f(m) = 2^{2^{\cdots^{2}}}$, where there are $m$ twos. Find the least integer $m$ such that $\log f(m) > 6$.
+
+\item (14AI9) Solve for $x: \log(5^{\frac{1}{x}} + 5^3) < \log 6 + \log 5^{\left(1 + \frac{1}{2x}\right)}$.
+
+\item (11QI15) Solve for $x: \log x \geq \log 2 + \log(x-1)$.
+
+\end{enumerate}
+
+\subsubsection*{Floor, ceil, fractional}
+
+\begin{enumerate}
+
+\item (11NE5) Solve for $x: 2\floor{x} = x + 2\{x\}$.
+
+\item (14ND5) Solve for $x: 2x(x - \floor{x}) = \floor{x}^2$.
+
+\item (13AI17) The number $x$ is chosen randomly from the interval $(0, 1]$. Define $y = \ceil{\log_4 x}$. Find the sum of the lengths of all subintervals of $(0, 1]$ for which $y$ is odd.
+
+\end{enumerate}
+
+\subsubsection*{Value-finding}
+
+\begin{enumerate}
+
+\item (11QI6) Given $f(1) = 5, f(x+1) = 2f(x) + 1$, find $f(7) - f(0)$.
+
+% \item (AIME 1984/7) Suppose that $f: \ZZ \to \ZZ$ and $$f(n) = \begin{cases} n-3 & n \geq 1000 \\ f(f(n+5)) & n < 1000 \end{cases}.$$ Find $f(84)$.
+
+\item (13QII8) Suppose $f: \RR^* \to \RR^*$ and $f(a) + \dfrac{1}{f(b)} = f\left(\dfrac{1}{a}\right) + f(b)$. Find all possible values of $f(1) - f(-1)$.
+
+\item (16NE2) A function $f(x)$ satisfies $(2-x)f(x) - 2f(3-x) = -x^3 + 5x - 18$ for all real $x$. Find $f(0)$.
+
+% \item (AIME 1994/3) Suppose that $f(x) + f(x-1) = x^2$ and $f(19) = 94$. What is the remainder when $f(94)$ is divided by $1000$?
+
+% \item (AIME 1988/8) Find $f(14,52)$ given that \begin{align*} f(x, x) &= x \\ f(x, y) &= f(y, x) \\ (x+y)f(x, y) &= yf(x,x+y). \end{align*}
+
+\end{enumerate}
+
+\subsubsection*{Cauchy functional equation}
+
+\begin{enumerate}
+
+\item (14QII5) Let $f: \RR \to \RR$ and $f(x+y)=f(x)f(y), f(xy)=f(x)+f(y),$ for all $x, y \in \RR$. Find $f(\pi^{2013})$.
+
+\item (9QIII3) Suppose that $f: \RR \to \RR$ and $f(a+b) = f(a) + f(b)$. Given $f(2008) = 3012,$ find $f(2009)$.
+
+\item (13NE6) Given $f: \RR \to \RR$ and $f(a+b) = f(a)f(b).$ If $f(4) = 625,$ what is $3f(-2)$?
+
+\end{enumerate}
+
+\subsubsection*{Other functional equations}
+
+\begin{enumerate}
+
+\item (10NE5) Given $f: \RR \to \RR^*$, and for all $x, y \in \RR, f(x-y) = 2009f(x)f(y)$, find $f(\sqrt{2009})$.
+
+\item (14QIII2) Find all functions $f: \RR \to \RR$ such that $f(0) = 1$ and $f(2xy - 1) = f(x)f(y) - f(x) - 2y - 1$.
+
+% \item (AIME 1997/12) Suppose for some $a, b, c, d \in \RR^*, f(x) = \dfrac{ax+b}{cx+d}, f(19) = 19, f(97) = 97$. For all $x \neq -\dfrac{d}{c}, f(f(x)) = x$. What real number is not in the range of $f$?
+
+\item (16QIII2) If $f: \RR \to \RR, f(5) = 3$ and $f(4xy) = 2y[f(x+y)+f(x-y)],$ find $f(2015)$.
+
+\item (10N3) Find all functions $f: \RR \to \RR$ such that $x+f(x)+2f\left(\dfrac{x+2009}{x-1}\right) = 2010, \text{for all } x \in \RR.$
+
+\item (11N4) Find all functions $f: \RR \to \RR$ such that $f(f(x)) + xf(x) = 1, \text{for all } x \in \RR.$
+\end{enumerate}
+
+\end{document}

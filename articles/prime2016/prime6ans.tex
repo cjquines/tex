@@ -1,0 +1,95 @@
+\documentclass[10pt,paper=letter]{scrartcl}
+\usepackage[alttitle]{cjquines}
+
+\begin{document}
+
+\title{VCSMS PRIME}
+\subtitle{Session 6: Combinatorics 2}
+\author{compiled by Carl Joshua Quines}
+\date{October 7, 2016}
+
+\maketitle
+
+\subsubsection*{Random variable}
+
+\begin{enumerate}
+
+\item Count: $10$ has $\cbr{6, 3, 1}, \cbr{6, 2, 2}, \cbr{5, 4, 1}, \cbr{5, 3, 2}, \cbr{4, 4, 2}, \cbr{4, 3, 3}$, multiplying by the number of permutations gives $27$. There are $6^3$ tuples, so $\dfrac{27}{216} = \dfrac18$.
+
+\item Consider all $6^3$ tuples of dice rolls. There are $3^3 = 27$ with numbers from $1$ to $3$, but of these, $2^3 = 8$ have no threes, leaving $27 - 8 = 19$ with the greatest being $3$. Thus the probability is $\dfrac{19}{216}$.
+
+\item Sherlock wins if and only if the sequence is TTT, with probability $\dfrac18$, and cannot win otherwise. Since the game must terminate, Mycroft wins with probability $\dfrac78$, and thus Mycroft has a higher probability of winning.
+
+\item Let the probability of obtaining $F$ be $f$. The probability of obtaining the side opposite $F$ is thus $\dfrac16 - f$. So getting a sum of $13$ has probability $2f\del{\dfrac16 - f} + 10\cdot\dfrac1{12}\cdot\dfrac1{12} = \dfrac{29}{384}$; solving the quadratic equation gives $f = \dfrac1{48}, \dfrac7{48}$. Since $f > \dfrac1{12}$, then the probability is $\dfrac7{48}$.
+
+\end{enumerate}
+
+\subsubsection*{Random selection}
+
+\begin{enumerate}
+
+\item Each of the $2^6 - 1 = 63$ possible subsets of six colors are equally likely, and only $1$ uses only her favorite color; the probability is $\dfrac1{63}$.
+
+\item There is one cube with no red sides, $6$ cubes with one red side, $12$ cubes with two red sides and $8$ cubes with three. A cube with one red side has $\dfrac16$ probability, etc., so the probability is $\dfrac{6}{27}\cdot\dfrac16 + \dfrac{12}{27}\dfrac13 + \dfrac{8}{27}\dfrac12 = \dfrac13$. 
+
+\item Modulo 2, the tuples $(a, b, c) = (0, 0, 0), (0, 1, 0), (1, 0, 0)$ and $(1, 1, 1)$ work. Since there is an equal probability of being either odd or even, then the probability is $\dfrac{4}{2^3} = \dfrac12$.
+
+\item The probability of getting a different color \emph{and} a different number is $\dfrac{8}{14}$, since among the $14$ chips left $10$ are of different colors but $2$ have the same number. So the probability is $1 - \dfrac{8}{14} = \dfrac37$.
+
+\item We count the number that does not contain any $2$s. Replace $5000$ with $0000$. The thousands digit can be anything from $0$ to $4$, the hundreds to ones digit can be $0$ to $9$, except $2$. This gives $4 \times 9 \times 9 \times 9 = 2916$, so the probability is $\dfrac{2916}{5000} = \dfrac{729}{1250}$.
+
+\item Use casework, or be witty: equivalent to Josh just picking two chips from all together without replacement. This is because, suppose we permute the six chips in a row, with the first three going to urn 1, and the second three going to urn 2, and Josh picked the first and fourth chips, which is equivalent. The probability both are red is $\dfrac46 \cdot \dfrac35 = \dfrac25$.
+
+\item The first draw must not all be red or not all be green. It is all red with probability $\dfrac36\cdot\dfrac25\cdot\dfrac14 = \dfrac1{20}$, and by symmetry all green with probability $\dfrac1{20}$. The first draw is not all red and not all green with probability $1 - \dfrac1{20} - \dfrac1{20} = \dfrac9{10}$.
+
+The bag now has one of one color, two of the other color, and three white, so the probability they are all different in the second draw is $\dfrac{1 \cdot 2 \cdot 3}{\binom63} = \dfrac3{10}$. The product is $\dfrac{27}{100}$.
+
+\item There are $\binom{23}3 = 1771$ ways to pick three non-adjacent people in a row of $25$, subtract the $21$ ways in which the front and back people are placed, for a total of $1750$ ways. There are $\binom{25}3 = 2300$ ways to pick three people randomly, so the probability is $1 - \dfrac{1750}{2300} = \dfrac{11}{46}$.
+
+\item Induction on $k$. Base case is $1 - \dfrac13 - \dfrac23 = \dfrac23$, as wanted. Suppose $k = n-1$ is true, then there are two cases: when the sum to $n-1$ is even and when the sum to $n-1$ is odd.
+
+For the former, the probability this happens is $\dfrac12 + \dfrac1{2\cdot3^{n-1}}$ by inductive hypothesis; for the whole sum to be even, $a_nb_n$ has to be even too, with probability $\dfrac23$. The whole probability for this case is thus $\dfrac23 \del{\dfrac12 + \dfrac1{2\cdot3^{n-1}}}$.
+
+Similarly, the probability for the other case is $\dfrac13 \del{\dfrac12 - \dfrac1{2\cdot3^{n-1}}}$. Taking their sum and simplifying yields the expression we want.
+
+\end{enumerate}
+
+\subsubsection*{Geometric probability}
+
+\begin{enumerate}
+
+\item Suppose the $AB$ has length $\ell$. Then $\dfrac{AP}{\ell - AP} < r$ so $AP < \dfrac{r\ell}{r+1}$. The segment of success has length $\dfrac{r\ell}{r+1}$ divided by the whole segment with length $\ell$, giving the probability $\dfrac{r}{r+1}$.
+
+\item Scale by $1/5000$. Let the prices of the gifts be $x, y$ pesos. Then the region of the plane is the square with $0 \leq x, y \leq 5$ and we must have $x + y \leq 9$. The failure region is $x + y > 9$, which intersects the square at the triangle with vertices $(4, 5), (5, 5)$ and $(5, 4)$. Its area is $\dfrac12$. The whole area of consideration is $25$, so the probability is $1 - \dfrac{\frac12}{25} = \dfrac{49}{50}$.
+
+\item Factoring, $x^2 - 3xy + 2y^2 > 0$ if $x > y$ or $x < 2y$. Intersecting with the square $0 \leq x, y \leq 1$ produces a region with area $\dfrac34$; since the area of the square is $1$, the probability is $\dfrac34$.
+
+\item The intervals where the sum is $5$ are when the first number is $(0.5, 1)$, $(1.5, 2)$, $(2.5, 3)$ and $(3.5, 4)$. Each interval has length $0.5$ and the whole interval has length $4.5$, so the probability is $\dfrac{4\cdot0.5}{4.5} = \dfrac49$.
+
+\end{enumerate}
+
+\subsubsection*{Existence combinatorics}
+
+\begin{enumerate}
+
+\item By PHP two of them are the same modulo $6$ and thus have a difference that is zero, so probability $1$.
+
+\item Modulo 2 the points are $(0, 0)$, $(0, 1)$, $(1, 0)$ or $(1, 1)$, by PHP two points are the same modulo $2$ and thus have a midpoint with integer coordinates, so probability $1$.
+
+\item For the former, consider a regular pentagon: by PHP three of them are the same color and form an isosceles triangle. For the latter, color half the circle red and the other half blue, no such equilateral triangle exists.
+
+\item Modulo 3, the number of blue, red, and yellow chips cycles $(1, 2, 0) \to (0, 1, 2) \to (2, 0, 1) \to (1, 2, 0)$. All the chips being the same color is $(2, 2, 2)$, which is impossible.
+
+\item For $n = 1005$ the sequence $0, 1, 2, \ldots, 1004$ trivially does not have two whose sum or difference is divisible by $2009$. For $n = 1006$, consider modulo $2009$, if no two have a difference that is $0$ then they must all be distinct, but by PHP one of $\cbr{0}, \cbr{-1, 1}, \cbr{-2, 2}, \ldots, \cbr{-1004, 1004}$ has two, which then have a sum divisible by $2009$.
+
+\item The sequence $1$ to $2011^{2011}$ has at least $2012$ prime numbers since $17489 < 2011^{2011}$. Then all numbers from $\del{2011^{2011} + 1}! + 2$ to $\del{2011^{2011} + 1}! + 2011^{2011} + 1$ are composite. Now move the left endpoint one upward and the right endpoint one upward: either the number of primes is increased by $1$, decreased by $1$, or stays the same. Since it starts from $\geq2012$ and eventually becomes $0$, it will hit $2011$ some time.
+
+\item Let $A$ be the set $\cbr{1, 2, \ldots, n}$ and $B$ be the set $\cbr{n+1, \ldots, 2n}$. Since the numbers are arranged on a circle, there are two adjacent points from opposite sets, join them with a chord. Remove them from the circle and keep connecting points with chords in this manner, you end up with $n$ non-intersecting chords. The sum is the sum of all the elements in set $B$ minus the sum of all the elements in set $A$, which is $n^2$.
+
+\item Consider a matrix with $120$ rows and $10$ columns, and write a $1$ on each entry if the student corresponding to the row does \emph{not} follow the celebrity for that column. Suppose that the hypothesis is not true, that is, each pair of students has at least one celebrity that both do not follow. This translates to each pair of rows having a column where both are $1$.
+
+We count the number of pairs of $1$s in each column. Vertically, since each column has at most $120-85=35$ ones, the sum is at most $10\binom{35}2 = 5950$. Horizontally, each of the $\binom{120}2$ pairs of rows has at least one pair of $1$s, so the sum is at least $7140$. Contradiction.
+
+\end{enumerate}
+
+\end{document}

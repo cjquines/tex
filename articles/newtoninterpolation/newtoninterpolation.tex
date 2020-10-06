@@ -1,0 +1,162 @@
+\documentclass[11pt,paper=letter]{scrartcl}
+\usepackage[wide]{cjquines}
+
+\newcommand{\ff}[1]{^{\underline{#1}}}
+
+\begin{document}
+
+\title{Newton interpolation and the umbral calculus}
+\subtitle{Tiny Explanations 3}
+\author{Carl Joshua Quines}
+\date{July 4, 2020}
+
+\maketitle
+
+\renewcommand{\thetitle}{Newton interpolation}
+
+Take a sequence that's determined by a linear polynomial, like $a_n = 3n + 8$ giving $8, 11, 14, 17, 20, \ldots$. (We're starting $n$ from $0$.) And then take the sequence formed by taking the difference of each term from the term before it. So $11 - 8$ is $3$, $14 - 11$ is $3$, and $17 - 14$ is $3$, which means this sequence is $3, 3, 3, \ldots$. These are called the \textit{first differences} of this sequence, and for a linear sequence, it's constant.
+
+Now take a sequence determined by a quadratic polynomial, like $a_n = n^2 - n + 2$. This sequence goes $2, 2, 4, 8, 14, \ldots$. The first differences of this are $0, 2, 4, 6, \ldots$. And then if we take the first differences of the first differences, we get $2, 2, 2, \ldots$, and these are what we call the \textit{second differences}. For a quadratic sequence, the second differences are constant.
+
+This is true in general: a sequence whose formula is a $k$th degree polynomial has constant $k$th differences. And the converse is also true. If the $k$th differences of a sequence is constant, then the formula must be a $k$th degree polynomial. As an example, consider the sequence $1, 5, 12, 22, 35, \ldots$. We can compute its first and second differences by placing them in a table like this:
+
+\begin{center}
+\begin{tabular}{ccccccccc}
+1 &   & 5 &   & 12 &    & 22 &    & 35 \\
+  & 4 &   & 7 &    & 10 &    & 13 & \\
+  &   & 3 &   & 3  &    & 3  &    &
+\end{tabular}
+\end{center}
+
+If we had a good reason to believe that the second differences are constant, then the formula has to be quadratic. Indeed, it's $a_n = \frac{3}{2}n^2 + \frac{1}{2}n + 1$, and you can check that this works.
+
+\section{Newton interpolation}
+
+How do we find this formula? Look at the three leftmost numbers in each row. Here, they are $1$, $4$, and $3$. For a quadratic sequence, these three numbers determine every other number. And the way that these numbers work are \textit{independent} of each other---the $1$ doesn't care about the $4$, nor the $3$. Look at what happens when we only take the $1$, make the other two numbers $0$, and compute the table:
+
+\begin{center}
+\begin{tabular}{ccccccccc}
+1 &   & 1 &   &  1 &    & 1 &    & 1 \\
+  & 0 &   & 0 &    & 0  &    &  0 & \\
+  &   & 0 &   & 0  &    & 0  &    &
+\end{tabular}
+\end{center}
+
+Then take only the $4$, make the other numbers $0$, and compute the table:
+
+\begin{center}
+\begin{tabular}{ccccccccc}
+0 &   & 4 &   &  8 &    & 12 &    & 16 \\
+  & 4 &   & 4 &    & 4  &    &  4 & \\
+  &   & 0 &   & 0  &    & 0  &    &
+\end{tabular}
+\end{center}
+
+Finally, if you take only the $3$, and make the other numbers $0$:
+
+\begin{center}
+\begin{tabular}{ccccccccc}
+0 &   & 0 &   &  3 &    &  9 &    & 18 \\
+  & 0 &   & 3 &    & 6  &    &  9 & \\
+  &   & 3 &   & 3  &    & 3  &    &
+\end{tabular}
+\end{center}
+
+The original sequence is now just the sum of these three sequences!
+
+\begin{center}
+\begin{tabular}{rrrrr}
+1 & 1 & 1 & 1 & 1 \\
+0 & 4 & 8 &12 &16 \\
+0 & 0 & 3 & 9 &18 \\ \hline
+1 & 5 &12 &22 &35
+\end{tabular}
+\end{center}
+
+So to find the formula, we only need the formula for each of these three sequences, and then add them together. The top row is easy: it's just $1$. The second row is $4n$, which makes sense, because you're adding $4$ each time.
+
+The third row is a bit tricky, but it might be easier to recognize if we divide everything by their common factor, $3$. We get $0, 0, 1, 3, 6, \ldots$. These are the triangular numbers, and their formula is $\frac{1}{2}n(n-1)$. So multiplying by $3$ gives the formula for the third row, which is $\frac{3}{2}n(n-1)$. We get the final formula by adding these together: $\frac{3}{2}n(n-1) + 4n + 1$. We can even rewrite this as $3\binom{n}{2} + 4\binom{n}{1} + 1$.
+
+There is nothing special about the numbers $1$, $4$, and $3$. As we just saw, the last row is just $3$ times the triangular numbers, but we could've replaced $3$ with anything. If we replaced it with $9$, then it'd just be $9$ times the triangular numbers. (Think about the finite difference table we had earlier, and multiply all the numbers by $3$.) Generally, if these numbers were $a$, $b$, and $c$, then we would get the formula $a + b\binom{n}{1} + c\binom{n}{2}$.
+
+So now we know how to find the formula if the second differences are constant, or if the sequence is quadratic. But what about if the \textit{third} differences were constant, or if it was a cubic? Well, we can use the same trick again, but we can reuse some of our previous work. We already know what it looks like for second differences:
+
+\begin{center}
+\begin{tabular}{ccccccccccc}
+0 &   & 0 &   & 1  &    &  3 &    & 6 &   & 10 \\
+  & 0 &   & 1 &    & 2  &    &  3 &   & 4 &    \\
+  &   & 1 &   & 1  &    & 1  &    & 1 &   & 
+\end{tabular}
+\end{center}
+
+So to get third differences, we can just \textit{add a row on top}!
+
+\begin{center}
+\begin{tabular}{ccccccccccccc}
+0 & & 0 &   & 0 &    & 1   &   &  4 &   &10 &    & 20 \\
+& 0 &   & 0 &   & 1  &    &  3 &    & 6 &   & 10 & \\
+&   & 0 &   & 1 &    & 2  &    &  3 &   & 4 &    & \\
+&   &   & 1 &   & 1  &    & 1  &    & 1 &   &    & 
+\end{tabular}
+\end{center}
+
+At this point, you may already recognize the pattern. We're forming Pascal's triangle, but rotated so that the tip is on the lower-left instead. The diagonals in Pascal's triangle become our rows: the leftmost diagonal of all $1$s is our bottom row of all $1$s. And you might know that the formula for the $k$th diagonal of Pascal's triangle is $\binom{n}{k}$, which is \textit{exactly} the formula we need!
+
+This is the main idea behind \textit{Newton interpolation}! If the ``leftmost numbers'' of each row were called $d_0, d_1, d_2, \ldots$, then the formula for the sequence would be
+\[
+  a_n = d_0 \binom{n}{0} + d_1 \binom{n}{1} + d_2 \binom{n}{2} + d_3 \binom{n}{3} + \cdots.
+\]
+There are infinitely many terms in this formula, but that's fine. If this is the formula for a $k$th degree polynomial, then we know that $d_k$ would be constant, so $d_{k+1}, d_{k+2}, d_{k+3}, \ldots$ would all be $0$. Some contest math applications are in \href{https://cjquines.com/files/prime2016/prime8.pdf}{PRIME 2016 S8} under Sequences and \href{https://cjquines.com/files/engineering.pdf}{Engineering} under Sequence guessing skills.
+
+\section{Umbral calculus}
+
+Let's rewrite this previous formula in a slightly different way. We're going to introduce the \textit{falling factorial} notation:
+\[
+  n\ff{k} = n(n-1)(n-2)\cdots\left(n-(k-1)\right).
+\]
+It's kind of like the factorial, except it cuts off after $k$ terms. Or it's like the exponential $n^k$, except the factors are smaller: instead of all of them being $n$, they go $n$, $n-1$, $n-2$, and so on. This lets us rewrite $\binom{n}{k}$ as $\frac{1}{k!} n\ff{k}$, giving
+\[
+  a_n = \frac{d_0}{0!} n\ff{0} + \frac{d_1}{1!} n\ff{1} + \frac{d_2}{2!} n\ff{2} + \frac{d_3}{3!} n\ff{3} + \cdots.
+\]
+If you're familiar with the Taylor series, notice how it's similar to that:
+\[
+  f(n) = \frac{f(0)}{0!} n^0 + \frac{f'(0)}{1!} n^1 + \frac{f''(0)}{2!} n^2 + \frac{f'''(0)}{3!} n^3 + \cdots.
+\]
+Here, we have the differences $d_0, d_1, d_2, \ldots$ turning into derivatives $f(0), f'(0), f''(0), \ldots$, and the falling factorial into exponentiation. And suddenly, we got the Taylor series!
+
+Let's think about this analogy more. Consider how, in normal calculus, the first derivative of $x^3$ is $3x^2$. If we ``convert back'' to the differences version, we want to find the first differences of $x\ff{3}$. But the first differences are
+\begin{align*}
+(x+1)\ff{3} - x\ff{3} &= (x+1)(x)(x-1) - (x)(x-1)(x-2) \\
+&= \left[(x+1) - (x-2)\right](x)(x-1) \\
+&= 3x(x-1) \\
+&= 3x\ff{2}.
+\end{align*}
+This phenomenon isn't entirely coincidence. Think about what happens when you take the derivative of the Taylor series several times and then plug in $x = 0$. And then in the differences version, think about what happens when we take the first difference several times, and then plug in $n = 0$.
+
+This is one of the observations that led to the discovery of \textit{umbral calculus}. Applying umbral calculus is more subtle than just changing everything into the umbral versions, and explaining it in more detail wouldn't fit a tiny explanation.
+
+But there's one quick example I can show you, which comes from the binomial theorem. Here's the regular binomial theorem:
+\[
+  (x+y)^n = \sum_{k=0}^n \binom{n}{k} x^{k} y^{n-k}.
+\]
+The umbral version of the binomial theorem is pretty much the same:
+\[
+  (x+y)\ff{n} = \sum_{k=0}^n \binom{n}{k} x\ff{k} y\ff{n-k}.
+\]
+And already this is something that's pretty surprising. Even for $n=2$, this isn't as obvious as the regular binomial theorem:
+\[
+  (x+y)(x+y-1) = y(y-1) + 2xy + x(x-1).
+\]
+Let's rewrite this in a slightly nicer version, by converting the falling factorials back to binomial coefficients. Remember that $n\ff{k} = k!\binom{n}{k}$, so:
+\begin{align*}
+(x+y)\ff{n} &= \sum_{k=0}^n \binom{n}{k} x\ff{k} y\ff{n-k}, \\
+n! \binom{x+y}{n} &= \sum_{k=0}^n \binom{n}{k} k! \binom{x}{k} (n-k)! \binom{y}{n-k},
+\end{align*}
+and conveniently enough, expanding $\binom{n}{k}$,
+\begin{align*}
+n! \binom{x+y}{n} &= \sum_{k=0}^n \frac{n!}{k!(n-k)!} k! \binom{x}{k} (n-k)! \binom{y}{n-k}, \\
+\binom{x+y}{n} &= \sum_{k=0}^n \binom{x}{k}\binom{y}{n-k},
+\end{align*}
+which is the Chu--Vandermonde identity. Note that this is a polynomial identity. Here, $x$ and $y$ are \textit{variables}; we don't require $x$ and $y$ to be positive, or even integers! As something to think about, does a similar trick work for $(x + y + z)^n$?
+
+\end{document}

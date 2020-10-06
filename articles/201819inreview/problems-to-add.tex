@@ -1,0 +1,156 @@
+(LOTM JHS Individual Finals 15) Let $D$ be a point inside acute $\triangle ABC$ such that $\angle ADB = \angle ACB + 90\dg$ and $AC \cdot BD = AD \cdot BC$. Find $\dfrac{AB \cdot CD}{AC \cdot BD}$.
+
+(LOTM SHS Semifinals 12) In a class of $10$ students, the probability that exactly $i$ ($i$ from $0$ to $10$) students passed an exam is directly proportional to $i^2$. If a student is selected at random, find the probability that s/he passed the exam.
+
+(LOTM SHS Eliminations A7) Find the largest possible value of the five-digit number $\overline{PUMaC}$ in the cryptarithm shown below. Here, identical letters represent the same digits and distinct letters represent distinct digits.
+\begin{center}
+  \begin{tabular}{ccccc}
+    & $N$ & $I$ & $M$ & $O$ \\
+    $+$ & $H$ & $M$ & $M$ & $T$ \\ \hline
+    $P$ & $U$ & $M$ & $a$ & $C$
+  \end{tabular}
+\end{center}
+
+(Sipnayan SHS Semifinals B D1) In $\triangle ABC$, let $M$ be the midpoint of $CA$, and $Y$ be on the segment $AB$ where $AY = 4$ and $BY = 6$. Suppose $X$ lies on the segment $CY$ such that $\angle ABX = \angle CXM$, and that $XY = 3$. Find the length of $CY$.
+
+(Sipnayan SHS Finals A-MN) Suppose positive integers $a$ and $b$ satisfy $\dfrac78 < \dfrac ab < \dfrac89$. Find $\dfrac ab$ such that $b$ is as small as possible.
+
+(PMO Qualifying I11) The points $(0, -1)$, $(1, 1)$, and $(a, b)$ are distinct collinear points on the graph of $y^2 = x^3 - x + 1$. Find $a + b$.
+
+(PMO National Orals D4) In acute triangle $ABC$, $M$ and $N$ are the midpoints of sides $AB$ and $BC$, respectively. The tangents to the circumcircle of triangle $BMN$ at $M$ and $N$ meet at $P$. Suppose that $AP$ is parallel to $BC$, $AP = 9$, and $PN = 15$. Find $AC$. (magical construct a point?)
+
+(PMO Areas I20) Suppose that $a, b, c$ are real numbers such that $$\frac1a + \frac1b + \frac1c = 4\del{\frac1{a+b} + \frac1{b+c} + \frac1{c+a}} = \frac c{a+b} + \frac a{b+c} + \frac b{c+a} = 4.$$ Determine the value of $abc$.
+
+(Pitagoras Finals W23) $PTGR$ is a regular tetrahedron with side length $2020$. What is the area of the cross section of $PTGR$ cut by the plane that passes through the midpoints $PT$, $PG$, and $GR$?
+
+(Pitagoras Finals W25) Let $n$ be a base-$10$ number. The value of $n$ when interpreted as a base-$20$ number is twice the value of $n$ when interpreted as a base-$13$ number. Calculate the sum of all possible values of $n$.
+
+(Mathira Orals T2-1) The $n$th term of an arithmetic sequence is $m$ and the $m$th term is $n$. Find the $(m+n)$th term.
+
+(Mathira Orals T10-1) The diagram below shows a grid with $n$ rows, with the $k$th row being composed of $2k-1$ identical equilateral triangles for all $k \in \cbr{1, \ldots, n}$. If there are $513$ different rhombuses each made up of two adjacent smaller triangles in the grid, what must be the value of $n$?
+  \begin{center}
+    \begin{asy}
+      size(5cm);
+      int k = 4;
+      pair A = (-0.5, -sqrt(3)/2);
+      void f(pair x) {
+        draw(x--(x+A)--(x+A+(1,0))--x);
+      }
+      void g(pair x) {
+        draw(x--(x+A)--(x+A+(1,0))--x, dashed);
+      }
+      pair O = (0, 0);
+      for (int i = 0; i < k; ++i) {
+        for (int j = 0; j <= i; ++j) {
+          f(O+(j,0));
+        }
+        O = O + A;
+      }
+      for (int j = 0; j <= k; ++j) {
+        g(O+(j,0));
+      }
+      O = O+A;
+      for (int j = 0; j <= k+1; ++j) {
+        f(O+(j,0));
+      }
+      draw((-0.25,0)--O+A+(-0.25,0));
+      label((O+A)/2 + (-0.5, 0), "$n$");
+    \end{asy}
+  \end{center}
+
+(Mathira Orals T12-1) Let $h(x) = ax^2 + bx + c$ such that $a$ and $c$ are real numbers; $b \geq -2019$; $a \neq 0$; and $b^2 - 4ac = 0$. If $h(h(\xi)) = 0$ for some rational number $\xi$, then find the sum of the possible integer values of $a\xi$.
+
+(Mathira Orals T12-3) Let $w = a + b + c + d$, $x = d - c + b - a$, $y = a^2 + b^2 + c^2 + d^2$, and $z = \dfrac{a+c}{b+d}$, where $a$, $b$, $c$, and $d$ are rational numbers. If the set $S = \cbr{w, x, y, z}$ is arranged in increasing order, then the resulting set is $T = \cbr{\dfrac{29}{68}, \dfrac{13}7, \dfrac{97}{21}, \dfrac{2735}{441}}$. Find the value of $ab + ac + ad + bc + bd + cd$.
+
+(MMC Individual Finals 10B/II.1) A cubic polynomial $P(x)$ satisfies $P(3)=3,P(5)=5,P(7)=7,P(10)=5$. Find $P(12)$.
+
+(LOTM JHS Individual Finals 13) For any positive integer $n$, let $d(n)$ be the sum of its digits. Find $n$ if $n + d(n) = 1\,000\,000\,000$.
+
+(Sipnayan JHS Written VD3) Consider a $7 \times 7$ grid where each cell can contain any integer from $7$ to $100$. How many ways are there to fill up the grid such that the sums of each of the rows and each of the columns all result in an even number? Express your answer as a product of prime powers. 
+
+(Sipnayan JHS Written E7) Find the smallest integer $n$ such that the expression $40! \times 5^n$ has the maximum number of trailing zeros.
+
+(Sipnayan JHS Semifinals A D4) Find the sum of $\dfrac{1^2}{1^2 - 10 + 50} + \dfrac{2^2}{2^2 - 20+ 50} + \dfrac{3^2}{3^2 - 30 + 50} + \cdots + \dfrac{9^2}{9^2 - 90 + 50}$.
+
+(Sipnayan JHS Semifinals B D4) Let $ABCD$ be a rectangle such that $AB = DC = 12$ and $AD = BC = 6$. Let $O$ be a point in the interior of the rectangles such that $\angle DOA = 45\dg$ and $DO = 3\sqrt6$. Find the value of $OB^2$.
+
+(Sipnayan JHS Finals V-RL) Find the sum $$\displaystyle \sum_{x = 0}^{2018} \del{6x^5 + 45 x^4 + 140x^3 + 225 x^2 + 186x + 63}.$$ Express your answer in the form $a^b - 1$ where $a$ is minimized.
+
+(Sipnayan SHS Semifinals B A2) Given rectangle $ABCD$ shown below, find the value of $OC^2$.
+\begin{center}
+  \begin{asy}
+    pair D = (0, 0);
+    pair C = (4, 0);
+    pair B = (4, 2);
+    pair A = (0, 2);
+    pair O = (2.5, 1.25);
+    draw(A--B--C--D--cycle);
+    draw(A--O--B);
+    draw(C--O--D);
+    label("$4$", A--B, N);
+    label("$2$", A--D);
+    label("$60^{\circ}$", A, SE+(2,-3));
+    label("$\sqrt3 + 1$", A--O);
+    label("$A$", A, NW);
+    label("$B$", B, NE);
+    label("$C$", C, SE);
+    label("$D$", D, SW);
+    label("$O$", O, N);
+  \end{asy}
+\end{center}
+
+(Sipnayan SHS Finals D-SL) In the figure below, $AF = 5$, $FB = 3$, $BD = 8$, $DC = 4$, $CE = 4$, and $EA = 4$, find $FD^2 : DE^2$.
+\begin{center}
+   \begin{asy}
+     pair B = (0, 0);
+     pair D = (8, 0);
+     pair C = (12, 0);
+     pair A = (6, sqrt(28));
+     pair F = (5*B+3*A)/8;
+     pair E = (A+C)/2;
+     draw(A--B--C--cycle);
+     draw(F--D--E);
+     label("$5$", A--F, NW);
+     label("$3$", F--B, NW);
+     label("$8$", B--D, S);
+     label("$4$", D--C, S);
+     label("$4$", C--E, NE);
+     label("$4$", E--A, NE);
+     label("$A$", A, N);
+     label("$B$", B, SW);
+     label("$C$", C, SE);
+     label("$D$", D, S);
+     label("$E$", E, NE);
+     label("$F$", F, NW);
+   \end{asy}
+ \end{center}
+
+(Sipnayan SHS Finals V-TM) Thanos has a set $S_1$ of fractions: $\cbr{\dfrac12, \dfrac13, \dfrac14, \cdots, \dfrac1{2018}}$. He uses the Reality Stone and instantaneously generates another set $S_2$, whose elements are every non-empty subset of $S_1$. Thor picks a random element from $S_2$ and, using Stormbreaker, takes the product of all the elements in that subset. If, because of the Time Stone, he is forced to do this infinitely many times, what should he expect his average result to tend towards?
+
+(LOTM JHS Eliminations E6) Find all real numbers $a$ such that $\abs{x + \abs{x} + a} + \abs{x - \abs{x} - a} = 2$ has exactly three real solutions in $x$. 
+
+(LOTM JHS Team Finals 8) A convex equilateral heptagon has angles that measure $168\dg$, $108\dg$, $108\dg$, $168\dg$, $x\dg$, $y\dg$, and $z\dg$, in clockwise order. What is $y$?
+
+(LOTM JHS Eliminations A1) The angles $A$, $B$, $C$ of $\triangle ABC$, where side $x$ is opposite angle $X$, are in arithmetic progression. If $2b^2 = 3c^2$, determine the angle $A$.
+
+(LOTM JHS Eliminations A6) Three congruent circles, centered at $(0, 0)$, $(1, 1)$, and $(2, 1)$, have a common tangent. Find the radius of the circles.
+
+(LOTM JHS Team Finals 11) A \emph{space diagonal} of a polyhedron is a line segment connecting two vertices of the polyhedron and is in the interior of the polyhedron. A dodecahedron is a polyhedron consisting of twelve pentagons such that three pentagons meet at a vertex. How many space diagonals does it have?
+
+(LOTM SHS Semifinals 11) Find the remainder when $2903^{2019} - 803^{2019} - 464^{2019} + 261^{2019} + 2019$ is divided by $1897$.
+
+(LOTM SHS Semifinals 13) Find the largest prime factor of the sum of the products of the nonzero digits of the positive integers less than $1000$.
+
+(PMO National Orals D3) Let $x = -\sqrt2 + \sqrt3 + \sqrt5$, $y = \sqrt2 - \sqrt3 + \sqrt5$, and $z = \sqrt2 + \sqrt3 - \sqrt5$. What is the value of the expression below? $$\frac{x^4}{(x-y)(x-z)} + \frac{y^4}{(y-z)(y-x)} + \frac{z^4}{(z-x)(z-y)}$$
+
+(PMO Qualifying II6) How many ordered pairs $(x, y)$ of positive integers are there such that $1 \le x \le y \le 20$ and both $\dfrac yx$ and $\dfrac{y+2}{x+2}$ are integers?
+
+(PMO Areas I17) Let $S = \cbr{1, 2, \ldots, 2018}$. For each subset $T$ of $S$, take the product of all elements of $T$, with $1$ being the product corresponding to the empty set. The sum of all such resulting products (with repetition) is $N$. Two elements $m$ and $n$, with $m < n$, are removed. The sum of all products over all subsets of the resulting set is $\dfrac{N}{2018}$. What is $n$?
+
+(Mathira Eliminations D2 / Finals Wave 4-2) Let $a_1, a_2, b_1, b_2$ be real numbers. The graph of a cubic polynomial function $P(x) = x^3 + 43x^2 + a_1x + b_1$ with (complex) zeros $p$, $q$, $r$ intersects the graph of a quadratic polynomial function $Q(x) = x^2 + a_2x + b_2$ with (complex) zeros $r$, $s$ exactly once. Find the value of $p + q + pq + s$.
+
+(Mathira Orals T9-1) Find the remainder when $(^{32}P_3)\del{31^{24} + 1}\del{31^{12} + 1}\del{31^6 + 1}\del{31^4 + 31^2 + 1}$ is divided by $47$.
+
+(Mathira Orals T8-3) Given $A = \sqrt{26} - 5$ and $B = \dfrac1A$, find $$y = \dfrac{A^4 + AB^3}{A^2 + 1}.$$
+
+(Mathira Finals W3-3) Suppose that $$\sum_{k=0}^{n-m-1} (k + m + 1) = \alpha,$$ where $m$ and $n$ are positive integers greater than or equal to $2$, with $m < n$. If $x$ and $y$ are real numbers, write the sum of $$\sum_{i=1}^n (x + i) + \sum_{j = 1}^m (y - j)$$ in terms of $n$, $m$, and $\alpha$.

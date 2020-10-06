@@ -1,0 +1,17 @@
+A = dir(180)
+B = dir(0)
+C = dir(30)
+D = waypoint(A--C,1.8)
+E = tangent(D,origin,1,1)
+G = dir(90)
+F = extension A G B E
+G' = dir(-90)
+
+circle A B C
+A--B
+A--D
+E--F
+D--E
+A--F
+Line(D,F,2)
+G'--F dashed

@@ -1,0 +1,1067 @@
+\documentclass[11pt,paper=letter]{scrartcl}
+\usepackage[wide,boxthm,noextlink]{cjquines}
+
+\begin{document}
+
+\title{Engineering}
+\author{Carl Joshua Quines}
+\date{March 30, 2020}
+
+\maketitle
+
+\section{What is engineering?}
+
+\bluebf{Engineering is finding the answer to a problem without solving it.} It's the art of solving without solving, of finding the answer with less effort than it would take us if we did the problem ``properly''. The following techniques are engineering:
+
+\begin{itemthin}
+  \item \emph{Engineer's induction:} finding the answer for some cases, then generalizing.
+  \item Carefully drawing a diagram and measuring the answer.
+  \item Using extra degrees of freedom to find a numerical answer.
+  \item Substituting choices of a multiple-choice problem to solve it.
+  \item Using the answer format to assist in any of the above techniques.
+\end{itemthin}
+\vspace{-12pt}
+
+\begin{exboxed}[PMO 2019 Qualifying III.4]
+In triangle $ABC$, $D$ and $E$ are points on sides $AB$ and $AC$ respectively, such that $BE$ is perpendicular to $CD$. Let $X$ be a point inside the triangle such that $\angle XBC = \angle EBA$ and $\angle XCB = \angle DCA$. If $\angle A = 54\dg$, what is the measure of $\angle EXD$?
+\end{exboxed}
+
+It's possible to carefully draw a diagram and then measure it to get the answer. You'll get a measurement of about $35\dg$. The nearest angle that's a nice angle would be $36\dg$, which just happens to be $90\dg - 54\dg$, so we guess $36\dg$ and move on. This is engineering, but it's risky.
+
+Instead, here's some better engineering: \bluebf{abuse degrees of freedom}. The answer is a number, so it must be the same no matter where the points are positioned. Knowing this, we take the special case when $D$ is very very close to $A$.
+
+\begin{center}
+\includegraphics{fig-1.pdf}
+\end{center}
+
+Then $E$ would be very close the foot of the perpendicular from $B$ to $AC$, and $X$ would be very close to $B$. Then $\angle EXD$ would be about $\angle EBA$. But triangle $EBA$ is right, so $\angle EBA = 90\dg - \angle EAB = 36\dg$, which is indeed the correct answer.
+
+Some important philosophical notes. I think engineering is a useful skill. It leads to making exciting conjectures, and involves things like estimation that are important outside of competitions. There are certainly lots of people who should use it more, but I also think that there are people who should use it \textit{less}.
+
+\bluebf{Engineering is not a replacement for learning math.} It shouldn't be \textit{satisfying} to get an answer with engineering. Engineering a problem is like taking out a loan, that you need to repay with learning the \textit{actual} solution to the problem.
+
+With that in mind, I think \bluebf{engineering is a skill that's best learned when you're more experienced with math,} rather than something you learn when you're starting out. Intuition is something that you need when engineering anyway, as I'll emphasize throughout the article, and intuition is something you pick up over time. This handout can do more harm than good, and don't say I didn't warn you.
+
+\section{Engineer's induction}
+
+\emph{Engineering} takes its name from \emph{engineer's induction}, which is the primary engineering technique. In its simplest form, engineer's induction is about guessing the formula for a sequence, and then convincing yourself that it's true based on some small cases. So the simplest kind of engineer's induction is used in problems where there's a sequence, and you have to guess the formula:
+
+% (2n - 1)/n^2
+\begin{exboxed}[PUMaC Algebra A 2018/2]
+  If $a_1, a_2, \ldots$ is a sequence of real numbers such that for all $n$, $\displaystyle \sum_{k=1}^{n} a_k\del{\frac kn}^2 = 1,$ find the smallest $n$ such that $a_n < \dfrac1{2018}$.
+\end{exboxed}
+
+We find the first few terms. Substituting $n = 1$, we get
+\[
+  a_1\left(\frac{1}{1}\right)^2 = 1 \implies a_1 = 1.
+\]
+Then substituting $n = 2$ gives
+\[
+  a_1\left(\frac{1}{2}\right)^2 + a_2\left(\frac{2}{2}\right)^2 = 1 \implies a_2 = \frac{3}{4}.
+\]
+We finally substitute $n = 3$ to get
+\[
+  a_1\left(\frac{1}{3}\right)^2 + a_2\left(\frac{2}{3}\right)^2 + a_3\left(\frac{3}{3}\right)^2 = 1 \implies a_3 = \frac{5}{9}.
+\]
+Looking at the numerators, we have $1, 3, 5$, which looks like the odd numbers. Looking at the denominators, we have $1, 4, 9$, which looks like the perfect squares. So we would guess that the formula is
+\[
+  a_n = \frac{2n - 1}{n^2}.
+\]
+In this case, it's not hard to prove the formula through actual induction. (If you don't immediately see how to do this, you should \bluebf{stop reading} this handout.) From having written lots of inductions before, we see \emph{why} this is true, and that's what engineer's induction is about---convincing yourself that something is true using examples, rather than a proof.
+
+\begin{exrboxed}
+  We could always check another case to be sure. Do something similar to what we did to find $a_4$, and verify that it matches our guess for the formula.
+\end{exrboxed}
+
+To finish the rest of the problem, we need the least $n$ such that
+\[
+  \frac{2n-1}{n^2} < \frac{1}{2018}.
+\]
+The fraction is approximately $\dfrac{2n}{n^2}$, or $\dfrac{2}{n}$. In this case, $n = 4036$ would make the fraction equal to $\frac{1}{2018}$. But $2n$ is larger than $2n-1$, so the actual fraction would be smaller. So $a_{4036}$ is indeed smaller than $\frac{1}{2018}$.
+
+Is the answer $4035$? Let's check whether $n = 4035$ would make the fraction smaller than $\frac{1}{2018}$. Here, let's  replace $2018$ with $\frac{n + 1}{2}$:
+\[
+  \frac{2n - 1}{n^2} \text{ ? } \frac{1}{\frac{n+1}{2}} \iff (2n-1)(n + 1) \text{ ? } 2n^2,
+\]
+The left-hand side is larger than the right-hand side, so $a_{4035} > \frac{1}{2018}$. So $a_{4035}$ is larger, which means that $a_{4036}$ is the first term smaller than $\frac{1}{2018}$, and the answer is $4036$.
+
+\begin{mdframed}[style=exmdbox]
+% 3/(4n-1)
+\begin{problem}[AMC 12A 2019/9]
+A sequence of numbers is defined by $a_1 = 1$, $a_2 = \frac{3}{7}$, and $$a_n=\frac{a_{n-2} \cdot a_{n-1}}{2a_{n-2} - a_{n-1}}$$ for all $n \geq 3$. Then $a_{2019}$ can be written as $\frac{p}{q}$, where $p$ and $q$ are relatively prime positive integers. What is $p+q$?
+\end{problem}
+
+% 3^{n-1}/2^n
+\begin{problem}[ARML Team 2017/6]
+  Let $\cbr{a_n}$ be a sequence with $a_0 = 1$, and for all $n > 0$, \[a_n = \frac12 \sum_{i=0}^{n-1}a_i.\] Compute the greatest value of $n$ for which $a_n < 2017$. \hint{\ref{h:2}}
+\end{problem}
+
+\end{mdframed}
+
+\subsection{Trying small cases}
+
+Engineer's induction can also be applied even if the problem doesn't have a sequence. In this case, the sequence is made by trying small cases of the problem, guessing the formula, and then applying it to the original problem. Here's an example:
+
+% n+1
+\begin{exboxed}[OMO Spring 2018/5]
+  A mouse has a wheel of cheese which is cut into $2018$ slices. The mouse also has a $2019$-sided die, with faces labeled $0,1,2,\ldots, 2018$, and with each face equally likely to come up. Every second, the mouse rolls the dice. If the dice lands on $k$, and the mouse has at least $k$ slices of cheese remaining, then the mouse eats $k$ slices of cheese; otherwise, the mouse does nothing. What is the expected number of seconds until all the cheese is gone?
+\end{exboxed}
+
+The $2018$ here is probably an arbitrary choice, and it's asking us to replace it with a smaller number. Let's let this number be $n$, and we're trying to look for the answer in terms of $n$. That is, we have this new, restated problem:
+
+\begin{exboxed}
+  A mouse has a wheel of cheese which is cut into $n$ slices. The mouse also has a $n+1$-sided die, with faces labeled $0,1,2,\ldots, n$, and with each face equally likely to come up. Every second, the mouse rolls the dice. If the dice lands on $k$, and the mouse has at least $k$ slices of cheese remaining, then the mouse eats $k$ slices of cheese; otherwise, the mouse does nothing. What is the expected number of seconds until all the cheese is gone?
+\end{exboxed}
+
+Let's call the answer to this problem $S_n$. We're looking for $S_{2018}$. We will try to guess the formula for $S_n$ by finding it for small values of $n$.
+
+When $n = 1$, then the die only has two faces, $0$ and $1$. It takes exactly $s$ seconds until all of the cheese is gone only if the first $s-1$ rolls are all $0$s, and the $s$th roll is $1$. This happens with probability $\dfrac{1}{2^s}$. So the expected number of seconds is
+\[
+  S_1 = 1 \cdot \frac{1}{2^1} + 2 \cdot \frac{1}{2^2} + 3 \cdot \frac{1}{2^3} + \cdots.
+\]
+To calculate this, we multiply both sides by $\frac{1}{2}$ and subtract it from $S_1$, giving us
+\begin{align*}
+\frac{S_1}{2} &= 1 \cdot \frac{1}{2^2} + 2 \cdot \frac{1}{2^3} + 3 \cdot \frac{1}{2^4} + \cdots \\
+S_1 - \frac{S_1}{2} &= 1 \cdot \frac{1}{2^1} + (2 - 1)\frac{1}{2^2} + (3 - 2)\frac{1}{2^3} + \cdots \\
+\frac{S_1}{2} &= \frac{\frac{1}{2}}{1 - \frac{1}{2}} = 1,
+\end{align*}
+which means that $S_1 = 2$.
+
+When $n = 2$, the problem is slightly harder, but it's still doable. When does it take exactly $s$ seconds for all of the cheese to be eaten? Either:
+\begin{itemize}
+  \item Both slices are eaten at the same time, which happens if the first $s-1$ rolls are $0$ and the $s$th roll is $2$. This happens with probability $\dfrac{1}{3^s}$.
+  \item The slices are eaten one at a time. There's some number $t$ such that the first $t-1$ rolls are $0$, and then the $t$th roll is $1$. Then the next $s-t-1$ rolls can be $0$ or $2$, and the $s$th roll is $1$ again. As $t$ can be anything from $1$ to $s-1$, this happens with probability
+  \[
+  \left(\frac{1}{3}\right)\left(\frac{2}{3}\right)^{s-2}\left(\frac{1}{3}\right)
+  + \left(\frac{1}{3}\right)^2\left(\frac{2}{3}\right)^{s-3}\left(\frac{1}{3}\right) + \cdots
+  + \left(\frac{1}{3}\right)^{s-1}\left(\frac{1}{3}\right) = \frac{2^{s-1} - 1}{3^s}.
+  \]
+  We can compute this series by noticing that the denominators are all $3^s$, while the numerators form a geometric series.
+\end{itemize}
+In total, the probability that it takes exactly $s$ seconds for all the cheese to be eaten is $\dfrac{2^{s-1}}{3^s}$. To compute the expected number of seconds, we do a similar trick on
+\[
+  S_2 = 1\cdot\frac{2^0}{3^1} + 2\cdot\frac{2^1}{3^2} + 3\cdot\frac{2^2}{3^3} + \cdots.
+\]
+We multiply the whole series by $\frac{2}{3}$ and then subtract it from the original series. This allows us to solve for $S_2 = 3$.
+
+So these two answers allow us to make a ``sequence'' of answers for different $n$. The sequence $S_n$ begins as $2, 3$. A good guess for the formula would be $S_n = n+1$, which means that we'd guess $S_{2018} = 2019$.
+
+If we really wanted to be sure, we could find $S_3$. However, it's already getting a bit tedious at this point, since we have four cases. Instead, we can guess that the probability that it takes exactly $s$ seconds for all of the cheese to be eaten is $\dfrac{3^{s-1}}{4^s}$.
+
+\begin{exrboxed}
+  Let's try to find $S_3$ without going through all four cases.
+  \begin{enumthin}[label=(\alph*)]
+    \item We guess it takes exactly $s$ seconds for all of the cheese to be eaten is $\dfrac{3^{s-1}}{4^s}$. Verify that this is true for $s = 1$ and $s = 2$. The fact that we have a simple formula, and that it's true for $s = 1$ and $s = 2$, should make us believe that the formula is true in general.
+    \item Using a similar technique to what we did earlier, check that the sum
+    \[
+    S_3 = 1\cdot\frac{3^0}{4^1} + 2\cdot\frac{3^1}{4^2} + 3\cdot\frac{3^2}{4^3} + \cdots
+    \]
+    is indeed equal to $4$.
+  \end{enumthin}
+\end{exrboxed}
+
+At this point, we've seen that $S_n = n+1$ for $n = 1, 2, 3$, so we should be pretty confident that $S_{2018} = 2019$. And this is indeed the correct answer!
+
+Think about this problem. The way we found the answer involved a lot of computation, but \bluebf{very few tricks were used in our technique}. Solutions that use states require knowing how to set up recursions, and the short intended solution is not easy to come up with. Engineer's induction may not always give the answer in a fast or elegant way, but it's often a method that requires knowing the least tricks.
+
+Here's a different kind of example, taken from the example in the previous section:
+
+\begin{exboxed}
+  Find the least positive integer $n$ such that
+  \[
+    \frac{2n-1}{n^2} < \frac{1}{2018}.
+  \]
+\end{exboxed}
+
+Again, $2018$ is an arbitrary number, so let's replace it with small numbers and try to guess the general answer. When we replace it with $1$, we get
+\[
+  \frac{2n-1}{n^2} < 1,
+\]
+and the least $n$ that works is $2$. When we replace it with $2$, we get
+\[
+  \frac{2n-1}{n^2} < \frac{1}{2},
+\]
+and the least $n$ that works is $4$. And when we replace it with $3$, we find that the least $n$ that works is $6$. It always looks to be double the number we're replacing. So we would guess that in the original problem, with $2018$, the least $n$ that works is $4036$, which is correct.
+
+\begin{mdframed}[style=exmdbox]
+
+% 2/3
+\begin{problem}[PUMaC Combinatorics A 2017/3]
+  There is a box containing $100$ balls, each of which is either orange or black. The box is equally likely to contain any number of black balls between $0$ and $100$, inclusive. A random black ball rolls out of the box. The probability that the next ball to roll out of the box is also black can be written in the form $\frac pq$ where $p$ and $q$ are relatively prime positive integers. Find $p + q$.
+\end{problem}
+
+% 5n
+\begin{problem}[PUMaC Combinatorics A 2016/4]
+  A knight is placed at the origin of the Cartesian plane. Each turn, the knight moves in an L-shape (2 units parallel to one axis and 1 unit parallel to the other) to one of eight posisble locations, chosen at random. After $2016$ such turns, what is the expected value of the square of the distance of the knight from the origin?
+\end{problem}
+
+% nC2, 1m is n^2, 1000 is n
+\begin{problem}[HMMT Guts 2017/20]
+  For positive integers $a$ and $N$, let $r(a, N)$, a number in $\cbr{0, 1, \ldots, N-1}$ denote the remainder of $a$ when divided by $N$. Determine the number of positive integers $n \leq 1000000$ for which $r(n, 1000) > r(n, 1001)$. \hint{\ref{h:1}}
+\end{problem}
+
+\end{mdframed}
+
+\subsubsection{Be fooled not by small numbers}
+
+Here's one important consideration when considering when to apply engineer's induction. We might only reach for it when the numbers in the problem are large, like the current year, or $1000$ or something. But sometimes, engineer's induction can be useful for small numbers too, and we shouldn't dismiss using it just because the given numbers are small. \bluebf{We can always make small numbers smaller.}
+
+\begin{exboxed}
+Eight points are equally spaced on a unit circle. What is the product of the distances from one point to each other point?
+\end{exboxed}
+
+Here, instead of tackling the problem directly, we use engineer's induction, replacing eight with smaller numbers:
+\begin{itemize}
+  \item If there are only two points, then there is only one distance, $2$, so the answer is $2$.
+  \item If there are three points, then this forms an equilateral triangle with height $\frac{3}{2}$, and by constructing a $30$-$60$-$90$ triangle, we see that it must have side length $\sqrt{3}$. So the answer is $\sqrt{3} \cdot \sqrt{3}$, which is $3$.
+  \item If there are four points, then this forms a square. The diagonal is $2$, and by drawing both diagonals, we form a $45$-$45$-$90$ triangle, which gives us the side length of $\sqrt{2}$. Then the answer is $\sqrt{2} \cdot 2 \cdot \sqrt{2}$, or $4$.
+\end{itemize}
+This strongly suggests that for eight points, the answer is $8$. We can further check this by checking the case of the hexagon:
+\begin{exrboxed}
+  Check that the answer is $6$ for a regular hexagon as well. (Two of the distances are part of an equilateral triangle, so we've done most of the work.)
+\end{exrboxed}
+And $8$ is indeed the correct answer, which we found through a much simpler technique than the intended solution of using complex numbers or trigonometry.
+
+\begin{mdframed}[style=exmdbox]
+
+% \begin{problem}
+% Evaluate $(2 + 1)(2^2 + 1)(2^4 + 1)\cdots(2^{256} + 1)$.
+% \end{problem}
+
+\begin{problem}[PMO 2017 Areas I.18]
+  A railway passes through four towns $A, B, C,$ and $D$, in that order. The railway forms a complete loop and trains go in both directions. Suppose that a trip between two adjacent towns costs one ticket. Using exactly eight tickets, how many distinct ways are there of travelling from town $A$ and ending at town $A$? (Note that passing through $A$ somewhere in the middle of the trip is allowed.)
+\end{problem}
+
+\begin{problem}[OMO Spring 2014/9]
+Eighteen students participate in a team selection test with three problems, each worth up to seven points. All scores are nonnegative integers. After the competition, the results are posted by Evan in a table with 3 columns: the student's name, score, and rank (allowing ties), respectively. Here, a student's rank is one greater than the number of students with strictly higher scores (for example, if seven students score $0, 0, 7, 8, 8, 14, 21$ then their ranks would be $6, 6, 5, 3, 3, 2, 1$ respectively).
+
+When Richard comes by to read the results, he accidentally reads the rank column as the score column and vice versa. Coincidentally, the results still made sense! If the scores of the students were $x_1 \le x_2 \le \cdots \le x_{18}$, determine the number of possible values the $18$-tuple $(x_1, x_2, \ldots, x_{18})$. In other words, determine the number of possible multisets (sets with repetition) of scores.
+\end{problem}
+
+% 2^n + n
+\begin{problem}[PUMAC Algebra B 2014/5]
+  Given that \[a_na_{n-2} - a_{n-1}^2 + a_n - na_{n-2} = -n^2 + 3n - 1\] and $a_0 = 1$, $a_1 = 3$, find $a_{20}$. \hint{\ref{h:3}}
+\end{problem}
+
+\begin{problem}[HMMT Algebra 2013/7]
+  Compute
+  \[
+  \sum_{a_1 = 0}^{\infty} \sum_{a_2 = 0}^{\infty} \cdots \sum_{a_7 = 0}^{\infty} \frac{a_1 + a_2 + \cdots + a_7}{3^{a_1 + a_2 + \cdots + a_7}}.
+  \]
+\end{problem}
+
+\end{mdframed}
+
+\subsection{Choosing what to induct on}
+
+Another thing to think about when doing engineer's induction is how \textit{exactly} we induct. What exactly do we change? How exactly are we going to make the sequence? Sometimes it's clear, but sometimes need to be more creative:
+
+% induct on 2014Ck; alternating sign triangle numbers
+% https://artofproblemsolving.com/community/c5h577097p3402517 AMC 12B 2014/23
+\begin{exboxed}[AMC 12B 2014/23]
+  The number $2017$ is prime. Let $\displaystyle S=\sum_{k=0}^{62}\binom{2014}{k}$. What is the remainder when $S$ is divided by $2017$?
+\end{exboxed}
+
+Here, there are several choices of what to try. We can see that $2014$ and $2017$ are related, so we might consider replacing the two numbers, with something like $4$ and $7$. But then, how are both numbers related to $62$? Indeed, the number that we want to change isn't $2014$ and $2017$, but the $62$. Since it doesn't really matter, we should consider what happens when we let it vary.
+
+In particular, let's try finding $\binom{2014}{k}$ modulo $2017$ for small values of $k$:
+\begin{itemthin}
+  \item When $k = 0$, it's just $1$.
+  \item When $k = 1$, it's $2014$, which would be nicer if we wrote it as $-3$.
+  \item When $k = 2$, it's
+  \[
+  \frac{2014 \cdot 2013}{2} \equiv \frac{(-3)(-4)}{2} \equiv 6.
+  \]
+\end{itemthin}
+At this point I'd say that the pattern is strong enough to guess: $1, -3, 6$ are the triangular numbers, except that the signs alternate.
+\begin{exrboxed}
+  Verify that the pattern continues for $k = 3$ by using the same trick; you should get $-10$.
+\end{exrboxed}
+We find the sums of the first few terms, and we get $1, -2, 4, -6, 9$. We can then guess the positive terms are the perfect squares, so the sum from $k = 0$ to $k = 62$ would give $32^2$, or $1024$.
+
+\begin{mdframed}[style=exmdbox]
+
+\begin{problem}[AMC 12A 2014/16]
+The product $(8)(888\ldots 8)$, where the second factor has $k$ digits, is an integer whose digits have a sum of $1000$. What is $k$?
+\end{problem}
+
+\begin{problem}[AIME I 2018/1]
+Let $S$ be the number of ordered pairs of integers $(a,b)$ with $1 \leq a \leq 100$ and $b \geq 0$ such that the polynomial $x^2+ax+b$ can be factored into the product of two (not necessarily distinct) linear factors with integer coefficients. Find the remainder when $S$ is divided by $1000$.
+\end{problem}
+
+\begin{problem}[AMC 12A 2014/23]
+The fraction $\dfrac1{99^2}=0.\overline{b_{n-1}b_{n-2}\ldots b_2b_1b_0},$ where $n$ is the length of the period of the repeating decimal expansion. What is the sum $b_0+b_1+\cdots+b_{n-1}$? \hint{\ref{h:4}}
+\end{problem}
+
+\end{mdframed}
+
+\subsubsection{Two free variables}
+
+Sometimes, we may want to have \textit{two} free variables instead of just one. This is slightly harder than only one free variable, because there are way, \textit{way} more possible formulas. One of the tricks is to \bluebf{only change one variable at a time}.
+
+% replace 2017 and 1337, and engineer on that
+\begin{exboxed}[HMMT Combinatorics 2017/6]
+  Emily starts with an empty bucket. Every second, she either adds a stone or removes a stone from the bucket, each with probability $\frac12$. If she wants to remove a stone from the bucket and the bucket is currently empty, she does nothing for that second (still with probability $\frac12$). What is the probability that after $2017$ seconds her bucket contains exactly $1337$ stones?
+\end{exboxed}
+
+Here, we have two clear numbers that we want to do engineer's induction on, $2017$ and $1337$. Let's call the number of seconds $s$. We can just find the answer for all small $s$, since there are only a limited number of possible stones. When $s = 1$, we have $0$ stones or $1$ stone with probability $\frac{1}{2}$.
+
+In the former case, half the time we get $0$ stones and half the time we get $1$ stone. In the latter case, half the time we get $0$ stones and the other half we get $2$ stones. So in total, for $s = 2$, we have $0$ stones with probability $\frac{2}{4}$, $1$ stone with $\frac{1}{4}$, and $2$ stones with $\frac{1}{4}$.
+
+Again, we can use these numbers to find the results for $s = 3$. It's $0$ stones with probability $\frac{3}{8}$, $1$ stone with $\frac{3}{8}$, $2$ stones with $\frac{1}{8}$, and $3$ stones with $\frac{1}{8}$. Now the numerators, $3$, $3$, $1$, $1$, are familiar---they're the binomial coefficients of the form $\binom{3}{x}$!
+
+\begin{exrboxed}
+  Verify that for $s = 4$, the probabilities for getting $0, 1, \ldots, 5$ stones are\[\frac{6}{2^4}, \frac{4}{2^4}, \frac{4}{2^4}, \frac{1}{2^4}, \frac{1}{2^4}.\] Can you guess the formula for the probability of having $x$ stones after $s$ seconds?
+\end{exrboxed}
+
+From here, we see that the answer should be $\dfrac{\binom{2017}{340}}{2^{2017}}$.
+
+\begin{mdframed}[style=exmdbox]
+
+% well-known
+% (n+1)/(k+1)
+\begin{problem}[SMT Discrete 2018/7]
+  Let $S$ be the set of all $1000$ element subsets of the set $\cbr{1, 2, 3, \ldots 2018}$. What is the expected value of the minimum element of a set chosen uniformly at random from $S$?
+\end{problem}
+
+% 1019/2019
+\begin{problem}[HMMT Guts 2019/18]
+$2019$ points are chosen independently and uniformly at random on the interval $[0,1]$. Tairitsu picks $1000$ of them randomly and colors them black, leaving the remaining ones white. Hikari then computes the sum of the positions of the leftmost white point and the rightmost black point. What is the probability that this sum is at most $1$?
+\end{problem}
+
+\begin{problem}[HMMT Combinatorics 2013/9]
+Given a permutation $\sigma$ of $\{1, 2, \ldots, 2013\}$, let $f(\sigma)$ be the number of fixed points of $\sigma$ -- that is, the number of $k \in \{1, 2, \ldots, 2013\}$ such that $\sigma(k) = k$. If $S$ is the set of all possible permutations $\sigma$, compute
+\[
+  \sum_{\sigma \in S} f(s)^4.
+\]
+(A \textit{permutation} $\sigma$ is a bijective mapping from $\{1, 2, \ldots, 2013\}$ to $\{1, 2, \ldots, 2013\}$.) \hint{\ref{h:5}}
+\end{problem}
+
+% HMMT Guts 2018/23 F_16
+% Kevin starts with the vectors (1,0) and (0,1) and at each time step, he replaces one of the vectors with their sum. Find the cotangent of the minimum possible angle between the vectors after 8 time steps.
+
+\end{mdframed}
+
+\subsubsection{Trigonometric sums and products}
+
+This is a particular kind of engineer's induction that I've seen often enough that it gets its own section. The key idea that I want to emphasize is that \bluebf{degrees are arbitrary}, and that every time you see a trigonometric sum or product with degrees, you should be thinking about using engineer's induction.
+
+\begin{exboxed}[Titu]
+  Evaluate
+  \[
+  \frac{1}{\cot 9\dg - 3 \tan 9\dg} + \frac{3}{\cot 27\dg - 3\tan 27\dg} + \frac{9}{\cot 81\dg - 3 \tan 81\dg} + \frac{27}{\cot 243\dg - 3\tan 243\dg}.
+  \]
+\end{exboxed}
+
+First, we recognize that the degrees are arbitrary, and probably the only important part is that it triples each time. Replace $9\dg$ with $x$ to get
+\[
+\frac{1}{\cot x - 3 \tan x} + \frac{3}{\cot 3x - 3\tan 3x} + \frac{9}{\cot 9x - 3 \tan 9x} + \frac{27}{\cot 27x - 3\tan 27x}.
+\]
+Now we can try different values of $x$ and see what we get. Convenient ones to try are $x = 45\dg$ and $x = 135\dg$. Let's try the first one. This gives us
+\[
+\frac{1}{1 - 3} + \frac{3}{-1 + 3} + \frac{9}{1 - 3} + \frac{27}{-1 + 3} = \frac{-1 + 3 - 9 + 27}{2} = 10.
+\]
+Similarly, check that if we try $x = 135\dg$, we get $-10$.
+
+Now, we know the answer should depend on $x$ in some way, most likely $\tan x$ or $\cot x$. Can it be something like $10\left(\tan x\right)^2$? If it was, then the answer for $x = 45\dg$ and $x = 135\dg$ would be the same, but it isn't.
+
+So we expect it to be in terms of either $\tan x$ or $\cot x$. The nicest option would be either something like $10 \tan x$ or $10 \cot x$, which matches what we have. What we've done so far can't distinguish between the two of them, but we can use size to figure out which one:
+
+\begin{exrboxed}
+  Say that $x$ was very small. Then $\tan x$ would be very small, and $\cot x$ would be very large. Convince yourself that, in this case, the sum is closer to $10 \tan x$ than it is to $10 \cot x$.
+\end{exrboxed}
+
+So we have a good guess of $10 \tan x$. What we'd really like is if we had another $x$ to try it on. Unfortunately, neither $0$ nor $30\dg$ nor $60\dg$ give anything defined. Instead, we can use $15\dg$.
+
+\begin{exrboxed}
+  Recall (or derive) that $\tan 15\dg = 2 - \sqrt{3}$. Then check that for $x = 15\dg$, the above sum really is $10 \tan x$.
+\end{exrboxed}
+
+And indeed, the answer really is $10 \tan 9\dg$. In short-answer type contests, the answer format is typically given, which makes things a bit easier:
+
+% http://www.artofproblemsolving.com/community/c6h65005p3415367 AIME II 2000/15 
+\begin{exboxed}[AIME II 2000/15]
+  Find the least positive integer $n$ such that \[ \frac 1{\sin 45^\circ\sin 46^\circ}+\frac 1{\sin 47^\circ\sin 48^\circ}+\cdots+\frac 1{\sin 133^\circ\sin 134^\circ}=\frac 1{\sin n^\circ}. \]
+\end{exboxed}
+
+The denominators form this arithmetic sequence $45\dg, 46\dg, \ldots, 134\dg$, and the next term would have been $135\dg$. Again, the common difference being $1\dg$ is definitely arbitrary---the important facts seem to be that it starts with $45\dg$, ends with $135\dg$, and has an odd number of terms. And also, the $n\dg$ on the right-hand side is probably just $n$ times the common difference.
+
+If the sum had only one term, the sequence would be $45\dg, 90\dg, 135\dg$. And then the sum would be
+\[
+  \frac{1}{\sin 45\dg \sin 90\dg} = \frac{1}{\sin 45n\dg} \implies n = 1.
+\]
+If we were unsure, we could see what would happen if the sum had more terms. One choice would be the sequence $45\dg, 60\dg, 75\dg, 90\dg, 105\dg, 120\dg, 135\dg$, which would give us the sum
+\[
+  \frac{1}{\sin 45\dg \sin 60\dg} + \frac{1}{\sin 75\dg \sin 90\dg} + \frac{1}{\sin 105\dg 120\dg} = \frac{1}{\sin 15n\dg}
+\]
+\begin{exrboxed}
+Evaluate the above sum, and show that $n = 1$ here as well. It may be easier to note that $\sin 75\dg = \sin 105\dg = \cos 15\dg$, not evaluate these until the end, and then use the earlier fact that $\tan 15\dg = 2 - \sqrt{3}$.
+\end{exrboxed}
+Again, if we \textit{really} wanted to be sure, we can also check it for when the sum has two terms. But at this point we should be pretty confident that the answer is just $1$, which is correct.
+
+\begin{mdframed}[style=exmdbox]
+
+\begin{problem}
+Find the value of $\displaystyle \sin\left(\frac{\pi}{2020}\right)\sin\left(\frac{2\pi}{2020}\right)\cdots\sin\left(\frac{2019\pi}{2020}\right)$.
+\end{problem}
+
+% change to cos 30 + cos 45 / sin 30 + sin 45
+\begin{problem}[HMMT February Guts 2018/17]
+Find the value of \[\dfrac{\cos 30.5\dg + \cos 31.5\dg + \cdots + \cos 44.5\dg}{\sin 30.5\dg + \sin 31.5\dg + \cdots + \sin 44.5\dg}.\]
+\end{problem}
+
+% http://artofproblemsolving.com/community/c5h1064890p4622272 
+\begin{problem}[AIME I 2015/13]
+The product $\displaystyle \prod_{k=1}^{45} \csc^2(2k-1)^\circ=m^n$, where $m$ and $n$ are integers greater than 1. Find $m+n$.
+\end{problem}
+
+% \ans{-\dfrac\pi6}
+\begin{problem}[Sipnayan 2018 SHS SF A VD 5]
+Evaluate $\displaystyle \sum_{k=1}^{2018} \arcsin\del{\dfrac{1009-k}{2018}}$. Recall that $\arcsin(x)$ returns a value in the range $\sbr{-\dfrac\pi2, \dfrac\pi2}$ radians. Give your answer in radians.
+\end{problem}
+
+% % classical
+% \begin{problem}
+%   Compute $\tan\del{\frac{\pi}7}\tan\del{\frac{2\pi}7}\tan\del{\frac{3\pi}7}$.
+% \end{problem}
+
+\end{mdframed}
+
+\subsection{Sequence guessing skills}
+\label{sec:sequenceguess}
+
+The other component of doing engineer's induction effectively is being able to recognize sequences when they come up. There are a couple sequences that come a lot. \bluebf{For many common sequences, the first three terms should give an instinctive guess.} For example:
+
+\begin{itemthin}
+  \item $1, 1, 2$ are the Fibonacci numbers.
+  \item $1, 2, 4$ are the powers of two.
+  \item $1, 2, 6$ are the factorials.
+  \item $1, 3, 5$ are the odd numbers.
+  \item $1, 3, 6$ are the triangular numbers.
+  \item $1, 4, 9$ are the perfect squares.
+\end{itemthin}
+
+Sequences like these should be pretty immediate, although if you see them, do a sanity check to make sure that it makes sense. Other sequences that should be clear after three terms are arithmetic sequences and geometric sequences. For everything else, you may need to do some investigation.
+
+\begin{exboxed}
+  What is the next term in the following sequence: $1, 2, 4, 10, 26, \ldots$?
+\end{exboxed}
+
+First, we take the differences, which often helps. Here, it's $1, 2, 6, 16$. These terms are pretty composite. In particular, note that the $n$th term here is divisible by $n$, so we divide it out. This gives us $1, 1, 2, 4, \ldots$, which is the original sequence! So this gives us the recurrence $a_{n+1} = a_n + na_{n-1}$.
+
+\begin{exrboxed}
+  Guess the next term in each of the following sequences:
+  \begin{itemthin}[itemsep=-0.2ex]
+    \item $2, 4, 7, 11, 16, \ldots$
+    \item $1, 5, 13, 29, 61, \ldots$
+    \item $1, 3, 11, 43, 171, \ldots$
+    \item $4, 10, 22, 46, 94, \ldots$
+    \item $1, 3, 15, 84, 495, \ldots$
+    \item $1, 2, 6, 20, 70, \ldots$
+  \end{itemthin}
+\end{exrboxed}
+
+Here are a list of tricks to try:
+
+\begin{itemize}
+  \item \bluebf{Taking differences between terms} always helps. These can rule out sequences that are polynomial, because they'll have the same difference after a while. In practice, polynomial sequences tend to be either quadratic or cubic, so you should be able to tell after four or five terms.
+
+  To elaborate, consider a sequence like $2, 4, 7, 11, 16$. The first differences are $2, 3, 4, 5$. Taking the second differences gives $1, 1, 1$. Since this is constant, the sequence must be quadratic; indeed it's $\binom{n}{2} + 1$. Similarly, if the third differences are constant, the sequence is cubic.
+
+  \item The multiplicative version of this is \bluebf{taking ratios of consecutive terms}, which can help you figure out whether the sequence has some exponential component. Consider a sequence like $1, 5, 13, 29, 61$. The ratios are all approximately $2$, so it's a good idea to compare the sequence to $2^n$. From here, we can guess the formula $2^{n + 2} - 3$.
+
+  Similarly, consider a sequence like $1, 3, 11, 43, 171$. Each term looks like it's about $4$ times the previous one. In fact, it's $4$ times the previous term minus $1$.
+
+  \item If all of the terms look ``very'' composite, try \bluebf{factoring the terms}. You might be able to rule out some exponential component, like if the $n$th term had $2^n$ as a factor, or if the $n$th term had $n$ as a factor.
+
+  The other possibility is that all of your terms are binomial coefficients, which is likely if your terms get ``more and more composite'' as the sequence goes on. That is, if the terms seem to get more and more factors. A sequence like $1, 3, 15, 84, 495$ is a good candidate. More about this in the next section.
+
+  \item Finally, if you know that the problem is combinatorial and probably involves recursion, you can always \bluebf{force a linear recurrence}. Four terms are enough to find any linear recurrence of the form $a_{n+1} = xa_n + ya_{n-1}$. Again, more about this later.
+\end{itemize}
+
+If the sequence does fall in one of the patterns above, you can usually tell it after three or four terms, maybe five terms. Often, doing the brute force until the fifth term isn't too bad, especially if you don't have an alternative. There isn't really much else to talk about this, so here are the problems:
+
+\begin{mdframed}[style=exmdbox]
+
+% 1,2,4,6,9,12,17,20,25,....
+%             5, 3, 5, 3, etc.
+\begin{problem}[HMMT Guts 2017/15]
+  Start by writing the integers $1, 2, 4, 6$ on the blackboard. At each step, write the smallest positive integer $n$ that satisfies both of the following properties on the board.
+  \begin{itemize}
+    \item $n$ is larger than any integer on the board currently.
+    \item $n$ cannot be written as the sum of $2$ distinct integers on the board.
+  \end{itemize}
+  Find the $100$th positive integer you write on the board. Recall that at the beginning, there are already $4$ integers on the board.
+\end{problem}
+
+% something cubic in terms of m
+\begin{problem}[HMMT Guts 2018/11]
+  Find the value of $\displaystyle \sum_{k=1}^{60} \sum_{n=1}^k \frac{n^2}{61 - 2n}$. \hint{\ref{h:6}}
+\end{problem}
+
+% 2^n - (n+1)
+\begin{problem}[CMIMC Combinatorics 2018/9]
+  Compute the number of rearrangements $a_1, a_2, \ldots, a_{2018}$ of the sequence $1, 2, \ldots, 2018$ such that the inequality $a_k > k$ is true for \emph{exactly} one value of $k$.
+\end{problem}
+
+% (n+1)2^(n-2)
+\begin{problem}[HMMT Combinatorics 2015/5]
+  For positive integers $x$, let $g(x)$ be the number of blocks of consecutive $1$'s in the binary expansion of $x$. For example, $g(19) = 2$ because $19 = 10011_2$ has a block of one $1$ at the beginning and a block of two $1$'s at the end, and $g(7) = 1$ because $7 = 111_2$ only has a single block of three $1$'s. Compute $g(1) + g(2) + g(3) + \cdots + g(256)$.
+\end{problem}
+
+% (n - 1)/2 - 1/2 + 1/2^n
+\begin{problem}[HMMT Guts 2010/15]
+  Pick a random integer between $0$ and $4095$, inclusive. Write it in base $2$ (without any leading zeroes). What is the expected number of consecutive digits that are not the same (that is, the expected number of occurrences of either $01$ or $10$ in the base $2$ representation)?
+\end{problem}
+
+\end{mdframed}
+
+\subsubsection{Binomial coefficients}
+
+As mentioned in the previous section, \bluebf{if the terms have a lot of factors, they may be binomial coefficients}. This should be especially true if you know it's a combinatorics problem and the answer could involve binomial coefficients. In these cases, it's helpful to draw out the first few rows of Pascal's triangle and start looking. Here's a simple example:
+
+\begin{exboxed}[PMO 2020 Areas I.4]
+  Determine the number of ordered quadruples $(a, b, c, d)$ of odd positive integers that satisfy the equation $a + b + c + d = 30$.
+\end{exboxed}
+
+Since the minimum sum is $4$, and the sum can only ever be even, we can try replacing $30$ with $4$, $6$, $8$, and count.
+
+There's only $1$ solution to $a + b + c + d = 4$. There are $4$ solutions to $a + b + c + d = 6$, corresponding to $(3, 1, 1, 1)$ and the $4$ ways to arrange it. For $a + b + c + d = 8$, there's $(3, 3, 1, 1)$ which we can arrange in $6$ ways, and then $(5, 1, 1, 1)$ which we can arrange in $4$ ways, making a total of $10$. So the sequence goes $1, 4, 10$. This is already enough to make a guess!
+
+\begin{center}
+\def\arraystretch{0.75}
+\setlength\tabcolsep{2pt}
+\begin{tabular}{*{13}{c}}
+&&&&&&1&&&&&&\\
+&&&&&1&&1&&&&&\\
+&&&&1&&2&&1&&&&\\
+&&&1&&3&&3&&\bluebf{1}&&&\\
+&&1&&4&&6&&\bluebf{4}&&1&&\\
+&1&&5&&10&&\bluebf{10}&&5&&1&\\
+1&&6&&15&&20&&15&&6&&1
+\end{tabular}
+\end{center}
+
+Drawing the first few rows of Pascal's triangle, we can spot $1, 4, 10$ as a line going through $\binom{3}{3}$, $\binom{4}{3}$, and $\binom{5}{3}$. So we'd guess that for $a + b + c + d = 2n$, the answer should be $\binom{n + 1}{3}$. Note that this is also roughly the correct order of magnitude---it's growing like a cubic polynomial, so it isn't too slow nor too fast. And indeed, $\binom{16}{3} = 560$ is the correct answer for this problem.
+
+Usually the pattern is something like $\binom{f(n)}{n}$, or $\binom{f(n)}{k}$ for some constant $k$, up to shifting. In particular, you wouldn't expect the pattern to lie only on a single row; you kind of expect it to lie on a diagonal of Pascal's triangle.
+
+\begin{mdframed}[style=exmdbox]
+
+% (in base 1, base 2, base 3, base 4, ...)
+\begin{problem}
+  How many four-digit numbers $\overline{ABCD}$ satisfy $A \ge B \ge C \ge D$? \hint{\ref{h:7}}
+\end{problem}
+
+\begin{problem}[HMMT Feb Guts 2016/6]
+  Consider a $2 \times n$ grid of points and a path consisting of $2n-1$ straight line segments connecting all these $2n$ points, starting from the bottom left corner and ending at the upper right corner. Such a path is called \textit{efficient} if each point is only passed through once and no two line segments intersect. How many efficient paths are there when $n = 2016$?
+\end{problem}
+
+\begin{problem}[HMMT Combinatorics 2007/9]
+Let $S$ denote the set of all triples $(i, j, k)$ of positive integers where $i + j + k = 17$. Compute
+\[
+  \sum_{(i, j, k) \in S} ijk.
+\]
+\end{problem}
+
+% n^2 + n - 1 C n
+\begin{problem}[HMMT Guts 2004/34]
+Find the number of $20$-tuples of integers $x_1$, $\ldots$, $x_{10}$, $y_1$, $\ldots$, $y_{10}$ with the following properties:
+\begin{itemthin}
+  \item $1 \le x_i \le 10$ and $1 \le y_i \le 10$ for each $i$;
+  \item $x_i \le x_{i+1}$ for $i=1,\dots,9$;
+  \item if $x_i = x_{i+1}$ then $y_i \le y_{i+1}$.
+\end{itemthin}
+\end{problem}
+
+\end{mdframed}
+
+% PMO 2020 Qualifying I.10
+% Suppose that $n$ identical promo coupons are to be distributed to a group of people, with no assurance that everyone will get a coupon. If there are $165$ more ways to distribute these to four people than there are ways to distribute these to three people, what is $n$?
+
+\subsubsection{Linear recurrences}
+
+As a last resort, and \textit{only} as a last resort, if you know that the problem is the kind of problem where you're expected to set up a linear recursion and extend it a couple terms, you could always \bluebf{solve for a linear recurrence} that fits.
+
+If there are two ``base cases'', then the recurrence is probably of the form $a_{n+1} = xa_n + ya_{n-1}$. Solving for an equation like this requires only four terms. If $x$ and $y$ end up being integers, and it matches the fifth term, then you're likely correct. Similarly, if there are three ``bases cases'', then you'll need six terms to solve for the coefficients, and a seventh term to check.
+
+This really is only applicable to a few cases. Many problems that look like they have recursion-ish solutions don't have \textit{linear} recurrences as solutions.
+
+\begin{exboxed}[PMO 2019 Areas I.11]
+  A \emph{Vitas word} is a string of letters that satisfies the following conditions:
+  \begin{itemthin}
+    \item It consists of only the letters B, L, R.
+    \item It begins with a B and ends in an L.
+    \item No two consecutive letters are the same.
+  \end{itemthin}
+  How many Vitas words are there with $11$ letters?
+\end{exboxed}
+
+Upon reading the problem, it feels like exactly the kind of problem where you'd expect the answers to form some kind of linear recurrence. How far back would this linear recurrence be? Since the condition only involves two consecutive letters, it only really needs to look back by two. So from $a_{n+1}$, it only ``cares'' about $a_n$ and $a_{n-1}$. This means we'd expect a linear recurrence of the form $a_{n+1} = xa_n + ya_{n-1}$.
+
+Now let's begin listing the answers for small $n$. For $n = 1$, there's nothing, so $0$. For $n = 2$ it's just BL, so $1$. Similarly, for $n = 3$ it's just BLR, so $1$. For $n = 4$, there are $3$: BRBL, BLBL, BLRL. This gives us the sequence $0, 1, 1, 3$, and if we solve the system
+\[
+  1 = 1x + 0y \qquad 3 = 1x + 1y
+\]
+we get $x = 1$ and $y = 2$. So we expect the recursion to be $a_{n+1} = a_n + 2a_{n-1}$. We can check this by going one step further:
+
+\begin{exrboxed}
+  Check that there are $11$ different Vitas words with $5$ letters.
+\end{exrboxed}
+
+From here, we can continue the recursion to get $11, 21, 43, 85, 171, 341$, which gives us the correct answer.
+
+\begin{mdframed}[style=exmdbox]
+
+\begin{problem}[PMO 2020 Qualifying III.3]
+  A string of $6$ digits, each taken from the set $\{0, 1, 2\}$, is to be formed. The string should \textbf{not} contain any of the substrings $012$, $120$, and $201$. How many such $6$-digit strings can be formed?
+\end{problem}
+
+\begin{problem}[AMC 12A 2007/25]
+  Call a set of integers \textit{spacy} if it contains no more than one out of any three consecutive integers. How many subsets of $\{1,2,3,\ldots,12\},$ including the empty set, are spacy?
+\end{problem}
+
+\begin{problem}[AIME I 2001/14]
+  A mail carrier delivers mail to the nineteen houses on the east side of Elm Street. The carrier notices that no two adjacent houses ever get mail on the same day, but that there are never more than two houses in a row that get no mail on the same day. How many different patterns of mail delivery are possible?
+\end{problem}
+
+\end{mdframed}
+
+\section{And other tricks}
+
+Other than engineer's induction, which is the namesake of this handout, there are some other engineering-flavored tricks. Here we present three of them: abusing degrees of freedom, using the answer choices, and using the answer format.
+
+\subsection{Abusing degrees of freedom}
+
+In the introduction, we talked about PMO 2019 Qualifying III.4, where we can abuse the degrees of freedom in the problem. For short-answer contests, we often know that the answer has to be numerical. This means that the answer should be the same no matter what configuration we pick, so we only have to \bluebf{try a specific case} to find it.
+
+\begin{exboxed}[PMO 2017 Areas I.4]
+  Suppose that $S_k$ is the sum of the first $k$ terms of an arithmetic sequence with common difference $3$. If the value of $S_{3n}/S_n$ does not depend on $n$, what is the $100$th term of the sequence?
+\end{exboxed}
+
+The morally correct way to solve this would be by writing out $S_n$ in terms of $n$, writing out the ratio $S_{3n}/S_n$, and choosing the value of the first term such that the $n$ cancels out or something.
+
+But we don't have to do this. Since we know the problem is correct anyway, we can just pick two specific values of $n$ and equate them. In particular, let's equate $S_3/S_1$ and $S_9/S_3$.
+
+\begin{exrboxed}
+  Letting $a$ be the first term, write $S_1$, $S_3$, and $S_9$ in terms of $a$. Check that $S_3/S_1 = S_9/S_3$ becomes $S_3^2 = S_1S_9$, and the $9a^2$ on both sides cancel to make a nice linear equation. From here, solve for $a = \frac{3}{2}$.
+\end{exrboxed}
+
+A problem can seem to signal something deeper. It could be that $S_{3n}/S_n$ is a ratio that doesn't depend on $n$, or that given a functional equation, then the value of $f(x+1) - f(x)$ is always the same. Generally it's of the form, \textit{given this condition, all the solutions share this property}. We don't actually have to show that this is true---we can just take it for granted, find a specific solution, and then use that.
+
+Not really much to talk about here again, so here are problems:
+
+\begin{mdframed}[style=exmdbox]
+
+\begin{problem}[AMC 10B 2002/20]
+  Let $a$, $b$, and $c$ be real numbers such that $a-7b+8c=4$ and $8a+4b-c=7$. What is the value of $a^2-b^2+c^2$?
+\end{problem}
+
+\begin{problem}[PUMaC Algebra B 2014/2]
+  The function $f : \ZZ^{\geq 0} \to \ZZ^{\geq 0}$ satisfies, for all $n \in \ZZ^{\geq 0}$, $f(f(n)) + f(n) = 2n + 3$. Find $f(2014)$.
+\end{problem}
+
+\begin{problem}[Mathira Elims 2018/2]
+  Each square of a $69 \times 69$ board is colored either maroon or green. Each maroon square not adjacent to an edge is adjacent exactly 5 green squares out of its 8 neighbors. Each green square not adjacent to an edge is adjacent to exactly 4 maroon squares out of its 8 neighbors. Find the number of maroon squares.
+\end{problem}
+
+\begin{problem}
+  Complex numbers $x$, $y$, and $z$ satisfy $|x| = |y| = |z| = xyz = 1$ and $x + y + z = 0$. Find $|(2 + x)(2+y)(2+ z)|$. \hint{\ref{h:8}}
+\end{problem}
+
+% https://artofproblemsolving.com/community/c5h1193487p5832230
+\begin{problem}[AMC 10A 2016/23]
+  A binary operation $\diamondsuit$ has the properties that $a\,\diamondsuit\, (b\,\diamondsuit \,c) = (a\,\diamondsuit \,b)\cdot c$ and that $a\,\diamondsuit \,a=1$ for all nonzero real numbers $a, b,$ and $c$. (Here $\cdot$ represents multiplication). The solution to the equation $2016 \,\diamondsuit\, (6\,\diamondsuit\, x)=100$ can be written as $\tfrac{p}{q}$, where $p$ and $q$ are relatively prime positive integers. What is $p+q?$
+\end{problem}
+
+\end{mdframed}
+
+\subsubsection{Take the boundaries}
+
+For geometry problems in particular, this means \bluebf{taking degenerate cases}. This doesn't happen a lot, since often the conditions in a geometry problem make it so that there's only one possible configuration. But if there are multiple possible configurations, we can exploit this. If you have a point $P$ that is allowed to be anywhere on a segment $AB$, why not take the limit as $P = A$ or $P = B$? If your triangle can be anything, make it equilateral, or make all the points collinear.
+
+\begin{exboxed}[HMMT Guts 2017/6]
+  Let $ABCD$ be a convex quadrilateral with $AC = 7$ and $BD = 17$. Let $M$, $P$, $N$, $Q$ be the midpoints of sides $AB$, $BC$, $CD$, $DA$, respectively. Compute $MN^2 + PQ^2$.
+\end{exboxed}
+
+Note that we can pick any quadrilateral where $AC = 7$ and $BD = 17$, so it's best to pick something that's easy to work with. One option is a rhombus, where all the sides are equal. In a rhombus, the diagonals are perpendicular bisectors, and $MN$ and $PQ$ both pass through their intersection, which we'll call $O$.
+
+\begin{center}
+\begin{asy}
+size(5cm);
+pair A = (0, 7);
+pair B = (-17, 0);
+pair C = (0, -7);
+pair D = (17, 0);
+pair M = (A + B)/2;
+pair P = (B + C)/2;
+pair N = (C + D)/2;
+pair Q = (D + A)/2;
+pair O = origin;
+
+draw(A--B--C--D--cycle);
+draw(M--N); draw(P--Q);
+draw(A--C); draw(B--D);
+
+label("$A$", A, dir(A));
+label("$B$", B, dir(B));
+label("$C$", C, dir(C));
+label("$D$", D, dir(D));
+label("$M$", M, dir(M));
+label("$P$", P, dir(P));
+label("$N$", N, dir(N));
+label("$Q$", Q, dir(Q));
+label("$O$", O, 2*dir(120));
+\end{asy}
+\end{center}
+
+So we only have to find $MO$. But look at right triangle $ABO$. Then $MO$ is the segment joining the midpoint of the hypotenuse to the opposite vertex, which means it's half the length of the hypotenuse.
+
+\begin{exrboxed}
+  Show that $MO = \sqrt{\left(\frac{7}{2}\right)^2 + \left(\frac{17}{2}\right)^2}$. Don't simplify it yet. Note that the final answer is $MN^2 + PQ^2$, and as $MN = PQ = 2MO$. From here, show that the final answer is $\frac{7^2 + 17^2}{2} = 169$.
+\end{exrboxed}
+
+Of course, there's an even simpler solution than using a rhombus---just make all the four points collinear! Let the points $B$, $A$, $C$, and $D$ be on a line in that order. Then we can pick $BA = 5$, $AC = 7$, and $CD = 5$, and this will still satisfy the conditions.
+
+\begin{center}
+\begin{asy}
+size(10cm);
+pair B = (0, 0);
+pair A = (4.8, 0.5);
+pair C = (12.2, -0.5);
+pair D = (17, 0);
+pair Bp = (-25, 0) + (0, 0);
+pair Ap = (-25, 0) + (5, 0);
+pair Cp = (-25, 0) + (12, 0);
+pair Dp = (-25, 0) + (17, 0);
+
+draw(A--B--C--D--cycle);
+draw(Ap--Bp--Cp--Dp--cycle);
+
+label("$A$", A, N);
+label("$B$", B, W);
+label("$C$", C, S);
+label("$D$", D, E);
+label("$A$", Ap, N);
+label("$B$", Bp, W);
+label("$C$", Cp, S);
+label("$D$", Dp, E);
+\end{asy}
+\end{center}
+
+The only condition that it doesn't satisfy, technically, is convexity. But we can wiggle around the points so that it becomes convex. The answer would still be the same; the lengths can't change \textit{that} much.
+
+\begin{exrboxed}
+  Show that, in this case, $MN^2 + PQ^2$ is still $169$.
+\end{exrboxed}
+
+In fact, it might be even easier to just take $A = B$, $AC = 7$, and then $CD = 10$, which would still satisfy the conditions. Either way, here are problems:
+
+\begin{mdframed}[style=exmdbox]
+
+\begin{problem}[AIMO 2019/6]
+  Let $ABCD$ be a parallelogram. Point $P$ is on $AB$ produced such that $DP$ bisects $BC$ at $N$. Point $Q$ is on $BA$ produced such that $CQ$ bisects $AD$ at $M$. Lines $DP$ and $CQ$ meet at $O$. If the area of parallelogram $ABCD$ is $192$, find the area of triangle $POQ$.
+\end{problem}
+
+\begin{problem}[HMMT Geometry 2017/4]
+  Let $ABCD$ be a convex quadrilateral with $AB = 5$, $BC = 6$, $CD = 7$, and $DA = 8$. Let $M$, $P$, $N$, $Q$ be the midpoints of sides $AB$, $BC$, $CD$, $DA$, respectively. Compute $MN^2 - PQ^2$.
+\end{problem}
+
+\begin{problem}
+  Triangle $ABC$ satisfies $AB = 5$, $BC = 6$, and $CA = 7$. Let point $P$ lie on side $BC$. Let $I_1$ and $I_2$ be the incenters of triangles $ABP$ and $ACP$, respectively. The circumcircle of triangle $PI_1I_2$ passes through a fixed point $X$ as $P$ varies on side $BC$. Find the ratio $BX/CX$. \hint{\ref{h:9}}
+\end{problem}
+
+\newpage
+\phantom{.}
+\vspace{-3pt}
+
+\begin{problem}[HMMT Geometry 2018/6]
+  Let $ABC$ be an equilateral triangle of side length $1$. For a real number $0 < x < 0.5$, let $A_1$ and $A_2$ be the points on side $BC$ such that $A_1B = A_2C = x$, and let $T_A = \triangle AA_1A_2$. Construct the triangles $T_B = \triangle BB_1B_2$ and $T_C = \triangle CC_1C_2$ similarly.
+
+  There exist positive rational numbers $b, c$ such that the region of points inside all three triangles $T_A$, $T_B$, $T_C$ is a hexagon with area
+  $$\frac{8x^2 - bx + c}{(2-x)(x+1)} \cdot \frac{\sqrt3}{4}.$$
+  Find $(b, c)$.
+\end{problem}
+
+\end{mdframed}
+
+\subsection{Using choices}
+
+We can sometimes use answer choices, if they exist, to solve the problem. We can \bluebf{eliminate incorrect answers} through modulo or divisibility considerations; the answer should be even, the denominator should be divisible by $7$, it should be a rational number times $\sqrt{17}$. We can also eliminate incorrect choices through estimating size.
+
+And of course, we can also just \bluebf{substitute each of the choices to see which one works}. Most of the time problems are written to avoid this from happening, but sometimes there are problems where we can just do this.
+
+\begin{exboxed}[AMC 12 2001/5]
+What is the product of all positive odd integers less than 10000?
+
+\vspace{6pt} \noindent $\textbf{(A)}\ \dfrac{10000!}{(5000!)^2}\qquad
+\textbf{(B)}\ \dfrac{10000!}{2^{5000}}\qquad
+\textbf{(C)}\ \dfrac{9999!}{2^{5000}}\qquad
+\textbf{(D)}\ \dfrac{10000!}{2^{5000} \cdot 5000!}\qquad
+\textbf{(E)}\ \dfrac{5000!}{2^{5000}}$
+\end{exboxed}
+
+Here, let's use a divisibility consideration. Let's say that $p$ is some prime slightly less than $5000$. Then in the final answer, a factor of $p$ should appear once, and exactly once, because it's a prime. So let's look at all the choices and count how many times $p$ appears as a factor:
+
+\begin{enumerate}
+  \item[(A)] It appears in the numerator twice, once for $p$ and once for $2p$. It also appears in the denominator twice: once each in $5000!$. So it doesn't appear in (A) as a factor at all.
+
+  \item[(B)] It appears in the numerator twice, and it doesn't appear in the denominator at all. So it appears twice, and this answer has to be wrong.
+
+  \item[(C)] Like (B), it appears in the numerator twice, and doesn't appear in the denominator at all, so this choice has to be wrong.
+\end{enumerate}
+\vspace{-12pt}
+\begin{exrboxed}
+  Finish the analysis for the remaining two choices (D) and (E). Does this eliminate one of them as incorrect? If not, what other considerations can you use to get the correct answer?
+\end{exrboxed}
+
+Often, tricks that eliminate answer choices won't eliminate all of them as cleanly as in this one. But divisibility and estimation are great ways to sanity check an answer anyway, so it's good practice for those.
+
+\begin{mdframed}[style=exmdbox]
+
+\begin{problem}[PMO 2016 Qualifying I.10]
+  In triangle $ABC, BD$ is the angle bisector of $\angle ABC$, and $AB = BD$. Moreover, $E$ is a point on $AB$ such that $AE = AD$. If $\angle ACB = 36\dg$, find $\angle BDE$.
+
+\vspace{6pt} \noindent $\textbf{(A)}\ 24\dg \qquad
+\textbf{(B)}\ 21\dg \qquad
+\textbf{(C)}\ 18\dg \qquad
+\textbf{(D)}\ 15\dg \qquad
+\textbf{(E)}\ 12\dg$
+\end{problem}
+
+\begin{problem}[AMC 12B 2016/17]
+  In $\triangle ABC$, $AB=7$, $BC=8$, $CA=9$, and $\overline{AH}$ is an altitude. Points $D$ and $E$ lie on sides $\overline{AC}$ and $\overline{AB}$, respectively, so that $\overline{BD}$ and $\overline{CE}$ are angle bisectors, intersecting $\overline{AH}$ at $Q$ and $P$, respectively. What is $PQ$?
+
+\vspace{6pt} \noindent $\textbf{(A)}\ 1 \qquad
+\textbf{(B)}\ \dfrac{5}{8}\sqrt{3} \qquad
+\textbf{(C)}\ \dfrac{4}{5}\sqrt{2} \qquad
+\textbf{(D)}\ \dfrac{8}{15}\sqrt{5} \qquad
+\textbf{(E)}\ \dfrac{6}{5}$
+
+\end{problem}
+
+\begin{problem}[AMC 10A 2019/18]
+  For some positive integer $k$, the repeating base-$k$ representation of the (base-ten) fraction $\dfrac{7}{51}$ is $0.\overline{23}_k = 0.232323..._k$. What is $k$?
+
+  \vspace{6pt} \noindent $\textbf{(A) } 13 \qquad\textbf{(B) } 14 \qquad\textbf{(C) } 15 \qquad\textbf{(D) } 16 \qquad\textbf{(E) } 17$
+\end{problem}
+
+\begin{problem}[AMC 12A 2018/24]
+  Alice, Bob, and Carol play a game in which each of them chooses a real number between 0 and 1. The winner of the game is the one whose number is between the numbers chosen by the other two players. Alice announces that she will choose her number uniformly at random from all the numbers between 0 and 1, and Bob announces that he will choose his number uniformly at random from all the numbers between $\frac{1}{2}$ and $\frac{2}{3}.$ Armed with this information, what number should Carol choose to maximize her chance of winning?
+
+  \vspace{6pt} \noindent $
+  \textbf{(A) }\dfrac{1}{2}\qquad
+  \textbf{(B) }\dfrac{13}{24} \qquad
+  \textbf{(C) }\dfrac{7}{12} \qquad
+  \textbf{(D) }\dfrac{5}{8} \qquad
+  \textbf{(E) }\dfrac{2}{3}\qquad
+  $
+\end{problem}
+
+\end{mdframed}
+
+\subsection{Using the answer format}
+
+Ideally, the answer format of a problem shouldn't reveal anything about how to solve it. But when it does, we can abuse the answer format to make a very good guess without actually solving the problem.
+
+\begin{exboxed}[Sipnayan Finals JHS 2018/V/TM]
+  \label{ex:sipnayan}
+  Find the sum $$\displaystyle \sum_{x = 0}^{2018} \del{6x^5 + 45 x^4 + 140x^3 + 225 x^2 + 186x + 63}.$$ Express your answer in the form $a^b - 1$ where $a$ is minimized. % \ans{2020^6 - 1}
+\end{exboxed}
+
+It's likely that $a$ and $b$ are integers. The fact that they want us to minimize $a$ is just to prevent us from submitting, say, $9^2 - 1$ if the answer was $3^4 - 1$. In either case, the answer is something that's very close to a perfect power.
+
+A first good step would be to figure out what $b$ is. Can $b$ be something huge, like $10$? It's unlikely. Remember that if we sum $1 + 2 + \cdots + n$, we get something that grows like $n^2$. Similarly, the sum $1 + 4 + \cdots + n^2$ grows like $n^3$. The largest terms in our sum grow like $1^5 + 2^5 + \cdots + n^5$, which should be around $n^6$. So $b = 6$ would be a good guess.
+
+Now what is $a$? Again, let's estimate the sum, and only care about the largest part: $6\left(1^5 + 2^5 + \cdots + 2018^5\right)$. This is approximately the integral of $6x^5$ from $x = 1$ to $x = 2018$. So we expect it to be around $2019^6$.
+
+\begin{exrboxed}
+  Convince yourself that the answer is larger than $2019^6$ by considering the contribution from the other parts. Using the same integral trick gives a pretty good approximation.
+\end{exrboxed}
+
+Adding in the other parts would give us something slightly above $2019^6$. Since we want $b = 6$, the next thing above $2019^6$ would be $2020^6$.
+
+Could it be $2021^6$? We can check how \textit{much} larger than $2019^6$ we want to go by expanding $(2019 + 1)^6$. In this case, the terms match up quite well with the estimates you'd get from doing integrals. So the answer $2020^6 - 1$ should be pretty convincing, and it is in fact the correct answer.
+
+\begin{exrboxed}
+  You can solve the problem using engineer's induction too. Noting that the answer should be of the form $a^6 - 1$, take the sum up to $x = 0$, then $x = 1$. You should convince yourself that this gives the same answer $2020^6 - 1$ that we did.
+\end{exrboxed}
+
+\begin{mdframed}[style=exmdbox]
+
+\begin{problem}[Mathira 2018/T3-2]
+  We define the Pabibo Najee sequence to consist of positive integers that is determined by the following recursive formula. For $k \ge 2$, $a_k = 2a_{k-1} + 9a_{k-2}$, where $a_0 = 1$ and $a_1 = 2$. Find real numbers $m$ and $n$ such that $m > n$ and $a_k = \dfrac{m^{k+1} - n^{k+1}}{m - n}$ for all natural numbers $k$.
+\end{problem}
+
+\begin{problem}[Sipnayan SHS Elims 2018/V1]
+  Let $s_0 = 6, s_1 = 6,$ and $s_n = 2s_{n-1} + 8s_{n-2}$ for $n \geq 2$. Define $$A_n = \sum_{i=0}^n s_i.$$ Find $A_{2018}$. Express your answer in the form $a^b + c^d$, where $a$, $b$, $c$, and $d$ are positive integers.
+\end{problem}
+
+\begin{problem}[Sipnayan SHS Finals 2017/V/FOP]
+  Lake Nick is an enormous underwater lake enclosing $2017$ islands arranged at the vertices of a regular $2017$-gon. Adjacent islands are joined with exactly two bridges. One day, Spongebob took a wrong bus from Bikini Bottom and ended up in one island in Lake Nick. When Spongebob remembered that the Hash Slinging Slasher was living in the lake, he started to think of destroying all the bridges. If the island he is on has at least one bridge still joined to it, he randomly selects one such bridge, crosses it, and immediately destroys it. Otherwise, he stops. What is the probability that Spongebob destroys all the bridges before he stops? Express your answer in the form $a\del{\dfrac b c}^d$, where $a,b,c,d \in \ZZ^+$ and $b, c$ are prime numbers. \hint{\ref{h:10}} % \ansp{1009\del{\dfrac23}^{2016}}
+\end{problem}
+
+% (Sipnayan SHS Finals 2017/V/FP Sipnayan is now on its $19$th year and based on statistics, it has been found that the number of participants each year is determined by the function $f(x) = 5f(x-1) - 6f(x-2)$. If the number of participants in the first and second year were $210$ and $450$ respectively, how many participants did Sipnayan have this year? Express your answer in the form $a \times b^c + d \times e^f$. % \ansp{90 \times 2^{19} + 10 \times 3^{19}}
+
+\end{mdframed}
+
+\section{Grab bag}
+
+Here are some more problems that are susceptible to some sort of engineering, sorted roughly by how hard they are to engineer.
+
+\begin{mdframed}[style=exmdbox,frametitle={Grab bag}]
+% % n! (asking for it)
+\begin{problem}[HMMT Guts 2017/19]
+  Find (in terms of $n \geq 1$) the number of terms with odd coefficients after expanding the product: $$\prod_{1 \leq i < j \leq n} (x_i + x_j)$$
+  e.g., for $n = 3$ the expanded product is given by $x_1^2x_2 + x_1^2x_3 + x_2^2x_3 + x_2^2x_1 + x_3^2x_1 + x_3^2x_2 + 2x_1x_2x_3$ and so the answer would be $6$.
+\end{problem}
+
+\begin{problem}[Mathira 2019 T10-1]
+  The diagram below shows a grid with $n$ rows, with the $k$th row being composed of $2k-1$ identical equilateral triangles for all $k \in \cbr{1, \ldots, n}$. If there are $513$ different rhombuses each made up of two adjacent smaller triangles in the grid, what must be the value of $n$?
+  \begin{center}
+    \begin{asy}
+      size(3.5cm);
+      int k = 4;
+      pair A = (-0.5, -sqrt(3)/2);
+      void f(pair x) {
+        draw(x--(x+A)--(x+A+(1,0))--x);
+      }
+      void g(pair x) {
+        draw(x--(x+A)--(x+A+(1,0))--x, linetype(new real[] {3,3}));
+      }
+      pair O = (0, 0);
+      for (int i = 0; i < k; ++i) {
+        for (int j = 0; j <= i; ++j) {
+          f(O+(j,0));
+        }
+        O = O + A;
+      }
+      for (int j = 0; j <= k; ++j) {
+        g(O+(j,0));
+      }
+      O = O+A;
+      for (int j = 0; j <= k+1; ++j) {
+        f(O+(j,0));
+      }
+      draw((-0.25,0)--O+A+(-0.25,0));
+      label((O+A)/2 + (-0.5, 0), "$n$");
+    \end{asy}
+  \end{center}
+  \hint{\ref{h:11}}
+\end{problem}
+
+\begin{problem}[Mathira 2017 T12-1]
+  I draw a series of line segments such that $B$, the second endpoint of a line segment $AB$, is the first endpoint of the next line segment $BC$, and $\angle ABC = 120\dg$. $AB$ is the first line segment, $BC$ is the second, $CD$ is the third, $DE$ is the fourth, and so on, with $\angle ABC$, $\angle BCD$, and $\angle CDE$ all equal to $120\dg$ and $\triangle ABC$ overlaps with $\triangle BCD$, $\triangle BCD$ overlaps with $\triangle CDE$ and so on. If every line segment is half of the length of the previous one, the series of line segments eventually becomes a single point $X$. What is the ratio of $AX$ to $AB$? \hint{\ref{h:12}}
+\end{problem}
+
+% [(n-5)/4]/[(n-3)/2]
+\begin{problem}[ARML Individuals 2017/6]
+  A diagonal of a regular $2017$-gon is chosen at random. Compute the probability that the chosen diagonal is longer than the median length of all of the diagonals.
+\end{problem}
+
+\begin{problem}[OMO Spring 2014/25]
+If
+\[
+  \sum_{n=1}^{\infty} \frac{\frac{1}{1} + \frac{1}{2} + \cdots + \frac{1}{n}}{\binom{n+100}{100}} = \frac{p}{q}
+\]
+for relatively prime positive integers $p, q$, find $p + q$.
+\end{problem}
+
+\begin{problem}[AMC 10A 2018/23]
+  Farmer Pythagoras has a field in the shape of a right triangle. The right triangle's legs have lengths 3 and 4 units. In the corner where those sides meet at a right angle, he leaves a small unplanted square $S$ so that from the air it looks like the right angle symbol. The rest of the field is planted. The shortest distance from $S$ to the hypotenuse is 2 units. What fraction of the field is planted?
+  \begin{center}
+  \begin{asy}
+  size(3.5cm);
+  draw((0,0)--(4,0)--(0,3)--(0,0));
+  draw((0,0)--(0.5,0)--(0.5,0.5)--(0,0.5)--(0,0));
+  label("$4$", (2,0), N);
+  label("$3$", (0,1.5), E);
+  label("$2$", (.8,1), E+E);
+  label("$S$", (0,0), NE);
+  draw((0.5,0.5)--(1.4,1.9), dashed);
+  \end{asy}
+  \end{center}
+  \hint{\ref{h:13}}
+\end{problem}
+\end{mdframed}
+
+\begin{mdframed}[style=exmdbox,frametitle={},  frametitlebelowskip = 0pt,splittopskip = 0pt,  innertopmargin = 5pt,]
+
+% guess multiplicative, then find p^n
+\begin{problem}[HMMT Algebra and Number Theory 2019/8]
+  There is a unique function $f : \NN \to \RR$ such that $f(1) > 0$ and such that 
+  $$\sum_{d \mid n} f(d)f\del{\frac nd} = 1$$
+  for all $n \geq 1$. What is $f\del{2018^{2019}}$? \hint{\ref{h:14}}
+\end{problem}
+
+% % n[(n+1)/2]/[n/2]
+% \begin{problem}[HMMT Algebra 2014/7]
+%   Find the largest real number $c$ such that
+%   $$\sum_{i=1}^{101}x_i^2 \geq cM^2$$
+%   whenever $x_1, \ldots, x_{101}$ are real numbers such that $x_1 + \cdots + x_{101} = 0$ and $M$ is the median of $x_1, \ldots, x_{101}$.
+% \end{problem}
+
+% (n+1)/2 - 1/(2^(n+1))
+\begin{problem}[PUMaC Combinatorics A 2018/4]
+  If $a$ and $b$ are selected uniformly from $\cbr{0, 1, \ldots, 511}$ with replacement, the expected number of $1$'s in the binary representation of $a+b$ can be written in simplest form as $\frac mn$. Compute $m + n$.
+\end{problem}
+
+% engineer on 2n+1=2017
+% -(n)/(2n+1)
+\begin{problem}[HMMT Algebra and Number Theory 2017/7]
+  Determine the largest real number $c$ such that for any $2017$ real numbers $x_1, x_2, \ldots, x_{2017}$, the inequality
+  $$\sum_{i=1}^{2016} x_i(x_i + x_{i+1}) \geq c \cdot x^2_{2017}$$
+  holds.
+\end{problem}
+
+\begin{problem}[CMIMC Algebra 2018/7]
+  Compute $\displaystyle \sum_{k=0}^{2017} \dfrac{5 + \cos\del{\frac{\pi k}{1009}}}{26 + 10\cos\del{\frac{\pi k}{1009}}}$. \hint{\ref{h:15}}
+\end{problem}
+
+\end{mdframed}
+
+% (CHMMC 2017 indiv) Deep writes down the numbers 1, 2, 3, . . . , 8 on a blackboard. Each minute after writing down the numbers, he uniformly at random picks some number m written on the blackboard, erases that number from the blackboard, and increases the values of all the other numbers on the blackboard by m. After seven minutes, Deep is left with only one number on the black board. What is the expected value of the number Deep ends up with after seven minutes?
+
+% 7 and 20
+% nontrivial
+% \begin{problem}[HMMT Theme 2017/7]
+% On a blackboard a stranger writes the values of $s_7(n)^2$ for $n=0,1,...,7^{20}-1$, where $s_7(n)$ denotes the sum of digits of $n$ in base $7$. Compute the average value of all the numbers on the board.
+% \end{problem}
+
+% $a_{n+1} = 2a_{n}a_{n-1} - a_{n-2}$,
+% \begin{problem}[HMMT Algebra/NT 2019/10]
+%   The sequence of integers $\{a_i\}_{i = 0}^{\infty}$ satisfies $a_0 = 3$, $a_1 = 4$, and
+% \[a_{n+2} = a_{n+1} a_n + \left\lceil \sqrt{a_{n+1}^2 - 1} \sqrt{a_n^2 - 1}\right\rceil\]for $n \ge 0$. Evaluate the sum
+% \[\sum_{n = 0}^{\infty} \left(\frac{a_{n+3}}{a_{n+2}} - \frac{a_{n+2}}{a_n} + \frac{a_{n+1}}{a_{n+3}} - \frac{a_n}{a_{n+1}}\right).\]
+% \end{problem}
+
+% \begin{problem}[AIME 1989/8]
+%   Assume that $x_1,x_2,\ldots,x_7$ are real numbers such that
+% \begin{align*}x_1+4x_2+9x_3+16x_4+25x_5+36x_6+49x_7&=1\\ 4x_1+9x_2+16x_3+25x_4+36x_5+49x_6+64x_7&=12\\ 9x_1+16x_2+25x_3+36x_4+49x_5+64x_6+81x_7&=123.\end{align*}Find the value of \[16x_1+25x_2+36x_3+49x_4+64x_5+81x_6+100x_7.\]
+% \end{problem}
+
+\section{Hints}
+
+\begin{enumerate}[topsep=2pt,itemsep=-0.7ex,partopsep=1ex,parsep=1ex,leftmargin=0pt]
+\item \label{h:14} When computing $f(p), f(p^2), f(p^3)$, \textit{do not} simplify fractions.
+\item \label{h:9} Let $I$ be the incenter. Moving $P$ to $B$, the circle becomes the one with diameter $BI$.
+\item \label{h:13} If $S$ has side length $s$, the shortest distance in the problem is linear in terms of $s$.
+\item \label{h:5} Find it when the exponent is $1$ by replacing $2013$. Then find it for $2$, then $3$.
+\item \label{h:15} This is tricky. Replacing $1009$ with $n$, notice that the denominators divide $5^{2n} - 1$.
+\item \label{h:7} Engineer on the base. How many are there in base $1$, base $2$, base $3$?
+\item \label{h:4} What's $1/9$ in base $10$?
+\item \label{h:12} Draw a good diagram. Your first reasonable guess is probably right.
+\item \label{h:2} When you have a guess, expand $(1 + 0.5)^n$. Most terms are small and can be ignored.
+\item \label{h:11} Estimate. ``Most'' triangles are part of $3$ rhombi, and each rhombus contains $2$ triangles.
+\item \label{h:6} Replacing $60$ with $n$, the answer has to be cubic in terms of $n$.
+\item \label{h:10} Tricky. Replace $2017$ with $n$ and engineer. Assume $b$ and $c$ are constant over all $n$.
+\item \label{h:1} Replace $1000$ with $n$, $1001$ with $n+1$, and $1000000$ with $n^2$.
+\item \label{h:3} Guessing the sequence is hard. Try again after reading \autoref{sec:sequenceguess}.
+\item \label{h:8} Pick three nice numbers on the unit circle that sum to zero.
+\end{enumerate}
+
+\subsubsection*{Acknowledgments}
+
+Thanks to Ankan Bhattacharya and Vincent Huang for references, David Altizio for suggestions about the introduction, Raymond Feng for a suggestion about \autoref{ex:sipnayan}, and Avi Mehra for typo corrections. If you spot a typo, see an error, have a suggestion, or want to ask a question, feel free to contact me at \mailto{cj@cjquines.com}.
+
+\end{document}

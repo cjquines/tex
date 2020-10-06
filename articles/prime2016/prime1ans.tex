@@ -1,0 +1,149 @@
+\documentclass[10pt,paper=letter]{scrartcl}
+\usepackage[alttitle]{cjquines}
+
+\begin{document}
+
+\title{VCSMS PRIME}
+\subtitle{Session 1: Algebra 1}
+\author{compiled by Carl Joshua Quines}
+\date{September 21, 2016}
+
+\maketitle
+
+\subsubsection*{Domain and range}
+
+\begin{enumerate}
+
+\item Notice that $x^2 - 4x + 1 = (x - 2)^2 - 3$. The minimum is thus $2^{-3}$ and it is unbounded, the range is thus $[1/8, +\infty)$.
+
+\item For the domain, $x^2 - 10x + 29 = (x - 5)^2 + 4 \geq 4$, thus there is no restriction for the square root. The denominator cannot be $0$, thus the radical cannot be $2/5$, but this is impossible. The domain is $(-\infty, +\infty)$.
+
+From above, the radical can be anything in $[2, +\infty)$. The maximum is when the radical is $2$, giving $3/4$. As the radical grows larger, it approaches $0$. The range is $(0, 3/4]$.
+
+\item We have $25 - x^2 - y^2 \geq 0, |x| - y \geq 0$. The first is a circle with radius $5$, the second is an absolute value function. The intersection is a sector with angle $270\dg$, which has area $75\pi/4$.
+
+\item $\floor{x^2 - x - 2}$ will be $0$ if $0 \leq x^2 - x - 2 < 1$. Solving yields $(\dfrac{1-\sqrt{13}}{2}, -1] \cup [2, \dfrac{1+\sqrt{13}}{2})$.
+
+\item For $f$, as $x$ approaches $-\infty$, $3^{-x}$ approaches $+\infty$ and the fraction approaches $2$. As $x$ approaches $+\infty, 3^{-x}$ approaches $0$ and the fraction approaches $1/2$. The range of $f$ is thus $(1/2, 2)$. Similarly the range of $g$ is $(-3, 4)$.
+
+\item Solving for $y$ yields $y = \dfrac{12e^x + 3}{3e^x + 1}$. By a similar argument as number $5, m = 3$. 
+
+\item We have $f^4(x) > 0, f^3(x) > 1, f^2(x) > e, f(x) > e^e, x > e^{e^e}$. The domain is $(e^{e^e}, +\infty)$.
+
+\item When $x = a, b, c$, $f$ is $1$. Since the degree of $f$ is at most $2$, and we have three distinct values of $f$, by interpolating, $f(x) = 1$. The range is $\{1\}$.
+
+\end{enumerate}
+
+\subsubsection*{Logarithms}
+
+\begin{enumerate}
+
+\item The sum is $1\times 3 + \cdots + 20 \times 22$. This is equal to $(2^2 - 1) + \cdots + (21^2 - 1)$, which we can evaluate using the sum of squares formula as $3290$.
+
+\item Raising both sides to the base, we have $4 = (x^2 - 3x)^2$. Thus $x^2 - 3x = +2, -2$. We see that the negative case is impossible after substituting in the original equation. Thus $x^2 - 3x = 2$, which has two real roots.
+
+\item We have $\abs{\log_{\frac{1}{2}}\abs{x}} - 1 = 0$. Thus $\log_{\frac{1}{2}}\abs{x} = \pm 1$, or $\abs{x} = \frac{1}{2}, 2$. This has four real solutions, thus the graph crosses the x-axis four times.
+
+\item After noting that $x > 0$ from the $\log_{2014}x$ in the exponent, taking the base-$x$ logarithm of both sides yields $\log_x\sqrt{2014} + \log_{2014}x = 2014$. Substituting $u = \log_{2014}x$ and using the fact that $\log_x\sqrt{2014} = \dfrac{1}{2u}$, we see that $2u^2 - 4028u + 1 = 0$. Suppose that the roots of this are $u_1 = \log_{2014}x_1, u_2 = \log_{2014}x_2$ and thus by Vieta's and the product rule for logarithms we have $u_1 + u_2 = 2014 = \log_{2014}(x_1x_2)$. The product of the roots $x_1$ and $x_2$ to the original equation is thus $2014^{2014}$ which has units digit $6$.
+
+\item Multiplying the three given equations yields $(xyz)^2 = 10^{a+b+c}$, taking the logarithms of both sides yields $\log x + \log y + \log z = \dfrac{a+b+c}{2}$.
+
+\item Note that $a = \log_{14}16 = 4\log_{14}2$. Thus $\log_{14}2 = a/4$. Thus $\log_8 14 = \dfrac{1}{\log_{14} 8} = \dfrac{1}{3\log_{14} 2} = \dfrac{4}{3a}$.
+
+\end{enumerate}
+
+\subsubsection*{Exponents}
+
+\begin{enumerate}
+
+\item a) Note that $4^3 = 2^6$. Equating exponents, $2^x = 6$, and thus $x = \log_2 6$.
+
+b) We see that $x = 1$ is a solution. Equating exponents yields $x = 2$. Thus $x = 1, 2$.
+
+c) Equating exponents, $x^x = x^2$. From b, we have $x = 1, 2$. Thus $x = 1, 2$.
+
+d) Again, we see that $x = 1$ is a solution. Equating exponents yields $x = \pm \sqrt[2010]{2010}$. Thus $x = 1, \pm \sqrt[2010]{2010}$.
+
+\item Taking hundredth roots yields $n^3 > 3^5 = 243$. The smallest integral $n$ that satisfies this is $7$.
+
+\item First, compare $11^{16}$ and $25^{12} = 5^{24}$ by taking the eighth root, reducing the comparison to $11^2$ and $5^3$. It is clear that the former is lesser. Compare $25^{12} = 5^{24}$ and $16^{14} = 2^{56}$ by taking the eighth root, reducing the comparison to $5^3$ and $2^7$. It is clear that the former is lesser. From least to greatest, we have $11^{16}, 25^{12}, 16^{14}$.
+
+\item We factor the LHS as $(9^{2x-1})(9 - 1) = 8\sqrt{3}$, by equating exponents, we have $2x - 1 = \frac{1}{2}$. Thus $(2x - 1)^{2x} = \sqrt{2}/8$.
+
+\end{enumerate}
+
+\subsubsection*{More logarithms}
+
+\begin{enumerate}
+
+\item We see that $2^3 < 3^2,$ thus $2 < 3^{2/3}, \log_3 2 < 2/3$. Since $625^2 < 75^3, 625^{2/3} < 75, 2/3 < \log_{625} 75$. Finally, we see that $\log_{625} 75 = \dfrac{\log_5 75}{4} < \log_5 3$. Thus from least to greatest, we have $\log_3 2, 2/3,$ $\log_{625} 75, \log_5 3$.
+
+\item After solving, we see $x = 1/2$. The infinite geometric series evaluates to $2$.
+
+\item Simplifying, we see that this is equivalent to $1 - \log_a b + 1 - \log_b a$. The minimum value of $\log_a b + \log_b a$ is $2$ by AM-GM, thus the maximum value of the expression is $0$.
+
+\item Simplifying, we see $5^k2^m = 400^n = (5^22^4)^n$. We have $k = 2n, m = 4n$. Since the greatest common divisor must be $1$, we have $n = 1, k = 2, m = 4, k + m + n = 7$.
+
+\item After trial and error, we find $m = 5$ works.
+
+\item Let $u = 5^{\frac{1}{2x}}$. Simplifying, we have $u^2 + 125 < 30u$ which factors into $(u - 5)(u - 25) < 0$, thus $u \in (5, 25)$ and $x \in (1/4, 1/2)$.
+
+\item We have $x \geq 2(x - 1)$, thus $x \leq 2$. But from the argument of $\log (x - 1)$ we have $x > 1$. Combining, we see all $x \in (1, 2]$ work.
+
+\end{enumerate}
+
+\subsubsection*{Floor, ceiling, fractional}
+
+\begin{enumerate}
+
+\item The equation is $2\floor{x} = \floor{x} + \{x\} + 2\{x\}$, which is $\floor{x} = 3\{x\}$. As $\{x\} \in [0, 1),$ the only values for which $3\{x\}$ is an integer is $\{x\} \in \{0, 1/3, 2/3\}$. These give solutions $x = 0, 4/3, 8/3$.
+
+\item Note that $x$ must be nonnegative. We do casework on $\floor{x}$. When $\floor{x} = 0$, clearly $x = 0$. When $\floor{x} = 1$ then $2x(x-1) = 1$, which has solution $\dfrac{1+\sqrt{3}}{2}$. When $\floor{x} = 2$, then $2x(x-2) = 4$, which has solution $1+\sqrt{3}$. If $\floor{x} \geq 3$, then examining the discriminant reveals there is no solution. Thus $x = 0, \dfrac{1+\sqrt{3}}{2}, 1+\sqrt{3}$.
+
+\item In the interval $(1/4^2, 1/4]$, $y$ is $1$, its length is $1/4 - 1/4^2$. In the interval $(1/4^4, 1/4^3]$, $y$ is $3$, its length is $1/4^3 - 1/4^4$. Continuing the pattern, the desired sum is $1/4 - 1/4^2 + 1/4^3 - 1/4^4 + \cdots$, an infinite geometric series with sum $1/5$.
+
+\end{enumerate}
+
+\subsubsection*{Value-finding}
+
+\begin{enumerate}
+
+\item Letting $x = 0$, we see $f(0) = 2$. Similarly, we see $f(7) = 383$. The difference is $381$.
+
+\item We set $f(a) = 1$ and subtract $f(1)$ on both sides. We see that $f(b)^2 = 1$ for all $b$. Thus $f(1) - f(-1)$ can be anything in $\{-2, 0, 2\}$.
+
+\item We substitute $x = 0$ and $x = 3$ to get the system of equations $2f(0) - 2f(3) = -18, -f(3) - 2f(0) = -30$. Solving, we get $f(0) = 7$.
+
+\end{enumerate}
+
+\subsubsection*{Cauchy functional equation}
+
+Note: if we have $f(x+y) = f(x) + f(y)$, the solution from $\QQ \to \RR$ is $f(x) = kx$. Similarly, the solution to $f(x+y) = f(x)f(y)$ is $f(x) = k^x$ and the solution to $f(xy) = f(x) + f(y)$ is $f(x) = \log_k x$.
+
+\begin{enumerate}
+
+\item Letting $y = 0$ in the second equation and cancelling $f(0)$ on both sides yields $f(x) = 0$ for all $x$. Thus $f(\pi^{2013}) = 0$.
+
+\item As per the note, the solution is $f(x) = kx$. We see that $k = 3/2$ and thus $f(2009) = 3013.5$.
+
+\item As per the note, the solution is $f(x) = k^x$. We see that $k = 5$ and $3f(-2) = 3/25$.
+
+\end{enumerate}
+
+\subsubsection*{Other functional equations}
+
+\begin{enumerate}
+
+\item Letting $x = y = 0$ gives $f(0) = 1/2009$. Letting $x = y$ gives $f(x) = \pm 1/2009$. The negative case fails, thus $f(\sqrt{2009}) = 1/2009$.
+
+\item Let $x = 0$ to get $f(-1) = f(y) - 2y - 2$. Let $y = 0$ to get $f(-1) = -1$. Equating gives us $f(y) = 2y + 1$ for all $y$.
+
+\item Let $y = 0$ to get $f(0) = 0$. Let $x = 0$ to get $f$ is odd. Switch $x$ and $y$ and equate to the original, use $f(y-x) = -f(x-y)$; rearrange to get $$f(x+y)/(x+y) = f(x-y)/(x-y).$$ Thus $f(a)/a$ is a constant $k$ for all $a$, and $f(a) = ka$. We have $k = 3/5$ and thus $f(2015) = 1209$.
+
+\item Let $g(x) = (x+2009)/(x-1)$. The given is $x+f(x)+2f(g(x)) = 2010$. Replace $x$ with $g(x)$ to get $g(x) + f(g(x)) + 2f(x) = 2010$. Solving, $f(x) = \dfrac{x^2 + 2007x - 6028}{3x - 3}$.
+
+\item Let $f(0) = a$, set $x = 0$ to get $f(a) = 1$. Set $x = a$ to get $f(1) = 1-a$, set $x = 1$ to get $f(1 - a) = a$. Set $x = 1-a$ to get $f(a) = 1 - a + a^2$. We get either $a = 0, 1$, either of which make a contradiction. Thus no $f$ exists.
+
+\end{enumerate}
+
+\end{document}

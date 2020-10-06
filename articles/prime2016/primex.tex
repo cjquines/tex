@@ -1,0 +1,346 @@
+\documentclass[10pt,paper=letter]{scrartcl}
+\usepackage[alttitle]{cjquines}
+
+\newcommand{\fivech}[5]{
+        \begin{tabular}{*{5}{@{}p{0.19\textwidth}}}
+(A)~#1 & (B)~#2 & (C)~#3 & (D)~#4 & (E)~#5
+        \end{tabular}}
+
+\begin{document}
+
+\title{VCSMS PRIME}
+\subtitle{Session 10: Metasolving}
+\author{compiled by Carl Joshua Quines}
+\date{October 21, 2016}
+
+\maketitle
+
+\subsection*{Best practice}
+
+\begin{enumerate}
+
+\item Reread the question.
+
+\item Work cleanly.
+
+\item Be aware of your time.
+
+\item Check your work.
+
+\item Learn how to guess.
+
+\end{enumerate}
+
+\subsection*{1 \,Reread the question}
+
+\subsubsection*{How to read}
+
+\begin{itemize}
+
+\item The most common source of mistakes is misreading. (``I thought it was $2016$, not $3^{2016}$, I didn't see that it's supposed to be nonzero, I picked the wrong choice.'') Thus, the most efficient way to reduce mistakes is to start by reducing the mistakes from misreading the question.
+
+\item When you first read the question, remember to take note of important details. One of the easiest ways to slip is to mistake an integer for a positive integer, or a complex number for a real number, to ignore bounds for a variable or ignore to read a condition. If you are not making progress on the problem, read it again -- perhaps you missed an important detail somewhere.
+
+\item When answering, make sure to remember all the details given. More often than not, a detail given is important in answering the problem. There are very few exceptions to this, when more information is given than what is needed. In fact, if you didn't use all the information, you should be suspicious and check your work -- perhaps there's a mistake.
+
+\item Once you have an answer, reread the question, even if you understand it completely. Is your answer in the proper format? Is it in the correct units? Does it match up with the choices, if there are any?
+
+\end{itemize}
+
+\subsection*{2 \,Work cleanly}
+
+\subsubsection*{How to write}
+
+\begin{itemize}
+
+\item The next most common error of mistakes is misreading your handwriting. If you thought misreading the question was bad enough, misreading your handwriting is even worse. (``I thought I wrote a $2$ instead of a $5$, wait, where was my work for problem $9$, is this a sine or a cosine?'')
+
+\item Write neatly. This is the correct solution to half of your problems in handwriting. It doesn't have to be very pretty, it just needs to be legible enough for you to understand what you wrote.
+
+\item The reason for legible handwriting is simple enough: you need to understand your own handwriting. When checking your work, you will refer to what you wrote earlier. When choosing the answer, you will refer to your solution. Thus legible handwriting is needed.
+
+\item Make sure your handwriting is unambiguous. For example, you can write the lowercase $L$ as $\ell$ instead of $l$, which is easier to understand if you're writing quickly. Adding the serifs in the digit $1$ also helps. Finally, make sure your $x$ and $y$ look different enough to be differentiable when written quickly.
+
+\end{itemize}
+
+\subsubsection*{Organize}
+
+\begin{itemize}
+
+\item The correct solution to the \emph{other} half of your handwriting problems is organizing your scratch work. Yes, your \emph{scratch work} should be organized as well.
+
+\item Draw boxes on your paper alloted to each problem. Problem $1$ for the first box, problem $2$ for the second, and so on. Or at the very least, indicate with an encircled number which problem is which, and try to keep your scratch work legible. This will help a lot when you're checking your answers later.
+
+\item Do not, \emph{do not} try to cram all of your scratch work in a few pages of paper. You can always ask for more scratch paper, so if your paper is too crowded, don't add even more writing.
+
+\end{itemize}
+
+\subsection*{3 \,Be aware of time}
+
+\subsubsection*{Time management}
+
+\begin{itemize}
+
+\item The principle of time management is trade-off. How much time should you spend solving and how much time should you spend checking your work? Should you use your time to solve this problem or that problem? It is important to make decisions like this quickly and accurately.
+
+\item Make sure you always have a rough idea of how much time is left. Wear a watch, and take note of what time the exam starts and ends. Usually the proctor will write overhead the time left, but it's always nicer to have a reference of how much time is left exactly.
+
+\end{itemize}
+
+\subsection*{4 \,Check your work}
+
+\subsubsection*{Checking}
+
+\begin{itemize}
+
+\item Checking is important. Correcting a mistake is faster and easier than solving a new problem.
+
+\item Your checking method must be fast. Checking your work on one problem is always sacrificing time for the next problem, thus you must have a fast way to check.
+
+\item Mark problems that you are unsure about. That way, you know to spend more time checking problems you are unsure rather than sure about. Also, if you do not have enough time to check all your problems, then check only those you are not sure about.
+
+\item Do not repeat your solutions when you check. Find a different way, use a different method to check. If you use the same method, the tendency is for your brain to follow the same path, and thus repeat the same reasoning, and thus repeat the mistake. If you can't find a different method, find a different order.
+
+\end{itemize}
+
+\subsubsection*{Meta-checking}
+
+\begin{itemize}
+
+\item If you finish the exam early, check your answers.
+
+\item If you have a few minutes left and the next problems are too difficult for you, check your answers.
+
+\item If you have a few minutes left, and you are a super-accurate person who never make mistakes, it is better to continue solving than to waste time checking your answers.
+
+\item If you rarely catch your own mistakes when checking your answers, it doesn't make sense to check.
+
+\item If the contest does not penalize wrong answers, it is best to guess strategically.
+
+\item Remember that correcting an error takes less time than solving a new question. Double-checking your work is usually a more efficient use of your time than proceeding to the next question. Besides, problems that were solved are easier than problems yet to be solved, so finding a mistake is faster than solving a new problem.
+
+\item Try to balance your time. If you are very error-prone, it is better to include more checking time at the end of the exam than to continue solving. On the other hand, if you are accurate, it is better to continue answering, or increase your speed.
+
+\end{itemize}
+
+\subsubsection*{Checking methods}
+
+\begin{itemize}
+
+\item Plugging in the answer is the clearest, simplest method. Use this method whenever possible. In problems such as finding the value of $x$, sometimes plugging in is needed to determine if there are extraneous solutions.
+
+\item Plug in an intermediate result. Sometimes the answer asks for something that you can't plug in -- for example, looking for $(2x+1)^2$ when you solve for $x$ in an equation. In this case, you can't plug in the answer, but you can plug in $x$.
+
+\item Use a different method. For example, complementary counting. If we want to count how many two-digit positive integers that have at least one $7$ as a digit, we can either do it directly (one digit containing $7$, both digits containing $7$\dots) or we can do it indirectly (number of two-digit numbers minus the two-digit numbers without $7$).
+
+\item Use an example. Consider this problem: two non-zero real numbers, $a$ and $b$, satisfy $ab = a-b$. Find a possible value of $a/b + b/a - ab$. If you solved this problem using algebra, it may help to use an example, such as $a = 1, b = 1/2$.
+
+\end{itemize}
+
+\subsection*{5 \,Learn how to guess}
+
+\subsubsection*{Guessing}
+
+\begin{itemize}
+
+\item Eliminating one out of four choices improves your chances from $25\%$ to $33\%$. Eliminating two out of four choices improves it to $50\%$, which is double the initial chances.
+
+\item Guess with caution in an exam that penalizes guessing. For example, in the American Mathematics Competitions, $1.5$ points are awarded if a problem is left blank but $0$ points are awarded if a problem is incorrect. In this case, if you cannot improve your guess, it is better not to guess.
+
+\item Always try to solve the problem without choices first. Sometimes the choices distract from solving the problem. Consider this problem: the sum of four two-digit numbers is $221$, none of the eight digits are $0$ and no two of them are the same. Which of the following is not included among the eight digits?
+
+\fourch
+{$2$}
+{$4$}
+{$6$}
+{$8$}
+
+If you consider the choices, you might be tempted to do it by trial-and-error. But if you consider the problem alone, the idea of divisibility by $9$ is immediate.
+
+\item Get into the mind of the problem-setter. The problem-setter wants to place choices that can confuse and mislead, and answers that are likely to be the result of a miscalculation or error in reasoning. Consider this problem: a digit watch displays hours and minutes with AM and PM. What is the largest possible sum of the digits in the display?
+
+\fourch
+{$17$}
+{$19$}
+{$21$}
+{$23$}
+
+The common mistake is to assume $12:59$ produces the largest sum, leading to the answer $17$. In a problem asking for maximums, the problem-setter will assume that some students will choose a smaller number over a larger one. That means the designers would include this mistake in the choices. Thus it is unlikely that the smallest answer will be correct -- so you should think twice before answering $17$. In this case, the correct answer is the last one, $23$, corresponding to $9:59$.
+
+\end{itemize}
+
+\subsubsection*{Meta-guessing}
+
+\begin{itemize}
+
+\item Consider the following choices:
+
+\fivech
+{$(-2,1)$}
+{$(-1,2)$}
+{$(2,-1)$}
+{$(1,-2)$}
+{$(4,4)$}
+
+The pair $(4,4)$ is a clear outlier. Outliers are most likely not correct choices. If $(4,4)$ were the correct answer, then instead of solving the problem, we can merely use intermediate arguments. For example, if you can argue that both numbers must be positive, or that both numbers must be even, you can get the correct answer without solving the problem -- that would be poor problem design. Thus $(4,4)$ should be eliminated during guessing.
+
+\item Consider the following choices:
+
+\fivech
+{$\dfrac{4}{9}$}
+{$\dfrac{2}{3}$}
+{$\dfrac{3}{2}$}
+{$\dfrac{5}{6}$}
+{$\dfrac{9}{4}$}
+
+Test designers want to create choices that appear correct. They try to anticipate possible mistakes. In this set of choices, the mistake they are hoping is confusing a number for its inverse. In this case, we can eliminate $5/6$, otherwise $6/5$ would be included. A similar example:
+
+\fivech
+{$-2$}
+{$-\dfrac{1}{2}$}
+{$\dfrac{1}{3}$}
+{$\dfrac{1}{2}$}
+{$2$}
+
+The designers probably hope that students will confuse numbers with their inverses and negations. Thus we exclude the choice $1/3$.
+
+\item Sometimes the outlier might hint at the correct answer. Consider these choices:
+
+\fivech
+{$2$}
+{$\dfrac{1}{2}\pi$}
+{$\pi$}
+{$2\pi$}
+{$4\pi$}
+
+The outlier here is $2$, all other choices have $\pi$. The problem designers were probably considering that the student might forget to multiply by $\pi$. Hence the likely correct answer is $2\pi$, the answer we get by multiplying $2$ and $\pi$.
+
+\end{itemize}
+
+\subsubsection*{Educated guessing}
+
+\begin{itemize}
+
+\item The most common method in solving without actually solving is by example. Consider this problem: the difference between the squares of two odd numbers is always divisible by:
+
+\fivech
+{$3$}
+{$5$}
+{$6$}
+{$7$}
+{$8$}
+
+Choose $1$ and $3$ as our odd numbers, we see the difference of the squares is $8$, thus the answer must be the last choice. 
+
+\item Sometimes the choices help in solving the problem. Consider this: two non-zero real numbers, $a$ and $b$, satisfy $ab = a-b$. Find a possible value of $a/b + b/a - ab$.
+
+\fivech
+{$-2$}
+{$-\dfrac{1}{2}$}
+{$\dfrac{1}{3}$}
+{$\dfrac{1}{2}$}
+{$2$}
+
+Seeing the choices, we see that the answer is a number. We plug in $a = 1$ to see that $b = 1/2$ so the answer is $2$. We are sure this is the only answer because only one answer can be correct.
+
+\item Here's another problem: let $a, b, c$ be real numbers such that $a - 7b + 8c = 4$ and $8a + 4b - c = 7$. Find $a^2 - b^2 + c^2$.
+
+\fivech
+{$0$}
+{$1$}
+{$4$}
+{$7$}
+{$8$}
+
+Again, seeing the choices, the answer is a number. Thus we can simply let $c$ be anything, for example, we can let $c = 0$ to reduce it to a linear equation, and then we can compute the answer.
+
+\item Instead of solving the problem, sometimes we can plug in the solutions one-by-one and see which one works. Consider this problem: in triangle $ABC, BD$ is the angle bisector of $\angle ABC$, and $AB = BD$. Moreover, $E$ is a point on $AB$ such that $AE = AD$. If $\angle ACB = 36\dg$, find $\angle BDE$.
+
+\fourch
+{$24\dg$}
+{$18\dg$}
+{$15\dg$}
+{$12\dg$}
+
+The easiest method is to simply plug in each of the answers as $\angle BDE$ and see which one does not result in a contradiction, which gives us the answer.
+
+\end{itemize}
+
+\subsubsection*{Choice elimination}
+
+\begin{itemize}
+
+\item Parity is one way to eliminate wrong answers. Consider the difference between the sum of the first $2003$ even counting numbers and the sum of the first $2003$ odd counting numbers.
+
+\fivech
+{$0$}
+{$1$}
+{$2$}
+{$2003$}
+{$4006$}
+
+Without computation we see the answer must be odd. Thus we can exclude three of the choices already. Parity is also an easy way to check your answers, as outlined below.
+
+\item Partial knowledge is helpful in solving. Consider solving for the number of non-negative integral solutions to $a + b + c = 6$.
+
+\fivech
+{$22$}
+{$25$}
+{$27$}
+{$28$}
+{$29$}
+
+Even if you do not remember the exact formula, you may remember that the answer is a binomial coefficient that involves the number $6$. The only choice that appears in the first $10$ rows of Pascal's triangle is $28$.
+
+\item Estimation is an important tool. Sometimes we do not need an exact answer to eliminate a wide range of choices. Consider this: let $n$ be a 5-digit number, and let $q$ and $r$ be the quotient and remainder, respectively, when $n$ is divided by $100$. For how many values of $n$ is $q+r$ divisible by $11$?
+
+\fivech
+{$8180$}
+{$8181$}
+{$8182$}
+{$9000$}
+{$9090$}
+
+By the meta-guessing rule of removing outliers, we want to remove the last two choices: they are the only two that at least $9000$. We confirm this with a quick estimation: there are $90000$ 5-digit numbers and about $90000/11 = 8182$ of them are divisible by $11$, so we estimate near the first three choices.
+
+\item Sometimes you can eliminate all the choices as to produce the correct answer, without solving the problem. Consider solving for the non-zero value of $x$ that satisfies $(7x)^{14} = (14x)^7$.
+
+\fivech
+{$\dfrac{1}{7}$}
+{$\dfrac{2}{7}$}
+{$1$}
+{$7$}
+{$14$}
+
+This can be solved very quickly: $1/7$ does not work because the left-hand side will become $1$ while the right-hand side will not, $1$ and $7$ cannot work because left-hand side will be odd and the right-hand side will be even, and finally $14$ will make the right side too big. Thus the answer is $2/7$, no solving needed.
+
+\item A final example: suppose we want to know the product of all odd positive integers less than $10000$.
+
+\fivech
+{$\dfrac{10000!}{5000!^2}$}
+{$\dfrac{10000!}{2^{5000}}$}
+{$\dfrac{9999!}{2^{5000}}$}
+{$\dfrac{10000!}{2^{5000}5000!}$}
+{$\dfrac{5000!}{2^{5000}}$}
+
+By the outlier-removal rule, we would remove the middle choices and the last choice, as we suspect that the numerator should be $10000!$. We confirm this: take a prime number and see what power it belongs to the answer. Let's see we have a prime number $p$ that is slightly below $5000$. Then $p$ should appear in the answer exactly once ($2p$ would be even, $3p$ would be too big).
+
+Now we look at the choices. Prime $p$ appears in $5000!$ once as the factor $p$, and it appears in $10000!$ twice as $p$ and $2p$. It appears in choice (A) zero times, in choice (B) and (C) twice, so the answers are either (D) or (E). But we can eliminate choice (E) as it does not contain any odd primes between $5000$ and $10000$, thus the answer is (D), confirming our meta-guess.
+
+\end{itemize}
+
+\subsection*{Quick reminders}
+
+\begin{itemize}
+
+\item The PMO Qualifying Round is tomorrow, October 22. Please come on time. Latecomers will be left behind, for real. Okay, probably not. But don't be late anyway.
+
+\item Don't forget to bring a pen and a pencil. Last year's test required a pencil, best to be safe. And please make our school look decent, and remember to bring sharpeners and erasers, rulers and compasses, or whatever paraphernalia you need -- it's degrading to borrow from one's seatmate.
+
+\item Eat well and gets lots of sleep. Don't get sick (which is what happened to me the first time I joined the PMO, a story that everyone knows now). Worry about schoolwork \emph{after} the PMO -- after all, it's the sembreak.
+
+\end{itemize}
+
+\noindent \emph{Much credits to Tanya Khovanova, of whom much of the material is borrowed from.}
+
+\end{document}

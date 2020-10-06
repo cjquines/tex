@@ -1,0 +1,205 @@
+\documentclass[11pt,paper=letter]{scrartcl}
+\usepackage[wide]{cjquines}
+\usepackage{mathtools}
+
+\begin{asydef}
+void arr(pair s, pair v) {
+  draw(s--(s + 0.8*(v-s) + 0.3*W), arrow=EndArrow(size=3));
+}
+\end{asydef}
+
+\newcommand{\xrightarrowdbl}[2][]{%
+  \xrightarrow[#1]{#2}\mathrel{\mkern-14mu}\rightarrow
+}
+\newcommand{\simm}{\!\sim\,}
+
+\begin{document}
+
+\title{Canonical decomposition and \\ the first isomorphism theorem}
+\subtitle{Tiny Explanations 2}
+\author{Carl Joshua Quines}
+\date{May 11, 2020}
+
+\maketitle
+
+\renewcommand{\thetitle}{Canonical decomposition}
+
+Aluffi's \textit{Algebra Chapter 0} introduces the concept of the canonical decomposition of a function. I'm kind of sad that I've never seen this concept being used anywhere else, because I think it's a nice way to explain the first isomorphism theorem.
+
+Consider such a function like $f: \{1, 2, 3, 4, 5, 6\} \to \{a, b, c, d, e\}$ that looks like this:
+\begin{center}
+\begin{asy}
+size(3cm);
+
+label("$1$", (0, -1), W);
+label("$2$", (0, -2), W);
+label("$3$", (0, -3), W);
+label("$4$", (0, -4), W);
+label("$5$", (0, -5), W);
+label("$6$", (0, -6), W);
+
+label("$a$", (3, -1.5), W);
+label("$b$", (3, -2.5), W);
+label("$c$", (3, -3.5), W);
+label("$d$", (3, -4.5), W);
+label("$e$", (3, -5.5), W);
+arr((0, -1), (3, -1.5));
+arr((0, -2), (3, -1.5));
+arr((0, -3), (3, -3.5));
+arr((0, -4), (3, -4.5));
+arr((0, -5), (3, -4.5));
+arr((0, -6), (3, -4.5));
+\end{asy}
+\end{center}
+This function defines an equivalence relation $\sim$, where two things are equivalent if they get mapped to the same thing. So $1 \sim 2$ because they both get mapped to $a$, and $4 \sim 6$ because they both get mapped to $e$, but $2 \not\sim 3$ because they both get mapped to different things.
+
+Then we can define $A/\simm$, the quotient of $A$ under the equivalence relation, which just consists of the subsets of $A$ that are equivalent to each other. Here, $A/\simm$ would have three elements: $\{1, 2\}$, $\{3\},$ and $\{4, 5, 6\}$. There is a very natural function $A \twoheadrightarrow A/\simm$ that takes the element to the corresponding subset.
+
+Now $f$ factors through $A/\simm$. \textit{Factor through} is a fancy phrase that means we can rewrite $f$ as a composition of two functions that go through the set $A/\simm$. This gives something like this:
+\begin{center}
+\begin{asy}
+size(5cm);
+
+label("$1$", (0, -1), W);
+label("$2$", (0, -2), W);
+label("$3$", (0, -3), W);
+label("$4$", (0, -4), W);
+label("$5$", (0, -5), W);
+label("$6$", (0, -6), W);
+
+label("$\{1,2\}$",   (3.5, -2.5));
+label("$\{3\}$",     (3.5, -3.5));
+label("$\{4,5,6\}$", (3.5, -4.5));
+
+label("$a$", (7, -1.5), W);
+label("$b$", (7, -2.5), W);
+label("$c$", (7, -3.5), W);
+label("$d$", (7, -4.5), W);
+label("$e$", (7, -5.5), W);
+
+arr((0, -1), (3.5, -2.5));
+arr((0, -2), (3.5, -2.5));
+arr((0, -3), (4, -3.5));
+arr((0, -4), (3, -4.5));
+arr((0, -5), (3, -4.5));
+arr((0, -6), (3, -4.5));
+
+arr((4.5, -2.5), (7.25, -1.5));
+arr((4.25, -3.5), (7.25, -3.5));
+arr((4.75, -4.5), (7.25, -4.5));
+\end{asy}
+\end{center}
+The second function here, the one that takes $A/\simm$ to $B$, also splits naturally into two functions. This function factors through the set $\im f$, the image of $f$, which in this case consists of $a$, $c$, and $d$. Our final diagram looks like this:
+\begin{center}
+\begin{asy}
+size(6.5cm);
+
+label("$1$", (0, -1), W);
+label("$2$", (0, -2), W);
+label("$3$", (0, -3), W);
+label("$4$", (0, -4), W);
+label("$5$", (0, -5), W);
+label("$6$", (0, -6), W);
+
+label("$\{1,2\}$",   (3.5, -2.5));
+label("$\{3\}$",     (3.5, -3.5));
+label("$\{4,5,6\}$", (3.5, -4.5));
+
+label("$a$", (7, -2.5), W);
+label("$c$", (7, -3.5), W);
+label("$d$", (7, -4.5), W);
+
+label("$a$", (10, -1.5), W);
+label("$b$", (10, -2.5), W);
+label("$c$", (10, -3.5), W);
+label("$d$", (10, -4.5), W);
+label("$e$", (10, -5.5), W);
+
+arr((0, -1), (3.5, -2.5));
+arr((0, -2), (3.5, -2.5));
+arr((0, -3), (4, -3.5));
+arr((0, -4), (3, -4.5));
+arr((0, -5), (3, -4.5));
+arr((0, -6), (3, -4.5));
+
+arr((4.5, -2.5), (7, -2.5));
+arr((4.25, -3.5), (7, -3.5));
+arr((4.75, -4.5), (7, -4.5));
+
+arr((7, -2.5), (10, -1.5));
+arr((7, -3.5), (10, -3.5));
+arr((7, -4.5), (10, -4.5));
+\end{asy}
+\end{center}
+Now take a moment to think about these three functions, in order. The first one, $A \twoheadrightarrow A/\simm$, is surjective. The second one, $A/\simm \to \im f$, is bijective. And the third one, $\im f \hookrightarrow B$, is injective. Suddenly, we've taken our function and written it as a composition of a surjection, a bijection, and an injection! And it's clear that any function can be decomposed like this:
+\[
+A \xrightarrowdbl{\phantom{xxx}} A/\simm
+\xrightarrow[\phantom{xxx}]{\cong} \im f
+\xhookrightarrow{\phantom{xxx}} B.
+\]
+
+Alright, now, I promised that this is related to the first isomorphism theorem. So let's look at some group homomorphisms:
+
+\begin{example*}
+Let $G$ be the nonzero integers modulo $7$, with the operation of multiplication. This is a group: the identity is $1$, and every element has an inverse, like $3$'s inverse is $5$ because $3 \cdot 5 = 1$.
+
+Now consider the function $\ZZ^+ \to G$ that takes $n$ to $2^n \bmod 7$. To check that this is a homomorphism, it needs to preseve the group operation. The operation of $\ZZ^+$ is addition, and the operation in $G$ is multiplication. And we can check that $a + b$ is taken to $2^a \cdot 2^b$, so this is a homomorphism.
+
+What are the equivalence classes? They're $\{\ldots, -3, 0, 3, 6, \ldots\}$, $\{\ldots, -2, 1, 4, 7, \ldots\}$, and $\{\ldots, -1, 2, 5, 8, \ldots\}$. The image is $2^0$, $2^1$, or $2^2$, which are $1$, $2$, and $4$. The canonical decomposition tells us that each of these equivalence classes correspond to one of these three numbers.
+\end{example*}
+
+\begin{example*}
+Consider the function $\CC^{\times} \to \RR^{\times}$ that takes $z$ to its magnitude. To check this is a homomorphism, it needs to preserve the group operation. But indeed, $ab$ is taken to $|a||b|$. (Note that the first multiplication here is in $\CC$, and the second multiplication here is in $\RR$.)
+
+The equivalence classes are the $z$ that have the same magnitude, which if you plotted them on the complex plane, form a circle centered at the origin. The image is the nonnegative real numbers. The canonical decomposition tells us that the circles centered at the origin correspond to the nonnegative real numbers.
+\end{example*}
+
+We usually like writing $A/\simm$ in a different way. Instead of quotienting by the equivalence relation, we can ``quotient'' by the subsets themselves, since these determine $\sim$ entirely. So to return to our original example, $A/\simm$ can be written as
+\[
+  A/\left(\{1, 2\}, \{3\}, \{4, 5, 6\}\right).
+\]
+Or in the example of $\ZZ^+ \to G$, we can write $\ZZ/\simm$ as
+\[
+  \ZZ/\left(\{\ldots, -3, 0, 3, 6, \ldots\}, \{\ldots, -2, 1, 4, 7, \ldots\},\{\ldots, -1, 2, 5, 8, \ldots\}\right).
+\]
+Or in the example of $\CC^{\times} \to \RR^\times$, we can write $\CC/\simm$ as
+\[
+  \CC/\left(\{|z| = r\} \text{ for } r \in \RR^{+}\right).
+\]
+This can get rather cumbersome. In the case of groups, then, we don't write \textit{all} the equivalence classes; it's enough to write one equivalence class. But which one do we pick? Well, because we're working with groups, there's a natural distinguished element---the identity! So is it just enough to pick the equivalence class with the identity?
+
+\begin{example*}
+Let's return to the example of $\ZZ^+ \to G$. If we knew that $\{\ldots, -3, 0, 3, 6, \ldots\}$, or $3\ZZ$, was the equivalence class with the identity, does that determine the other equivalence classes? Intuitively, just from looking at this set, the natural other classes are $\{\ldots, -2, 1, 4, 7, \ldots\}$ and $\{\ldots, -1, 2, 5, 8, \ldots\}$, which you get from taking $3\ZZ$ and adding something, like $3\ZZ + 1$, or $3\ZZ + 2$.
+\end{example*}
+
+\begin{example*}
+What about the other example, the one from $\CC^{\times} \to \RR^{\times}$? Here, the equivalence class with the identity is $|z| = 1$, the unit circle, which we'll write as $T$. Then you get any other equivalence class by multiplying $T$ with some element in $\CC^{\times}$. For example, $5T$ is all the complex numbers with magnitude $5$, which happens to be the same as $(3 + 4i)T$.
+\end{example*}
+
+Because the equivalence class with the identity is clearly pretty special, it has a name: $\ker f$, the kernel of $f$. It's the equivalence class of $A/\simm$ that contains the identity, or equivalently, the subset of $A$ that gets sent to the identity in $B$.
+
+We just saw that for groups, $\ker f$ determines all the other equivalence classes in $A/\simm$. To find them, we simply take $\ker f$, and add or multiply the other elements in $A$ with it. Because $\ker f$ is enough to describe all the equivalence classes, instead of writing $A/\simm$, we can (and usually do) write $A/\ker f$:
+\[
+A \xrightarrowdbl{\phantom{xxx}} A/\ker f
+\xrightarrow[\phantom{xxx}]{\cong} \im f
+\xhookrightarrow{\phantom{xxx}} B.
+\]
+So in the $\ZZ^+ \to G$ example, where the kernel was $3\ZZ$, the multiples of $3$:
+\[
+\ZZ^+ \xrightarrowdbl{\phantom{xxx}} \ZZ/3\ZZ
+\xrightarrow[\phantom{xxx}]{\cong} \{1, 2, 4\}
+\xhookrightarrow{\phantom{xxx}} G.
+\]
+And in the $\CC^\times \to \RR^\times$ example, where the kernel was $T$, the elements of $\CC$ with magnitude $1$:
+\[
+\CC^\times \xrightarrowdbl{\phantom{xxx}} \CC/T
+\xrightarrow[\phantom{xxx}]{\cong} \RR^+
+\xhookrightarrow{\phantom{xxx}} \RR^\times.
+\]
+And finally, the middle function here, the one that's the bijection---that's the first isomorphism theorem! There's a bit of work here to show that all of these things are well-defined, in particular with the claim ``$\ker f$ determines all the equivalence classes,'' but that's best left for a textbook. (It's not entirely clear, because not all subgroups are the kernel of some homomorphism.)
+
+So this gives us two ways to think of $G/H$. First, it's the equivalence classes you get when you take $H$ and multiply it with elements in $G$. This is the perspective that the notation $G/H$ suggests: you're dividing $G$ into $H$-sized equivalence classes. And second, it's $\im f$, where $f$ is a homomorphism from $G$ with $H$ as the kernel. Both perspectives are useful. Useful examples to think about: $\RR/\ZZ$, and $\QQ/\ZZ$.
+
+Similarly, if you have a group homomorphism $f : G \to H$, it's always a good idea to think: what's $\ker f$? What's $G/\ker f$? Which subgroup of $H$ is it?
+
+\end{document}
