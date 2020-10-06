@@ -1,0 +1,126 @@
+\documentclass[11pt,paper=letter]{scrartcl}
+\usepackage[titlingx]{cjquines}
+
+\begin{document}
+
+\title{Compass and ruler}
+\author{Carl Joshua Quines}
+\date{June 7, 2019}
+
+\maketitle
+
+\noindent With a compass and a ruler, here are two ``classical'' constructions. Two of these are from Sharygin, because Sharygin almost always has a compass-and-ruler construction problem.
+
+\begin{enumerate}
+  \item Construct a triangle given three segments: the first has the same length of one of its sides, the second has the same length as the altitude to that side, and the third has the same length as its circumradius. % draw BC, then O = (B,R)\cap(C,R), then (ABC), then a line parallel to BC with distance altitude
+
+  \item (Sharygin) Construct points $X$ and $Y$ on sides $AB$ and $BC$, respectively, of triangle $ABC$ so that $AX = BY$ and $XY \parallel AC$.% (Draw bisector BY1, then line Y1Y parallel to side AB (we assume that Y lies on BC). Now, it is obvious how to construct point X)
+
+  \item (Sharygin) Let $AP$ and $BQ$ be altitudes of acute-angled triangle $ABC$. Using a compass and a ruler, construct a point $M$ on side $AB$ such that $\angle AQM = \angle BPM$. % (QPM) is tangent to AB)
+\end{enumerate}
+
+\noindent Still with a compass and ruler, here are some slightly different kinds of constructions:
+
+\begin{enumerate}[resume]
+  % \item Construct the tangent to a point on an incomplete circular arc. % PARALLEL
+
+  \item Given a segment of length $7\sqrt3$, construct a segment of length $\sqrt7$. % POP
+
+  % \item Construct a triangle congruent to a given one, and whose sides pass through three given points. % Let ABC be the triangle, MNP be the points. Construct a point C' such that <MC'N = <C. 
+
+  \item Given three concurrent lines, construct a triangle with those lines as angle bisectors. % Pick A on l1. Reflect over l2 and l3; this is line BC.
+
+  \item Disect a given $19\dg$ angle into $19$ equal parts. % 361 = 1 mod 360
+
+  \item Construct a heptagon given the midpoints of its sides. % reflect 7 times / parallelograms
+
+  \item Construct an equilateral triangle whose vertices lie on three given parallel lines. % Pick a point A on the first line l1. Rotate l2 about A through 60d, \cap l3 = C, then find B.
+\end{enumerate}
+
+\noindent With slightly different tools, we can construct other things too. We assume that no matter what tools we have, we can always:
+\begin{itemize}
+  \item Mark the intersections of two objects drawn, and
+  \item Mark an arbitrary point on a given object or on the plane.
+\end{itemize}
+
+\noindent Then:
+
+\begin{enumerate}[resume]
+  \item With an unmarked, infinite two-sided ruler, construct the midpoint of a given segment.
+
+  \item Given a regular unit hexagon and a ruler, construct a segment of length (a) $2019$, (b) $\dfrac1{2019}$, (c) $\sqrt{2019}$.
+
+  \textbf{Extension:} For which $n$ can we construct segments of the length $\sqrt{n}$? These are exactly the integers $n$ where we can write $n = a^2 - ab + b^2$ for some integers $a, b$. These are closely related to the \href{https://en.wikipedia.org/wiki/Eisenstein_integer}{Eisenstein integers}, numbers of the form $a + b\omega$, where $\omega$ satisfies $\omega^3 = 1$ and $\omega \neq 1$.
+
+  \item Construct a segment joining two points with only a ruler shorter than their distance. % Let us draw through point A two rays p and q that form a small angle inside which point B lies (the rays can be constructed by replacing the ruler). Let us draw through point B segments P Q1 and P1Q (Fig. 93). If P Q < 10 cm and P1Q1 < 10 cm, then we can construct point O at which lines P Q and P1Q1 intersect.
+
+  % \item Two non-parallel lines drawn on a sheet of paper intersect at a point $P$ outside the sheet. Given a point $O$ on neither line, with only a ruler, construct the line $OP$. % DESARGUES: Let P be a vertex of a triangle PQR with Q and R on the two given lines e and f. Take D on QR extended, E on RP extended, and let DE meet QP (extended) at F. For any Q' on e, let DQ' meet j at R', and let ER' meet FQ' at P'. Then PP is the desired line through P.
+
+  \item (Prasolov) An angle is drawn on a sheet of paper. Using only the corner of a rectangular metal sheet, draw its bisector.
+  % first reflect, then use thales's theorem
+
+  \item (Half of ELMO 2018/3) Let $A$ be a point in the plane, and $\ell$ a line not passing through $A$. Evan has a special compass which has the ability to draw a circle through three distinct noncollinear points. Construct the reflection of $A$ over $\ell$.
+
+  \item (Prasolov) Take a coin, trace its circumference, and choose a point on it. Using the coin, we can construct the point's antipode.
+\end{enumerate}
+
+\subsubsection*{Hints}
+
+\begin{enumerate}
+  \item To use the altitude, draw a line $\ell$ perpendicular to the side $m$. Draw a circle centered on $\ell \cap m$ with radius the altitude. Let it intersect $\ell$ at point $P$. Then draw a line through $P$ perpendicular to $\ell$.
+
+  \item Draw angle bisector $BZ$, then line $ZY$ parallel to $AB$.
+
+  \item Choose $M$ such that $(QPM)$ is tangent to $AB$.
+
+  \item Lots of different ways to do this; one way is power of a point.
+
+  \item Pick a point $A$ on the first line. Reflect it over the other two lines.
+
+  \item Modulo $360\dg$.
+
+  \item All you have to do is construct a parallelogram!
+
+  \item Pick a point $A$ on the first line. Rotate the whole configuration $60\dg$ about $A$, and overlay it on the original diagram.
+
+  \item In triangle $ABC$, let $E$ and $F$ be on $AC$ and $AB$ such that $EF \parallel BC$. Let $X = BE \cap CF$. What is $AX \cap BC$?
+
+  \item Construct the triangular grid.
+
+  \item Draw two rays through the first point $A$ such that point $B$ is contained within the two rays, and the rays form a sufficiently small angle. Pick points $P$, $P'$ on the first ray, $Q$, $Q'$ on the second ray, such that $PQ' \cap P'Q = B$. Use $PQ \cap P'Q'$.
+
+  \item First figure out how to reflect a point over another point. Then use Thales's theorem.
+
+  \item Invert about the circle.
+
+  \item Let $\omega_1$ be the initial circle, and $A_1$ be the given point. Draw a circle $\omega_2$ through $A_1$, and let $A_2 = \omega_1 \cap \omega_2$. Draw a circle $\omega_3$ through $A_2$, and let $A_3 = \omega_2 \cap \omega_3$. Draw $\omega_4$ through $A_3$, and let $B_1, A_4 = \omega_1 \cap \omega_3$. Finally, draw $\omega_5$ through both $B_1$ and $A_4$. The desired point is $\omega_1 \cap \omega_5$.
+\end{enumerate}
+
+\subsubsection*{References}
+
+Yaglom's Geometric Transformations I is the source for problems 5, 7, and 8. Problems 1, 6, 9, 11, 12, 14 are taken from Prasolov's \href{http://e.math.hr/afine/planegeo.pdf}{Problems in Plane and Solid Geometry}. Pretty much all the problems here are folklore anyway.
+
+\end{document}
+
+% In triangle ABC, given lines lb and lc containing the bisectors of angles B and C, and the foot L1 of the bisector of angle A. Restore triangle ABC.
+
+% Solution. Let I be the common point of lb and lc. Then IL1 is the bisector of angle A. Thus we know the angles between the bisectors of the triangle and therefore we know the angles of the triangle. Construct an arbitrary triangle A′B′C′ with the same angles, find its incenter I′, construct on the lines lb, lc the segments IB′′ = I′B′, IC′′ = I′C′ and pass the line through L1 parallel to B′′C′′. This line meets lb, lc at the vertices B, C of the sought triangle. The construction of the vertex A is now evident.
+
+% Let AP and BQ be altitudes of acute-angled triangle ABC. Using a compass and a ruler, construct a point M on side AB such that ∠AQM = ∠BPM. (
+
+% Let ABC be an acute-angled triangle. Construct points A′, B′, C′ on its sides BC, CA, AB such that:
+% - A′B′ ∥ AB;
+% - C′C is the bisector of angle A′C′B′;
+% - A′C′ + B′C′ = AB.
+
+% Let L be a common point of CC′ and A′B′. Then BC′/AC′ = A′L/B′L =A′C′/B′C′ and since A′C′ + B′C′ = AB we obtain that BC′ = C′A′, AC′ = ′B′. Thusthe reflections of C′in AC and BC lie on A′B′ and line CC′is symmetric to the altitudefrom C about the correspondent bisector i.e. CC′ passes through the orthocenter of thegiven triangle 
+
+% Construct $ \triangle ABC $ proceeding from the following elements : $ h_{b}, h_{c} , m_{a} $ (Let $w$ be the circle with $AD=m_a$ as diameter; $E,F\in w$ such that $DE=h_b/2,DF=h_c/2$, $E'$ is the mirror of $E$ about $D, B\in AF$ and $BE'\parallel AE,C=AE\cap BD.$)
+
+% Given three points $O,I$, and $E$ in the plane construct a triangle such that its circumcenter is at $O$, its incenter is at $I$, and one of its excenters is at $E$. (1) Let the midpoint of $IE$ by $M$.
+% 2) Draw a circle centered at $O$ which passes through $M$. Call this circle $\Omega$.
+% 3) Extend line $MI$ to meet $\Omega$ again at $A$.
+% 4) Draw a circle centered at $M$ which passes through $I$. Call this circle $\omega$.
+% 5) Circles $\omega$ and $\Omega$ should intersect at two points. Call these intersections $B$ and $C$.)
+
+% Let $AB$ and $CD$ be nonintersecting chords of a circle and let $K$ be a point on $CD$. Construct (with straightedge and compass) a point $P$ on the circle such that $K$ is the midpoint of the part of segment $CD$ lying inside triangle $ABP$.

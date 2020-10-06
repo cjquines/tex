@@ -1,0 +1,44 @@
+\documentclass[11pt,paper=letter]{scrartcl}
+\usepackage[alttitle]{cjquines}
+
+\begin{document}
+
+\title{Spelling out numbers}
+\author{Carl Joshua Quines}
+\date{May 12, 2017}
+
+\maketitle
+
+\begin{enumerate}
+  \item Warm-up (NIMO April 2017, Michael Tang) Find $f(4\,000)^2 + f(40\,000)^2 + f(400\,000)^2$ where $f : \ZZ \rightarrow \ZZ$ is a function satisfying the following conditions:
+  \begin{enumerate}
+    \item For every positive integer $x$, we have $f(-x) = f(x) + 8$.
+    \item For $x \in \{3, 4, \ldots, 9\}$, we have $$f(x+10) - f(10x) = 2 - \frac1{120}(x-3)(x-5)(x-6)(x-7)(x-8)(x-9).$$
+    \item $f(10^{12}) \in \{10, 11\}.$
+    \item For all $x \in \ZZ$ the sequence $$\cbr{f^n(x)}_{n \geq 0} = x, f(x), f(f(x)), f(f(f(x))), \ldots$$ eventually becomes constant at $4$.
+  \end{enumerate}
+  \item On arranging alphabetically:
+  \begin{enumerate}
+    \item We sort the integers from $1$ to $10^{10}$ alphabetically. What number appears first? What number appears last?
+    \item We spell out the integers from $1$ to $99$ to form a list. We then arrange this list alphabetically. Which numbers don't change their places? 
+    \item We call the above the \emph{alphabetical permutation} of a list. For which $n$ do the integers from $1$ to $n$ have a fixed point in their alphabetical permutation?
+  \end{enumerate}
+  \item Not having letters:
+  \begin{enumerate}
+    \item What's so special about this sequence: $2, 4, 6, 30, 32, 34, 36, \ldots$?
+    \item The above sequence is called the \emph{eban} sequence, because it consists of all the numbers without the letter `e' when spelled out. Show that all eban numbers are even.
+    \item Similarly, the \emph{oban} numbers are those without the letter `o'. What's the largest oban number? How many oban numbers are there?
+    \item We can define \emph{aban}, \emph{iban} and \emph{uban} numbers similarly. Of the numbers from $1$ to $1000$, which appears most often: aban, eban, iban, oban or uban numbers?
+    \item Here is the beginning of the list of natural numbers without the digit $4$: $1, 2, 3, 5, 6, 7, 8, 9, \ldots$ What's the difference between this list and the list of uban numbers?
+    \item What's the largest iban number? How many iban numbers are there?
+  \end{enumerate}
+  \item Having letters:
+  \begin{enumerate}
+    \item What's the smallest number that contains all the vowels? What about all the vowels and the letter `y'?
+    \item What's the largest number with no repeated letters?
+    \item What's the largest number which contains every vowel exactly once?
+    \item Is the consonant to vowel ratio of a number unbounded? If not, which number achieves the maximum?
+  \end{enumerate}
+\end{enumerate}
+
+\end{document}

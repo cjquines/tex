@@ -1,0 +1,136 @@
+\documentclass[11pt,paper=letter]{scrartcl}
+\usepackage[alttitle]{cjquines}
+
+\begin{document}
+
+\title{Angle chasing}
+\author{Carl Joshua Quines}
+\date{March 24, 2019}
+
+\maketitle
+
+\subsubsection*{Warm-ups}
+
+\begin{enumerate}
+  \item Do twenty push-ups. (This is a warm-up, but does not involve angle chasing.)
+
+  \item In quadrilateral $WXYZ$ with perpendicular diagonals, we are given $\angle WZX = 30\dg$, $\angle XWY = 40\dg$, and $\angle WYZ = 50\dg$. Compute $\angle WXY$.
+
+  \item (Orthic triangle) In triangle $ABC$, let $D$, $E$, and $F$ denote the feet of the altitudes from $A$, $B$, and $C$, respectively. Let $H$ be the orthocenter of triangle $ABC$.
+  \begin{enumerate}
+    \item Identify six cyclic quadrilaterals with vertices among $\cbr{A, B, C, D, E, F, H}$.
+
+    \item Show that $\triangle AEF \sim \triangle ABC$. What about other triangles?
+
+    \item Prove that $H$ is the incenter of triangle $DEF$. 
+
+    \item Let $X$ be the reflection of $H$ over $BC$. Show that $X$ lies on $(ABC)$.
+
+    \item Let $Y$ be the reflection of $H$ over the midpoint of $BC$. Show that $AY$ is a diameter of $(ABC)$.
+  \end{enumerate}
+\end{enumerate}
+
+\subsubsection*{Lecture}
+
+\begin{enumerate}
+  \item A reminder of cyclic quadrilaterals and tangent circles
+
+  % \item changing concurrence to collinearity: (IMO 1959) Point $E$ lies on side $BC$ of a square $ABCD$. Square $BFGE$ is constructed outside $ABCD$. Prove that the lines $AE$, $CF$, and $DG$ concur. % let P = AE cap CF. Prove (ABCP). Prove (EPGF).
+
+  % \item tangent circles: In parallelogram $ABCD$, $AC > BD$. Let $P$ be a point on $AC$ such that $BCDP$ is cyclic. Prove that $BD$ is tangent to $(ADP)$.
+
+  % \item In triangle $ABC$, $AC = BC$. Point $M$ is the midpoint of $AB$. Point $D$ lies on line $CM$. Let $K$ and $L$ be the feet of the perpendiculars from $D$ and $C$ onto $BC$ and $AD$, respectively. Prove that $K$, $L$, and $M$ are collinear. % five-fingers, but config issues!
+
+  \item Directed angles
+
+  % what happens in the orthocenter configuration if ABC is obtuse?
+  % cyclic quadrilaterals: <XAY = <XBY or <XAY + <XBY = 180d.
+  % even <AOP + <POB = <AOB fails when P lies outside <AOB.
+  % define dangles as conuterclockwise in terms of lines first
+  % note that <(l, m) + <(m, l) = 180d holds always, but annoying. so take modulo 180d always.
+  % similarly we have <XAY = <XBY implies concyc for both configs, and <AOP + <POB = <AOB always, similary for triangle sum; <ABC + <BCA + <CAB = 0. similarly <XBC = <XBA (for all configs). 
+  % perp is always 90d, whether or not clockwise or counterclockwise
+  % rewriting the proof in terms of directed angles
+  % miquel point as an example
+
+  % \item (Miquel) Points $P$, $Q$, and $R$ are chosen on lines $BC$, $CA$, and $AB$ of a triangle $ABC$. Prove that $(AQR)$, $(BRP)$, and $(CPQ)$ concur.
+
+  % NEVER TAKE HALF OF AN ANGLE
+  % NEVER USE IT IF IT WORKS IN ONLY ONE CONFIG
+
+  \item Incenter--excenter lemma
+
+  % \item In scalene triangle $ABC$, let $K$ be the intersection of the angle bisector of $\angle A$ and the perpendicular bisector of $BC$. Prove that the points $A$, $B$, $C$, $K$ are concyclic.
+  
+  \item Drawing a diagram properly
+
+  \textbf{Required reading}: \href{http://web.evanchen.cc/handouts/Constructions/Constructions.pdf}{Some Notes on Constructing Diagrams}
+
+  \item Geoguessing
+
+  % right angle on intouch chord
+
+  % \item (ISL 2010) Let $ABC$ be an acute triangle with $D$, $E$, and $F$ the feet of the altitudes lying on $BC$, $CA$, and $AB$, respectively. One of the intersection points of the line $EF$ and the circumcircle is $P$. The lines $BP$ and $DF$ meet at point $Q$. Prove that $AP = AQ$. % (APQF)
+
+  % \item (China) A convex quadrilateral $ABCD$ is inscribed in a circle with center $O$. The diagonals $AC$ and $BD$ intersect at $P$. The circumcircles of triangles $ABP$ and $CDP$ intersect again at $Q$. If $O$, $P$, and $Q$ are three distinct points, prove that $OQ$ is perpendicular to $PQ$. % (BQOC)
+\end{enumerate}
+
+\subsubsection*{Angle chasing}
+
+\begin{enumerate}
+  \item Let $ABCDE$ be a convex pentagon such that $BCDE$ is a square with center $O$ and $\angle A = 90\dg$. Prove that $AO$ bisects $\angle BAE$. % five fingers
+
+  \item Two parallel lines are tangent to a circle with center $O$. A third line, also tangent to the circle, meets the two parallel lines at $A$ and $B$. Prove that $AO$ is perpendicular to $OB$.
+
+  \item Let $ABC$ be a triangle and let $AO$ meet $BC$ at $D$. Point $K$ is selected so that $KA$ is tangent to $(ABC)$ and $\angle KCB = 90\dg$. Prove that $KD$ is parallel to $AB$.
+  
+  \item (BAMO 1999) Points $O$, $A$, and $B$ are collinear in that order. Let $P$ be a point on the circle with diameter $AB$. Point $Q$ lies on line $PA$ such that $OQ$ and $OA$ are perpendicular. Prove that $\angle BQP = \angle BOP$.
+
+  \item Let $ABCD$ be a cyclic quadrilateral. Let $M$ be the midpoint of arc $BC$ not containing $A$ or $D$. Let $E$ and $F$ be the intersections of $AM$ and $DM$ with $BC$, respectively. Show that $A$, $E$, $F$, $D$ lie on the same circle. 
+\end{enumerate}
+
+\subsubsection*{Configuration issues}
+
+\begin{enumerate}
+  \item Suppose that the circles $\omega_1$ and $\omega_2$ intersect at distinct points $A$ and $B$. Let $CD$ be any chord on $\omega_1$, and let $E$ and $F$ be the second intersections of the lines $CA$ and $BD$, respectively, with $\omega_2$. Prove $EF$ is parallel to $DC$. % DANGLES easy angle chase
+
+  \item (Tritangent) Let $ABC$ be an acute triangle with altitudes $BE$ and $CF$. Let $M$ be the midpoint of $BC$. Prove that $ME$, $MF$, and the line through $A$ parallel to $BC$ are all tangents to $(AEF)$.
+
+  \item In cyclic quadrilateral $ABCD$, let $I_1$ and $I_2$ denote the incenters of $\triangle ABC$ and $\triangle DBC$, respectively. Prove that $I_1I_2BC$ is cyclic.
+
+  \item (Simson) Let $ABC$ be a triangle and $P$ be a point on $(ABC)$. Let $X$, $Y$, and $Z$ be the feet of the perpendiculars from $P$ onto $BC$, $CA$, and $AB$, respectively. Prove that $X$, $Y$, and $Z$ are collinear.
+\end{enumerate}
+
+\subsubsection*{Incenter--excenter lemma}
+
+\begin{enumerate}
+  \item (CGMO 2012) Let $ABC$ be a triangle. The incircle of $\triangle ABC$ is tangent to $AB$ and $AC$ at $D$ and $E$, respectively. Let $O$ be the circumcenter of $\triangle BCI$. Prove that $\angle ODB = \angle OEC$. % by I-E, A-I-O, but ADO cong AEO.
+
+  \item (Nine-point) Let $ABC$ be a triangle with orthocenter $H$. Let $D$, $E$, $F$ be the altitudes from $A$, $B$, $C$ to the opposite sides. Show that the midpoint of $AH$ lies on $(DEF)$.
+
+  \item (IMO 2006) Let $ABC$ be a triangle with incenter $I$. A point $P$ in the interior of the triangle satisfies $\angle PBA + \angle PCA = \angle PBC + \angle PCB$. Show that $AP \geq AI$, with equality if and only if $P = I$. % P also lies on i-e circle
+
+  \item (JBMO 2010) Let $AL$ and $BK$ be angle bisectors of scalene triangle $ABC$. The perpendicular bisector of $BK$ intersects line $AL$ at $M$. Point $N$ lies on line $BK$ such that $LN$ is parallel to $MK$. Prove that $LN = NA$. % geoguessing: M is an i-e point, N is an i-e point
+
+  \item (IMO 2002) Let $BC$ be a diameter of circle $\Omega$ center at $O$. Let $A$ be a point of $\Omega$ such that $\angle AOB < 120\dg$. Let $D$ be the midpoint of arc $AB$ which does not contain $C$. The line through $O$ parallel to $DA$ meets the line $AC$ at $I$. The perpendicular bisector of $OA$ meets $\Omega$ at $E$ and at $F$. Prove that $I$ is the incenter of triangle $CEF$. % equiv to showing that i-e center is A
+\end{enumerate}
+
+\subsubsection*{Geoguessing}
+
+\begin{enumerate}
+  \item (IMO 2004) Let $ABC$ be an acute scalene triangle. The circle with diameter $BC$ intersects the sides $AB$ and $AC$ at $M$ and $N$, respectively. Denote by $O$ the midpoint of the side $BC$. The bisectors of $\angle BAC$ and $\angle MON$ intersect at $R$. Prove that $(BMR)$ and $(CNR)$ intersect at a point on $BC$. % (AMNR), then tritangent
+
+  \item (Russia 1996) Points $E$ and $F$ are given on the side $BC$ of a convex quadrilateral $ABCD$ (with $E$ closer than $F$ to $B$). It is known that $\angle BAE = \angle CDF$ and $\angle EAF = \angle FDE$. Prove that $\angle CAF = \angle EDB$. % (AEFD) from statement, then show opp angles in ABCD supp
+
+  \item (Iran 2004) Let $ABCD$ be a cyclic quadrilateral. The perpendiculars to $AD$ and $BC$ at $A$ and $C$ respectively meet at $M$, and the perpendiculars to $AD$ and $BC$ at $D$ and $B$ meet at $N$. If the lines $AD$ and $BC$ meet at $E$, prove that $\angle DEN = \angle CEM$. % (EBDN), (EACM)
+
+  % \item In triangle $ABC$, points $D$ and $E$ are located on the side $BC$ such that $AD$ is an altitude and $AE$ is an angle bisector. The point $M$ on $AE$ is such that $BM$ is perpendicular to $AE$ and the point $N$ on $AC$ is such that $EN$ is perpendicular to $AC$. Prove that the points $D$, $M$, and $N$ are collinear. % (ABDM), (ADEN), wts <BDM + <NDC = 0.
+
+  \item (IMO 2013) Let $ABC$ be an acute triangle with orthocenter $H$, and let $W$ be a point on the side $BC$, between $B$ and $C$. The points $M$ and $N$ are the feet of the altitudes drawn from $B$ and $C$, respectively. $\omega_1$ is the circumcircle of triangle $BWN$ and $X$ is a point such that $WX$ is a diameter of $\omega_1$. Similarly, $\omega_2$ is the circumcircle of triangle $CWM$ and $Y$ is a point such that $WY$ is a diameter of $\omega_2$. Show that the points $X$, $Y$, and $H$ are collinear. % let w1 cap w2 = P. Then (AMNP), but <APH = 90d, but also <XPW = 90d.
+
+  \item (NIMO 2013) Let $ABC$ be a triangle with orthocenter $H$ and let $M$ be the midpoint of $BC$. Denote by $\omega_B$ the circle passing through $B$, $H$, and $M$, and denote by $\omega_C$ the circle passing through $C$, $H$ and $M$. Lines $AB$ and $AC$ meet $\omega_B$ and $\omega_C$ again at $P$ and $Q$, respectively. Rays $PH$ and $QH$ meet $\omega_C$ and $\omega_B$ again at $R$ and $S$, respectively. Prove that $M$, $R$, $S$ are collinear. % by Miquel, (APHQ). also <HBA + <BAC = 90d. So <BPS = <BHS = <PHS + <BHP = <PHQ + <BHP = <PAQ + <BHP = <PAQ - (<HPB + <PBH) = <BAC - (<HPB + <ABH) = <BAC + <BPH + <HBA = 90d + <BPH. but <BPS - <BPH = <BPS + <HPB = <HPS, so <HPS = 90d, so <HMS = 90d, so <HMR = 90d, so <HMS = <HMR, so MRS.
+
+  \item (EGMO 2012) Let $ABC$ be an acute-angled triangle with circumcenter $\Gamma$ and orthocenter $H$. Let $K$ be a point on $\Gamma$ on the other side of $BC$ from $A$. Let $L$ be the reflection of $K$ in the line $AB$, and let $M$ be the reflection of $K$ in the line $BC$. Let $E$ be the second point of intersection of $\Gamma$ with $(BLM)$. Show that the lines $KH$, $EM$, and $BC$ concur.
+\end{enumerate}
+
+\end{document}

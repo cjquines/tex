@@ -1,0 +1,149 @@
+\documentclass[11pt,paper=letter]{scrartcl}
+\usepackage[alttitle]{cjquines}
+
+\begin{document}
+
+\title{Synthetic trigonometry}
+\author{Carl Joshua Quines}
+\date{May 10, 2019}
+
+\maketitle
+
+\noindent We'll find the values of $\sin x\dg$ for common values of $x$ without using any trigonometric identities.
+
+\begin{enumerate}
+  \item (Warm-ups) Finding $\sin 30\dg$, $\sin 45\dg$, and $\sin 60\dg$:
+  \begin{enumerate}
+    \item Let $\triangle ABC$ satisfy $AB = BC$ and $\angle ABC = 90\dg$. Use this triangle to determine $\sin 45\dg$.
+    \item Let $\triangle ABC$ be equilateral, and let $D$ be the foot from $A$ to $BC$. Use $\triangle ABD$ to determine $\sin 30\dg$ and $\sin 60\dg$.
+  \end{enumerate} 
+  \item Finding $\sin 15\dg$ and $\sin 75\dg$:
+  \begin{enumerate}
+    \item Triangle $ABC$ has a right angle at $B$ and satisfies $\angle CAB = 15\dg$. Let $D$ be on side $AB$ such that $AD = DC$. Find $\angle DCA$, $\angle BCD$, and $\angle CDB$.
+    \begin{center}
+      \begin{asy}
+size(9cm);
+pair A = (0, 0);
+pair B = (2+sqrt(3), 0);
+pair C = (2+sqrt(3), 1);
+pair D = (2, 0);
+pair origin = (A+C)/2;
+
+draw(A--B--C--A);
+draw(D--C);
+
+dot("$A$", A, dir(A-origin));
+dot("$B$", B, dir(B-origin));
+dot("$C$", C, dir(C-origin));
+dot("$D$", D, dir(D-origin));
+      \end{asy}
+    \end{center}
+    \item Suppose $BC = 1$. Find $DB$, $DC$, and $AD$.
+    \item Show that $\sqrt{8 + 4\sqrt{3}} = \sqrt a + \sqrt b$, for some positive integers $a$ and $b$. Find $CA$.
+    \item Prove that $\sin 15\dg = \frac1c\del{\sqrt a - \sqrt b}$, for some positive integers $a$, $b$, and $c$. Similarly, find $\sin 75\dg$. Do these make sense with the half-angle formula?
+    \item Find $\tan 75\dg$. It should be in the form $a + \sqrt b$, for some positive integers $a$, $b$. This is an easy number to memorize, so I use this to derive $\sin 75\dg$ and $\cos 75\dg$ when I need to.
+  \end{enumerate}
+  \item Finding $\sin 22.5\dg$ and $\sin 67.5\dg$:
+  \begin{enumerate}
+    \item Let $ABCD$ be a rectangle with $AB = 1$ and $BC = \sqrt2$. Let $E$ be on side $BC$ such that $AD = DE$. Find $\angle ADE$, $\angle EAD$, and $\angle BAE$.
+    \begin{center}
+      \begin{asy}
+size(5cm);
+pair A = (0, 0);
+pair B = (0, -1);
+pair D = (sqrt(2), 0);
+pair C = B+D;
+pair E = C-(1, 0);
+pair origin = (A+C)/2;
+
+draw(A--B--C--D--A--E--D);
+
+dot("$A$", A, dir(A-origin));
+dot("$B$", B, dir(B-origin));
+dot("$D$", D, dir(D-origin));
+dot("$C$", C, dir(C-origin));
+dot("$E$", E, dir(E-origin));
+      \end{asy}
+    \end{center}
+    \item Find $BE$ and $AE$. 
+    \item Prove that $\sin 22.5\dg = \frac1c\del{a - \sqrt b}$, for some positive integers $a$, $b$, and $c$. Similarly, find $\sin 67.5\dg$. Do these make sense with the half-angle formula?
+    \item Find $\tan 67.5\dg$. Like $\tan 75\dg$, it should be in the form $a + \sqrt b$, for some positive integers $a$, $b$. This is also the number I use to derive $\sin 67.5\dg$ and $\cos 67.5\dg$.
+    \item The number $\tan 67.5\dg$ is known as the \emph{silver ratio}. Suppose that two positive numbers $a$ and $b$ satisfy
+    $$\frac{2a+b}{a} = \frac ab.$$
+    Show that $\frac ab = \tan 67.5\dg$.
+    \item (\faBolt) Consider the \emph{Pell sequence} $0, 1, 2, 5, 12, \ldots$, where each term is the sum of twice the previous term and the term before that. The formula for the $n$th term is $$\frac{\tan^n 22.5\dg + \tan^n 67.5\dg}{2\sqrt2}.$$ Do the first few terms agree with this formula? Show that the ratio of consecutive terms approaches $\tan 67.5\dg$.
+  \end{enumerate}
+  \item (\faBolt) Finding $\sin 18\dg$, $\sin 36\dg$, $\sin 54\dg$, and $\sin 72\dg$:
+  \begin{enumerate}
+    \item In $\triangle ABC$ with $AB = AC = 1$, point $D$ is on side $AC$ such that $CB = BD = DA$. Show that $\angle BAC = 36\dg$. 
+\begin{center}
+  \begin{asy}
+size(5cm);
+pair A = dir(90.0);
+pair B = dir(234.0);
+pair C = dir(306.0);
+pair D = OP(Circle(B,abs(B-C)),A--C);
+
+draw(A--B--C--A);
+draw(B--D);
+
+dot("$A$", A, dir(A-origin));
+dot("$B$", B, dir(B-origin));
+dot("$C$", C, dir(C-origin));
+dot("$D$", D, dir(D-origin));
+  \end{asy}
+\end{center}
+    \item Show that $\triangle ABC \sim \triangle BCD$. 
+    \item Suppose $BC = x$. Use the previous similarity to prove that $\frac{AB}{BC} = \frac{BC}{CD}$. Then use the quadratic formula to solve for $x$.
+    \item Use the Law of Cosines on $\triangle ABC$ to find $\cos 36\dg$. It should be of the form $\frac1c\del{a + \sqrt b}$, for some positive integers $a$, $b$, and $c$. Use the Law of Cosines again to find $\cos 72\dg$.
+    \item The number $2\cos 36\dg$ is known as the \emph{golden ratio}, and is usually denoted as $\varphi$. Suppose that two positive numbers $a$ and $b$ satisfy
+    $$\frac{a+b}{a} = \frac ab.$$
+    Show that $\frac ab = \varphi$. Its ``conjugate'', $2\cos 72\dg$, is typically denoted as $\psi$.
+    \item (\faBolt) Consider the \emph{Fibonacci sequence} $0, 1, 1, 2, 3, \ldots$, where each term is the sum of the two previous terms. The formula for the $n$th term is $\frac1{\sqrt5}\del{\varphi^n - \psi^n}$. Do the first few terms agree with this formula? Show that the ratio of consecutive terms approaches $\varphi$.
+  \end{enumerate}
+  \pagebreak
+  \item Here's a different approach than the Law of Cosines to find $x$:
+  \begin{enumerate}
+    \item Let $ABCDE$ be a regular pentagon. Explain why $AC = AD = BD$.
+    \begin{center}
+      \begin{asy}
+size(5cm);
+pair A = dir(90.0);
+pair B = dir(162.0);
+pair C = dir(234.0);
+pair D = dir(306.0);
+pair E = dir(18.0);
+
+draw(A--B--C--D--E--A);
+draw(B--D--A--C);
+
+dot("$A$", A, dir(A-origin));
+dot("$B$", B, dir(B-origin));
+dot("$C$", C, dir(C-origin));
+dot("$D$", D, dir(D-origin));
+dot("$E$", E, dir(E-origin));
+      \end{asy}
+    \end{center}
+    \item If $ABCD$ is a cyclic quadrilateral, \emph{Ptolemy's theorem} states that
+    $$AC \cdot BD = AB \cdot CD + BC \cdot AD.$$
+    In regular pentagon $ABCDE$, suppose that $AC = AD = BD = 1$. Use Ptolemy's theorem to find $AB$.
+    \item Show that $\triangle ACD$ is the triangle in the previous problem. From here, we see how the golden ratio is related to regular pentagons.
+  \end{enumerate}
+  \item Some applications:
+  \begin{enumerate}
+    \item (AMC 10B 2014/22) In rectangle $ABCD$, $AB = 20$ and $BC = 10$. Let $E$ be a point on $CD$ such that $\angle CBE = 15\dg$. What is $AE$?
+    \item (AIME 1991/11) Twelve congruent disks are placed on a circle $C^{}_{}$ of radius 1 in such a way that the twelve disks cover $C^{}_{}$, no two of the disks overlap, and so that each of the twelve disks is tangent to its two neighbors. The sum of the areas of the twelve disks can be written in the from $\pi(a-b\sqrt{c})$, where $a,b,c^{}_{}$ are positive integers and $c^{}_{}$ is not divisible by the square of any prime. Find $a+b+c^{}_{}$.
+    \item (AMC 12B 2018/16) The solutions to the equation $(z+6)^8=81$ are connected in the complex plane to form a convex regular polygon, three of whose vertices are labeled $A,B,$ and $C$. What is the least possible area of $\triangle ABC?$
+    \item (AMC 10B 2015/22) In the figure shown below, $ABCDE$ is a regular pentagon and $AG=1$. What is $FG + JH + CD$?
+    \begin{center}
+      \begin{asy}
+        size(5cm);
+        pair A=(cos(pi/5)-sin(pi/10),cos(pi/10)+sin(pi/5)), B=(2*cos(pi/5)-sin(pi/10),cos(pi/10)), C=(1,0), D=(0,0), E1=(-sin(pi/10),cos(pi/10)); pair F=intersectionpoints(D--A,E1--B)[0], G=intersectionpoints(A--C,E1--B)[0], H=intersectionpoints(B--D,A--C)[0], I=intersectionpoints(C--E1,D--B)[0], J=intersectionpoints(E1--C,D--A)[0]; draw(A--B--C--D--E1--A); draw(A--D--B--E1--C--A); draw(F--I--G--J--H--F); label("$A$",A,N); label("$B$",B,E); label("$C$",C,SE); label("$D$",D,SW); label("$E$",E1,W); label("$F$",F,NW); label("$G$",G,NE); label("$H$",H,E); label("$I$",I,S); label("$J$",J,W);
+      \end{asy}
+    \end{center}
+  \end{enumerate}
+\end{enumerate}
+
+\emph{Thanks to Konwoo Kim for reviewing a draft.}
+
+\end{document}
