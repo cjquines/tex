@@ -1,5 +1,25 @@
-% cjquines.sty, version 2.0
-% last update 2020-10-06
+% cjquines.sty; last update 2020-10-06
+%
+% MIT License
+% Copyright (c) 2020 Carl Joshua Quines
+%
+% Permission is hereby granted, free of charge, to any person obtaining a copy
+% of this software and associated documentation files (the "Software"), to deal
+% in the Software without restriction, including without limitation the rights
+% to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+% copies of the Software, and to permit persons to whom the Software is
+% furnished to do so, subject to the following conditions:
+
+% The above copyright notice and this permission notice shall be included in all
+% copies or substantial portions of the Software.
+
+% THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+% IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+% FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+% AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+% LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+% OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+% SOFTWARE.
 
 \ProvidesPackage{cjquines}
 
@@ -63,7 +83,8 @@
     \RequirePackage{fontawesome5,relsize}
     \patchcmd{\hyper@link@}
     {{\Hy@tempb}{#4}}
-    {{\Hy@tempb}{#4\ltx@ifempty{#2}{}{{\relsize{-1} \faIcon{external-link-alt}}}}}
+    {{\Hy@tempb}{#4%
+    \ltx@ifempty{#2}{}{{\relsize{-1} \faIcon{external-link-alt}}}}}
     {}{}
   \fi
 
@@ -73,9 +94,13 @@
   \setlist[enumthin]{label=\arabic*.}
 
   \ifcjqparskip
-    \setlist*[itemthin,enumthin]{topsep=0pt,itemsep=0em,partopsep=0pt,parsep=0.4em}
+    \setlist*[itemthin,enumthin]{%
+      topsep=0pt,itemsep=0em,partopsep=0pt,parsep=0.4em
+    }
   \else
-    \setlist*[itemthin,enumthin]{topsep=2pt,itemsep=-0.7ex,partopsep=1ex,parsep=1ex}
+    \setlist*[itemthin,enumthin]{%
+      topsep=2pt,itemsep=-0.7ex,partopsep=1ex,parsep=1ex
+    }
   \fi
 \fi
 
@@ -148,12 +173,15 @@
   \newlength\FHright\setlength\FHright{-1in}
   \newbox\FHline\setbox\FHline=\hbox{\hsize=\paperwidth%
     \hspace*{\FHleft}%
-    \rule{\dimexpr\headwidth-\FHleft-\FHright\relax}{\headrulewidth}\hspace*{\FHright}%
+    \rule{\dimexpr\headwidth-\FHleft-\FHright\relax}%
+    {\headrulewidth}\hspace*{\FHright}%
   }
   \cfoot{}
-  \lhead{\sffamily {\Huge \thetitle}\\\vspace{1em}{\LARGE \theauthor}\vspace{1em}}
+  \lhead{\sffamily {\Huge \thetitle}\\%
+  \vspace{1em}{\LARGE \theauthor}\vspace{1em}}
   \rhead{\fbox{\sffamily \LARGE Day: \textbf{\thepage}}\vspace{1em}}
-  \rfoot{\begin{flushright}\emph{Time limit: 4 hours 30 minutes.\\Each problem is worth 7 points.}\end{flushright}}
+  \rfoot{\begin{flushright}\emph{Time limit: 4 hours 30 minutes.\\%
+  Each problem is worth 7 points.}\end{flushright}}
 \fi
 
 \ifcjqparskip
@@ -163,7 +191,9 @@
     \setlength{\parindent}{0pt}
   }{
     \setparsizes{0pt}{11pt}{\parfillskip}
-    \RedeclareSectionCommands[runin=false,afterskip=0pt]{section,subsection,subsubsection}
+    \RedeclareSectionCommands[runin=false,afterskip=0pt]{%
+      section,subsection,subsubsection
+    }
   }
 \fi
 
@@ -230,7 +260,10 @@
           }%
       }
       \postauthor{\vspace{-20pt} \end{flushleft}}
-      \postdate{\vspace{-25pt} \end{flushleft} \rule{\textwidth}{0.5pt} \vspace{-2.5em}}
+      \postdate{%
+        \vspace{-25pt} \end{flushleft}
+        \rule{\textwidth}{0.5pt} \vspace{-2.5em}
+      }
     \else
       \posttitle{\vspace{-15pt} \end{center}}
       \renewcommand{\subtitle}[1]{%
@@ -423,8 +456,12 @@
 
 \newcommand{\subi}[1]{\phantom{.} \par \noindent \textbf{#1}}
 \newcommand{\bluebf}[1]{{\bfseries \color{DarkMidnightBlue} #1}}
-\newcommand{\hint}[1]{{\color{Black!90} \scriptsize \sffamily \textbf{Hint:} #1}}
-\newcommand{\hints}[1]{{\color{Black!90} \scriptsize \sffamily \textbf{Hints:} #1}}
+\newcommand{\hint}[1]{%
+  {\color{Black!90} \scriptsize \sffamily \textbf{Hint:} #1}
+}
+\newcommand{\hints}[1]{%
+  {\color{Black!90} \scriptsize \sffamily \textbf{Hints:} #1}
+}
 
 \newcommand{\fourch}[4]{
   \begin{tabular}{*{4}{@{}p{0.23\textwidth}}}
