@@ -48,7 +48,6 @@
     etoolbox,
     microtype,
     multicol,
-    relsize,
     sansmath,
     thmtools
   }
@@ -61,7 +60,7 @@
   \ifcjqnoextlink
 
   \else
-    \RequirePackage{fontawesome5}
+    \RequirePackage{fontawesome5,relsize}
     \patchcmd{\hyper@link@}
     {{\Hy@tempb}{#4}}
     {{\Hy@tempb}{#4\ltx@ifempty{#2}{}{{\relsize{-1} \faIcon{external-link-alt}}}}}
