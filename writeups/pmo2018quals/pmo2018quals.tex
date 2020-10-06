@@ -1,0 +1,936 @@
+\documentclass[11pt,paper=letter]{scrartcl}
+\usepackage[parskip]{cjquines}
+
+\newcommand{\ans}{{\sffamily \bfseries Answer.}\;}
+\newcommand{\ansb}[2]{\ans\(\boxed{\text{(#1) #2}}\).}
+\newcommand{\sol}{{\sffamily \bfseries Solution.}\;}
+\newcommand{\soln}[1]{{\sffamily \bfseries Solution #1.}\;}
+\newenvironment{rem}%
+{\noindent \ignorespaces \small \sffamily \sansmath {\bfseries Remark.}}%
+{\ignorespacesafterend}
+
+\begin{document}
+
+\title{PMO 2018 Qualifying Stage}
+\author{Carl Joshua Quines}
+\date{October 28, 2017}
+
+\maketitle
+
+Are any explanations unclear? If so, contact me at \mailto{cj@cjquines.com}. More material is available on my website: \url{https://cjquines.com}.
+
+\textbf{PART I.} Choose the best answer. Each correct answer is worth two points.
+
+\begin{enumerate}[left=0pt]
+
+\item Find $x$ if $\dfrac{79}{125}\left(\dfrac{79+x}{125+x}\right) = 1$.
+
+\fourch
+{$0$}
+{$-46$}
+{$-200$}
+{$-204$}
+
+\ansb{d}{$-204$}
+
+\soln1 Letting $a = 79$ and $b = 125$, and cross multiplying, we get
+\begin{align*}
+\dfrac{a}{b}\left(\dfrac{a+x}{b+x}\right) &= 1 \\
+a(a+x) &= b(b+x) \\
+a^2 + ax &= b^2 + bx \\
+a^2 - b^2 &= -(a - b)x \\
+-(a + b) &= x.
+\end{align*}
+The last step follows from the difference of two squares, because $a^2 - b^2 = (a + b)(a - b)$. Hence $x = -204$.
+
+\soln2 We check each choice. Choice (a) and (b) would give something smaller than $1$, because we'd be multiplying two fractions smaller than $1$. Choice (c) would make the denominator of the second fraction $-75$, so the product can't be $1$, because nothing can cancel the $79$ in the numerator of the first fraction. So the answer must be (d).
+
+\item The line $2x + ay = 5$ passes through $(-2, -1)$ and $(1, b)$. What is the value of $b$?
+
+\fourch
+{$-\dfrac{1}{2}$}
+{$-\dfrac{1}{3}$}
+{$-\dfrac{1}{4}$}
+{$-\dfrac{1}{6}$}
+
+\ansb{b}{$-\dfrac{1}{3}$}
+
+\sol Substitute $(-2, -1)$ to the equation to get $2(-2) + a(-1) = 5$, and solving gives $a = -9$. Hence the line is $2x - 9y = 5$. Substitute $(1, b)$ to get $2(1) - 9(b) = 5$, and solving gives $b = -\dfrac{1}{3}$.
+
+\item Let $ABCD$ be a parallelogram. Two squares are constructed from its adjacent sides, as shown in the figure below. If $\angle BAD = 56\dg$, find $\angle ABE + \angle ADH + \angle FCG$, the sum of the three highlighted angles.
+
+\begin{center}
+\begin{asy}
+size(6cm);
+
+pair A = (0, 0);
+pair B = (-0.3, -0.3);
+pair C = (0, -1);
+pair D = C-B;
+pair Ep = rotate(270, B)*C;
+pair F = Ep+C-B;
+pair H = rotate(90, D)*C;
+pair G = C+H-D;
+
+draw(A--B--C--D--cycle);
+draw(B--Ep--F--C);
+draw(C--G--H--D);
+
+markscalefactor=0.02;
+filldraw(anglemark(A, B, Ep), lightgray, black);
+filldraw(anglemark(F, C, G), lightgray, black);
+filldraw(anglemark(H, D, A), lightgray, black);
+
+dot("$A$", A, N);
+dot("$B$", B, 2*E);
+dot("$C$", C, N + 2*W);
+dot("$D$", D, 2*S);
+dot("$E$", Ep, W);
+dot("$F$", F, S);
+dot("$H$", H, E);
+dot("$G$", G, S);
+\end{asy}
+\end{center}
+
+\fourch
+{$348\dg$}
+{$384\dg$}
+{$416\dg$}
+{$432\dg$}
+
+\ansb{c}{$416\dg$}
+
+\soln1 By looking around vertex $B$, we get $\angle ABE = 360\dg - \angle EBC - \angle CBA$. But $\angle EBC = 90\dg$ as it is part of the square. Similarly, we can look around vertex $C$ and $D$ to get
+\begin{align*}
+\angle ABE &= 360\dg - 90\dg - \angle CBA \\
+\angle ADH &= 360\dg - 90\dg - \angle CDA \\
+\angle FCG &= 360\dg - 90\dg - \angle DCB - 90\dg.
+\end{align*}
+Add the three equations to get
+\begin{align*}
+\angle ABE + \angle ADH + \angle FCG
+&= 360\dg + 360\dg - \angle CBA - \angle CDA - \angle DCB \\
+&= 360\dg + \angle BAD = 416\dg.
+\end{align*}
+The last line follows from the fact that the sum of the angles of $ABCD$ has to be $360\dg$.
+
+\soln2 Since $ABCD$ is a parallelogram, we can find that $\angle DCB = \angle BAD = 56\dg$, and \[\angle CBA = \angle CDA = 180\dg - 56\dg = 124\dg.\] Using the equations from Solution 1, we can solve for $\angle ABE = 146\dg$, $\angle ADH = 146\dg$, and $\angle FCG = 124\dg$. Their sum is $416\dg$.
+
+\begin{rem}
+In Solution 1 we didn't use the fact that $ABCD$ is a parallelogram at all. So the answer is the same no matter what quadrilateral $ABCD$ is, as long as $\angle BAD = 56\dg$ and the angles remain defined.
+\end{rem}
+
+\item For how many integers $x$ from $1$ to $60$, inclusive, is the fraction $\dfrac{x}{60}$ already in lowest terms?
+
+\fourch
+{$15$}
+{$16$}
+{$17$}
+{$18$}
+
+\ansb{2}{$16$}
+
+\sol It would be in lowest terms if $x$ is relatively prime to $60$, so the answer is $\varphi(60)$, where \href{https://en.wikipedia.org/wiki/Euler's_totient_function}{Euler's totient function}. By a well-known formula, this is \[
+  \varphi(60) = 60\left(1 - \frac{1}{2}\right)\left(1 - \frac{1}{3}\right)\left(1 - \frac{1}{5}\right) = 16.
+\]
+
+\begin{rem}
+Compare to \href{https://cjquines.com/files/pmo2020areas.pdf}{PMO 2020 Areas I.14}: ``How many positive rational numbers less than $1$ can be written in the form $\frac{p}{q}$, where $p$ and $q$ are relatively prime integers and $p + q = 2020$?''
+\end{rem}
+
+\item Let $r$ and $s$ be the roots of the polynomial $3x^2 - 4x + 2$. Which of the following is a polynomial with roots $\dfrac{r}{s}$ and $\dfrac{s}{r}$?
+
+\fourch
+{$3x^2 + 2x + 3$}
+{$3x^2 + 2x - 3$}
+{$3x^2 - 2x + 3$}
+{$3x^2 - 2x - 3$}
+
+\ansb{c}{$3x^2 - 2x + 3$}
+
+\soln1 By Vieta's formulas, $r + s = \dfrac{4}{3}$, and $rs = \frac{2}{3}$. The sum of this roots of the polynomial we're looking for would have to be \[
+  \frac{r}{s} + \frac{s}{r} = \frac{r^2 + s^2}{sr} = \frac{(r + s)^2 - 2sr}{sr} = \frac{\left(\frac{4}{3}\right)^2 - 2 \cdot \frac{2}{3}}{\frac{2}{3}} = \frac{2}{3},
+\]
+and the product would have to be $\dfrac{r}{s} \cdot \dfrac{s}{r} = 1$. By Vieta's again, the polynomial would have to be $x^2 - \dfrac{2}{3}x + 1$, times some constant. The only choices that matches is $3x^2 - 2x + 3$.
+
+\soln2 One such polynomial would be $(sx - r)(rx - s)$. This expands to $rsx^2 - (r^2 + s^2)x + rs$. Similar to Solution 1, we can compute $r^2 + s^2 = \dfrac{4}{9}$, so this is $\dfrac{2}{3}x^2 - \dfrac{4}{9}x + \dfrac{2}{3}$. Multiplying through by $9$, we get $6x^2 - 4x + 6$, and then dividing by $2$ gives $3x^2 - 2x + 3$.
+
+\soln3 From the choices, we only need the signs of the coefficients relative to the sign of the $x^2$ term. Because the product of the roots is $1$, the constant should be positive. The sum of the roots is $\dfrac{r^2 + s^2}{rs}$. The numerator is a sum of squares, and is always positive; from the given polynomial, we see that $rs$ is also positive. So the sum is a positive number divided by a positive number, which is also positive. Hence the middle coefficient should be negative, and the only choice that matches is $3x^2 - 2x + 3$.
+
+\item If the difference between two numbers is $a$ and the difference between their squares is $b$, where $a, b > 0$, what is the sum of their squares?
+
+\fourch
+{$\dfrac{a^2 + b^2}{a}$}
+{$2\left(\dfrac{a + b}{a}\right)^2$}
+{$\left(a + \dfrac{b}{a}\right)^2$}
+{$\dfrac{a^4 + b^2}{2a^2}$}
+
+\ansb{d}{$\dfrac{a^4 + b^2}{2a^2}$}
+
+\soln1 Suppose the numbers were $x$ and $y$, where $x > y$. Then $x - y = a$ and $x^2 - y^2 = b$. Factoring $x^2 - y^2$ as $(x - y)(x + y)$, we can divide the two equations to get $x + y = \dfrac{b}{a}$. Squaring two of our equations,
+\begin{align*}
+(x - y)^2 = x^2 - 2xy + y^2 &= a^2 \\
+(x + y)^2 = x^2 + 2xy + y^2 &= \frac{b^2}{a^2}.
+\end{align*}
+Adding them gives $2\left(x^2 + y^2\right) = \dfrac{a^4 + b^2}{a^2}$, and dividing by $2$ gives the answer.
+
+\soln2 From Solution 1, we have $x + y = \dfrac{b}{a}$ and $x - y = a$. Add them and divide by $2$ to get $x = \dfrac{a^2 + b}{2a}$. Subtract them and divide by $2$ to get $y = \dfrac{b - a^2}{2a}$. Then the sum of squares would be \[
+  \left(\frac{a^2 + b}{2a}\right)^2 + \left(\frac{b - a^2}{2a}\right)^2 = \frac{a^4 + 2a^2b + b^2}{4a^2} + \frac{b^2 - 2a^2b + a^4}{4a^2} = \frac{2a^4 + 2b^2}{4a^2} = \frac{a^4 + b^2}{2a^2}.
+\]
+
+\soln3 Let's try an example. Pick $0$ and $1$. Then $a = b = 1$ and the sum of their squares should be $1$. This rules out (a), (b), and (c), so the answer must be (d).
+
+\begin{rem}
+Solution 3 is an excellent example of \href{https://cjquines.com/files/engineering.pdf}{using the answer choices}, which can be more than just ``substituting each answer choice to see which one works''.
+\end{rem}
+
+\item Evaluate the sum \[
+  \sum_{n=3}^{2017} \sin\left(\dfrac{(n!)\pi}{36}\right).
+\]
+
+\fourch
+{$0$}
+{$\dfrac{1}{2}$}
+{$-\dfrac{1}{2}$}
+{$1$}
+
+\ansb{b}{$\dfrac{1}{2}$}
+
+\sol Let's write the first few terms of the sum: \[
+  \sin\left(\frac{\pi}{6}\right) + \sin\left(\frac{2\pi}{3}\right) + \sin\left(\frac{10\pi}{3}\right) + \sin\left(20\pi\right) + \sin\left(140\pi\right) + \cdots.
+\]
+Because of how the factorial works, note how the inner number changes. Multiplying $\dfrac{\pi}{6}$ by $4$ gives $\dfrac{2\pi}{3}$, then multiply by $5$ to get $\dfrac{10\pi}{3}$, then multiply by $6$ to get $20\pi$, and so on. That means that from $20\pi$ onward, we'll be taking the sine of a multiple of $2\pi$, which is $0$. So the sum is just \[
+  \sin\left(\frac{\pi}{6}\right) + \sin\left(\frac{2\pi}{3}\right) + \sin\left(\frac{10\pi}{3}\right) = \frac{1}{2} + \frac{\sqrt{3}}{2} - \frac{\sqrt{3}}{2} = \frac{1}{2}.
+\]
+
+\begin{rem}
+Compare \href{http://pmo.ph/wp-content/uploads/2014/08/19th-PMO-Qualifying-Stage-Questions-and-Answers.pdf}{PMO 2017 Qualifying I.9} ``Evaluate the following sum: $1 + \cos\frac\pi3 + \cos\frac{2\pi}3 + \cos\frac{3\pi}3 + \cdots + \cos\frac{2016\pi}3$'', or \href{https://cjquines.com/files/pmo2020quals.pdf}{PMO 2020 Qualifying II.2} ``Evaluate the sum $\sum_{n=0}^{2019}\cos\left(\dfrac{n^2\pi}{3}\right).$.''
+\end{rem}
+
+\item In $\triangle ABC$, $D$ is the midpoint of $BC$. If the sides $AB$, $BC$, and $CA$ have lengths $4$, $8$, and $6$, respectively, then what is the numerical value of $AD^2$?
+
+\fourch
+{$8$}
+{$10$}
+{$12$}
+{$13$}
+
+\ansb{b}{$10$}
+
+\sol Apply the law of cosines on side $AB$ of $\triangle ABD$ and on side $CA$ of $\triangle ADC$ to get
+\begin{align*}
+AB^2 &= BD^2 + AD^2 - 2 \cdot BD \cdot AD \cdot \cos \angle BDA \\
+CA^2 &= CD^2 + AD^2 - 2 \cdot CD \cdot AD \cdot \cos \angle ADC.
+\end{align*}
+Because $\angle ADC = 180\dg - \angle BDA$, that means $\cos \angle ADC = - \cos \angle BDA$. And since $BD = CD$ as they are midpoints, adding the two equations will cancel the term with cosine. This leaves \[
+  AB^2 + CA^2 = BD^2 + CD^2 + 2AD^2 \implies AD^2 = 10.
+\]
+
+\begin{rem}
+This is a direct application of \href{https://en.wikipedia.org/wiki/Apollonius%27s_theorem}{Apollonius's theorem}, which we just proved. This in turn is a special case of \href{https://en.wikipedia.org/wiki/Stewart%27s_theorem}{Stewart's theorem}.
+\end{rem}
+
+\item Let $A$ be a positive integer whose leftmost digit is $5$ and let $B$ be the number formed by reversing the digits of $A$. If $A$ is divisible by $11$, $15$, $21$, and $45$, then $B$ is \textit{not always} divisible by
+
+\fourch
+{$11$}
+{$15$}
+{$21$}
+{$45$}
+
+\ansb{c}{$21$}
+
+\sol Recall the divisibility test for $11$: we take the alternating sum of digits, and if the result is divisible by $11$, then the number itself must be divisible by $11$. Reversing the digits of a number would either keep this alternating sum the same, or make it negative, which wouldn't affect the divisibility. So $B$ is divisible by $11$.
+
+Similarly, if it is divisible by $45$, then it is divisible by $9$, meaning the sum of its digits is divisible by $9$. So $B$ is also divisible by $9$. And since the leftmost digit of $A$ is $5$, the leftmost digit of $B$ is $5$, so $B$ is also divisible by $5$. As $B$ is divisible by both $5$ and $9$, it is divisible by $45$ as well. And since it is divisible by $45$, it is also divisible by $15$.
+
+The remaining choice is $21$, which must be the answer.
+
+\item In $\triangle ABC$, the segments $AD$ and $AE$ trisect $\angle BAC$. Moreover, it is known that $AB=6,AD=3,AE=2.7,AC=3.8$, and $DE = 1.8$. The length of $BC$ is closest to which of the following?
+
+\begin{center}
+\begin{asy}
+size(5.5cm);
+
+pair A = 0.8*dir(110);
+pair B = dir(200);
+pair C = dir(20);
+pair D = B/4;
+pair Ep = C/4;
+
+draw(A--B--C--cycle);
+draw(D--A--Ep);
+
+dot("$A$", A, N);
+dot("$B$", B, SW);
+dot("$C$", C, E);
+dot("$D$", D, SE);
+dot("$E$", Ep, SE);
+\end{asy}
+\end{center}
+
+\fourch
+{$8$}
+{$8.2$}
+{$8.4$}
+{$8.6$}
+
+\ansb{a}{$8$}
+
+\sol Note that $AD$ bisects $\angle BAE$, and $AE$ bisects $\angle DAC$. So we apply the angle bisector theorem on each triangle. For $\triangle BAE$, we get that \[
+  \frac{AB}{AE} = \frac{BD}{DE} \implies BD = DE \cdot \frac{AB}{AE} = 1.8 \cdot \frac{6}{2.7} = 4.
+\]
+And for $\triangle DAC$, we get that \[
+  \frac{AD}{AC} = \frac{DE}{EC} \implies EC = DE \cdot \frac{AC}{AD} = 1.8 \cdot \frac{3.8}{3} = 2.28.
+\]
+Hence $BC = BD + DE + EC = 4 + 1.8 + 2.28 = 8.08$, so the answer is (a).
+
+\item Let $\{a_n\}$ be a sequence of real numbers defined by the recursion $a_{n+2} = a_{n+1} - a_n$ for all positive integers $n$. If $a_{2013} = 2015$, find the value of $a_{2017} - a_{2019} + a_{2021}$.
+
+\fourch
+{$2015$}
+{$-2015$}
+{$4030$}
+{$-4030$}
+
+\ansb{d}{$-4030$}
+
+\soln1 From the recursion, we get $a_{n+1} = a_n - a_{n-1}$. Substituting this in the original recurion, we get $a_{n+2} = -a_{n-1}$. This means that if we go back three terms, the sign switches:
+\begin{align*}
+a_{2017} - a_{2019} + a_{2021}
+&= -a_{2014} + a_{2016} - a_{2018} \\
+&= a_{2011} - a_{2013} + a_{2015} \\
+&= a_{2011} - a_{2013} - a_{2012} \\
+&= -a_{2013} - \left(a_{2012} - a_{2011}\right),
+\end{align*}
+so the answer is $-2a_{2013} = -4030$.
+
+\soln2 Let's say $a_{2013} = a$ and $a_{2014} = b$ and try to continue the sequence from there:
+\begin{center}
+\begin{tabular}{c|ccccccccc}
+$n$ & 2013 & 2014 & 2015 & 2016 & 2017 & 2018 & 2019 & 2020 & 2021 \\ \hline
+$a_n$ & $a$ & $b$ & $b-a$ & $-a$ & $-b$ & $a-b$ & $a$ & $b$ & $b-a$
+\end{tabular}
+\end{center}
+It just so happens that $a_{2017} - a_{2019} + a_{2021}$ is $-b-a+(b-a) = -2a$. As $a_{2013} = a = 2015$, the answer is $-4030$.
+
+\begin{rem}
+It's also possible to solve this by noting that, since the choices are all numerical, then the value of $a_{2014}$ shouldn't affect the answer. So we can set, say, $a_{2014} = 0$, and then compute the rest of the terms. This is a trick I call \href{https://cjquines.com/files/engineering.pdf}{abusing degrees of freedom}.
+\end{rem}
+
+\item A \textit{lattice point} is a point whose coordinates are integers. How many lattice points are strictly inside the triangle formed by the points $(0, 0), (0, 7),$ and $(8, 0)$?
+
+\fourch
+{$21$}
+{$22$}
+{$24$}
+{$28$}
+
+\ansb{a}{$21$}
+
+\soln1 Consider the rectangle formed by the points $(0, 0), (0, 7), (8, 0), (8, 7)$, and draw the diagonal going from $(0, 7)$ to $(8, 0)$. Because $7$ and $8$ are relatively prime, this diagonal doesn't pass through any lattice points.
+
+\begin{center}
+\begin{asy}
+size(5cm);
+
+draw((0,0)--(10,0), EndArrow(size=7));
+draw((0,0)--(0,9), EndArrow(size=7));
+
+draw((0,7)--(8,7)--(8,0)--cycle);
+
+for (int i = 0; i <= 9; ++i) {
+  for (int j = 0; j <= 8; ++j) {
+    dot((i, j), defaultpen+3);
+  }
+}
+\end{asy}
+\end{center}
+
+By symmetry, the number of lattice points below the diagonal is the same as the number of lattice points above the diagonal. There are $7 \cdot 6 = 42$ points inside the rectangle, and half of them must be in the triangle, so the answer is $21$.
+
+\soln2 The line joining the points $(0, 7)$ and $(8, 0)$ is $7x + 8y = 56$, so a point $(x, y)$ lies below this line if $7x + 8y < 56$. In particular, for a given $x$, we count the positive integers $y$ such that $y < \frac{56 - 7x}{8}$.
+
+When $x = 1$, we need $y < \frac{49}{8}$. So the points $(1, 1)$ through $(1, 6)$ work, so that gives $6$ points. Continuing for $x = 2, 3, 4, 5, 6, 7$, we get $5, 4, 3, 2, 1, 0$ points respectively. The total is $21$.
+
+\soln3 The triangle has area $\dfrac{7 \cdot 8}{2} = 28$. On the boundary, there's $(0, 1)$ through $(0, 7)$, $(1, 0)$ through $(8, 0)$, and $(0, 0)$, making $16$ points in total. (There aren't any points on the diagonal.) By Pick's theorem, the area is $A = i + \frac{b}{2} - 1$, where $i$ is the number of interior lattice points and $b$ is the number of boundary points. So $28 = i + \frac{16}{2} - 1$, and hence $i = 21$.
+
+\item Find the sum of the solutions to the logarithmic equation \[
+  x^{\log x} = 10^{2 - 3 \log x + 2\left(\log x\right)^2},
+\]
+where $\log x$ is the logarithm of $x$ to the base $10$.
+
+\fourch
+{$10$}
+{$100$}
+{$110$}
+{$111$}
+
+\sol Taking the logarithm of both sides, we get
+\begin{align*}
+\log x^{\log x} &= \log 10^{2 - 3 \log x + 2\left(\log x\right)^2} \\
+\left(\log x\right)^{2} &= 2 - 3 \log x + 2\left(\log x\right)^2 \\
+(\log x - 2)(\log x - 1) &= 0.
+\end{align*}
+Hence $\log x = 1, 2$, meaning $x = 10, 100$, and the sum is $110$.
+
+\begin{rem}
+Compare to \href{https://cjquines.com/files/pmo2017areas.pdf}{PMO 2017 Areas I.11}: ``How many real $x$ satisfy $\del{\abs{x^2 - 12x + 20}^{\log x^2}}^{-1 + \log x} = \abs{x^2 - 12x + 20}^{1 + \log(1/x)}?$''
+\end{rem}
+
+\item Triangle $ABC$ has $AB = 10$ and $AC = 14$. A point $P$ is randomly chosen in the interior or on the boundary of triangle $ABC$. What is the probability that $P$ is closer to $AB$ than to $AC$?
+
+\fourch
+{$1/4$}
+{$1/3$}
+{$5/7$}
+{$5/12$}
+
+\ansb{d}{$5/12$}
+
+\sol Let $D$ be the point on $BC$ such that $AD$ bisects $\angle BAC$. Note that all the points on the angle bisector are of the same distance to $AB$ and $AC$. So everything between $AB$ and $AD$ is closer to $AB$, and everything between $AD$ and $AC$ is closer to $AC$.
+
+\begin{center}
+\begin{asy}
+size(4cm);
+
+pair A = dir(110);
+pair B = dir(210);
+pair C = dir(330);
+pair Dp = bisectorpoint(B, A, C);
+pair D = extension(A, Dp, B, C);
+
+draw(A--B--C--cycle);
+draw(A--D);
+
+dot("$A$", A, dir(A-origin));
+dot("$B$", B, dir(B-origin));
+dot("$C$", C, dir(C-origin));
+dot("$D$", D, dir(D-origin));
+\end{asy}
+\end{center}
+
+The probability that a randomly chosen point is closer to $AB$ than to $AC$, then, is the probability that the point is inside $\triangle ABD$. This is the same as the ratio of the area of $\triangle ABD$ to $\triangle ABC$. Because they have the same height, the ratio of their areas is just the ratio of their bases, which is $BD$ to $BC$.
+
+But by the angle bisector theorem, $\dfrac{BD}{DC} = \dfrac{AB}{AC} = \dfrac{5}{7}$. So $\dfrac{BD}{BC} = \dfrac{BD}{BD + DC} = \dfrac{5}{12}$.
+
+\item Suppose that $\{a_n\}$ is a nonconstant arithmetic sequence such that $a_1 = 1$ and the terms $a_3, a_{15}, a_{24}$ form a geometric sequence in that order. Find the smallest index $n$ for which $a_n < 0$.
+
+\fourch
+{$50$}
+{$51$}
+{$52$}
+{$53$}
+
+\ansb{c}{$52$}
+
+\sol Let the common difference be $d$, which means $a_n = 1 + (n-1)d$. Because the three terms form a geometric sequence, that means that $a_{15}^2 = a_3a_{24}$. Hence
+\begin{align*}
+(1 + 14d)^2 &= (1 + 2d)(1 + 23d) \\
+196d^2 + 28d + 1 &= 46d^2 + 25d + 1 \\
+150d^2 + 3d &= 0.
+\end{align*}
+This factors as $3d(50d + 1) = 0$. Since the sequence is nonconstant, $d \ne 0$, and so $d = -\dfrac{1}{50}$. Then \[
+  0 > a_n = 1 + (n-1)d = 1 - \frac{n-1}{50} \implies n > 51,
+\]
+so the smallest $n$ is $52$.
+
+\end{enumerate}
+
+\noindent\textbf{PART II.} Choose the best answer. Each correct answer is worth three points.
+
+\begin{enumerate}[left=0pt]
+
+\item Two red balls, two blue balls, and two green balls are lined up into a single row. How many ways can you arrange these balls such that no two adjacent balls are of the same color?
+
+\fourch
+{$15$}
+{$30$}
+{$60$}
+{$90$}
+
+\ansb{b}{$30$}
+
+\sol Let's count these based on the arrangement of red and blue balls:
+
+\begin{itemthin}
+\item If they're arranged $RRBB$, then the two green balls have to divide the adjacent red and blue balls. This gives $1$ possibility.
+
+\item If it's $RBRB$, then the two green balls can go anywhere, as long as they're not adjacent. We can think of there being five ``slots'' in between the letters that the green balls can go, like $\_R\_B\_R\_B\_$. The green balls can occupy two of these slots, so this gives $\binom{5}{2} = 10$ possibilities.
+
+\item If it's $RBBR$, one green ball has to be in the center, making $RBGBR$. The remaining green ball has four places it can go. So this gives $4$ possibilities.
+\end{itemthin}
+
+Finally, there are $BBRR$, $BRBR$, and $BRRB$, but these are similar to the cases we already have, having $1$, $10$, and $4$ possibilities each. So the total is $2(1 + 10 + 4) = 30$.
+
+\begin{rem}
+The sequence where two is replaced with general $n$ is \href{https://oeis.org/A110706}{OEIS A110706}. A recurrence is provided, but it doesn't seem like there's a nice closed form.
+\end{rem}
+
+\item What is the sum of the last two digits of $403^{10^{10} + 6}$?
+
+\fourch
+{$9$}
+{$10$}
+{$11$}
+{$12$}
+
+\ansb{c}{$11$}
+
+\sol We want to find the value of $403^{10^{10} + 6}$ modulo $100$. We can use \href{https://en.wikipedia.org/wiki/Euler's_theorem}{Euler's theorem} to reduce the exponent here. First, note that \[
+\varphi\left(100\right) = 100\left(1 - \frac{1}{2}\right)\left(1 - \frac{1}{5}\right) = 40,
+\]
+which means that, by Euler's theorem, $3^{\phi(100)} \equiv 3^{40} \equiv 1 \pmod{100}$. So we need to take the exponent, $10^{10} + 6$, modulo $40$. But $10^{10}$ is already divisible by $40$, so this is just $6$. Hence \[
+  403^{10^{10} + 6} \equiv 3^{10^{10} + 6} \equiv 3^{10^{10} + 6 \bmod 40} \equiv 3^6 \equiv 29 \pmod{100},
+\]
+and the answer is $11$.
+
+\item How many strictly increasing finite sequences (having one or more terms) of positive integers less than or equal to $2017$ with an odd number of terms are there?
+
+\fourch
+{$2^{2016}$}
+{$\dfrac{4034!}{\left(2017!\right)^2}$}
+{$2^{2017} - 2017^{2}$}
+{$2^{2018} - 1$}
+
+\ansb{a}{$2^{2016}$}
+
+\soln1 We'd expect that half of the sequences should have an odd number of terms, and half of them should have an even number of terms. Indeed, we can prove this by constructing a bijection.
+
+Let $n_{\text{odd},\,1}$ be the number of sequences with an \textit{odd} number of terms, that begin with $1$. By taking any such sequence, and removing the first term, we get a sequence with an \textit{even} number of terms that \textit{doesn't} begin with $1$. If this number was $n_{\text{even},\,\text{not }1}$, then $n_{\text{odd},\,1} = n_{\text{even},\,\text{not }1}$. So this means that \[
+  n_{\text{odd},\,1} + n_{\text{odd},\,\text{not }1}
+  = n_{\text{even},\,\text{not }1} + n_{\text{odd},\,\text{not }1}.
+\]
+But the right-hand side counts \textit{all} sequences that don't begin with $1$, so we just need to count this. For each of the numbers $2, 3, \ldots, 2017$, we can either include it in the sequence or not, giving $2$ choices. So in total, there are $2^{2016}$ sequences.
+
+\soln2 We can also do this more directly. The number of sequences that have $k$ terms is $\displaystyle \binom{2017}{k}$, because for each choice of $k$ numbers in $1, 2, \ldots 2017$, we can just arrange them in increasing order. So the answer is \[
+  \binom{2017}{1} + \binom{2017}{3} + \cdots + \binom{2017}{2017}.
+\]
+We can compute this using the \href{http://web.evanchen.cc/handouts/Summation/Summation.pdf}{roots of unity filter} (p.~6). By the binomial theorem, \[
+  (1 + 1)^{2017} = \binom{2017}{0} + \binom{2017}{1} + \binom{2017}{2} + \cdots + \binom{2017}{2016} + \binom{2017}{2017},
+\]
+and also, \[
+  (1 - 1)^{2017} = \binom{2017}{0} - \binom{2017}{1} + \binom{2017}{2} - \cdots + \binom{2017}{2016} - \binom{2017}{2017}.
+\]
+By subtracting the second equation from the first one, we get \[
+  (1 + 1)^{2017} - (1 - 1)^{2017} = 2\left(\binom{2017}{1} + \binom{2017}{3} + \cdots + \binom{2017}{2017}\right).
+\]
+Hence the answer is $2^{2016}$.
+
+\item If one of the legs of a right triangle has length $17$ and the lengths of the other two sides are integers, then what is the radius of the circle inscribed in that triangle?
+
+\fourch
+{$8$}
+{$14$}
+{$11$}
+{$10$}
+
+\ansb{a}{$8$}
+
+\sol If the other leg had length $b$, and the hypotenuse had length $c$, then by the Pythagorean theorem, $17^2 + b^2 = c^2$. Using the difference of two squares, $289 = (c - b)(c + b)$.
+
+As $b$ and $c$ are positive integers, $c-b$ and $c+b$ are also integers, and $c-b$ is smaller than $c+b$. The only way to write $289$ as the product of two positive integers, one smaller than the other, is $1 \times 289$. So we set $c - b = 1$ and $c + b = 289$, and then we can solve for $b = 144$ and $c = 145$.
+
+Finally, it's well-known that the inradius of a right triangle is $\dfrac{a + b - c}{2}$, where $a$ and $b$ are the lengths of its legs and $c$ is the length of its hypotenuse. So the answer is $\dfrac{17 + 144 - 145}{2} = 8$.
+
+\begin{rem}
+To prove the formula for the inradius, consider that the area is both $\frac{1}{2}ab$ and the inradius times the semiperimeter, $\frac{1}{2}(a + b + c)$. So the inradius is the area divided by the semiperimeter, meaning it is $\frac{ab}{a + b + c}$. This can be simplified as $\frac{ab}{a + b + c} \cdot \frac{a + b - c}{a + b - c} = \frac{ab(a + b - c)}{(a + b)^2 - c^2} = \frac{ab(a + b - c)}{(a^2 + b^2 - c^2) + 2ab} = \frac{a + b - c}{2}.$
+\end{rem}
+
+\item Let $N$ be the smallest three-digit positive number with exactly $8$ positive even divisors. What is the sum of the digits of $N$?
+
+\fourch
+{$4$}
+{$9$}
+{$12$}
+{$13$}
+
+\ansb{b}{$9$}
+
+\sol If $N$ has $8$ positive even divisors, then $N/2$ has exactly $8$ positive divisors, which are just each of these divisors divided by $2$. Also, because $N \ge 100$, then $N/2 \ge 50$. So we're looking for the smallest number that's at least $50$ and has $8$ divisors.
+
+We just count up. Recall that the formula for the number of divisors, given the prime factorization $p_1^{e_1}p_2^{e_2} \cdots p_n^{e_n}$, is $(e_1 + 1)(e_2 + 1) \cdots (e_n + 1)$. So $50 = 2 \cdot 5^2$ has $6$ divisors, $51 = 3 \cdot 17$ has $4$ divisors, $52 = 2^2 \cdot 13$ has $6$ divisors, and $53$ is a prime, so it has $2$ divisors. Finally, $54 = 2 \cdot 3^3$, so it has $8$ divisors. So $N/2 = 54$, and thus $N = 108$, making the answer $9$.
+
+\item Let $a, b, c$ be randomly chosen (in order, and with replacement) from the set $\{1, 2, 3, \ldots, 999\}$. If each choice is equally likely, what is the probability that $a^2 + bc$ is divisible by $3$?
+
+\fourch
+{$\dfrac{1}{3}$}
+{$\dfrac{2}{3}$}
+{$\dfrac{7}{27}$}
+{$\dfrac{8}{27}$}
+
+\ansb{a}{$\dfrac{1}{3}$}
+
+\sol We only need to consider the values of $a$, $b$, and $c$ modulo $3$. There are $333$ numbers in the set that are $0$ modulo $3$, $333$ that are $1$ modulo $3$, and $333$ that are $2$ modulo $3$. So the chance that a given number is $0$, $1$, or $2$ modulo $3$ is $\dfrac{1}{3}$. Let's do casework on $a$:
+\begin{itemize}
+  \item If $a \equiv 0$, then $a^2 + bc \equiv bc$, and we need one of $b$ or $c$ to be divisible by $3$. So there are $5$ possibilities for $(b, c)$ modulo $3$ in this case: $(0, 0), (0, 1), (0, 2), (1, 0), (2, 0)$. The probability $a \equiv 0$ is $\dfrac{1}{3}$, and the probability for each $(b, c)$ is $\dfrac{1}{9}$, so the total for this case is $\dfrac{1}{3} \cdot \dfrac{5}{9} = \dfrac{5}{27}$.
+
+  \item If $a \equiv 1$ or $2$, then $a^2 + bc \equiv 1 + bc$, so we need $bc \equiv 2$. There are only two possibilities for $b$ and $c$: either $(1, 2)$ or $(2, 1)$. Similar to the previous case, the chance $a \equiv 1$ or $2$ is $\dfrac{2}{3}$, multiplied by the $\dfrac{2}{9}$ chance that $b$ and $c$ are good, making $\dfrac{4}{27}$ in total for this case.
+\end{itemize}
+The total over all cases is $\dfrac{5 + 4}{27} = \dfrac{1}{3}$.
+
+\item Folding a rectangular sheet of paper with length $\ell$ and width $w$ in half along one of its diagonals, as shown in the figure below, reduces its ``visible'' area (the area of the pentagon below) by $30\%$. What is $\dfrac{\ell}{w}$?
+
+\begin{center}
+\begin{asy}
+size(5.5cm);
+
+pair A = dir(0);
+pair B = dir(110);
+pair Bp = dir(70);
+pair C = dir(180);
+pair D = extension(A, B, C, Bp);
+pair M = foot(D, A, C);
+
+draw(A--Bp--C--cycle);
+draw(A--D, dashed);
+draw(D--B--C);
+\end{asy}
+\end{center}
+
+\fourch
+{$\dfrac{4}{3}$}
+{$\dfrac{2}{\sqrt{3}}$}
+{$\sqrt{5}$}
+{$\dfrac{\sqrt{5}}{2}$}
+
+\ansb{c}{$\sqrt{5}$}
+
+\sol Let one of the triangles be $ABC$, with the right angle at $B$, and let $D$ be where the legs of the two right triangles intersect. Let $M$ be the foot of the perpendicular from $D$ to $BC$, as in the figure:
+
+\begin{center}
+\begin{asy}
+size(6cm);
+
+pair A = dir(0);
+pair B = dir(110);
+pair Bp = dir(70);
+pair C = dir(180);
+pair D = extension(A, B, C, Bp);
+pair M = foot(D, A, C);
+
+draw(A--Bp--C--cycle);
+draw(A--D, dashed);
+draw(M--D--B--C);
+
+dot("$A$", A, dir(A-origin));
+dot("$B$", B, dir(B-origin));
+dot("$C$", C, dir(C-origin));
+dot("$D$", D, dir(D-origin));
+dot("$M$", M, S);
+\end{asy}
+\end{center}
+
+Set $AB = w$ and $BC = \ell$; by the Pythagorean theorem, $AC = \sqrt{w^2 + \ell^2}$. From symmetry, $M$ must be the midpoint of $AC$, so $MC = \dfrac{\sqrt{w^2 + \ell^2}}{2}$. As right $\triangle ABC$ and $\triangle DMC$ share $\angle C$, it follows $\triangle ABC \sim \triangle DMC$. So we can solve for $DM$: \[
+  \frac{AB}{BC} = \frac{DM}{MC} \implies DM = \frac{AB}{BC}  \cdot MC = \frac{w}{\ell}\left(\frac{\sqrt{w^2 + \ell^2}}{2}\right).
+\]
+The visible area is the sum of the areas of the two triangles, minus the area of $\triangle ADC$. But this is just the twice the area of $\triangle ABC$, minus twice the area of $\triangle DMC$, which is: \[
+  2\left(\frac{AB \cdot BC}{2}\right) - 2\left(\frac{DM \cdot MC}{2}\right)
+  = 2\left(\frac{w \cdot \ell}{2}\right)
+  - 2\left(\frac{\frac{w}{\ell}\left(\frac{\sqrt{w^2 + \ell^2}}{2}\right) \cdot \frac{\sqrt{w^2 + \ell^2}}{2}}{2}\right) = w\ell - \frac{w(w^2 + \ell^2)}{4\ell}.
+\]
+This visible area is $30\%$ less than the original area, which is just $w\ell$. So it's $70\%$ of $w\ell$, meaning
+\begin{align*}
+w\ell - \frac{w(w^2 + \ell^2)}{4\ell} &= w\ell \cdot \frac{7}{10} \\
+20w\ell^2 - 5w(w^2 + \ell^2) &= 14w\ell^2 \\
+6\ell^2 &= 5w^2 + 5\ell^2 \\
+\frac{\ell^2}{w^2} &= 5,
+\end{align*}
+which gives the answer, $\sqrt{5}$.
+
+\item Find the sum of all positive integers $k$ such that $k(k+15)$ is a perfect square.
+
+\fourch
+{$63$}
+{$65$}
+{$67$}
+{$69$}
+
+\ansb{c}{$67$}
+
+\soln1 Let $k(k+15) = n^2$ for some integer $n$. We complete the square on the left-hand side, multiply by $4$ to remove denominators, and then use the difference of two squares:
+\begin{align*}
+k^2 + 15k + \left(\frac{15}{2}\right)^2 &= n^2 + \left(\frac{15}{2}\right)^2  \\
+\left(k + \frac{15}{2}\right)^2 &= n^2 + \left(\frac{15}{2}\right)^2  \\
+\left(2k + 15\right)^2 &= (2n)^2 + 15^2 \\
+(2k + 15 - 2n)(2k + 15 + 2n) &= 15^2.
+\end{align*}
+As $2k + 15 - 2n$ is smaller than $2k + 15 + 2n$, the possible factorizations of $15^2$ that match up with the two factors are $(1, 225), (3, 75)$, $(5, 45)$, and $(9, 25)$.
+
+Each one gives a different value of $k$. For example, for the first one, we have $2k + 15 - 2n = 1$ and $2k + 15 + 2n = 225$. Adding them gives $4k + 30 = 226$, so $k = 49$. Similarly, for $(3, 75), (5, 45)$, and $(9, 25)$, we get $k = 12, 5,$ and $1$. The total is $67$.
+
+\soln2 Let's try to find some examples. There's $k = 1$, which gives $1 \cdot 16$. Trying other small numbers, we get $k = 5$, which gives $100$.
+
+From $1 \cdot 16$, it's a product of two perfect squares, which gives a perfect square. So maybe there's another example of two perfect squares being multiplied together. If we set $k = a^2$ and $k + 15 = b^2$, we get $15 = (b-a)(b+a)$. We can set $(b-a, b+a)$ as $(3, 5)$, which gives the previous $k = 1$. But we can also do $(b-a, b+a)$ as $(1, 15)$, which gives $a = 7$, and hence $k = 49$. And indeed, $49(49 + 15) = 49 \cdot 64$, so it's also a perfect square.
+
+The total so far is $1 + 5 + 49 = 55$. Subtracting from each of the choices, we get $8, 10, 12, 14$. Trying each of these, we notice that $12 \cdot 27$ is also a perfect square, so the answer must be $67$.
+
+\begin{rem}
+Completing the square is a neat trick here, and is a good idea whenever we have a quadratic Diophantine equation. Compare \href{https://cjquines.com/files/pmo2020quals.pdf}{PMO 2020 Qualifying II.6}, ``Find the sum of all real numbers $b$ for which all the roots of the equation $x^2 + bx - 3b = 0$ are integers.''
+\end{rem}
+
+\item Let $f(n) = \dfrac{n}{3^r}$, where $n$ is an integer, and $r$ is the largest nonnegative integer such that $n$ is divisible by $3^r$. Find the number of distinct values of $f(n)$ where $1 \le n \le 2017$.
+
+\fourch
+{$1344$}
+{$1345$}
+{$1346$}
+{$1347$}
+
+\ansb{b}{$1345$}
+
+\sol The answer is the number of $1 \le n \le 2017$ such that $n$ isn't divisible by $3$. To see this, note that for each of these $n$, then $r = 0$, and $f(n) = n$. And for all $n$ divisible by $3$, the result will be some number less than $n$ that isn't divisible by $3$.
+
+We count the number of $1 \le n \le 2017$ that is divisible by $3$, and then subtract it from the total, $2017$. The numbers divisible by $3$ are $3, 6, \ldots, 2016$. Dividing by $3$, we get the list $1, 2, \ldots, 672$, so there are $672$ numbers that are divisible by $3$. This means there are $2017 - 672 = 1345$ numbers that aren't divisible by $3$, which is the answer.
+
+\item If $A$, $B$, and $C$ are the angles of a triangle such that \[
+  5 \sin A + 12 \cos B = 15
+\]
+and \[
+  12 \sin B + 5 \cos A = 2,
+\]
+then the measure of angle $C$ is
+
+\fourch
+{$150\dg$}
+{$135\dg$}
+{$45\dg$}
+{$30\dg$}
+
+\ansb{d}{$30\dg$}
+
+\sol To get rid of the $\sin A$ and $\cos A$, we can try to use the fact $\sin^2 A + \cos^2 A = 1$. So we square each equation and add them:
+\begin{align*}
+25 \sin^2 A + 120 \sin A \cos B + 144 \cos^2B &= 225 \\
+144 \sin^2 B + 120 \sin B \cos A + 25 \cos^2 A &= 4 \\
+25\left(\sin^2 A + \cos^2 A\right) + 144\left(\sin^2 A + \cos^2 A\right) + 120\left(\sin A \cos B + \sin B \cos A\right) &= 229.
+\end{align*}
+But by the addition formula, $\sin A \cos B + \sin B \cos A = \sin(A + B)$. So we can simplify this further:
+\begin{align*}
+25 + 144 + 120\sin(A + B) &= 229 \implies \sin(A + B) = \frac{229 - 25 - 144}{120} = \frac{1}{2}.
+\end{align*}
+As $\sin(A + B) = \frac{1}{2}$, then either $A + B = 30\dg$ or $150\dg$. Let's consider the case when $A + B = 30\dg$. Then $A$ would be between $0\dg$ and $30\dg$, so $\sin A$ would be at most $\dfrac{1}{2}$. Also, $\cos B \le 1$, because of how cosine works. So \[
+  15 = 5 \sin A + 12 \cos B \le 5\left(\frac{1}{2}\right) + 12(1) = 14.5,
+\]
+which is impossible. So $A + B = 150\dg$, and $C = 180\dg - A - B = 30\dg$.
+
+\end{enumerate}
+
+\noindent\textbf{PART III.} All answers should be in simplest form. Each correct answer is worth six points.
+
+\begin{enumerate}[left=0pt]
+
+\item How many three-digit numbers are there such that the sum of two of its digits is the largest digit?
+
+\ans $\boxed{279\text{ or }126}$.
+
+\soln1 There are two interpretations of the question, which is why two answers were accepted. First, where the sum could be one of the two original digits. And second, where the sum has to be the third digit. We'll do the first interpretation first. Let's split into two cases: when $0$ is one of the digits, and when it isn't.
+
+\begin{enumthin}
+\item In this case, the number looks like $ab0$ or $a0b$ for some digits $a$ and $b$. Any choice of digits works, because if $a \ge b$, then $0 + a = a$, which is the largest digit, and if $b \le a$, then $0 + b = b$, which is the largest digit. We split up into cases again:
+\begin{enumthin}
+  \item For each pair of distinct digits $a, b$ from $1, \ldots, 9$, there are four numbers: $ab0$, $ba0$, $a0b$, and $b0a$. There are $\binom{9}{2}$ of these pairs, so this gives $4\binom{9}{2} = 144$ numbers.
+  \item When $a = b$, there are only two numbers, either $aa0$ or $a0a$, giving $2 \cdot 9 = 18$ numbers.
+  \item Finally, there's the case when one of them is $0$, like $a00$, which gives $9$ numbers.
+\end{enumthin}
+\item In this case, we get something like $a + b = c$, where $a, b, c$ are nonzero digits. It's automatically the case that $c$ is the largest digit. We have to be careful not to overcount here, because $a = b$ is possible. Also, we have to make sure $a$ and $b$ can't be swapped, so let's enforce $a \le b$. Cases again:
+\begin{enumthin}
+  \item When $a < b$, there are $6$ numbers, one for each permutation of $a, b, c$. For each $a$, each of $2a + 1, 2a + 2, \ldots 9$ can be the value of $c$, giving $9 - 2a$ possible values of $c$. So there are $7 + 5 + 3 + 1 = 16$ such $(a, b, c)$, giving $6 \cdot 16 = 96$ numbers.
+  \item When $a = b$, there are just $3$ numbers, $aac$, $aca$, and $caa$. The possible $a, b, c$ here are $(1, 1, 2), \ldots, (4, 4, 8)$, so this case gives $3 \cdot 4 = 12$ numbers.
+\end{enumthin}
+\end{enumthin}
+In total, this is $144 + 18 + 9 + 96 + 12 = 279$.
+
+\soln2 Let's work on the second interpretation, when the sum has to be the third digit. Many of the previous casework applies:
+\begin{enumthin}
+\item In the case that one of the digits is $0$:
+\begin{enumthin}
+  \item The distinct digits case, where $a, b$ from $1, \ldots, 9$, no longer applies.
+  \item When $a = b$, there are only two numbers, either $aa0$ or $a0a$, giving $2 \cdot 9 = 18$ numbers.
+  \item The case $a00$ no longer applies.
+\end{enumthin}
+\item In the other case, all of the work still applies, so this gives $96 + 12$ numbers.
+\end{enumthin}
+In total, this is $18 + 96 + 12 = 126$.
+
+\item In the figure, a quarter circle, a semicircle, and a circle are mutually tangent inside a square of side length $2$. Find the radius of the circle.
+
+\begin{center}
+\begin{asy}
+size(3.5cm);
+
+pair A = (0, 2);
+pair B = (0, 0);
+pair C = (2, 0);
+pair D = (2, 2);
+pair O = (2-1/2, 0);
+pair P = (2-2/9, sqrt((1/2+2/9)**2-(1/2-2/9)**2));
+
+draw(A--B--C--D--cycle);
+draw(arc(A, 2, 270, 360));
+draw(arc(O, 1/2, 0, 180));
+draw(circle(P, 2/9));
+\end{asy}
+\end{center}
+
+\ans $\boxed{\dfrac{2}{9}}$.
+
+\soln1 Let the center of the quarter circle, semicircle, and circle be $A$, $O$, and $P$, respectively. Label the square $ABCD$ such that $O$ lies on $BC$, and let $Q$ be the foot of the perpendicular from $P$ to $CD$. Finally, let $D'$ and $C'$ be on $AD$ and $BC$ such that $D'C'$ is parallel to $DC$ and passes through $P$.
+
+\begin{center}
+\begin{asy}
+size(6cm);
+
+pair A = (0, 2);
+pair B = (0, 0);
+pair C = (2, 0);
+pair D = (2, 2);
+pair O = (2-1/2, 0);
+pair P = (2-2/9, sqrt((1/2+2/9)**2-(1/2-2/9)**2));
+
+draw(A--B--C--D--cycle);
+draw(arc(A, 2, 270, 360));
+draw(arc(O, 1/2, 0, 180));
+draw(circle(P, 2/9));
+
+dot("$A$", A, dir(A-(1,1)));
+dot("$B$", B, dir(B-(1,1)));
+dot("$C$", C, dir(C-(1,1)));
+dot("$D$", D, dir(D-(1,1)));
+dot("$O$", O, S);
+dot("$P$", P, SE);
+
+pair Dp = foot(P, A, D);
+pair Cp = foot(P, B, C);
+pair Q = foot(P, C, D);
+
+dot("$C'$", Cp, S);
+dot("$D'$", Dp, N);
+dot("$Q$", Q, E);
+draw(P--A--O--cycle);
+draw(Dp--Cp);
+draw(P--Q);
+\end{asy}
+\end{center}
+
+Let's say the radius of the semicircle is $s$. We'll try to compute $s$ using the Pythagorean theorem on $\triangle ABO$. We know $AB = 2$ because it's the side of a square, and $BO = BC - OC = 2 - s$, because $OC$ is a radius of the semicircle. Finally, $AO$ is the radius of the quarter circle plus the radius of the semicircle, so $AO = 2 + s$. So by the Pythagorean theorem:
+\begin{align*}
+AO^2 &= AB^2 + BO^2 \\
+(2 + s)^2 &= 2^2 + (2 - s)^2 \\
+s^2 + 4s + 4 &= s^2 - 4s + 8,
+\end{align*}
+so $s = \dfrac{1}{2}$. Now suppose the radius of the circle is $r$. Because $D'DQP$ is a rectangle, that means $PQ = D'D = r$, and similarly $C'C = r$. Also, $AP$ is the radius of the quarter circle plus the radius of the semicircle, so $AP = 2 + r$, and similarly, $OP = \dfrac{1}{2} + r$. Now we can use the Pythagorean theorem on $\triangle AD'P$ and $\triangle OC'P$:
+\begin{align*}
+AP^2 &= AD'^2 + D'P^2 & OP^2 &= OC'^2 + C'P^2 \\
+(2 + r)^2 &= (AD - D'D)^2 + D'P^2 & \left(\frac{1}{2} + r\right)^2 &= (OC - C'C)^2 + C'P^2 \\
+(2 + r)^2 &= (2 - r)^2 + D'P^2 & \left(\frac{1}{2} + r\right)^2 &= \left(\frac{1}{2} - r\right)^2 + C'P^2 \\
+D'P^2 &= 8r & C'P^2 &= 2r.
+\end{align*}
+Finally, $D'P + C'P = D'C' = 2$. Squaring this gives
+\begin{align*}
+D'P^2 + 2 \cdot D'P \cdot C'P + C'P^2 &= 4 \\
+8r + 2 \left(\sqrt{8r}\right) \left(\sqrt{2r}\right) + 2r &= 4,
+\end{align*}
+so $18r = 4$, and hence $r = \dfrac{2}{9}$.
+
+\soln2 We pick up from the previous solution, after computing the radius of the semicircle. We can apply Descartes's theorem to the quarter circle, semicircle, circle, and the right side of the square, to find the radius of the circle. Descartes's theorem says that, for circles with curvatures $k_1, k_2, k_3, k_4$, then \[
+  k_4 = k_1 + k_2 + k_3 \pm 2\sqrt{k_1k_2 + k_2k_3 + k_3k_1}.
+\]
+The curvature of a circle is $\pm1/r$, where $r$ is the radius, and here the curvature is positive because the circles are externally tangent. So the curvatures of the quarter circle, semicircle, and right side of the square, will be $\dfrac{1}{2}$, $2$, and $0$. (A line is like a circle of infinite radius.) So
+\begin{align*}
+k_4 &= k_1 + k_2 + k_3 \pm 2\sqrt{k_1k_2 + k_2k_3 + k_3k_1} \\
+&= \frac{1}{2} + 2 + 0 \pm 2\sqrt{\frac{1}{2} \cdot 2 + 2 \cdot 0 + 0 \cdot \frac{1}{2}} \\
+&= \frac{5}{2} \pm 2\sqrt{1},
+\end{align*}
+so $k_4$ is either $\dfrac{9}{2}$ or $\dfrac{1}{2}$, and hence the radius is either $\dfrac{2}{9}$ or $2$. But $2$ would be too large, so the answer must be $\dfrac{2}{9}$.
+
+\begin{rem}
+I discuss Descartes's theorem in my handout, \href{https://cjquines.com/files/obscuregeothms.pdf}{Obscure Geometry Theorems}. Compare with \href{https://cjquines.com/files/pmo2019areas.pdf}{PMO 2019 Areas I.12}: ``In the figure below, five circles are tangent to line $\ell$. Each circle is externally tangent to two other circles. Suppose that circles $A$ and $B$ have radii $4$ and $225$, respectively, and that $C_1$, $C_2$, $C_3$ are congruent circles. Find their common radius.''
+\end{rem}
+
+\item Find the minimum value of \[
+  \dfrac{18}{a + b} + \dfrac{12}{ab} + 8a + 5b,
+\]
+where $a$ and $b$ are positive real numbers.
+
+\ans $\boxed{30}$.
+
+\sol From AM--GM, \[
+  \left(\frac{18}{a + b} + 2(a + b)\right) + \left(\frac{12}{ab} + 6a + 3b\right) \ge 2\sqrt{18 \cdot 2} + 3\cbrt{12 \cdot 6 \cdot 3} = 30.
+\]
+The equality case of AM--GM happens when the terms are all equal. So the first AM--GM gives us $\frac{18}{a + b} = 2(a + b)$, or $a + b = 36$, and the second gives $\frac{12}{ab} = 6a = 3b$, or $b = 2a$. Combining, $a + 2a = 36$, so $a = 12$ and $b = 24$, and we can verify that these give a value of $30$, so it must be the minimum.
+
+\begin{rem}
+The fact that we're minimizing something involving positive real numbers motivates us to do something using AM--GM. We want to rewrite the expression as a sum of terms so that they cancel. To cancel the $a + b$, we need something that's $k(a + b)$. We then notice that if $k = 2$, then we get $18 \cdot 2$ which is a perfect square, and the remaining terms would be $12 \cdot 6 \cdot 3$, which is a perfect cube.
+
+Compare \href{http://pmo.ph/wp-content/uploads/2014/08/19th-PMO-Qualifying-Stage-Questions-and-Answers.pdf}{PMO 2017 Qualifying II.4}, ``If $b > 1$, find the minimum value of $\frac{9b^2 - 18b + 13}{b - 1}$'', or  \href{https://cjquines.com/files/pmo2020quals.pdf}{PMO 2020 Qualifying III.5}, ``Find the minimum value of $\frac{7x^2 - 2xy + 3y^2}{x^2 - y^2}$ if $x$ and $y$ are positive real numbers such that $x > y$.''
+\end{rem}
+
+\item Suppose $\dfrac{\tan x}{\tan y} = \dfrac{1}{3}$ and $\dfrac{\sin 2x}{\sin 2y} = \dfrac{3}{4}$, where $0 < x, y < \dfrac{\pi}{2}$. What is the value of $\dfrac{\tan 2x}{\tan 2y}$?
+
+\ans $\boxed{-\dfrac{3}{11}}$.
+
+\sol Writing $\tan x = \dfrac{\sin x}{\cos x}$ and $\sin 2x = 2 \sin x \cos x$, we get \[
+  \frac{\sin x \cos y}{\sin y \cos x} = \frac{1}{3}, \quad \frac{\sin x \cos x}{\sin y \cos y} = \frac{3}{4}.
+\]
+Multiplying the two equations, and dividing the first equation from the second, \[
+  \frac{\sin^2 x}{\sin^2 y} = \frac{1}{4}, \quad \frac{\cos^2 x}{\cos^2 y} = \frac{9}{4} \quad \implies \quad 4\sin^2x = \sin^2y, \quad 4\cos^2x = 9\cos^2y.
+\]
+Adding these two equations, and adding $9$ times the first equation to the second equation,
+\begin{align*}
+4\sin^2x &= \sin^2 y & 36 \sin^2x &= 9\sin^2y \\
+4\cos^2x &= 9\cos^2 y & 4 \cos^2x &= 9\cos^2y \\
+4\left(\sin^2 x + \cos^2 x\right) &= \sin^2y + 9\cos^2y
+& 36\sin^2x + 4\cos^2x &= 9\left(\sin^2 x + \cos^2y\right) \\
+4 &= 1 + 8 \cos^2 y & 32 \sin^2x + 4 &= 9 \\
+\cos^2 y &= \frac{3}{8} & \sin^2x &= \frac{5}{32} \\
+2\cos^2 y - 1 &= 2\cdot\frac{3}{8} - 1 & 1 - 2\sin^2x &= 1 - 2\cdot\frac{5}{32} \\
+\cos 2y &= -\frac{1}{4}, & \cos 2x &= \frac{11}{16}.
+\end{align*}
+Hence \[
+  \frac{\tan 2x}{\tan 2y}
+  = \frac{\sin 2x}{\sin 2y} \cdot \frac{\cos 2y}{\cos 2x}
+  = \frac{3}{4} \cdot \frac{-\frac{1}{4}}{\frac{11}{16}} = -\frac{3}{11}.
+\]
+
+\item Find the largest positive real number $x$ such that \[
+  \dfrac{2}{x} = \dfrac{1}{\floor{x}} + \dfrac{1}{\floor{2x}},
+\]
+where $\floor{x}$ denotes the greatest integer less than or equal to $x$.
+
+\ans $\boxed{\frac{20}{7}}$.
+
+\sol Let $n = \floor{x}$, and write $x = n + r$, for some $0 \le r < 1$. Then $\floor{2x} = \floor{2n + 2r}$. We now have two cases, depending on the value of $r$:
+
+\begin{itemize}
+\item If $0 \le r < \dfrac{1}{2}$, then $0 \le 2r < 1$, and $\floor{2n + 2r} = 2n$, as $2n$ is an integer. So \[
+\frac{2}{n + r} = \frac{1}{n} + \frac{1}{2n} = \frac{3}{2n} \implies 4n = 3n + 3r,
+\]
+and $n = 3r$. Since we want to maximize $x = n + r$, we want to maximize $n$. As $r < \dfrac{1}{2}$, this means $n = 3r < \dfrac{3}{2}$, so since $n$ is an integer, the maximum possible value of $n$ is $1$. Then $r = \dfrac{n}{3} = \dfrac{1}{3}$, and $x = \dfrac{4}{3}$.
+
+\item If $\dfrac{1}{2} \le r < 1$, then $1 \le 2r < 2$, so $\floor{2n + 2r} = 2n + 1$. Hence
+\begin{align*}
+\frac{2}{n + r} &= \frac{1}{n} + \frac{1}{2n + 1} \\
+\frac{2}{n + r} &= \frac{3n + 1}{2n^2 + n} \\
+4n^2 + 2n &= 3n^2 + 3nr + n + r \\
+r &= \frac{n^2 + n}{3n + 1}.
+\end{align*}
+Since $r < 1$, this means that $n^2 + n < 3n + 1$, or
+\begin{align*}
+n^2 - 2n - 1 = (n - 1)^2 - 3 < 0 \implies n < 1 + \sqrt{3}.
+\end{align*}
+So the maximum integer value of $n$ would be $2$, which gives $r = \dfrac{6}{7}$, and $x = \dfrac{20}{7}$.
+
+\end{itemize}
+
+The maximum over all cases is $\dfrac{20}{7}$, which is the answer.
+
+\begin{rem}
+Compare with \href{https://cjquines.com/files/pmo2017areas.pdf}{PMO 2017 Areas I.8}: ``For each $x \in \RR$, let $\cbr{x}$ be the fractional part of $x$ in its decimal representation. For instance, $\cbr{3.4} = 3.4 -3 = 0.4$, $\cbr{2} = 0$, and $\cbr{-2.7} = -2.7 - (-3) = 0.3$. Find the sum of all real numbers $x$ for which $\cbr{x} = \dfrac{1}{5}x$.''
+\end{rem}
+
+\end{enumerate}
+
+\emph{With thanks to Nathanael Joshua Balete for comments.}
+
+\end{document}

@@ -1,0 +1,774 @@
+\documentclass[11pt,paper=letter]{scrartcl}
+\usepackage[parskip]{cjquines}
+
+\newcommand{\ans}{{\sffamily \bfseries Answer.}\;}
+\newcommand{\sol}{{\sffamily \bfseries Solution.}\;}
+\newcommand{\soln}[1]{{\sffamily \bfseries Solution #1.}\;}
+\newcommand{\rem}[1]{{\small \sffamily \sansmath {\bfseries Remark.} #1}}
+
+\begin{document}
+
+\title{PMO 2020 Qualifying Stage}
+\author{Carl Joshua Quines}
+\date{October 12, 2019}
+
+\maketitle
+
+The date of the test is October 12 for all regions except Region 9, which held the test on October 19 instead. For cross-referencing purposes, this is the first year that the test numbering continues throughout the test, rather than restarting for each part. Are any explanations unclear? If so, contact me at \mailto{cj@cjquines.com}. More material is available on my website: \url{https://cjquines.com}.
+
+\textbf{PART I.} Choose the best answer. Each correct answer is worth two points.
+
+\begin{enumerate}[align=left,leftmargin=*]
+
+\item If $2^{x-1} + 2^{x-2} + 2^{x-3} = \dfrac{1}{16}$, find $2^x$.
+
+\fourch{$\dfrac{1}{14}$}{$\dfrac{2}{3}$}{$\sqrt[14]{2}$}{$\cbrt{4}$}
+
+\ans $\boxed{\text{(a) }\dfrac{1}{14}}$.
+
+\sol Factoring out $2^x$, we get that
+$$
+2^x \left(2^{-1} + 2^{-2} + 2^{-3}\right) = \dfrac{1}{16} \implies 
+2^x \cdot \frac{7}{8} = \dfrac{1}{16},$$
+which means $2^x = \dfrac{1}{14}$.
+
+\item If the number of sides of a regular polygon is decreased from $10$ to $8$, by how much does the measure of each of its interior angles decrease?
+
+\fourch{$30\dg$}{$18\dg$}{$15\dg$}{$9\dg$}
+
+\ans $\boxed{\text{(d) }9\dg}$.
+
+\soln1 Each interior angle of a regular polygon with $n$ sides is $\dfrac{180\dg(n-2)}{n}$, so the angles have measures $144\dg$ and $135\dg$, respectively. It decreases by $9\dg$.
+
+\soln2 Alternatively, the decrease in the interior angle is the same as the increase in the exterior angle. Since the exterior angles of a regular polygon are $\frac{360\dg}{n}$, we get $45\dg - 36\dg = 9\dg$.
+
+\item Sylvester has 5 black socks, 7 white socks, 4 brown socks, where each sock can be worn on either foot. If he takes socks randomly and without replacement, how many socks would be needed to guarantee that he has at least one pair of socks of each color?
+
+\fourch{$13$}{$14$}{$15$}{$16$}
+
+\ans $\boxed{\text{(B) }14}$.
+
+\sol In the worst case, Sylvester draws 5 black socks, 7 white socks, and 1 brown sock, without having a pair of socks in each color. When Sylvester draws the next sock, it must be brown. In total, he draws $5 + 7 + 2 = 14$ socks.
+
+\rem{Compare \href{http://pmo.ph/wp-content/uploads/2014/08/19th-PMO-Qualifying-Stage-Questions-and-Answers.pdf}{PMO 2017 Qualifying I.7} ``Issa has an urn containing only red and blue marbles. She selects a number of marbles from the urn at random and without replacement. She needs to draw at least $N$ marbles in order to be sure that she has at least two red marbles. In contrast, she needs three times as much in order to be sure that she has at least two blue marbles. How many marbles are there in the urn?''}
+
+\item Three dice are simultaneously rolled. What is the probability that the resulting numbers can be arranged to form an arithmetic sequence?
+
+\fourch{$\dfrac{1}{18}$}{$\dfrac{11}{36}$}{$\dfrac{7}{36}$}{$\dfrac{1}{6}$}
+
+\ans $\boxed{\text{(c) }\dfrac{7}{36}}$.
+
+\sol We count how many times each possible arithmetic sequence appears in all $6^3 = 216$ possible rolls, doing casework on the common difference.
+\begin{itemize}[itemsep=-0.7ex]
+  \item When the difference is $0$, each of $(1, 1, 1)$, $(2, 2, 2)$, and so on, can be rolled in one way. This accounts for $6$ ways.
+  \item When the difference is $1$, each of $(1, 2, 3)$, $(2, 3, 4)$, up to $(4, 5, 6)$ can be rolled in $3! = 6$ possible ways. This gives for $4 \cdot 6 = 24$ ways.
+  \item Similarly, for difference $2$, we get $(1, 3, 5)$ and $(2, 4, 6)$ giving $2 \cdot 6 = 12$ ways.
+  \item We can't have a common difference larger than $2$.
+\end{itemize}
+In total, we get $6 + 24 + 12 = 42$ possible ways, giving a probability of $\dfrac{42}{216} = \dfrac{7}{36}$.
+
+\item Sean and the bases of three buildings, $A$, $B$, and $C$ are all on level ground. Sean measures the angles of elevation of the tops of buildings $A$ and $B$ to be $62\dg$ and $57\dg$, respectively. Meanwhile, on top of building $C$, CJ spots Sean and determines that the angle of depression of Sean from his location is $31\dg$. If the distance from Sean to the bases of all three buildings is the same, arrange buildings $A$, $B$, and $C$ in order of increasing heights.
+
+\fourch{$C, B, A$}{$B, C, A$}{$A, C, B$}{$A, B, C$}
+
+\ans $\boxed{\text{(a) }C, B, A}$.
+
+\sol Sean, the base of the building, and the top of the building, form the vertices of a right triangle, with the right angle at the base of the building. The angle of elevation is the angle opposite the side corresponding to the height of the building. Since the distance from Sean to the base of each building is the same, the larger the angle of elevation, the longer the length of the opposite side must be, which is the height of the building. The angle of depression from CJ to Sean is the same as his angle of elevation, so in order of increasing height, we get $C, B$, and $A$.
+
+\item A function $f : \RR \to \RR$ satisfies $f(xy) = f(x)/y^2$ for all positive real numbers $x$ and $y$. Given that $f(25) = 48$, what is $f(100)$?
+
+\fourch{$1$}{$2$}{$3$}{$4$}
+
+\ans $\boxed{\text{(c) }3}$.
+
+\sol Substituting $x = 25$ and $y = 4$ to the given equation, we get $f(100) = f(25)/16$, so $f(100) = 3$.
+
+\rem{We can also solve for the function by substituing $x = 25$ and $y = x'/25$ to get $f(x') = 30000/x'^2$. Compare \href{https://cjquines.com/files/pmo2017areas.pdf}{PMO 2017 Areas I.2{}} ``Let $f$ be a real-valued function such that $f(x-f(y)) = f(x) - xf(y)$ for any real numbers $x$ and $y$. If $f(0) = 3,$ determine $f(2016) - f(2013)$.''}
+
+\item A trapezoid has parallel sides of length $10$ and $15$; its other sides have lengths $3$ and $4$. Find its area.
+
+\fourch{$24$}{$30$}{$36$}{$42$}
+
+\ans $\boxed{\text{(b) }30}$.
+
+\sol We can dissect the trapezoid into a rectangle with width $10$, and two triangles. Putting the two triangles together gives a right triangle with side lengths $3$, $4$, and $5$.
+
+\begin{center}
+\begin{asy}
+size(15cm);
+
+pair A = (0, 0);
+pair B = (10, 0);
+pair C = (9/5 + 5, 12/5);
+pair D = (9/5, 12/5);
+pair E = foot(C, A, B);
+pair F = foot(D, A, B);
+
+pair t = (11, 0);
+pair Cp = t + (0, 12/5);
+pair Dp = t + (5, 12/5);
+pair Ep = t + (5, 0);
+pair Fp = t + (0, 0);
+
+pair s = (17, 0);
+pair Ap = s + (0, 0);
+pair Bp = s + (5, 0);
+pair Xp = s + (9/5, 12/5);
+
+draw(A--B--C--D--cycle);
+draw(C--E, dashed);
+draw(D--F, dashed);
+
+draw(Cp--Dp--Ep--Fp--cycle);
+draw(Ap--Bp--Xp--cycle);
+draw(Xp--foot(Xp, Ap, Bp), dashed);
+label("$h$", Xp--foot(Xp, Ap, Bp), (1, 0));
+\end{asy}
+\end{center}
+
+The height of the trapezoid must be the height of the triangle. Letting this height be $h$, we can compute the area of the triangle both as $\frac{1}{2}\cdot3\cdot4$ and $\frac{1}{2}\cdot5\cdot h$, so $h = \frac{12}{5}$. The area of the rectangle is $\frac{12}{5}\cdot10$, and the area of the triangle is $\frac{1}{2}\cdot3\cdot4$, so the area of the whole trapezoid is $30$.
+
+\rem{Compare with PMO 2019 National Orals Average 7: ``In trapezoid $ABCD$, $AD$ is parallel to $BC$. If $AD = 52$, $BC = 65$, $AB = 20$, and $CD = 11$, find the area of the trapezoid.''}
+
+\item Find the radius of the circle tangent to the line $3x + 2y - 4 = 0$ at $(-2, 1)$ and whose center is on the line $x - 8y + 36 = 0$.
+
+\fourch{$2\sqrt{13}$}{$2\sqrt{10}$}{$3\sqrt{5}$}{$5\sqrt{2}$}
+
+\ans $\boxed{\text{(a) }2\sqrt{13}}$.
+
+\sol Consider the line $\ell$ passing through the tangent point, perpendicular to the tangent line. This line must pass through the center of the circle, so we can intersect it with the line $x - 8y + 36 = 0$ to find the center of the circle.
+
+The slope of the tangent line is $-\frac{3}{2}$, so the slope of $\ell$ is $\frac{2}{3}$. It passes through the point $(-2, 1)$, so this line must be $y = \frac{2}{3}x + \frac{7}{3}$. Substituting to the second equation, we get
+\[
+  x - 8\left(\frac{2}{3}x + \frac{7}{3}\right) + 36 = 0 \implies x = 4,
+\]
+which means $y = 5$. The distance of the tangency point $(-2, 1)$ to the center $(4, 5)$ is $2\sqrt{13}$, which must be the radius.
+
+\rem{Compare with \href{https://cjquines.com/files/pmo2019quals.pdf}{PMO 2019 Qualifying I.9} ``A circle is tangent to the line $2x - y + 1 = 0$ at the point $(2, 5)$ and the center is on the line $x + y - 9 = 0$. Find the radius of the circle.''}
+
+\item A circle is inscribed in a rhombus which has a diagonal of length $90$ and area $5400$. What is the circumference of the circle?
+
+\fourch{$36\pi$}{$48\pi$}{$72\pi$}{$90\pi$}
+
+\ans $\boxed{\text{(c) }72 \pi}$.
+
+\sol The area of the rhombus is half the product of its diagonals, meaning the other diagonal has length $120$. The intersecting diagonals form four triangles. As the diagonals are the perpendicular bisectors of each other, they form a right triangle with legs $45$ and $60$. By the Pythagorean theorem, the rhombus has side length $75$.
+
+\begin{center}
+\begin{asy}
+size(5cm);
+pair A = (0, 0);
+pair B = (1, 0);
+pair D = (0.6, 0.8);
+pair C = B+D-A;
+pair E = extension(A, C, B, D);
+
+draw(A--B--C--D--cycle);
+draw(A--C^^B--D);
+draw(E--foot(E, A, B), dashed);
+draw(E--foot(E, A, D), dashed);
+draw(E--foot(E, C, B), dashed);
+draw(E--foot(E, C, D), dashed);
+draw(rightanglemark(C,E,D,2));
+draw(circle(E, distance(E, foot(E, A, B))));
+\end{asy}
+\end{center}
+
+Consider each of these four triangles. Dropping the perpendicular from the intersection of the diagonals to the sides, they must be the same length $h$. So the inscribed circle must be centered at the intersection, and have radius of length $h$.
+
+We can compute the area of each triangle as $\frac{1}{2}\cdot75\cdot h$, so the area of the whole rhombus is $4\cdot\frac{1}{2}\cdot75\cdot h$. But this is $5400$, so $h = 36$. The circumference of the circle must then be $2 \pi h = 72\pi$.
+
+\rem{We computed the area of the rhombus as half the product of the perimeter and the radius of the inscribed circle. This is similar to the formula $sr$ for the area of a triangle, where $s$ is the semiperimeter and $r$ is the inradius.}
+
+\item Suppose that $n$ identical promo coupons are to be distributed to a group of people, with no assurance that everyone will get a coupon. If there are $165$ more ways to distribute these to four people than there are ways to distribute these to three people, what is $n$?
+
+\fourch{$12$}{$11$}{$10$}{$9$}
+
+\ans $\boxed{\text{(d) }9}$.
+
+\sol The number of ways to distribute $n$ identical objects to four distinct people is, by \href{https://en.wikipedia.org/wiki/Stars_and_bars_(combinatorics)#Theorem_one}{balls and urns}, $\displaystyle \binom{n + 3}{3}$. Similarly, the number of ways to distribute to three people is $\displaystyle \binom{n + 2}{2}$. This means that
+$\displaystyle
+\binom{n + 3}{3} - \binom{n+2}{2} = 165.
+$ Trying each choice, we see that $n = 9$ works.
+
+\rem{Compare to \href{http://pmo.ph/wp-content/uploads/2015/10/18thPMO-QualifyingRound-Questions.pdf}{PMO 2016 Qualifying III.4}: ``Let ${N = \cbr{0, 1, 2 \ldots}}$. Find the cardinality of the set ${\cbr{(a, b, c, d, e) \in N^5 : 0 \leq a + b \leq 2, 0 \leq a + b + c + d + e \leq 4}}$'', or \href{http://pmo.ph/wp-content/uploads/2014/08/18th-PMO-Area-Stage.pdf}{PMO 2016 Areas I.9}: ``How many ways can you place ${10}$ identical balls in 3 baskets of different colors if it is possible for a basket to be empty?'', or \href{http://pmo.ph/wp-content/uploads/2014/08/18th-PMO-National-Stage-Oral-Phase-Q-and-A.pdf}{PMO 2016 Nationals Easy 11}: ``How many solutions does ${x + y + z = 2016}$ have, where ${x}$, ${y}$, and ${z}$ are integers with ${x > 1000}$, ${y > 600}$, and ${z > 400}$?'', or \href{http://pmo.ph/wp-content/uploads/2014/08/19th-PMO-Qualifying-Stage-Questions-and-Answers.pdf}{PMO 2017 Qualifying II.9}: ``How many ordered triples of positive integers ${(x, y, z)}$ are there such that ${x + y + z = 20}$ and two of ${x}$, ${y}$, ${z}$ are odd?'', or \href{http://cjquines.com/files/pmo2019quals.pdf}{PMO 2019 Qualifying I.5}: ``Juan has ${4}$ distinct jars and a certain number of identical balls. The number of ways that he can distribute the balls into the jars where each jar has at least one ball is ${56}$. How many balls does he have?'', or \href{https://cjquines.com/files/pmo2019areas.pdf}{PMO 2019 Areas I.16{}} ``Compute the number of ordered $6$-tuples $(a,b,c,d,e,f)$ of positive integers such that $a + b + c + 2(d+e+f) = 15.$''}
+
+\item Let $x$ and $y$ be positive real numbers such that
+\[
+  \log_x 64 + \log_{y^2} 16 = \dfrac{5}{3}\qquad \text{and}\qquad \log_y 64 + \log_{x^2} 16 = 1.
+\]
+What is the value of $\log_2(xy)$?
+
+\fourch{$16$}{$3$}{$\dfrac{1}{3}$}{$\dfrac{1}{48}$}
+
+\ans $\boxed{\text{(a) }16}$.
+
+\sol We can use the change of base formula to write all of the logarithms in base $2$. This gives the two equations as
+\[
+  \frac{\log_2 64}{\log_2 x} + \frac{\log_2 16}{\log_2 y^2} = \frac{5}{3} \qquad \text{and} \qquad \frac{\log_2 64}{\log_2 y} + \frac{\log_2 16}{\log_2 x^2} = 1.
+\]
+Writing $\log_2 x^2 = 2\log_2 x$ and $\log_2 y^2 = 2 \log_2 y$, we can rewrite the equations entirely using $u = \dfrac{1}{\log_2 x}$ and $v = \dfrac{1}{\log_2 y}$:
+\[
+  6u + 2v = \frac{5}{3} \qquad \text{and} \qquad 6v + 2u = 1.
+\]
+We add the two equations to get $8u + 8v = \frac{8}{3}$ and divide by $4$ to get $2u + 2v = \frac{2}{3}$. Subtracting from the first equation, we get $u = \frac{1}{4}$, and so $v = \frac{1}{12}$. Finally,
+$$\log_2(xy) = \log_2 x + \log_2 y = \frac{1}{u} + \frac{1}{v} = 16.$$
+
+\item The figure below shows a parallelogram $ABCD$ with $CD = 18$. Point $F$ lies inside $ABCD$ and lines $AB$ and $DF$ meet at $E$. If $AE = 12$ and the areas of triangles $FEB$ and $FCD$ are $30$ and $162$, respectively, find the area of triangle $BFC$.
+
+\begin{center}
+\begin{asy}
+size(6cm);
+pair t = (-12, -6);
+pair A = (0, 0)+t;
+pair E = (12, 0)+t;
+pair B = (18, 0)+t;
+pair C = (22, 12)+t;
+pair D = A+C-B;
+pair F = (D+2*E)/3;
+
+draw(A--B--C--D--cycle);
+draw(D--E);
+draw(C--F--B);
+
+dot("$A$", A, dir(A));
+dot("$E$", E, dir(E));
+dot("$B$", B, dir(B));
+dot("$C$", C, dir(C));
+dot("$D$", D, dir(D));
+dot("$F$", F, dir(F));
+\end{asy}
+\end{center}
+
+\fourch{$162$}{$156$}{$150$}{$144$}
+
+\ans $\boxed{\text{(d) }144}$.
+
+\sol Let the feet of the perpendiculars from $F$ to $EB$ and $CD$ be $X$ and $Y$, respectively.
+
+\begin{center}
+\begin{asy}
+size(6cm);
+pair t = (-12, -6);
+pair A = (0, 0)+t;
+pair E = (12, 0)+t;
+pair B = (18, 0)+t;
+pair C = (22, 12)+t;
+pair D = A+C-B;
+pair F = (D+2*E)/3;
+pair X = foot(F, E, B);
+pair Y = foot(F, C, D);
+
+draw(A--B--C--D--cycle);
+draw(D--E);
+draw(C--F--B);
+draw(X--Y, dashed);
+
+dot("$A$", A, dir(A));
+dot("$E$", E, dir(E));
+dot("$B$", B, dir(B));
+dot("$C$", C, dir(C));
+dot("$D$", D, dir(D));
+dot("$F$", F, dir(F));
+dot("$X$", X, dir(X));
+dot("$Y$", Y, dir(Y));
+\end{asy}
+\end{center}
+
+As the area of triangle $FEB$ is $30$, we get $\frac{1}{2}\cdot FX \cdot EB = \frac{1}{2} \cdot FX \cdot 6 = 30$, which means $FX = 10$. Similarly, we find $FY = 18$. So the height of the parallelogram is $10 + 18 = 28$. The area of trapezoid $EBCD$ is $\frac{1}{2}(18 + 6)(28) = 336$, so the area of triangle $BFC$ is $336 - 30 - 168 = 144$.
+
+\item A \textit{semiprime} is a natural number that is the product of two primes, not necessarily distinct. How many subsets of the set $\{2, 4, 6, \ldots, 18, 20\}$ contain at least one semiprime?
+
+\fourch{$768$}{$896$}{$960$}{$992$}
+
+\ans $\boxed{\text{(c) }960}$.
+
+\sol We use complimentary counting. The total number of subsets is $2^{10} = 1024$. We now count the number of subsets which don't contain any semiprime. The semiprimes are $4, 6, 10$, and $14$, so there are $6$ remaining elements, which form $2^{6} = 64$ subsets. Subtracting these gives $1024 - 64 = 960$.
+
+\item The number whose base-$b$ representation is $91_b$ is divisible by the number whose base-$b$ representation is $19_b$. How many possible values of $b$ are there?
+
+\fourch{$2$}{$3$}{$4$}{$5$}
+
+\ans $\boxed{\text{(b) }3}$.
+
+\sol In base-$10$, $91_b$ is $9b + 1$ and $19_b$ is $b + 9$. So the ratio
+$\displaystyle
+  \frac{9b + 1}{b + 9} = 9 - \frac{80}{b + 9}
+$
+must be an integer. For $\dfrac{80}{b + 9}$ to be an integer, we must have $b = 1, 7, 11, 31, 71$. But for $91_b$ to be a number in base-$b$, we must have $b > 9$. So there are $3$ possible values of $b$.
+
+\rem{Several problems boil down to determining when a quotient like this is an integer, and the strategy of doing division works. Compare \href{https://cjquines.com/files/pmo2009.pdf}{PMO 2009 Qualifying II.7} ``How many values of $n$ are there for which $n$ and $\frac{n+3}{n-1}$ are both integers?'' or \href{http://pmo.ph/wp-content/uploads/2015/09/PMO17_area.pdf}{PMO 2015 Areas I.11} ``Find all integer values of $n$ that will make $\frac{6n^3 - n^2 +2n + 32}{3n + 1}$ an integer'', or Problem 21 later on.}
+
+\item The number of ordered pairs $(a, b)$ of relatively prime positive integers such that $ab = 36!$ is
+
+\fourch{$128$}{$1024$}{$2048$}{$4096$}
+
+\ans $\boxed{\text{(c) }2048}$.
+
+\sol Suppose the prime factorization of $36!$ is $p_1^{e_1}p_2^{e_2}\cdots p_k^{e_k}$. For $a$ and $b$ to be relatively prime, they must share no prime divisors. That means that all of $p_1^{e_1}$ must go into either $a$ or $b$; we can't split it between the two of them. So each ordered pair $(a, b)$ corresponds to a different way to partition the prime factors of $36!$.
+
+There are 11 primes less than $36$: $2, 3, 5, 7, 11, 13, 17, 19, 23, 29$, and $31$. So there are $2^{11} = 2048$ different ways to partition these primes, and thus $2048$ different ordered pairs.
+
+\end{enumerate}
+
+\noindent\textbf{PART II.} Choose the best answer. Each correct answer is worth three points.
+
+\begin{enumerate}[align=left,leftmargin=*,resume]
+
+\item Which of the following \textbf{cannot} be the difference between a positive integer and the sum of its digits?
+
+\fourch{$603$}{$684$}{$765$}{$846$}
+
+\ans $\boxed{\text{(b) }684}$.
+
+\soln1 Each of the choices, except $684$ can be written as the difference between a positive integer and the sum of its digits. For example, $610 - 7 = 603$, $780 - 15 = 765$, and $860 - 14 = 846$. However, we get that $690 - 15 = 675$, but $700 - 7 = 693$. This skips over $684$, so it cannot be written as the difference between a positive integer and the sum of its digits.
+
+\soln2 A systematic way to find this would be, if the positive integer was $\overline{abc}$, we're solving the equation
+\[
+  100a + 10b + c - (a + b + c) = 9(11a + b) = 603, 684, 765, 846.
+\]
+So for $603$, for example, we get $11a + b = 67$, and we have $(a, b) = (6, 1)$ as a solution. Similarly, for $765$ we get $11a + b = 85$ and thus $(a, b) = (7, 8)$ is a solution, and for $846$, we get $11a + b = 94$, so $(a, b) = (8, 6)$ is a solution. But for $684$, we get $11a + b = 76$, and there's no solution for this where $a$ and $b$ are digits.
+
+\rem{These numbers are \href{https://oeis.org/A282473}{OEIS A282473}. They have the interesting property that the difference between consecutive terms seems to almost always be $9$. Sharvil informs me this is similar to a problem from the Australian Mathematical Olympiad 2016.}
+
+\item Evaluate the sum
+\[
+  \sum_{n=0}^{2019}\cos\left(\dfrac{n^2\pi}{3}\right).
+\]
+
+\fourch{$0$}{$1$}{$-1$}{$\dfrac{1}{2}$}
+
+\ans $\boxed{\text{(a) }0}$.
+
+\sol Writing out the values of $\cos\left(\dfrac{n^2\pi}{3}\right)$ for $n = 0, 1, 2, \ldots,$ it takes the values
+\[
+  1, \frac{1}{2}, -\frac{1}{2}, -1, -\frac{1}{2}, \frac{1}{2}, 1, \frac{1}{2}, -\frac{1}{2}, \ldots
+\]
+So we would guess that it repeats every $6$ terms. The sum of every $6$ terms is $0$, meaning that the only remaining terms are the $n =2016$ through $n = 2019$ terms, which must be the same as the $n = 0$ through $n = 3$ terms. The sum of these terms is also $0$, so the whole sum is $0$.
+
+\rem{Compare \href{http://pmo.ph/wp-content/uploads/2014/08/19th-PMO-Qualifying-Stage-Questions-and-Answers.pdf}{PMO 2017 Qualifying I.9} ``Evaluate the following sum: $1 + \cos\frac\pi3 + \cos\frac{2\pi}3 + \cos\frac{3\pi}3 + \cdots + \cos\frac{2016\pi}3$'', or \href{http://pmo.ph/wp-content/uploads/2018/08/PMO-20-Qualifying-Round-with-answers-only.pdf}{PMO 2018 Qualifying I.7} ``Evaluate the sum $\sum_{n=3}^{2017} \sin \left(\frac{(n!)\pi}{36}\right)$.''}
+
+\item There is an unlimited supply of red $4 \times 1$ tiles and blue $7 \times 1$ tiles. In how many can an $80 \times 1$ path be covered using nonoverlapping tiles from this supply?
+
+\fourch{$2381$}{$3382$}{$5384$}{$6765$}
+
+\ans $\boxed{\text{(c) }5384}$.
+
+\sol Suppose we use $r$ red tiles and $b$ blue tiles. As the total number of tiles is $80$, they must satisfy $4r + 7b = 80$, which has solutions $(r, b)$ as $(20, 0), (13, 4)$, and $(6, 8)$. There's one way to arrange $20$ tiles in a row. There are $\displaystyle \binom{17}{4}$ ways to arrange $13$ red tiles and $4$ blue tiles in a row: we choose which of the $13 + 4 = 17$ tiles are blue, and the rest of the tiles are red. Similarly, there are $\displaystyle \binom{14}{8}$ ways for the other case. This gives a total of $1 + 2380 + 3003 = 5384$ ways.
+
+\item For a real number $t$, $\floor{t}$ is the greatest integer less than or equal to $t$. How many natural numbers $n$ are there such that $\floor{\dfrac{n^3}{9}}$ is prime?
+
+\fourch{$3$}{$9$}{$27$}{infinitely many}
+
+\ans $\boxed{\text{(a) }3}$.
+
+\sol Considering that we're dividing by $9$, we do casework on the value of $n$ modulo $3$. Letting $n = 3k + r$, for some $r = 0, 1, 2$, we get that
+\[
+  \frac{(3k + r)^3}{9} = \frac{27k^3 + 27k^2r + 9kr^2 + r^3}{9} = 3k^3 + 3k^2r + kr^2 + \frac{r^3}{9}.
+\]
+For $r = 0, 1, 2$, the last term is always less than $1$, so taking the floor leaves only $3k^3 + 3k^2r + kr^2$. This factors as $k(3k^2 + 3kr + r^2)$. For this to be prime, one of these factors must be $1$, which must be $k$. When $k = 1$, we can check $n = 3, 4, 5$ to get $3, 7, 13$, which all work. So there are only $3$ possible values of $n$.
+
+\item A quadrilateral with sides of length $7, 15, 15,$ and $d$ is inscribed in a semicircle with diameter $d$, as shown in the figure below.
+
+\begin{center}
+\begin{asy}
+size(6cm);
+pair A = dir(0);
+pair B = dir(75);
+pair C = dir(150);
+pair D = dir(180);
+
+draw(A--B--C--D--cycle);
+draw(arc(origin, 1, 0, 180));
+
+label("$15$", A--B, SW);
+label("$15$", B--C, SE);
+label("$7$", C--D, E);
+label("$d$", D--A, S);
+\end{asy}
+\end{center}
+
+Find the value of $d$.
+
+\fourch{$18$}{$22$}{$24$}{$25$}
+
+\ans $\boxed{\text{(d) }25}$.
+
+\soln1 Let $r$ be the radius, and label the points as in the figure below.
+
+\begin{center}
+\begin{asy}
+size(7cm);
+pair A = dir(0);
+pair B = dir(75);
+pair C = dir(150);
+pair D = dir(180);
+pair F = extension(origin, B, A, C);
+
+draw(A--B--C--D--cycle);
+draw(arc(origin, 1, 0, 180));
+draw(origin--B^^F--C);
+draw(rightanglemark(A,C,D,3));
+draw(rightanglemark(A,F,origin,3));
+draw(F--A, rgb(0.1,0.417,0.571));
+
+label("$A$", A, dir(A));
+label("$B$", B, dir(B));
+label("$C$", C, dir(C));
+label("$D$", D, dir(D));
+label("$O$", origin, S);
+label("$E$", F, NE);
+
+label("$15$", A--B, NE);
+label("$15$", B--C, NW);
+label("$7$", C--D, E);
+label("$r$", origin--A, S);
+label("$r$", origin--D, S);
+label("$\frac{7}{2}$", origin--F, W);
+label("$r - \frac{7}{2}$", F--B, W);
+\end{asy}
+\end{center}
+
+Draw the radius $OB$. This radius bisects the chord $AC$, and therefore must be perpendicular to it. This produces two similar right triangles, $\triangle DCA \sim \triangle OFA$. The hypotenuse of $\triangle DCA$ is $2r$ while the hypotenuse of $\triangle OFA$ is $r$, so because $DC = 7$, we get $OF = \frac{7}{2}$. The length of $AE$ can then be computed in two different ways using the Pythagorean theorem:
+\begin{align*}
+r^2 - \left(\frac{7}{2}\right)^2 = 15^2 - \left(r - \frac{7}{2}\right)^2 \implies 2r^2 - 7r - 225 = 0,
+\end{align*}
+which factors as $(2r - 25)(r + 9) = 0$. Discarding the negative solution, $d = 2r = 25$.
+
+\soln2 The lengths $7$, $15$, and the choices, suggest both the $7$--$24$--$25$ right triangle, and the $15$--$20$--$25$ right triangle. This would make sense given the two right triangles formed by the diagonals. We make a guess that the lengths in the diagram are like so:
+
+\begin{center}
+\begin{asy}
+size(6cm);
+pair A = dir(0);
+pair B = dir(75);
+pair C = dir(150);
+pair D = dir(180);
+
+draw(A--B--C--D--cycle);
+draw(arc(origin, 1, 0, 180));
+draw(A--C^^B--D);
+draw(rightanglemark(A,B,D,3));
+draw(rightanglemark(A,C,D,3));
+
+label("$15$", A--B, NE);
+label("$15$", B--C, NW);
+label("$7$", C--D, E);
+label("$25$", D--A, S);
+label("$20$", B--D, 4*E+N);
+label("$24$", A--C, SW);
+\end{asy}
+\end{center}
+
+We can verify that the top length is $15$ through Ptolemy's, as $20 \cdot 24 = 15 \cdot 25 + 7 \cdot 15$. So the answer is $25$.
+
+\soln3 There's a solution that does not involve guessing that uses the same idea. By the Pythagorean theorem, the length of the two diagonals are $\sqrt{d^2 - 49}$ and $\sqrt{d^2 - 225}$. Using Ptolemy's, we find that
+\begin{align*}
+\sqrt{d^2 - 49} \cdot \sqrt{d^2 - 225} &= 15d + 7\cdot15 \\
+(d^2 - 49)(d^2 - 225) &= (15d + 105)^2 \\
+d^4 - 499d^2 - 3150d &= 0.
+\end{align*}
+We can then factor the last equation as $d(d + 7)(d + 18)(d - 25) = 0$ to get $d = 25$, or we can plug in each of the choices to see that $d = 25$ is a root. So the answer must be $25$.
+
+\soln4 Rotate the semicircle about its center by $180\dg$ to complete the hexagon. All diameters are the same length, so we can find the length of any of these diameters instead. In particular, we focus on an isosceles trapezoid with bases $7$ and $d$, and legs $15$.
+
+\begin{center}
+\begin{asy}
+size(6cm);
+pair A = dir(0);
+pair B = dir(75);
+pair C = dir(150);
+pair D = dir(180);
+pair E = dir(255);
+pair F = dir(330);
+
+draw(A--B--C--D--E--F--cycle);
+draw(arc(origin, 1, 0, 360));
+draw(D--B--E--C);
+draw(rightanglemark(B,D,E,3));
+draw(rightanglemark(B,C,E,3));
+
+label("$15$", A--B, NE);
+label("$15$", B--C, NW);
+label("$x$", B--D, (1.5, -0.5));
+label("$x$", C--E, NE);
+label("$d$", B--E, (1, 0));
+label("$7$", C--D, (1, 0));
+label("$15$", D--E, SW);
+label("$15$", E--F, SE);
+label("$7$", F--A, W);
+\end{asy}
+\end{center}
+
+Both of its diagonals have the same length; call it $x$. By Ptolemy's, $x^2 = 7d + 225$. As a diagonal forms a right triangle with the diameter as the hypotenuse, by the Pythagorean theorem, we get $x^2 + 225 = d^2$. Combining these, we get $d^2 - 7d - 450 = 0$, which factors as $(d + 18)(d - 25) = 0$, so $d = 25$.
+
+\rem{Dr.~Eden shared Solution 1 to me. Siva and Andrew shared Solution 4 to me. In a contest, I would do Solution 2. It falls under the class of techniques I describe as \textit{engineering}. I think engineering is helpful for short-answer competition math problems, and it's a skill that people don't exercise as often. I'm working on an article about this, so stay tuned. Compare to \href{https://artofproblemsolving.com/community/c5h528159p3003343}{AIME 2013 II Problem 8}.}
+
+\item Find the sum of all real numbers $b$ for which all the roots of the equation $x^2 + bx - 3b = 0$ are integers.
+
+\fourch{$4$}{$-8$}{$-12$}{$-24$}
+
+\ans $\boxed{\text{(d) }-24}$.
+
+\soln1 Let the roots be $r$ and $s$. By Vieta's, $r + s = -b$ and $rs = -3b$, so $rs = 3r + 3s$. We can solve for $r$ as
+\[
+  r = \frac{3s}{s - 3} = 3 + \frac{9}{s - 3},
+\]
+and so $s - 3$ has to be a factor of $9$, so it can be either $-9$, $-3$, $-1$, $1$, $3$, or $9$. This gives
+\[
+  (r, s) = (2, -6), (0, 0), (-6, 2), (12, 4), (6, 6), (4, 12).
+\]
+As $b = -(r + s)$, its possible values are $4, 0, -16, -12$, which has sum $-24$.
+
+\soln2 For the roots of the equation to be integers, the discriminant $b^2 + 12b$ must be a perfect square $a^2$. We complete the square to get
+\begin{align*}
+a^2 &= b^2 + 12b \\
+a^2 + 36 &= (b + 6)^2 \\
+36 &= (b + 6 - a)(b + 6 + a),
+\end{align*}
+by using the difference of two squares. If $a$ is an integer, then $b$ must be an integer as well, so we're looking at factorizations of $36$ into two integers.
+
+To solve the system of equations, for both $a$ and $b$ to be integers, we must have $b + 6 - a$ and $b + 6 + a$ as both odd or both even. Also, $b + 6 - a$ is less than $b + 6 + a$. So the possible factors of $36$ that correspond to $(b + 6 - a, b + 6 + a)$ are $(-18, -2), (-6, -6), (2, 18)$, and $(6, 6)$. The $b$s that correspond to each of these are $-16, -12, 4, 0$. This gives a sum of $-24$.
+
+\soln3 From the fact that the discriminant is $b^2 + 12b = (b + 6)^2 - 36$, we can see that if $b$ is a solution, then $-12 - b$ has to be a solution as well, because $$(b + 6)^2 - 36 = \left((-12 - b) + 6\right)^2 + 36.$$ By pairing up $b$ and $-12-b$, we see the answer has to be some multiple of $-12$. Looking at the choices, we see $4$, which happens to be a solution. By inspection, $0$ has to be another solution. So we have at least two pairs of solutions adding up to $-12$, which means the answer is at most $-24$. But this is the smallest choice, so it must be correct.
+
+\rem{Completing the square is a neat trick here, and is a good idea whenever we have a quadratic Diophantine equation. Compare \href{https://artofproblemsolving.com/community/c5h623889p3734545}{AMC 2015 12A Problem 18 / 10A Problem 23}, ``The zeroes of the function $f(x)=x^2-ax+2a$ are integers. What is the sum of all possible values of $a$?'' }
+
+\item A number $x$ is selected randomly from the set of all real numbers such that a triangle with side lengths $5, 8,$ and $x$ may be formed. What is the probability that the area of this triangle is greater than $12$?
+
+\fourch{$\dfrac{3\sqrt{15} - 5}{10}$}{$\dfrac{3\sqrt{15} - \sqrt{41}}{10}$}{$\dfrac{3\sqrt{17} - 5}{10}$}{$\dfrac{3\sqrt{17} - \sqrt{41}}{10}$}
+
+\ans $\boxed{\text{(c) }\dfrac{3\sqrt{17} - 5}{10}}$.
+
+\soln1 Consider how the area of the triangle varies as $x$ varies. When $x$ is close to $3$, the area is close to zero. As $x$ increases, the area gradually increases until it reaches a maximum. Then as $x$ continues increasing, the area decreases, until when $x$ is close to $13$, and it becomes close to zero again. So there's some minimum value of $x$ and some maximum value of $x$, where in between these values the area of the triangle is at least $12$. At these values, the area of the triangle must be $12$.
+
+We use Heron's formula to determine when the area is $12$. The semiperimeter is $s = \dfrac{x + 13}{2}$, and we get
+\begin{align*}
+  12 &= \sqrt{s(s-a)(s-b)(s-c)} \\
+  144 &= \frac{x + 13}{2}\cdot \frac{x + 3}{2} \cdot \frac{x - 3}{2} \cdot \frac{13 - x}{2} \\
+  2304 &= (169 - x^2)(x^2 - 9),
+\end{align*}
+which conveniently factors into $(x^2 - 25)(x^2 - 153) = 0$. Discarding the negative solutions, the area of the triangle is $12$ when $x = 5$ or $x = 3\sqrt{17}$, and is greater than $12$ for any value in between. Since $x$ can be any value between $3$ and $13$, the probability is $\dfrac{3\sqrt{17} - 5}{10}$.
+
+\soln2 Here's another way to find for which $x$ the area would be $12$. Let $\theta$ be the angle opposite $x$, and use the formula $\frac{1}{2}bc \sin \theta$ for the area. We find that $$\frac{1}{2}\cdot5\cdot8\cdot\sin \theta = 12 \implies \sin \theta = \frac{3}{5}.$$ From $\sin^2 \theta + \cos^2 \theta = 1$, we find that $\cos \theta = \pm\frac{4}{5}$. We can then use the law of cosines to find the possible $x$:
+$$x = \sqrt{5^2 + 8^2 - 2\cdot5\cdot8\cdot\cos \theta} = \sqrt{89 \pm 64} = 5, 3\sqrt{17}.$$
+
+\item Two numbers $a$ and $b$ are chosen randomly from the set $\{1, 2, \ldots, 10\}$ in order, and with replacement. What is the probability that the point $(a, b)$ lies above the graph of $y = ax^{3} - bx^2$?
+
+\fourch{$\dfrac{4}{15}$}{$\dfrac{9}{50}$}{$\dfrac{19}{100}$}{$\dfrac{1}{5}$}
+
+\ans $\boxed{\text{(c) }\dfrac{19}{100}}$.
+
+\sol For $(a, b)$ to lie above the graph, it must be the case that $y > ax^3 - bx^2$, or $b > a^4 - a^2b$. This rearranges to $b > \dfrac{a^4}{a^2 + 1} = a^2 + \dfrac{1}{a^2 + 1}$. As $b$ has to be an integer, we get $b \ge a^2$. We now do casework on the value of $a$:
+
+\begin{itemize}[itemsep=-0.7ex]
+  \item If $a = 1$, then any value of $b$ works, so there are $10$ possible pairs $(a, b)$ that work.
+
+  \item If $a = 2$, then $b \ge 4$ work, giving $7$ possible pairs.
+
+  \item If $a = 3$, then $b \ge 9$ work, giving $2$ pairs.
+
+  \item For $a \ge 4$, we find that $a^2 > 10$, so there's no value of $b$ that works.
+\end{itemize}
+
+This gives us $10 + 7 + 2 = 19$ possible pairs that work out of $100$, so the probability is $\dfrac{19}{100}$.
+
+\item For a real number $t$, $\floor{t}$ is the greatest integer less than or equal to $t$. How many integers $n$ are there with $4 \le n \le 2019$ such that $\floor{\sqrt{n}}$ divides $n$ and $\floor{\sqrt{n+1}}$ divides $n+1$?
+
+\fourch{$44$}{$42$}{$40$}{$38$}
+
+\ans $\boxed{\text{(b) }42}$.
+
+\sol We determine which integers $n$ satisfy $\floor{\sqrt{n}}$ divides $n$. Let $k = \floor{\sqrt{n}}$, and let $r$ be such that $n = k^2 + r$. Note that $0 \le r < 2k + 1$, because otherwise $k + 1$ would be the largest integer less than or equal to $\sqrt{n}$. If $k$ divides $n$, it then means $r$ must be either $0$, $k$, or $2k$.
+
+Now if $n = k^2$, then $n + 1$ would be $k^2 + 1$, which cannot satisfy the conditions for $\floor{\sqrt{n}}$ to divide $n$. Similarly, if $n = k^2 + k$, then $k^2 + k + 1$ also can't satisfy the conditions for $\floor{\sqrt{n}}$ to divide $n$.
+
+So it must be the case that $n = k^2 + 2k$, and $n + 1 = k^2 + 2k + 1$, which is $(k + 1)^2$. This indeed satisfies the conditions for $\floor{\sqrt{n+1}}$ to divide $n+1$. So any positive integer $n$ equal to $k^2 + 2k$ for some $k$ works.
+
+For $4 \le k^2 + 2k \le 2019$, we must have $k = 2, 3, \ldots, 43$. So there are $42$ choices of $k$ that works.
+
+\rem{The numbers $n$ such that $\floor{\sqrt{n}}$ divides $n$ are \href{https://oeis.org/A006446}{OEIS A006446{}}.}
+
+\item The number $20^5 + 21$ has two prime factors which are three-digit numbers. Find the sum of these numbers.
+
+\fourch{$1112$}{$1092$}{$1062$}{$922$}
+
+\ans $\boxed{\text{(a) }1112}$.
+
+\soln1 Letting $x = 20$, we're motivated to factor $x^5 + x + 1$. Let $\omega$ be a primitive cube root of unity; that is, $\omega$ satisfies $\omega^3 = 1$ but $\omega \ne 1$. This is $$\omega^3 - 1 = (\omega - 1)(\omega^2 + \omega + 1) = 0$$ and as $\omega \ne 1$, we get $\omega^2 + \omega + 1 = 0$. Also, from $\omega^3 = 1$, we can multiply both sides by $\omega^2$ to get $\omega^5 = \omega^2$. So $$\omega^5 + \omega + 1 = \omega^2 + \omega + 1 = 0,$$ and $\omega$ is a root of $x^5 + x + 1$, so $x^2 + x + 1$ must be a factor of $x^5 + x + 1$. Indeed, $x^5 + x + 1 = (x^2 + x + 1)(x^3 - x^2 + 1)$, and so we get $20^5 + 21 = 421 \cdot 7601$. We're given that the number has two prime factors which are three-digit numbers, so $7601$ has to be divisible by some small prime. Checking small primes shows that it's divisible by $11$, as $7601 = 11 \cdot 691$. So the two primes are $421$ and $691$, and their sum is $1112$.
+
+\soln2 There are several other ways to find the factorization. We can quickly check that $x^5 + x + 1$ doesn't have $x+1$ or $x-1$ as a factor, so if it is factorable, it must be a cubic times a quadratic:
+\[
+  x^5 + x + 1 = (x^3 + ax^2 + bx + 1)(x^2 + cx + 1).
+\]
+Expanding the right-hand side, we get
+\[
+  x^5 + (a + c)x^4 + (ac + b + 1)x^3 + (a + bc + 1)x^2 + (b + c)x + 1 = 0.
+\]
+By comparing coefficients, we find the solution $(a, b, c) = (-1, 0, 1)$, which gives us the factorization.
+
+\rem{I've used the same problem in one of the tests I've written. See \href{https://cjquines.com/files/prime2017/primefinal.pdf}{PRIME 2017 Final III.3{}}, ``What is the sum of the prime factors of $3\,200\,021$?''}
+
+\end{enumerate}
+
+\noindent\textbf{PART III.} All answers should be in simplest form. Each correct answer is worth six points.
+
+\begin{enumerate}[align=left,leftmargin=*,resume]
+
+\item Find the number of ordered triples of integers $(m, n, k)$ with $0 < k < 100$ satisfying
+\[
+  \dfrac{1}{2^m} - \dfrac{1}{2^n} = \dfrac{3}{k}.
+\]
+
+\ans $\boxed{13}$.
+
+\sol Rearranging the equation, we get
+$$
+\frac{2^{n-m} - 1}{2^n} = \frac{3}{k} \implies k(2^{n-m} - 1) = 3 \cdot 2^n.$$
+For the left-hand side to be positive, we must have $n > m$. So the factor $2^{n-m} - 1$ has to be odd. We get that $2^n$ has to divide $k$, and we can write $k$ as $2^n \ell$ for some integer $\ell$, to get
+$$
+\ell(2^{n-m} - 1) = 3.
+$$
+We have two cases:
+\begin{itemize}[itemsep=-0.7ex]
+  \item $\ell = 3$ and $2^{n-m} - 1 = 1$. In this case, $n - m = 1$, and $k = 3 \cdot 2^n$. For $0 < 3 \cdot 2^n < 100$, we get that $n = 0, 1, \ldots, 5$, giving $6$ possible triples.
+
+  \item $\ell = 1$ and $2^{n-m} - 1 = 3$. In this case, $n - m = 2$, and $k = 2^n$. For $0 < 2^n < 100$, we must have $n = 0, 1, \ldots, 6$, giving $7$ possible triples.
+\end{itemize}
+In total, this gives us $13$ possible triples.
+
+\item Triangle $ABC$ has $\angle BAC = 60\dg$ and circumradius $15$. Let $O$ be the circumcenter of $ABC$ and let $P$ be a point inside $ABC$ such that $OP = 3$ and $\angle BPC = 120\dg$. Determine the area of triangle $BPC$.
+
+\ans $\boxed{54\sqrt{3}}$.
+
+\sol As $\angle BAC = 60\dg$ and $O$ is the circumcenter, we get that $\angle BOC = 120\dg$. As this is equal to $\angle BPC$, quadrilateral $BPOC$ is cyclic. This motivates us to draw the radii $BO$ and $CO$, both of which have length $15$. Using the law of cosines on $\triangle BOC$, we find that $BC = 15\sqrt{3}$.
+
+\begin{center}
+\begin{asy}
+size(6.5cm);
+pair A = dir(110);
+pair B = dir(210);
+pair C = dir(330);
+pair O = origin;
+pair L = circumcenter(B, O, C);
+pair P = rotate(20, L)*O;
+
+draw(A--B--C--cycle);
+draw(B--O--C--P--B^^O--P);
+draw(circumcircle(A, B, C));
+draw(arc(L, distance(B, L), 15, 165), dashed+rgb(0.1,0.417,0.571));
+
+dot("$A$", A, dir(A));
+dot("$B$", B, dir(B));
+dot("$C$", C, dir(C));
+dot("$O$", O, N);
+dot("$P$", P, NW);
+
+label("$15$", O--B, S);
+label("$15$", O--C, 2*N);
+label("$15\sqrt{3}$", B--C, S);
+label("$b$", B--P, NW);
+label("$c$", P--C, SW);
+label("$3$", P--O, N);
+\end{asy}
+\end{center}
+
+Let $b = BP$ and $c = CP$. Using the law of cosines again on $\triangle BPC$, we find that $b^2 + bc + c^2 = 675$. Applying Ptolemy's theorem on quadrilateral $BPOC$ gives us \[
+  15c = 45\sqrt{3} + 15b \implies c - b = 3\sqrt{3}.
+\]
+We can square this equation to get $b^2 - 2bc + c^2 = 27$. Combining with the previous equation, we find $bc = 216$. The area of $\triangle BPC$ is then
+\[
+  \frac{1}{2}bc \sin 120\dg = \frac{1}{2}\cdot216\cdot\frac{\sqrt{3}}{2} = 54\sqrt{3}.
+\]
+
+\item A string of $6$ digits, each taken from the set $\{0, 1, 2\}$, is to be formed. The string should \textbf{not} contain any of the substrings $012$, $120$, and $201$. How many such $6$-digit strings can be formed?
+
+\ans $\boxed{492}$.
+
+\soln1 We use PIE and complementary counting. In particular, we need to know the number of $6$-digit strings that \textbf{do} contain some of these substrings. By using symmetry, we only have to consider three cases:
+\begin{itemize}[itemsep=-0.7ex]
+  \item The string contains $012$. We have to choose the other $3$ digits in $3^3$ ways, and then arrange $012$ with the other $3$ digits in $4$ ways. But this counts the string $012012$ twice, so the actual count is $3^3\cdot4 - 1 = 107$.
+
+  \item The string contains both $012$ and $120$. This can appear as $0120$, which by similar logic, happens in $3\cdot3^2 = 27$ possible ways, or as $12012$, which happens in $2\cdot3 = 6$ possible ways, or as $012120$, or $120012$, which are $2$ ways. But the strings $012012$ and $120120$ are counted twice, so the actual count is $27 + 6 + 2 - 2 = 33$.
+
+  \item The string contains all of $012$, $120$, and $201$. There are, again, $6$ possible ways for it to contain each of $01201$, $12012$, or $20120$. But the strings $012012$, $120120$, and $201201$ are each counted twice. So the actual count is $6 + 6 + 6 - 3 = 15$.
+\end{itemize}
+As there are $729$ possible strings in total, the answer is $729 - 3 \cdot 107 + 3 \cdot 33 - 15 = 492$.
+
+\soln2 Let the string be $s_1s_2 \cdots s_6$, and consider the transformed string $t_1t_2 \cdots t_6$, where $t_i = s_i - i$ modulo $3$. Then instead of avoiding the substrings $012$, $120$, and $201$, we want to avoid the substrings $000$, $111$, and $222$ instead. Call a string \textit{valid} if it satisfies this.
+
+Let $a_n$ denote the number of such strings of length $n$. Given a valid string $t_1t_2 \cdots t_n$, there are two cases. The first case is that $t_n = t_{n-1}$, which means $t_{n-1} \ne t_{n-2}$ and removing the last two characters gives a valid string of length $n-2$. The second case is that $t_n \ne t_{n-1}$, and removing the last character gives a valid string of length $n-1$.
+
+So given a valid string of length $n-2$, we can append two of $00$, $11$, or $22$ to make a valid string of length $n$. Similarly, given a valid string of length $n-1$, we can append two of $0$, $1$, or $2$ to make a valid string of length $n$. We thus get the recursion $a_n = 2a_{n-1} + 2a_{n-2}$. The base cases are $a_1 = 3$ and $a_2 = 9$. We continue to find $24$, $66$, $180$, then $492$, which is the answer.
+
+\soln3 We proceed from the previous solution, and count the number of strings that avoid $000$, $111$, and $222$. Let $b_n$ be the number of valid strings $t_1 \cdots t_n$ such that $t_{n-1} = t_n$, and let $c_n$ be the number of valid strings such that $t_{n-1} \ne t_n$. We can then write the recursions
+\begin{align*}
+b_n &= c_{n-1} \\
+c_n &= 2c_{n-1} + 2b_{n-1},
+\end{align*}
+with the base cases $b_1 = 0$, $b_2 = 3$, $c_1 = 3$, and $c_2 = 6$. It can be checked that this gives the same answer of $492$.
+
+\rem{The sequence $a_n$ is \href{https://oeis.org/A121907}{OEIS A121907{}}. Compare to \href{https://cjquines.com/files/pmo2019areas.pdf}{PMO 2019 Areas I.11} ``A \emph{Vitas word} is a string of letters that satisfies the following conditions: it consists of only the letters B, L, R; it begins with a B and ends in an L; no two consecutive letters are the same. How many Vitas words are there with $11$ letters?''}
+
+\item Suppose $a, b$, and $c$ are positive integers less than $11$ such that
+\begin{align*}
+3a + b + c &\equiv abc \pmod{11} \\
+a + 3b + c &\equiv 2abc \pmod{11} \\
+a + b + 3c &\equiv 4abc \pmod{11}.
+\end{align*}
+What is the sum of all possible values of $abc$?
+
+\ans $\boxed{198}$.
+
+\sol The key idea is that, modulo $11$, we can divide both sides of congruences by numbers that aren't multiples of $11$. For example, to divide by $5$, we can multiply both sides by $9$, because $5 \cdot 9 \equiv 1 \pmod{11}$. For example, if we add the three congruences, we can multiply both sides by $9$ to get
+\begin{align*}
+5a + 5b + 5c &\equiv 7abc \pmod{11} \\
+a + b + c &\equiv 8abc \pmod{11}.
+\end{align*}
+Subtracting this from the original congruences, and then multiplying both sides by $6$ to get rid of the $2$, we find
+\[
+  a \equiv 2abc, \qquad b \equiv 8abc, \qquad c \equiv 9abc \pmod{11}.
+\]
+Multiplying all three, we get $abc \equiv (abc)^3$. As $abc \not\equiv 0$, we find that $abc \equiv 1$ or $abc \equiv 10$. Substituting these to the previous equivalences, we get that $(a, b, c) = (2, 8, 9)$ or $(a, b, c) = (9, 3, 2)$. The sum of all possible $abc$ is then $2\cdot8\cdot9 + 9\cdot3\cdot2 = 198$.
+
+\rem{Working in congruences modulo primes are nice, because you can divide by nonzero numbers. In other words, the integers modulo a prime form a \href{https://en.wikipedia.org/wiki/Field_(mathematics)}{field}, where we can add, subtract, multiply, and divide. For small primes, we can figure out how to divide by trial and error. Compare \href{http://pmo.ph/wp-content/uploads/2014/08/19th-PMO-Qualifying-Stage-Questions-and-Answers.pdf}{PMO 2017 Qualifying I.11}, ``When $2a$ is divided by $7$, the remainder is $5$. When $3b$ is divided by $7$, the remainder is also $5$. What is the remainder when $a+b$ is divided by $7$?''}
+
+\item Find the minimum value of $\dfrac{7x^2 - 2xy + 3y^2}{x^2 - y^2}$ if $x$ and $y$ are positive real numbers such that $x > y$.
+
+\ans $\boxed{2\sqrt{6} + 2}$.
+
+\soln1 The fact that we're minimizing something involving positive real numbers, and that we have $x > y$, motivates us to do something using AM--GM. We want to rewrite the expression as a sum of terms so that they cancel. We would want to find $a$, $b$, and $c$ such that
+\[
+  \dfrac{7x^2 - 2xy + 3y^2}{x^2 - y^2} = a \cdot\frac{x + y}{x - y} + b \cdot \frac{x-y}{x + y} + c,
+\]
+for all $x$ and $y$. By expanding the right-hand side and comparing coefficients, we get the system of equations
+\begin{align*}
+a + b + c &= 7 \\
+2a - 2b &= -2 \\
+a + b - c &= 3.
+\end{align*}
+Adding all three equations gives $4a = 8$, so $a = 2$. Substituting to the second equation gives $b = 3$, and substituting to the first equation gives $c = 2$. Using AM--GM on the first two terms, we find
+\[
+  \dfrac{7x^2 - 2xy + 3y^2}{x^2 - y^2} = 2\cdot\frac{x + y}{x - y} + 3\cdot \frac{x-y}{x + y} + 2 \ge 2\sqrt{6} + 2,
+\]
+and equality can be achieved by setting $2\cdot\frac{x + y}{x - y}$ and $3\cdot \frac{x-y}{x + y}$ equal to each other.
+
+\soln2 Let the minimum value be $k$. Because it is the minimum, then for all positive $x$ and $y$ such that $x > y$, we get
+\begin{align*}
+\frac{7x^2 - 2xy + 3y^2}{x^2 - y^2} &\ge k \\
+7x^2 - 2xy + 3y^2 - k(x^2 - y^2) &\ge 0 \\
+(7 - k)\left(\frac{x}{y}\right)^2 - 2 \cdot\frac{x}{y} + (3 + k) &\ge 0.
+\end{align*}
+This is a quadratic in terms of $\frac{x}{y}$ that is always nonnegative. That means that it has exactly one real root, which means its discriminant must be zero. This means that
+\[
+  4 - 4(7 - k)(3 + k) = 0 \implies k = 2 \pm 2\sqrt{6},
+\]
+but as $k$ can't be negative, it must be $2 + 2\sqrt{6}$.
+
+\rem{Compare \href{http://pmo.ph/wp-content/uploads/2014/08/19th-PMO-Qualifying-Stage-Questions-and-Answers.pdf}{PMO 2017 Qualifying II.4}, ``If $b > 1$, find the minimum value of $\frac{9b^2 - 18b + 13}{b - 1}$'', or \href{http://pmo.ph/wp-content/uploads/2018/08/PMO-20-Qualifying-Round-with-answers-only.pdf}{PMO 2018 Qualifying III.3}, ``Find the minimum value of $\frac{18}{a + b} + \frac{12}{ab} + 8a + 5b$, where $a$ and $b$ are positive real numbers''.}
+
+\end{enumerate}
+
+\emph{With thanks to David Altizio, Raphael Dylan Dalida, Richard Eden, Sharvil Kesarwani, Siva Muthupalaniappan, Issam Wang, and Andrew Wu for comments.}
+
+\end{document}

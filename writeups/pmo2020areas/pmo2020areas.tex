@@ -1,0 +1,639 @@
+\documentclass[11pt,paper=letter]{scrartcl}
+\usepackage[parskip]{cjquines}
+
+\newcommand{\ans}{{\sffamily \bfseries Answer.}\;}
+\newcommand{\sol}{{\sffamily \bfseries Solution.}\;}
+\newcommand{\soln}[1]{{\sffamily \bfseries Solution #1.}\;}
+\newcommand{\rem}[1]{{\small \sffamily \sansmath {\bfseries Remark.} #1}}
+
+\begin{document}
+
+\title{PMO 2020 Area Stage}
+\author{Carl Joshua Quines}
+\date{November 16, 2019}
+
+\maketitle
+
+Are any explanations unclear? If so, contact me at \mailto{cj@cjquines.com}. More material is available on my website: \url{https://cjquines.com}.
+
+\textbf{PART I.} Give the answer in the simplest form that is reasonable. No solution is needed. Figures are not drawn to scale. Each correct answer is worth three points.
+
+\begin{enumerate}[left=0pt]
+
+\item If the sum of the first $22$ terms of an arithmetic progression is $1045$ and the sum of the next $22$ terms is $2013$, find the first term.
+
+\ans $\boxed{\dfrac{53}{2}}$.
+
+\sol Letting the first term be $a$ and the common difference be $d$, we get two equations:
+\begin{align*}
+a + (a + d) + (a + 2d) + \cdots + (a + 21d) &= 1045, \\
+(a + 22d) + (a + 23d) + (a + 24d) + \cdots + (a + 43d) &= 2013.
+\end{align*}
+Taking the difference of the two equations, we get $22d + 22d + \cdots + 22d = 484d = 968$, so $d = 2$. Using the formula $1 + 2 + \ldots + n = \dfrac{n(n+1)}{2}$, the first equation becomes $22a + 231d = 1045$, and substituting $d = 2$ gives $a = \dfrac{53}{2}$.
+
+\item How many positive divisors do $50\,400$ and $567\,000$ have in common?
+
+\ans $\boxed{72}$.
+
+\sol Any common positive divisor of the two numbers must also divide their GCD, so we need to count the number of divisors of their GCD. Factoring, $50\,400 = 2^5 \cdot 3^2 \cdot 5^2 \cdot 7$ and $567\,000 = 2^3 \cdot 3^4 \cdot 5^3 \cdot 7$, so their GCD is $2^3 \cdot 3^2 \cdot 5^2 \cdot 7$. By a well-known formula, this number has $(3 + 1)(2 + 1)(2 + 1)(1 + 1) = 72$ divisors.
+
+\item In the figure below, an equilateral triangle of height $1$ is inscribed in a semicircle of radius $1$. A circle is then inscribed in the triangle. Find the fraction of the semicircle that is shaded.
+
+\begin{center}
+\begin{asy}
+size(6cm);
+
+draw(arc((0, 0), 1, 0, 180));
+draw((-1, 0)--(1, 0));
+real r = sqrt(3)/3;
+draw((-r, 0)--(0, 1)--(r, 0));
+filldraw(circle((0, 1/3), 1/3), gray, black);
+\end{asy}
+\end{center}
+
+\ans $\boxed{\dfrac{2}{9}}$.
+
+\sol Because the triangle is equilateral, the inscribed circle has its center on the triangle's centroid. The centroid divides the height $1$ in the ratio $2$ to $1$, so the radius of the incircle must be $\frac{1}{3}$, and its area is $\frac{\pi}{9}$. The area of the semicircle is $\frac{\pi}{2}$, so the ratio is $\frac{2}{9}$.
+
+\item Determine the number of ordered quadruples $(a, b, c, d)$ of odd positive integers that satisfy the equation $a + b + c + d = 30$.
+
+\ans $\boxed{560}$.
+
+\sol As $a$, $b$, $c$, and $d$ are odd positive integers, we can rewrite them as $2a' - 1$, $2b' - 1$, $2c' - 1$, and $2d' - 1$, where $a'$, $b'$, $c'$, and $d'$ can be any positive integer. The equation becomes
+\[
+  (2a' - 1) + (2b' - 1) + (2c' - 1) + (2d' - 1) = 30 \implies a' + b' + c' + d' = 17.
+\]
+By \href{https://en.wikipedia.org/wiki/Stars_and_bars_(combinatorics)#Theorem_one}{balls and urns}, the answer is $\displaystyle \binom{16}{3} = 560$.
+
+\rem{David Altizio believes that the earliest reference is \href{https://artofproblemsolving.com/wiki/index.php/1998_AIME_Problems/Problem_7}{AIME 1998 Problem 7{}}: ``Let $n$ be the number of ordered quadruples $(x_1, x_2, x_3, x_4)$ of positive odd integers that satisfy $\sum_{i=1}^4 x_i = 98$. Find $\frac{n}{100}$.'' Compare to \href{http://pmo.ph/wp-content/uploads/2015/10/18thPMO-QualifyingRound-Questions.pdf}{PMO 2016 Qualifying III.4}: ``Let ${N = \cbr{0, 1, 2 \ldots}}$. Find the cardinality of the set ${\cbr{(a, b, c, d, e) \in N^5 : 0 \leq a + b \leq 2, 0 \leq a + b + c + d + e \leq 4}}$'', or \href{http://pmo.ph/wp-content/uploads/2014/08/18th-PMO-Area-Stage.pdf}{PMO 2016 Areas I.9}: ``How many ways can you place ${10}$ identical balls in 3 baskets of different colors if it is possible for a basket to be empty?'', or \href{http://pmo.ph/wp-content/uploads/2014/08/18th-PMO-National-Stage-Oral-Phase-Q-and-A.pdf}{PMO 2016 Nationals Easy 11}: ``How many solutions does ${x + y + z = 2016}$ have, where ${x}$, ${y}$, and ${z}$ are integers with ${x > 1000}$, ${y > 600}$, and ${z > 400}$?'', or \href{http://pmo.ph/wp-content/uploads/2014/08/19th-PMO-Qualifying-Stage-Questions-and-Answers.pdf}{PMO 2017 Qualifying II.9}: ``How many ordered triples of positive integers ${(x, y, z)}$ are there such that ${x + y + z = 20}$ and two of ${x}$, ${y}$, ${z}$ are odd?'', or \href{http://cjquines.com/files/pmo2019quals.pdf}{PMO 2019 Qualifying I.5}: ``Juan has ${4}$ distinct jars and a certain number of identical balls. The number of ways that he can distribute the balls into the jars where each jar has at least one ball is ${56}$. How many balls does he have?'', or \href{https://cjquines.com/files/pmo2019areas.pdf}{PMO 2019 Areas I.16}: ``Compute the number of ordered $6$-tuples $(a,b,c,d,e,f)$ of positive integers such that $a + b + c + 2(d+e+f) = 15$,'' or \href{https://cjquines.com/files/pmo2020quals.pdf}{PMO 2020 Qualifying I.10}: ``Suppose that $n$ identical promo coupons are to be distributed to a group of people, with no assurance that everyone will get a coupon. If there are $165$ more ways to distribute these to four people than there are ways to distribute these to three people, what is $n$?''}
+
+\item Suppose a real number $x > 1$ satisfies \[
+  \log_{\cbrt{3}}\left(\log_3 x \right)
+  + \log_3\left(\log_{27} x\right)
+  + \log_{27}\left(\log_{\cbrt{3}} x\right) = 1.
+\]
+Compute $\log_3(\log_3 x)$.
+
+\ans $\boxed{\dfrac{5}{13}}$.
+
+\sol We first express everything in terms of base $3$ using the change of base formula. In particular,
+\[
+  \log_{\cbrt{3}}\left(\log_3 x \right) =
+  \frac{\log_3\left(\log_3 x\right)}{\log_3 \cbrt{3}} = 3\log_3 \left(\log_3 x\right),
+\]
+and by using change of base and the quotient rule,
+\[
+  \log_3\left(\log_{27} x\right) = \log_3\left(\frac{\log_3 x}{\log_3 27}\right) = \log_3\left(\log_3 x\right) - \log_3 \log_3 27 = \log_3\left(\log_3 x\right) - 1,
+\]
+and similarly,
+\[
+  \log_{27}\left(\log_{\cbrt{3}} x\right) = \frac{\log_3 \left( \frac{\log_3 x}{\log_3 \cbrt{3}} \right)}{\log_3 27}
+  = \frac{1}{3} \left(\log_3 \left(\log_3 x\right) - \log_3 \left(\log_3 \cbrt{3}\right)\right)
+  = \frac{1}{3} \left(\log_3 \left(\log_3 x\right) + 1\right).
+\]
+The equation then becomes
+\[
+  \frac{13}{3} \log_3 \left(\log_3 x\right) - \frac{2}{3} = 1 \implies \log_3 \left(\log_3 x\right) = \frac{5}{13}.
+\]
+
+\item Let $f(x) = x^2 + 3$. How many positive integers $x$ are there such that $x$ divides $f(f(f(x)))$?
+
+\ans $\boxed{6}$.
+
+\sol Note that $f(f(f(x)))$ is some polynomial in terms of $x$ with integer coefficients. All of its terms, like $x^6$ or $12x^2$, have $x$ as a factor, and are divisible by $x$, except for the constant term. The constant term of $f(x)$ is $3$, so the constant term of $f(f(x))$ is $3^2 + 3 = 12$, and the constant term of $f(f(f(x)))$ is $12^2 + 3 = 147$. As $147 = 3 \cdot 7^2$, it has $(1 + 1)(2 + 1) = 6$ positive divisors, each of which could be a possible value of $x$.
+
+\item In $\triangle XYZ$, let $A$ be a point on (segment) $YZ$ such that $XA$ is perpendicular to $YZ$. Let $M$ and $N$ be the incenters of triangles $XYA$ and $XZA$, respectively. If $YZ = 28$, $XA = 24$, and $YA = 10$, what is the length of $MN$?
+
+\ans $\boxed{2\sqrt{26}}$.
+
+\sol Let $P$ and $Q$ be the feet from $M$ and $N$ to $XA$, respectively, and let $R$ and $S$ be the feet from $M$ and $N$ to $YZ$, respectively.
+
+\begin{center}
+\begin{asy}
+size(9cm);
+
+pair X = dir(120);
+pair Y = dir(200);
+pair Z = dir(340);
+pair A = foot(X, Y, Z);
+pair M = incenter(X, Y, A);
+pair N = incenter(X, Z, A);
+pair P = foot(M, X, A);
+pair Q = foot(N, X, A);
+pair R = foot(M, Y, Z);
+pair S = foot(N, Y, Z);
+
+draw(X--Y--Z--cycle);
+draw(X--A);
+draw(R--M--P);
+draw(S--N--Q);
+draw(circle(M, distance(M, P)));
+draw(circle(N, distance(N, Q)));
+
+dot("$X$", X, (0, 1));
+dot("$Y$", Y, SW);
+dot("$Z$", Z, SE);
+dot("$A$", A, (0, -1));
+dot("$M$", M, (0, 1));
+dot("$N$", N, (0, 1));
+dot("$P$", P, NE);
+dot("$Q$", Q, NW);
+dot("$R$", R, (0, -1));
+dot("$S$", S, dir(S));
+\end{asy}
+\end{center}
+
+As $\triangle XAY$ is a $5$--$12$--$13$ triangle, we find $XY = 26$, and as $\triangle XAZ$ is a $3$--$4$--$5$ triangle, we find $XZ = 30$. It is well-known that the inradius of a right triangle is $\dfrac{a + b - c}{2}$, where $a$ and $b$ are the lengths of its legs and $c$ is the length of its hypotenuse. Thus $MP = MR = 4$ and $NQ = NS = 6$, as they are all inradii.
+
+Finally, note that we can form a right triangle with hypotenuse $MN$, which has legs of length $PQ$ and $MP + NQ$. As $PQ = NS - MR = 2$, by the Pythagorean theorem, $MN = \sqrt{2^2 + 10^2} = \sqrt{104} = 2\sqrt{26}$.
+
+\rem{It's possible to solve this problem with Cartesian coordinates; a reasonable choice is $A = (0, 0)$, $X = (0, 24)$, $Y = (-10, 0)$, and $Z = (18, 0)$, giving $M = (-4, 4)$ and $N = (6, 6)$, then the distance formula finishes.
+
+To prove the formula for the inradius, consider that the area is both $\frac{1}{2}ab$ and the inradius times the semiperimeter, $\frac{1}{2}(a + b + c)$. So the inradius is the area divided by the semiperimeter, meaning it is $\frac{ab}{a + b + c}$. This can be simplified as $\frac{ab}{a + b + c} \cdot \frac{a + b - c}{a + b - c} = \frac{ab(a + b - c)}{(a + b)^2 - c^2} = \frac{ab(a + b - c)}{(a^2 + b^2 - c^2) + 2ab} = \frac{a + b - c}{2}.$}
+
+\item Find the largest three-digit integer for which the product of its digits is $3$ times the sum of its digits.
+
+\ans $\boxed{951}$.
+
+\sol Let its digits be $a$, $b$, and $c$, and without loss of generality, let $a \ge b \ge c$. To make the number as large as possible, we start with the largest possible value of $a$, which is $9$. The condition becomes $9bc = 3(b + c + 9)$. We use \href{https://artofproblemsolving.com/wiki/index.php/Simon%27s_Favorite_Factoring_Trick}{Simon's Favorite Factoring Trick{}} to write this as
+\[
+  9bc - 3b - 3c = 27 \implies (3b - 1)(3c - 1) = 28.
+\]
+As $b \ge c$, we have $3b - 1 \ge 3c - 1$, so $(3b - 1, 3c - 1)$ can be any of $(28, 1)$, $(14, 2)$, or $(7, 4)$. The only one that gives integer solutions for $b$ and $c$ is $(14, 2)$, which gives $b = 5$ and $c = 1$. This gives us the three-digit number $951$ as the only solution when $a = 9$. Any other solution will have a smaller $a$, and give a smaller integer, so this is the largest solution.
+
+\rem{Compare to \href{https://cjquines.com/files/pmo2018areas.pdf}{PMO 2018 Areas I.7{}}: ``Determine the area of the polygon formed by the ordered pairs $(x, y)$ where $x$ and $y$ are positive integers that satisfy the equation $\frac1x + \frac1y = \frac1{13}$,'' and \href{http://pmo.ph/wp-content/uploads/2014/08/18th-PMO-National-Stage-Oral-Phase-Q-and-A.pdf}{PMO 2014 Orals Easy 4}: ``Find positive integers $a, b, c$ such that $a + b + ab = 15, b + c + bc = 99$ and $c + a + ca = 399$.''}
+
+\item A wooden rectangular brick with dimensions $3$ units by $a$ units by $b$ units is painted blue on all six faces and then cut into $3ab$ unit cubes. Exactly $1/8$ of these unit cubes have all their faces unpainted. Given that $a$ and $b$ are positive integers, what is the volume of the brick?
+
+\ans $\boxed{96}$.
+
+\sol The number of unpainted unit cubes form a rectangular brick of dimensions $1 \times a - 2 \times b - 2$, so there are $(a-2)(b-2)$ unpainted unit cubes. This means that
+\[
+  (a-2)(b-2) = \frac{3ab}{8} \implies 5ab - 16a - 16b + 32 = 0.
+\]
+We try to use Simon's Favorite Factoring Trick. Seeing that there is a $-16a$ and $-16b$, we want something of the form $(?a - 16)(?b - 16)$, in order to get something divisible by $16$. To get $5ab$, we try $(5a - 16)(5b - 16)$, which gives us
+\[
+  (5a - 16)(5b - 16) = 25ab - 80a - 80b + 256
+\]
+But notice that the first three terms are actually $5(5ab - 16a - 16b)$, which by the given equation, we know is $5(-32) = -160$. So we get
+\[
+  (5a - 16)(5b - 16) = 5(5ab - 16a - 16b) + 256 = 96.
+\]
+The only factorization of $96$ that gives integer $a$ and $b$ is $4$ and $24$. Without loss of generality, setting $(5a - 16, 5b - 16) = (4, 24)$, this gives $a = 4$ and $b = 8$. The volume of the brick is $3ab = 96$.
+
+\rem{This extension of Simon's Favorite Factoring Trick, which involves multiplying both sides of the equation by some constant in order to factor it, is also well-known. Compare to \href{https://kskedlaya.org/putnam-archive/2018.pdf}{Putnam 2018 A1{}}, ``Find all ordered pairs $(a, b)$ of positive integers for which $\frac{1}{a} + \frac{1}{b} = \frac{3}{2018}$.'' }
+
+\item In square $ABCD$ with side length $1$, $E$ is the midpoint of $AB$ and $F$ is the midpoint of $BC$. The line segment $EC$ intersects $AF$ and $DF$ at $G$ and $H$, respectively. Find the area of quadrilateral $AGHD$.
+
+\ans $\boxed{\dfrac{7}{15}}$.
+
+\sol As triangle $\triangle FAD$ has base $AD = 1$ and height $1$, its area is $\frac{1}{2}$. To find the area of quadrilateral $AGHD$, we then only need to find the area of $\triangle FGH$. Let $I$ be the midpoint of $CD$, and let $AI$ intersect $DF$ at $J$.
+
+\begin{center}
+\begin{asy}
+size(5cm);
+pair A = (0,0);
+pair B = (0,-1);
+pair C = (1,-1);
+pair D = (1,0);
+pair E = (A+B)/2;
+pair F = (B+C)/2;
+pair G = extension(A, F, E, C);
+pair H = extension(D, F, E, C);
+pair I = (C+D)/2;
+pair J = extension(A, I, D, F);
+
+draw(A--B--C--D--cycle);
+draw(A--F--D);
+draw(C--E);
+draw(A--I);
+draw(rightanglemark(D, J, I, s=2));
+draw(rightanglemark(D, H, C, s=2));
+
+dot("$A$", A, NW);
+dot("$B$", B, SW);
+dot("$C$", C, SE);
+dot("$D$", D, NE);
+dot("$E$", E, W);
+dot("$F$", F, S);
+dot("$G$", G, SW);
+dot("$H$", H, 2*N);
+dot("$I$", I, (1, 0));
+dot("$J$", J, 2*N);
+\end{asy}
+\end{center}
+
+Our strategy to find its area will be to compare it to the area of $\triangle FAJ$ through similar triangles, and then to $\triangle FAD$ through the same height. A key observation is that $CE$ and $DF$ are perpendicular. To see this, rotate the square $90\dg$ around its center, which brings $CE$ to $FD$, so they must form a $90\dg$ angle with each other. Similarly, $AI$ and $FD$ must also be perpendicular.
+
+This makes several similar triangles. In particular, notice that $\triangle DJI \sim \triangle DHC$, as they share $\angle JDI$ and have $\angle DJI$ and $\angle DHC$ as both right. The ratio of similarity is $1 : 2$, because $I$ is the midpoint of $DC$. This means that $DJ$ is half the length of $DH$, or $DJ = JH$.
+
+Also, notice that $\triangle DJI \sim \triangle DCF$ for the same reason. As $FC$ is half the length of $DC$, then $JI$ is also half the length of $DJ$. But from the $90\dg$ rotation from earlier, we notice that $\triangle DJI \cong CHF$. So $HF = JI = DJ/2 = JH/2$.
+
+Finally, $\triangle FGH \sim \triangle FAJ$, because they both have right angles at $\angle GHF$ and $\angle AJF$, and they share $\angle GFH$. Since $HF$ is half the length of $JH$, the ratio of similarity is $1 : 3$, so the ratio of their areas is $1 : 9$. And $\triangle FAJ$ and $\triangle FAD$ share the same height $AJ$, so the ratio of their areas is the ratio of their bases, which is $FJ : FD = 3 : 5$. So the ratio of areas of $\triangle FGH$ and $\triangle FAD$ is $1 : 15$, and since the area of $\triangle FAD$ is $\frac{1}{2}$, the area of $\triangle FGH$ is $\frac{1}{30}$, and the area of quadrilateral $AGHD$ is $\frac{7}{15}$.
+
+\rem{Cartesian coordinates give a simpler but more computationally intensive solution; after finding the intersections, the \href{https://en.wikipedia.org/wiki/Shoelace_formula}{shoelace formula{}} gives the answer.
+
+The setup involving the segment joining the vertex of a square to the midpoint of an opposite side is rather common, and the common tricks are often completing the symmetry and rotation. For example, an interesting fact is that $AH = 1$. Also see the \href{http://mathforum.org/library/drmath/view/55267.html}{one-fifth area square{}}.}
+
+\item A sequence $\{a_n\}_{n \ge 1}$ of positive integers satisfies the recurrence relation $a_{n+1} = n\floor{a_n / n} + 1$ for all integers $n \ge 1$. If $a_4 = 34$, find the sum of all positive values of $a_1$.
+
+\ans $\boxed{130}$.
+
+\sol We work backwards. Substituting $n = 3$ to the relation, we get
+\[
+  34 = a_4 = 3\floor{a_3 / 3} + 1 \implies \floor{a_3 / 3} = 11.
+\]
+This means that $a_3$ can be any of $33$, $34$, or $35$. Substituting $n = 2$ to the relation, we get
+\[
+  a_3 = 2\floor{a_2 / 2} + 1 \implies \floor{a_2 / 2} = 16, 16.5, 17.
+\]
+As $\floor{a_2 / 2}$ is an integer, it can't be $16.5$, so it can be either $16$ or $17$. This means that $a_2$ can be any of $32$, $33$, $34$, or $35$. Finally, substituting $n = 1$ to the relation, we get that
+\[
+  a_2 = \floor{a_1 / 1} + 1 \implies \floor{a_1} = 31, 32, 33, 34.
+\]
+As $a_1$ is an integer, it can be any of $31$, $32$, $33$, or $34$. The answer is $31 + 32 + 33 + 34 = 130$.
+
+\item Let $(0, 0)$, $(10, 0)$, $(10, 8)$, and $(0, 8)$ be the vertices of a rectangle on the Cartesian plane. Two lines with slopes $-3$ and $3$ pass through the rectangle and divide the rectangle into three regions with the same area. If the lines intersect above the rectangle, find the coordinates of their point of intersection.
+
+\ans $\boxed{(5, 9)}$.
+
+\sol By symmetry, the point of intersection must be midway between the two sides of the rectangle parallel to the $y$-axis, and so it must have $x$-coordinate $5$. Let this point of intersection be $(5, a)$, for some $a$.
+
+\begin{center}
+\begin{asy}
+size(7cm);
+pair A = (0, 0);
+pair B = (10, 0);
+pair C = (10, 6);
+pair D = (0, 6);
+pair E = (5, 10);
+pair F = (3, 0);
+pair G = extension(E,F,C,D);
+
+draw(A--B--C--D--cycle);
+draw(F--E--(7,0));
+
+dot("$(5, a)$", E, W);
+dot("$\left(\dfrac{15 - a}{3}, 0\right)$", F, S);
+dot("$\left(\dfrac{23 - a}{3}, 8\right)$", G, SW);
+label((E+G)/2, "$y = 3x + a - 15$", W);
+\end{asy}
+\end{center}
+
+The line with slope $-3$ passing through $(5, a)$ is $y = 3x + a - 15$. It intersects the rectangle at the points $\left(\dfrac{15 - a}{3}, 0\right)$ and $\left(\dfrac{23 - a}{3}, 8\right)$. This line forms a trapezoid with the rectangle, with bases of lengths $\dfrac{15 - a}{3}$ and $\dfrac{23 - a}{3}$, and height of length $8$. But this region must have an area that is one-third the area of the rectangle. So
+\[
+  \left(\frac{15 - a}{3} + \frac{23 - a}{3}\right)\frac{8}{2} = \frac{80}{3} \implies a = 9,
+\]
+and the point is $(5, 9)$.
+
+\item For a positive integer $x$, let $f(x)$ be the last two digits of $x$. Find $\displaystyle \sum_{n=1}^{2019} f\left(7^{7^n}\right)$.
+
+\ans $\boxed{50\,493}$.
+
+\sol Note that the last digits of $7^1, 7^2, 7^3, 7^4, \ldots$ are $7, 49, 43, 1$, and then they repeat. So to find out what $f\left(7^m\right)$ is, we need to find what $m$ is modulo $4$. But modulo $4$, $7^1, 7^2, 7^3, \ldots$ is $3, 1, 3, 1, \ldots$. So this means that
+\begin{align*}
+f\left(7^{7^1}\right) &= f\left(7^3\right) = 43, \\
+f\left(7^{7^2}\right) &= f\left(7^1\right) = 7, \\
+f\left(7^{7^3}\right) &= f\left(7^3\right) = 43, \\
+f\left(7^{7^4}\right) &= f\left(7^1\right) = 7,
+\end{align*}
+and so on, meaning that the answer is
+\[
+  (43 + 7) + (43 + 7) + \cdots + (43 + 7) + 43 = 50 \cdot 1009 + 43 = 50\,493.
+\]
+
+\item How many positive rational numbers less than $1$ can be written in the form $\dfrac{p}{q}$, where $p$ and $q$ are relatively prime integers and $p + q = 2020$?
+
+\ans $\boxed{400}$.
+
+\sol For it to be less than $1$, we need $p < q$. As $q = 2020 - p$, this means $p < 1010$. If $p$ and $q$ are relatively prime, then so are $p$ and $p + q = 2020$, so $p$ is less than $1010$ and relatively prime to $2020$. The number of integers less than $2020$ that are relatively prime to it is $\varphi(2020)$, where $\varphi$ is \href{https://en.wikipedia.org/wiki/Euler%27s_totient_function}{Euler's totient function{}}. By a well-known formula, this is
+\[
+  \varphi(2020) = 2020\left(1 - \frac{1}{2}\right)\left(1 - \frac{1}{5}\right)\left(1 - \frac{1}{101}\right) = 800.
+\]
+Half of these must be less than $1010$, and the other half must be larger than $1010$. (To see this, note that if $p$ is relatively prime to $2020$, then so is $2020 - p$.) This means there are $400$ choices of $p$, and thus $400$ such rational numbers.
+
+\rem{Compare to \href{https://cjquines.com/files/pmo2019areas.pdf}{PMO 2019 Areas I.5{}}: ``Let $N$ be the smallest positive integer divisible by $20$, $18$, and $2018$. How many positive integers are both less than and relatively prime to $N$?''}
+
+\item The constant term in the expansion of $\left(ax^2 - \dfrac{1}{x} + \dfrac{1}{x^2}\right)^8$ is $210a^5$. If $a > 0$, find the value of $a$.
+
+\ans $\boxed{\dfrac{4}{3}}$.
+
+\sol By the \href{https://en.wikipedia.org/wiki/Multinomial_theorem}{multinomial theorem{}}, the terms of the expansion are of the form
+\[
+  \frac{8!}{\ell!m!n!}(ax^2)^\ell\left(-\frac{1}{x}\right)^m\left(\frac{1}{x^2}\right)^n,
+\]
+where $\ell$, $m$, and $n$ are nonnegative integers that sum to $8$. By looking at the exponent of $x$, we see that the constant terms must then satisfy $2\ell - m - 2n = 0$. Adding this with $\ell + m + n = 8$, we see that $3\ell - n = 8$. Trying each possible value of $n$, we see the only possible solutions are $(\ell, m, n) = (3, 4, 1)$ and $(4, 0, 4)$. The constant term is thus
+\[
+  \frac{8!}{3!4!1!}(ax^2)^3\left(-\frac{1}{x}\right)^4\left(\frac{1}{x^2}\right)^1 + \frac{8!}{4!0!4!}(ax^2)^4\left(-\frac{1}{x}\right)^0\left(\frac{1}{x^2}\right)^4 = 280a^3 + 70a^4.
+\]
+Equating to $210a^5$, we see that $280a^3 + 70a^4 = 210a^5$, or $3a^5 - a^4 - 4a^3 =0$. This factors as $a^3(3a - 4)(a + 1) = 0$, and as $a > 0$, we find $a = \frac{4}{3}$.
+
+\rem{The multinomial theorem is the generalization of the binomial theorem for general polynomials. It's also possible to solve this problem through two applications of the binomial theorem, by treating the first two terms as a single term, and then using the binomial theorem twice.}
+
+\item Let $A = \{n \in \ZZ \mid \abs{n} \le 24\}$. In how many ways can two distinct numbers be chosen (simultaneously) from $A$ such that their product is less than their sum?
+
+\ans $\boxed{623}$.
+
+\sol We count ordered pairs $(a, b)$ that satisfy $ab < a + b$, making sure to remember that later, we have to remove cases like $(a, a)$, and count $(a, b)$ and $(b, a)$ as the same. We split into three cases.
+\begin{itemize}
+  \item $b = 1$. The condition is $a < a + 1$, which is true for all $a$; this gives us $49$ cases.
+
+  \item $b \ge 2$. The condition rearranges to $a(b-1) < b$, and as $b-1$ is positive, we can divide by it to get $a < \dfrac{b}{b-1}$. As $b \ge 2$, then $\dfrac{b}{b-1}$ is between $1$ and $2$, so any $a \le 1$ work. For each $b$, this gives $26$ such $a$. So this gives us $23 \cdot 26 = 598$ cases.
+
+  \item $b \le 0$. As $b - 1$ is negative, we divide by it to get $a > \dfrac{b}{b-1}$. It is easier to consider the fraction as $\dfrac{(-b)}{1 + (-b)}$. By writing it like this, we see that this fraction is always between $0$ and $1$, so any $a \ge 1$ work. For each $b$, this gives $24$ such $a$. So this gives us $25 \cdot 24 = 600$ cases.
+\end{itemize}
+In total, we get $600 + 598 + 49 = 1247$ cases. Now we remove cases where $a = b$. The condition becomes $a^2 < 2a$, which is satisfied only when $a = 1$. This leaves $1246$ cases. But we counted $(a, b)$ and $(b, a)$ separately, so dividing by two gives the final answer $623$.
+
+\item Points $A$, $B$, $C$, and $D$ lie on a line $\ell$ in that order, with $AB = CD = 4$ and $BC = 8$. Circles $\Omega_1$, $\Omega_2$, and $\Omega_3$ with diameters $AB$, $BC$, and $CD$, respectively, are drawn. A line through $A$ and tangent to $\Omega_3$ intersects $\Omega_2$ at the two points $X$ and $Y$. Find the length of $XY$.
+
+\begin{center}
+\begin{asy}
+size(13cm);
+pair A = (-8,0);
+pair O_1 = (-6,0);
+pair B = (-4,0);
+pair O_2 = (0,0);
+pair C = (4,0);
+pair O_3 = (6,0);
+pair D = (8,0);
+pair Z = tangent(A, O_3, 2, 2);
+pair X = IP(A--Z, circle(O_2,4), 0);
+pair Y = IP(A--Z, circle(O_2,4), 1);
+pair W = (X+Y)/2;
+
+draw((-9,0)--(9,0));
+draw(Line(A, Z, 0.075, 0.3));
+draw(circle(O_1, 2));
+draw(circle(O_2, 4));
+draw(circle(O_3, 2));
+
+dot("$A$", A, SW);
+dot("$B$", B, SW);
+dot("$C$", C, SW);
+dot("$D$", D, SW);
+dot("$X$", X, NE);
+dot("$Y$", Y, NE);
+label((9, 0), "$\ell$", E);
+label((-6, -2), "$\Omega_1$", S);
+label((0, -4), "$\Omega_2$", S);
+label((6, -2), "$\Omega_3$", S);
+\end{asy}
+\end{center}
+
+\ans $\boxed{\dfrac{24\sqrt{5}}{7}}$.
+
+\sol Let $O_2$ and $O_3$ be the centers of $\Omega_2$ and $\Omega_3$, respectively. Let $W$ be the midpoint of $XY$, and let $XY$ be tangent to $\Omega_3$ at the point $Z$.
+
+\begin{center}
+\begin{asy}
+size(13cm);
+pair A = (-8,0);
+pair O_1 = (-6,0);
+pair B = (-4,0);
+pair O_2 = (0,0);
+pair C = (4,0);
+pair O_3 = (6,0);
+pair D = (8,0);
+pair Z = tangent(A, O_3, 2, 2);
+pair X = IP(A--Z, circle(O_2,4), 0);
+pair Y = IP(A--Z, circle(O_2,4), 1);
+pair W = (X+Y)/2;
+
+draw((-9,0)--(9,0));
+draw(Line(A, Z, 0.075, 0.3));
+draw(circle(O_1, 2));
+draw(circle(O_2, 4));
+draw(circle(O_3, 2));
+draw(Z--O_3);
+draw(X--W--O_2);
+draw(rightanglemark(A, W, O_2, s=12));
+draw(rightanglemark(A, Z, O_3, s=12));
+
+dot("$A$", A, SW);
+dot("$X$", X, NE);
+dot("$Y$", Y, NE);
+dot("$W$", W, NE);
+dot("$Z$", Z, NE);
+dot("$O_2$", O_2, S);
+dot("$O_3$", O_3, S);
+\end{asy}
+\end{center}
+
+The key observation is that $\triangle AWO_2 \sim \triangle AZO_3$. Note that they share $\angle A$. As $XY$ is a chord of $\Omega_2$, then $O_2W$ is its perpendicular bisector, and $\angle AWO_2$ is right. Also, as $AZ$ is tangent to $\Omega_3$, then $\angle AZO_3$ is also right. The similarity follows by AA.
+
+Now $AO_3 = AB + BC + CO_3 = 4 + 8 + 2 = 14$, as $CO_3$ is a radius, $AO_2 = AB + BO_2 = 4 + 4 = 8$ as $BO_2$ is also a radius, and $ZO_3 = 2$ as it is also a radius. By similarity,
+\[
+  \frac{O_2W}{AO_2} = \frac{O_3Z}{AO_3} \implies O_2W = \frac{8}{7}.
+\]
+Applying the Pythagorean theorem on $\triangle XWO_2$, we find
+\[
+  XY = 2XW = 2\sqrt{4^2 - \left(\frac{8}{7}\right)^2} = \frac{24\sqrt{5}}{7}.
+\]
+
+\item A musical performer has three different outfits. In how many ways can she dress up for seven different performances such that each outfit is worn at least once? (Assume that outfits can be washed and dried between performances.)
+
+\ans $\boxed{1806}$.
+
+\sol We use complementary counting. Instead, we want to count the number of ways to dress up such that some outfit is never worn at all. Label the outfits $A$, $B$, and $C$.
+
+Let's say the performer doesn't wear $C$. There are $2^7$ ways to dress up: for each of the $7$ days, there are $2$ choices, either $A$ or $B$. This makes $2 \cdot 2 \cdots 2 = 2^7$ ways. There are three different cases, depending on whether the performer doesn't wear $A$, $B$ or $C$, making $3 \cdot 2^7 = 384$ ways in total.
+
+However, we overcounted the cases when the performer wears the same outfit for all days. For example, the case when the performer wears $A$ for all seven days is counted in both the $2^7$ cases when they don't wear $B$, and the $2^7$ cases when they don't wear $C$. This means we have to subtract $3$ to correct for overcounting.
+
+In total, there are $384 - 3 = 381$ ways such that some outfit is never worn at all. By similar reasoning from earlier, the total number of ways to dress up is $3^7 = 2187$, so the final answer is $2187 - 381 = 1806$.
+
+\item In $\triangle PMO$, $PM = 6\sqrt{3}$, $PO = 12\sqrt{3}$, and $S$ is a point on $MO$ such that $PS$ is the angle bisector of $\angle MPO$. Let $T$ be the reflection of $S$ across $PM$. If $PO$ is parallel to $MT$, find the length of $OT$.
+
+\ans $\boxed{2\sqrt{183}}$.
+
+\sol Let $\alpha = \angle MPO$. As $PO \parallel MT$, then $\angle PMT = \angle MPO = \alpha$. As $MT$ is the reflection of $MS$ across $PM$, then $\angle PMS = \angle PMT = \alpha$ too. Thus $\angle MPO = \angle PMO$, and $\triangle PMO$ is isosceles with $PO = OM = 12\sqrt{3}$.
+
+\begin{center}
+\begin{asy}
+size(8cm);
+pair P = dir(110);
+pair M = dir(210);
+pair O = dir(330);
+pair Sx = bisectorpoint(M, P, O);
+pair S = extension(P, Sx, M, O);
+pair T = reflect(P,M)*S;
+
+draw(P--T--M--O--cycle);
+draw(M--P--S);
+draw(T--O);
+draw(anglemark(M, P, O, 8));
+draw(anglemark(P, M, T, 8));
+draw(anglemark(O, M, P, 8));
+
+dot("$P$", P, dir(P));
+dot("$M$", M, dir(M));
+dot("$O$", O, dir(O));
+dot("$S$", S, dir(S));
+dot("$T$", T, dir(T));
+
+label(P, "$\alpha$", 3*(bisectorpoint(M, P, O)-P));
+label(M, "$\alpha$", 3*(bisectorpoint(P, M, T)-M));
+label(M, "$\alpha$", 3*(bisectorpoint(O, M, P)-M));
+label((T+M)/2, "$4\sqrt{3}$", SW);
+label((M+S)/2, "$4\sqrt{3}$", (0, -1));
+label((S+O)/2, "$8\sqrt{3}$", (0, -1));
+label((P+M)/2, "$6\sqrt{3}$", NW);
+label((P+O)/2, "$12\sqrt{3}$", NE);
+\end{asy}
+\end{center}
+
+By the angle bisector theorem, $MS : SO = 1 : 2$, so $MS = 4\sqrt{3}$, and by reflection, $MT = 4\sqrt{3}$ as well. We use the law of cosines on $\triangle PMO$ to find
+\[
+  \left(12\sqrt{3}\right)^2 = \left(6\sqrt{3}\right)^2 + \left(12\sqrt{3}\right)^2 - 2\left(6\sqrt{3}\right)\left(12\sqrt{3}\right)\cos \alpha \implies \cos \alpha = \frac{1}{4}.
+\]
+By the double angle formula, $\cos 2\alpha = 2\cos^2 \alpha - 1 = -\frac{7}{8}$. Finally, using the law of cosines on $\triangle OTM$ gives us
+\[
+  OT^2 = \left(4\sqrt{3}\right)^2 + \left(12\sqrt{3}\right)^2 - 2\left(4\sqrt{3}\right)\left(12\sqrt{3}\right)\cos 2\alpha \implies OT = 2\sqrt{183}.
+\]
+
+\rem{Dr.~Eden points out that another way to compute $\cos \alpha$ is to use the fact that it's an isosceles triangle. Constructing the altitude from $O$ to $PM$ bisects the base to $3\sqrt{3}$, making a right triangle with hypotenuse $12\sqrt{3}$, so $\cos \alpha = \frac{3\sqrt{3}}{12\sqrt{3}} = \frac{1}{4}$.}
+
+\item A student writes the six complex roots of the equation $z^6 + 2 = 0$ on the blackboard. At every step, he randomly chooses two numbers $a$ and $b$ from the board, erases them, and replaces them with $3ab - 3a - 3b + 4$. At the end of the fifth step, only one number is left. Find the largest possible value of this number.
+
+\ans $\boxed{730}$.
+
+\sol We use Simon's Favorite Factoring Trick. Note that \[
+  3ab - 3a - 3b + 4 = 3(a - 1)(b - 1) + 1.
+\]
+The $a-1$ and $b-1$ inspire us to consider what happens if all the numbers in the blackboard had $1$ subtracted from them. Suppose we had a copy of the blackboard where all numbers had $1$ subtracted from them instead. In the original blackboard, we replace $a$ and $b$ with $3(a-1)(b-1) + 1$. So in the second blackboard, we replace $a-1$ and $b-1$ with $3(a-1)(b-1)$, which is just $3$ times their product.
+
+This means that at the end of the process, the final number in the second blackboard must be $3^5$ times the product of the original numbers in the second blackboard. This means that if the roots are $r_1, r_2, \ldots, r_6$, then the final number in the second blackboard is $3^5(r_1 - 1)(r_2 - 1)\cdots (r_6 - 1)$, and the final number in the original blackboard is $3^5(r_1 - 1)(r_2 - 1)\cdots (r_6 - 1) + 1$. (So there is only one possible value.)
+
+To find $(r_1 - 1)(r_2 - 1)\cdots(r_6 - 1)$, we construct a polynomial that has roots $r_1 - 1, r_2 - 1, \ldots, r_6 - 1$. One such polynomial is $(z + 1)^6 + 2$. For example, substituting $r_1 - 1$ gives $r_1^6 + 2$, which is $0$ because $r_1$ is a root of $z^6 + 2$.
+
+This means that $(r_1 - 1)(r_2 - 1)\cdots(r_6 - 1)$ is the product of the roots of $(z + 1)^6 + 2$, which by Vieta's formulas, is $3$. The final answer is thus $3^5(r_1 - 1)(r_2 - 1)\cdots (r_6 - 1) + 1$, which is $3^6 + 1 = 730$.
+
+\rem{Compare to \href{https://cjquines.com/files/pmo2019areas.pdf}{PMO 2019 Areas I.20{}}: ``Suppose that $a, b, c$ are real numbers such that $\frac1a + \frac1b + \frac1c = 4\del{\frac1{a+b} + \frac1{b+c} + \frac1{c+a}} = \frac c{a+b} + \frac a{b+c} + \frac b{c+a} = 4.$ Determine the value of $abc$.''}
+
+\end{enumerate}
+
+\textbf{PART II.} Show your solution to each problem. Each complete and correct solution is worth ten points.
+
+\begin{enumerate}[left=0pt]
+
+\item Consider all subsets of $\{1,2, 3, \ldots, 2018, 2019\}$ having exactly $100$ elements. For each subset, take the greatest element. Find the average of all these greatest elements.
+
+\soln1 We first find the sum $S$ of all these greatest elements. Consider how many $100$-element subsets have a number like $1000$ appears as its greatest element. The other $99$ elements must be less than $1000$, so they can be any $99$-element subset of $\{1,2, \ldots, 999\}$. This gives $\binom{999}{99}$ different subsets. So in the sum, it contributes $1000\binom{999}{99}$. Through similar reasoning, the total sum must be
+\[
+  S = 100\binom{99}{99} + 101\binom{100}{99} + 102\binom{101}{99} + \cdots + 2019\binom{2018}{99}.
+\]
+Note that, by absorption,
+\[
+  1000\binom{999}{99} = \frac{1000 \cdot 999!}{900! 99!} = \frac{1000! \cdot 100}{900! 100!} = 100\binom{1000}{100},
+\]
+so through similar reasoning,
+\[
+  S = 100\binom{100}{100} + 100\binom{101}{100} + 100\binom{102}{100} + \cdots + 100\binom{2019}{100}.
+\]
+By the hockeystick identity, this final sum is $S = 100\binom{2020}{101}$. To find the average, we divide by the number of $100$-element subsets, which is $\binom{2019}{100}$. This gives us the final answer of
+\[
+  \frac{S}{\binom{2019}{100}} = \frac{100 \cdot 2020!}{1919! \cdot 101!} \cdot \frac{1919! 100!}{2019!} = 2000.
+\]
+
+\soln2 Suppose $\{a_1, a_2, \ldots, a_{100}\}$ is drawn uniformly at random over all subsets of $100$ elements. Taking $a_1 < a_2 < \cdots < a_{100}$ without loss of generality, the problem asks for the expected value of $a_{100}$. Consider the (possibly empty) intervals
+\[
+  [1, a_1 - 1], [a_1 + 1, a_2 - 1], [a_2 + 1, a_3 - 1], \ldots, [a_{99} + 1, a_{100} - 1], [a_{100} + 1, 2019].
+\]
+There are $101$ of these intervals, with $2019 - 100 = 1919$ total integers divided among them. By symmetry, the expected number of integers in each interval is $\frac{1919}{101} = 19$. In particular, the number of integers in the last interval is $2019 - (a_{100} + 1) + 1 = 2019 - a_{100}$. So the expected value of $2019 - a_{100}$ is $19$, and by linearity of expectation, the expected value of $a_{100}$ is $2019 - 19 = 2000$.
+
+\rem{I first saw this calculation in \href{http://internetolympiad.org/archive/OMOSpring16/OMOSpring16Solns.pdf}{OMO Spring 2016/18{}}. When I participated in the contest, I did something like Solution 1, using the hockeystick identity. The official solution calls this problem a ``classical problem with many ways to solve it'', presenting something similar to Solution 2. Other references are \href{https://sumo.stanford.edu/pdfs/smt2018/discrete-solutions.pdf}{SMT Discrete 2018 Problem 7{}}, \href{https://artofproblemsolving.com/wiki/index.php/2015_AIME_I_Problems/Problem_12}{AIME 2015 I Problem 12{}}, and \href{https://artofproblemsolving.com/wiki/index.php/1981_IMO_Problems/Problem_2}{IMO 1981 Problem 2}.}
+
+\item Let $a_1, a_2, \ldots$ be a sequence of integers defined by $a_1 = 3$, $a_2 = 3$, and \[
+  a_{n+2} = a_{n+1}a_n - a_{n+1} - a_n + 2
+\]
+for all $n \ge 1$. Find the remainder when $a_{2020}$ is divided by $22$.
+
+\sol We use Simon's Favorite Factoring Trick. Note that the recurrence is
+\[
+  a_{n+2} = (a_{n+1} - 1)(a_n - 1) + 1.
+\]
+Defining the sequence $b_n = a_n - 1$, we get the recurrence $b_{n+2} = b_{n+1}b_n$. As $b_1 = b_2 = 2$, we can prove by induction that $b_n = 2^{F_n}$. Here $F_n$ is the $n$th Fibonacci number, defined by $F_1 = F_2 = 1$ and $F_{n+2} = F_{n+1} + F_n$ for all $n \ge 1$.
+
+To find $a_{2020}$ or $2^{F_{2020}} + 1$ modulo $22$, by the \href{https://en.wikipedia.org/wiki/Chinese_remainder_theorem}{Chinese remainder theorem{}}, we only need to find $2^{F_{2020}}$ modulo $2$ and modulo $11$. It is $0$ modulo $2$, so we only need to find it modulo $11$; by \href{https://en.wikipedia.org/wiki/Fermat%27s_little_theorem}{Fermat's little theorem{}}, we only need to find $F_{2020}$ modulo $10$.
+
+Again by the Chinese remainder theorem, we only need to find $F_{2020}$ modulo $2$ and $5$. Modulo $2$, the Fibonacci sequence is $1, 1, 0, 1, 1, 0, \ldots$, repeating every $3$ terms, so $F_{2020}$ is $1$ modulo $2$. Modulo $5$, the sequence is
+\[
+  1,1,2,3, 0,3,3,1,4, 0,4,4,3,2, 0,2,2,4,1,0,
+\]
+which repeats every $20$ terms, so $F_{2020}$ is $0$ modulo $5$. Combining these, we find that $F_{2020}$ is $5$ modulo $10$. Thus
+\[
+  a_{2020} \equiv 2^{F_{2020}} + 1 \equiv 2^5 + 1 \equiv 11 \pmod{22},
+\]
+so the answer is $11$.
+
+\rem{The period for which the Fibonacci numbers repeat modulo $n$ is known as the \href{https://en.wikipedia.org/wiki/Pisano_period}{Pisano period{}}; it is interesting that $5$ has a relatively large Pisano period compared to other primes.}
+
+\item In $\triangle ABC$, $AB = AC$. A line parallel to $BC$ meets sides $AB$ and $AC$ at $D$ and $E$, respectively. The angle bisector of $\angle BAC$ meets the circumcircles of $\triangle ABC$ and $\triangle ADE$ at points $X$ and $Y$, respectively. Let $F$ and $G$ be the midpoints of $BY$ and $XY$, respectively. Let $T$ be the intersection of lines $CY$ and $DF$. Prove that the  circumcenter of $\triangle FGT$ lies on line $XY$.
+
+\soln1 Let $F'$ be the reflection of $F$ over line $XY$. Observe that, by symmetry, we get $\angle ADY = \angle AEY$. As quadrilateral $ADYE$ is cyclic, both angles must be right, and hence $\angle BDY$ is right as well.
+
+\begin{center}
+\begin{asy}
+size(9cm);
+  
+pair A = dir(90);
+pair B = dir(170);
+pair C = dir(10);
+pair D = extension(origin, dir(145), A, B);
+pair E = extension(D, B-C+D, A, C);
+pair X = dir(270);
+pair Y = OP(circumcircle(A,D,E),A--X);
+pair F = midpoint(B--Y);
+pair G = midpoint(X--Y);
+pair T = extension(C, Y, D, F);
+pair temp = foot(F, A, X);
+pair Fp = 2*temp-F;
+
+draw(A--B--C--A);
+draw(circumcircle(A, B, C));
+draw(circumcircle(A, D, E));
+draw(D--Y--E);
+draw(B--Y--C);
+draw(D--T--Y);
+draw(A--X);
+draw(circumcircle(F, G, T), dashed);
+
+dot("$A$", A, dir(A));
+dot("$B$", B, dir(B));
+dot("$C$", C, dir(C));
+dot("$D$", D, dir(D));
+dot("$E$", E, dir(E));
+dot("$X$", X, dir(X));
+dot("$Y$", Y, dir(Y)+SW);
+dot("$F$", F, dir(F)+S);
+dot("$G$", G, dir(G)+W);
+dot("$T$", T, dir(T));
+dot("$F'$", Fp, dir(Fp)+S);
+\end{asy}
+\end{center}
+  
+Thus $F$ is the circumcenter of triangle $BDY$, so $\angle FDB = \angle FBD$. By reflecting over $XY$, we also get $\angle FBD = \angle F'CE$. Thus
+$$\dang TCA = \dang F'CE = \dang DBF = \dang FDB = \dang TDA,$$
+so $D$, $A$, $T$, and $C$ are concyclic. This implies that
+$$\dang FTF' = \dang DTC = \dang DAC = \dang BAC = \dang BXC = \dang FGF',$$
+the last step following from $FG \parallel BX$ and $F'G \parallel CX$. Thus the points $F$, $T$, $G$, and $F'$ are concyclic. Their circumcenter must lie on the perpendicular bisector of $FF'$, which is line $XY$. But this is also the circumcenter of triangle $FGT$, as desired.
+
+\soln2 As in Solution 1, $AY$ and $AX$ are diameters. It follows that 
+$$\angle ADY = \angle ABX = 90\dg \implies BX \perp BD \perp DY.$$
+Hence $BX \parallel DY$. As $FG$ is a midline of $\triangle BXY$, it follows that it is the perpendicular bisector of $BD$. Then
+$$\dang GFT = \dang GFD = \dang BFG =  \dang YFG = \dang GF'Y = \dang GF'T,$$
+which implies that $FF'GT$ is cyclic. The logic in Solution 1 finishes the proof.
+
+\soln3 As in Solution 1, $D$, $A$, $T$, and $C$ are concyclic. Extend $CT$ to meet the circumcircle of $ABC$ at $S$. Then
+\[
+  \dang BSC = \dang BAC = \dang DAC = \dang DTC.
+\]
+Thus, $BS$ and $DT$ are parallel, so $BS$ and $FT$ are parallel. Since $F$ is the midpoint of $BY$, then $T$ is the midpoint of $SY$. Consider the homothety centered at $Y$ mapping $B$ to $F$; its scale is $\frac{1}{2}$. It carries concylic points $B$, $S$, $X$, and $C$ to $F$, $T$, $G$, and $F'$, which shows these are concylic. The logic in Solution 1 finishes the proof.
+
+\rem{The directed angles are necessary here due to configuration issues. If I'm remembering right, Solution 1 is due to Shaquille Que, and Solution 2 is due to Albert Patupat. Solution 3 was communicated to me by Dr.~Eden.}
+
+\end{enumerate}
+
+\emph{With thanks to Christian Chan Shio, David Altizio, and Richard Eden for corrections and additions.}
+
+\end{document}

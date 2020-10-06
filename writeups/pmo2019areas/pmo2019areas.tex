@@ -1,0 +1,629 @@
+\documentclass[11pt,paper=letter]{scrartcl}
+\usepackage[parskip]{cjquines}
+
+\begin{document}
+
+\title{PMO 2019 Area Stage}
+\author{Carl Joshua Quines}
+\date{November 24, 2018}
+
+\maketitle
+
+I'll present the questions and some solutions to all the problems. Are any explanations unclear? If so, contact me at \mailto{cj@cjquines.com}. More material is available on my website: \url{https://cjquines.com}.
+
+\textbf{PART I.} Give the answer in the simplest form that is reasonable. No solution is needed. Figures are not drawn to scale. Each correct answer is worth three points.
+
+\begin{enumerate}[left=0pt]
+
+\item How many distinct prime factors does $5^{14} - 30 + 5^{13}$ have?
+
+{\sffamily \bfseries Answer.} $\boxed{7}$.
+
+{\sffamily \bfseries Solution.} Observe that
+\begin{align*}
+  5^{14} - 30 + 5^{13} &= 5^{12}\del{5^2 + 5} - 30 \\
+  &= 30\del{5^{12} - 1} \\
+  &= 30\del{5^6 - 1}\del{5^6 + 1} \\
+  &= 30\del{5^3 - 1}\del{5^3 + 1}\del{5^2 + 1}\del{5^4 - 5^2 + 1} \\
+  &= 30\del{5 - 1}\del{5^2 + 5 + 1}\del{5 + 1}\del{5^2 - 5 + 1}\del{5^2 + 1}\del{5^4 - 5^2 + 1} \\
+  &= \del{2 \cdot 3 \cdot 5}\del{2^2}\del{31}\del{2 \cdot 3}\del{3 \cdot 7}\del{2 \cdot 13}\del{601}.
+\end{align*}
+There are $7$ distinct prime factors: $2$, $3$, $5$, $7$, $13$, and $601$.
+
+{\small \sffamily \textbf{Remark.} Compare to \href{http://cjquines.com/files/pmo2009.pdf}{PMO 2009 Areas I.16} ``Give the prime factorization of $\mathsf{3^{20} + 3^{19} - 12}$.'' The factorization of $\mathsf{x^n - 1}$ is related to \href{https://en.wikipedia.org/wiki/Cyclotomic_polynomial}{\emph{cyclotomic polynomials}}. In this problem, we get \begin{align*}\mathsf{x^{12} - 1} &= \mathsf{\prod_{d|12}\Phi_d(x) = \Phi_1(x)\Phi_2(x)\Phi_3(x)\Phi_4(x)\Phi_6(x)\Phi_{12}(x)} \\ &= \mathsf{(x-1)(x+1)(x^2+x+1)(x^2+1)(x^2-x+1)(x^4-x^2+1)},\end{align*} where $\mathsf{\Phi_n(x)}$ is the $\mathsf{n}$th cyclotomic polynomial.}
+
+\item Given that $a$ and $b$ are real numbers satisfying the equation $$\log_{16} 3 + 2 \log_{16}(a - b) = \frac12 + \log_{16}a + \log_{16}b$$ find all possible values of $\dfrac ab$.
+
+{\sffamily \bfseries Answer.} $\boxed{3}$.
+
+{\sffamily \bfseries Solution.} We can rewrite the equation using the power and product rules as
+\begin{align*}
+  \log_{16} 3 + 2 \log_{16}(a - b) &= \frac12 + \log_{16}a + \log_{16}b \\
+  \log_{16} 3 + \log_{16}(a - b)^2 &= \log_{16}4 + \log_{16}a + \log_{16}b \\
+  \log_{16} 3(a-b)^2 &= \log_{16} 4ab.
+\end{align*}
+This gives $3(a-b)^2 = 4ab$, which factors as $(a-3b)(3a-b) = 0$, so either $a - 3b = 0$ or $3a - b = 0$. We check both cases by setting $a = 3b$ and $3a = b$. In the first case, we get $$\log_{16}3 + 2\log_{16}(3b - b) = \dfrac12 + \log_{16}3b + \log_{16}b,$$ and the above work shows this is true when $b$ is positive. In the second case, however, we get $$\log_{16}3 + 2\log_{16}(a - 3a) = \dfrac12 + \log_{16}a + \log_{16}3a.$$ For $\log_{16}(-2a)$ to be defined, $a$ needs to be negative. But for $\log_{16}a$ to be defined, $a$ needs to be positive. Thus no value of $a$ that satisfies this equation exists. So the case of $3a = b$ is impossible. The only possibility is $a = 3b$, giving $\dfrac ab = 3$.
+
+\item Find the minimum value of the expression $\sqrt{(x-1)^2 + (y+1)^2} + \sqrt{(x+3)^2 + (y-2)^2}$.
+
+{\sffamily \bfseries Answer.} $\boxed{5}$.
+
+{\sffamily \bfseries Solution.} We can interpret the first addend as the distance from the point $(x, y)$ to the point $(1, -1)$, and the second addend as the distance from the point $(x, y)$ to the point $(-3, 2)$. By the triangle inequality, the sum of these distances is at least the distance from $(1, -1)$ to $(-3, 2)$. This distance is $\sqrt{(1 - (-3))^2 + (-1 - 2)^2} = 5$. The minimum distance is achieved when $(x, y)$ lies on the line segment joining the two points.
+
+{\small \sffamily \textbf{Remark.} The idea of interpreting an expression as the distance formula appears often. Compare to \href{http://pmo.ph/wp-content/uploads/2014/08/16th-PMO-Natl-Oral-Stage-Beamer-with-Ans.pdf}{PMO 2014 National Orals Average 10}: ``Find the maximum of $\mathsf{\sqrt{(x-4)^2 + (x^3 - 2)^2} - \sqrt{(x-2)^2 + (x^3 + 4)^2}}$,'' or \href{http://cjquines.com/files/sipnayan2017jhs.pdf}{Sipnayan 2017 Junior High Finals Difficult JN}, ``Find the minimum value of $\mathsf{\sqrt{(x+3)^2 + 49} + \sqrt{(x-5)^2 + 64}}$.''}
+
+\item In how many ways can the letters of the word COMBINATORICS be arranged so that the letters C, O, A, C, T, O, R, S appear in that order in the arrangement (although there may be letters in between)?
+
+{\sffamily \bfseries Answer.} $\boxed{77\,220}$.
+
+{\sffamily \bfseries Solution 1.} There are $\dfrac{5!}{2!}$ ways to arrange the remaining letters \textsc{mbini}, as the letter \textsc{i} is repeated twice. Of the 13 letters in the word, we then choose 5 of them to belong to the letters in \textsc{mbini}, with the remaining 8 being the letters of \textsc{coactors}, in order. There are $\displaystyle\binom{13}{5}$ ways to do this. The total count is $\displaystyle \binom{13}{5}\dfrac{5!}{2!} = \dfrac{13}{5!8!}\dfrac{5!}{2!} = \dfrac{13!}{8!2!} = 77\,220$.
+
+{\sffamily \bfseries Solution 2.} There are $\dfrac{13!}{2!2!2!}$ distinct ways to arrange the letters of the word \textsc{combinatorics}, and $\dfrac{8!}{2!2!}$ distinct ways to arrange the letters of \textsc{coactors}, similar to the above. Each way the letters in \textsc{combinatorics} are arranged corresponds to one of the ways the letters in \textsc{coactors} is arranged, by ignoring the remaining letters. Thus $\dfrac{13!}{2!2!2!}$ overcounts by a factor of $\dfrac{8!}{2!2!}$. This gives ${\dfrac{13!}{2!2!2!}} \div {\dfrac{8!}{2!2!}} = \dfrac{13!}{8!2!} = 77\,220$.
+
+{\small \sffamily \textbf{Remark.} Compare to \href{http://pmo.ph/wp-content/uploads/2015/10/18thPMO-QualifyingRound-Questions.pdf}{PMO 2016 Qualifying I.11}: ``In how many ways can the letters of the word QUALIFYING be arranged such that the vowels are in alphabetical order?'' or \href{http://pmo.ph/wp-content/uploads/2014/08/18th-PMO-Area-Stage.pdf}{PMO 2016 Areas I.15,} ``In how many ways can the letters of the word ALGEBRA be arranged if the order of the vowels remains unchanged?''.}
+
+\item Let $N$ be the smallest positive integer divisible by $20$, $18$, and $2018$. How many positive integers are both less than and relatively prime to $N$?
+
+{\sffamily \bfseries Answer.} $\boxed{48\,384}$.
+
+{\sffamily \bfseries Solution.} The integer $N$ is the least common multiple of $20 = 2^2 \cdot 5$, $18 = 2 \cdot 3^2$, and $2018 = 2 \cdot 1009$. Thus $N = 2^2 \cdot 3^2 \cdot 5 \cdot 1009$. The answer is $\phi(N)$, the \href{https://en.wikipedia.org/wiki/Euler%27s_totient_function}{Euler's totient function} of $N$. By a well-known formula, this is \begin{align*}
+\phi(N) &= N\prod_{p|N}\del{1 - \frac1p} \\
+&= \del{2^2 \cdot 3^2 \cdot 5 \cdot 1009}\del{1 - \dfrac12}\del{1 - \frac13}\del{1 - \frac15}\del{1 - \frac1{1009}} \\
+&= \del{2^2 \cdot 3^2 \cdot 5 \cdot 1009}\dfrac12 \cdot \dfrac23 \cdot \dfrac45 \cdot \dfrac{1008}{1009} \\
+&= 2 \cdot 2 \cdot 3 \cdot 4 \cdot 1008 = 48\,384.\end{align*}
+
+\item A square is inscribed in a circle, and a rectangle is inscribed in the square. Another circle is circumscribed about the rectangle, and a smaller circle is tangent to the three sides of the rectangle, as shown below. The shaded area between the two larger circles is eight times the area of the smallest circle, which is also shaded. What fraction of the largest circle is shaded?
+
+\begin{center}
+  \begin{asy}
+    size(5cm);
+    pair O = (0, 0);
+    pair A = (1, 1);
+    pair B = (1, -1);
+    pair C = (-1, -1);
+    pair D = (-1, 1);
+    pair E = (3*A+7*B)/10;
+    pair F = (7*B+3*C)/10;
+    pair G = (3*C+7*D)/10;
+    pair H = (7*D+3*A)/10;
+    pair O_1 = (0.4, -0.4);
+    filldraw(circumcircle(A,B,C), opacity(0.3)+black);
+    filldraw(circumcircle(E,F,G), white);
+    filldraw(circle(O_1, 0.3*sqrt(2)), opacity(0.3)+black);
+    draw(A--B--C--D--cycle);
+    draw(E--F--G--H--cycle);
+  \end{asy}
+\end{center}
+
+{\sffamily \bfseries Answer.} $\boxed{\dfrac9{25}}$.
+
+{\sffamily \bfseries Solution.} First, observe that the two larger circles must share the same center. Let this common center be $O$. Label a vertex of the rectangle as $P$, and label the nearest vertex of the square to $P$ as $Q$. Let $R$ be the foot from $O$ to line $PQ$.
+
+Without loss of generality, set the radius of the smallest circle as $1$ and the radius of the largest circle as $2r$. Then the shorter side length of the rectangle must be $2$, because it is a diameter of the smallest circle. Side $PQ$ is a leg of an isosceles right triangle with hypotenuse $2$, so it must have length $\sqrt{2}$.
+
+\begin{center}
+  \begin{asy}
+    size(5cm);
+    pair O = (0, 0);
+    pair A = (1, 1);
+    pair B = (1, -1);
+    pair C = (-1, -1);
+    pair D = (-1, 1);
+    pair E = (3*A+7*B)/10;
+    pair F = (7*B+3*C)/10;
+    pair G = (3*C+7*D)/10;
+    pair H = (7*D+3*A)/10;
+    pair O_1 = (0.4, -0.4);
+    filldraw(circumcircle(A,B,C), opacity(0.3)+black);
+    filldraw(circumcircle(E,F,G), white);
+    filldraw(circle(O_1, 0.3*sqrt(2)), opacity(0.3)+black);
+    draw(A--B--C--D--cycle);
+    draw(E--F--G--H--cycle);
+    draw(O--D);
+    draw(O--(0,1));
+    draw(H--O);
+    label("$O$", O, NE);
+    label("$P$", H, dir(H));
+    label("$Q$", D, NW);
+    label("$R$", (0, 1), N);
+  \end{asy}
+\end{center}
+
+Also, $OQR$ is an isosceles right triangle with hypotenuse $2r$, so $QR$ must have length $r\sqrt{2}$. Then the area in between the two circles is $$\pi OQ^2 - \pi OP^2 = \pi\sbr{(QR^2 + OR^2) - (PR^2 + OR^2)} = \pi\del{QR^2 - PR^2} = \pi\del{2r^2 - 2(r-1)^2}.$$ This must be equal to eight times the area of the smallest circle. But the smallest circle has radius $1$, so it has area $8\pi$. Therefore $2r^2 - 2(r-1)^2 = 8$, which we can solve to get $r = \dfrac 52$. Thus the area of the largest circle is $25\pi$, and the shaded region has area $8\pi + \pi = 9\pi$. The ratio is $\dfrac9{25}$.
+
+\item In $\triangle ABC$, the length of $AB$ is $12$ and its incircle $O$ has radius $4$. Let $D$ be the point of tangency of circle $O$ with $AB$. If $AD : AB = 1 : 3$, find the area of $\triangle ABC$. 
+
+{\sffamily \bfseries Answer.} $\boxed{96}$.
+
+{\sffamily \bfseries Solution 1.} Let $E$ and $F$ be the points of tangency of circle $O$ with sides $BC$ and $CA$.
+
+\begin{center}
+  \begin{asy}
+    size(4.5cm);
+    pair A = (0, 0);
+    pair B = (12, 0);
+    pair C = (0, 16);
+    pair D = (4, 0);
+    pair O = (4, 4);
+    pair E = foot(O, B, C);
+    pair F = foot(O, C, A);
+    draw(A--B--C--cycle);
+    draw(O--E);
+    draw(O--D);
+    draw(O--F);
+    draw(circumcircle(D,E,F));
+    label("$A$", A, SW);
+    label("$B$", B, SE);
+    label("$C$", C, NW);
+    label("$O$", O, N);
+    label("$D$", D, SE);
+    label("$E$", E, NE);
+    label("$F$", F, NW);
+  \end{asy}
+\end{center}
+
+As $AD : AB = 1 : 3$ and $AB = 12$, we get $AD = 4$ and $DB = 8$. As $AD$ and $AF$ are tangents to circle $O$ from the same point, we get $AD = AF = 4$, and similarly $DB = BE = 8$. Set $CF = CE = x$, which are the same length because they are again tangents from the same point.
+
+In quadrilateral $OFAD$, observe that $OF = OD = 4$ as they are both radii. Hence $OFAD$ is a rhombus, as all its sides are the same length. However, note that $\angle ODA$ of this rhombus is right because of the tangency. Hence this rhombus is a square, and $\angle FAD = \angle CAB$ is right as well.
+
+Hence, triangle $ABC$ is a right triangle with right angle at $A$. By the Pythagorean theorem, we get $(x + 4)^2 + 12^2 = (x + 8)^2$, and solving yields $x = 12$, making its area $96$.
+
+{\sffamily \bfseries Solution 2.} It is possible to find $x$ without observing that $OFAD$ is a square or triangle $ABC$ is right. We proceed after the second paragraph in the solution above.
+
+We can compute the area of the triangle in two ways: through the formula $rs$, where $r$ is the inradius and $s$ is the semiperimeter, or through Heron's formula $\sqrt{s(s-a)(s-b)(s-c)}$, where $a$, $b$, and $c$ are the side lengths. We can solve for $s = x + 12$, and equating them gives
+\begin{align*}
+  rs &= \sqrt{s(s-a)(s-b)(s-c)} \\
+  4(x + 12) &= \sqrt{(x + 12)(x)(4)(8)} \\
+  16(x + 12)^2 &= 32x(x + 12),
+\end{align*}
+and hence $x = 12$. Again by Heron's formula we get the area as $96$.
+
+\item Suppose that $\cbr{a_n}_{n \geq 1}$ is an arithmetic sequence of real numbers such that \begin{align*}
+  a_1 + a_2 + a_3 + a_4 + \cdots + a_{10} &= 20,\\
+  a_1 + a_4 + a_9 + a_{16} + \cdots + a_{100} &= 18.
+\end{align*}
+Compute $a_1 + a_8 + a_{27} + a_{64} + \cdots + a_{1000}$.
+
+{\sffamily \bfseries Answer.} $\boxed{2}$.
+
+{\sffamily \bfseries Solution.} Letting $a$ be the zeroth term of the sequence and $d$ be its common difference, we get that $a_n = a + nd$. The given, and the expression we're looking for, becomes \begin{align*}
+  (a + d) + (a + 2d) + (a + 3d) + \cdots + (a + 10d) &= 20,\\
+  (a + d) + (a + 4d) + (a + 9d) + \cdots + (a + 100d) &= 18,\\
+  (a + d) + (a + 8d) + (a + 27d) + \cdots + (a + 1000d) &= \, ?
+\end{align*}
+Observe that the coefficient of $d$ in the first equation is $1 + 2 + \cdots + 10$. By a well-known formula, this is $55$. Similarly, the coefficient of $d$ in the second equation is $1 + 2^2 + \cdots + 10^2$, which is $385$ by another well-known formula, and the coefficient of $d$ in the last equation is $1 + 2^3 + \cdots + 10^3 = 3025$. So the equations are \begin{align*}
+  10a + 55d &= 20,\\
+  10a + 385d &= 18,\\
+  10a + 3025d &= \, ?
+\end{align*}
+Subtracting the first from the second equation gives $330d = -2$. Multiplying this by $9$ gives $2970d = -18$. Adding this to the first equation gives $10a + 3025d = 2$, which is the answer.
+
+{\small \sffamily \textbf{Remark.} The well-known formulas mentioned are $\mathsf{\frac12n(n+1)}$, $\mathsf{\frac16n(n+1)(2n+1)}$, and $\mathsf{\del{\frac12n(n+1)}^2}$, respectively. Compare the problem to \href{http://artofproblemsolving.com/community/c139h1065734p4629732}{NIMO 18.2}: ``There exists a unique strictly increasing arithmetic sequence $\mathsf{\{a_i\}_{i=1}^{100}}$ of positive integers such that $\mathsf{a_1+a_4+a_9+\cdots+a_{100}=\text{1000}}$, where the summation runs over all terms of the form $\mathsf{a_{i^2}}$ for $\mathsf{1\leq i\leq 10}$. Find $\mathsf{a_{50}}$.''}
+
+\item Let $\alpha$ and $\beta$ be the roots of the equation $x^2 - 11x + 24 = 0$. Let $f$ be the polynomial of least degree, with integer coefficients and leading coefficient $1$, such that $\sqrt{\alpha} + \sqrt{\beta}$ and $\sqrt{\alpha\beta}$ are zeros of $f$. Find $f(1)$.
+
+{\sffamily \bfseries Answer.} $\boxed{-92}$.
+
+{\sffamily \bfseries Solution 1.} The given equation factors as $(x-3)(x-8) = 0$, so $\alpha$ and $\beta$ are $3$ and $8$. We are looking for a polynomial with roots $\sqrt{3} + \sqrt{8}$ and $\sqrt{24}$.
+
+We know that if $a + \sqrt b$ is a root of a polynomial with rational coefficients, then $a - \sqrt b$ must also be a root of that polynomial. Thus $\sqrt{3} - \sqrt{8}$, $-\sqrt{3} + \sqrt{8}$, and $-\sqrt{3} -\sqrt{8}$ are roots of $f$ as well. The polynomial must then have $$\del{x - \del{\sqrt{3} + \sqrt{8}}}\del{x - \del{\sqrt{3} - \sqrt{8}}}\del{x - \del{- \sqrt{3} + \sqrt{8}}}\del{x - \del{- \sqrt{3} - \sqrt{8}}}$$ as a factor. Conveniently, the first and fourth factors are the factored form of a difference of two squares, with product $x^2 - \del{\sqrt{3} + \sqrt{8}}^2 = x^2 - 11 - 2\sqrt{24}$. Similarly, the second and third factors have product $x^2 - \del{\sqrt{3} - \sqrt{8}}^2 = x^2 - 11 + 2\sqrt{24}$. These two are again a difference of two squares, whose product is $(x^2 - 11)^2 - (2\sqrt{24})^2 = x^4 - 22x^2 + 25$.
+
+Similarly, the polynomial must also have $(x - \sqrt{24})(x + \sqrt{24})$ as a factor. This product is $x^2 - 24$. The final polynomial must be $f(x) = (x^4 - 22x^2 + 25)(x^2 - 24)$, and we get $f(1) = -92$.
+
+{\sffamily \bfseries Solution 2.} There is another way to find the polynomial $x^4 - 22x^2 + 25$. We can set $x = \sqrt{3} + \sqrt{8}$, and manipulate it to produce a polynomial with integer coefficients:
+\begin{align*}
+  x &= \sqrt{3} + \sqrt{8} \\
+  x^2 &= \del{\sqrt3 + \sqrt8}^2 \\
+  x^2 &= 3 + 2\sqrt{24} + 8 \\
+  \del{x^2 - 11}^2 &= \del{2\sqrt{24}}^2 \\
+  x^4 - 22x^2 + 25 &= 0.
+\end{align*}
+As $\sqrt{3} + \sqrt{8}$ is a root of the first equation, it must also be a root of the last equation.
+
+{\small \sffamily \textbf{Remark.} Compare to \href{http://pmo.ph/wp-content/uploads/2015/10/18thPMO-QualifyingRound-Questions.pdf}{PMO 2016 Qualifying II.3}: ``Let $\mathsf{f(x)}$ be a polynomial of degree $\mathsf{4}$ with integer coefficients, leading coefficient $\mathsf{1}$, and having $\mathsf{\sqrt{10} + \sqrt{11}}$ as one of its zeros. What is $\mathsf{f(1)}$?''
+
+The polynomial being found is called the \href{https://en.wikipedia.org/wiki/Minimal_polynomial_(field_theory)}{\emph{minimal polynomial}}. The minimal polynomial of $\mathsf{\alpha}$ is the polynomial of lowest degree having certain coefficients such that $\mathsf{\alpha}$ is a root. The study of minimal polynomials is under \href{https://en.wikipedia.org/wiki/Galois_theory}{\emph{Galois theory}}. We have quadratic, cubic, and quartic formulas to find the roots of polynomials in terms of its coefficients, but Galois theory says there aren't such formulas for quintics and above.}
+
+\item Suppose that the lengths of the sides of a right triangle are integers and its area is six times its perimeter. What is the least possible length of its hypotenuse?
+
+{\sffamily \bfseries Answer.} $\boxed{58}$.
+
+{\sffamily \bfseries Solution.} A Pythagorean triple consists of integers whose side lengths form a right triangle. By \href{https://en.wikipedia.org/wiki/Pythagorean_triple#Generating_a_triple}{Euclid's formula}, all Pythagorean triples can be expressed as $m^2 - n^2$, $2mn$, and $m^2 + n^2$, for some integers $m > n > 0$. The area would then be $mn(m^2 - n^2)$ and the perimeter would be $2mn + 2m^2$. By the condition in the problem, we get $$mn(m^2 - n^2) = 6(2mn + 2m^2) = 12m(m + n).$$ Dividing both sides by $m(m+n)$, we get $n(m-n) = 12$. It is enough to try each value of $m$ and $n$, and check which gives the minimum hypotenuse:
+
+\begin{center}
+  \begin{tabular}{rr|r}
+    $n$  & $m$   & $m^2 + n^2$ \\ \hline
+    $1$  & $13$  & $170$         \\ 
+    $2$  & $8$   & $68$         \\ 
+    $3$  & $7$   & $58$         \\ 
+    $4$  & $7$  & $65$        \\ 
+    $6$  & $8$  & $100$        \\ 
+    $12$  & $13$  & $313$
+  \end{tabular}
+\end{center}
+
+We see that the smallest hypotenuse is $58$. This is attained when $m = 7$ and $n = 3$, giving the Pythagorean triple $40$, $42$, $58$.
+
+\item A \emph{Vitas word} is a string of letters that satisfies the following conditions:
+\begin{itemize}
+  \item It consists of only the letters B, L, R.
+  \item It begins with a B and ends in an L.
+  \item No two consecutive letters are the same.
+\end{itemize}
+How many Vitas words are there with $11$ letters?
+
+{\sffamily \bfseries Answer.} $\boxed{341}$.
+
+{\sffamily \bfseries Solution 1.} Let $B_n$, $L_n$, and $R_n$ be the number of Vitas words of length $n$, except ending with $B$, $L$, and $R$ instead, respectively. 
+
+Observe that $B_n = L_{n-1} + R_{n-1}$: if we have a word of length $n-1$ that ends with $L$ or $R$, we can add a letter $B$ at the end to get a word of length $n$ that ends with $B$. Similarly, we get $L_n = B_{n-1} + R_{n-1}$, and also $R_n = B_{n-1} + L_{n-1}$.
+
+Finally, our base cases are $B_3 = 2$, $L_3 = 1$, and $R_3 = 1$. We can compute the remaining values by repeatedly applying the recursion:
+
+\begin{center}
+\begin{tabular}{l|rrrrrrrrr}
+$n$ & $3$ & $4$ & $5$ & $6$ & $7$ & $8$ & $9$ & $10$ & $11$ \\ \hline
+$B_n$ & 2 & 2 & 6 & 10 & 22 & 42 & 86 & 170 & 342 \\
+$L_n$ & 1 & 3 & 5 & 11 & 21 & 43 & 85 & 171 & 341 \\
+$R_n$ & 1 & 3 & 5 & 11 & 21 & 43 & 85 & 171 & 341
+\end{tabular}
+\end{center}
+
+Hence, the answer is $L_{11} = 341$.
+
+{\sffamily \bfseries Solution 2.} Let $a_n$ be the number of Vitas words of length $n$. By symmetry, $a_n$ is also the number of Vitas words that end with an $R$ instead of an $L$. Consider a Vitas word of length $n$:
+\begin{itemize}
+  \item If it ends with the letters $BL$, removing these two produces a Vitas word of length $n-2$, ending with possibly $R$ or $L$. There are, by definition, $2a_{n-2}$ of these words.
+
+  \item Otherwise, it must end with $RL$. Removing the last letter produces a Vitas word of length $n-1$, ending with $R$ instead. There are $a_{n-1}$ of these words.
+\end{itemize}
+
+As these are all the cases, we get the recursion $a_n = a_{n-1} + 2a_{n-2}$. The base cases of this recursion are $a_2 = 1$ and $a_3 = 1$. The rest of the terms can be computed as $1, 1, 3, 5, 11, 21, 43, 85, 171$ and $341$. The answer is $a_{11} = 341$.
+
+{\sffamily \bfseries Solution 3.} Assign the letters $B$, $L$, and $R$ values of $0$, $1$, and $2$, respectively.
+
+Consider a summation of $1$s and $2$s modulo 3, such as $1 + 2 + 1 + 1$. The empty sum, $0$, is the letter $B$. Adding $1$ gives $1$, the letter $L$. Adding $2$ gives $0$, or $B$. Adding $1$ gives $L$, and adding $1$ again gives $R$, forming the word $BLBLR$.
+
+It is clear that there is a bijection between sums of length $n$, consisting only of $1$s and $2$s, to words starting with $B$ of length $n+1$ where no two consecutive letters are the same. We now want to determine which of these words end with $L$.
+
+For the word to end with $L$, the sum must be $1$ modulo $3$. As all the addends are $1$s and $2$s, the sum is between $10$ and $20$, so it is either $10$, $13$, $16$, or $19$. To form a sum of $10$, all of the addends have to be $1$s. To form a sum of $13$, we choose three out of the ten addends to be $2$s. Similarly, for $16$ we choose six out of ten to be $2$s, and for $19$ we choose nine out of ten.
+
+In total, the number of ways is $\displaystyle \binom{10}0 + \binom{10}3 + \binom{10}6 + \binom{10}9 = 341$.
+
+{\small \sffamily \textbf{Remark.} The sequence $\mathsf{L_n = R_n}$ in the first solution and $\mathsf{a_n}$ in the second solution is known as the \href{https://en.wikipedia.org/wiki/Jacobsthal_number}{\emph{Jacobsthal sequence}}, or OEIS \href{https://oeis.org/A001045}{A001045}. They count the number of ways to tile a $\mathsf{3 \times (n - 2)}$ rectangle with $\mathsf{1 \times 1}$ and $\mathsf{2 \times 2}$ squares. An interesting property is that the sum of consecutive terms is a power of two.
+
+The third solution suggests that there is a closed form for it. Indeed, finding $\mathsf{\sum_{k \geq 0} \binom{n}{3k}}$ can be done through the \href{http://web.evanchen.cc/handouts/Summation/Summation.pdf}{\emph{roots of unity filter}} (p.~6), as follows. The sum is $\mathsf{\sum_{k \geq 0} \binom{n}{k}f(n)}$, where $\mathsf{f(n)}$ is $\mathsf{1}$ when $\mathsf{3\mid k}$ and $\mathsf{0}$ otherwise. But we can write $\mathsf{f(n) = \frac13\del{1^n + \omega^n + (\omega^2)^n}}$, where $\mathsf{\omega}$ is a cube root of unity. So you can distribute the summation over $\mathsf{f(n)}$ and use the binomial theorem to find the summation.}
+
+\item In the figure below, five circles are tangent to line $\ell$. Each circle is externally tangent to two other circles. Suppose that circles $A$ and $B$ have radii $4$ and $225$, respectively, and that $C_1$, $C_2$, $C_3$ are congruent circles. Find their common radius.
+
+\begin{center}
+  \begin{asy}
+    size(9.7cm);
+    real r = 0.32622835073;
+    pair O = (0, 0);
+    pair A = (0, 2);
+    real c1x = sqrt((2 + r)**2 - (2 - r)**2);
+    pair C_1 = (c1x, r);
+    pair C_2 = (c1x + 2r, r);
+    pair C_3 = (c1x + 4r, r);
+    pair B = (sqrt(24), 3);
+    draw(circle(A, 2));
+    draw(circle(B, 3));
+    draw(circle(C_1, r));
+    draw(circle(C_2, r));
+    draw(circle(C_3, r));
+    draw((-3, 0)--(sqrt(24)+4, 0));
+    label("$A$", (-1, 4), W);
+    label("$B$", (sqrt(24)+2, 5.5), E);
+    label("$C_1$", (c1x, 0), S);
+    label("$C_2$", (c1x + 2r, 0), S);
+    label("$C_3$", (c1x + 4r, 0), S);
+    label("$\ell$", (sqrt(24)+3.5, 0), N);
+  \end{asy}
+\end{center}
+
+{\sffamily \bfseries Answer.} $\boxed{\dfrac94}$.
+
+{\sffamily \bfseries Solution.} Let the common radius be $r$. Draw the radii of circle $A$ and $B$ tangent to line $\ell$. Let $C$ be the foot from $A$ to the radius of $B$. Let $D$ be the foot from $C_1$ to the radius of $A$. Let $E$ be the foot from $C_3$ to the radius of $B$.
+
+\begin{center}
+  \begin{asy}
+    dotfactor = 2;
+    size(9.7cm);
+    real r = 0.32622835073;
+    pair O = (0, 0);
+    pair A = (0, 2);
+    real c1x = sqrt((2 + r)**2 - (2 - r)**2);
+    pair C_1 = (c1x, r);
+    pair C_2 = (c1x + 2r, r);
+    pair C_3 = (c1x + 4r, r);
+    pair B = (sqrt(24), 3);
+    pair C = (sqrt(24), 2);
+    pair D = (0, r);
+    pair Ep = (sqrt(24), r);
+    draw(circle(A, 2));
+    draw(circle(B, 3));
+    draw(circle(C_1, r));
+    draw(circle(C_2, r));
+    draw(circle(C_3, r));
+    draw((-3, 0)--(sqrt(24)+4, 0));
+    draw(A--(0,0));
+    draw(B--(sqrt(24),0));
+    draw(A--C_1--C_2--C_3--B--cycle);
+    draw(A--C, dashed);
+    draw(C_1--D);
+    draw(C_3--Ep);
+    label("$A$", A, NW);
+    label("$B$", B, NE);
+    label("$C_1$", (c1x, 0), S);
+    label("$C_2$", (c1x + 2r, 0), S);
+    label("$C_3$", (c1x + 4r, 0), S);
+    label("$C$", C, E);
+    label("$D$", D, W);
+    label("$E$", Ep, E);
+    dot(C_1);
+    dot(C_2);
+    dot(C_3);
+    label("$\ell$", (sqrt(24)+3.5, 0), N);
+  \end{asy}
+\end{center}
+
+Observe that the length of $AD$ is a radius of $A$ minus the radius of $C_1$, so $AD = 4 - r$. Also, $AC_1$ is the sum of the radii of $A$ and $C_1$, so $AC_1 = 4 + r$. By the Pythagorean theorem, we get the length of $DC_1$ as $\sqrt{(4+r)^2 - (4-r)^2} = 4\sqrt{r}$.
+
+Similarly, we get $BE = 225 - r$ and $BC_3 = 225 + r$, so $C_3E = \sqrt{(225+r)^2 - (225-r)^2} = 30\sqrt{r}$. Again, we similarly get $BC = 225 - 4$ and $AB = 225 + 4$, so $AC = \sqrt{229^2 - 221^2} = 60$.
+
+But observe $AC = DC_1 + C_1C_3 + C_3E$. Hence $60 = 4\sqrt{r} + 4r + 30\sqrt{r}$. This is a quadratic equation in $\sqrt{r}$. The equation factors as $\del{\sqrt{r} + 10}\del{2\sqrt{r} - 3} = 0$. As $\sqrt{r}$ is positive, it must satisfy $2\sqrt{r} - 3 = 0$. This gives us the common radius as $r = \dfrac94$.
+
+\item Let $S = \cbr{1, 2, 3, \ldots, 12}$. Find the number of \emph{nonempty} subsets $T$ of $S$ such that if $x \in T$ and $3x \in S$, then it follows that $3x \in T$.
+
+{\sffamily \bfseries Answer.} $\boxed{1151}$.
+
+{\sffamily \bfseries Solution.} Partition $S$ into $\cbr{1, 3, 9}$, $\cbr{2, 6}$, $\cbr{4, 12}$, $\cbr{5}$, $\cbr{7}$, $\cbr{8}$, $\cbr{10}$, $\cbr{11}$. 
+
+Consider the first subset, $\cbr{1, 3, 9}$. Say $1$ is an element of $T$. Because $1 \cdot 3 = 3$ is in $S$, $3$ must also be in $T$. Furthermore, since $3 \cdot 3 = 9$ is in $S$, $9$ must also be in $T$. So if $T$ contains $1$, it must contain $3$ and $9$. Similarly, if it contains $3$, it must also contain $9$. So $T$ either contains $\cbr{1, 3, 9}$, $\cbr{3, 9}$, $\cbr{9}$, or the empty set. This gives $4$ possibilities for the first subset.
+
+In general, if $T$ contains an element $q$ of one of the subsets, it must also contain the elements in the subset that are larger than $q$. So there are $3$ possibilities for $\cbr{2, 6}$ and $\cbr{4, 12}$, and $2$ possibilities for the rest.
+
+This gives a total of $4 \cdot 3 \cdot 3 \cdot 2 \cdot 2 \cdot 2 \cdot 2 \cdot 2 = 1152$. However, one of these possibilities is the empty set, so we subtract $1$ to get $1152 - 1 = 1151$.
+
+{\small \sffamily \textbf{Remark.} Compare to \href{https://www.hmmt.co/static/archive/february/problems/2010/pcomb10f.pdf}{Harvard--MIT Mathematics Tournament 2010 Combinatorics 1}: ``Let $\mathsf{S = \cbr{1, 2, \ldots, 10}}$. How many (potentially empty) subsets $\mathsf{T}$ of $\mathsf{S}$ are there such that, for all $\mathsf{x}$, if $\mathsf{x}$ is in $\mathsf{T}$ and $\mathsf{2x}$ is in $\mathsf{S}$ then $\mathsf{2x}$ is also in $\mathsf{T}$?''}
+ 
+\item In the figure below, the incircle of the isosceles triangle has radius $3$. The smaller circle is tangent to the incircle and the two congruent sides of the triangle. If the smaller circle has radius $2$, find the length of the base of the triangle.
+
+\begin{center}
+  \begin{asy}
+    size(8.5cm);
+    pair A = (0, 0);
+    pair J = (10, 0);
+    pair I = (15, 0);
+    pair C = (18, 1.5*sqrt(6));
+    pair B = (18, -1.5*sqrt(6));
+    draw(circle(J, 2));
+    draw(circle(I, 3));
+    draw(A--B--C--cycle);
+  \end{asy}
+\end{center}
+
+{\sffamily \bfseries Answer.} $\boxed{3 \sqrt6}$.
+
+{\sffamily \bfseries Solution.} Let the isosceles triangle be $ABC$, with $A$ at the vertex angle. Suppose the incenter has center $I$ and is tangent to $BC$ at $D$ and to $CA$ at $E$. Suppose the smaller circle has center $J$ and is tangent to $CA$ at $F$.
+
+\begin{center}
+  \begin{asy}
+    size(8.5cm);
+    pair A = (0, 0);
+    pair J = (10, 0);
+    pair I = (15, 0);
+    pair C = (18, 1.5*sqrt(6));
+    pair B = (18, -1.5*sqrt(6));
+    pair D = (18, 0);
+    pair Ep = foot(I, C, A);
+    pair F = foot(J, C, A);
+    draw(circle(J, 2));
+    draw(circle(I, 3));
+    draw(A--B--C--cycle);
+    draw(A--D);
+    draw(I--Ep);
+    draw(J--F);
+    label("$A$", A, W);
+    label("$B$", B, SE);
+    label("$C$", C, NE);
+    label("$J$", J, NE);
+    label("$I$", I, NE);
+    label("$D$", D, E);
+    label("$E$", Ep, NW);
+    label("$F$", F, NW);
+  \end{asy}
+\end{center}
+
+Observe that triangles $AFJ$ and $AEI$ are similar right triangles, because they share the same angle $\angle CAD$. Hence, if we set $AJ = x$, we get $$\frac{AJ}{FJ} = \frac{AI}{EI} \implies \frac{x}{2} = \frac{x + 5}{3},$$ and solving yields $x = 10$. However, triangles $AEI$ and $ADC$ are similar right triangles as well, because they also share the same angle $\angle CAD$. This gives us $$\frac{AD}{CD} = \frac{AE}{IE} \implies CD = \frac{AD \cdot IE}{AE} = \frac{(18)(3)}{\sqrt{15^2 - 3^2}} = \frac{3\sqrt6}2,$$ where we get $AE$ through the Pythagorean theorem. Hence the length of the whole base is $3\sqrt6$.
+
+\item Evaluate the expression $\del{1 + \tan7.5\dg}\del{1 + \tan 18\dg}\del{1 + \tan27\dg}\del{1 + \tan37.5\dg}$.
+
+{\sffamily \bfseries Answer.} $\boxed{4}$.
+
+{\sffamily \bfseries Solution.} Observe that $7.5\dg + 37.5\dg = 18\dg + 27\dg = 45\dg$. This encourages to pair up the product as $(1 + \tan x)(1 + \tan(45\dg - x))$. But by the tangent angle sum formula, this product is
+$$(1 + \tan x)\del{1 + \frac{\tan 45\dg - \tan x}{1 + \tan45\dg \tan x}} = \del{1 + \tan x}\del{1 + \frac{1 - \tan x}{1 + \tan x}} = \del{1 + \tan x}\del{\frac2{1 + \tan x}} = 2.$$
+By pairing up the factors, we see that the product is $4$.
+
+\item Compute the number of ordered $6$-tuples $(a,b,c,d,e,f)$ of positive integers such that $$a + b + c + 2(d+e+f) = 15.$$
+
+{\sffamily \bfseries Answer.} $\boxed{119}$.
+
+{\sffamily \bfseries Solution.} \href{https://en.wikipedia.org/wiki/Stars_and_bars_(combinatorics)#Theorem_one}{Balls and urns} gives us the well-known formula for the number of positive integer solutions to $a + b + c = n$. Imagine having $n$ balls lined up in a row, and choosing two of the $n-1$ spaces in between them to place dividers. These dividers split up the balls into three containers containing $a$, $b$, and $c$ balls each, corresponding to a solution of $a + b + c = n$, so there are the same number of both, which is $\displaystyle \binom{n-1}2$.
+
+Set $d + e + f = k$, noting that $k$ can be any integer from $3$ to $6$. It can't be smaller as $d$, $e$, and $f$ are at least $1$, and it can't be larger as $a$, $b$, and $c$ are at least $1$. We also get $a + b + c = 15 - 2k$.
+
+By the above, there are $\displaystyle \binom{k-1}{2}$ ways to pick $d$, $e$, and $f$ satisfying the first equation, and $\displaystyle \binom{14-2k}{2}$ ways to pick $a$, $b$, and $c$ satisfying the second. Multiplying them gives the number of tuples $(a, b, c, d, e, f)$ satisfying the given equation, for a certain $k$. Summing over all possible values of $k$ gives $\displaystyle \sum_{k=3}^6 \binom{k-1}{2}\binom{14-2k}{2} = 119$ ways.
+
+{\small \sffamily \textbf{Remark.} Compare to \href{http://pmo.ph/wp-content/uploads/2015/10/18thPMO-QualifyingRound-Questions.pdf}{PMO 2016 Qualifying III.4}: ``Let $\mathsf{N = \cbr{0, 1, 2 \ldots}}$. Find the cardinality of the set $\mathsf{\cbr{(a, b, c, d, e) \in N^5 : 0 \leq a + b \leq 2, 0 \leq a + b + c + d + e \leq 4}}$'', or \href{http://pmo.ph/wp-content/uploads/2014/08/18th-PMO-Area-Stage.pdf}{PMO 2016 Areas I.9}: ``How many ways can you place $\mathsf{10}$ identical balls in 3 baskets of different colors if it is possible for a basket to be empty?'', or \href{http://pmo.ph/wp-content/uploads/2014/08/18th-PMO-National-Stage-Oral-Phase-Q-and-A.pdf}{PMO 2016 Nationals Easy 11}: ``How many solutions does $\mathsf{x + y + z = 2016}$ have, where $\mathsf{x}$, $\mathsf{y}$, and $\mathsf{z}$ are integers with $\mathsf{x > 1000}$, $\mathsf{y > 600}$, and $\mathsf{z > 400}$?'', or \href{http://pmo.ph/wp-content/uploads/2014/08/19th-PMO-Qualifying-Stage-Questions-and-Answers.pdf}{PMO 2017 Qualifying II.9}: ``How many ordered triples of positive integers $\mathsf{(x, y, z)}$ are there such that $\mathsf{x + y + z = 20}$ and two of $\mathsf{x}$, $\mathsf{y}$, $\mathsf{z}$ are odd?'', or \href{http://cjquines.com/files/pmo2019quals.pdf}{PMO 2019 Qualifying I.5}: ``Juan has $\mathsf{4}$ distinct jars and a certain number of identical balls. The number of ways that he can distribute the balls into the jars where each jar has at least one ball is $\mathsf{56}$. How many balls does he have?''}
+
+\item Let $S = \cbr{1, 2, \ldots, 2018}$. For each subset $T$ of $S$, take the product of all elements of $T$, with $1$ being the product corresponding to the empty set. The sum of all such resulting products (with repetition) is $N$. Two elements $m$ and $n$, with $m < n$, are removed. The sum of all products over all subsets of the resulting set is $\dfrac{N}{2018}$. What is $n$?
+
+{\sffamily \bfseries Answer.} $\boxed{1008}$.
+
+{\sffamily \bfseries Solution.} Consider the product $$(1 + 1)(1 + 2)(1 + 3) \cdots (1 + 2018).$$ Each term in its expansion is formed by taking the product of 2018 numbers, where each number is chosen from each binomial. For example, one of the terms could be $1 \cdot 2 \cdot 1 \cdot 4 \cdot 1 \cdot 6 \cdots \cdot 1 \cdot 2018$, formed by choosing all of the even numbers and none of the odd ones. But this is precisely the product of the elements in the set $\cbr{2, 4, 6, \ldots, 2018}$. 
+
+More generally, we see that the product of the elements of each subset $T$ corresponds to one term in its expansion, by choosing the elements in $T$ for the product. Thus, $N$ is the above product.
+
+Through similar reasoning, the sum of all products after removing $m$ and $n$ from the set is also $N$, except with the $1 + m$ and $1 + n$ factors removed from the product. Thus $$\frac{(1 + 1)(1 + 2)(1 + 3) \cdots (1 + 2018)}{(1+m)(1+n)} = \frac{N}{2018},$$ giving $2018 = (1 + m)(1 + n)$. As $2018 = 2 \cdot 1009$, the only choice is $m = 1$ and $n = 1008$.
+
+{\small \sffamily \textbf{Remark.} This is a useful idea in general. For example, expanding $\mathsf{(1 + 2 + 2^2)(1 + 3 + 3^2)(1 + 5)}$ gives the sum of the divisors of $\mathsf{2^2 \cdot 3^2 \cdot 5}$. One can also get the sum of the squares of the divisors through $\mathsf{(1 + 2^2 + 2^4)(1 + 3^2 + 3^4)(1 + 5^2)}$, and the sum of the perfect square divisors through $\mathsf{(1 + 2^2)(1 + 3^2)(1)}$. This is somewhat related to \href{http://web.evanchen.cc/handouts/Summation/Summation.pdf}{\emph{multiplicative number theory}} (p.~10).}
+
+\item Let $\alpha$ be the unique positive root of the equation $$x^{2018} - 11x - 24 = 0.$$ Find $\floor{\alpha^{2018}}$. (Here, $\floor{x}$ denotes the greatest integer less than or equal to $x$.)
+
+{\sffamily \bfseries Answer.} $\boxed{35}$.
+
+{\sffamily \bfseries Solution.} Observe that as $\alpha$ satisfies $\alpha^{2018} - 11\alpha - 24 = 0$, rearranging the equation gives $\alpha^{2018} = 11\alpha + 24$. It remains to find $\floor{11\alpha + 24}$.
+
+Let $f(x) = x^{2018} - 11x - 24$. As $f(0) < 0$ and $f(1) < 0$, the root cannot be between $0$ and $1$. But $f(2) > 0$, so the root must be between $1$ and $2$. In fact, it looks as if the root is $1$ plus a small value. Thus, suppose $\alpha = 1 + e$, for some $e > 0$.
+
+We will use the estimate $(1 + e)^{2018} > 1 + 2018e$ from \href{https://en.wikipedia.org/wiki/Bernoulli%27s_inequality}{Bernoulli's inequality}. This gives $$f(1 + e) = (1 + e)^{2018} - 11(1 + e) - 24 > 2007e - 34.$$ Note that when $e > \dfrac{34}{2007}$, then $f(1+e)$ is greater than zero.
+
+So by the \href{https://en.wikipedia.org/wiki/Intermediate_value_theorem}{intermediate value theorem}, $1 < \alpha < 1 + \dfrac{34}{2007}$. Thus $35 < 11\alpha + 24 < 35 + \dfrac{816}{2007}$. We then get $\floor{11 \alpha + 24} = 35$.
+
+\item How many distinct numbers are there in the sequence $\floor{\dfrac{1^2}{2018}}, \floor{\dfrac{2^2}{2018}}, \ldots, \floor{\dfrac{2018^2}{2018}}$?
+
+{\sffamily \bfseries Answer.} $\boxed{1514}$.
+
+{\sffamily \bfseries Solution.} Note that the difference of $n^2$ and $(n+1)^2$ is $2n+1$. This difference is less than $2018$ for $n = 1, 2, \ldots, 1008$. So there are no integers missing from $\floor{\dfrac{1^2}{2018}}, \floor{\dfrac{2^2}{2018}}, \ldots, \floor{\dfrac{1008^2}{2018}}$. These cover the integers from $0$ to $\floor{\dfrac{1008^2}{2018}} = 503$, giving $504$ integers.
+
+The remaining numbers must then give distinct integers. This is because the differences between the numerators is greater than $2018$. Thus the fractions increase by at least $1$, so they cannot have the same value. These are from the $1009$th to the $2018$th terms, giving $1010$ integers. 
+
+In all, there are $504 + 1010 = 1514$ distinct integers.
+
+{\small \sffamily \textbf{Remark.} This is the same as \href{http://cjquines.com/files/mathira2018orals.pdf}{Mathirang Mathibay 2018 Finals Wave 3--3}, except $\mathsf{2018}$ is replaced by $\mathsf{2020}$.}
+
+\item Suppose that $a, b, c$ are real numbers such that $$\frac1a + \frac1b + \frac1c = 4\del{\frac1{a+b} + \frac1{b+c} + \frac1{c+a}} = \frac c{a+b} + \frac a{b+c} + \frac b{c+a} = 4.$$ Determine the value of $abc$.
+
+{\sffamily \bfseries Answer.} $\boxed{\dfrac{49}{23}}$.
+
+{\sffamily \bfseries Solution.} By equating the first and last expressions, we get $$\frac1a + \frac1b + \frac1c = \frac{ab + bc + ca}{abc} = 4.$$ Letting $abc = n$, we get $ab + bc + ca = 4n$. By equating the second and last expressions, we get $$\frac1{a+b} + \frac1{b+c} + \frac1{c+a} = 1. \qquad (\star)$$By adding $3$ to the rightmost equality, we get \begin{align*}
+\del{\frac c{a+b} + 1} + \del{\frac a{b+c} + 1} + \del{\frac b{c+a} + 1} &= 4 + 3 \\
+\frac{a+b+c}{a+b} + \frac{a+b+c}{b+c} + \frac{a+b+c}{c+a} &= 7 \\
+(a + b + c)\del{\frac1{a+b} + \frac1{b+c} + \frac1{c+a}} &= 7.
+\end{align*}
+Dividing both sides by $(\star)$, we get $a + b + c = 7$. Since we have the expressions $a + b + c$, $ab + bc + ca$, and $abc$, we are encouraged to use Vieta's formulas. By Vieta's formulas, the polynomial $P(x) = x^3 - 7x^2 + 4nx - n$ has $a$, $b$, and $c$ as roots.
+
+Because $P(7-(7-r)) = P(r)$, the roots of $P(7-x)$ are $7-a$, $7-b$, and $7-c$. This is
+\begin{align*}P(7-x) &= \del{7 - x}^3 - 7\del{7 - x}^2 + 4n\del{7 - x} - n \\
+&= \del{343 - 147x + 21x^2 - x^3} - \del{343 - 98x + 7x^2} + \del{28n - 4nx} - n \\
+&= -x^3 + 14x^2 - (49 + 4n)x + 27n.\end{align*}As $a + b +c = 7$, we can replace the denominators of $(\star)$ to get $$\frac1{7-c} + \frac1{7-a} + \frac1{7-b} = 1.$$ But this is precisely the sum of the reciprocals of the roots of $P(7-x)$. By Vieta's formulas again, this is $\dfrac{-(49+4n)}{-27n}$, and equating this to $1$ gives $n = \dfrac{49}{23}$.
+
+\end{enumerate}
+
+\noindent\textbf{PART II.} Show your solution to each problem. Each complete and correct solution is worth ten points.
+
+\begin{enumerate}[left=0pt]
+
+\item For a positive integer $n$, let $\phi(n)$ denote the number of positive integers less than and relatively prime to $n$. Let $\displaystyle S_k = \sum_n \frac{\phi(n)}{n}$, where $n$ runs through all positive divisors of $42^k$. Find the largest positive integer $k < 1000$ such that $S_k$ is an integer.
+
+{\sffamily \bfseries Answer.} $\boxed{996}$.
+
+{\sffamily \bfseries Solution.} Note by a \href{https://en.wikipedia.org/wiki/Euler%27s_totient_function#Euler's_product_formula}{well-known formula}, $\displaystyle \phi(n) = n \prod_{p|n} \del{1 - \frac1p}$. Dividing both sides by $n$, we get $\displaystyle \frac{\phi(n)}n = \prod_{p|n} \del{1 - \frac1p}$. Thus the value of $\dfrac{\phi(n)}{n}$ only depends on the prime factors of $n$. We then do casework on the possible prime factors of a factor of $42^k$:
+\begin{center}
+  \begin{tabular}{rrr|c}
+  $n$ & \# & $\phi(n)/n$ & $\sum$ \\ \hline
+  1 & 1 & 1 & 1 \\
+  $2^a$ & $k$ & $1 - \dfrac12 = \dfrac12$ & $\dfrac k2$ \\[8pt]
+  $3^a$ & $k$ & $1 - \dfrac13 = \dfrac23$ & $\dfrac{2k}3$ \\[8pt]
+  $7^a$ & $k$ & $1 - \dfrac17 = \dfrac67$ & $\dfrac{6k}7$ \\[8pt]
+  $2^a3^b$ & $k^2$ & $\del{1 - \dfrac12}\del{1 - \dfrac13} = \dfrac13$ & $\dfrac {k^2}3$ \\[8pt]
+  $2^a7^b$ & $k^2$ & $\del{1 - \dfrac12}\del{1 - \dfrac17} = \dfrac37$ & $\dfrac {3k^2}7$ \\[8pt]
+  $3^a7^b$ & $k^2$ & $\del{1 - \dfrac13}\del{1 - \dfrac17} = \dfrac47$ & $\dfrac {4k^2}7$ \\[8pt]
+  $2^a3^b7^c$ & $k^3$ & $\del{1 - \dfrac12}\del{1 - \dfrac13}\del{1 - \dfrac17} = \dfrac27$ & $\dfrac {2k^3}7$
+  \end{tabular}
+\end{center}
+In the table, the first column lists the form of the factor, and the second column counts how many factors of that form there are. In total, we get $S_k = \dfrac{12k^3 + 56k^2 + 85k + 42}{42}$. To be an integer, the numerator must be divisible by $42$, or all of $2$, $3$, and $7$:
+\begin{itemize}
+  \item Modulo $2$, the numerator is $k$. To be zero, $k$ must be even.
+  \item Modulo $3$, the numerator is $2k^2 + k$. To be zero, $k$ must be either $0$ or $1$ modulo $3$.
+  \item Modulo $7$, the numerator is $5k^3 + k$. To be zero, $k$ must be $0$, $2$, or $5$ modulo $7$.
+\end{itemize}
+The largest such $k$ less than $1000$ satisfying all of these is $996$: it is even, $0$ modulo $3$, and $2$ modulo $7$, Hence $S_{996}$ is an integer.
+
+{\small \sffamily \textbf{Remark.} The problem's definition gives $\mathsf{\phi(1) = 0}$ rather than the standard $\mathsf{\phi(1) =1}$; this doesn't affect the answer. We can also use a similar trick to I.17 to get $\mathsf{S_k = \del{1 + k\del{1 - \frac12}}\del{1 + k\del{1 - \frac13}}\del{1 + k\del{1 - \frac17}}}$.}
+
+\item In $\triangle ABC$, $AB > AC$ and the incenter is $I$. The incircle of the triangle is tangent to sides $BC$ and $AC$ at points $D$ and $E$, respectively. Let $P$ be the intersection of the lines $AI$ and $DE$, and let $M$ and $N$ be the midpoints of sides $BC$ and $AB$, respectively. Prove that $M$, $N$, and $P$ are collinear.
+
+{\sffamily \bfseries Solution.} 
+
+\begin{center}
+  \begin{asy}
+    pen bluey = rgb(0.1,0.417,0.571)+1;
+    size(8cm);
+    pair C = dir(140);
+    pair A = dir(210);
+    pair B = dir(330);
+    pair I = incenter(A, B, C);
+    pair D = foot(I, B, C);
+    pair E = foot(I, A, C);
+    pair P = IP(Line(A, I, 5), Line(D, E, 5));
+    pair M = (B + C)/2;
+    pair N = (A + B)/2;
+
+    draw(incircle(A, B, C));
+    draw(A--B--C--cycle);
+    draw(A--P--E);
+    draw(P--B, bluey);
+    draw(rightanglemark(A,P,B,2), bluey);
+    draw(circumcircle(B,P,I), bluey);
+    draw(P--N, linetype(new real[] {6,4})+bluey);
+    draw(B--I--D, bluey);
+
+    label("$A$", A, dir(A));
+    label("$B$", B, dir(B));
+    label("$C$", C, dir(C));
+    label("$D$", D, dir(90));
+    label("$E$", E, dir(E));
+    label("$P$", P, dir(P));
+    label("$I$", I, NW);
+    label("$M$", M, NE);
+    label("$N$", N, dir(N));
+  \end{asy}
+\end{center}
+
+First, observe that $$
+  \angle BIP
+  = 180\dg - \angle AIB
+  = \angle IBA + \angle BAI
+  = \frac{\angle CBA}2 + \frac{\angle BAC}2
+  = \frac{180\dg - \angle ACB}2.$$
+Note that $CD = CE$ as they are tangents from the same point to the same circle, thus triangle $CDE$ is isosceles. This means that its base angle is $$\dfrac{180\dg - \angle ACB}2 = \angle CDE = \angle BDP,$$ so $B$, $I$, $P$, and $D$ are concylic. Then
+$$\angle BPA = \angle BPI = \angle BDI = 90\dg,$$ making triangle $BPA$ a right triangle. Point $N$ is the midpoint of its hypotenuse, thus $NP = NA$, making another isosceles triangle $NPA$. This means $$\angle NPA = \angle NAP = \angle NAI = \angle IAC,$$ thus $NP$ and $AC$ are parallel. But $N$ is the midpoint of $AB$, so line $NP$ is the midline, meaning it meets side $BC$ at its midpoint $M$.
+ 
+{\small \sffamily \textbf{Remark.} This is the well-known \emph{right angle on intouch chord} lemma, which is true even if $\mathsf{AB \leq AC}$; the condition $\mathsf{AB > AC}$ makes the angle chasing have only one configuration. A nice way to state it is that ``an angle bisector, an incircle chord, and a midline, each drawn from different vertices, are concurrent''. This is also Lemma 8 in Yufei Zhao's \href{http://yufeizhao.com/olympiad/geolemmas.pdf}{``Lemmas in Euclidean Geometry''}, and Lemma 1.45 in Evan Chen's \href{https://books.google.com.ph/books?id=47UaDAAAQBAJ&lpg=PP1&pg=PP1&redir_esc=y#v=onepage&q&f=false}{\emph{Euclidean Geometry in Mathematical Olympiads}}. The proof presented here is adapted from Zhao's handout.}
+
+\item Consider the function $f : \NN \to \ZZ$ satisfying, for all $n \in \NN$,
+
+\begin{enumerate}
+  \item[(a)] $\abs{f(n)} = n$
+  \item[(b)] $\displaystyle 0 \leq \sum_{k=1}^n f(k) < 2n$.
+\end{enumerate}
+
+Evaluate $\displaystyle \sum_{n=1}^{2018}f(n)$.
+
+{\sffamily \bfseries Answer.} $\boxed{2649}$.
+
+{\sffamily \bfseries Solution.} Let $\displaystyle S_n = \sum_{k=1}^{n}f(k)$. Observe the following:
+\begin{enumerate}
+  \item[(1)] Suppose $1 \leq S_n \leq n$. We must have $S_{n+1} = S_n + f(n+1) \geq 0$. Then it must be true that $f(n+1) = n+1$, as otherwise $S_{n+1}$ would be negative. This makes $n + 2 \leq S_{n+1} \leq 2n + 1$.
+
+  We must also have $S_{n+2} = S_{n+1} + f(n+2) < 2(n+2)$. For this to be true, we must have $f(n+2) = -(n+2)$, as otherwise the value of $S_{n+2}$ would be at least $2n+2$. In all, we get $S_{n+2} = S_n + (n+1) - (n+2) = S_n - 1$.
+
+  \item[(2)] Suppose $S_n = 0$. Then $f(n+1) = n+1$, as otherwise $S_{n+1}$ would be negative. Thus we get that $S_{n+1} = n+1$.
+
+  We then use (1) repeatedly to get $$S_{n+1} = n+1 \;\overset{(1)}{\longrightarrow}\; S_{n+3} = n \;\overset{(1)}{\longrightarrow}\; S_{n+5} = n - 1 \;\overset{(1)}{\longrightarrow}\; \cdots \;\overset{(1)}{\longrightarrow}\; S_{n+(2i+1)} = n - (i-1).$$
+  The pattern continues until $i = n+1$, in which case we get $S_{3n+3} = 0$. 
+\end{enumerate}
+We compute the first few sums as $S_1 = 1$, $S_2 = 3$, and $S_3 = 0$. By using (2) repeatedly, we get
+$$S_3 = 0 \;\overset{(2)}{\longrightarrow}\; S_{3(3) + 3} = S_{12} = 0 \;\overset{(2)}{\longrightarrow}\; S_{3(12) + 3} = S_{39} = 0 \;\overset{(2)}{\longrightarrow}\; \cdots \;\overset{(2)}{\longrightarrow}\; S_{1092} = 0.$$
+Finally, we use (2) on $n = 1092$ and $i = 462$ to get $$S_{2017} = S_{1092 + 2(462) + 1} = 1092 - (462 - 1) = 631.$$We then get $f(2018) = 2018$ and thus $S_{2018} = 2649$.
+
+{\small \sffamily \textbf{Remark.} Sequence $\mathsf{S_n}$ is OEIS \href{http://oeis.org/A008344}{A008344}. It is related to \href{https://www.youtube.com/watch?v=FGC5TdIiT9U}{\emph{Recam\'{a}n's sequence}}, or OEIS \href{https://oeis.org/A005132}{A005132}, where $\mathsf{a_0 = 0}$ and $\mathsf{a_n = a_{n-1} - n}$ if it is positive and not already in the sequence, otherwise $\mathsf{a_n = a_{n-1} + n}$.}
+
+\end{enumerate}
+
+\emph{With thanks to Vincent Dela Cruz (I.11, I.17) and Andres Rico Gonzales (II.3) for solutions.}
+
+\end{document}

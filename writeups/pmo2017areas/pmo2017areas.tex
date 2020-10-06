@@ -1,0 +1,268 @@
+\documentclass[11pt,paper=letter]{scrartcl}
+\usepackage[parskip]{cjquines}
+
+\begin{document}
+
+\title{PMO 2017 Area Stage}
+\author{Carl Joshua Quines}
+\date{January 21, 2017}
+
+\maketitle
+
+It is consensus that the area stage this year has been the most difficult one yet. It is for this reason I'll present the questions and some solutions to all the problems. The PMO does not release solutions to part I, in either case. Suggestions and corrections are welcomed: contact me at \mailto{cj@cjquines.com}.
+
+\textbf{PART I.} Give the answer in the simplest form that is reasonable. No solution is needed. Figures are not drawn to scale. Each correct answer is worth three points.
+
+\begin{enumerate}[left=0pt]
+
+\item The vertices of a triangle are at the points $(0, 0)$, $(a, b)$ and $(2016 - 2a, 0)$, where $a > 0$. If $(a, b)$ is on the line $y = 4x$, find the value(s) of $a$ that maximizes the triangle's area.
+
+\textbf{Answer:} $\boxed{504}$.
+
+\textbf{Solution:} If $(a, b)$ lies on $y = 4x$, we must have $b = 4a$. Then $(0, 0), (a, 4a), (2016 -2a, 0)$ is a triangle with altitude $4a$ and base $2016 - 2a$. Its area is thus $\frac{1}{2}(4a)(2016-2a)$, and the maximum value is attained when $a = 504$.
+
+\item Let $f$ be a real-valued function such that $$f(x - f(y)) = f(x) - xf(y)$$ for any real numbers $x$ and $y$> If $f(0) = 3$, determine $f(2016) - f(2013)$.
+
+\textbf{Answer:} $\boxed{6048}$.
+
+\textbf{Solution:} Substituting $(x, y) = (2016, 0)$ and $f(0) = 3$ yields $f(2013) = f(2016) - 6048$. Rearranging gives the answer.
+
+\item In the figure on the right, $AB$ is tangent to the circle at point $A$, $BC$ passes through the center of the circle, and $CD$ is a chord of the circle that is parallel to $AB$. If $AB = 6$ and $BC = 12$, what is the length of $CD$?
+
+\textbf{Answer:} $\boxed{\frac{36}{5}}$.
+
+\textbf{Solution:} Let the line $AO$ intersect $CD$ at $E$. If the radius of the circle is $r$, then by power of a point on $B$, we have $6^2 = 12(12 - 2r)$, giving us $r = \frac{9}{2}$. Notice that $\triangle COE \sim \triangle BOA$, and thus $$\frac{CE}{r} = \frac{CE}{CO} = \frac{AB}{BO} = \frac{6}{12 - r}.$$ Solving gives us $CE = \frac{18}{5}$. Finally, as $OE \perp CD$, $E$ is the midpoint of $CD$. Thus $CD = \frac{36}{5}$.
+
+\item Suppose that $S_k$ is the sum of the first $k$ terms of an arithmetic sequence with common difference $3$. If the value of $\dfrac{S_{3n}}{S_n}$ does not depend on $n$, what is the $100$th term of the sequence?
+
+\textbf{Answer:} $\boxed{\frac{597}{2}}$.
+
+\textbf{Solution:} Let $a$ be the first term of the sequence. Setting the ratio when $n = 1$ equal to the ratio when $n = 3$ gives us
+\begin{align*}
+  \frac{S_3}{S_1} &= \frac{S_9}{S_3} \\
+  S_3^2 &= S_1 \cdot S_9 \\
+  (3a + 9)^2 &= (a)(9a + 108) \\
+  9a^2 + 54a + 81 &= 9a^2 + 108a \\
+  a &= \frac{3}{2}
+\end{align*}
+The $100$th term is $\frac{3}{2} + 99(3) = \frac{597}{2}$.
+
+\item In parallelogram $ABCD$, $AB = 1$, $BC = 4$, and $\angle ABC = 60\dg$. Supose that $AC$ is extended from $A$ to a point $E$ beyond $C$ so that $ADE$ has the same area as the parallelogram. Find the length of $DE$.
+
+\textbf{Answer:} $\boxed{2\sqrt{3}}$.
+
+\textbf{Solution:} Note that the area of the parallelogram is twice the area of $ACD$. Thus the area of $ADE$ must be twice $ACD$. However, they both have the same height from $D$ to $AC$, so the base of $ADE$ must be twice the length of the base of $ACD$. In other words, $AE$ is twice $AC$, or $AC = CE$.
+
+We use the law of cosines to calculate $AC = \sqrt{4^2 + 1^2 - 2(4)(1)(\cos 60\dg)} = \sqrt{13}$. We use Apollonius's theorem on the triangle $ADE$ to calculate $DE = 2\sqrt{3}$.
+
+\item Find the exact value of $\tan^{-1} \del{\dfrac{1}{2}} + \tan^{-1} \del{\dfrac{1}{5}} + \tan^{-1} \del{\dfrac{1}{8}}.$
+
+\textbf{Answer:} $\boxed{45\dg}$
+
+\textbf{Solution:} Substituting $\tan^{-1}$ in the tangent angle sum formula yields $$\tan(\alpha + \beta) = \frac{\tan{\alpha} + \tan{\beta}}{1 - \tan{\alpha}\tan{\beta}} \iff \tan^{-1}(A) + \tan^{-1}(B) = \tan^{-1}\del{\frac{A + B}{1 - AB}}.$$ The required sum is thus
+\begin{align*}
+  \tan^{-1} \del{\dfrac{1}{2}} + \tan^{-1} \del{\dfrac{1}{5}} + \tan^{-1} \del{\dfrac{1}{8}} &= \tan^{-1}\del{\frac{\frac{1}{2} + \frac{1}{5}}{1 - \frac{1}{2} \cdot \frac{1}{5}}} + \tan^{-1}\del{\frac{1}{8}} \\
+  &= \tan^{-1}\del{\frac{7}{9}} + \tan^{-1}\del{\frac{1}{8}} \\
+  &= \tan^{-1}\del{\frac{\frac{7}{9} + \frac{1}{8}}{1 - \frac{7}{9} \cdot \frac{1}{8}}} \\
+  &= \tan^{-1}(1) = 45\dg.
+\end{align*}
+
+\item A small class of nine boys are to change their seating arrangement by drawing their new seat numbers from a box. After the seat change, what is the probability that there is only one pair of boys who have switched seats with each other and only three boys who have unchanged seats?
+
+\textbf{Answer:} $\boxed{\frac{1}{48}}$.
+
+\textbf{Solution:} There are two boys who have switched seats with each other, three boys with unchanged seats, and four boys who have changed seats, with no two of the four having switched. We count the number of ways for this to happen.
+
+There are $\binom{9}{2}$ ways to pick two boys that switched seats. Of the remaining seven, there are $\binom{7}{3}$ boys who have unchanged seats. Finally, there are $6$ permutations of $ABCD$ such that no letter is in its own place and no two have swapped: $$BCDA, BDAC, CADB, CDBA, DABC, DCAB,$$ so there are $6$ ways to permute the last four boys. The final answer is $$\frac{\binom{9}{2}\binom{7}{3} \cdot 6}{9!} = \frac{1}{48}.$$
+
+\item For each $x \in \RR$, let $\cbr{x}$ be the fractional part of $x$ in its decimal representation. For instance, $\cbr{3.4} = 3.4 -3 = 0.4$, $\cbr{2} = 0$, and $\cbr{-2.7} = -2.7 - (-3) = 0.3$. Find the sum of all real numbers $x$ for which $\cbr{x} = \dfrac{1}{5}x$.
+
+\textbf{Answer:} $\boxed{\frac{15}{2}}$.
+
+\textbf{Solution:} Rewriting $x = \floor{x} + \cbr{x}$ and rearranging the terms yields $4\cbr{x} = \floor{x}$. Since $\floor{x}$ is a integer, $\cbr{x} = \frac{n}{4}$ for some value of $n$. Letting $n = 0, 1, 2, 3$ gives the values $x = 0, \frac{5}{4}, \frac{5}{2}, \frac{15}{4}$, with sum $\frac{15}{2}$.
+
+\item Find the integer which is closest to the value of $\dfrac{1}{\sqrt[6]{5^6 + 1} - \sqrt[6]{5^6 - 1}}$
+
+\textbf{Answer:} $\boxed{9375}$.
+
+\textbf{Solution:} We manipulate $(5^6 + 1) - (5^6 - 1)$ by factoring it as the difference of two squares, and again as the difference of two cubes:
+\begin{align*}
+  2 &= (5^6 + 1) - (5^6 - 1) \\
+  2 &= (\sqrt{5^6 + 1} - \sqrt{5^6 - 1})(\sqrt{5^6 + 1} + \sqrt{5^6 - 1}) \\
+  2 &= (\sqrt[6]{5^6 + 1} - \sqrt[6]{5^6 - 1})(\sqrt[3]{5^6 + 1} + \sqrt[6]{(5^6 + 1)(5^6 - 1)} + \sqrt[3]{5^6 - 1})(\sqrt{5^6 + 1} + \sqrt{5^6 - 1}) \\
+  2 &\approx (\sqrt[6]{5^6 + 1} - \sqrt[6]{5^6 - 1})(\sqrt[3]{5^6} + \sqrt[6]{5^{12}} + \sqrt[3]{5^6})(\sqrt{5^6} + \sqrt{5^6}) \\
+  2 &\approx (\sqrt[6]{5^6 + 1} - \sqrt[6]{5^6 - 1})(5^2 + 5^2 + 5^2)(5^3 + 5^3) \\
+  2 &\approx (\sqrt[6]{5^6 + 1} - \sqrt[6]{5^6 - 1})(18750)
+\end{align*}
+Thus, $\dfrac{1}{\sqrt[6]{5^6 + 1} - \sqrt[6]{5^6 - 1}} \approx 9375$.
+
+\textbf{Remark:} The actual value, correct to six decimal places, is $9374.999990$. Our estimate is very close as $\sqrt{x + 1} - \sqrt{x} \approx \frac{1}{2\sqrt{x}}$ for large $x$, so dropping the $\pm 1$ makes a negligible difference.
+
+\item A line intersects the $y$-axis, the line $y = 2x + 2$, and the $x$-axis at the points $A, B,$ and $C,$ respectively. If segment $AC$ has a length of $4\sqrt{2}$ units and $B$ lies in the first quadrant and is the midpoint of segment $AC$, find the equation of the line in slope-intercept form.
+
+\textbf{Answer:} $\boxed{y = -7x + \frac{28}{5}}$.
+
+\textbf{Solution:} Let $O$ be the origin, and $B$ have coordinates $(x, 2x+2)$. Then $B$ is the circumcenter of right triangle $AOC$, and thus $BA = BC = BO$. Since $AC$ has a length of $4\sqrt{2}$ units, it follows $BO$ must be half that length, $2\sqrt{2}$ units.
+
+Since $B = (x, 2x+2)$, its distance to the origin must be $\sqrt{x^2 + (2x + 2)^2}$. Setting this equal to $2\sqrt{2}$ and discarding the negative case gives us $x = \frac{2}{5}$, so $B = (\frac{2}{5}, \frac{14}{5})$. As the $x$-coordinate of $B$ is halfway through $O$ and $C$, the coordinates of $C$ must be $(\frac{4}{5}, 0)$. Finally, line $BC$ is $y = -7x + \frac{28}{5}$.
+
+\item How many real numbers $x$ satisfy the equation $$\del{\abs{x^2 - 12x + 20}^{\log x^2}}^{-1 + \log x} = \abs{x^2 - 12x + 20}^{1 + \log(1/x)}?$$
+
+\textbf{Answer:} $\boxed{6}$.
+
+\textbf{Solution:} Note that $a^b = a^c$ has several cases. We list each one of them and count the number of real $x$. Our base is $\abs{x^2 - 12x + 20}$, the left exponent is $(\log x^2)(-1 + \log x)$ and the right exponent is $1 + \log(1/x)$.
+
+\begin{enumerate}
+
+\item $a = -1, b, c \in \ZZ$. Not possible, as the base is always positive.
+
+\item $a < 0, b = c \in \ZZ$. Not possible, as the base is always positive.
+
+\item $a = 0$, $b, c > 0$. The base is $0$ when $x = 3$ or $x = 4$. In either case, the left exponent will be negative, so we have no solutions.
+
+\item $a > 0, b = c$. The base is greater than $0$ provided that $x \neq 3, 4$. Setting the exponents equal and simplifying gives us $x = 10, \frac{1}{\sqrt{10}}$, giving two solutions.
+
+\item $a = 1$. The base is $1$ for four real numbers, the solutions to $x^2 - 12x + 20 = \pm 1$. This gives four solutions, none of which are the same as the previous case's solutions.
+
+\end{enumerate}
+
+In total, we have six real solutions, and all of them are distinct.
+
+\textbf{Remark.} We use the convention that this is the common logarithm. If this is the natural logarithm, the answer would be different.
+
+\item Let $n = 2^{23}3^{17}$. How many factors of $n^2$ are less than $n$, but do not divide $n$?
+
+\textbf{Answer:} $\boxed{391}$.
+
+\textbf{Solution:} We solve the more general case of $n = p^aq^b$ for distinct primes $p, q$ and positive integers $a, b$. Then $n^2 = p^{2a}q^{2b}$, which has $(2a + 1)(2b + 1)$ factors. For each factor less than $n$, there is a corresponding factor greater than $n$. Not counting $n$, there are $$\frac{(2a + 1)(2b + 1) - 1}{2} = 2ab + a + b$$ factors of $n^2$ less than $n$. Because $n$ has $(a + 1)(b + 1)$ factors, including $n$ itself, and because every factor of $n$ is also a factor of $n^2$, there are $$2ab + a + b - \del{(a+1)(b+1) - 1} = ab$$ factors of $n^2$ that are less than $n$ but do not divide $n$. The answer is $23 \times 17 = 391$.
+
+\item A circle is inscribed in a $2$ by $2$ square. Four squares are placed on the corners (the spaces between circle and square), in such a way that one side of the square is tangent to the circle, and two of the vertices lie on the sides of the larger square. Find the total area of the four smaller squares.
+
+\textbf{Answer:} $\boxed{\frac{48 - 32\sqrt{2}}{9}}$.
+
+\textbf{Solution:} Suppose the side of a smaller square is $s$. Let $O$ be the center of the circle, $P$ be the point of tangency of the circle and one of the smaller squares, $Q$ be the midpoint of the side of the smaller square opposite the side containing $P$, and $R$ be the vertex of the larger square closest to $Q$.
+
+Note that $OR$ is half the diagonal of the larger square and has length $\sqrt{2}$. Note that $OP$ is a radius and has length $1$. $PQ$ is as long as a side of the smaller square and has length $s$. $QR$ is one leg of an isosceles right triangle, and the other leg has length $\frac{s}{2}$. We then have $\sqrt{2} = 1 + s + \frac{s}{2}$. Thus $s = \frac{2\sqrt{2} - 1}{3}$, and $4s^2 = \frac{48 - 32\sqrt{2}}{9}$.
+
+\item Define $f: \RR^2 \rightarrow \RR^2$ by $f(x, y) = (2x - y, x + 2y)$. Let $f^0(x, y) = (x, y)$ and, for each $n \in \NN$, $f^n(x, y) = f(f^{n-1}(x, y))$. Determine the distance between $f^{2016}\del{\dfrac{4}{5}, \dfrac{3}{5}}$ and the origin.
+
+\textbf{Answer:} $\boxed{5^{1008}}$.
+
+\textbf{Solution:} Note that, as $f: (x, y) \rightarrow (2x - y, x + 2y)$, the distance to the origin is changed from $\sqrt{x^2 + y^2}$ to $$\sqrt{(2x - y)^2 + (x + 2y^2)} = \sqrt{4x^2 - 4xy + y^2 + x^2 + 4xy + 4y^2} = \sqrt{5x^2 + 5y^2}.$$ In other words, the distance is multiplied by $\sqrt{5}$ when we apply $f$. Since $f$ is applied $2016$ times, and the original distance to the origin is $\sqrt{(\frac{4}{5})^2 + (\frac{3}{5})^2} = 1$, the answer is $(1)(\sqrt{5})^{2016} = 5^{1008}$.
+
+\item How many numbers between $1$ and $2016$ are divisible by exactly one of $4, 6,$ or $10$?
+
+\textbf{Answer:} $\boxed{470}$.
+
+\textbf{Solution:} By the Principle of Inclusion-Exclusion, the answer is $$\floor{\frac{2016}{4}} + \floor{\frac{2016}{6}} + \floor{\frac{2016}{10}} - 2\floor{\frac{2016}{12}} - 2\floor{\frac{2016}{20}} - 2\floor{\frac{2016}{30}} + 3\floor{\frac{2016}{60}} = 470.$$
+
+\item Let $N$ be a natural number whose base-$2016$ representation is $ABC$. Working now in base-$10$, what is the remainder when $N - (A + B + C + k)$ is divided by $2015,$ if $k \in \cbr{1, 2, \ldots, 2015}$?
+
+\textbf{Answer:} $\boxed{2015 - k}$.
+
+\textbf{Solution:} In base $10$, $N = A \cdot 2016^2 + B \cdot 2016 + C$. Then $N - (A + B + C + k) = A(2016^2 - 1) + B(2016 - 1) - k$. But $2015$ divides $A(2016^2 - 1)$ and $B(2016 - 1)$ without remainder, so the remainder must be $2015 - k$.
+
+\item Find the number of pairs of positive integers $(n, k)$ that satisfy the equation $(n + 1)^k - 1 = n!$.
+
+\textbf{Answer:} $\boxed{3}$.
+
+\textbf{Solution:} Rearrange the equation as $(n+1)^k = n! + 1$. When $n = 1$, we have $k = 1$. Assume $n > 1$, then the right hand side is odd, so $n + 1$ has to be odd as well.
+
+Let $p$ be an odd prime dividing $n+1$. If $p < n + 1$, then $p$ is a factor of $n!$, and thus the right side is not divisible by $p$, contradiction. Thus $p = n + 1$, so $n + 1$ has to be an odd prime.
+
+Substituting yields $p^k - 1 = (p - 1)!$. We see that $p = 3$ gives $k = 1$, so assume $p > 3$. We take $\nu_2$ of both sides, then evaluate the left side using the lifting the exponent lemma, and the right side with Legendre's formula: $$\nu_2(p - 1) + \nu_2(p + 1) + \nu_2(k) - 1 = \nu_2((p-1)!) = \nu_2(p^k - 1) = \floor{\frac{p-1}{2}} + \floor{\frac{p-1}{4}} + \cdots \geq \frac{3(p - 1)}{4}$$
+
+We then raise the leftmost and rightmost sides of this inequality to the base $2$, which after rearranging gives us the estimation $$k \geq \frac{2^{(3p + 1)/4}}{p + 1}$$ which is at least $p$ for $p > 8$. It remains to check $p = 5$, which gives $k = 2$, and $p = 7$, which does not have a solution $k$. Thus there are three solutions.
+
+\textbf{Remark:} This problem is in literature; it is equivalent to a problem in Amir Parvardi's handout on the lifting the exponent lemma.
+
+\item A railway passes through four towns $A, B, C,$ and $D$. The railway forms a complete loop, as shown on the right, and trains go in both directions. Suppose that a trip between two adjacent towns costs one ticket. Using exactly eight tickets, how many distinct ways are there of travelling from town $A$ and ending at town $A$? (\emph{Note that passing through $A$ somewhere in the middle of the trip is allowed.})
+
+\textbf{Answer:} $\boxed{128}$.
+
+\textbf{Solution:} Represent a clockwise turn as $R$ and a counterclockwise turn as $L$. Then note that any eight turns with an even number of $R$s will necessarily end up at $A$. The answer is the number of permutations of eight $R$s, plus the number of permutations of six $R$s and two $L$s, and so on. This is $$\binom{8}{0} + \binom{8}{2} + \binom{8}{4} + \binom{8}{6} + \binom{8}{8} = 2^{8 - 1} = 128.$$
+
+\item The lengths of the two legs of a right triangle are in the ratio of $7$ : $24$. The distance between its incenter and its circumcenter is $1$. Find its area. (\emph{Recall that the \textbf{incenter} of a triangle is the center of its inscribed circle and the \textbf{circumcenter} is the center of its circumscribing circle.})
+
+\textbf{Answer:} $\boxed{\frac{336}{325}}$.
+
+\textbf{Solution 1:} We use the identity $OI^2 = R^2 - 2Rr.$ Let the triangle have sides $7k, 24k, 25k$. Then the cirumradius is half the circumference, so $R = \frac{25}{2}k$. It is well-known for a right triangle that $r = \frac{a+b-c}{2} = 3k$. We have $1 = (\frac{25}{2}k)^2 - 2(\frac{25}{2}k)(3k)$, or $k^2 = \frac{4}{325}$. The area is $84k^2 = \frac{336}{325}$.
+
+\textbf{Solution 2:} We begin with a right triangle $ABC$ of sides $AB = 7, BC = 24, CA = 25$, with incenter $I$ and circumcenter $O$. and scale the distance between the incenter and the circumcenter afterward.
+
+Let $AI$ meet $BC$ at point $D$. By the angle bisector theorem, $BD = \frac{7}{7+25}\cdot24 = \frac{21}{4}$. By the Pythagorean theorem, $AD = \frac{\sqrt{805}}{4}$. Finally, note that $\frac{AI}{AD} = \frac{24}{7 + 25}$, so $AI = \frac{3\sqrt{805}}{16}$. Through a similar computation, we see $CI = \frac{48\sqrt{2}}{49}$.
+
+Finally, note that $O$ is the midpoint of $AC$. We use Apollonius's theorem to calculate the length of the median $IO$ in triangle $AIC$ as $\frac{5\sqrt{13}}{2}$. Now we scale down from the area $[ABC] = 84$ by $\frac{1}{IO^2}$, giving $\frac{336}{325}$.
+
+\item Let $\floor{x}$ be the greatest integer not exceeding $x$. For instance, $\floor{3.4} = 3, \floor{2} = 2,$ and $\floor{-2.7} = -3$. Determine the value of the constant $\lambda > 0$ so that $2\floor{\lambda n} = 1 - n + \floor{\lambda\floor{\lambda n}}$ for all positive integers $n$.
+
+\textbf{Answer:} $\boxed{\sqrt{2} + 1}$.
+
+\textbf{Solution:} As $n$ grows without bound, $\floor{\lambda n}$ approaches $\lambda n$. Taking the limit of both sides as $n$ grows yields $2\lambda n = 1 - n + \lambda^2 n$, or $(1 + 2\lambda - \lambda^2)n = 1$. As $n$ approaches infinity, $1 + 2\lambda - \lambda^2$ must approach zero. Then $\lambda$ approaches $1 \pm \sqrt{2}$, but we discard the negative case.
+
+To show $\lambda = \sqrt{2} + 1$ works, substitute back to the equation:
+\begin{align*}
+  2\floor{n\sqrt{2} + n} &= 1 - n + \floor{(\sqrt{2} + 1)\floor{n\sqrt{2} + n}} \\
+  2\floor{n\sqrt{2}} + 2n &= 1 - n + \floor{(\sqrt{2} + 1)\del{\floor{n\sqrt{2}} + n}} \\
+  2\floor{n\sqrt{2}} + 2n &= 1 - n + \floor{\sqrt{2}\floor{n\sqrt{2}} + \floor{n\sqrt{2}} + n\sqrt{2} + n} \\
+  2\floor{n\sqrt{2}} + 2n &= 1 - n + \floor{\sqrt{2}\floor{n\sqrt{2}}} + \floor{n\sqrt{2}} + \floor{n\sqrt{2}} + n \\
+  2n &= 1 + \floor{\sqrt{2}\floor{n\sqrt{2}}},
+\end{align*}
+which is clearly true for integral $n$. Thus $\lambda = \sqrt{2} + 1$ is the unique solution.
+
+\end{enumerate}
+
+\noindent\textbf{PART II.} Show your solution to each problem. Each complete and correct answer is worth ten points.
+
+\begin{enumerate}[left=0pt]
+
+\item Let $x$ and $y$ be real numbers that satisfy the following system of equations:
+
+\begin{equation*}
+  \left\{ \begin{aligned}
+    \frac{x}{x^2y^2 - 1} - \frac{1}{x} &= 4\\
+    \frac{x^2y}{x^2y^2 - 1} + y &= 2
+  \end{aligned}
+  \right .
+\end{equation*}
+
+Find all possible values of the product $xy$.
+
+\textbf{Answer:} $\boxed{\pm \frac{1}{\sqrt{2}}}$.
+
+\textbf{Solution:} Note that neither $x$ nor $y$ can equal $0$. Multiplying the first equation by $xy$ and subtracting from the second equation yields $2y = 2 - 4xy$, or $y = \frac{1}{2x+1}$. Substituting in the first equation and simplifying, we see that $x = -1 \pm \frac{1}{\sqrt{2}}$. Since $y = \frac{1}{2x+ 1}$, we see $y = \frac{1}{-1 \pm \sqrt{2}}$. Then multipliyng $x$ and $y$ yields $xy = \pm \frac{1}{\sqrt{2}}$.
+
+\item (Iranian Geometry Olympiad 2015/Medium/2) Let $BH$ be the altitude from the vertex $B$ to the side $AC$ of an acute-angled triangle $ABC$. Let $D$ and $E$ be the midpoints of $AB$ and $AC$, respectively, and $F$ the reflection of $H$ across the line segment $ED$. Prove that the line $BF$ passes through the circumcenter of $\triangle ABC$.
+
+\textbf{Proof:} Let $O$ be the circumcenter of triangle $ABC$. In right triangle $AHB$, $D$ is the midpoint of hypotenuse $AB$, which means $DA = DB = DH$. Due to reflection, we have $DH = DF$. Thus $D$ is of equal distance to the points $A, B, F,$ and $H$, implying quadrilateral $ABFH$ is cyclic.
+
+Since $DA = DH$, we have $\angle DAH = \angle DHA$. However, $$\angle DFE = \angle DHE = \angle 180\dg - \angle DHA = 180\dg - \angle DAH,$$ so quadrilateral $ADFE$ is cyclic. Note that since $O$ is the circumcenter, $\angle ADO = \angle AEO = 90\dg$, thus $ADOE$ is cyclic. This means $ADFOE$ is a cyclic pentagon.
+
+From cyclic quadrilateral $ABFH$ we have $\angle AFB = \angle AHB = 90\dg$. From cyclic pentagon $ADFOE$ we have $\angle AFO = \angle ADO = 90\dg$. Thus $\angle AFB + \angle AFO = 90\dg + 90\dg = 180\dg$, so $B, F,$ and $O$ are collinear.
+
+\item A function $g : \NN \rightarrow \NN$ satisfies the following:
+
+\begin{enumerate}
+
+\item[(a)] If $m$ is a proper divisor of $n$, then $g(m) < g(n)$.
+
+\item[(b)] If $m$ and $n$ are relatively prime and greater than $1$, then $$g(mn) = g(m)g(n) + (n+1)g(m) + (m+1)g(n) + m + n.$$
+
+\end{enumerate}
+
+Find the least possible value of $g(2016)$.
+
+\textbf{Answer:} $\boxed{3053}$.
+
+\textbf{Solution:} Define $f(x) = g(x) + x + 1$. Rearranging the second condition gives us
+\begin{align*}
+  g(mn) &= g(m)g(n) + (n+1)g(m) + (m+1)g(n) + m + n \\
+  g(mn) + mn + 1 &= g(m)g(n) + ng(m) + g(m) + mg(n) + g(n) + m + n + mn + 1 \\
+  g(mn) + mn + 1 &= g(m)\del{g(n) + n + 1} + m\del{g(n) + n + 1} + \del{g(n) + n + 1} \\
+  g(mn) + mn + 1 &= (g(m) + m + 1)(g(n) +n + 1)\\
+  f(mn) &= f(m)f(n),
+\end{align*}
+for relatively prime $m, n$. Since $f$ is a multiplicative function, we only need to consider prime powers. Let $p$ be a prime. For a natural number $e$, we have $$1 \leq g(1) < g(p) < g(p^2) < \cdots < g(p^e),$$ thus $g(p^e) \geq e + 1$, and $f(p^e) \geq p^e + e + 2$. Thus, applying multiplicativity, for distinct primes $p_1, p_2, \ldots, p_k$ and natural numbers $e_1, e_2, \ldots, e_k$: $$f(p_1^{e_1}p_2^{e_2}\cdots p_k^{e_k}) \geq (p_1^{e_1} + e_1 + 2)(p_2^{e_2} + e_2 + 2)\cdots(p_k^{e_k} + e_k + 2).$$ Thus, $$f(2016) \geq (2^5 + 5 + 2)(3^2 + 2 + 2)(7^1 + 1 + 2) = 5070,$$ so $g(2016) \geq 5070 - 2016 - 1 = 3053$. Equality is achievable by setting $f$ as the equality case in the above inequality.
+\end{enumerate}
+
+\end{document}

@@ -1,0 +1,309 @@
+\documentclass[11pt,paper=letter]{scrartcl}
+\usepackage[parskip]{cjquines}
+
+\begin{document}
+
+\title{PMO 2018 Area Stage}
+\author{Carl Joshua Quines}
+\date{November 25, 2017}
+
+\maketitle
+
+Like last year, it is widely agreed area stage this year is much more difficult than pre-$2015$ PMO; some feel this year is slightly harder than last. I'll present the questions and some solutions to all the problems. The PMO does not release solutions to part I, in either case. Suggestions and corrections are welcomed: contact me at \mailto{cj@cjquines.com}.
+
+\textbf{PART I.} Give the answer in the simplest form that is reasonable. No solution is needed. Figures are not drawn to scale. Each correct answer is worth three points.
+
+\begin{enumerate}[left=0pt]
+
+\item Suppose that $x$ and $y$ are nonzero real numbers such that $\del{x + \dfrac1y}\del{y + \dfrac1x} = 7$. Find the value of $\del{x^2 + \dfrac 1{y^2}}\del{y^2 + \dfrac1{x^2}}$.
+
+\textbf{Answer:} $\boxed{25}$.
+
+\textbf{Solution 1:} Expanding and subtracting $2$ from both sides yields $xy + \dfrac1{xy} = 5$. Squaring both sides, after factoring, yields $$x^2y^2 + 2 + \dfrac1{x^2y^2} = \del{x^2 + \dfrac 1{y^2}}\del{y^2 + \dfrac1{x^2}} = 25.$$
+
+\textbf{Solution 2:} Since the answer is numerical, the answer is independent of the values chosen for $x$ and $y$. Thus, suppose $x = y$. We are then given $\del{x + \dfrac1x}^2 = 7$; expanding and subtracting $2$ from both sides yields $x^2 + \dfrac1{x^2} = 5$. We are looking for $\del{x^2 + \dfrac1{x^2}}^2$, which is then $25$.
+
+\item In how many ways can the integers $$-5, -4, -3, -2, -1, 1, 2, 3, 4, 5$$ be arranged in a circle such that the product of each pair of adjacent integers is negative? (Assume that arrangements which can be obtained by rotation are considered the same.)
+
+\textbf{Answer:} $\boxed{2880}$.
+
+\textbf{Solution 1:} We cannot have two positive or two negative integers as adjacent, as then their product would be positive. Since there are five of each, they must alternate. Suppose we count rotations as distinct. Then there are $5!$ ways to arrange the negative integers and $5!$ ways to arrange the positive integers. We then choose whether a positive or negative integer comes first, so we multiply by $2$. Finally, we divide by $10$ to account for rotations. This gives $$\frac{2 \cdot 5! \cdot 5!}{10} = 2880.$$
+
+\textbf{Solution 2:} As above, the negative and positive integers alternate. Without loss of generality, rotate such that $-1$ is at the top. Then there are $4!$ ways to arrange the remaining negative integers, and $5!$ ways to arrange the remaining positive integers. This is $4! \cdot 5! = 2880$.
+
+\item Let $P$ be a point inside the isosceles trapezoid $ABCD$ where $AD$ is one of the bases, and let $PA$, $PB$, $PC$, and $PD$ bisect angles $A$, $B$, $C$, and $D$ respectively. If $PA = 3$ and $\angle APD = 120\dg$, find the area of trapezoid $ABCD$.
+
+\textbf{Answer:} $\boxed{6\sqrt3}$.
+
+\textbf{Solution:} A trapezoid is isosceles if and only if it is cyclic. Thus $ABCD$ is a cyclic quadrilateral. Since this is a trapezoid, then $\angle A$ and $\angle D$ are congruent. Since this is a cyclic quadrilateral, $\angle A$ and $\angle C$ are supplementary.
+
+Both $AP$ and $DP$ are angle bisectors of congruent angles $\angle A$ and $\angle D$, thus $\angle PAD$ and $\angle PDA$ are congruent as well. From $\angle APD = 120\dg$ it follows $\angle PAD = \angle PDA = 30\dg$. Again, since $AP$ and $DP$ are angle bisectors, then $\angle BAP = 30\dg$ and $\angle CDP = 30\dg$, so $\angle A = \angle D = 60\dg$. 
+
+Then $\angle C$ is supplementary to $\angle A$, so it is $120\dg$. Similarly, $\angle B = 120\dg$ as well. Since $BP$ and $CP$ are angle bisectors, then $\angle ABP = \angle PBC = 60\dg$ and $\angle DPC = \angle PCB = 60\dg$. From this, $PBC$ is an equilateral triangle, $PAB$ and $PCD$ are two $30\dg$--$60\dg$--$90\dg$ triangles. 
+
+The altitude from $P$ in triangle $PAD$ divides it into two $30\dg$--$60\dg$--$90\dg$ triangles. From $PA = 3$, we see this altitude has length $\dfrac32$, and the base has length $3\sqrt3$, so its area is $\dfrac{9\sqrt3}4$.
+
+In triangle $PAB$, we have $PA = 3$. Then $PB = \sqrt3$, as it is a $30\dg$--$60\dg$--$90\dg$ triangle. Its area is thus $\dfrac{3\sqrt3}2$. Since this is congruent to triangle $PCD$, it shares the same area. Finally, triangle $PBC$ is equilateral with side length $\sqrt3$, so its area is $\dfrac{3\sqrt3}4$. The total area is thus $6\sqrt3$.
+
+\item Determine the number of ordered pairs of integers $(p, q)$ for which $p^2 + q^2 < 10$ and $-2^p \leq q \leq 2^p$.
+
+\textbf{Answer:} $\boxed{17}$.
+
+\textbf{Solution:} When $p$ is negative, then $2^p$ is less than $1$, so the only possible value of $q$ is $0$. Since the smallest such $p$ is $-3$ from $p^2 + q^2 < 10$, this gives three tuples. When $p$ is $0$, then $q$ has to be between $-1$ and $1$, which gives three tuples as well.
+
+If $p$ is $1$, then $q$ can take any integer from $-2$ to $2$, giving five tuples. If $p$ is $2$, then from $p^2 + q^2 < 10$, we must have $q$ between $-2$ and $2$, giving five tuples as well. Finally, when $p$ is $3$, the only possible $q$ that satisfies $p^2 + q^2 < 10$ is $0$. This gives $3 + 3 + 5 + 5 + 1 = 17$ tuples.
+
+\item Let $f(x) = \sqrt{4\sin^4x - \sin^2x\cos^2x + 4\cos^4x}$ for any $x \in \RR$. Let $M$ and $m$ be the maximum and minimum values of $f$, respectively. Find the product of $M$ and $m$.
+
+\textbf{Answer:} $\boxed{\sqrt{7}}$.
+
+\textbf{Solution:} Using the identity $\sin2x = 2\sin x\cos x$, we can rewrite $$f(x) = \sqrt{4\del{\sin^2 x + \cos^2 x}^2 - 9\sin^2x\cos^2x} = \sqrt{4 - \dfrac94\sin^22x}.$$ The range of $\sin x$ is from $-1$ to $1$, so the range of $\sin^22x$ is from $0$ to $1$. The minimum of $f$ is then attained when $\sin^22x$ is $1$, which is $\dfrac{\sqrt7}2$, and its maximum when $\sin^22x$ is $0$, giving $2$. The product of these values is $\sqrt7$.
+
+\item A semicircle $\Gamma$ has diameter $AB = 25$. Point $P$ lies on $AB$ with $AP = 16$ and $C$ is on the semicircle such that $PC \perp AB$. A circle $\omega$ is drawn so that is tangent to segment $PC$, segment $PB$ and $\Gamma$. What is the radius of $\omega$?
+
+\textbf{Answer:} $\boxed{4}$.
+
+\textbf{Solution:} Let the center of $\Gamma$ be $O$, the center of $\omega$ be $Q$, and the points of tangency of $\omega$ to $\Gamma$ and $AB$ be $D$ and $E$, respectively. Let the radius of $\omega$ be $r$.
+
+Since the diameter of $\Gamma$ is $AB$, its radius half this, $\dfrac{25}2$. Since $AP$ is $16$, then $OP = AP - AO$, and $AO$ is a radius, so $OP = 16 - \dfrac{25}2 = \dfrac72$.
+
+Then $QO = OD - QD$. Because $OD$ is a radius of $\Gamma$ and $QD$ is a radius of $\omega$, then $QO = \dfrac{25}2 - r$. Segment $QE$ is a radius of $\omega$ and has length $r$. Finally, $OE = OP + PE$, and $PE$ is congruent to the radius of $\omega$ tangent to $CP$, so $OE = \dfrac72 + r$. Applying the Pythagorean theorem on right triangle $QEO$ and solving for $r$ gives $r = 4$.
+
+\item Determine the area of the polygon formed by the ordered pairs $(x, y)$ where $x$ and $y$ are positive integers that satisfy the equation $$\dfrac1x + \dfrac1y = \dfrac1{13}.$$
+
+\textbf{Answer:} $\boxed{12096}$.
+
+\textbf{Solution:} Clearing denominators, the equation is $13x + 13y = xy$. We use Simon's Favorite Factoring Trick, or completing the rectangle, to factor this as $(x-13)(y-13) = 169$. We can write $169$ as the product of $13$ and $13$, giving the tuple $(26, 26)$, or as the product of $1$ and $169$, giving both $(14, 182)$ and $(182, 14)$. The other ways to write $169$ as a product of integers give negative $x$ and $y$.
+
+It remains to find the area of the triangle with vertices $A(14, 182)$, $B(26, 26)$, and $C(182, 14)$. It is possible to use the shoelace formula directly. Calculations can be made easier by scaling the points by a suitable factor, perhaps $\dfrac1{91}$ or $\dfrac1{182}$.
+
+Alternatively, note that the triangle has the line $x = y$ as an axis of symmetry, so it is isosceles. Then the altitude from $B$ meets $AC$ on its midpoint, $(98, 98)$. The height then has length $72\sqrt2$, and the base $AC$ has length $168\sqrt2$. Either method gives the area $12096$.
+
+\item Let $A$ be the sum of the decimal digits of the largest $2017$-digit multiple of $7$ and let $B$ be the sum of the decimal digits of the smallest $2017$-digit multiple of $7$. Find $A-B$.
+
+\textbf{Answer:} $\boxed{18144}$.
+
+\textbf{Solution:} From the number of digits, we must have $A < 10^{2017}$ and $B \geq 10^{2016}$. Modulo $7$, we have $$10^{2017} \equiv \del{3^{6\cdot336}}\cdot3^1 \equiv 1\cdot 3^1 \equiv 3 \pmod7,$$ the second equivalence following from Fermat's Little Theorem. The maximum is then $10^{2017} - 3$, the $-3$ chosen for the number to be $0$ modulo $7$. In digits, this is $2016$ nines followed by a seven.
+
+Similarly, $10^{2016}$ modulo $7$ is $1$ through a similar equivalence. The smallest multiple of $7$ is then $10^{2016} + 6$, which in digits is one, followed by $2015$ zeros, followed by $6$. Then $A = 2016\cdot9 + 7$ and $B = 7$, so $A-B = 2016\cdot9 = 18144$.
+
+\item Two semicircles, each with radius $\sqrt2$, are tangent to each other, as shown in the figure below. If $AB || CD$, determine the length of segment $AD$.
+
+\begin{center}
+  \includegraphics{fig.pdf}
+\end{center}
+
+\textbf{Answer:} $\boxed{2\sqrt3+2}$.
+
+\textbf{Solution:} Let $M$ and $N$ be the midpoints of $AB$ and $CD$, and let $O$ be the point of tangency of the two semicircles.
+
+Since $AB$ and $CD$ are parallel and $AB$ and $CD$ are the same length, then $ABCD$ is a parallelogram. Then $MN$, the line connecting the centers of the two circles, must pass through the point of tangency, $O$. Then $MO$ and $NO$ are radii, so the length $MN$ is $2\sqrt2$. Since $AC$, $MN$, and $BD$ are parallel, then $ACNM$ and $BDNM$ are both parallelograms, so $AC = MN = BD = 2\sqrt2$.
+
+It follows $ABCD$ is a rhombus, with base $2\sqrt2$. Its height is the distance between the lines $AB$ and $CD$, which is congruent to the radius of either semicircle, which is $\sqrt2$. Its area is thus $4$.
+
+Since $O$ is the midpoint of line $MN$, then it must be the center of this rhombus, and bisects both diagonals. Since $ABCD$ is a rhombus, its diagonals meet at right angles and its area is the product of these diagonals. Thus, let $AD$ have length $x$ and $BC$ have length $\dfrac4x$.
+
+Since the diagonals bisect each other, $AO$ and $BO$ are half the length of $AD$ and $BC$, and have lengths $\dfrac x2$ and $\dfrac 2x$ respectively. Since $O$ is a point of tangency, it lies on semicircle $AB$, and thus $\angle AOB = 90\dg$. Applying the Pythagorean theorem on triangle $AOB$ gives a quadratic equation, and solving this gives the solutions $x = 2\sqrt3\pm2$.
+
+One of the solutions is the length of $BC$ and the other is the length of $AD$. Since $AD$ is longer, it must have length $2\sqrt3 + 2$.
+
+\item The boat is sinking! Passengers must then be saved, but the rescuer must know the count. If the passengers group themselves into $7$, one group will only have $4$ passengers. If the passengers group themselves into $11$, one group will only have $7$ passengers. If the passengers group themselves into $13$, one group will only have $10$ passengers. How many passengers are there if the boat carried at most $1000$ passengers?
+
+\textbf{Answer:} $\boxed{634}$.
+
+\textbf{Solution:} Let the number of passengers be $n$. We have from the first and third conditions that $n \equiv 4 \equiv -3 \pmod 7$ and $n \equiv 10 \equiv -3 \pmod{13}$. Since the least common multiple of $7$ and $13$ is $91$, then $n \equiv -3 \pmod{91}$ as well. From this, we can write $n$ as $91k - 3$ for some integer $k$.
+
+From the second condition, we have $n \equiv 7 \pmod{11}$. Substituting yields $91k - 3 \equiv 7 \pmod{11}$, or $3k \equiv 10 \pmod{11}$. Trial-and-error on $k$ yields $k \equiv 7 \pmod {11}$. The only choice of $k$ that keeps $n$ positive and less than $1000$ is $k = 7$, and substituting gives $n = 91\cdot7 - 3 = 634$.
+
+\item Given $a_n \in \ZZ$ with $a_{10} = 11$ and $a_9 = -143$, determine the number of polynomials of the form $$P(x) = \sum_{n=0}^{10}a_nx^n$$ such that the zeros of $P(x)$ are all positive integers.
+
+\textbf{Answer:} $\boxed{3}$.
+
+\textbf{Solution:} From Vieta's formulas, the sum of the roots of $P(x)$ must be $-\dfrac{-143}{11} = 13$. There are ten roots, and all of them are positive integers, so setting each as $1$ gives a sum of $10$. This leaves $3$ to distribute among the roots to give a sum of $13$. We can write $3$ as $3$, $2+1$, and $1+1+1$. Since order does not matter, each of the three ways to write $3$ yields a different polynomial $P(x)$. There are then $3$ such polynomials.
+
+\item In how many ways can nine chips be selected from a bag that contains three red chips, three blue chips, three white chips, and three yellow chips? (Assume that the order of selection is irrelevant and that the chips are identical except for their color.)
+
+\textbf{Answer:} $\boxed{20}$.
+
+\textbf{Solution 1:} Selecting nine chips is equivalent to selecting which three chips are left in the bag. We do casework on the colors of the chips.
+
+If all of the chips were the same color, there are $4$ different ways, one for each color. If they were all of different colors, there are also $4$ different ways, equivalent to picking which color does not remain in the bag. Finally, if there were two colors, one color has two chips and the other color has one chip. There are $4$ ways to pick the color that has two chips and $3$ ways to pick the color that has one chip, giving $4\cdot3 = 12$ ways. This gives a total of $20$ ways.
+
+\textbf{Solution 2:} Similar to the first solution, we select which three chips are left in the bag. There are sufficient numbers of chips, so the problem is equivalent to placing three indistinguishable balls in four distinguishable urns. This is well known to be $\binom{4+3-1}{4-1} = 20$.
+
+\item Let $L_1$ be the line with equation $6x - y + 6 = 0$. Let $P$ and $Q$ be the points of intersection of $L_1$ with the $x$-axis and $y$-axis, respectively. A line $L_2$ that passes through the point $(1,0)$ intersects the $y$-axis and $L_1$ at $R$ and $S$ respectively. If $O$ denotes the origin and the area of $\triangle OPQ$ is six times the area of $\triangle QRS$, find all possible equations of the line $L_2$. Express your answer in the form $y = mx + b$.
+
+\textbf{Answer:} $\boxed{y = -3x + 3, y = -10x + 10}$.
+
+\textbf{Solution:} Note that $P$ is $(-1, 0)$ and $Q$ is $(0, 6)$. Then $OPQ$ is a right triangle with legs $OP$ and $OQ$ along the axes, so its area is $3$. We must then have the area of triangle $QRS$ as one-sixth of this, or $\dfrac12$.
+
+Substituting $(1, 0)$ to $y = mx + b$ yields $m + b = 0$, allowing us to substitute $m = -b$. The line $y = -bx + b$ intersects the $y$-axis at the point $R(0, b)$. Equating $y$ with line $L_1$ yields $6x + 6 = -bx + b$, or $x = \dfrac{b-6}{b+6}$, which is the $x$-coordinate of point $S$.
+
+Triangle $QRS$ has base $QR$ along the $y$-axis, so the altitude from $S$ is the distance from $S$ to the $y$-axis, which is its $x$-coordinate, $\dfrac{b-6}{b+6}$. The base $QR$ has length $\abs{6-b}$. Taking the product with the $x$-coordinate of $S$ and dividing by two gives the area of triangle $QRS$, which is $\dfrac12$.
+
+Solving the resulting quadratic equation results in the solutions $b = 3, 10$. It is easy to check that both of these work. This gives the answers $y = -3x + 3$ and $y = -10x + 10$.
+
+\item Find the smallest positive integer whose cube ends in $2017$.
+
+\textbf{Answer:} $\boxed{9073}$.
+
+\textbf{Solution:} Note that the cubes of the digits have distinct values modulo $10$, which means the last digit of such an integer must be $3$.
+
+Writing the number as $10m + 3$ for some integer $m$, we have $\del{10m + 3}^3 \equiv 17 \pmod{100}$. The first two terms disappear since they have a factor of $100$, leaving $270m + 27 \equiv 17 \pmod{100}$. This is $$270m \equiv -10 \equiv 90 \pmod{100},$$ and it is possible to divide through by $90$ to get $3m \equiv 1 \pmod{10}$. This has the unique solution $m \equiv 7 \pmod{10}$. Thus the last two digits of the number are $73$.
+
+Repeating this process, write the number as $100n + 73$ for some integer $n$. Again, we have $\del{100n + 73}^3 \equiv 2017 \pmod{10\,000}$, and the first two terms in the expansion disappear. This leaves $8700n + 73^3 \equiv 2017 \pmod{10\,000}$. After computing the last four digits of $73^3$ as $9017$, $$8700n \equiv -7000 \equiv 3000 \pmod{10\,000}.$$ Dividing through by $300$ gives $29n \equiv 10 \pmod{100}$, with solution $n \equiv 90 \pmod{100}$. The smallest such number is then $9073$. 
+
+\item Let $\cbr{x_k}^n_{k=1}$ be a sequence whose terms come from $\cbr{2, 3, 6}$. If $$x_1 + x_2 + \cdots + x_n = 633\quad\text{and}\quad\frac1{x_1^2} + \frac1{x_2^2} + \cdots + \frac1{x_n^2} = \frac{2017}{36},$$ find the value of $n$.
+
+\textbf{Answer:} $\boxed{262}$.
+
+\textbf{Solution:} Suppose that of the $x_i$, $a$ are $2$, $b$ are $3$, and $c$ are $6$. The given equations, after collecting similar terms, are then equivalent to $$2a + 3b + 6c = 633\quad\text{and}\quad\dfrac a4 + \dfrac b9 + \dfrac c{36} = \frac{2017}{36},$$ where the second equation, after clearing denominators, becomes $9a + 4b + c = 2017$. Multiplying this by $6$ and subtracting the first equation gives $52a + 21b = 11\,469$.
+
+Taking this equation modulo $21$ gives $10a \equiv 3 \pmod{21}$. Since $a \equiv 2 \pmod{21}$ gives $10a \equiv 20 \equiv -1 \pmod{21}$, then $a \equiv 2 \cdot -3 \equiv 15 \pmod{21}$ is the desired solution.
+
+Substituting $a = 21d + 15$ in $52a + 21b = 11\,469$ and dividing by $21$ yields $52d + b = 509$. There are many possible solutions; but we must have $c$ as a positive integer as well, so we want to keep the sum of $a$ and $b$ small. Choosing the maximal $d$ gives $d = 9$ and $b = 41$. This gives $a = 204$ and $c = 17$, which satisfy both equations. Then $n = a + b + c = 262$.
+
+\textbf{Remark:} The original problem had a typo in the second equation that was not corrected, where the second addend had a denominator of $x_1^2$ instead of $x_2^2$.
+
+\item Let $S$ be a subset of $\cbr{1, 2, \ldots, 2017}$ such that no two elements of $S$ have a sum divisible by $37$. Find the maximum number of elements that $S$ can have.
+
+\textbf{Answer:} $\boxed{991}$.
+
+\textbf{Solution:} Consider the residues modulo $37$. We can have at most one number with residue $0$, for two of them would have a sum that is $0$ modulo $37$. Of the nonzero residues, there are $55$ each of residues $1$ through $19$, and $54$ of the residues $20$ through $36$. This follows from the fact that $2017 = 37 \cdot 54 + 19$. 
+
+Consider the two sets of numbers with residues $1$ and $36$. By the Pigeonhole principle, if $56$ of these were chosen, then two would be from different sets and have a sum that is $0$ modulo $37$. Thus, we can choose at most $55$. We can repeat the same argument with the $17$ other pairs of sets: those with residues $2$ and $35$, $3$ and $34$, and so on, until $18$ and $19$.
+
+This gives $55 \cdot 18 = 990$ such numbers. Adding in one number with residue $0$ gives at most $991$ elements in $S$.
+
+\item In cyclic pentagon $ABCDE$, $\angle ABD = 90\dg$, $BC = CD$, and $AE$ is parallel to $BC$. If $AB = 8$ and $BD = 6$, find $AE^2$.
+
+\textbf{Answer:} $\boxed{\dfrac{338}5}$.
+
+\textbf{Solution:} Let $BC = CD = x$. The Pythagorean theorem gives $AD = 10$. Since $ABCD$ is cyclic, we have $\angle ABD = \angle ACD = 90\dg$, and applying the Pythagorean theorem on right triangle $ACD$ gives the length of $AC$ as $\sqrt{100-x^2}$. Using Ptolemy's on quadrilateral $ABCD$ gives $$AC \cdot BD = AB \cdot CD + AD \cdot BC \implies 6\sqrt{100-x^2} = 8x + 10x,$$ and solving gives $x = \sqrt{10}$.
+
+Let the line through $D$ parallel to $BC$ meet the circumcircle of $ABCDE$ again at $F$. Then $AE$ and $FD$ are parallel, and since $AD$ is a diameter, then $\angle AFD = \angle AED = 90\dg$. From this, we see $AFDE$ is a rectangle. 
+
+Since $BC$ is parallel to $DF$, then $BCDF$ is a cyclic trapezoid, and thus it is isosceles. Then its diagonals $BD$ and $CF$ have the same length $6$, and its legs $BF$ and $CD$ have the same length $\sqrt{10}$. Let $y = FD$. Ptolemy's on quadrilateral $BCDF$ gives $$BD \cdot CF = BC \cdot DF + CD \cdot BF \implies 6\cdot6 = y\sqrt{10} + \sqrt{10} \cdot \sqrt{10}.$$
+
+We are looking for $AE^2$, but as $AFDE$ is a rectangle, this is equal to $FD^2$, or $y^2$. Solving for $y^2$ in the equation gives $\dfrac{338}5$.
+
+\item The edges of a square are to be colored either red, blue, yellow, pink, or black. Each side of the square can only have one color, but a color may color many sides. How many different ways are there to color the square if two ways that can be obtained from each other by rotation are identical?
+
+\textbf{Answer:} $\boxed{165}$.
+
+\textbf{Solution 1:} Counting without rotation, there are $5^4 = 625$ different ways. The ones that are the same when rotated are the ones with opposite sides the same color, of which there are $5^2 = 25$. This leaves $600$ that have four different ways when rotated, and dividing by the number of rotations for these leaves $150$.
+
+Of the $5^2 = 25$ that are the same color when rotated, there are $5$ that have the same color on all sides. The remaining $20$ are the same when rotated $180\dg$, so dividing by two gives $10$. Adding the remaining $5$ that have all sides the same color gives $150 + 10 + 5 = 165$.
+
+\textbf{Solution 2:} We use Burnside's lemma, which is allowed since we are operating on the group of rotations of a square. The four operations are the identity, rotating by $90\dg$, rotating by $180\dg$, and rotating by $270\dg$.
+
+All $5^4$ colorings are fixed by the identity. If a coloring is the same when rotated $90\dg$, then all of the sides must have the same color, which gives $5$ colorings. A coloring that is the same when rotated $180\dg$ must have opposite sides the same color, giving $25$ colorings. The $270\dg$ case is similar to the $90\dg$ case, which gives $5$ colorings. The average is $$\frac{5^4 + 5 + 5^2 + 5}4 = 165.$$
+
+\item Let $\floor{x}$ denote the greatest integer less than or equal to $x$. If $a_n\floor{a_n} = 49^n + 2n + 1$, find the value of $2S + 1$, where $S = \displaystyle \floor{\sum_{n=1}^{2017}\frac{a_n}2}$.
+
+\textbf{Answer:} $\boxed{\dfrac{7^{2018}-7}6}$.
+
+\textbf{Solution:} Let $\cbr{x}$ denote the fractional part of $x$, or $x - \floor{x}$. Then observe that $\cbr{x}$ is always in the interval $[0, 1)$. Substituting in the given equation gives $$\floor{a_n}^2 + \floor{a_n}\cbr{a_n} = 49^n + 2n + 1.$$ But since $\cbr{a_n} \in [0, 1)$, we have $2\floor{a_n} + 1 > \floor{a_n}\cbr{a_n} \geq 0.$ Adding $\floor{a_n}^2$ to both sides and factoring gives $$\del{\floor{a_n} + 1}^2 > \floor{a_n}^2 + \floor{a_n}\cbr{a_n} \geq \floor{a_n}^2.$$ It is also clear from expansion that $$\del{7^n + 1}^2 > 49^n + 2n + 1 > \del{7^n}^2.$$ Combined with the given equation, we see that it is only possible that $\floor{a_n} = 7^n$. Dividing both sides of the given equation by $\floor{a_n}$ gives $a_n = 7^n + \dfrac{2n+1}{7^n}$.
+
+The sum $\displaystyle \sum_{n=1}^{2017} a_n$ can be split. Let $M = \displaystyle\sum_{n=1}^{2017} 7^n$ and let $N = \displaystyle \sum_{n=1}^{2017} \dfrac{2n+1}{7^n}$. 
+
+Observe that $N$ is strictly less than the sum $N' = \displaystyle \sum_{n=1}^{\infty} \dfrac{2n+1}{7^n} = \dfrac37 + \dfrac5{7^2} + \dfrac7{7^3} + \cdots$. Multiplying by $7$ gives $7N' = 3 + \dfrac57 + \dfrac7{7^2} + \cdots$ and subtracting $N'$ gives $6N' = 3 + \dfrac27 + \dfrac2{7^2} + \cdots$. The latter sum is an infinite geometric series with sum $\dfrac{\frac27}{1 - \frac17} = \dfrac13$, so $N' = \dfrac59$.
+
+Then $S = \floor{\dfrac{M+N}2} = \floor{\dfrac M2 + \dfrac{5}{18}}$. The sum $M$ is odd, since there are an odd number of odd addends. It follows that the fractional part of $\dfrac M2$ is $\dfrac12$, and its integer part is $\dfrac{M-1}2$.
+
+Thus, $S = \floor{\dfrac{M-1}2 + \dfrac79} = \dfrac{M-1}2$. We use the well-known formula for the geometric series to get the answer as $2S + 1 = M = \dfrac{7^{2018} - 7}6$.
+
+\item A spider and a fly are on diametrically opposite vertices of a web in the shape of a regular hexagon. The fly is stuck and cannot move. On the other hand, the spider can walk freely along the edges of the hexagon. Each time the spider reaches a vertex, it randomly chooses between two adjacent edges with equal probability, and proceeds to walk along that edge. On average, how many edge lengths will the spider walk before getting to the fly?
+
+\textbf{Answer:} $\boxed{9}$.
+
+\textbf{Solution:} Let the hexagon be $ABCDEF$, with the spider standing on $A$. By symmetry, the expected number of steps before the spider reaches the fly on $B$ and $F$, and on $C$ and $E$, are the same. Let the expected number of steps before the spider reaches the fly from $A$ be $a$, from $B$ be $b$, and from $C$ be $c$.
+
+Note that from $A$, the spider will take one step, and with equal probability, move to either $B$ or $F$. The the number of steps the spider will take is $1$ plus one-half times the number of steps it takes from $B$, plus one-half times the number of steps it takes from $F$. By linearity of expectation, we have $a = 1 + \dfrac12\cdot b + \dfrac12\cdot b$. Writing similar equations gives us \begin{align*}b &= 1 + \dfrac12\cdot a + \dfrac12\cdot c, \\ c &= 1 + \dfrac12\cdot b + \dfrac 12 \cdot 0. \end{align*} Solving yields $(a, b, c) = (9, 8, 5)$, giving the answer $9$.
+
+\end{enumerate}
+
+\noindent\textbf{PART II.} Show your solution to each problem. Each complete and correct answer is worth ten points.
+
+\begin{enumerate}[left=0pt]
+
+\item Find all pairs $(r, s)$ of real numbers such that the zeros of the polynomials $$f(x) = x^2 - 2rx + r$$ and $$g(x) = 27x^3 - 27rx^2 + sx - r^6$$ are all real and nonnegative.
+
+\textbf{Answer:} $\boxed{(0, 0), (1, 9)}$.
+
+\textbf{Solution:} Setting $f(x) = 0$ and completing the square gives $\del{x - r}^2 = r^2 - r$. For the roots to be real, we must have $r^2 \geq r$. 
+
+Let the roots of $g(x)$ be $a$, $b$, and $c$. Since these are all real and nonnegative, by AM--GM, $$\dfrac{a+b+c}3 \geq \cbrt{abc}.$$ By Vieta's, the sum of the roots is $-\dfrac{-27r}{27} = r$, and the product of the roots is $-\dfrac{-r^6}{27} = \dfrac{r^6}{27}$. Substituting to the earlier inequality, $$\dfrac{r}3 \geq \cbrt{\dfrac{r^6}{27}} = \dfrac{r^2}3,$$ or $r \geq r^2$. Combined with $r^2 \geq r$ from earlier, we must have the equality case.
+
+Then $r^2 = r$, which has solutions $r = 0$ and $1$. The equality case of AM--GM is achieved when all the terms are equal; in the former case, all the roots are $0$, and in the latter case, all the roots are $\dfrac13$. This makes $g(x) = 27x^3$ for the former, and $g(x) = \del{3x - 1}^3$ for the latter.
+
+These give the tuples $(0, 0)$ and $(1, 9)$, respectively. It is easy to check that these values give real, nonnegative roots for $f(x)$ as well.
+
+\item A point $P$ is chosen randomly inside the triangle with sides $13$, $20$ and $21$. Find the probability that the circle centered at $P$ with radius $1$ will intersect at least one of the sides of the triangle.
+
+\textbf{Answer:} $\boxed{\dfrac{75}{196}}$.
+
+\textbf{Solution:} Let the triangle be $ABC$. Draw a line $a'$ that is parallel to side $BC$ and distance $1$ to it, such that $a'$ is on the same half-plane about $BC$ as $A$. Define lines $b'$ and $c'$ similarly. Let $A'$ be the intersection of $b'$ and $c'$, define $B'$ and $C'$ similarly.
+
+Suppose that $P$ lies between $a'$ and side $BC$. Then the unit circle centered at $P$ will intersect side $BC$, as the distance from $P$ to $BC$ is less than one. Similarly, it follows that the circle about $P$ intersects the sides if and only if it is outside triangle $A'B'C'$.
+
+Observe that since $A'$ is equidistant from sides $AB$ and $AC$, line $AA'$ is the angle bisector of $\angle A$. Then $AA'$, $BB'$, and $CC'$ concur at the incenter $I$ of triangle $ABC$. Triangles $IB'C'$ and $IBC$ are thus similar, as $B'C'$ and $BC$ are parallel.
+
+It then follows that a homothety centered at $I$ carries triangle $A'B'C'$ to triangle $ABC$, so they are similar. Then the altitude from $I$ to $B'C'$ is also the altitude to $BC$, so it is shorter by $1$. Thus the inradius of $A'B'C'$ is shorter by $1$ than the inradius of $ABC$.
+
+We can write the area of $ABC$ as the product of the inradius and the semiperimeter, or using Heron's formula. Equating these gives the length of the inradius as $\dfrac{14}3$, so the inradius of $A'B'C'$ is $\dfrac{11}3$, and the ratio of similarity is $\dfrac{11}{14}$. The required probability is $1$ minus the ratio of their areas, which is $1 - \del{\dfrac{11}{14}}^2 = \dfrac{75}{196}$.
+
+\item Define a sequence of integers as follows: $a_1 = 1$, $a_2 = 2$, and for $k \in \NN$, $a_{k+2} = a_{k+1} + a_k$. How many different ways are there to write $2017$ as a sum of distinct elements in the sequence?
+
+\textbf{Remark:} A clarification was released during the exam. The sum is taken to be unordered. For example, $3 + 5 + 1$ and $5 + 3 + 1$ are counted as the same sum.
+
+\textbf{Answer:} $\boxed{24}$.
+
+\textbf{Solution 1:} The first few terms of the sequence are listed below:
+
+\begin{center}
+  \begin{tabular}{c c c c c c c c c c c c c c c c c c}
+    $n$ & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 & 11 & 12 & 13 & 14 & 15 & 16 & 17 \\
+    $a_n$ & 1 & 2 & 3 & 5 & 8 & 13 & 21 & 34 & 55 & 89 & 144 & 233 & 377 & 610 & 987 & 1597 & 2584
+  \end{tabular}
+\end{center}
+
+We first prove that $a_1 + a_2 + \cdots + a_n = a_{n+2} - 2$ through induction. The base case, $n = 1$, is clear. Supposing that this is true for $n = k$, then the sum for $n = k+1$ is $$\del{a_1 + a_2 + \cdots + a_k} + a_{k+1} = a_{k+2} - 2 + a_{k+1} = a_{k+3} - 2,$$ as desired. The first equality is by hypothesis, and the second is from the definition of the sequence.
+
+\newpage
+
+It is clear that the sequence is strictly increasing, so none of the terms after $a_{17}$ can be part of the sum. Suppose that neither of the terms $a_{15}$ or $a_{16}$ were part of the sum. The maximum possible value of the sum of the remaining terms is then $a_1 + a_2 + \cdots + a_{14} = a_{16} - 2 = 1595$, which is not enough. Thus either of the terms must be selected, since the sum of both is greater than $2017$.
+
+\emph{Case 1: $a_{16}$ is selected.} This leaves $2017 - 1597 = 420$ left. Through a similar argument, either of $a_{13}$ or $a_{12}$ must be selected, as the sum of the remaining terms is $a_1 + \cdots + a_{11} = a_{13} - 2 = 375$, which is less than $420$, and the sum of both is greater than $420$.
+
+\emph{Case 1.1: $a_{13}$ is selected.} This leaves $420 - 377 = 43$ left. It is straightforward to verify that there are only four ways to write $43$ as such a sum: $34 + 8 + 1$, $34 + 5 + 3 + 1$, $21 + 13 + 8 + 1$, and $21 + 13 + 5 + 1$. This gives $4$ sums.
+
+\emph{Case 1.2: $a_{12}$ is selected.} This leaves $420 - 233 = 187$ left. Again, either of $a_{11}$ or $a_{10}$ must be selected, as $a_1 + \cdots + a_9 = 142$, and the sum of both is greater than $187$.
+
+\emph{Case 1.2.1: $a_{11}$ is selected.} This leaves $187 - 144 = 43$, similar to Case 1.1, and has $4$ sums.
+
+\emph{Case 1.2.2: $a_{10}$ is selected.} This leaves $187 - 89 = 98$. If $a_9$ is not selected, the sum of the remaining is $a_1 + \cdots + a_8 = 87$, not enough. Thus $a_9$ must be selected too, leaving $98 - 55 = 43$, which is similar to Case 1.1 and has $4$ sums.
+
+\emph{Case 2: $a_{15}$ is selected.} This leaves $2017 - 987 = 1030$ left. If $a_{14}$ is not selected, the sum of the remaining is $a_1 + \cdots + a_{13} = 985$, which is not enough. Thus $a_{14}$ must be selected too, leaving $1030 - 610 = 420$, which is similar to Case 1 and has $12$ sums.
+
+This gives a total of $4+4+4+12 = 24$ sums.
+
+\textbf{Solution 2:} Zeckendorf's theorem states that any number can be uniquely expressed as a sum of Fibonacci numbers, no two of which are consecutive. We cite this without proof. Then $2017$ is $1594+377+34+8+3+1$, as indicated in the table below, where addends are indicated with $1$s.
+
+\begin{center}
+  \begin{tabular}{c c c c c c c c c c c c c c c c c c}
+    $n$ & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 & 11 & 12 & 13 & 14 & 15 & 16 & 17 \\
+    $a_n$ & 1 & 2 & 3 & 5 & 8 & 13 & 21 & 34 & 55 & 89 & 144 & 233 & 377 & 610 & 987 & 1597 & 2584 \\
+    sum & 1 & 0 & 0 & 0 & 1 & 0 & 0 & 1 & 0 & 0 & 0 & 0 & 1 & 0 & 0 & 1 & 0
+  \end{tabular}
+\end{center}
+
+Due to the definition of the Fibonacci numbers, it is possible to replace a $001$ in the sum with a $110$, and to keep iterating this on the leftmost $1$. Note that after replacing the leftmost $1$ in $00110$ with $11010$, then the rightmost $1$ cannot be replaced. Inductively, the only $1$ that can be replaced is always the one that is leftmost.
+
+Consider each of the $1$s from left to right. The $1$ corresponding to $a_1$ cannot be replaced. The $1$ corresponding to $a_5$ can either be replaced once or not at all, giving $2$ choices. The $1$ of $a_{8}$ can also either be replaced once or not at all, $2$ choices. The $1$ of $a_{13}$ can either be replaced once, twice, or not at all, giving $3$ choices. Finally, the $1$ of $a_{16}$ can also be either replaced once or not at all, giving $2$ choices.
+
+Multiplying, there are $2 \cdot 2 \cdot 3 \cdot 2 = 24$ possible ways to replace the $1$s to produce a valid sum. We have shown that they are all distinct and that no other replacements are possible, meaning no other sums are possible. Thus there are $24$ sums.
+
+\end{enumerate}
+
+\end{document}
