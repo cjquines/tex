@@ -1,1 +1,542 @@
-/home/cj/texmf/tex/latex/cjquines/cjquines.sty
+% cjquines.sty, version 2.0
+% last update 2020-10-06
+
+\ProvidesPackage{cjquines}
+
+\newif\ifcjqnoimport\cjqnoimportfalse
+\newif\ifcjqnodefault\cjqnodefaultfalse
+\newif\ifcjqnoextlink\cjqnoextlinkfalse
+
+\newif\ifcjqwide\cjqwidefalse
+\newif\ifcjqthin\cjqthinfalse
+\newif\ifcjqpset\cjqpsetfalse
+\newif\ifcjqoly\cjqolyfalse
+
+\newif\ifcjqalttitle\cjqalttitlefalse
+\newif\ifcjqboxthm\cjqboxthmfalse
+\newif\ifcjqparskip\cjqparskipfalse
+
+\DeclareOption{noimport}{\cjqnoimporttrue}
+\DeclareOption{nodefault}{\cjqnodefaulttrue}
+\DeclareOption{noextlink}{\cjqnoextlinktrue}
+
+\DeclareOption{wide}{\cjqwidetrue}
+\DeclareOption{thin}{\cjqthintrue}
+\DeclareOption{pset}{\cjqpsettrue\cjqparskiptrue}
+\DeclareOption{oly}{\cjqolytrue}
+
+\DeclareOption{alttitle}{\cjqalttitletrue}
+\DeclareOption{boxthm}{\cjqboxthmtrue}
+\DeclareOption{parskip}{\cjqparskiptrue}
+
+\ProcessOptions\relax
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Imports
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\ifcjqnoimport
+
+\else
+  \RequirePackage{
+    amsmath,
+    amssymb,
+    amsthm,
+    asymptote,
+    booktabs,
+    enumitem,
+    etoolbox,
+    microtype,
+    multicol,
+    relsize,
+    sansmath,
+    thmtools
+  }
+  \RequirePackage[colorlinks=true, allcolors=MidnightBlue]{hyperref}
+  \PassOptionsToPackage{dvipsnames}{color}
+  \PassOptionsToPackage{dvipsnames}{xcolor}
+  \definecolor{MidnightBlue}{RGB}{0,81,120}
+  \definecolor{DarkMidnightBlue}{RGB}{0,40,60}
+
+  \ifcjqnoextlink
+
+  \else
+    \RequirePackage{fontawesome5}
+    \patchcmd{\hyper@link@}
+    {{\Hy@tempb}{#4}}
+    {{\Hy@tempb}{#4\ltx@ifempty{#2}{}{{\relsize{-1} \faIcon{external-link-alt}}}}}
+    {}{}
+  \fi
+
+  \newlist{itemthin}{itemize}{2}
+  \setlist[itemthin]{label=\textbullet}
+  \newlist{enumthin}{enumerate}{2}
+  \setlist[enumthin]{label=\arabic*.}
+
+  \ifcjqparskip
+    \setlist*[itemthin,enumthin]{topsep=0pt,itemsep=0em,partopsep=0pt,parsep=0.4em}
+  \else
+    \setlist*[itemthin,enumthin]{topsep=2pt,itemsep=-0.7ex,partopsep=1ex,parsep=1ex}
+  \fi
+\fi
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Page layouts
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\ifcjqnodefault
+
+\else
+  \@ifundefined{KOMAClassName}{
+    \RequirePackage{fancyhdr}
+  }{
+    \usepackage[headsepline]{scrlayer-scrpage}
+  }
+  \setlength{\voffset}{-1.0in}
+  \setlength{\hoffset}{-1.0in}
+  \setlength{\headheight}{15pt}
+  \setlength{\headsep}{15pt}
+
+  \setlength{\evensidemargin}{1in}
+  \setlength{\oddsidemargin}{1in}
+  \setlength{\textheight}{9in}
+  \setlength{\textwidth}{6.5in}
+  \setlength{\topmargin}{0.75in}
+\fi
+
+\ifcjqwide
+  \setlength{\evensidemargin}{1.44in}
+  \setlength{\oddsidemargin}{1.44in}
+  \setlength{\textheight}{9.11in}
+  \setlength{\textwidth}{5.62in}
+  \setlength{\topmargin}{0.63in}
+\fi
+
+\ifcjqthin
+  \setlength{\evensidemargin}{0.5in}
+  \setlength{\oddsidemargin}{0.5in}
+  \setlength{\textheight}{9.75in}
+  \setlength{\textwidth}{7.5in}
+  \setlength{\topmargin}{0.5in}
+\fi
+
+\ifcjqpset
+  \newtoggle{seenfirstsection}
+  \global\togglefalse{seenfirstsection}
+  \pretocmd\@ssect
+    {\iftoggle{seenfirstsection}
+      {\clearpage}
+      {\global\toggletrue{seenfirstsection}}
+    }{}{}
+  \newcommand{\pset}[2]{\section*{Problem #1}\textbf{Sources consulted:} #2}
+\fi
+
+\ifcjqoly
+  \RequirePackage{fancyhdr}
+  \RequirePackage{titling}
+  \pagestyle{fancy}
+  \setlength{\topmargin}{2em}
+  \setlength{\oddsidemargin}{0.73in}
+  \setlength{\headheight}{9em}
+  \setlength{\headsep}{2em}
+  \setlength{\voffset}{-1in}
+  \setlength{\hoffset}{-0.5in}
+  \setlength{\footskip}{0in}
+  \newlength\FHoffset\setlength\FHoffset{0.5in}
+  \addtolength\headwidth{2\FHoffset}
+  \fancyheadoffset{\FHoffset}
+  \newlength\FHleft\setlength\FHleft{0in}
+  \newlength\FHright\setlength\FHright{-1in}
+  \newbox\FHline\setbox\FHline=\hbox{\hsize=\paperwidth%
+    \hspace*{\FHleft}%
+    \rule{\dimexpr\headwidth-\FHleft-\FHright\relax}{\headrulewidth}\hspace*{\FHright}%
+  }
+  \cfoot{}
+  \lhead{\sffamily {\Huge \thetitle}\\\vspace{1em}{\LARGE \theauthor}\vspace{1em}}
+  \rhead{\fbox{\sffamily \LARGE Day: \textbf{\thepage}}\vspace{1em}}
+  \rfoot{\begin{flushright}\emph{Time limit: 4 hours 30 minutes.\\Each problem is worth 7 points.}\end{flushright}}
+\fi
+
+\ifcjqparskip
+  \@ifundefined{KOMAClassName}{
+    \RequirePackage{parskip}
+    \setlength{\parskip}{1em}
+    \setlength{\parindent}{0pt}
+  }{
+    \setparsizes{0pt}{11pt}{\parfillskip}
+    \RedeclareSectionCommands[runin=false,afterskip=0pt]{section,subsection,subsubsection}
+  }
+\fi
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Titling
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\ifcjqnodefault
+
+\else
+  \RequirePackage{titling}
+  \pretitle{\vspace{-5em} \begin{center} \bfseries \sffamily \LARGE}
+  \ifcjqwide
+    \pretitle{\begin{center} \bfseries \sffamily \LARGE}
+  \fi
+  \ifcjqthin
+    \pretitle{\vspace{-6em} \begin{center} \bfseries \sffamily \LARGE}
+  \fi
+  \posttitle{\vspace{-3pt} \end{center}}
+  \renewcommand{\subtitle}[1]{%
+    \posttitle{%
+      \vspace{-6pt}\end{center}
+      \begin{center}#1\end{center}\vspace{-17pt}
+      }%
+  }
+  \preauthor{\begin{center}}
+  \postauthor{\vspace{-7pt} \end{center}}
+  \predate{\begin{center}}
+  \postdate{\vspace{-10pt} \end{center}}
+\fi
+
+\ifcjqalttitle
+  \RequirePackage{titling}
+  \pretitle{\vspace{-5em} \begin{flushleft} \bfseries \sffamily \Large}
+  \ifcjqwide
+    \pretitle{\begin{flushleft} \bfseries \sffamily \Large}
+  \fi
+  \ifcjqthin
+    \pretitle{\vspace{-6em} \begin{flushleft} \bfseries \sffamily \Large}
+  \fi
+  \posttitle{\vspace{-5pt} \end{flushleft}}
+  \renewcommand{\subtitle}[1]{%
+    \posttitle{%
+      \vspace{-6pt}\end{flushleft}
+      \begin{flushleft}#1\end{flushleft}\vspace{-17pt}
+      }%
+  }
+  \preauthor{\begin{flushleft}}
+  \postauthor{\vspace{-7pt} \end{flushleft}}
+  \predate{\begin{flushleft}}
+  \postdate{\vspace{-10pt} \end{flushleft} \rule{\textwidth}{0.5pt}}
+\fi
+
+\ifcjqparskip
+  \@ifundefined{KOMAClassName}
+  {}
+  {
+    \ifcjqalttitle
+      \posttitle{\vspace{-20pt} \end{flushleft}}
+      \renewcommand{\subtitle}[1]{%
+        \posttitle{%
+          \vspace{-20pt}\end{flushleft}
+          \begin{flushleft}#1\end{flushleft}\vspace{-45pt}
+          }%
+      }
+      \postauthor{\vspace{-20pt} \end{flushleft}}
+      \postdate{\vspace{-25pt} \end{flushleft} \rule{\textwidth}{0.5pt} \vspace{-2.5em}}
+    \else
+      \posttitle{\vspace{-15pt} \end{center}}
+      \renewcommand{\subtitle}[1]{%
+        \posttitle{%
+          \vspace{-15pt}\end{center}
+          \begin{center}#1\end{center}\vspace{-39pt}
+          }%
+      }
+      \postauthor{\vspace{-18pt} \end{center}}
+      \postdate{\vspace{-21pt} \end{center}}
+    \fi
+  }
+\fi
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Headers and footers
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\ifcjqnodefault
+
+\else
+  \RequirePackage{titling}
+  \@ifundefined{KOMAClassName}{
+    \RequirePackage{fancyhdr}
+    \renewcommand{\headrulewidth}{0.3pt}
+    \renewcommand{\footrulewidth}{0.0pt}
+    \pagestyle{fancy}
+    \fancyhead{}
+    \fancyfoot{}
+    \fancyhead[L]{\thepage}
+    \fancyhead[R]{\sffamily \theauthor}
+    \fancyfoot[R]{}
+    \ifcjqwide
+      \fancyhead[L]{\sffamily \thetitle}
+      \fancyfoot[R]{\thepage}
+    \fi
+    \fancypagestyle{plain} {
+      \fancyhf{}
+      \renewcommand{\headrulewidth}{0.0pt}
+      \renewcommand{\footrulewidth}{0.0pt}
+    }
+  }{
+    \usepackage[headsepline]{scrlayer-scrpage}
+    \renewcommand{\headfont}{}
+    \ihead{\thepage}
+    \chead{}
+    \ohead{\sffamily \theauthor}
+    \ifoot{}
+    \cfoot[]{}
+    \ofoot{}
+    \ifcjqwide
+      \ihead{\sffamily \thetitle}
+      \ofoot{\thepage}
+    \fi
+  }
+\fi
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Theorems
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\ifcjqnodefault
+
+\else
+  \RequirePackage[framemethod=TikZ]{mdframed}
+  \RequirePackage{amsthm,thmtools}
+  \theoremstyle{plain}
+
+  \ifcjqboxthm
+    \mdfdefinestyle{mdbox}{%
+      linewidth = 3pt,
+      skipabove = 12pt,
+      skipbelow = 0pt,
+      innerleftmargin = 7pt,
+      innerrightmargin = 10pt,
+      innerbottommargin = 7pt,
+      linecolor = Gray,
+      backgroundcolor = Gray!5,
+      hidealllines = true,
+      leftline = true,
+      leftmargin = -10pt,
+      rightmargin = -10pt
+    }
+
+    \mdfdefinestyle{exmdbox}{%
+      frametitle = {Exercises},
+      frametitlefont = \sffamily \bfseries \color{MidnightBlue},
+      frametitlebelowskip = 0pt,
+      splittopskip = 0pt,
+      innertopmargin = 5pt,
+      linewidth = 3pt,
+      skipabove = 12pt,
+      skipbelow = 0pt,
+      innerleftmargin = 7pt,
+      innerrightmargin = 10pt,
+      innerbottommargin = 7pt,
+      linecolor = MidnightBlue,
+      backgroundcolor = MidnightBlue!5,
+      hidealllines = true,
+      leftline = true,
+      font = \small,  
+      leftmargin = -10pt,
+      rightmargin = -10pt
+    }
+
+    \declaretheoremstyle[
+      headfont = \sffamily \bfseries \color{Black!80},
+      bodyfont = \normalfont,
+      mdframed = {style=mdbox}
+    ]{exbox}
+
+    \declaretheoremstyle[
+      spaceabove = 5pt,
+      spacebelow = 5pt,
+      headfont = \sffamily \bfseries \color{DarkMidnightBlue},
+      bodyfont = \normalfont
+    ]{thmm}
+
+    \declaretheorem[style=exbox,name=Example,numberwithin=section]{exboxed}
+    \declaretheorem[style=exbox,name=Exercise,sibling=exboxed]{exrboxed}
+    \declaretheorem[style=exbox,name=Problem,sibling=exboxed]{probboxed}
+    \declaretheorem[style=exbox,name=Theorem,sibling=exboxed]{thmboxed}
+
+    \theoremstyle{definition}
+
+    \declaretheorem[style=thmm,name=Problem,sibling=exboxed]{problem}
+    \declaretheorem[style=thmm,name=Exercise,sibling=exboxed]{exercise}
+    \declaretheorem[style=thmm,name=Question,sibling=exboxed]{question}
+    \declaretheorem[style=thmm,name=Theorem,sibling=exboxed]{theorem}
+  \else
+    \mdfdefinestyle{mdbox}{%
+      roundcorner = 2pt,
+      linewidth = 1pt,
+      skipabove = 12pt,
+      innerbottommargin = 9pt,
+      skipbelow = 12pt,
+      linecolor = Gray,
+      nobreak = true,
+    }
+    
+    \declaretheoremstyle[
+      headfont = \sffamily \bfseries \color{Black},
+      mdframed = {style=mdbox},
+      headpunct = {\\[3pt]},
+      postheadspace = {0pt}
+    ]{thmbox}
+    
+    \declaretheorem[style=thmbox,name=Theorem]{theorem}
+    \declaretheorem[style=thmbox,name=Lemma,sibling=theorem]{lemma}
+    \declaretheorem[style=thmbox,name=Corollary,sibling=theorem]{corollary}
+    \declaretheorem[style=thmbox,name=Proposition,sibling=theorem]{proposition}
+    \declaretheorem[style=thmbox,name=Theorem,numbered=no]{theorem*}
+    \declaretheorem[style=thmbox,name=Lemma,numbered=no]{lemma*}
+    \declaretheorem[style=thmbox,name=Corollary,numbered=no]{corollary*}
+    \declaretheorem[style=thmbox,name=Proposition,numbered=no]{proposition*}
+    
+    \theoremstyle{definition}
+    
+    \newtheorem{answer}[theorem]{Answer}
+    \newtheorem{case}[theorem]{Case}
+    \newtheorem{claim}[theorem]{Claim}
+    \newtheorem{conjecture}[theorem]{Conjecture}
+    \newtheorem{definition}[theorem]{Definition}
+    \newtheorem{exercise}[theorem]{Exercise}
+    \newtheorem{example}[theorem]{Example}
+    \newtheorem{fact}[theorem]{Fact}
+    \newtheorem{note}[theorem]{Note}
+    \newtheorem{problem}[theorem]{Problem}
+    \newtheorem{remark}[theorem]{Remark}
+    \newtheorem{question}[theorem]{Question}
+    
+    \newtheorem*{answer*}{Answer}
+    \newtheorem*{case*}{Case}
+    \newtheorem*{claim*}{Claim}
+    \newtheorem*{conjecture*}{Conjecture}
+    \newtheorem*{definition*}{Definition}
+    \newtheorem*{exercise*}{Exercise}
+    \newtheorem*{example*}{Example}
+    \newtheorem*{fact*}{Fact}
+    \newtheorem*{note*}{Note}
+    \newtheorem*{problem*}{Problem}
+    \newtheorem*{remark*}{Remark}
+    \newtheorem*{question*}{Question}
+  \fi
+\fi
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Commands
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\subi}[1]{\phantom{.} \par \noindent \textbf{#1}}
+\newcommand{\bluebf}[1]{{\bfseries \color{DarkMidnightBlue} #1}}
+\newcommand{\hint}[1]{{\color{Black!90} \scriptsize \sffamily \textbf{Hint:} #1}}
+\newcommand{\hints}[1]{{\color{Black!90} \scriptsize \sffamily \textbf{Hints:} #1}}
+
+\newcommand{\fourch}[4]{
+  \begin{tabular}{*{4}{@{}p{0.23\textwidth}}}
+    (a)~#1 & (b)~#2 & (c)~#3 & (d)~#4
+  \end{tabular}
+}
+
+\newcommand{\mailto}[1]{\href{mailto:#1}{\texttt{#1}}}
+
+\newcommand{\cbrt}[1]{\sqrt[3]{#1}}
+
+\newcommand{\ol}{\overline}
+\newcommand{\ul}{\underline}
+\newcommand{\ub}{\underbrace}
+
+\newcommand{\ts}[1]{\textsc{#1}}
+\newcommand{\mf}[1]{\mathfrak{#1}}
+\renewcommand{\tt}[1]{\mbox{\texttt{#1}}}
+
+\newcommand{\abs}[1]{\left\lvert #1 \right\rvert}
+\newcommand{\norm}[1]{\left\lVert #1 \right\rVert}
+\newcommand{\floor}[1]{\left\lfloor #1 \right\rfloor}
+\newcommand{\ceil}[1]{\left\lceil #1 \right\rceil}
+
+\newcommand{\del}[1]{\left( #1 \right)}
+\newcommand{\cbr}[1]{\left\{ #1 \right\}}
+\newcommand{\sbr}[1]{\left[ #1 \right]}
+
+\newcommand{\cycsum}{\sum_{\mathrm{cyc}}}
+\newcommand{\symsum}{\sum_{\mathrm{sym}}}
+\newcommand{\cycprod}{\prod_{\mathrm{cyc}}}
+\newcommand{\symprod}{\prod_{\mathrm{sym}}}
+
+\newcommand{\CC}{\mathbb C}
+\newcommand{\EE}{\mathbb E}
+\newcommand{\FF}{\mathbb F}
+\newcommand{\NN}{\mathbb N}
+\newcommand{\PP}{\mathbb P}
+\newcommand{\QQ}{\mathbb Q}
+\newcommand{\RR}{\mathbb R}
+\newcommand{\ZZ}{\mathbb Z}
+
+\newcommand{\Id}{\mathrm{Id}}
+
+\newcommand{\dang}{\measuredangle}
+\newcommand{\ray}[1]{\overrightarrow{#1}} 
+\newcommand{\seg}[1]{\overline{#1}}
+\newcommand{\arc}[1]{\wideparen{#1}}
+
+\newcommand{\dg}{^\circ}
+\newcommand{\dydx}{\frac{dy}{dx}\,}
+\newcommand{\ddx}{\frac{d}{dx}\,}
+
+\ifcjqnoimport
+
+\else
+  \DeclareMathOperator{\cis}{cis}
+  \DeclareMathOperator*{\lcm}{lcm}
+  \DeclareMathOperator*{\argmin}{arg min}
+  \DeclareMathOperator*{\argmax}{arg max}
+
+  \DeclareMathOperator{\coker}{coker}
+  \DeclareMathOperator{\Coker}{Coker}
+  \DeclareMathOperator{\dom}{dom}
+  \DeclareMathOperator{\End}{End}
+  \DeclareMathOperator{\ext}{ext}
+  \DeclareMathOperator{\FixedPt}{FixedPt}
+  \DeclareMathOperator{\Gal}{Gal}
+  \DeclareMathOperator{\GL}{GL}
+  \DeclareMathOperator{\Hom}{Hom}
+  \DeclareMathOperator{\im}{im}
+  \DeclareMathOperator{\Ker}{Ker}
+  \DeclareMathOperator{\Mor}{Mor}
+  \DeclareMathOperator{\pred}{pred}
+  \DeclareMathOperator{\pr}{pr}
+  \DeclareMathOperator{\rank}{rank}
+  \DeclareMathOperator{\ran}{ran}
+  \DeclareMathOperator{\Spec}{Spec}
+  \DeclareMathOperator{\Tr}{Tr}
+  \DeclareMathOperator{\Var}{Var}
+
+  \newcommand{\bm}[1]{\begin{bmatrix}#1\end{bmatrix}}
+  \newcommand{\vm}[1]{\begin{vmatrix}#1\end{vmatrix}}
+  \newcommand{\e}[1]{\EE\sbr{#1}}
+  \newcommand{\p}[1]{\PP\sbr{#1}}
+\fi
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Asymptote
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\ifcjqnoimport
+
+\else
+  \begin{asydef}
+    defaultpen(fontsize(11pt)+0.7);
+    size(8cm);
+    usepackage("amsmath");
+    usepackage("amssymb");
+    texpreamble("\RequirePackage{color}");
+    import olympiad;
+    import cse5;
+    pointpen = black;
+    pathpen = black;
+    pathfontpen = black;
+    anglepen = black;
+    anglefontpen = black;
+    pointfontsize = 8;
+    pen bluey = rgb(0.1,0.417,0.571)+1;
+    pen ruddy = rgb(0.568,0.208,0.098)+1;
+    pen greeny = rgb(0.302,0.568,0.098)+1;
+    pen dashed = linetype(new real[] {4,4});
+  \end{asydef}
+\fi
