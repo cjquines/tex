@@ -9,10 +9,10 @@
 % to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 % copies of the Software, and to permit persons to whom the Software is
 % furnished to do so, subject to the following conditions:
-
+%
 % The above copyright notice and this permission notice shall be included in all
 % copies or substantial portions of the Software.
-
+%
 % THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 % IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 % FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -35,6 +35,7 @@
 \newif\ifcjqalttitle\cjqalttitlefalse
 \newif\ifcjqboxthm\cjqboxthmfalse
 \newif\ifcjqparskip\cjqparskipfalse
+\newif\ifcjqlinguistics\cjqlinguisticsfalse
 
 \DeclareOption{noimport}{\cjqnoimporttrue}
 \DeclareOption{nodefault}{\cjqnodefaulttrue}
@@ -48,6 +49,7 @@
 \DeclareOption{alttitle}{\cjqalttitletrue}
 \DeclareOption{boxthm}{\cjqboxthmtrue}
 \DeclareOption{parskip}{\cjqparskiptrue}
+\DeclareOption{linguistics}{\cjqlinguisticstrue}
 
 \ProcessOptions\relax
 
@@ -448,6 +450,55 @@
     \newtheorem*{remark*}{Remark}
     \newtheorem*{question*}{Question}
   \fi
+\fi
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Linguistics
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\ifcjqlinguistics
+  \RequirePackage[linguistics]{forest}
+  \RequirePackage{tipa,phonrule,gb4e}
+  \apptocmd{\forest}{for tree={s sep+=1mm, inner sep=0, l=0}}{}{}
+
+  \ifcjqparskip
+    \pretocmd{\exe}{\vspace{-1em}}{}{}
+    \pretocmd{\endexe}{\vspace{-1em}}{}{}
+  \fi
+
+  \let\i\textipa
+  \newcommand{\sh}{\super{h}}
+
+  \def\lingaddto#1#2{\expandafter\def\expandafter#1\expandafter{#1#2}}
+  \def\lingreplacestrings#1#2{%
+    \def\tmp##1#1##2\end{\ifx\end##2\end\lingaddto\tmpb{##1}\else\lingaddto\tmpb{##1#2}\tmp##2\end\fi}%
+    \expandafter\def\expandafter\tmpb\expandafter{\expandafter}\expandafter\tmp\tmpb#1\end
+  }
+  \def\lingreplacestringsx#1#2{%
+    \def\tmp##1#1##2\end{\ifx\end##2\end\lingaddto\tmpc{##1}\else\lingaddto\tmpc{##1#2}\tmp##2\end\fi}%
+    \expandafter\def\expandafter\tmpc\expandafter{\expandafter}\expandafter\tmp\tmpc#1\end
+  }
+  \newcommand{\move}[4]{%
+    \def\tmpb{#2}%
+    \lingreplacestrings{NW}{north west}%
+    \lingreplacestrings{NE}{north east}%
+    \lingreplacestrings{SW}{south west}%
+    \lingreplacestrings{SE}{south east}%
+    \lingreplacestrings{N}{north}%
+    \lingreplacestrings{W}{west}%
+    \lingreplacestrings{E}{east}%
+    \lingreplacestrings{S}{south}%
+    \def\tmpc{#4}%
+    \lingreplacestringsx{NW}{north west}%
+    \lingreplacestringsx{NE}{north east}%
+    \lingreplacestringsx{SW}{south west}%
+    \lingreplacestringsx{SE}{south east}%
+    \lingreplacestringsx{N}{north}%
+    \lingreplacestringsx{W}{west}%
+    \lingreplacestringsx{E}{east}%
+    \lingreplacestringsx{S}{south}%
+    \draw[->] (#1) to[out=\tmpb,in=\tmpc] (#3);
+  }
 \fi
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
