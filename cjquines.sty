@@ -469,35 +469,35 @@
   \let\i\textipa
   \newcommand{\sh}{\super{h}}
 
-  \def\lingaddto#1#2{\expandafter\def\expandafter#1\expandafter{#1#2}}
-  \def\lingreplacestrings#1#2{%
-    \def\tmp##1#1##2\end{\ifx\end##2\end\lingaddto\tmpb{##1}\else\lingaddto\tmpb{##1#2}\tmp##2\end\fi}%
-    \expandafter\def\expandafter\tmpb\expandafter{\expandafter}\expandafter\tmp\tmpb#1\end
+  \def\@cjqaddto#1#2{\expandafter\def\expandafter#1\expandafter{#1#2}}
+  \def\@cjqreplacestrings#1#2{%
+    \def\tmp##1#1##2\end{\ifx\end##2\end\@cjqaddto\@cjqtmpb{##1}\else\@cjqaddto\@cjqtmpb{##1#2}\tmp##2\end\fi}%
+    \expandafter\def\expandafter\@cjqtmpb\expandafter{\expandafter}\expandafter\tmp\@cjqtmpb#1\end
   }
-  \def\lingreplacestringsx#1#2{%
-    \def\tmp##1#1##2\end{\ifx\end##2\end\lingaddto\tmpc{##1}\else\lingaddto\tmpc{##1#2}\tmp##2\end\fi}%
-    \expandafter\def\expandafter\tmpc\expandafter{\expandafter}\expandafter\tmp\tmpc#1\end
+  \def\@cjqreplacestringsx#1#2{%
+    \def\tmp##1#1##2\end{\ifx\end##2\end\@cjqaddto\@cjqtmpc{##1}\else\@cjqaddto\@cjqtmpc{##1#2}\tmp##2\end\fi}%
+    \expandafter\def\expandafter\@cjqtmpc\expandafter{\expandafter}\expandafter\tmp\@cjqtmpc#1\end
   }
   \newcommand{\move}[4]{%
-    \def\tmpb{#2}%
-    \lingreplacestrings{NW}{north west}%
-    \lingreplacestrings{NE}{north east}%
-    \lingreplacestrings{SW}{south west}%
-    \lingreplacestrings{SE}{south east}%
-    \lingreplacestrings{N}{north}%
-    \lingreplacestrings{W}{west}%
-    \lingreplacestrings{E}{east}%
-    \lingreplacestrings{S}{south}%
-    \def\tmpc{#4}%
-    \lingreplacestringsx{NW}{north west}%
-    \lingreplacestringsx{NE}{north east}%
-    \lingreplacestringsx{SW}{south west}%
-    \lingreplacestringsx{SE}{south east}%
-    \lingreplacestringsx{N}{north}%
-    \lingreplacestringsx{W}{west}%
-    \lingreplacestringsx{E}{east}%
-    \lingreplacestringsx{S}{south}%
-    \draw[->] (#1) to[out=\tmpb,in=\tmpc] (#3);
+    \def\@cjqtmpb{#2}%
+    \@cjqreplacestrings{NW}{north west}%
+    \@cjqreplacestrings{NE}{north east}%
+    \@cjqreplacestrings{SW}{south west}%
+    \@cjqreplacestrings{SE}{south east}%
+    \@cjqreplacestrings{N}{north}%
+    \@cjqreplacestrings{W}{west}%
+    \@cjqreplacestrings{E}{east}%
+    \@cjqreplacestrings{S}{south}%
+    \def\@cjqtmpc{#4}%
+    \@cjqreplacestringsx{NW}{north west}%
+    \@cjqreplacestringsx{NE}{north east}%
+    \@cjqreplacestringsx{SW}{south west}%
+    \@cjqreplacestringsx{SE}{south east}%
+    \@cjqreplacestringsx{N}{north}%
+    \@cjqreplacestringsx{W}{west}%
+    \@cjqreplacestringsx{E}{east}%
+    \@cjqreplacestringsx{S}{south}%
+    \draw[->] (#1) to[out=\@cjqtmpb,in=\@cjqtmpc] (#3);
   }
 \fi
 
