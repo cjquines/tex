@@ -471,33 +471,32 @@
 
   \def\@cjqaddto#1#2{\expandafter\def\expandafter#1\expandafter{#1#2}}
   \def\@cjqreplacestrings#1#2{%
-    \def\tmp##1#1##2\end{\ifx\end##2\end\@cjqaddto\@cjqtmpb{##1}\else\@cjqaddto\@cjqtmpb{##1#2}\tmp##2\end\fi}%
-    \expandafter\def\expandafter\@cjqtmpb\expandafter{\expandafter}\expandafter\tmp\@cjqtmpb#1\end
+    \def\tmp##1#1##2\end{%
+      \ifx\end##2\end
+        \@cjqaddto\@cjqtmpstr{##1}
+      \else
+        \@cjqaddto\@cjqtmpstr{##1#2}\tmp##2\end
+      \fi
+    }%
+    \expandafter\def\expandafter\@cjqtmpstr
+      \expandafter{\expandafter}\expandafter\tmp\@cjqtmpstr#1\end
   }
-  \def\@cjqreplacestringsx#1#2{%
-    \def\tmp##1#1##2\end{\ifx\end##2\end\@cjqaddto\@cjqtmpc{##1}\else\@cjqaddto\@cjqtmpc{##1#2}\tmp##2\end\fi}%
-    \expandafter\def\expandafter\@cjqtmpc\expandafter{\expandafter}\expandafter\tmp\@cjqtmpc#1\end
+  \def\@cjqreplacedirs#1#2{%
+    \def\@cjqtmpstr{#1}
+    \@cjqreplacestrings{NW}{north west}
+    \@cjqreplacestrings{NE}{north east}
+    \@cjqreplacestrings{SW}{south west}
+    \@cjqreplacestrings{SE}{south east}
+    \@cjqreplacestrings{N}{north}
+    \@cjqreplacestrings{W}{west}
+    \@cjqreplacestrings{E}{east}
+    \@cjqreplacestrings{S}{south}
+    \expandafter\edef\csname @cjqtmp#2\endcsname{\@cjqtmpstr}
   }
   \newcommand{\move}[4]{%
-    \def\@cjqtmpb{#2}%
-    \@cjqreplacestrings{NW}{north west}%
-    \@cjqreplacestrings{NE}{north east}%
-    \@cjqreplacestrings{SW}{south west}%
-    \@cjqreplacestrings{SE}{south east}%
-    \@cjqreplacestrings{N}{north}%
-    \@cjqreplacestrings{W}{west}%
-    \@cjqreplacestrings{E}{east}%
-    \@cjqreplacestrings{S}{south}%
-    \def\@cjqtmpc{#4}%
-    \@cjqreplacestringsx{NW}{north west}%
-    \@cjqreplacestringsx{NE}{north east}%
-    \@cjqreplacestringsx{SW}{south west}%
-    \@cjqreplacestringsx{SE}{south east}%
-    \@cjqreplacestringsx{N}{north}%
-    \@cjqreplacestringsx{W}{west}%
-    \@cjqreplacestringsx{E}{east}%
-    \@cjqreplacestringsx{S}{south}%
-    \draw[->] (#1) to[out=\@cjqtmpb,in=\@cjqtmpc] (#3);
+    \@cjqreplacedirs{#2}{out}
+    \@cjqreplacedirs{#4}{in}
+    \draw[->] (#1) to[out=\@cjqtmpout,in=\@cjqtmpin] (#3);
   }
 \fi
 
