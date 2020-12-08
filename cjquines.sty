@@ -504,9 +504,10 @@
   \newlength{\@cjqarrow}
   \setlength{\@cjqarrow}{-2.5ex}
   \newcommand*\@cjqstrut{{\vrule height 0.75\@cjqarrow depth -0.25\@cjqarrow width 0pt}}
-  \newcommand{\name}[1]{%
+  \newcommand*{\name}[2][\@cjqname]{%
+    \def\@cjqname{#2}%
     \tikz[remember picture, baseline=(#1.base)]%
-      \node[anchor=base,inner sep=0pt, outer sep=0pt] (#1) {#1\@cjqstrut};
+      \node[anchor=base,inner sep=0pt, outer sep=0pt] (#1) {#2\@cjqstrut};
   }
   \tikzset{
     ncbar angle/.initial=90,
