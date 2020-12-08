@@ -457,9 +457,11 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \ifcjqlinguistics
+  \RequirePackage{tikz}
+  \usetikzlibrary{calc}
   \RequirePackage[linguistics]{forest}
-  \RequirePackage{tipa,phonrule,gb4e}
   \apptocmd{\forest}{for tree={s sep+=1mm, inner sep=0, l=0}}{}{}
+  \RequirePackage{xparse,tipa,phonrule,gb4e}
 
   \ifcjqparskip
     \pretocmd{\exe}{\vspace{-0.5em}}{}{}
@@ -468,6 +470,11 @@
 
   \let\i\textipa
   \newcommand{\sh}{\super{h}}
+  \renewcommand{\sc}[1]{{\scshape #1}}
+  \newcommand{\vp}{\textit{v}P}
+  \newcommand{\vb}{\textit{v}'}
+  \newcommand{\vv}{\textit{v}}
+  \renewcommand{\lb}[1]{_{\text{#1}}}
 
   \def\@cjqaddto#1#2{\expandafter\def\expandafter#1\expandafter{#1#2}}
   \def\@cjqreplacestrings#1#2{%
@@ -493,10 +500,39 @@
     \@cjqreplacestrings{S}{south}
     \expandafter\edef\csname @cjqtmp#2\endcsname{\@cjqtmpstr}
   }
-  \newcommand{\move}[4]{%
-    \@cjqreplacedirs{#2}{out}
-    \@cjqreplacedirs{#4}{in}
-    \draw[->] (#1) to[out=\@cjqtmpout,in=\@cjqtmpin] (#3);
+
+  \newlength{\@cjqarrow}
+  \setlength{\@cjqarrow}{-2.5ex}
+  \newcommand*\@cjqstrut{{\vrule height 0.75\@cjqarrow depth -0.25\@cjqarrow width 0pt}}
+  \newcommand{\name}[1]{%
+    \tikz[remember picture, baseline=(#1.base)]%
+      \node[anchor=base,inner sep=0pt, outer sep=0pt] (#1) {#1\@cjqstrut};
+  }
+  \tikzset{
+    ncbar angle/.initial=90,
+    ncbar/.style={
+      to path=(\tikztostart)
+      -- ($(\tikztostart)!#1!%
+        \pgfkeysvalueof{/tikz/ncbar angle}:(\tikztotarget)$)
+      -- ($(\tikztotarget)!($(\tikztostart)!#1!%
+        \pgfkeysvalueof{/tikz/ncbar angle}:(\tikztotarget)$)%
+        !\pgfkeysvalueof{/tikz/ncbar angle}:(\tikztostart)$)
+      -- (\tikztotarget)
+    },
+    ncbar/.default=\@cjqarrow,
+  }
+
+  \DeclareDocumentCommand\move{ m m g g }{%
+    \IfNoValueTF{#3}{%
+      \begin{tikzpicture}[remember picture,overlay]
+        \draw[->,shorten >=1ex,shorten <=1ex]%
+          ([yshift=1.25ex] #1.south) to [ncbar] ([yshift=1.25ex] #2.south);
+      \end{tikzpicture}
+    }{%
+      \@cjqreplacedirs{#2}{out}
+      \@cjqreplacedirs{#4}{in}
+      \draw[->] (#1) to[out=\@cjqtmpout,in=\@cjqtmpin] (#3);
+    }
   }
 \fi
 
