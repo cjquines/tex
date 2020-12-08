@@ -526,8 +526,8 @@
   \DeclareDocumentCommand\move{ m m g g }{%
     \IfNoValueTF{#3}{%
       \begin{tikzpicture}[remember picture,overlay]
-        \draw[->,shorten >=1ex,shorten <=1ex]%
-          ([yshift=1.25ex] #1.south) to [ncbar] ([yshift=1.25ex] #2.south);
+        \draw[->,shorten >=1.25ex,shorten <=1.25ex]%
+          ([yshift=1.5ex] #1.south) to [ncbar] ([yshift=1.5ex] #2.south);
       \end{tikzpicture}
     }{%
       \@cjqreplacedirs{#2}{out}
