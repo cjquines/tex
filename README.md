@@ -32,4 +32,37 @@ Some notes on cjquines.sty:
 
 - `pset` and `oly` include specific styling for my homework solutions and olympiad papers.
 
+- `linguistics` tightens the spacing of trees made by `forest`, and includes helpful macros:
+
+```latex
+\begin{exe}
+\ex \gll
+[\lb{DP} \name{The} ice] will melt \name[t]{$t$.}\\
+{} \sc{det} ice will melt {}\\
+\move{t}{The}
+\end{exe}
+
+\begin{forest}
+[TP
+  [DP
+    [the ice,roof,name=t]
+  ]
+  [T'
+    [T\\will]
+    [\vp
+      [\vv,name=tt]
+      [VP
+        [V\\melt,name=ss]
+        [\textit{t},name=s]
+      ]
+    ]
+  ]
+]
+\move{s}{S}{t}{SW}
+\move{ss}{W}{tt}{SW}
+\end{forest}
+```
+
+![](linguistics.png)
+
 <!-- TODO: talk about tsqx, and clean up tsqx while we're at it -->
