@@ -1,0 +1,684 @@
+\documentclass[11pt,paper=letter]{scrartcl}
+\usepackage[parskip]{cjquines}
+
+\newcommand{\ans}{{\sffamily \bfseries Answer.}\;}
+\newcommand{\ansb}[2]{\ans\(\boxed{\text{(#1) #2}}\).}
+\newcommand{\sol}{{\sffamily \bfseries Solution.}\;}
+\newcommand{\soln}[1]{{\sffamily \bfseries Solution #1.}\;}
+\newenvironment{rem}%
+{\noindent \ignorespaces \small \sffamily \sansmath {\bfseries Remark.}}%
+{\ignorespacesafterend}
+
+\begin{document}
+
+\title{PMO 2017 Qualifying Stage}
+\author{Carl Joshua Quines}
+\date{October 22, 2016}
+
+\maketitle
+
+Are any explanations unclear? If so, contact me at \mailto{cj@cjquines.com}. More material is available on my website: \url{https://cjquines.com}.
+
+\textbf{PART I.} Choose the best answer. Each correct answer is worth two points.
+
+\begin{enumerate}[left=0pt]
+
+\item If $27^3 + 27^3 + 27^3 = 27^x$, what is the value of $x$?
+
+\fourch
+{$\dfrac{10}{3}$}
+{$4$}
+{$9$}
+{$12$}
+
+\ansb{a}{$\dfrac{10}{3}$}
+
+\sol This is $27^3 + 27^3 + 27^3 = 3 \cdot 27^3 = 27^{\frac{1}{3}} \cdot 27^3 = 27^{3 + \frac{1}{3}} = 27^{\frac{10}{3}}.$
+
+\item Let $a, b > 0$. If $\abs{x - a} \le a + b$, then what is the minimum value of $x$?
+
+\fourch
+{$-2a-b$}
+{$-a-b$}
+{$a$}
+{$-b$}
+
+\ansb{d}{$-b$}
+
+\soln1 We split on cases based on the value of $x$:
+
+\begin{itemize}
+\item When $x \ge a$, then $x - a \ge 0$, and the inequality becomes $x - a \le a + b$, or $x \le 2a + b$. In this case, the minimum value would be $a$.
+\item When $x < a$, then $x - a < 0$ and we have to flip the absolute value. So it becomes $-(x - a) \le a + b$, or $x \ge -b$. In this case, the minimum value is $-b$.
+\end{itemize}
+
+Because $-b$ is smaller than $a$, as it's negative, the answer is $-b$.
+
+\soln2 We interpret $\abs{x - a}$ as the distance of the number $x$ from $a$. This distance is at most $a + b$, so the minimum value of $x$ would be starting from $a$, then going $a + b$ units towards the negative side. This gives $-b$.
+
+\item One diagonal of a rhombus is three times as long as the other. If the rhombus has an area of 54 square meters, what is its perimeter?
+
+\fourch
+{$9$ meters}
+{$12\sqrt{10}$ meters}
+{$36$ meters}
+{$9\sqrt{5}$ meters}
+
+\ansb{b}{$12\sqrt{10}$ meters}
+
+\sol In a rhombus, the diagonals are perpendicular bisectors of each other. Say they have lengths $2x$ and $6x$. This means the right triangles formed by the diagonals have legs $x$ and $3x$.
+
+\begin{center}
+\begin{asy}
+size(4cm);
+
+pair A = (0, 0);
+pair B = (5, 0);
+pair C = (3, 4);
+pair D = B+C-A;
+pair E = extension(A,D,B,C);
+
+draw(A--B--C--D--cycle^^A--C^^B--D);
+draw(rightanglemark(C,E,D));
+label("$x$", C--E, SW);
+label("$3x$", D--E, 2*S);
+\end{asy}
+\end{center}
+
+Each triangle has area $\frac{x \cdot 3x}{2}$, and because there are four triangles, the total area is $6x^2$. Setting this to $54$ and solving, we get $x = 3$. Using the Pythagorean theorem, we can solve for the hypotenuse of the triangles as $\sqrt{3^2 + 9^2} = 3\sqrt{10}$. The perimeter is four times that, or $12\sqrt{10}$.
+
+\item Suppose that $r_1$ and $r_2$ are the roots of the equation $4x^2 - 3x - 7 = 0$. What is the sum of the squares of the reciprocals of $r_1$ and $r_2$?
+
+\fourch
+{$-\dfrac{3}{7}$}
+{$-\dfrac{47}{49}$}
+{$\dfrac{65}{49}$}
+{$\dfrac{6}{7}$}
+
+\ansb{c}{$\dfrac{65}{49}$}
+
+\sol By Vieta's formulas, we know $r_1 + r_2 = \frac{3}{4}$ and $r_1r_2 = -\frac{7}{4}$. The answer is \[
+  \frac{1}{r_1^2} + \frac{1}{r_2^2}
+  = \frac{r_1^2 + r_2^2}{r_1^2r_2^2}
+  = \frac{(r_1 + r_2)^2 - 2r_1r_2}{(r_1r_2)^2}
+  = \frac{\left(\frac{3}{4}\right)^2 - 2\left(-\frac{7}{4}\right)}{\left(-\frac{7}{4}\right)^2}
+  = \frac{65}{49}.
+\]
+
+\item The lengths of the sides of a triangle are $3, 5,$ and $x$. The lengths of the sides of another triangle are $4, 6,$ and $y$. If the lengths of all sides of both triangles are integers, what is the maximum value of $\abs{x - y}$?
+
+\fourch
+{$2$}
+{$6$}
+{$7$}
+{$8$}
+
+\ansb{b}{$6$}
+
+\sol From the \href{https://en.wikipedia.org/wiki/Triangle_inequality#Mathematical_expression_of_the_constraint_on_the_sides_of_a_triangle}{triangle inequality}, we get $5 - 3 < x < 5 + 3$, or $2 < x < 8$, and similarly $2 < y < 10$. Either we want to make $x$ as large as possible and $y$ as small as possible, or vice-versa. We can check that the maximum is when $x = 3$ and $y = 9$, with a difference of $6$.
+
+\begin{rem}
+To see why the third side has to have length between the difference and the sum of the two other sides, consider this visually. The two other sides are joined by a vertex. When the angle between them approaches $0\dg$, the third side approaches the difference of the two sides. When the angle approaches $180\dg$, the third side approaches their sum.
+\end{rem}
+
+\item Three circles with radii $4, 5,$ and $9$ have the same center. If $x\%$ of the area of the largest circle lies between the other two circles, what is $x$ to the nearest integer?
+
+\fourch
+{$9$}
+{$11$}
+{$25$}
+{$33$}
+
+\ansb{b}{$11$}
+
+\sol The area in between the two circles is $25\pi - 16\pi = 9\pi$. The area of the largest circle is $81\pi$. The ratio is $\frac{9\pi}{81\pi} = \frac{1}{9} = 11.111\ldots \%$, so the answer is $11$.
+
+\item Issa has an urn containing only red and blue marbles. She selects a number of marbles from the urn at random and without replacement. She needs to draw at least $N$ marbles in order to be sure that she has at least two red marbles. In contrast, she needs three times as much in order to be sure that she has at least two blue marbles. How many marbles are in the urn?
+
+\fourch
+{$4N - 4$}
+{$4N - 3$}
+{$4N - 2$}
+{$4N$}
+
+\ansb{a}{$4N - 4$}
+
+\sol For Issa to guarantee that she draws at least two red marbles, the worst case would be if she draws all the blue marbles, and then the two red marbles. That would mean that there are $N - 2$ blue marbles, because then she would have to draw all of those marbles, and two more, to make the total $N$. Similarly, there are $3N - 2$ red marbles, making a total of $4N - 4$ marbles.
+
+\item How many positive divisors of $30^9$ are divisible by $400\,000$?
+
+\fourch
+{$72$}
+{$150$}
+{$240$}
+{$520$}
+
+\ansb{b}{$150$}
+
+\sol The prime factorizations are $400\,000 = 2^7 \cdot 3^0 \cdot 5^5$ and $30^9 = 2^9 \cdot 3^9 \cdot 5^9$. A divisor of $30^9$ must be of the form $2^x \cdot 3^y \cdot 5^z$, and each of the exponents must be at most the corresponding exponent in $30^9$, so $x, y, z \le 9$. For it to be divisible by $400\,000$, the exponents have to be at least the its exponent in $400\,000$, so $x \ge 7$, $y \ge 0$, and $z \ge 5$.
+
+This means that $x$ has $3$ possibilities: $7, 8$, or $9$. Similarly, $y$ has $10$ possibilities, and $z$ has $5$ possibilities. That means there are $3 \cdot 10 \cdot 5 = 150$ possible divisors.
+
+\begin{rem}
+Alternatively, one can count the number of divisors of $30^9 / 400\,000$. This method is slightly more robust; for example, the sum of the divisors would be $400\,000$ times the sum of the divisors of $30^9 / 400\,000$.
+\end{rem}
+
+\item Evaluate the following sum: \[
+  1 + \cos \frac{\pi}{3} + \cos \frac{2\pi}{3} + \cos \frac{3\pi}{3} + \cos \frac{4\pi}{3} + \cdots + \cos \frac{2016\pi}{3}.
+\]
+
+\fourch
+{$1$}
+{$0$}
+{$-1$}
+{$\frac{1}{2}$}
+
+\ansb{a}{$1$}
+
+\soln1 We start by evaluating the first few terms: \[
+  \left(1 + \frac{1}{2} - \frac{1}{2} - 1 - \frac{1}{2} + \frac{1}{2}\right) + \left(1 + \frac{1}{2} - \frac{1}{2} - \cdots\right) + \cdots
+\]
+We notice that we can regroup the sum into groups of six terms, each with sum $0$. The groups would be $\cos \frac{0\pi}{3}$ to $\cos \frac{5\pi}{3}$, then $\cos \frac{6\pi}{3}$ to $\cos \frac{11\pi}{3}$, and so on. The beginning of the group is always a multiple of six, so the last group would be $\cos \frac{2010\pi}{3}$ to $\cos \frac{2015\pi}{3}$. Up to that term, the entire sum would be $0$. This means the entire sum is just the remaining term, $\cos \frac{2016\pi}{3}$, which is $1$.
+
+\soln2 A fully general method is to use the product-to-sum formula to telescope the sum. We want to use the formula $2\cos x \sin y = \left(\sin(x + y) - \sin(x - y)\right)$, so we need to figure out what value of $\sin y$ would make the telescoping work. We want to cancel, say, $\sin\left(\frac{\pi}{3} + y\right)$ and $\sin\left(\frac{2\pi}{3} - y\right)$. This means we want $y = \frac{\pi}{6}$. Letting the sum be $S$, we multiply through by $2\sin \frac{\pi}{6}$ and use the product-to-sum formula to get
+\begin{align*}
+2S\left(\sin \frac{\pi}{6}\right)
+&= 2\cos\frac{0\pi}{3}\sin\frac{\pi}{6}
++ 2\cos\frac{1\pi}{3}\sin\frac{\pi}{6}
++ 2\cos\frac{2\pi}{3}\sin\frac{\pi}{6}
++ \cdots
++ 2\cos\frac{2016\pi}{3}\sin\frac{\pi}{6} \\
+&= \left(\sin \frac{\pi}{6} - \sin \frac{-\pi}{6}\right)
++ \left(\sin \frac{3\pi}{6} - \sin \frac{\pi}{6}\right)
++ \left(\sin \frac{5\pi}{6} - \sin \frac{3\pi}{6}\right)
++ \cdots \\
+&+ \left(\sin \frac{4033\pi}{6} - \sin \frac{4031\pi}{6}\right) \\
+&= -\sin \frac{-\pi}{6} + \sin \frac{4033\pi}{6}.
+\end{align*}
+This means $2S \sin \frac{\pi}{6} = -\sin \frac{-\pi}{6} + \sin \frac{4033\pi}{6} = \frac{1}{2} + \frac{1}{2} = 1$, and hence $S = 1$.
+
+\item An infinite geometric series has first term $7$ and sum between $8$ and $9$, inclusive. Find the sum of the smallest and largest possible values of its common ratio.
+
+\fourch
+{$15/56$}
+{$23/56$}
+{$17/72$}
+{$25/72$}
+
+\ansb{d}{$25/72$}
+
+\sol Letting the common ratio be $r$, we get $8 \le \frac{7}{1-r} \le 9$. Solving the left inequality, we get $8(1 - r) \le 7$ or $r \ge \frac{1}{8}$. Solving the right inequality, we get $7 \le 9(1 - r)$, or $r \le \frac{2}{9}$. So the answer is $\frac{1}{8} + \frac{2}{9} = \frac{25}{72}$.
+
+\item When $2a$ is divided by $7$, the remainder is $5$. When $3b$ is divided by $7$, the remainder is also $5$. What is the remainder when $a + b$ is divided by $7$?
+
+\fourch
+{$2$}
+{$3$}
+{$5$}
+{$6$}
+
+\ansb{b}{$3$}
+
+\soln1 Knowing the answer is numerical, we can just find values of $a$ and $b$ that work and test it. Taking $a = 6$, we get $2a = 12$, and when it's divided by $7$ it has remainder $5$. Taking $b = 4$, we get $3b = 12$, and when it's divided by $7$ it has remainder $5$. Hence $a + b = 10$, and when divided by $7$ it has remainder $3$.
+
+\soln2 Taking everything modulo $7$, we have $2a \equiv 5$. Multiplying both sides by $4$, we get $8a \equiv 20$, or $a \equiv 6$. We also have $3b \equiv 5$, and multiplying both sides by $5$ gives $15b \equiv 25$, or $b \equiv 4$. Hence $a + b \equiv 6 + 4 \equiv 3$.
+
+\item In the figure on the right (not drawn to scale), triangle $ABC$ is equilateral, triangle $DBE$ is isosceles with $ED = BD$, and the lines $l_1$ and $l_2$ are parallel. What is $m\angle FBE$?
+
+\fourch
+{$30\dg$}
+{$35\dg$}
+{$40\dg$}
+{$45\dg$}
+
+\begin{center}
+\begin{asy}
+size(5cm);
+
+pair A = (0, 0);
+pair D = (6, 0);
+pair C = (-1, -12);
+pair B = (11, -9);
+pair eep = (-1, -8);
+pair Ep = extension(A, C, B, eep);
+pair F = extension(A, B, D, Ep);
+
+draw((-3,0)--(13,0));
+draw((-3,-12)--(13,-12));
+
+markscalefactor=0.15;
+draw(A--B--C--cycle);
+draw(D--Ep--B--cycle);
+
+filldraw(anglemark(B, Ep, D), lightgray, black);
+label("$50^{\circ}$", anglemark(B, Ep, D), N*0.75+3.5*E);
+filldraw(anglemark(B, D, (8,0)), lightgray, black);
+label("$60^{\circ}$", anglemark(B, D, (8,0)), 3*SE);
+filldraw(anglemark((8,-12), C, B), lightgray, black);
+label("$15^{\circ}$", anglemark((8,-12), C, B), NE+4*E);
+
+dot("$A$", A, dir(N));
+dot("$D$", D, dir(N));
+dot("$C$", C, dir(S));
+dot("$B$", B, dir(E));
+dot("$E$", Ep, dir(W));
+dot("$F$", F, dir(N));
+\end{asy}
+\end{center}
+
+\ansb{b}{$35\dg$}
+
+\sol We want to use $\angle FBC + \angle DBE - \angle DBC = \angle FBE$, so let's find each of those three angles. Note that $\angle FBC = \angle ABC$, which is just $60\dg$, because it's part of an equilateral triangle. Using the fact that triangle $DBE$ is isosceles, we get $\angle DBE = \angle DEB = 50\dg$.
+
+The trickiest one is $\angle DBC$. Construct a line perpendicular to $l_1$ at $G$ and to $l_2$ at $H$, to the right of the entire figure. That way, $DGHCB$ would be a pentagon. Two of its angles are right, the other two angles are $60\dg$ and $15\dg$, and the remaining angle is the reflex $\angle DBC$. Since the sum of the angles of a pentagon is $540\dg$, that means the reflex $\angle DBC$ is $540\dg - 90\dg - 90\dg - 60\dg - 15\dg = 285\dg$. This means the other $\angle DBC = 360\dg - 285\dg = 75\dg$, so $\angle FBE = 60\dg + 50\dg - 75\dg = 35\dg$.
+
+\begin{rem}
+Another way to find $\angle DBC$ is to draw a line through $B$ parallel to $l_1$ and $l_2$. By using the alternate interior angles of the three parallel lines, we get that it's $60\dg + 15\dg$.
+\end{rem}
+
+\item How many three-digit numbers have distinct digits that add up to $21$?
+
+\fourch
+{$18$}
+{$24$}
+{$30$}
+{$36$}
+
+\ansb{a}{$18$}
+
+\sol It helps to work down from the largest digit. With a largest digit of $9$, the remaining sum needs to be $12$, which could be $8 + 4$ or $7 + 5$. With a largest digit of $8$, the remaining sum needs to be $13$, which can only be $7 + 6$. It's not possible for the largest digit to be $7$, or anything smaller than that.
+
+So the only options for the digits are $9, 8, 4$, then $9, 7, 5$, and $8, 7, 6$. Each triplet has $3! = 6$ different arrangements, giving $3 \cdot 6 = 18$ three-digit numbers in total.
+
+\item A regular hexagon with area $28$ is inscribed in a circle. What would the area of a square inscribed in the same circle be?
+
+\fourch
+{$28\sqrt3$}
+{$\dfrac{56}{\sqrt6}$}
+{$\dfrac{112}{3\sqrt3}$}
+{$28\sqrt6$}
+
+\ansb{c}{$\dfrac{112}{3\sqrt3}$}
+
+\clearpage
+
+\sol Let the circle have radius $r$. We can split the regular hexagon into six equilateral triangles, each with side length $r$. The area of each one would be $\frac{r^2 \sqrt{3}}{4}$, so the total area would be $\frac{3r^2 \sqrt 3}{2}$. Setting this equal to $28$ and solving gives $r^2 = \frac{56}{3\sqrt3}$.
+
+\begin{center}
+\begin{asy}
+size(6cm);
+
+pair A = dir(90.0);
+pair B = dir(150.0);
+pair C = dir(210.0);
+pair D = dir(270.0);
+pair E = dir(330.0);
+pair F = dir(30.0);
+pair G = (2.5,0)+dir(90.0);
+pair H = (2.5,0)+dir(180.0);
+pair I = (2.5,0)+dir(270.0);
+pair J = (2.5,0)+dir(360.0);
+
+draw(A--B--C--D--E--F--cycle);
+draw(G--H--I--J--cycle);
+draw(circumcircle(A,B,C));
+draw(circumcircle(I,G,H));
+draw(A--D^^B--E^^C--F);
+draw(G--I^^H--J);
+label("$r$",origin--A);
+label("$r$",(2.5,-0.2)--G);
+\end{asy}
+\end{center}
+
+Now consider the square. We can split it into four isosceles right triangles with leg length $r$. Each one has an area of $\frac{r^2}{2}$, so the total area is $2r^2$, or $\frac{112}{3\sqrt3}$.
+
+\item A positive integer $n$ is a \textit{triangular number} if there exists some positive integer $k$ for which it is the sum of the first $k$ positive integers, that is, $n = 1 + 2 + \cdots + (k - 1) + k$. How many triangular numbers are there which are less than $2016$?
+
+\fourch
+{$61$}
+{$62$}
+{$63$}
+{$64$}
+
+\ansb{b}{$62$}
+
+\sol It's well-known that $1 + 2 + \cdots + k = \frac{k(k+1)}{2}$. Setting this less than $2016$ gives $k(k+1) < 4032$. The choices are all around $60$-something, so we can check these values of $k$ and see which ones would work.
+
+Starting with $61$, we see that $61 \cdot 62$ is $3782$, then $62 \cdot 63$ is $3906$, and $63 \cdot 64$ is $4032$, which is already too large. So we know that all the integers from $k = 1$ up to $k = 62$ would give a different triangular number, giving $62$ triangular numbers in total.
+
+\end{enumerate}
+
+\noindent\textbf{PART II.} Choose the best answer. Each correct answer is worth three points.
+
+\begin{enumerate}[left=0pt]
+
+\item I have $2016$ identical marbles. I plan to distribute them equally into one or more identical containers. How many ways can this be done if I have an unlimited number of containers?
+
+\fourch
+{$10$}
+{$36$}
+{$1008$}
+{$6552$}
+
+\ansb{b}{$36$}
+
+\sol Each factor of $2016$ gives a different way to distribute it among the containers, for example, we can split it into $32$ containers each with $63$ marbles. As $2016 = 2^5 \cdot 3^2 \cdot 7^1$, it has $(5 + 1)(2 + 1)(1 + 1) = 36$ factors.
+
+\item Suppose that the seven-digit number $159aa72$ is a multiple of $2016$. What is the sum of its distinct prime divisors?
+
+\fourch
+{$12$}
+{$17$}
+{$23$}
+{$36$}
+
+\ansb{c}{$23$}
+
+\sol Note that $2016$ is a multiple of $9$, so $159aa72$ also has to be divisible by $9$. From the divisibility rule by $9$, we need $1 + 5 + 9 + a + a + 7 + 2 = 2a + 24$ to be divisible by $9$. We can check that the only digit that works is $a = 6$, so the number is $1596672$.
+
+Now we need to factorize it. We know that $2016$ is a factor, so we can divide $1596672/2016 = 792$. We can then factor $792 = 2^3 \cdot 3^2 \cdot 11$. So the distinct prime factors are $2, 3, 7, 11$, the $2, 3, 7$ from $2016$ and the $11$ from $792$. They have sum $23$.
+
+\item Let $f(x)$ be a polynomial of degree $4$ with integer coefficients, leading coefficient $1$, and having $\sqrt{10} + \sqrt{11}$ as one of its zeroes. What is $f(1)$?
+
+\fourch
+{$-44$}
+{$-40$}
+{$-36$}
+{$-21$}
+
+\ansb{b}{$-40$}
+
+\sol The other roots have to be $\sqrt{10} - \sqrt{11}, -\sqrt{10} + \sqrt{11},$ and $-\sqrt{10}-\sqrt{11}$. These are four roots, and the polynomial is degree $4$, so there's only one such polynomial $f(x)$. If we can find a polynomial, that must be the only one.
+
+We can find a polynomial with $\sqrt{10} + \sqrt{11}$ as one of its zeroes by setting it as $x$ and repeatedly squaring both sides:
+\begin{align*}
+x &= \sqrt{10} + \sqrt{11} \\
+x^2 &= 10 + 2\sqrt{110} + 11 \\
+\left(x^2 - 21\right)^2 &= \left(2 \sqrt{110}\right)^2 \\
+x^4 - 42x^2 + 441 &= 440 \\
+x^4 - 42x^2 + 1 &= 0.
+\end{align*}
+Plugging in $x = 1$ gives $-40$.
+
+\item If $b > 1$, find the minimum value of $\dfrac{9b^2 - 18b + 13}{b - 1}$.
+
+\fourch
+{$0$}
+{$9$}
+{$12$}
+{$36$}
+
+\ansb{c}{$12$}
+
+\sol We can divide this out to get $9b - 9 + \dfrac{4}{b-1}$. Noting that $9b - 9$ is $9(b - 1)$, we can use AM--GM to get that \[
+\frac{9(b - 1) + \frac{4}{b-1}}{2} \ge \sqrt{9(b - 1) \cdot \frac{4}{b-1}} = 6,
+\]
+which means the expression is at least $2 \cdot 6 = 12$. We can check that this is achievable by setting $9(b - 1) = \frac{4}{b - 1}$ and solving to get $b = \frac{5}{3}$, which does achieve $12$.
+
+\item How many triangles are there in the figure below?
+
+\begin{center}
+\begin{asy}
+size(2cm);
+
+pair A = (0, 0);
+pair B = (1, 0);
+pair C = (1, 1);
+pair D = (0, 1);
+pair E = midpoint(A--B);
+pair F = midpoint(C--D);
+
+draw(A--B--C--D--cycle);
+draw(A--C);
+draw(B--D);
+draw(E--D);
+draw(F--B);
+\end{asy}
+\end{center}
+
+\fourch
+{$14$}
+{$16$}
+{$18$}
+{$20$}
+
+\ansb{d}{$20$}
+
+\sol Here are all twenty triangles.
+
+\input{ii5}
+
+\item What is the $100$th digit of the following sequence? \[
+  1\;4\;9\;16\;25\;36\;49\;64\;81\;100\;\cdots
+\]
+\fourch
+{$6$}
+{$7$}
+{$8$}
+{$9$}
+
+\ansb{d}{$9$}
+
+\sol There are $15$ digits before $100$. The three-digit perfect squares are from $10^2 = 100$ to $31^2 = 961$, so these are $22$ numbers, each with $3$ digits, giving $66$ more digits. The current total is now $81$, which means we need to count $19$ more digits, starting from $32^2$. Each of $32^2, 33^2, 34^2, 35^2$ has four digits, which leaves $3$ digits left. The third digit of $36^2 = 1296$ is $9$.
+
+\item Louie plays a board game where he throws a circular coin with radius $1$ unit, which falls flat entirely inside a square board having side $10$ units. He wins the game if the coin touches the boundary or the interior of a circle of radius $2$ units drawn at the center of the board. What is the probability that Louie wins the game?
+
+\fourch
+{$\dfrac{9\pi}{64}$}
+{$\dfrac{16\pi}{81}$}
+{$\dfrac{\pi}{9}$}
+{$\dfrac{9\pi}{100}$}
+
+\ansb{a}{$\dfrac{9\pi}{64}$}
+
+\sol Consider the center of the coin. To touch the circle, it can lie anywhere on a circle of radius $3$ units centered on the board. Since the coin also falls entirely within the board, the center must be in an $8$ by $8$ square.
+
+\begin{center}
+\begin{asy}
+size(4.5cm);
+
+draw((0,0)--(10,0)--(10,10)--(0,10)--cycle);
+draw((1,1)--(9,1)--(9,9)--(1,9)--cycle);
+draw(circle((5,5),2));
+draw(circle((5,5),3));
+draw(circle((1.4,8.7),1));
+dot((1.4,8.7));
+draw(circle((2.5,4),1));
+dot((2.5,4));
+\end{asy}
+\end{center}
+
+The circle has area $9\pi$ and the square has area $64$, so the probability that Louie wins is $\frac{9\pi}{64}$.
+
+\item Guido and David each randomly choose an integer from $1$ to $100$. What is the probability that neither integer is the square of the other?
+
+\fourch
+{$0.81$}
+{$0.99$}
+{$0.9919$}
+{$0.9981$}
+
+\ansb{d}{$0.9981$}
+
+\sol We count the opposite, that is, the probability that one integer \textit{is} the square of the other. Guido's integer could be the square of David's, or vice-versa. There are $10$ perfect squares from $1$ to $100$. This makes $20$ possibilities for their two integers, but we count the case when they both have $1$ twice, which means that there are only $19$ possibilities. The total number of possibilities is $100^2$, so the probability is $19/100^2 = 0.0019$. That means the answer is $1 - 0.0019 = 0.9981$.
+
+\item How many ordered triples of positive integers $(x, y, z)$ are there such that $x + y + z = 20$ and two of $x, y, z$ are odd?
+
+\fourch
+{$135$}
+{$138$}
+{$141$}
+{$145$}
+
+\ansb{a}{$135$}
+
+\sol Two of the integers are odd and the third must be even. We can choose one of the integers to be even, so there are three possibilites. Let's say $x$ is even and then multiply the number of triples we get by three. That means we can write $x = 2x'$, $y = 2y' - 1$, and $z = 2z' - 1$, for some positive integers $x', y', z'$. This makes \[
+  2x' + 2y' - 1 + 2z' - 1 = 20 \implies x' + y' + z' = 11.
+\]
+Now we can use \href{https://en.wikipedia.org/wiki/Stars_and_bars_(combinatorics)#Theorem_one}{balls and urns} to count the number of triplets as $\binom{11 - 1}{3 - 1} = 45$. Multiplying this by $3$, to account for the integer that we chose to be even, we get the final answer, $135$.
+
+\begin{rem}
+See references in my write-up for \href{https://cjquines.com/files/pmo2020areas.pdf}{PMO 2020 Areas I.4}.
+\end{rem}
+
+\item Suppose that $x < 0 < y < 1 < z$. Which of the following statements is true?
+
+\begin{enumerate}
+\item[I.] $\dfrac{xz - y}{x}$ is always greater than $x + yz$
+\item [II.] $xy + z$ is always greater than $\dfrac{z - xy}{x}$
+\end{enumerate}
+
+\fourch
+{I only}
+{II only}
+{both I and II}
+{neither I nor II}
+
+\ansb{a}{I only}
+
+\sol We handle the two statements separately. First, note that because $0 < y < 1$ and $z > 0$, then $z > yz$. Second, note that $-\frac{y}{x}$ is positive, while $x$ is negative. This means $-\frac{y}{x} > x$. Combining these, we get \[
+  \frac{xz - y}{x}
+  = z - \frac{y}{x}
+  > yz + x,
+\]
+so statement I is true. After a little experimentation, we see that statement II is false; take for example $(x, y, z) = \left(-100, \frac{1}{2}, 2\right)$. So only I is true.
+
+\end{enumerate}
+
+\noindent\textbf{PART III.} All answers should be in simplest form. Each correct answer is worth six points.
+
+\begin{enumerate}[left=0pt]
+
+\item A paper cut-out in the shape of an isosceles right triangle is folded in such a way that one vertex meets the edge of the opposite side, and that the constructed edges $m_1$ and $m_2$ are parallel to each other (refer to figure below, which is not drawn to scale). If the length of the triangle's leg is $2$ units, what is the area of the shaded region?
+
+\begin{center}
+\begin{asy}
+size(6cm);
+
+real r = 2/(1+sqrt(2));
+pair A = (0, 0);
+pair B = (r, 0);
+pair C = (0, r);
+pair D = (2, 0);
+pair F = (r, 2-r);
+
+draw(A--C--F--D--cycle);
+filldraw(C--B--F--cycle, lightgray, black);
+label("$m_1$", A--C, W);
+label("$m_2$", B--F, E);
+\end{asy}
+\end{center}
+
+\ans{$6\sqrt{2} - 8$}
+
+\sol We'll find the area of the shaded region by using $m_2$ as the base, and finding the height. Let the edge $m_2$ have length $x$. The right triangle with leg $m_2$ thus has hypotenuse $x \sqrt 2$. Edge $m_2$ unfolds to form part of the hypotenuse of the entire right triangle, so the original right triangle had hypotenuse $x + x \sqrt{2}$. This is equal to $2\sqrt{2}$, so $x = \frac{2\sqrt{2}}{1 + \sqrt{2}}$.
+
+The height to $m_2$ is the same as the length of $m_1$. Looking along the bottom legs of the two right triangles, we see that they sum up to form the leg of the original right triangle. So the length of $m_1$ is $2 - x$, or $\frac{2}{1 + \sqrt{2}}$. The area of the shaded region is thus \[
+  \frac{1}{2}\left( \frac{2\sqrt{2}}{1 + \sqrt{2}} \cdot \frac{2}{1 + \sqrt{2}}\right)
+  = \frac{1}{2}\left( \frac{4\sqrt{2}}{3 + 2\sqrt{2}} \right) = \frac{4\sqrt{2} (3 - 2\sqrt{2})}{2 \left(9 - 8\right)} = 6\sqrt{2} - 8.
+\]
+
+\item Using the numbers $1, 2, 3, 4, 5, 6,$ and $7$, we can form $7! = 5040$ $7$-digit numbers in which the $7$ digits are all distinct. If these numbers are listed in increasing order, find the $2016$th number in the list.
+
+\ans{$3\,657\,421$}
+
+\sol Let's consider each of the digits of the number in order. There are $6! = 720$ numbers starting with $1$, then another $720$ starting with $2$, then another $720$ starting with $3$. The total is now over $2016$, which means that the first digit of the number must be $3$. That means we are looking for the $2016 - 2 \cdot 720 = 576$th number starting with $3$.
+
+We now keep going. There are $5! = 120$ numbers that start with $31$, then another $120$ with $32$, then $34$, $35$, $36$. Because $576 - 4 \cdot 120 = 96$, that means we're looking for the $96$th number beginning with $36$.
+
+Finally, there are $4! = 24$ numbers that start with $361$, then another $24$ that start with $362$, then $364$, then $365$. Because $96 = 4 \cdot 24$, we're looking for the last number that starts with $365$. The remaining digits then have to be in descending order, which means the number is $3\,657\,421$.
+
+\begin{rem}
+The one-to-one correspondence between the permutations of $n$ items and the numbers from $0$ to $n! - 1$ is used by the \href{https://en.wikipedia.org/wiki/Factorial_number_system#Permutations}{factorial number system}.
+\end{rem}
+
+\item Let $G$ be the set of ordered pairs $(x,y)$ such that $(x,y)$ is the midpoint of $(-3,2)$ and some point on the circle $(x + 3)^2 + (y - 1)^2 = 4$. What is the largest possible distance between any two points in $G$?
+
+\ans{$2$}
+
+\sol Let $P$ be $(-3, 2)$, let $O$ be the center $(-3, 1)$ of the original circle, and let $O'$ be the midpoint of $OP$. Then $G$ is a new circle, with center $O'$ and half the radius of the original.
+
+To see this, let $Q$ be a point on the original circle, $Q'$ be the corresponding point in $G$, and consider $\triangle Q'PO' \sim \triangle QPO$. The ratio of similarity is $2$, which means that $Q'O'$ is half the length of $QO$. But $QO$ is a radius of the original circle, so its length is the same no matter which $Q$ we pick. So all points $Q'$ in $G$ have a constant distance from $O'$, which means it's a circle.
+
+\begin{center}
+\begin{asy}
+size(5cm);
+
+pair Q = (0, 0);
+pair O = (3, 0);
+pair Op = midpoint(O--Q);
+pair P = (2, sqrt(15));
+pair Pp = midpoint(Q--P);
+draw(circle(O, 4));
+draw(circle(Op, 2));
+draw(P--Q--O--cycle);
+draw(Pp--Op);
+
+dot("$O'$", Op, S);
+dot("$Q'$", Pp, NW);
+dot("$O$", O, S);
+dot("$Q$", P, N);
+dot("$P$", Q, S);
+\end{asy}
+\end{center}
+
+The radius of the original circle is $2$, so the radius of $G$ is $1$. The largest possible distance between two points in a circle is the length of its diameter, so the answer is $2$.
+
+\item Let $f(x) = \sqrt{-x^2 + 20x + 400} + \sqrt{x^2 - 20x}$. How many elements in the range of $f$ are integers?
+
+\ans{$9$}
+
+\sol Because $f$ is continuous, we only need to find the minimum and maximum values of $f$, and all the integers in between are in the range. Because $x^2 - 20x$ is repeated, it encourages us to set it as a variable. Letting $y = x^2 - 20x$, this is $\sqrt{400 - y} + \sqrt{y}$.
+
+Intuitively, the minimum value happens when the two terms are as far apart as possible, and the maximum happens when they are as near to each other as possible. Note that when $y = 0$, we get $\sqrt{400} + \sqrt{0} = 20$, and when $y = 200$, we get $\sqrt{200} + \sqrt{200} = 20\sqrt{2}$. We have to check that these correspond to possible values of $x$; but it is possible for $x^2 - 20x$ to be $0$ and $200$.
+
+Because the minimum is $20$ and the maximum is $20\sqrt{2} \approx 28.2$, that means the integers in the range are $20, 21, \ldots, 28$. So there are $9$ integers.
+
+To prove the minimum, note that \[
+\left(\sqrt{400 - y} + \sqrt{y}\right)^2
+= (400 - y) + 2\left(\sqrt{400 - y}\sqrt{y}\right) + y
+\ge (400 - y) + y = 400,
+\]
+the center inequality coming from \href{https://artofproblemsolving.com/wiki/index.php/Trivial_Inequality}{the trivial inequality}. Taking the square root of both sides gives the minimum. To prove the maximum, we can use the \href{https://en.wikipedia.org/wiki/HM-GM-AM-QM_inequalities}{AM-QM inequality} to get that \[
+\frac{\sqrt{400 - y} + \sqrt{y}}{2} \le \sqrt{\frac{\left(\sqrt{400 - y}\right)^2 + \left(\sqrt{y}\right)^2}{2}} = 10\sqrt{2}.
+\]
+
+\begin{rem}
+An interesting geometric interpretation also proves the minimum. Note that $\sqrt{y}$ and $\sqrt{400 - y}$ are the legs of a right triangle with hypotenuse $20$. Then the triangle inequality proves the minimum value.
+\end{rem}
+
+\item For every positive integer $n$, let $s(n)$ denote the number of terminal zeroes in the decimal representation of $n!$. For example, $10! = 3\,628\,800$ ends in two zeroes, so $s(10) = 2$. How many positive integers $n$ less than or equal to $2016$ cannot be expressed in the form $n + s(n)$ for some positive integer $n$?
+
+\ans{$401$}
+
+\sol By \href{https://en.wikipedia.org/wiki/Legendre%27s_formula}{Legendre's formula}, we know that \[
+  s(n) = \floor{\frac{n}{5}} + \floor{\frac{n}{25}} + \floor{\frac{n}{125}} + \cdots.
+\]
+This counts the exponent of $5$ in $n!$, and since every factor of $5$ will have a corresponding factor of $2$, this will be number of trailing zeroes.
+
+We can use this to work out the first few values of $n + s(n)$ as $1, 2, 3, 4, 6, 7, 8, 9, 10, 12, \ldots$. The important thing to note here is that $n + s(n)$ keeps increasing. Our strategy, then, would be to find a value of $n$ such that $n + s(n)$ is as close to $2016$ as possible, and then we can subtract to find out the number of skipped numbers.
+
+To see why this works, consider a smaller example. Note that $15 + s(15) = 18$. So the positive integers at most $18$ that \textit{can} be expressed as $n + s(n)$ are $1 + s(1), 2 + s(2), \ldots, 15 + s(15)$. There are $15$ of these integers, which means $18 - 15 = 3$ integers \textit{can't} be expressed.
+
+We can approximate to get a close value of $n$. By approximating the floor functions as the number themselves, we get the infinite geometric series \[
+  n + s(n) = n + \floor{\frac{n}{5}} + \floor{\frac{n}{25}} + \floor{\frac{n}{125}} + \cdots
+  \approx n + {\frac{n}{5}} + {\frac{n}{25}} + {\frac{n}{125}} + \cdots = \frac{n}{1 - \frac{1}{5}} = \frac{5n}{4}.
+\]
+For $5n/4$ to be close to $2016$, $n$ needs to be close to four-fifths of $2016$, around $1612$. From there, we can just check the values of $n + s(n)$:
+\begin{align*}
+1612 + s(1612) &= 1612 + 400 = 2012 \\
+1613 + s(1613) &= 1613 + 400 = 2013 \\
+1614 + s(1614) &= 1614 + 400 = 2014 \\
+1615 + s(1615) &= 1615 + 401 = 2016.
+\end{align*}
+This means that all of $1 + s(1), \ldots, 1615 + s(1615)$ \textit{can} be expressed. Because $1615$ numbers can be expressed, it follows that $2016 - 1615 = 401$ numbers cannot.
+
+\begin{rem}
+Note that $s(5n) = n + s(n)$. So the integers that can't be expressed as $n + s(n)$ are precisely the integers that can't be expressed as $s(n)$. The integers that can be $s(n)$ is \href{http://oeis.org/A191610}{OEIS A191610}, and the integers that can't is \href{http://oeis.org/A000966}{OEIS A000966}.
+\end{rem}
+
+\end{enumerate}
+
+% \emph{With thanks to Nathanael Joshua Balete for comments.}
+
+\end{document}

@@ -1,0 +1,124 @@
+\newcommand{\iifive}{%
+size(1.5cm);%
+pair A = (0, 0);%
+pair B = (1, 0);%
+pair C = (1, 1);%
+pair D = (0, 1);%
+pair E = midpoint(A--B);%
+pair F = midpoint(C--D);%
+pair G = extension(A, C, B, F);%
+pair H = extension(A, C, E, D);%
+pair I = extension(A, C, B, D);%
+draw(A--B--C--D--cycle);%
+draw(A--C);%
+draw(B--D);%
+draw(E--D);%
+draw(F--B);%
+}
+
+\begin{center}
+\begin{asy}
+\iifive
+filldraw(A--H--D--cycle, gray, black);
+\end{asy}
+$\quad$
+\begin{asy}
+\iifive
+filldraw(A--D--I--cycle, gray, black);
+\end{asy}
+$\quad$
+\begin{asy}
+\iifive
+filldraw(A--D--E--cycle, gray, black);
+\end{asy}
+$\quad$
+\begin{asy}
+\iifive
+filldraw(A--H--E--cycle, gray, black);
+\end{asy}
+$\quad$
+\begin{asy}
+\iifive
+filldraw(A--I--B--cycle, gray, black);
+\end{asy}
+$\quad$
+\begin{asy}
+\iifive
+filldraw(I--H--D--cycle, gray, black);
+\end{asy}
+$\quad$
+\begin{asy}
+\iifive
+filldraw(E--B--D--cycle, gray, black);
+\end{asy}
+\end{center}
+
+\begin{center}
+\begin{asy}
+\iifive
+filldraw(C--B--G--cycle, gray, black);
+\end{asy}
+$\quad$
+\begin{asy}
+\iifive
+filldraw(C--B--I--cycle, gray, black);
+\end{asy}
+$\quad$
+\begin{asy}
+\iifive
+filldraw(C--B--F--cycle, gray, black);
+\end{asy}
+$\quad$
+\begin{asy}
+\iifive
+filldraw(C--G--F--cycle, gray, black);
+\end{asy}
+$\quad$
+\begin{asy}
+\iifive
+filldraw(C--I--D--cycle, gray, black);
+\end{asy}
+$\quad$
+\begin{asy}
+\iifive
+filldraw(I--G--B--cycle, gray, black);
+\end{asy}
+$\quad$
+\begin{asy}
+\iifive
+filldraw(F--B--D--cycle, gray, black);
+\end{asy}
+\end{center}
+
+\begin{center}
+
+\begin{asy}
+\iifive
+filldraw(A--D--B--cycle, gray, black);
+\end{asy}
+$\quad$
+\begin{asy}
+\iifive
+filldraw(A--C--D--cycle, gray, black);
+\end{asy}
+$\quad$
+\begin{asy}
+\iifive
+filldraw(I--A--D--cycle, gray, black);
+\end{asy}
+$\quad$
+\begin{asy}
+\iifive
+filldraw(C--I--B--cycle, gray, black);
+\end{asy}
+$\quad$
+\begin{asy}
+\iifive
+filldraw(B--C--A--cycle, gray, black);
+\end{asy}
+$\quad$
+\begin{asy}
+\iifive
+filldraw(C--B--D--cycle, gray, black);
+\end{asy}
+\end{center}
