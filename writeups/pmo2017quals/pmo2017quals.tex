@@ -221,7 +221,7 @@ This means $2S \sin \frac{\pi}{6} = -\sin \frac{-\pi}{6} + \sin \frac{4033\pi}{6
 
 \soln1 Knowing the answer is numerical, we can just find values of $a$ and $b$ that work and test it. Taking $a = 6$, we get $2a = 12$, and when it's divided by $7$ it has remainder $5$. Taking $b = 4$, we get $3b = 12$, and when it's divided by $7$ it has remainder $5$. Hence $a + b = 10$, and when divided by $7$ it has remainder $3$.
 
-\soln2 Taking everything modulo $7$, we have $2a \equiv 5$. Multiplying both sides by $4$, we get $8a \equiv 20$, or $a \equiv 6$. We also have $3b \equiv 5$, and multiplying both sides by $5$ gives $15b \equiv 25$, or $b \equiv 4$. Hence $a + b \equiv 6 + 4 \equiv 3$.
+\soln2 Taking everything modulo $7$, we can use modular inverses to solve this. For example, note that $2 \cdot 4 \equiv 8 \equiv 1$. So if we have $2a \equiv 5$, we can multiply both sides by $4$ to get $8a \equiv 20$, or $a \equiv 6$. We also have $3b \equiv 5$, and multiplying both sides by $5$ gives $15b \equiv 25$, or $b \equiv 4$. Hence $a + b \equiv 6 + 4 \equiv 3$.
 
 \item In the figure on the right (not drawn to scale), triangle $ABC$ is equilateral, triangle $DBE$ is isosceles with $ED = BD$, and the lines $l_1$ and $l_2$ are parallel. What is $m\angle FBE$?
 
@@ -270,10 +270,10 @@ dot("$F$", F, dir(N));
 
 \sol We want to use $\angle FBC + \angle DBE - \angle DBC = \angle FBE$, so let's find each of those three angles. Note that $\angle FBC = \angle ABC$, which is just $60\dg$, because it's part of an equilateral triangle. Using the fact that triangle $DBE$ is isosceles, we get $\angle DBE = \angle DEB = 50\dg$.
 
-The trickiest one is $\angle DBC$. Construct a line perpendicular to $l_1$ at $G$ and to $l_2$ at $H$, to the right of the entire figure. That way, $DGHCB$ would be a pentagon. Two of its angles are right, the other two angles are $60\dg$ and $15\dg$, and the remaining angle is the reflex $\angle DBC$. Since the sum of the angles of a pentagon is $540\dg$, that means the reflex $\angle DBC$ is $540\dg - 90\dg - 90\dg - 60\dg - 15\dg = 285\dg$. This means the other $\angle DBC = 360\dg - 285\dg = 75\dg$, so $\angle FBE = 60\dg + 50\dg - 75\dg = 35\dg$.
+The trickiest one is $\angle DBC$. Consider drawing a line through $B$ parallel to $l_1$ and $l_2$. By using the alternate interior angles of the three parallel lines, we get that $\angle DBC = 60\dg + 15\dg = 75\dg$. This means $\angle FBE = 60\dg + 50\dg - 75\dg = 35\dg$.
 
 \begin{rem}
-Another way to find $\angle DBC$ is to draw a line through $B$ parallel to $l_1$ and $l_2$. By using the alternate interior angles of the three parallel lines, we get that it's $60\dg + 15\dg$.
+Another way to find $\angle DBC$ is to construct a line perpendicular to $l_1$ at $G$ and to $l_2$ at $H$, to the right of the entire figure. That way, $DGHCB$ would be a pentagon. Two of its angles are right, the other two angles are $60\dg$ and $15\dg$, and the remaining angle is the reflex $\angle DBC$. Since the sum of the angles of a pentagon is $540\dg$, that means the reflex $\angle DBC$ is $540\dg - 90\dg - 90\dg - 60\dg - 15\dg = 285\dg$. This means $\angle DBC = 360\dg - 285\dg = 75\dg$.
 \end{rem}
 
 \item How many three-digit numbers have distinct digits that add up to $21$?
@@ -388,9 +388,9 @@ Now we need to factorize it. We know that $2016$ is a factor, so we can divide $
 
 \ansb{b}{$-40$}
 
-\sol The other roots have to be $\sqrt{10} - \sqrt{11}, -\sqrt{10} + \sqrt{11},$ and $-\sqrt{10}-\sqrt{11}$. These are four roots, and the polynomial is degree $4$, so there's only one such polynomial $f(x)$. If we can find a polynomial, that must be the only one.
+\sol For the coefficients to be rational, it's well-known that if $a + \sqrt{b}$ to be a zero, then $a - \sqrt{b}$ needs to be a zero as well. Hence the other roots have to be $\sqrt{10} - \sqrt{11}, -\sqrt{10} + \sqrt{11},$ and $-\sqrt{10}-\sqrt{11}$.
 
-We can find a polynomial with $\sqrt{10} + \sqrt{11}$ as one of its zeroes by setting it as $x$ and repeatedly squaring both sides:
+These are four roots, and the polynomial is degree $4$, so there's only one such polynomial $f(x)$. If we can find a polynomial, that must be the only one. We can find a polynomial with $\sqrt{10} + \sqrt{11}$ as one of its zeroes by setting it as $x$ and repeatedly squaring:
 \begin{align*}
 x &= \sqrt{10} + \sqrt{11} \\
 x^2 &= 10 + 2\sqrt{110} + 11 \\
@@ -679,6 +679,6 @@ Note that $s(5n) = n + s(n)$. So the integers that can't be expressed as $n + s(
 
 \end{enumerate}
 
-% \emph{With thanks to Nathanael Joshua Balete for comments.}
+\emph{With thanks to Nathanael Joshua Balete for comments.}
 
 \end{document}
