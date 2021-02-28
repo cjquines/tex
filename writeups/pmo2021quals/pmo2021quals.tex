@@ -1,0 +1,871 @@
+\documentclass[11pt,paper=letter]{scrartcl}
+\usepackage[parskip]{cjquines}
+
+\newcommand{\ans}[1]{{\sffamily \bfseries Answer.}\;\(\boxed{\text{#1}}\).}
+\newcommand{\ansb}[2]{{\sffamily \bfseries Answer.}\;\(\boxed{\text{(#1) #2}}\).}
+\newcommand{\sol}{{\sffamily \bfseries Solution.}\;}
+\newcommand{\soln}[1]{{\sffamily \bfseries Solution #1.}\;}
+\newenvironment{rem}%
+{\noindent \ignorespaces \small \sffamily \sansmath {\bfseries Remark.}}%
+{\ignorespacesafterend}
+
+\begin{document}
+
+\title{PMO 2021 Qualifying Stage}
+\author{Carl Joshua Quines}
+\date{February 20, 2021}
+
+\maketitle
+
+Due to the pandemic, the PMO was held virtually. In lieu of a qualifying stage and an area stage, only a single qualifying stage was held, explaining the different format. This test continues last year's numbering scheme, with the numbering continuing throughout the test. Are any explanations unclear? If so, contact me at \mailto{cj@cjquines.com}. More material is available on my website: \url{https://cjquines.com}.
+
+\textbf{PART I.} Choose the best answer. Figures are not drawn to scale. Each correct answer is worth two points.
+
+\begin{enumerate}[align=left,leftmargin=*]
+
+\item In a convex polygon,the number of diagonals is $23$ times the number of its sides. How many sides does it have?
+
+\fourch
+{$46$}
+{$49$}
+{$66$}
+{$69$}
+
+\ansb{b}{$49$}
+
+\sol If a polygon has $n$ vertices, the number of diagonals it has is $\binom{n}{2} - n$. This is because a diagonal joins two vertices, but we overcounted the $n$ sides of the polygon. From the problem, we get $\binom{n}{2} - n = 23n$, and solving yields $n = 49$.
+
+\begin{rem}
+Another way to get the same formula. A diagonal is formed by joining each of the $n$ vertices to one of $n - 3$ vertices: any other vertex except itself and the vertices it's next to. This counts each diagonal twice, though, so we divide by two to get $\frac{1}{2}n(n-3)$, which is the same formula.
+\end{rem}
+
+\item What is the smallest real number $a$ for which the function $f(x) = 4x^2 - 12x - 5 + 2a$ will always be nonnegative for all real numbers $x$?
+
+\fourch
+{$0$}
+{$\dfrac{3}{2}$}
+{$\dfrac{5}{2}$}
+{$7$}
+
+\ansb{d}{$7$}
+
+\sol For a quadratic to be always nonnegative, its discriminant has to be nonpositive:
+\begin{align*}
+(-12)^2 - 4(4)(-5 + 2a) &\le 0 \\
+144 - (-80 + 32a) &\le 0 \\
+224 &\le 32a.
+\end{align*}
+Hence $a \ge 7$, and the minimum value for $a$ is $7$.
+
+\item In how many ways can the letters of the word $PANACEA$ be arranged so that the three $A$s are not all together?
+
+\fourch
+{$540$}
+{$576$}
+{$600$}
+{$720$}
+
+\ansb{d}{$720$}
+
+\sol We do complementary counting: count the total number of arrangements, and then subtract the ones where the $A$s are all together. The total number of arrangements is $\frac{7!}{3!}$. There are $7$ letters, but we overcounted by a factor of $3!$, because the $A$s can be arranged in $3!$ ways without changing the arrangement.
+
+The number of arrangements where the $A$s are all together is $5!$. You can imagine treating all the $A$s as a single, big letter $AAA$, and then there would be $5$ letters to arrange. So the final answer is \[
+  \frac{7!}{3!} - 5! = \frac{7 \cdot 6 \cdot 5!}{3!} - 5! = 5!\left(\frac{7 \cdot 6}{3!} - 1\right) = 720.
+\]
+
+\item How many ordered pairs of positive integers $(x, y)$ satisfy $20x + 21y = 2021$?
+
+\fourch
+{$4$}
+{$5$}
+{$6$}
+{infinitely many}
+
+\ansb{b}{$5$}
+
+\sol From $2021 = 2000 + 21$, we get the solution $(100, 1)$. To produce another solution, note that $20(-21) + 21(20) = 0$. We can add this to both sides to get:
+\begin{align*}
+20(100) + 21(1) &= 2021 \\
+20(-21) + 21(20) &= 0 \\
+20(100 - 21) + 21(1 + 20) &= 2021,
+\end{align*}
+giving us the solution $(79, 21)$. If we keep doing this, we get the solutions $(58, 41)$, $(37, 61)$, and $(16, 81)$. This gives $5$ solutions.
+
+To prove there are no other solutions, let's say that $(x, y)$ was another solution. Then we can subtract the equation $20x + 21y = 2021$ from $20(100) + 21(1) = 2021$ to get $20(100 - x) + 21(1 - y) = 0$. Now, note that $21$ is a factor of $0$, and it is also a factor of $21(1 - y)$. This means $21$ must be a factor of $20(100 - x)$, and since it doesn't share factors with $20$, it has to be a factor of $100 - x$. This limits the possible values of $x$, and similarly $y$; from here it's possible to show that there are only $5$ solutions.
+
+\begin{rem}
+There is a general theory for solving \href{https://en.wikipedia.org/wiki/Diophantine_equation#One_equation}{linear Diophantine equations}. Here's another way to visualize this. Consider the graph of $20x + 21y = 2021$ in the plane. It's a line, and $(100, 1)$ is one of the points on it. The slope of the line is $-\frac{20}{21}$. Interpreting this as rise over run, it means that if we go up $20$ units in the $y$-coordinate, we go back $21$ units in the $x$-coordinate. So another point on the line would be $(100 - 21, 1 + 20) = (79, 21)$, and if we think about drawing the line on graph paper, it wouldn't cross any other points with integer coordinates.
+\end{rem}
+
+\item Find the sum of all $k$ for which $x^5 + kx^4 - 6x^3 - 15x^2 - 8k^3x - 12k + 21$ leaves a remainder of $23$ when divided by $x + k$.
+
+\fourch
+{$-1$}
+{$-\dfrac{3}{4}$}
+{$\dfrac{5}{8}$}
+{$\dfrac{3}{4}$}
+
+\ansb{b}{$-\dfrac{3}{4}$}
+
+\sol From the remainder theorem, we know that the remainder when divided by $x + k$ is the result of substituting $-k$ for $x$. Setting this to $23$, we get
+\begin{align*}
+(-k)^5 + k(-k)^4 - 6(-k)^3 - 15(-k)^2 - 8k^3(-k) - 12k + 21 &= 23 \\
+-k^5 + k^5 + 6k^3 - 15k^2 + 8k^4 - 12k - 21 &= 0 \\
+8k^4 + 6k^3 - 15k^2 - 12k - 21 &= 0.
+\end{align*}
+From Vieta's formulas, we know that the sum of possible values of $k$ is $-\frac{6}{8} = -\frac{3}{4}$.
+
+\item In rolling three fair twelve-sided dice simultaneously, what is the probability that the resulting numbers can be arranged to form a geometric sequence?
+
+\fourch
+{$\dfrac{1}{72}$}
+{$\dfrac{5}{288}$}
+{$\dfrac{1}{48}$}
+{$\dfrac{7}{288}$}
+
+\ansb{d}{$\dfrac{7}{288}$}
+
+\sol There are $12^3$ possible ordered triplets of the results. We'll count the number of triplets that can be arraged to form a geometric sequence. We'll work up from the possible common ratios, and within each one, work from the smallest term:
+\begin{itemthin}
+\item When the ratio is $1$, the possibilities are $(1, 1, 1), (2, 2, 2), \ldots, (12, 12, 12)$. These are $12$ possibilities in all.
+\item When the ratio is $\frac{3}{2}$, the only possibility that works is $(4, 6, 9)$, giving $3! = 6$ permutations.
+\item When the ratio is $2$, the possibilites are $(1, 2, 4), (2, 4, 8), (3, 6, 12)$. This gives $3 \cdot 6 = 18$ in total.
+\item When the ratio is $3$, the only possibility is $(1, 3, 9)$, which gives $6$ possible triplets.
+\end{itemthin}
+Note that the ratio can't be any other value; the ratio of the last to first term needs to be a perfect square, and the only squares are $1, 4, 9$. Thus the total number of triplets is $42$ and the answer is $\frac{42}{12^3} = \frac{7}{288}$.
+
+\item How many positive integers $n$ are there such that $\dfrac{n}{120-2n}$ is a positive integer?
+
+\fourch
+{$2$}
+{$3$}
+{$4$}
+{$5$}
+
+\ansb{b}{$3$}
+
+\soln1 Let's say this integer is $m$. Then $\frac{n}{120 - 2n} = m$ rearranges to $2mn - 120m + n = 0.$ We now complete the rectangle by using \href{https://artofproblemsolving.com/wiki/index.php/Simon%27s_Favorite_Factoring_Trick}{Simon's Favorite Factoring Trick}. The $-120m$ suggests that it's from $(2m)(-60)$, so we want something like $(2m + \_\_)(n - 60)$, and we can fill it in with $1$. This adds an extra term $60$ to both sides:
+\begin{align*}
+2mn - 120m + n + 60 &= 60 \\
+(2m + 1)(n - 60) &= 60.
+\end{align*}
+Now, $2m + 1$ is an odd factor of $60$. The odd factors of $60$ are $1, 3, 5, 15$. Of these, $2m + 1$ can't be $1$, because then $m$ wouldn't be positive, but the other ones work. This means there are $3$ solutions for $m$, and for each, we can find the corresponding value of $n$.
+
+\soln2 It's easier to work with a complicated numerator than a complicated denominator. Since the fraction is positive and $n$ is positive, we know $120 - 2n$ must also be positive. Let's let $60 - n = m$, and that way $n = 60 - m$. This means \[\dfrac{n}{120 - 2n} = \frac{n}{2(60 - n)} = \dfrac{60 - m}{2m}.\] Because the denominator is even, and this is an integer, the numerator must also be even. Hence $60 - m$ is even, and thus $m$ is even, so $m = 2\ell$ for some positive integer $\ell$. That makes \[\dfrac{60 - m}{2m} = \frac{60 - 2\ell}{4\ell} = \dfrac{30 - \ell}{2\ell}.\] Through similar reasoning, $\ell$ must also be even, so letting $\ell = 2k$, \[
+  \dfrac{30 - \ell}{2\ell} = \frac{30 - 2k}{4k} = \frac{15 - k}{2k}.
+\]
+At this point, we can see that $k$ is odd, but it's now small enough to just check the remaining choices. The choices $k = 1$, $3$, and $5$ work, which means there are $3$ solutions.
+
+\begin{rem}
+Compare \href{https://cjquines.com/files/pmo2018areas.pdf}{PMO 2018 Areas I.7} ``Determine the area of the polygon formed by the ordered pairs $(x, y)$ where $x$ and $y$ are positive integers that satisfy the equation $\frac1x + \frac1y = \frac1{13}.$'' and \href{https://cjquines.com/files/pmo2020areas.pdf}{PMO 2020 Areas I.9} ``A wooden rectangular brick with dimensions $3$ units by $a$ units by $b$ units is painted blue on all six faces and then cut into $3ab$ unit cubes. Exactly $1/8$ of these unit cubes have all their faces unpainted. Given that $a$ and $b$ are positive integers, what is the volume of the brick?''
+\end{rem}
+
+\item Three real numbers $a_1, a_2, a_3$ form an arithmetic sequence. After $a_1$ is increased by $1$, the three numbers now form a geometric sequence. If $a_1$ is a positive integer, what is the smallest positive value of the common difference?
+
+\fourch
+{$1$}
+{$\sqrt{2} + 1$}
+{$3$}
+{$\sqrt{5} + 2$}
+
+\ansb{b}{$\sqrt{2} + 1$}
+
+\sol Let's say the common difference is $d$, and let's write $a$ for $a_1$. Then the arithmetic sequence is $a, a + d, a + 2d$, and the geometric sequence is $a + 1, a + d, a + 2d$. Because this is a geometric sequence, the ratios of consecutive terms have to be the same:
+\begin{align*}
+\frac{a + d}{a + 1} &= \frac{a + 2d}{a + d} \\
+(a + d)^2 &= (a + 2d)(a + 1) \\
+a^2 + 2ad + d^2 &= a^2 + 2ad + a + 2d \\
+d^2 - 2d - a &= 0.
+\end{align*}
+We can now work up from values of $a$, starting from $1$, and solve for $d$. Alternatively, we can use the quadratic formula, or complete the square:
+\begin{align*}
+d^2 - 2d + 1 - 1 - a &= 0 \\
+(d - 1)^2 &= a + 1 \\
+d &= 1 \pm \sqrt{a + 1}.
+\end{align*}
+Given that $a$ is a positive integer, we can see the minimum positive value for $d$ is $\sqrt{2} + 1$.
+
+\item Point $G$ lies on side $AB$ of square $ABCD$ and square $AEFG$ is drawn outwards $ABCD$, as shown in the figure below. Suppose that the area of triangle $EGC$ is $1/16$ of the area of pentagon $DEFBC$. What is the ratio of the areas of $AEFG$ and $ABCD$?
+
+\begin{center}
+\begin{asy}
+size(4.5cm);
+
+pair D = (0 , 0);
+pair C = (5 , 0);
+pair B = (5 , 5);
+pair A = (0 , 5);
+pair G = (2 , 5);
+pair E = (0 , 7);
+pair F = E+G-A;
+
+draw(A--B--C--D--cycle);
+draw(A--E--F--G);
+draw(B--F);
+draw(C--E--G--cycle);
+
+dot("$D$", D, plain.SW);
+dot("$C$", C, plain.SE);
+dot("$B$", B, plain.NE);
+dot("$A$", A, plain.W);
+dot("$G$", G, plain.NE);
+dot("$E$", E, plain.NW);
+dot("$F$", F, plain.N);
+\end{asy}
+\end{center}
+
+\fourch
+{$4 : 25$}
+{$9 : 49$}
+{$16 : 81$}
+{$25 : 121$}
+
+\ansb{a}{$4 : 25$}
+
+\soln1 The tricky part is finding the area of $EGC$. It's a good idea to consider the possible bases to compute the area from. Here, $EG$ is a promising base. We now need the height from $C$ to $EG$. In fact, this is equal to the height from $A$ to $EG$.
+
+\begin{center}
+\begin{asy}
+size(4.5cm);
+
+pair D = (0 , 0);
+pair C = (5 , 0);
+pair B = (5 , 5);
+pair A = (0 , 5);
+pair G = (2 , 5);
+pair E = (0 , 7);
+pair F = E+G-A;
+
+draw(A--B--C--D--cycle);
+draw(A--E--F--G);
+draw(B--F);
+draw(C--E--G--cycle);
+draw(C--foot(C, E, G)--G, dashed);
+draw(A--foot(A, E, G), dashed);
+draw(A--C);
+
+dot("$D$", D, plain.SW);
+dot("$C$", C, plain.SE);
+dot("$B$", B, plain.NE);
+dot("$A$", A, plain.W);
+dot("$G$", G, plain.NE);
+dot("$E$", E, plain.NW);
+dot("$F$", F, plain.N);
+\end{asy}
+\end{center}
+
+To see this, draw $AC$. Note that $AC$ and $EG$ are parallel lines. The height from $C$ to $EG$ is thus the distance between these two parallel lines, which is equal to the height from $A$ to $EG$. So triangles $EGC$ and $EGA$ have the same area! Now we can compute. Let the smaller square have side length $x$ and the larger square have side length $y$. Then \[
+\frac{[EGC]}{[DEFBC]}
+= \frac{[EAG]}{[AEFG] + [GFB] + [ABCD]}
+= \frac{\frac{x^2}{2}}{x^2 + \frac{x(y-x)}{2} + y^2}
+= \frac{x^2}{x^2 + xy + 2y^2} = \frac{1}{16}.
+\]
+Cross-multiplying this last equation and factoring, we get
+\begin{align*}
+15x^2 - xy - 2y^2 &= 0 \\
+(3x + y)(5x - 2y) &= 0.
+\end{align*}
+The case $3x + y = 0$ isn't possible, so $5x - 2y = 0$, which means $\frac{x}{y} = \frac{2}{5}$. Squaring this gives us the ratio of the areas, $4 : 25$.
+
+\soln2 If the smaller square has side length $x$ and the larger square have side length $y$,
+\[
+  [EGC] = [EAG] + [ABCD] - [GBC] - [EDC] 
+= \frac{x^2}{2} + y^2 - \frac{y(y - x)}{2} - \frac{y(x + y)}{2}
+= \frac{x^2}{2},
+\]
+and the rest of the solution proceeds as in Solution 1.
+
+\soln3 We use Cartesian coordinates. Since only the ratio of the area matters, we can say that the larger square has side length $1$. Let $a$ be the side length of the smaller square. Taking $D$ to be the origin, we get these coordinates:
+
+\begin{center}
+\begin{asy}
+size(7cm);
+
+pair D = (0 , 0);
+pair C = (5 , 0);
+pair B = (5 , 5);
+pair A = (0 , 5);
+pair G = (2 , 5);
+pair E = (0 , 7);
+pair F = E+G-A;
+
+draw(A--B--C--D--cycle);
+draw(A--E--F--G);
+draw(B--F);
+draw(C--E--G--cycle);
+
+dot("$D = (0, 0)$", D, plain.SW);
+dot("$C = (1, 0)$", C, plain.SE);
+dot("$B = (1, 1)$", B, plain.NE);
+dot("$A = (0, 1)$", A, plain.W);
+dot("$G = (a, 1)$", G, plain.S);
+dot("$E = (0, a + 1)$", E, plain.NW);
+dot("$F = (a, a + 1)$", F, plain.NE);
+\end{asy}
+\end{center}
+
+We can now use the \href{https://artofproblemsolving.com/wiki/index.php/Shoelace_Theorem}{shoelace formula} to find the areas of $EGC$ and $DEFBC$:
+\begin{align*}
+[EGC] &= \frac{1}{2}\abs{0 \cdot 1 + a \cdot 0 + 1 \cdot (a + 1) - a \cdot (a+1) - 1 \cdot 1 - 0 \cdot 0} \\
+&= \frac{1}{2}\abs{-a^2} = \frac{1}{2}(a^2). \\
+[DEFBC] &= \frac{1}{2}\abs{a \cdot 1 - a \cdot (a + 1) - 1 \cdot (a + 1) - 1} \\
+&= \frac{1}{2}\abs{-a^2 - a - 2} = \frac{1}{2}(a^2 + a + 2).
+\end{align*}
+Here, in the shoelace formula for $[DEFBC]$, we only write the terms that don't have a zero factor. Each of the absolute values follow from $a > 0$. Now we can solve for $a$: \[
+\frac{a^2}{a^2 + a + 2} = \frac{1}{16}
+\iff 15a^2 - a - 2 = (3a + 1)(5a - 2) = 0,
+\]
+so $a = \frac{2}{5}$, and the ratio of the areas is $4 : 25$.
+
+\begin{rem}
+Compare with \href{https://cjquines.com/files/pmo2020quals.pdf}{PMO 2020 Qualifying I.12} ``In parallelogram $ABCD$, $CD = 18$. Point $F$ lies inside $ABCD$ and $AB$ and $DF$ meet at $E$. If $AE = 12$ and the areas of $FEB$ and $FCD$ are $30$ and $162$, find the area of triangle $BFC$.'' and \href{https://cjquines.com/files/pmo2017quals.pdf}{PMO 2017 Qualifying III.1} ``A paper cut-out in the shape of an isosceles right triangle is folded such that one vertex meets the edge of the opposite side and that the edges are parallel. If the length of the triangle's leg is $2$, what is the area of the shaded region?''
+\end{rem}
+
+\item In how many ways can $2021$ be written as a sum of two or more consecutive integers?
+
+\fourch
+{$3$}
+{$5$}
+{$7$}
+{$9$}
+
+\ansb{c}{$7$}
+
+\sol Let's say that the consecutive integers begin with $a$, and there are $n$ of them. From the formula for the sum of an arithmetic series, \[
+  2021 = a + (a + 1) + \cdots + \left(a + (n - 1)\right) = \frac{n}{2}(2a + n - 1) \iff 4042 = n(2a + n - 1).
+\]
+Note that if $n$ is odd, then $n + (2a - 1)$ is an odd number plus an odd number, and is even. Similarly, if $n$ is even, the other factor is odd. Thus we need to write $4042$ as a product of an even and an odd number: one of them will be $n$, and the other will be $2a + n - 1$. As long as this is true, we can always find an integer $a$ that works.
+
+Note $4042 = 2 \cdot 43 \cdot 47$. Because there's only one factor of $2$, if we pick any factor as $n$, the other will be the opposite parity. For example, if $n = 2 \cdot 43$, which is even, then $2a + n - 1 = 47$, which is odd. So any factor of $4042$ corresponds to a way to write it as a sum of consecutive integers. From a well-known formula, we know $4042$ has $8$ factors. Subtracting the case $n = 1$, because the problem asks for ``two or more consecutive integers'', we get the final answer, $7$.
+
+\begin{rem}
+From here, it's possible to solve ``Which integers can be written as the sum of two or more consecutive integers?'' Because $n$ and $2a + n - 1$ need to have opposite parity, the ones that can't are the powers of $2$.
+\end{rem}
+
+\item In quadrilateral $ABCD$, $\angle CBA = 90\dg$, $\angle BAD = 45\dg$, and $\angle ADC = 105\dg$. Suppose that $BC = 1 + \sqrt{2}$ and $AD = 2 + \sqrt{6}$. What is the length of $AB$?
+
+\fourch
+{$2\sqrt{3}$}
+{$2 + \sqrt{3}$}
+{$3 + \sqrt{2}$}
+{$3 + \sqrt{3}$}
+
+\ansb{c}{$3 + \sqrt{2}$}
+
+\sol Let $E$ and $F$ be the feet of the perpendiculars from $D$ to $AB$, and $C$ to $DE$, respectively. Because $\angle EAD = 45\dg$, that means $\triangle AED$ is a $45$--$45$--$90$ triangle. Then $\angle EDA = 45\dg$, so $\angle CDF = \angle ADC - \angle EDA = 105\dg - 45\dg = 60\dg$, so $\triangle DFC$ is a $30$--$60$--$90$ triangle.
+
+\begin{center}
+\begin{asy}
+size(5cm);
+
+pair A = (5 , 0);
+pair B = (0 , 0);
+pair C = (0 , 2);
+pair D = (2 , 3);
+pair E = (2 , 0);
+pair F = (2 , 2);
+
+draw(A--B--C--D--cycle);
+draw(D--E^^C--F);
+draw(rightanglemark(A, B, C));
+draw(rightanglemark(A, E, F));
+draw(rightanglemark(D, F, C));
+draw(anglemark(C, D, F));
+
+dot("$A$", A, plain.SE);
+dot("$B$", B, plain.SW);
+dot("$C$", C, plain.NW);
+dot("$D$", D, plain.N);
+dot("$E$", E, plain.S);
+dot("$F$", F, plain.SE);
+label("$60^{\circ}$", D, 3*plain.S + 1.5*plain.W);
+\end{asy}
+\end{center}
+
+From the fact that $\triangle AED$ is $45$--$45$--$90$, we know that $AE = ED = \frac{AD}{\sqrt{2}} = \sqrt2 + \sqrt3$. From rectangle $BEFC$, $BC = FE$, so we can find $DF = ED - FE = \left(\sqrt2 + \sqrt3\right) - \left(1 + \sqrt2\right) = \sqrt3 - 1$. Then we use the fact that $\triangle DFC$ is a $30$--$60$--$90$ triangle to get $CF = 3 - \sqrt3$, which from rectangle $BEFC$ is also $BE$. Finally, $AB = AE + BE = \left(\sqrt2 + \sqrt3\right) + \left(3 - \sqrt3\right) = 3 + \sqrt2$.
+
+\item Alice tosses two biased coins, each of which has a probability $p$ of obtaining a head, simultaneously and repeatedly until she gets two heads. Suppose that this happens on the $r$th toss for some integer $r \ge 1$. Given that there is a $36\%$ chance that $r$ is even, what is the value of $p$?
+
+\fourch
+{$\dfrac{\sqrt7}{4}$}
+{$\dfrac{2}{3}$}
+{$\dfrac{\sqrt{2}}{2}$}
+{$\dfrac{3}{4}$}
+
+\ansb{a}{$\dfrac{\sqrt7}{4}$}
+
+\soln1 The probability that Alice gets two heads on the $r$th toss is $p^2$, times the probability she didn't get two heads on any of the previous $r-1$ tosses, which is $\left(1 - p^2\right)^{r-1}$. Hence the probability $r$ is even is the total probability that $r = 2, 4, 6, \ldots$, which is \[
+  \left(1 - p^2\right)^1p^2 + \left(1 - p^2\right)^3p^2 + \left(1 - p^2\right)^5p^2 + \cdots = \frac{(1 - p^2)p^2}{1 - (1 - p^2)^2},
+\]
+where we used the formula for an infinite geometric series. Setting it equal to $\frac{36}{100}$, we get
+\begin{align*}
+\frac{(1 - p^2)p^2}{1 - (1 - p^2)^2} &= \frac{36}{100} \\
+100 - 100p^2 &= 72 - 36p^2.
+\end{align*}
+Hence $p^2 = \frac{28}{64} = \frac{7}{16}$, so $p = \frac{\sqrt7}{4}$.
+
+\soln2 Either $r$ is even, which happens with probability $36\%$, or $r$ is odd, which must happen with probability $100\% - 36\% = 64\%$. These are related---$r$ is even is just like $r$ being odd, if you started counting after the first flip. That is, the probability $r$ is even is the probability that Alice doesn't get two heads in the first flip, times the probability that $r$ is odd. This means \[
+  \frac{36}{100} = (1 - p^2)\frac{64}{100},
+\]
+and we can solve for $p = \frac{\sqrt7}{4}$.
+
+\begin{rem}
+Solution 2 uses the fact that $r$, being a geometric random variable, is \href{https://en.wikipedia.org/wiki/Memorylessness#Discrete_memorylessness}{memoryless}.
+\end{rem}
+
+\item For a real number $t$, $\floor{t}$ is the greatest integer less than or equal to $t$ and $\cbr{t} = t - \floor{t}$ is the fractional part of $t$. How many real numbers between $1$ and $23$ satisfy $\floor{x}\cbr{x} = 2\sqrt{x}$?
+
+\fourch
+{$18$}
+{$19$}
+{$20$}
+{$21$}
+
+\ansb{a}{$18$}
+
+\sol It helps to think about what the graph of $\floor{x}\cbr{x}$ looks like. Consider a given interval, say, $[2, 3)$. Here, $\floor{x}$ is always $2$, while $\cbr{x}$ goes $[0, 1)$. So the graph is a line from $0$ to $2$.
+
+In this interval, what does $2\sqrt{x}$ look like? It goes from $2\sqrt{2} \approx 2.82$ to $2\sqrt{3} \approx 3.46$. It's also increasing. So in the interval $[2, 3)$, the value of $2\sqrt{x}$ is always at least $2.82$. But the maximum value of $\floor{x}\cbr{x}$ is $2$. This means that there are no solutions in the interval $[2, 3)$.
+
+Let's look at a different example, like $[5, 6)$. Again, the $\floor{x}\cbr{x}$ part would go from $0$ to $5$. The $2\sqrt{x}$ part would go from $2\sqrt{5} \approx 4.47$ to $2\sqrt{6} = 4.90$. That means that their graphs would intersect at some point in the interval. Since both graphs are increasing, that means they also intersect at only one point.
+
+We can do similar reasoning for the rest of the intervals. Each of $[1, 2), \ldots, [4, 5)$ have no solutions, while each of $[5, 6), \ldots, [22, 23)$ have one solution, giving $18$ such real numbers.
+
+\item Find the remainder when $\displaystyle \sum_{n=2}^{2021} n^n$ is divided by $5$.
+
+\fourch
+{$1$}
+{$2$}
+{$3$}
+{$4$}
+
+\ansb{d}{$4$}
+
+\sol To find $n^n \bmod 5$, we'll simplify both the base and the exponent. The base can just be taken mod $5$. For the exponent, we know by \href{https://en.wikipedia.org/wiki/Fermat%27s_little_theorem}{Fermat's little theorem} that $n^4 \equiv 1 \pmod 5$, as long as $n$ isn't $0$. This means we only need to take the exponent mod $4$, because if the exponent is, say, $4k + 2$, then $n^{4k + 2} \equiv \left(n^4\right)^kn^2 \equiv 1 \cdot n^2 \equiv n^2 \pmod 5$.
+
+Because we're taking the base mod $5$ and the exponent mod $4$, this means that $n$ mod $20$ completely determines the value of $n^n$. So we only need to find the value of the first $20$ numbers, and then multiply by the number of times they appear in the sum. \[
+\begin{matrix}
+1^1 & 2^2 & 3^3 & 4^4 & 5^5 \\
+6^6 & 7^7 & 8^8 & 9^9 & 10^{10} \\
+11^{11} & 12^{12} & 13^{13} & 14^{14} & 15^{15} \\
+16^{16} & 17^{17} & 18^{18} & 19^{19} & 20^{20}
+\end{matrix}
+\;\equiv\;
+\begin{matrix}
+1^1 & 2^2 & 3^3 & 4^4 & 0 \\
+1^2 & 2^3 & 3^0 & 4^1 & 0 \\
+1^{3} & 2^{0} & 3^{1} & 4^{2} & 0 \\
+1^{0} & 2^{1} & 3^{2} & 4^{3} & 0
+\end{matrix}
+\;\equiv\;
+\begin{matrix}
+1 & 4 & 2 & 1 & 0 \\
+1 & 3 & 1 & 4 & 0 \\
+1 & 1 & 3 & 1 & 0 \\
+1 & 2 & 4 & 4 & 0
+\end{matrix}
+\pmod5
+\]
+The sum of $n^n$ from $1$ to $20$ is thus $4$. By our previous argument, this is also the sum of $n^n$ from $21$ to $40$, and from $41$ to $60$, and so on. Going from $1$ to $2020$, this repeats $101$ times, so the sum would be $404 \equiv 4 \pmod5$. Finally, note that the sum starts from $2$ and ends at $2021$, so we have to subtract $1^1$ and add $2021^{2021}$. This means the final answer is $4 - 1 + 1 \equiv 4 \pmod 5$.
+
+\begin{rem}
+An interesting observation is the columns of the previous table sum to either $4$ or $0$ mod $5$. This follows from the fact that, for a prime $p$, $a^0 + a^1 + \cdots + a^{p-1} \equiv 0 \pmod p$ when $a \not\equiv 1$, which can be proven using the geometric series formula.
+\end{rem}
+
+\item In the figure below, $BC$ is the diameter of a semicircle centered at $O$, which intersects $AB$ and $AC$ at $D$ and $E$ respectively. Suppose that $AD = 9$, $DB = 4$, and $\angle ACD = \angle DOB$. Find the length of $AE$.
+
+\begin{center}
+\begin{asy}
+size(5cm);
+
+pair A = dir(70);
+pair C = dir(220);
+pair B = dir(320);
+pair D = foot(C, A, B);
+pair E = foot(B, C, A);
+pair O = midpoint(B--C);
+
+draw(A--B--C--cycle);
+draw(C--D--O);
+draw(arc(O, distance(O, B), 0, 180));
+
+dot("$A$", A, plain.N);
+dot("$C$", C, dir(C));
+dot("$B$", B, dir(B));
+dot("$D$", D, plain.NE);
+dot("$E$", E, plain.NW);
+dot("$O$", O, plain.SW);
+\end{asy}
+\end{center}
+
+\fourch
+{$\dfrac{117}{16}$}
+{$\dfrac{39}{5}$}
+{$2\sqrt{13}$}
+{$3\sqrt{13}$}
+
+\ansb{b}{$\dfrac{39}{5}$}
+
+\soln1 Our strategy is to use power of a point on $A$, and to do that, we want to find $AC$. The key observation is that, because $\angle DCB$ is an inscribed angle, its measure is half of $\angle DOB$, and thus, half of $\angle ACD$. This encourages us to draw the angle bisector of $\angle ACD$, so let $F$ be on segment $AD$ such that $CF$ bisects $\angle ACD$.
+
+\begin{center}
+\begin{asy}
+size(6cm);
+
+pair A = dir(70);
+pair B = dir(320);
+pair C = dir(220);
+pair D = foot(C, A, B);
+pair E = foot(B, C, A);
+pair O = midpoint(B--C);
+pair F = extension(C, bisectorpoint(A, C, D), A, D);
+
+draw(A--B--C--cycle);
+draw(F--C--D--O);
+draw(arc(O, distance(O, B), 0, 180));
+draw(anglemark(B, C, A));
+draw(rightanglemark(C, D, B, s=3));
+
+dot("$A$", A, plain.N);
+dot("$B$", B, dir(B));
+dot("$C$", C, dir(C));
+dot("$D$", D, plain.NE);
+dot("$E$", E, plain.NW);
+dot("$O$", O, plain.SW);
+dot("$F$", F, plain.NE);
+\end{asy}
+\end{center}
+
+Now if we let $\angle ACD = \angle DOB = 2\theta$ for some $\theta$, then $\angle DCB = \frac{1}{2}\angle DOB = \theta$, and $\angle ACF = \angle FCD = \frac{1}{2}\angle ACD = \theta$. Because $BC$ is a diameter of a semicircle, it follows $\angle CDB = \angle CDF = 90\dg$, and hence $\triangle FCD \cong \triangle BCD$ by ASA. Thus $DF = DB = 4$ and $AF = AD - DF = 5$.
+
+We now apply the angle bisector theorem on $\triangle ACD$ with angle bisector $CF$. This tells us that $\frac{AC}{CD} = \frac{AF}{FD} = \frac{5}{4}$. Hence, let $AC = 5x$, $CD = 4x$ for some $x$. Using the Pythagorean theorem on right $\triangle ADC$, we get $CD^2 + AD^2 = AC^2$, or $(4x)^2 + 9^2 = (5x)^2$. It follows that $x = 3$ and $AC = 15$. Finally, applying power of a point on $A$, we get that $AD \cdot AB = AE \cdot AC$, or $9 \cdot 13 = AE  \cdot 15$, and hence $AE = \frac{39}{15}$.
+
+\soln2 We pick up from Solution 1, after deducing $\angle ACD = 2\theta$, $\angle DCB = \theta$ and $\angle CDB = \angle CDA = 90\dg$. Then using right $\triangle ADC$ and $\triangle BDC$, we get that $CD = \frac{9}{\tan 2\theta} = \frac{4}{\tan \theta}$. From the tangent double angle formula,
+\begin{align*}
+\frac{9}{\frac{2\tan \theta}{1 - \tan^2\theta}}
+&= \frac{4}{\tan\theta} \\
+1 - \tan^2 \theta &= \frac{4 \cdot 2 \tan \theta}{9 \tan \theta},
+\end{align*}
+and hence $\tan \theta = \frac{1}{3}$. (We discard $\tan \theta = 0$ and $\tan \theta = -\frac{1}{3}$ because $\theta$ is acute.) Hence $CD = 12$, and from the Pythagorean theorem, $AC = 15$, and the rest proceeds as in Solution 1.
+
+\soln3 There's a solution that involves no geometric insight, although it is a lot of algebra. We pick up from Solution 1, after noticing $\angle CDB = \angle CDA = 90\dg$. Somehow we have to use the fact that $\angle ACD = \angle DOB$. But $\triangle ADC$ is right, so we can find $\sin \angle ACD$ using $AC$. Then we can use the cosine law on $\angle DOB$ to get $\cos \angle DOB$, and then try to use $\sin^2 \angle ACD + \cos^2 \angle DOB = 1$.
+
+Let $AC = x$. Let $AC = x$. From right $\triangle ADC$, $\sin \angle ACD = \frac{AD}{AC} = \frac{9}{x}$. Now let $OB = OC = OD = r$, the radius of the semicircle. If we use the cosine law on $\triangle DOB$, we can find
+\begin{align*}
+DB^2 &= DO^2 + OB^2 - 2 \cdot DO \cdot OB \cdot \cos \angle DOB \\
+\cos \angle DOB &= \frac{r^2 + r^2 - 4^2}{2 \cdot r \cdot r} \\
+\cos \angle DOB &= 1 - \frac{8}{r^2}.
+\end{align*}
+So $\sin^2 \angle ACD + \cos^2 \angle DOB = 1$ relates $r$ and $x$, but to solve for them, we need one more way to relate $r$ and $x$. Well, we can use the Pythagorean theorem on right $\triangle ADC$ and $\triangle BDC$. Note that $CD^2 = BC^2 - BD^2 = AC^2 - AD^2$, so $(2r)^2 - 4^2 = x^2 - 9^2$, giving us $r^2 = \frac{x^2 - 65}{4}$. Finally,
+\begin{align*}
+\sin^2 \angle ACD + \cos^2 \angle DOB &= 1 \\
+\left(\frac{9}{x}\right)^2
++ \left(1 - \frac{8}{r^2}\right)^2
+&= 1 \\
+\frac{81}{x^2}
++ \left(1 - \frac{32}{x^2 - 65}\right)^2 &= 1 \\
+\frac{81}{x^2} +
+1 - \frac{64}{x^2 - 65} + \frac{1024}{x^4 - 130x^2 + 4225}
+&= 1 \\
+\frac{17x^4 - 5346x^2 + 342225}{x^6 - 130x^4 + 4225x^2} &= 0 \\
+\left(17x^2 - 39^2\right)\left(x^2 - 15^2\right) &= 0.
+\end{align*}
+The positive possibilities are $x = \frac{39}{\sqrt{17}}$ and $x = 15$. Of these, the former can be ruled out as being too small, or because it doesn't lead to an answer in the choices. The latter gives us $AC = 15$, and the rest proceeds as in Solution 1.
+
+\begin{rem}
+In Solution 1, from the fact that $AC : AD = 5 : 4$, we could also deduce that $\triangle ACD$ is a $3$--$4$--$5$ triangle, and then get $AC = 15$.
+\end{rem}
+
+\end{enumerate}
+
+\noindent\textbf{PART II.} All answers are positive integers. Do not use commas if there are more than $3$ digits, e.g. type $1234$ instead of $1,234$. A positive fraction $a/b$ is in lowest terms if $a$ and $b$ are both positive integers whose greatest common factor is $1$. Each correct answer is worth five points.
+
+\begin{enumerate}[align=left,leftmargin=*,resume]
+
+\item Consider all real numbers $c$ such that $\abs{x-8} + \abs{4-x^2} = c$ has exactly three real solutions. The sum of all such $c$ can be expressed as a fraction $a/b$ in lowest terms. What is $a + b$?
+
+\ans{$93$}
+
+\sol It helps to think about the graph of $\abs{x-8} + \abs{4-x^2} = y$ to get a sense of what the $y$ would be. When does it increase and decrease? To analyze it, we can split it up based on the value of $x$. We'll split on $x = -2, 2, 8$, because these are where the absolute values would change.
+
+\begin{itemthin}
+\item When $x \le -2$, it's $\left(8 - x\right) + \left(x^2 - 4\right) = y$, or $y = x^2 - x + 4$. This is a parabola, pointing up, whose vertex is at $x = \frac{1}{2}$, so it just decreases in this interval.
+
+\item When $-2 \le x \le 2$, it's $\left(8 - x\right) + \left(4 - x^2\right) = y$, or $y = -x^2 - x + 12$. This is a parabola, pointing down, whose vertex is at $x = -\frac{1}{2}$. In this interval, it increases, then decreases.
+
+\item When $2 \le x \le 8$, it's $\left(8 - x\right) + \left(x^2 - 4\right) = y$, or $y = x^2 - x + 4$. This is the parabola we saw earlier, which means that it just increases in this interval.
+
+\item Finally, when $x \ge 8$, it's $\left(x - 8\right) + \left(x^2 - 4\right) = y$, or $y = x^2 + x - 12$. Again, this is a parabola pointing up with vertex at $-\frac{1}{2}$, so it continues increasing in this interval.
+\end{itemthin}
+
+The graph changes direction thrice, at $x = -2, -\frac{1}{2}$, and $2$. We can compute the $y$ values at these points as $10, \frac{49}{4}, 6$. Using this information, we can sketch what the graph would look like, and determine that the $y$ that produce three solutions are $10$ and $\frac{49}{4}$. Their sum is $\frac{89}{4}$, so the answer is $89 + 4 = 93$.
+
+\item Find the smallest positive integer $n$ for which there are exactly $2323$ positive integers less than or equal to $n$ that are divisible by $2$ or $23$, but not both.
+
+\ans{$4644$}
+
+\sol The number of integers at most $n$ that are divisible by $2$ is $\floor{\frac{n}{2}}$, and similarly, the number divisible by $23$ is $\floor{\frac{n}{23}}$. But this double-counts the numbers divisible by both. To not count those numbers, we can subtract $2\floor{\frac{n}{46}}$. So we're looking for the smallest $n$ such that \[
+  \floor{\frac{n}{2}} + \floor{\frac{n}{23}} - 2\floor{\frac{n}{46}} = 2323.
+\]
+Let's over-estimate $n$ and then go down bit-by-bit until we find the right one. $\floor{x}$ is always at most $x$, so we want $\frac{n}{2} + \frac{n}{23} - \frac{2n}{46} \le 2323$, which solves to $n \le 4646$. Plugging into the original equation, we see that $4646$ works, but is it the smallest? We can check that $4645$ and $4644$ both work, but $4643$ gives $2322$, which is too small. So the answer must be $4644$.
+
+\item Let $P(x)$ be a polynomial with integer coefficients such that $P(-4) = 5$ and $P(5) = -4$. What is the maximum possible remainder when $P(0)$ is divided by $60$?
+
+\ans{$41$}
+
+\soln1 By the remainder theorem, we know that $P(x) = (x + 4)Q(x) + 5$, where $Q(x)$ is some other polynomial with integer coefficients. (To see this, consider substituting $x = -4$.) We want $P(5) = -4$, so substituting $x = 5$ gives 
+\begin{align*}
+P(5) &= (5 + 4)Q(5) + 5 \\
+Q(5) &= -1 \\
+Q(x) &= (x - 5)R(x) - 1,
+\end{align*}
+where we again use the remainder theorem. Plugging it back into the first equation and substituting $x = 0$,
+\begin{align*}
+P(x) &= (x + 4)Q(x) + 5 \\
+P(x) &= (x + 4)\left( (x - 5)R(x) - 1 \right) + 5 \\
+P(0) &= 4\left(-5R(0)-1\right) + 5 \\
+P(0) &= -20R(0)+1.
+\end{align*}
+Now $R(0)$ is some constant. Modulo $60$, the value of $-20R(0) + 1$ is either $1$, $-20 + 1$, or $-40 + 1$. These are $1$, $41$, and $21$ modulo $60$, so the largest possible remainder is $41$.
+
+\soln2 We use the fact that $a - b \mid P(a) - P(b)$ to get $4 \mid P(0) - P(-4)$ and $-5 \mid P(0) - P(5)$. This means $P(0) \equiv P(-4) \equiv 1 \pmod 4$ and $P(0) \equiv P(5) \equiv 1 \pmod 5$. This means $P(0) \equiv 1 \pmod{20}$, and the possible values of $P(0) \bmod{60}$ would be $1$, $21$, $41$, the largest of which is $41$.
+
+\item Let $\triangle ABC$ be an equilateral triangle with side length $16$. Points $D$, $E$, $F$ are on $CA$, $AB$, and $BC$, respectively, such that $DE \perp AE$, $DF \perp CF$, and $BD = 14$. The perimeter of $\triangle BEF$ can be written in the form $a + b \sqrt{2} + c\sqrt{3} + d\sqrt{6}$, where $a$, $b$, $c$, and $d$ are integers. Find $a + b + c + d$.
+
+\ans{$31$}
+
+\soln1 Let $AE = x$ and $CF = y$. Then note that $\triangle DAE$ and $\triangle DCF$ are $30$--$60$--$90$ triangles, so $AD = 2x$, $DE = x\sqrt{3}$, $DC = 2y$, and $DF = y\sqrt{3}$.
+
+\begin{center}
+\begin{asy}
+size(5cm);
+
+pair A = dir(90.0);
+pair B = dir(210.0);
+pair C = dir(330.0);
+pair D = 3*A/5+2*C/5;
+pair E = foot(D, A, B);
+pair F = foot(D, B, C);
+
+draw(A--B--C--cycle);
+draw(E--D--F);
+draw(B--D);
+draw(E--F);
+draw(rightanglemark(C, F, D, s=3));
+draw(rightanglemark(D, E, A, s=3));
+
+dot("$A$", A, dir(A));
+dot("$B$", B, dir(B));
+dot("$C$", C, dir(C));
+dot("$D$", D, dir(D));
+dot("$E$", E, plain.NW);
+dot("$F$", F, plain.S);
+\end{asy}
+\end{center}
+
+From $AD + DC = AC$ we get $2x + 2y = 16$, or $x + y = 8$. We also have $BE = 16 - x$ and $BF = 16 - y$. So $BE + BF = 32 - (x - y) = 24$, and the only thing we need to find is $EF$. Applying Stewart's theorem on cevian $BD$, we get
+\begin{align*}
+AC \cdot AD \cdot DC + BD^2 \cdot AC
+&= BC^2 \cdot AD + AB^2 \cdot DC \\
+16 \cdot 2x \cdot 2y + 14^2 \cdot 16
+&= 16^2 \cdot 2x + 16^2 \cdot 2y \\
+4xy + 196 &= 32(x + y) \\
+xy &= 15.
+\end{align*}
+Because $\angle BED = \angle BFD = 90\dg$, it follows $\angle BED + \angle BFD = 180\dg$ and $BEDF$ is cyclic. We can now apply Ptolemy's theorem to find $EF$:
+\begin{align*}
+BD \cdot EF &= BF \cdot DE + BE \cdot DF \\
+14 \cdot EF &= (16 - y)\left(x \sqrt{3}\right) + (16 - x)\left(y \sqrt{3}\right) \\
+14 \cdot EF &= 16\sqrt{3}(x + y) - 2xy\sqrt{3} \\
+EF &= 7\sqrt{3}.
+\end{align*}
+Hence the perimeter is $BE + BF + EF = 24 + 7\sqrt{3}$ and the answer is $24 + 0 + 7 + 0 = 31$.
+
+\soln2 We proceed from the first paragraph of Solution 1. Using the Pythagorean theorem on right $\triangle AED$, we get that $ED^2 + EB^2 = BD^2$, or
+\begin{align*}
+\left(x\sqrt{3}\right)^2 + \left(16 - x\right)^2 &= 14^2 \\
+3x^2 + x^2 - 32x + 256 &= 196.
+\end{align*}
+This is $(x - 5)(x - 3) = 0.$ Hence $x = 3, 5$, and as $x + y = 8$, we get $(x, y) = (3, 5)$ or $(5, 3)$. These are symmetric about swapping $A$ and $C$, so we know that both choices will give the same perimeter. From here, we can proceed using Ptolemy's, as in Solution 1, to find $EF$.
+
+\soln3 Alternatively, we could also use the cosine law on, say, $\triangle DEF$. From quadrilateral $BEDF$ we get $\angle EDF = 120\dg$, hence
+\begin{align*}
+DE^2 + DF^2 - 2 \cdot DE \cdot DF \cdot \cos \angle EDF &= EF^2 \\
+\left(x \sqrt{3}\right)^2 + \left(y \sqrt{3}\right)^2 - 2\left(x\sqrt{3}\right)\left(y\sqrt{3}\right)\cos 120\dg &= EF^2 \\
+3x^2 + 3y^2 - 6xy\left(-\frac{1}{2}\right) &= EF^2 \\
+3\left( (x + y)^2 - xy \right) &= EF^2.
+\end{align*}
+If we knew $x + y$ and $xy$ from Solution 1, or if we knew the values of $x$ and $y$ from Solution 2, we can now find $EF$. It's also possible to use the cosine law on $\triangle BEF$ itself.
+
+\soln4 Let $G$ be the foot of the perpendicular from $B$ to $AC$. Then $BG = 8\sqrt{3}$, because it's the height of an isosceles triangle with side length $16$. Using the Pythagorean theorem on right $\triangle BGD$, we get $DG^2 = BD^2 - BG^2 = 196 - 192 = 4$, so $DG = 2$. From here we can get $AD = 6$ and $DC = 10$, and we can proceed as in Solution 1.
+
+\item How many subsets of the set $\cbr{1, 2, 3, \ldots, 9}$ do not contain consecutive odd integers?
+
+\ans{$208$}
+
+\sol Such a set can contain any subset of $\{2, 4, 6, 8\}$, and then a subset of $\{1, 3, 5, 7, 9\}$ with no two consecutive odd integers. There are $2^4$ ways to pick a subset of the even numbers. Then we want to pick a subset of $5$ things, no two of which are consecutive. It's well-known that this is $F_7$, the seventh Fibonacci number, which is $13$. So the answer is $2^4 \cdot 13 = 208$.
+
+Why is $F_{n+2}$ the number of ways to choose a subset of $\{1, 2, \ldots, n\}$ containing no consecutive integers? Say there are $a_n$ such subsets. We count based on whether they contain $n$ or not:
+\begin{itemthin}
+\item If it doesn't contain $n$, then it can be a subset of $\{1, 2, \ldots, n-1\}$ with no consecutive integers. So there are $a_{n-1}$ subsets that don't contain $n$.
+\item If it does contain $n$, then it can't contain $n-1$. So it's a subset of $\{1, 2, \ldots, n-2\}$, with no consecutive integers, with $n$ added in. There are $a_{n-2}$ of these, so there are $a_{n-2}$ subsets that do contain $n$.
+\end{itemthin}
+This means $a_n = a_{n-1} + a_{n-2}$. Now, $a_0 = 1$, because there's only one way, the empty set. And $a_1 = 2$, because it's either the whole set or the empty set. This means $a_0 = F_2$ and $a_1 = F_3$, and from the recursion, we can prove $a_n = F_{n+2}$.
+
+\begin{rem}
+A common interpretation of the Fibonacci numbers is the number of ways to tile a $2 \times n$ rectangle with $2 \times 1$ dominoes. It's possible to construct a bijection from this to the number of subsets of $\{1, 2, \ldots, n-1\}$ with no consecutive integers. See \href{http://oeis.org/A000045}{A000045} for more interpretations.
+\end{rem}
+
+\begin{rem}
+It's also possible to construct the recursion directly. Let $a_n$ be the number of subsets of $\{1, 2, \ldots, n\}$ with no consecutive odd integers. Then we can show, with the same technique, that $a_n = 2a_{n-2} + 4a_{n-4}$.
+\end{rem}
+
+\item For a positive integer $n$, define $s(n)$ as the smallest positive integer $t$ such that $n$ is a factor of $t!$. Compute the number of positive integers $n$ for which $s(n) = 13$.
+
+\ans{$792$}
+
+\sol An important fact about the factorials is that $t! = t \cdot (t-1)!$. So any factor of $(t-1)!$ is also a factor of $t!$. By induction, if $s < t$, then any factor of $s!$ is also a factor of $t!$. This means that if $s(n) = 13$, then $n$ is a factor of $13!$, and it isn't a factor of $12!$. If $\tau(n)$ is the number of factors of $n$, the answer must be $\tau(13!) - \tau(12!)$. We can compute that $12! = 2^{10} \cdot 3^5 \cdot 5^2 \cdot 7^1 \cdot 11^1$, and from a well-known formula, we get that $\tau(12!) = (1 + 10)(1 + 5)(1 + 2)(1 + 1)(1 + 1) = 792$. Similarly $\tau(13!) = 1584$, so the answer is $1584 - 792 = 792$.
+
+\begin{rem}
+From \href{https://en.wikipedia.org/wiki/Divisor_function#Properties}{multiplicativity}, $\tau(13!) - \tau(12!) = \tau(13)\tau(12!) - \tau(12!) = \tau(12!)$. So we don't need to find the factors of $13!$, although it's not hard to do so if we already have the factors of $12!$.
+\end{rem}
+
+\item Alice and Bob are playing a game with dice. They each roll a die six times, and they take the sums of the outcomes of their own rolls. The player with the higher sum wins. If both players have the same sum, then nobody wins. Alice's first three rolls are $6$, $5$, and $6$, while Bob's first three rolls are $2$, $1$, and $3$. The probability that Bob wins can be written as a fraction $a/b$ in lowest terms. What is $a + b$?
+
+\ans{$3895$}
+
+\sol Let's say that Alice's next three rolls are $a, b, c$ and Bob's next three rolls are $d, e, f$. We count the number of possibilities for $a, b, c, d, e, f$ such that Bob wins. We want $6 + 5 + 6 + a + b + c < 2 + 1 + 3 + d + e + f$, or \[
+  a + b + c + (7 - d) + (7 - e) + (7 - f) < 10.
+\]
+Here, we write $7 - d$ so that it becomes a positive integer; because $d$ is between $1$ and $6$, $7 - d$ would also be between $1$ and $6$. We can check that $a, b, c$ are also forced to be between $1$ and $6$, otherwise the sum would be more than $10$.
+
+So we have six positive integers that sum to some integer less than $10$. We can count the number of possibilities with \href{https://en.wikipedia.org/wiki/Stars_and_bars_(combinatorics)#Theorem_one}{balls and urns}. When the sum is $n$, the number of solutions is $\binom{n-1}{5}$. Since the sum can be either $6$, $7$, $8$, or $9$, the total number of solutions is \[
+  \binom{6 - 1}{5} + \binom{7 - 1}{5} + \binom{8 - 1}{5} + \binom{9 - 1}{5} = \binom{9}{6} = 84,
+\]
+where we use the \href{https://en.wikipedia.org/wiki/Hockey-stick_identity}{hockeystick identity}. The number of possible rolls is $6^6$, so the probability is $\frac{84}{6^6} = \frac{7}{3888}$ and the answer is $7 + 3888 = 3895$.
+
+\item Let $ABC$ be an isosceles triangle with a right angle at $A$, and suppose that the diameter of its circumcircle $\Omega$ is $40$. Let $D$ and $E$ be points on the arc $BC$ not containing $A$ such that $D$ lies between $B$ and $E$, and $AD$ and $AE$ trisect $\angle BAC$. Let $I_1$ and $I_2$ be the incenters of $\triangle ABE$ and $\triangle ACD$ respectively. The length of $I_1I_2$ can be expressed in the form $a + b\sqrt{2} + c\sqrt{3} + d\sqrt{6}$, where $a$, $b$, $c$, and $d$ are integers. Find $a + b + c + d$.
+
+\ans{$20$}
+
+\soln1 We have an incenter and a circumcircle, so the key idea is to use the \href{https://web.evanchen.cc/handouts/Fact5/Fact5.pdf}{incenter--excenter lemma}. Because $AD$ and $AE$ trisect $\angle BAC$, it follows $AD$ is the angle bisector of $\angle BAE$. Hence, by the lemma, $DI_1 = DB = DE$. Similarly, $EI_2 = EC = DE$.
+
+\begin{center}
+\begin{asy}
+size(6cm);
+
+pair A = dir(90);
+pair B = dir(180);
+pair C = dir(0);
+pair D = dir(240);
+pair E = dir(300);
+pair I_1 = incenter(A, B, E);
+pair I_2 = incenter(A, C, D);
+pair J_1 = foot(I_1, D, E);
+pair J_2 = foot(I_2, D, E);
+
+draw(A--B--C--cycle);
+draw(circumcircle(A, B, C));
+draw(B--D--E--C);
+draw(J_2--I_2--I_1--J_1);
+draw(D--A--E);
+
+dot("$A$", A, dir(A));
+dot("$B$", B, dir(B));
+dot("$C$", C, dir(C));
+dot("$D$", D, dir(D));
+dot("$E$", E, dir(E));
+dot("$I_1$", I_1, plain.NW);
+dot("$I_2$", I_2, plain.NE);
+dot("$J_1$", J_1, plain.S);
+dot("$J_2$", J_2, plain.S);
+\end{asy}
+\end{center}
+
+Now we claim that $DI_1 = BD = DE = EC = EI_2 = 20$, half the radius of the circumcircle. One way to see this is to imagine rotating quadrilateral $BDEC$ $180\dg$ about the center of the circle, which produces a regular hexagon, which is well-known to have side length equal to the radius of the circle. Another way is to note that $\angle DAE$ is one-third of $\angle BAC$, so it's $30\dg$, and by the extended law of sines $DE = 2 \cdot 20 \cdot \sin 30\dg = 20$.
+
+Let $J_1$ and $J_2$ lie on $DE$ such that $I_1J_1$ and $I_2J_2$ are both perpendicular to $DE$. Finally, \[
+I_1I_2 = J_1J_2 = DE - DJ_1 - EJ_2,
+\]
+so using right triangles $DJ_1I_1$ and $EJ_2I_2$,
+\[
+  DE - DI_1 \cos 75\dg - EI_2 \cos 75\dg = 20 - 20\left(\frac{\sqrt6 - \sqrt2}{4}\right) - 20\left(\frac{\sqrt6 - \sqrt2}{4}\right)
+= 20 - 10\sqrt6 + 10\sqrt2,
+\]
+so the final answer is $20 + 10 + 0 - 10 = 20$.
+
+\soln2 We use Cartesian coordinates. Center $\Omega$ on the origin $O$ and choose $A = (0, 20)$, $B = (-20, 0)$, and $C = (20, 0)$. By symmetry, we know that $I_1I_2$ is parallel to $BC$ and is bisected by $OA$, so it's enough to just find the distance of, say, $I_2$ to $OA$, and then double it. But this is just the $x$-coordinate of $I_2$!
+
+To find the $x$-coordinate of $I_2$, we can use the formula for the incenter of a triangle in Cartesian coordinates: it's the weighted average of the triangle's vertices, where each vertex is weighted by the length of the opposite side. This means we need to coordinates of $D$. Because $\angle BAD = \frac{1}{3} \angle BAC = 30\dg$, we know $\angle BOD = 2\angle BAD = 60\dg$, and using some trigonometry we get $D = \left(-10, -10\sqrt3\right)$.
+
+Now we need the side lengths of $\triangle ACD$. Using the distance formula, we get $AC = 20\sqrt2$, $CD = 20\sqrt3$ and $DA = 10\sqrt2 + 10\sqrt6$. Then the $x$-coordinate of $I_2$ would be \[
+  \frac{0 \left(20\sqrt3\right) + 20\left(10\sqrt2 + 10\sqrt6\right) - 10 \left(20\sqrt2\right)}{20\sqrt3 + 10\sqrt2 + 10\sqrt6 + 20\sqrt2}
+  = \frac{200\sqrt2 + 200\sqrt6 - 200\sqrt2}{30\sqrt2 + 20\sqrt3 + 10\sqrt6} = \frac{20\sqrt6}{3\sqrt2 + 2\sqrt3 + \sqrt6}.
+\]
+We want to write this in the form $a + b\sqrt2 + c\sqrt3 + d\sqrt6$. The simplest way is to do this is equate it with $a + b\sqrt2 + c\sqrt3 + d\sqrt6$, and cross-multiply to get
+\[
+20\sqrt6 = \left(6b + 6c + 6d\right) + \left(3a + 3c + 6d\right)\sqrt2 + \left(2a + 2b + 6d\right)\sqrt3 + \left(a + 2b + 3c\right)\sqrt6.
+\]
+Solving the system of equations gives $(a, b, c, d) = (10, 5, 0, -5)$. Hence the $x$-coordinate of $I_2$ is $10 + 5\sqrt2 - 5\sqrt6$, which means the length of $I_1I_2$ is double that, $20 + 10\sqrt2 - 10\sqrt6$, and the answer is $20 + 10 + 0 - 10 = 20$.
+
+\begin{rem}
+In Solution 2, the fact that we could rewrite $\frac{20\sqrt6}{3\sqrt2 + 2\sqrt3 + \sqrt6}$ in the form $a + b\sqrt2 + c\sqrt3 + d\sqrt6$ is a fancy consequence of the fact that $\QQ\left(\sqrt2, \sqrt3\right)$ is a \href{https://en.wikipedia.org/wiki/Field_extension#Algebraic_extension}{field extension} of $\QQ$. This is why the $\sqrt6$ is necessary, for example, $\frac{4}{1 + \sqrt2 + \sqrt3} = 2 + \sqrt2 - \sqrt6$. Sorry, it's been a while since I've done number theory, and I need to cite little facts like these to prove to myself that I can still do it.
+\end{rem}
+
+\item Find the number of functions $f$ from the set $S = \cbr{0, 1, 2, \ldots, 2020}$ to itself such that, for all $a, b, c \in S$, all three of the following conditions are satisfied:
+
+\begin{enumthin}
+\item[(i)] If $f(a) = a$, then $a = 0$;
+\item[(ii)] If $f(a) = f(b)$, then $a = b$; and
+\item[(iii)] If $c \equiv a + b \pmod{2021}$, then $f(c) \equiv f(a) + f(b) \pmod{2021}$.
+\end{enumthin}
+
+\ans{$1845$}
+
+\sol The important condition is (iii). We can show through induction that, because $f(a) \equiv f(a - 1) + f(1) \mod{2021}$, then $f(a) \equiv af(1) \pmod{2021}$. If we determine the value of $f(1)$, we know what the entire function is. Now we consider the other two conditions and what restrictions they give for $f(1)$.
+
+Condition (i) means that for each $a \ne 0$, we want $af(1) \ne a$. Because $f(a) \equiv af(1) \pmod{2021}$, this means $af(1) \not\equiv a \pmod{2021}$, or $a\left(f(1) - 1\right) \not \equiv 0 \pmod{2021}$. Now, note that this has to be true for \textit{every} $a \ne 0$, so we can choose the $a$ we want. Picking $a = 43$, we get that $43\left(f(1) - 1\right) \not\equiv 0 \pmod{2021}$. Now we can divide by $43$ to get $f(1) - 1 \not\equiv 0 \pmod{47}$. This means $f(1) \not\equiv 1 \pmod{47}$. Similarly, by picking $a = 47$, we can prove that $f(1) \not\equiv 1 \pmod{43}$.
+
+Let's look at condition (ii) with $b = 0$. Note that $f(0) = 0f(1) = 0$, regardless of the choice of $f(1)$. This means that, for each $a \ne 0$, we want $f(a) \ne 0$, or $af(1) \not\equiv 0 \pmod{2021}$. Again, we choose $a = 43$ to show $f(1) \not\equiv 0 \pmod{47}$, and $a = 47$ to show $f(1) \not\equiv 0 \pmod{43}$.
+
+So, we have that $f(1) \not\equiv 0, 1 \pmod{43}$ and $f(1) \not\equiv 0, 1 \pmod{47}$. The values of $f(1)$ mod $43$ and $47$ completely determine it mod $2021$. Since $f(1) \equiv 2, \ldots, 42 \pmod{43}$, it has $41$ possibilities mod $43$, and similarly $45$ possibilities mod $47$, it has $41 \cdot 45 = 1845$ possibilities mod $2021$.
+
+\begin{rem}
+To give a full proof, we have to show that if $f(1) \not\equiv 0, 1 \pmod{43, 47}$, then the function satisfies all three conditions. This isn't necessary for the contest and follows a similar idea to the solution above, but it does need to be shown when the proof is required.
+\end{rem}
+
+\item A sequence $\cbr{a_n}$ of positive real numbers is defined by $a_1 = 1$ and for all integers $n \ge 1$, \[
+  a_{n+1} = \frac{a_n\sqrt{n^2 + n}}{\sqrt{n^2 + n + 2a_n^2}}.
+\]
+Compute the sum of all positive integers $n < 1000$ for which $a_n$ is a rational number.
+
+\ans{$131$}
+
+\sol The first few terms are $
+  1, \frac{\sqrt{2}}{2}, \frac{\sqrt{21}}{7}, \frac{\sqrt{10}}{5}, \frac{\sqrt{65}}{13}, \ldots
+$.
+There's a lot of square roots here, so let's try squaring all the terms. This gives us the numbers $1, \frac{1}{2}, \frac{3}{7}, \frac{2}{5}, \frac{5}{13}, \ldots$. Now it looks like the numerators are $1, 2, 3, \ldots$. In fact, we can rewrite the squares of the terms as $\frac{1}{1}, \frac{2}{4}, \frac{3}{7}, \frac{4}{10}, \frac{5}{13}, \ldots,$ so we can guess that $a_n = \sqrt{\frac{n}{3n-2}}$. In fact, we can prove this with induction. The base case is clear, and for the inductive step, \[
+\frac{a_n\sqrt{n^2 + n}}{\sqrt{n^2 + n + 2a_n^2}}
+= \sqrt{\frac{n}{3n-2}} \cdot \frac{\sqrt{n^2 + n}}{\sqrt{n^2 + n + 2 \cdot \frac{n}{3n-2}}}
+= \frac{\sqrt{n^2 (n + 1)}}{\sqrt{n^2(3n + 1)}} = \sqrt{\frac{n + 1}{3\left(n + 1\right) - 2}},
+\]
+as desired. Now we need to find all positive integers $n < 1000$ for which $\sqrt{\frac{n}{3n-2}}$ is a rational number. For this to happen, the fraction $\frac{n}{3n-2}$, when put in simplest terms, must have a perfect square in the numerator and a perfect square in the denominator. To put it in simplest forms, we divide $n$ and $3n-2$ by their GCD. By a property of GCD, we get that $(n, 3n - 2) = (n, 3n - 2 - 3n) = (n, -2)$, so the GCD is either $2$ or $1$.
+
+If the GCD is $2$, that means $n = 2n'$ for some $n'$, and $\frac{n}{3n - 2} = \frac{2n'}{6n' - 2} = \frac{n'}{3n' - 1}$, which is now in simplest terms. Now the numerator must be a perfect square, so let's say $n' = x^2$ for some integer $x$. That means $3n' - 1$, which is $3x^2 - 1$, must also be a perfect square. But modulo $3$, this is $-1$, and $-1$ is not a perfect square modulo $3$. So $3n' - 1$ can't be a perfect square, and there are no solutions in this case.
+
+The remaining case is when the GCD is $1$. Then both $n$ and $3n - 2$ are perfect squares. Letting $n = x^2$ for some integer $x$, we get that $3x^2 - 2$ is also a perfect square. At this point we can just try some values of $x$ until we get one that works: $x = 1$ works, so does $x = 3$, and $x = 11$. Since $n = x^2$, we only have to check up to $31$, because $32^2 > 1000$. We find that the only ones that work are $1, 3, 11$, which means $n = 1, 9, 121$ are the solutions, and they have sum $131$.
+
+\begin{rem}
+The equation $3x^2 - 2 = y^2$ is a \href{https://en.wikipedia.org/wiki/Pell%27s_equation#Generalized_Pell's_equation}{generalized Pell equation}; it can be written in the more familiar form $x^2 - 3y^2 = -2$. The morally correct method is to use the solution $(x, y) = (1, 1)$, and then generate solutions through multiplying by the solutions of the regular Pell equation $u^2 - 3v^2 = 1$. For example, the Pell equation has solution $(u, v) = (2, 1)$, and note that \[
+  \left(x + y\sqrt{3}\right)\left(u + v\sqrt{3}\right)
+  = (1 + \sqrt{3})(2 + \sqrt{3})
+  = 5 + 3\sqrt{3},
+\]
+and indeed, $(x, y) = (5, 3)$ is a solution to $x^2 - 3y^2 = -2$. We can get the solutions of the regular Pell equation $u^2 - 3v^2 = 1$ through computing \href{https://en.wikipedia.org/wiki/Pell%27s_equation#Additional_solutions_from_the_fundamental_solution}{the powers of the fundamental solution} $(u, v) = (2, 1)$. For example, $(2 + \sqrt{3})^3 = 26 + 15\sqrt{3}$, and $(u, v) = (26, 15)$ is a solution to $u^2 - 3v^2 = 1$. 
+\end{rem}
+
+\end{enumerate}
+
+\emph{With thanks to Nathanael Joshua Balete for comments.}
+
+\end{document}
