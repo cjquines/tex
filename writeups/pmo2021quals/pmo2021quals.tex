@@ -49,13 +49,15 @@ Another way to get the same formula. A diagonal is formed by joining each of the
 
 \ansb{d}{$7$}
 
-\sol For a quadratic to be always nonnegative, its discriminant has to be nonpositive:
+\soln1 For a quadratic to be always nonnegative, its discriminant has to be nonpositive:
 \begin{align*}
 (-12)^2 - 4(4)(-5 + 2a) &\le 0 \\
 144 - (-80 + 32a) &\le 0 \\
 224 &\le 32a.
 \end{align*}
 Hence $a \ge 7$, and the minimum value for $a$ is $7$.
+
+\soln2 Note that $2a - 5$ only affects the constant term of $f$, so we are considering translating the graph of $4x^2 - 12x$ upward or downward. It opens upward, and to make it tangent to the $x$-axis, it needs to be $4x^2 - 12x + 9 = (2x - 3)^2$. Hence we want $2a - 5 \ge 9$, or $a \ge 7$.
 
 \item In how many ways can the letters of the word $PANACEA$ be arranged so that the three $A$s are not all together?
 
@@ -69,7 +71,7 @@ Hence $a \ge 7$, and the minimum value for $a$ is $7$.
 
 \sol We do complementary counting: count the total number of arrangements, and then subtract the ones where the $A$s are all together. The total number of arrangements is $\frac{7!}{3!}$. There are $7$ letters, but we overcounted by a factor of $3!$, because the $A$s can be arranged in $3!$ ways without changing the arrangement.
 
-The number of arrangements where the $A$s are all together is $5!$. You can imagine treating all the $A$s as a single, big letter $AAA$, and then there would be $5$ letters to arrange. So the final answer is \[
+The number of arrangements where the $A$s are all together is $5!$. You can imagine combining the $A$s as a single, big letter $AAA$. Then there would be $5$ letters to arrange. The final answer is \[
   \frac{7!}{3!} - 5! = \frac{7 \cdot 6 \cdot 5!}{3!} - 5! = 5!\left(\frac{7 \cdot 6}{3!} - 1\right) = 720.
 \]
 
@@ -91,7 +93,7 @@ The number of arrangements where the $A$s are all together is $5!$. You can imag
 \end{align*}
 giving us the solution $(79, 21)$. If we keep doing this, we get the solutions $(58, 41)$, $(37, 61)$, and $(16, 81)$. This gives $5$ solutions.
 
-To prove there are no other solutions, let's say that $(x, y)$ was another solution. Then we can subtract the equation $20x + 21y = 2021$ from $20(100) + 21(1) = 2021$ to get $20(100 - x) + 21(1 - y) = 0$. Now, note that $21$ is a factor of $0$, and it is also a factor of $21(1 - y)$. This means $21$ must be a factor of $20(100 - x)$, and since it doesn't share factors with $20$, it has to be a factor of $100 - x$. This limits the possible values of $x$, and similarly $y$; from here it's possible to show that there are only $5$ solutions.
+To prove there are no other solutions, let's say that $(x, y)$ was another solution. We can subtract the equation $20x + 21y = 2021$ from $20(100) + 21(1) = 2021$ to get $20(100 - x) + 21(1 - y) = 0$. Note that $21$ is a factor of $0$, and it is also a factor of $21(1 - y)$. This means $21$ must be a factor of $20(100 - x)$. Since it doesn't share factors with $20$, it has to be a factor of $100 - x$. This limits the possible $x$, and similarly $y$; from here we can show that there are only $5$ solutions.
 
 \begin{rem}
 There is a general theory for solving \href{https://en.wikipedia.org/wiki/Diophantine_equation#One_equation}{linear Diophantine equations}. Here's another way to visualize this. Consider the graph of $20x + 21y = 2021$ in the plane. It's a line, and $(100, 1)$ is one of the points on it. The slope of the line is $-\frac{20}{21}$. Interpreting this as rise over run, it means that if we go up $20$ units in the $y$-coordinate, we go back $21$ units in the $x$-coordinate. So another point on the line would be $(100 - 21, 1 + 20) = (79, 21)$, and if we think about drawing the line on graph paper, it wouldn't cross any other points with integer coordinates.
@@ -157,7 +159,7 @@ Now, $2m + 1$ is an odd factor of $60$. The odd factors of $60$ are $1, 3, 5, 15
 At this point, we can see that $k$ is odd, but it's now small enough to just check the remaining choices. The choices $k = 1$, $3$, and $5$ work, which means there are $3$ solutions.
 
 \begin{rem}
-Compare \href{https://cjquines.com/files/pmo2018areas.pdf}{PMO 2018 Areas I.7} ``Determine the area of the polygon formed by the ordered pairs $(x, y)$ where $x$ and $y$ are positive integers that satisfy the equation $\frac1x + \frac1y = \frac1{13}.$'' and \href{https://cjquines.com/files/pmo2020areas.pdf}{PMO 2020 Areas I.9} ``A wooden rectangular brick with dimensions $3$ units by $a$ units by $b$ units is painted blue on all six faces and then cut into $3ab$ unit cubes. Exactly $1/8$ of these unit cubes have all their faces unpainted. Given that $a$ and $b$ are positive integers, what is the volume of the brick?''
+Compare \href{https://cjquines.com/files/pmo2018areas.pdf}{PMO 2018 Areas I.7} ``Determine the area of the polygon formed by the ordered pairs $(x, y)$ where $x$ and $y$ are positive integers that satisfy the equation $\frac1x + \frac1y = \frac1{13}.$'' and \href{https://cjquines.com/files/pmo2020areas.pdf}{PMO 2020 Areas I.9} ``A brick with dimensions $3$ by $a$ by $b$ units is painted blue and then cut into $3ab$ unit cubes. Exactly $1/8$ of the cubes have all faces unpainted. Given $a$ and $b$ are positive integers, what is the volume of the brick?''
 \end{rem}
 
 \item Three real numbers $a_1, a_2, a_3$ form an arithmetic sequence. After $a_1$ is increased by $1$, the three numbers now form a geometric sequence. If $a_1$ is a positive integer, what is the smallest positive value of the common difference?
@@ -265,7 +267,7 @@ Cross-multiplying this last equation and factoring, we get
 15x^2 - xy - 2y^2 &= 0 \\
 (3x + y)(5x - 2y) &= 0.
 \end{align*}
-The case $3x + y = 0$ isn't possible, so $5x - 2y = 0$, which means $\frac{x}{y} = \frac{2}{5}$. Squaring this gives us the ratio of the areas, $4 : 25$.
+The case $3x + y = 0$ isn't possible, because then one of $x$ and $y$ would have to be negative. So $5x - 2y = 0$, which means $\frac{x}{y} = \frac{2}{5}$. Squaring this gives us the ratio of the areas, $4 : 25$.
 
 \soln2 If the smaller square has side length $x$ and the larger square have side length $y$,
 \[
@@ -318,7 +320,7 @@ Here, in the shoelace formula for $[DEFBC]$, we only write the terms that don't 
 so $a = \frac{2}{5}$, and the ratio of the areas is $4 : 25$.
 
 \begin{rem}
-Compare with \href{https://cjquines.com/files/pmo2020quals.pdf}{PMO 2020 Qualifying I.12} ``In parallelogram $ABCD$, $CD = 18$. Point $F$ lies inside $ABCD$ and $AB$ and $DF$ meet at $E$. If $AE = 12$ and the areas of $FEB$ and $FCD$ are $30$ and $162$, find the area of triangle $BFC$.'' and \href{https://cjquines.com/files/pmo2017quals.pdf}{PMO 2017 Qualifying III.1} ``A paper cut-out in the shape of an isosceles right triangle is folded such that one vertex meets the edge of the opposite side and that the edges are parallel. If the length of the triangle's leg is $2$, what is the area of the shaded region?''
+Compare with \href{https://cjquines.com/files/pmo2020quals.pdf}{PMO 2020 Qualifying I.12} ``In parallelogram $ABCD$, $CD = 18$. Point $F$ lies inside $ABCD$ and $AB$ and $DF$ meet at $E$. If $AE = 12$ and the areas of $FEB$ and $FCD$ are $30$ and $162$, find the area of triangle $BFC$.'' and \href{https://cjquines.com/files/pmo2017quals.pdf}{PMO 2017 Qualifying III.1} ``A paper cut-out in the shape of an isosceles right triangle is folded in such a way that one vertex meets the edge of the opposite side, and that the constructed edges $m_1$ and $m_2$ are parallel to each other. If the length of the triangle's leg is $2$ units, what is the area of the shaded region?''
 \end{rem}
 
 \item In how many ways can $2021$ be written as a sum of two or more consecutive integers?
@@ -423,13 +425,30 @@ Solution 2 uses the fact that $r$, being a geometric random variable, is \href{h
 
 \ansb{a}{$18$}
 
-\sol It helps to think about what the graph of $\floor{x}\cbr{x}$ looks like. Consider a given interval, say, $[2, 3)$. Here, $\floor{x}$ is always $2$, while $\cbr{x}$ goes $[0, 1)$. So the graph is a line from $0$ to $2$.
+\soln1 It helps to think about what the graph of $\floor{x}\cbr{x}$ looks like. Consider a given interval, say, $[2, 3)$. Here, $\floor{x}$ is always $2$, while $\cbr{x}$ goes $[0, 1)$. So the graph is a line from $0$ to $2$.
 
 In this interval, what does $2\sqrt{x}$ look like? It goes from $2\sqrt{2} \approx 2.82$ to $2\sqrt{3} \approx 3.46$. It's also increasing. So in the interval $[2, 3)$, the value of $2\sqrt{x}$ is always at least $2.82$. But the maximum value of $\floor{x}\cbr{x}$ is $2$. This means that there are no solutions in the interval $[2, 3)$.
 
 Let's look at a different example, like $[5, 6)$. Again, the $\floor{x}\cbr{x}$ part would go from $0$ to $5$. The $2\sqrt{x}$ part would go from $2\sqrt{5} \approx 4.47$ to $2\sqrt{6} = 4.90$. That means that their graphs would intersect at some point in the interval. Since both graphs are increasing, that means they also intersect at only one point.
 
 We can do similar reasoning for the rest of the intervals. Each of $[1, 2), \ldots, [4, 5)$ have no solutions, while each of $[5, 6), \ldots, [22, 23)$ have one solution, giving $18$ such real numbers.
+
+\soln2 Let $n = \floor{x}$ and $d = \cbr{x}$. Then
+\begin{align*}
+\floor{x}\cbr{x} &= 2\sqrt{x} \\
+nd &= 2\sqrt{n + d} \\
+n^2d^2 - 4n - 4d &= 0 \\
+d &= \frac{4 \pm \sqrt{16 - 4(n^2)(-4n)}}{2n^2} \\
+d &= \frac{2 + 2\sqrt{1 + n^3}}{n^2}.
+\end{align*}
+Here, we use the quadratic formula to solve for $d$, and take the positive solution because $d \ge 0$. The value of $n$ determines the value of $d$, and thus the value of $x = n + d$. Thus, we only need to count the number of $n$ that make $d < 1$:
+\begin{align*}
+\frac{2 + 2\sqrt{1 + n^3}}{n^2} &< 1 \\
+2\sqrt{1 + n^3} &< n^2 - 2 \\
+4 + 4n^3 &< n^4 - 4n^2 + 4 \\
+n^2\left(n^2 - 4n - 4\right) &> 0.
+\end{align*}
+This becomes $(n - 2)^2 > 8$, which is satisfied by each of $n = 5, 6, \ldots, 22$, giving $18$ solutions.
 
 \item Find the remainder when $\displaystyle \sum_{n=2}^{2021} n^n$ is divided by $5$.
 
@@ -476,7 +495,7 @@ An interesting observation is the columns of the previous table sum to either $4
 
 \begin{center}
 \begin{asy}
-size(5cm);
+size(4.5cm);
 
 pair A = dir(70);
 pair C = dir(220);
@@ -510,7 +529,7 @@ dot("$O$", O, plain.SW);
 
 \begin{center}
 \begin{asy}
-size(6cm);
+size(5cm);
 
 pair A = dir(70);
 pair B = dir(320);
@@ -573,7 +592,7 @@ So $\sin^2 \angle ACD + \cos^2 \angle DOB = 1$ relates $r$ and $x$, but to solve
 The positive possibilities are $x = \frac{39}{\sqrt{17}}$ and $x = 15$. Of these, the former can be ruled out as being too small, or because it doesn't lead to an answer in the choices. The latter gives us $AC = 15$, and the rest proceeds as in Solution 1.
 
 \begin{rem}
-In Solution 1, from the fact that $AC : AD = 5 : 4$, we could also deduce that $\triangle ACD$ is a $3$--$4$--$5$ triangle, and then get $AC = 15$.
+In Solution 1, from $AC : AD = 5 : 4$, we can deduce that $\triangle ACD$ is $3$--$4$--$5$, and then get $AC = 15$.
 \end{rem}
 
 \end{enumerate}
@@ -663,7 +682,7 @@ dot("$F$", F, plain.S);
 \end{asy}
 \end{center}
 
-From $AD + DC = AC$ we get $2x + 2y = 16$, or $x + y = 8$. We also have $BE = 16 - x$ and $BF = 16 - y$. So $BE + BF = 32 - (x - y) = 24$, and the only thing we need to find is $EF$. Applying Stewart's theorem on cevian $BD$, we get
+From $AD + DC = AC$ we get $2x + 2y = 16$, or $x + y = 8$. We also have $BE = 16 - x$ and $BF = 16 - y$. So $BE + BF = 32 - (x + y) = 24$, and the only thing we need to find is $EF$. Applying Stewart's theorem on cevian $BD$, we get
 \begin{align*}
 AC \cdot AD \cdot DC + BD^2 \cdot AC
 &= BC^2 \cdot AD + AB^2 \cdot DC \\
@@ -717,7 +736,7 @@ A common interpretation of the Fibonacci numbers is the number of ways to tile a
 \end{rem}
 
 \begin{rem}
-It's also possible to construct the recursion directly. Let $a_n$ be the number of subsets of $\{1, 2, \ldots, n\}$ with no consecutive odd integers. Then we can show, with the same technique, that $a_n = 2a_{n-2} + 4a_{n-4}$.
+It's also possible to construct the recursion directly. Let $a_n$ be the number of subsets of $\{1, 2, \ldots, n\}$ with no consecutive odd integers. Then we can show, by considering whether or not $1$ is part of the subset, that $a_n = 2a_{n-2} + 4a_{n-4}$.
 \end{rem}
 
 \item For a positive integer $n$, define $s(n)$ as the smallest positive integer $t$ such that $n$ is a factor of $t!$. Compute the number of positive integers $n$ for which $s(n) = 13$.
@@ -866,6 +885,6 @@ and indeed, $(x, y) = (5, 3)$ is a solution to $x^2 - 3y^2 = -2$. We can get the
 
 \end{enumerate}
 
-\emph{With thanks to Nathanael Joshua Balete for comments.}
+\emph{With thanks to Nathanael Joshua Balete and Richard Eden for comments.}
 
 \end{document}
