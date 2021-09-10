@@ -1,0 +1,1499 @@
+\documentclass[11pt,paper=letter]{scrartcl}
+\usepackage[wide]{cjquines}
+\usepackage{etoolbox,proof,tikz-cd}
+
+\renewcommand{\sf}{\mathsf}
+\renewcommand{\land}{\wedge}
+\renewcommand{\lor}{\vee}
+\renewcommand{\lnot}{\neg}
+\newcommand{\true}{\top}
+\newcommand{\false}{\bot}
+\newcommand{\vc}[1]{\vcenter{\hbox{#1}}}
+\newcommand{\simp}{\vspace{0.5em}\noindent\hangindent=2em\textsc{simplicio:} }
+\newcommand{\salv}{\vspace{0.5em}\noindent\hangindent=2em\textsc{salviati:} }
+\newcommand{\set}{\mathsf{Set}}
+\newcommand{\prop}{\mathsf{Prop}}
+\newcommand{\type}{\mathsf{Type}}
+\newcommand{\toto}{\rightsquigarrow}
+\newcommand{\sto}{\,\to\,}
+\newcommand{\smapsto}{\,\mapsto\,}
+
+\setcounter{section}{-1}
+
+\begin{document}
+
+\title{Type Theory by Example}
+\author{Carl Joshua Quines}
+\date{September 9, 2021}
+
+\maketitle
+
+\tableofcontents
+
+\clearpage
+
+\section{Intro}
+
+Here was my frustration on type theory. All the material I've seen either:
+\begin{itemize}
+\item covered the theory well, but was dense, research-level, and notation-heavy, with few examples I understood, or
+\item had plenty of good examples, but was specific to something like Coq or Lean, and gave only passing mention to the theory.
+\end{itemize}
+There was a hole here. I wanted a relatively accessible introduction to type theory, focusing on the \emph{theory} behind it, without going through details specific to proof assistants. Despite that, I wanted to learn more about the theory that was relevant to proof assistants. I wanted to understand the relationship between types and propositions, and all the different kinds of types that made up the calculus of inductive constructions. I wasn't concerned too much about metatheory, or logics that aren't used in formal verification anyway. This is my attempt to fill this hole.
+
+It's called \emph{Type Theory by Example} because I believe in the value of having a ``poster example'' to have when thinking about a concept. I tried to make the examples as clear as possible, even if it meant sacrificing the finer details. In fact, we'll focus on examples so much that we'll only very rarely state any actual rules.
+
+The intended pre-requisites:
+
+\begin{itemize}
+\item You're familiar with logical notation, enough that you know how to read $\forall x: \RR, \exists y: \RR, x + y = 0$ and have it make sense.
+
+\item You know some classical logic, enough that the statement ``if either $A$ or $B$, and $A$ implies not $B$, then $B$'' makes sense.
+
+\item You know enough set theory to know the definition of a function $f : A \to B$ as a subset of $A \times B$ satisfying certain properties.
+
+\item You have solid experience reading other people's proofs and writing your own.
+\end{itemize}
+
+Thanks to Nir Elber and Jason Chen for comments and suggestions. There are probably typos, small errors, medium errors, and absolutely huge errors. If you spot anything wrong, please correct me, because I'm literally just an undergrad and I don't know anything about anything I'm writing about. You can contact me at \mailto{cj@cjquines.com}. Feel free to reach me too if you find something unclear or if you have questions.
+
+\clearpage
+
+\section{Logic}
+
+\subsection{Inference rules}
+
+\textbf{Symbolic logic} is the study of how sets of symbols and rules about them build up the foundation of mathematics. These rules are built up in levels, depending on how much restriction you're putting over things you can quantify---that is, say ``for all'' ($\forall$) and ``there exists'' ($\exists$) on. In higher-order logic, you can quantify over anything. In first-order logic, you can quantify over single variables, so you can't quantify over sets or functions. And in zeroth-order logic, there are no quantifiers at all!
+
+If there aren't quantifiers in zeroth-order logic, what's left? There are propositions, like true ($\true$), false ($\false$), and variables for propositions ($A, B, C, \dots$). There are connectives between propositions, like ``and'' ($\land$), ``or'' ($\lor$), ``implies'' ($\to$), and ``not'' ($\lnot$). Propositions and connectives form other propositions (e.g. $A \to \lnot B$). That's it. This is why zeroth-order logic is called \textbf{propositional calculus}. There are many kinds of propositional calculi, depending on what rules you use.
+
+Propositional calculi are also built up in levels. On the top is classical logic, where we have all of our nice connectives, each proposition is either true or false, and the law of excluded middle holds. Removing the law of excluded middle gives us constructive logic. Removing most of the connectives, leaving only $\to$ and $\lnot$, gives us implicational calculus. And below even \emph{that}, where we \emph{only} keep $\to$, we get \textbf{positive implicational calculus}. We'll study this first.
+
+The rules in any symbolic logic are called \textbf{inference rules}. Given something that's true, and in a certain format, an inference rule tells us something else that's true. The essential one, in positive implicational calculus, is this one, \textbf{modus ponens}.
+\begin{align*}
+\infer
+{B}
+{A & A \to B}
+\end{align*}
+The way this rule should be read is as ``if $A$ is true, and $A \to B$ is true, then $B$ is true.'' The things above the bar are called hypotheses, and the thing below is the conclusion. Here $A$ and $B$ stand for any proposition. We can replace them with other propositions, like replacing $A$ with $A \to B$ and $B$ with $B \to C$.
+\begin{align*}
+\infer
+{B \to C}
+{A \to B & (A \to B) \to (B \to C)}
+\end{align*}
+We can stack these diagrams to produce longer proofs. These can get rather long, so we can also label the rule we use to the side. Here $\sf{MP}$ stands for modus ponens.
+\begin{align*}
+\infer[^\sf{MP}]
+{C}
+{B &
+\infer[^\sf{MP}]
+{B \to C}
+{A \to B & (A \to B) \to (B \to C)}}
+\end{align*}
+Positive implicational calculus also gives us two axioms, which are inference rules that don't have ``requirements''. We'll call these rules rule $\sf{K}$ and $\sf{S}$, for reasons that will become clearer later.
+\begin{align*}
+\infer[^\sf{K}]
+{A \to (B \to A)}
+{}
+\qquad
+\infer[^\sf{S}]
+{(A \to (B \to C)) \to \left((A \to B) \to (A \to C)\right)}
+{}
+\end{align*}
+Please convince yourself that $\sf{MP}, \sf{K}$, and $\sf{S}$ are true in classical logic as well. Now we can try to prove facts using just these rules. For example, consider the fact $A \to A$. We know, from classical logic, that this is true for any $A$. Can we prove it using just these three rules? Our first attempt might proceed by just trying to substitute $A$ for everything in $\sf{S}$. We want to use $\sf{MP}$, somehow, to get $A \to A$.
+\begin{align*}
+\infer[^\sf{S}]
+{(A \to (A \to A)) \to \left((A \to A) \to (A \to A)\right)}
+{}
+\end{align*}
+However, we can't immediately use this. We can make $A \to (A \to A)$ by substituting $A$ for everything in $\sf{K}$. Then we can use $\sf{MP}$. But we don't get anything useful:
+\begin{align*}
+\infer[^\sf{MP}]
+{(A \to A) \to (A \to A)}
+{
+  \infer[^\sf{K}]
+  {A \to (A \to A)}
+  {}
+  &
+  \infer[^{\sf{S}\text{ (from above)}}]
+  {(A \to (A \to A)) \to \left((A \to A) \to (A \to A)\right)}
+  {}
+}
+\end{align*}
+To get to the conclusion $A \to A$ with $\sf{MP}$, we somehow need to have produced $A \to A$ already! So instead, we use $\sf{S}$, substitute $A$ for $A$, but substitute $A \to A$ for $B$ instead. We can then use $\sf{K}$, by substituting $A \to A$ for $B$. This allows us to use $\sf{MP}$. To get the conclusion, we use $\sf{K}$ again. This gives us the following proof.
+\begin{align*}
+\infer[^\sf{MP}]
+{(A \to (A \to A)) \to (A \to A)}
+{
+  \infer[^\sf{K}]
+  {A \to ((A \to A) \to A)}
+  {}
+  &
+  \infer[^\sf{S}]
+  {(A \to ((A \to A) \to A)) \to ((A \to (A \to A)) \to (A \to A))}
+  {}
+}
+\end{align*}
+\begin{align*}
+\infer[^\sf{MP}]
+{A \to A}
+{
+  \infer[^\sf{K}]
+  {A \to (A \to A)}
+  {}
+  &
+  \infer[^\text{(from above)}]
+  {(A \to (A \to A)) \to (A \to A)}
+  {}
+}
+\end{align*}
+There are lots and lots of parentheses. To reduce parentheses, we adopt the convention that \textbf{$\mathbf{\to}$ is right-associative}. That is, \[
+  A \to B \to C \to D \text{ should be interpreted as } A \to (B \to (C \to D)).
+\]
+Note that this allows us to write $\sf{K}$ and $\sf{S}$ with less parentheses.
+\begin{align*}
+\infer[^\sf{K}]
+{A \to B \to A}
+{}
+\qquad
+\infer[^\sf{S}]
+{(A \to B \to C) \to (A \to B) \to A \to C}
+{}
+\end{align*}
+Why right-associative? The simple, perhaps unsatisfying answer, is that this means we write less parentheses than we do if we treated $\to$ as left-associative. We'll give a more satisfying explanation later on when we talk about currying.
+
+\subsection{The deduction theorem}
+
+These kinds of proofs get complicated. Can you use these three rules to prove the fact that $(A \to B) \to (B \to C) \to A \to C$? This intuitively feels like something that should be true: we take $A \to B$, and we take $B \to C$, and we should be able to ``chain'' them together to get $A \to C$. Translating this to a proof straight from the axioms is kind of hard, though.
+
+It'd be really nice if, somehow, we had a sort of ``metatheorem''. Not a theorem in the implicational calculus, but a theorem \emph{about} it, proven \emph{above} it. If $\Delta$ is a list of propositions, we'd really like to prove this \textbf{deduction theorem}:
+\begin{align*}
+\vc{\infer*
+{B}
+{\Delta & A}}
+\implies
+\vc{\infer*
+{A \to B}
+{\Delta}}.
+\end{align*}
+Here we're using $\vdots$ to represent multiple inferences. To prove this, we'll be a bit more specific about what we can do with inferences. One rule we've been using implicitly, without mentioning it, is substitution: if we know $A$, then we can change a part $x$ to any $y$. We'll call this rule $\sf{Sub.}$, and abbreviate it as $A[x \mapsto y]$. 
+
+Another, even more basic rule, is inferring something we already have, which we'll call $\sf{Ref.}$ for reflexivity. We'll consider these two as inference rules we can \emph{always} use, no matter what system we're using. With modus ponens, this gives us our three inference rules.
+\begin{align*}
+\infer[^\sf{Ref.}]
+{A}
+{\Delta & A}
+\qquad
+\infer[^\sf{Sub.}]
+{A[x \mapsto y]}
+{A}
+\qquad
+\infer[^\sf{MP}]
+{B}
+{A & A \to B}
+\end{align*}
+To prove the deduction theorem, we'll induct on the number of inferences we've made. The base case is no inferences. Now suppose that the deduction theorem is true for any sequence of $n$ inferences. Suppose that we started with $\Delta$ and $A$, and after $n+1$ inferences, end up with $B$. Then there are three cases for the last inference:
+\begin{itemize}
+\item We used $\sf{Ref.}$. If $B$ is $A$, we need to prove $A \to B = A \to A$, which we've already done. Else $B$ is in $\Delta$. Then
+\begin{align*}
+\infer[^\sf{MP}]
+{A \to B}
+{
+\infer[^\sf{Ref.}]
+{B}
+{\Delta}
+&
+\infer[^\sf{K}]
+{B \to (A \to B)}
+{}
+}.
+\end{align*}
+\item We used $\sf{Sub.}$. Then $B = B'[x \to y]$ for some $B'$, $x$, and $y$. We used at most $n$ inferences to get $B'$, so by induction, we can prove $A \to B'$. Then
+\begin{align*}
+\infer[^\sf{Sub.}]
+{(A \to B')[x \to y] = A \to B}
+{
+\vc{\infer*
+{B'}
+{\Delta & A}}
+\;\overset{\text{ind. hyp.}}{\implies}\;
+\vc{\infer*
+{A \to B'}
+{\Delta}}
+}
+\end{align*}
+\item We used $\sf{MP}$. Then there exists some $P$ such that the final step looks like
+\begin{align*}
+\infer[^\sf{MP}]
+{B}
+{
+\infer*
+{P}
+{\Delta & A}
+&
+\infer*
+{P \to B}
+{\Delta & A}
+}.
+\end{align*}
+By induction hypothesis,
+\begin{align*}
+\vc{\infer*
+{P}
+{\Delta & A}}
+\;\overset{\text{ind. hyp.}}{\implies}\;
+\vc{\infer*
+{A \to P}
+{\Delta}}
+\qquad\qquad
+\vc{\infer*
+{P \to B}
+{\Delta & A}}
+\;\overset{\text{ind. hyp.}}{\implies}\;
+\vc{\infer*
+{A \to P \to B}
+{\Delta}}.
+\end{align*}
+Finally,
+\begin{align*}
+\infer[^\sf{MP}]
+{A \to B}
+{
+\infer*[^\text{(above)}]{P \to B}{\Delta}
+&
+\infer[^\sf{MP}]{(P \to B) \to A \to B}{
+\infer*[^\text{(above)}]{A \to P \to B}{\Delta}
+&
+\infer[^\sf{S}]{(A \to P \to B) \to (P \to B) \to A \to B}{}
+}
+}.
+\end{align*}
+\end{itemize}
+With the deduction theorem, it is now much easier to prove the fact $(A \to B) \to (B \to C) \to A \to C$. The idea is that we want to write $A \to B$, $B \to C$, and $A$ as hypotheses, use $\sf{MP}$ to get $C$, then use the deduction theorem to bring down anything that's not a conclusion.
+\begin{align*}
+&\vc{\infer[^\sf{MP}]
+{C}
+{
+\infer[^\sf{MP}]{B}{A & A \to B}
+& B \to C
+}}\\
+\;\overset{\text{deduct.}}{\implies}\;&
+\vc{
+\infer*
+{A \to C}
+{A \to B & B \to C}
+}\\
+\;\overset{\text{deduct.}}{\implies}\;&
+\vc{
+\infer*
+{(B \to C) \to A \to C}
+{A \to B}
+}\\
+\;\overset{\text{deduct.}}{\implies}\;&
+\vc{
+\infer*
+{(A \to B) \to (B \to C) \to A \to C}
+{\phantom{A}}
+}
+\end{align*}
+The great thing about our proof of the deduction theorem is that, if we wanted to, we can actually \emph{construct} the inferences we used, by going backwards using the proof.
+
+As an exercise, please prove $\sf{K}$ and $\sf{S}$ using just $\sf{MP}$ and the deduction theorem. This means that ($\sf{MP}$, deduction theorem) can prove, and be proven with, ($\sf{MP}$, $\sf{K}$, $\sf{S}$). This means these two systems are equivalent to each other!
+
+\subsection{Constructive negation}
+
+With positive implicational calculus behind us, we now proceed upward. The reason it's called \emph{positive} is because there was no negation, or $\lnot A$. To get implicational calculus, we add the proposition $\false$, or false, to our system. Simply put, $\false$ is a proposition that can never be proved. If we have $\false$, we have a contradiction.
+
+We now \emph{define} $\lnot A$ to mean $A \to \false$. That way, we're still using $\to$ as our only connective, which is why it's called \emph{implicational} calculus.
+
+Here's an important philosophical point, even though it may sound simple. We know what it means for $A$ to be true: if we can prove $A$, it is true. But what does it mean for $A$ to be false? Take a moment to think about this before reading on.
+
+Consider a proposition $A$, like ``For all odd $n$, $n$ is prime.'' To show $A$ is false, one way would be to show a counterexample---that is, to bring out $9$ and say, look, this integer is odd. If $A$ was true, then $9$ would be prime. We also know that as $9 = 3 \cdot 3$ then it is not prime. So we've gotten a contradiction, and so we know the $A$ must be false. This means $A \to \false$, or $\lnot A$. In particular, $\lnot A$ means ``There exists some odd $n$ such that $n$ is not prime.''
+
+Now, consider a different proposition $A$, like ``For all irrational $a$ and $b$, $a^b$ is irrational.'' To show $A$ is false, we show a counterexample. Consider $\sqrt{2}^{\sqrt{2}}$. If $A$ was true, then it would be irrational. Now consider $\Big(\sqrt{2}^{\sqrt{2}}\Big)^{\sqrt{2}}$. It is $2$, so it is rational. Contradiction. So $A$ must be false, and therefore $\lnot A$.
+
+That's fine. But what is $\lnot A$? Is it ``There exists irrational $a$ and $b$ such that $a^b$ is rational''? That was not what we proved. If that was what we proved, then where is the $a$ and $b$? What we \emph{did} prove is ``it's not the case that for every irrational $a$ and $b$, then $a^b$ is irrational.'' That is what $\lnot A$ is, nothing more.
+
+% Here's another example. Let's define the real number $\hat{\pi}$. Suppose that, beginning at the $n$th digit after $\pi$'s decimal point, there are a million consecutive zeroes. Then $\hat{\pi}$ is the same as $\pi$, up until the $n$th digit. If $n$ is even, the $n$th digit of $\hat{\pi}$ is $1$, and otherwise, it's $0$. Then $\hat{\pi}$'s decimal expansion stops at the $n$th digit. If there are never a million consecutive zeroes, $\hat{\pi}$ is the same number as $\pi$.
+
+% Now, is it true that $\hat{\pi} - \pi$ is either positive, negative, or zero? Perhaps a proof of this would begin by saying that there are two cases: either there are a million consecutive zeroes or there aren't. But that's not \emph{quite} true---only one of these cases holds in the first place, and we don't know which one.
+
+We are getting at the heart of the distinction between \textbf{constructive logic} and classical logic. In classical logic, every proposition $A$ must be true or false, so $\lnot A$ is just the opposite. In classical logic, a proposition must be true or false, whether or not we can prove it. But in constructive logic:
+\begin{itemthin}
+\item To say $A$ is to prove $A$.
+\item To say $\lnot A$ is to prove that $A$ gives $\false$.
+\item To say $A$ is false is to prove that $A$ gives $\false$.
+\item To say $\lnot A$ is false is to prove that $\lnot A$ gives $\false$.
+\item To say $\lnot A$ is false is to prove that (proving that $A$ gives $\false$), gives $\false$.
+\item To say $\lnot A$ is false is to prove that there's no proof that $A$ gives $\false$.
+\item To say $\lnot \lnot A$ is true is to prove that there's no proof that $A$ gives $\false$.
+\end{itemthin}
+In constructive logic, $A$ and $\lnot\lnot A$ mean different things, and it's not always true that $A \to \lnot\lnot A$! This actually makes sense, given Gödel's incompleteness theorems, which say that there will always be some true statements we can't prove.
+
+This means that, in constructive logic, statements like the law of excluded middle ($A \lor \lnot A$) or double negation elimination ($\lnot \lnot A \to A$) aren't true for all $A$. On the other hand, even if double negation \emph{elimination} is false, double negation \emph{introduction} ($A \to \lnot\lnot A$) is true. Our constructive logic is positive implicational logic with $\lnot$, so we can still use the deduction theorem. To prove $A \to \lnot\lnot A$, we need to prove $A \to (A \to \false) \to \false$. But this follows from $\sf{MP}$, and deduction twice.
+\begin{align*}
+\vc{\infer[^\sf{MP}]
+{\false}
+{A & A \to \false}}
+\;\overset{\text{deduct.}}{\implies}\;
+\vc{\infer*
+{(A \to \false) \to \false}
+{A}}
+\;\overset{\text{deduct.}}{\implies}\;
+\vc{\infer*
+{A \to (A \to \false) \to \false}
+{}}
+\end{align*}
+Even more interesting: $\lnot\lnot A \to A$ isn't always true, but $\lnot\lnot\lnot A \to \lnot A$ is! We invite the reader to think about it a little. You start with
+\begin{align*}
+\vc{\infer
+{\phantom{\false}}
+{
+((A \to \false) \to \false) \to \false
+&
+\infer[^\sf{MP}]
+{\false}
+{A & A \to \false}
+}
+}
+\end{align*}
+then use deduction to bring $A \to \false$ down one step. When we use deduction again, everything that was deduced from $A$ gets removed with it, leaving
+\begin{align*}
+\vc{\infer[^\sf{MP}]
+{\false}
+{
+((A \to \false) \to \false) \to \false
+&
+\infer*
+{(A \to \false) \to \false}
+{A}
+}
+}
+\;\overset{\text{deduct.}}{\implies}\;
+\vc{\infer*
+{A \to \false}
+{
+((A \to \false) \to \false) \to \false
+}
+}
+\end{align*}
+from which another deduction finishes the proof.
+
+\subsection{The BHK interpretation}
+
+We just discussed what it means to prove that $\lnot A$. But what about other connectives? What does it mean to prove $A \lor B$, $A \land B$? In fact, let's go back even further: what does $A \to B$ \emph{mean}? We now hand it to Simplicio and Salviati.
+
+\simp We've talked a lot about how to write these symbols down and use rules to change them. But what do they actually \emph{mean}?
+
+\salv I'm not sure I understand what \emph{you} mean.
+
+\simp I mean, we've worked with the symbols only by following rules blindly. The rules $\sf{MP}$, $\sf{K}$, and $\sf{S}$ don't ``mean'' anything beyond shuffling symbols around. We keep saying that $\to$ means ``implies'', but what \emph{does} that word mean?
+
+\salv Ah, you're wondering about the difference between \emph{syntax} and \emph{semantics}. So far, yes, we've only discussed syntax. Now let's talk about semantics, or what it means for a formula to be true.\footnote{Usually, ``semantics'' in logic refers to \emph{formal semantics}. This section discusses a basis for proof-theoretic semantics. Okay, actually I'm not quite sure, but I think this is true?} Let's speak intuitively. If I asked you to prove $A \to B$, what would you do?
+
+\simp Well, first I'd assume that $A$ is true. Using that, I'd show that $B$ is true.
+
+\salv Yes. So $A \to B$ is a proof that, assuming $A$ is true, proves that $B$ is true. In particular, if you knew how to prove $A \to B$, and I gave you a proof of $A$, you would know how to prove $B$, right?
+
+\simp Yeah, I just chain the proofs together. I write the proof of $A$. Then I write the proof of $A \to B$, which ends up proving $B$.
+
+\salv Precisely! So $A \to B$ is a function.
+
+\simp A function?
+
+\salv Yes, a function. If your proof of $A \to B$ was a function $f$, and I gave you a proof $p$ of $A$, then $f(p)$ would be ``inserting'' the proof of $A$ into $f$. This results in a proof of $B$. Does that make sense?
+
+\simp Kinda? It's weird thinking about proofs as things we can feed into functions. Or proofs \emph{themselves} being functions.
+
+\salv Well, you've done some programming before, right? What \emph{is} a function, in a computer program? How does a function, say, reverse a list of words?
+
+\simp Well, it's a list of instructions. You write down a list of instructions that define the function. You tell the function to take the list of words, write down the last word, then write down the word before that, and so on.
+
+\salv Yes, exactly! Now think about a proof. A proof is just a list of words. A function \emph{can} operate on lists of words, and a function \emph{itself} is just a list of words.
+
+\simp Certainly a function that operates on proofs written on paper would be rather complicated. But sure, in theory, it's possible.
+
+\salv Let's move on. How would you prove $A \land B$?
+
+\simp I'd hand you a proof of $A$, and then hand you a proof of $B$.
+
+\salv Exactly. So $A \land B$ is an ordered pair of proofs $(p, q)$, where $p$ is a proof of $A$, and $q$ is a proof of $B$. What about $A \lor B$?
+
+\simp I'd tell you which of $A$ or $B$ I'm proving, then I prove it. So, is $A \lor B$ an ordered pair $(P, p)$, where $P$ is either $A$ or $B$, and $p$ is the proof of that?
+
+\salv Yes! Now consider $\lnot (A \land \lnot A)$. This expands to $(A \land (A \to \false)) \to \false$. How would you prove this, intuitively?
+
+\simp Well, the outermost thing is a $\to$. So I'll assume that $A \land (A \to \false)$ is true, and I'm trying to prove $\false$. But if I have $A \land (A \to \false)$, I know $A$, and I also know $A \to \false$. So I can conclude $\false$, done.
+
+\salv Now, how do we translate this in the perspective we've been using, with the functions and all? Let me start. The outermost thing is a $\to$. You want to give me a function that takes $A \land (A \to \false)$ and outputs $\false$.
+
+\simp Okay. Well, the input to this function is $(p, q)$, where $p$ is a proof of $A$, and $q$ is a proof of $A \to \false$, right? Then I can---and this is kind of the weird part---I can write $q(p)$, which gives me a proof of $\false$?
+
+\salv Yes. So the proof is just the function that takes an ordered pair $(p, q)$ and returns $q(p)$. Or $(p, q) \mapsto q(p)$.
+
+\simp Wait a second! This function doesn't refer to $A$ or $\false$ or any of those at all?
+
+\salv No, because we don't have to. \emph{Your} proof didn't refer to the ``meanings'' of $A$ or $A \to \false$ or $\false$. All your proof did was just take $A \land \lnot A$, split it, then use $\sf{MP}$. We wouldn't expect the function proof to be any different. Anyway, let's do one more example. How would you prove $A \to \lnot\lnot A$?
+
+\simp Well, this is $A \to ((A \to \false) \to \false)$. So first, we assume $A$ is true, we're trying to prove that $(A \to \false) \to \false$. Well, to prove \emph{that}, let's assume that $A \to \false$ is true too, right?
+
+\salv Yep! Now we're assuming both $A$ and $A \to \false$.
+
+\simp Alright. But since we're assuming both of those, we know that $\false$ is true, just like we wanted to prove. Done!
+
+\salv Okay, now let's speak of functions. You want to give me a function that takes $A$ and outputs $(A \to \false) \to \false$.
+
+\simp Let's say the input is $p$, where $p$ is a proof of $A$. Then I need to return\dots another function?
+
+\salv Yeah, another function. This function will take $A \to \false$ and output $\false$.
+
+\simp So let's say this function's input is $q$. Then I need to return $q(p)$, right? So this is the function $q \mapsto q(p)$.
+
+\salv So what's the whole function?
+
+\simp Is it $p \mapsto (q \mapsto q(p))$? It's kind of weird having this ``function that returns a function'' thing, but I can see why it works. First the function takes in a proof of $A$, then it takes in a proof of $A \to \false$, and then it outputs a proof of $\false$.
+
+\vspace{0.5em}
+
+This is the \textbf{Brouwer--Heyting--Kolmogorov interpretation}: interpreting $A \to B$ as a function, $A \land B$ as an ordered pair, and $A \lor B$ as another ordered pair. We'll say ``BHK interpretation'' from now on, or even simply ``BHK''.
+
+Simplicio gave us a proof of $A \to \lnot\lnot A$. Compare it with the proof given to us by the deduction theorem. Now what about $\lnot\lnot A \to A$? Its proof would be a function that takes $(A \to \false) \to \false$ and returns $A$. But there isn't a function that does this. This corresponds to the fact that, in constructive logic, $\lnot\lnot A \to A$ isn't always true.
+
+\subsection{Lambda calculus}
+
+Before we finally begin our dive into types, we need to talk about the nature of functions. Already in our previous discussion we had to talk about functions that \emph{return functions}, which is a weird concept to wrap your head around at first. So let's talk about the \textbf{lambda calculus}, which might help.
+
+You might be used to writing functions as $f(x) = x^2$, which is read as ``the function that takes $x$, and returns $x^2$''. In lambda calculus, we'll often not give functions names, and instead write $x \mapsto x^2$. That arrow, $\mapsto$, is read as ``maps to'' or ``goes to''. And just like we write $f(3) = 9$ to apply the function to $3$, we write $(x \mapsto x^2)(3) = 9$. If we \emph{really} wanted to name our functions, we can write $f = x \mapsto x^2$.
+
+Function creation is called \textbf{abstraction}. The reason it's called that is that a function ``abstracts'' a computation. Consider $3^2$, $(-1)^2$, and $\pi^2$. These are all squaring some number. We can abstract the number into a function, like $x \mapsto x^2$.
+
+In lambda calculus, we usually use the letter $\lambda$ to write these functions. So instead of $x \mapsto x^2$, we'd have written $\lambda x.x^2$. I personally dislike this notation and we won't use it in these notes, but most treatments of lambda calculus will use $\lambda$.
+
+Functions themselves can take functions as input. Consider the function $f \mapsto f(f(5))$. This takes in a function and applies it to $5$, twice. So \[
+  (f \mapsto f(f(5)))(x \mapsto x^2)
+  = (x \mapsto x^2)((x \mapsto x^2)(5))
+  = (x \mapsto x^2)(5^2)
+  = (5^2)^2
+  = 625.
+\]
+Note how we computed this. When we compute an \textbf{application} of a function, like $f \mapsto f(f(5))$ on $x \mapsto x^2$, we take the \textbf{bound variable} $f$, then change all the $f$s in the expression with whatever our input is, $x \mapsto x^2$. This is known as \textbf{beta reduction}.\footnote{There's also alpha conversion, and eta expansion. In the calculus of constructions, there's also iota reduction, delta reduction, and zeta reduction. We won't talk about those.} We then applied beta reduction \emph{again}, changing the bound variable $x$ to the input $5$. Then we apply beta reduction one more time.
+
+We're already getting lots of parentheses, so when it's clear, we will omit parentheses in application. Instead of writing $f(x)$ to apply $f$ to $x$, we will just write $fx$.
+
+Functions themselves can also return functions. Consider the functions $y \mapsto 3 + y$, or $y \mapsto -1 + y$, or $y \mapsto \pi + y$. These are all the same computation! So we can abstract the number into a function, giving us $x \mapsto (y \mapsto x + y)$. The way we'd apply this would look like \[
+  (x \mapsto (y \mapsto x + y))(3)(5)
+  = (y \mapsto 3 + y)(5)
+  = 3 + 5
+  = 8.
+\]
+
+Some functions take multiple inputs. For example, you might think of the addition function as $f(x, y) = x + y$. While we can write this as $(x, y) \mapsto x + y$, when we do lambda calculus, we prefer all of our functions to have only \emph{one} input. To do functions with multiple inputs, we give our inputs one at a time. So we'd write the addition function as $x \mapsto (y \mapsto x + y)$. Hey, doesn't that look familiar?
+
+When we turn a function with multiple inputs to several functions that take one input at a time, that's called \textbf{currying}. It's because of currying that we make $\mapsto$ \textbf{right-associative}. This means that \[
+  x \mapsto y \mapsto z \mapsto w
+  \text{ should be interpreted as }
+  x \mapsto (y \mapsto (z \mapsto w)),
+\]
+because this is the curried version of $(x, y, z) \mapsto w$. When you see a chain of $\mapsto$s, we can think about it as ``a function that returns a function'', but we can also think of it as ``a function with multiple inputs''. The BHK interpretation turns $\to$ to $\mapsto$, which is why they're both right-associative.
+
+It's also because of currying that we make function application \textbf{left-associative}. This means that \[
+  fghx \text{ should be interpreted as } ((fg)h)x.
+\]
+Putting it together, we'd say
+\begin{align*}
+(a \mapsto b \mapsto ab)(f \mapsto f5)(x \mapsto x + 3)
+&= (b \mapsto (f \mapsto f5)b)(x \mapsto x + 3) \\
+&= (b \mapsto b5)(x \mapsto x + 3)\\
+&= (x \mapsto x + 3)5,
+\end{align*}
+which is $5 + 3 = 8$.
+
+\subsection{Curry--Howard, part 1}
+
+Now we draw our first big connection. You may have noticed the way we proved $A \to \lnot\lnot A$ with the deduction theorem, and the BHK interpretation as $p \mapsto q \mapsto qp$, are related. We can make this precise. Here, we repeat the deduction proof, but we annotate each proposition with its BHK interpretation.
+\begin{align*}
+\vc{\infer[^\sf{MP}]
+{
+\overset{qp}{\false}
+}
+{\overset{p}{A} & \overset{q}{A \to \false}}
+}
+\;\overset{\text{deduct.}}{\implies}\;
+\vc{\infer*
+{\overset{q\;\mapsto\;qp}{(A \to \false) \to \false}}
+{\overset{p}{A}}}
+\;\overset{\text{deduct.}}{\implies}\;
+\vc{\infer*
+{\overset{p\;\mapsto\;q\;\mapsto\;qp}{A \to (A \to \false) \to \false}}
+{}}
+\end{align*}
+Please convince yourself that \textbf{\textsf{MP} is application} and \textbf{deduction is abstraction}. This is an important correspondence known as the \textbf{Curry--Howard correspondence}, and this won't be the first time we'll encounter it. It's important enough that it gets its own section, even if it's a short one.
+
+As an exercise, consider our proof of $\lnot\lnot\lnot A \to \lnot A$, and write it out in BHK. The easiest way is to work from the deduction-style proof we wrote earlier. You should've gotten an answer like $p \mapsto q \mapsto p(r \mapsto rq)$; check that it also matches what we'd expect from the BHK interpretation.
+
+\clearpage
+
+\section{Types}
+
+\subsection{Curry--Howard, part 2}
+
+So far in the Curry--Howard correspondence, we've shown a relationship between deduction-style proofs and lambda calculus. In particular, given a deduction-style proof, we can come up with a corresponding proof in the BHK interpretation, that happens to be a function. But for this to be a correspondence, we want to be able to go the other way around as well! Given a function in the lambda calculus, does it represent a proof of some logical fact?
+
+We can do this for some kinds of functions. Let's consider the example $p \mapsto q \mapsto qp$. The $qp$ at the end, an application, must be a result of $\sf{MP}$. Hence, if $p$ is a proposition $A$, then $q$ must be $A \to B$, for some $B$. By reversing the abstractions, the theorem must have been $A \to (A \to B) \to B$. Note that this is \emph{more} general than the statement we originally used $p \mapsto q \mapsto qp$ to prove, which was $A \to \lnot\lnot A$, or $A \to (A \to \false) \to \false$.
+
+On the other hand, we can't do this for all possible functions. Consider a function like $x \mapsto xx$. Again, we know from $\sf{MP}$ that if $x$ was some proposition $A$, then $x$ must be $A \to B$, for some $B$. But this is impossible! So if the correspondence isn't between deduction-style proofs and lambda calculus, what is it a correspondence between? This is solved by introducing types.
+
+\subsection{Inference and inhabitation}
+
+The main concept of \textbf{type theory} is that all mathematical objects, or \textbf{terms}, have a \textbf{type}. For example, we can say that $\pi$ has type $\sf{real}$, indicating that it's a real number. We write this as $\pi : \sf{real}$, where the $:$ is read as ``has the type''.
+
+As another example, $3 : \sf{int}$, where $\sf{int}$ is the type of integers. Two terms of different types have to be different, so $3 : \sf{real}$ is a different $3$ than $3 : \sf{int}$. Functions are also terms, and have types determined by their input and output. For example, $x \mapsto \floor{x} : \sf{real} \to \sf{int}$. Again, terms with different types are different; the previous function is different from $x \mapsto \floor{x} : \sf{real} \to \sf{real}$.
+
+Functions restrict the types of their inputs. This seemingly simple fact about functions is very, very important! We cannot call a function on inputs that are of different type than it accepts. By adding types to lambda calculus, we get what is known as the \textbf{simply typed lambda calculus}.
+
+As we've seen in (untyped) lambda calculus, functions can also take functions as input. We can also assign types to these functions, like $f \mapsto ff5 : (\sf{int} \to \sf{int}) \to \sf{int}$. Also, functions can return functions, so \[
+x \mapsto y \mapsto x + y : \sf{int} \to \sf{int} \to \sf{int}
+\] is a possible function. Once again, $\to$ is right-associative, so $\sf{int} \to \sf{int} \to \sf{int}$ should be interpreted as $\sf{int} \to (\sf{int} \to \sf{int})$.
+
+This allows us to do \textbf{type inference}, to determine what the type of a function term is, even if we're not told directly what it is. If we know $f\pi = 3$, we can infer $f : \sf{real} \to \sf{int}$. Even if all we're given is $f\alpha : B$, for some $\alpha : A$, we can tell that $f$ must have type $A \to B$. Note that it's possible that $A$ and $B$ are the same type, but the most general possible type would be $A \to B$.
+
+Now, let's go back to $p \mapsto q \mapsto qp$. What is the most general possible type of this function? We start inside. From $qp$, we know if $p : A$ and $qp : B$, then $q$ must have the type $A \to B$. This means the type is \[
+  \text{(type of $p$)} \to \text{(type of $q$)} \to \text{(type of $qp$)}, \text{ or } A \to (A \to B) \to B.
+\]
+Looks familiar? As an exercise, use a similar to procedure to find the type of $p \mapsto q \mapsto p(r \mapsto rq)$. You'd start with something like, ``From $rq$, we know if $q : A$, and $rq : B$, then $r$ must have type $A \to B$\dots.''
+
+There are reasons why the simply typed lambda calculus is, in some ways, nicer than lambda calculus. In lambda calculus, there are certain kinds of functions that aren't well-behaved. Consider $\omega = x \mapsto xx$. What happens when we try to evaluate $\omega\omega$? We get an infinite loop: by calling $\omega$ with $\omega$, the result is still $\omega\omega$. In some deep sense, this comes from the fact that we can't assign a valid type to $\omega$. What happens when we try to infer its type? From $xx$, we see $x$ is a function that takes in the type of $x$. Please convince yourself that this is impossible.
+
+In a sense, the simply typed lambda calculus is what you get when you ask, \emph{how can we enforce every function to be the result of a BHK interpretation}? The rule you get for application---the fact that function inputs must match types---is precisely what $\sf{MP}$ corresponds to. There is also a rule for abstraction, which prevents silly functions like $x \mapsto y$, because $y$ isn't defined.
+
+Type inference is the problem of figuring out a type based on the term. The opposite problem---figuring out whether a term of a certain type exists---is \textbf{type inhabitation}. If there is a term of a given type, we say the type is \textbf{inhabited}. Generally, type inhabitation is harder than inference, but we can still do it in some cases.
+
+In particular, the previous section showed that if we have a deduction-style proof, we can convert it to a term. This means that facts like $\sf{K}$ and $\sf{S}$, can be converted. Please check that \[
+  \sf{K} = p \mapsto q \mapsto p
+  \text{ and }
+  \sf{S} = p \mapsto q \mapsto r \mapsto pr(qr)
+\]
+are functions that have the appropriate types.\footnote{This is why these are named $\sf{K}$ and $\sf{S}$, by the way! I think Schönfinkel named it $\sf{K}$ for the German for ``constant'', because it returns a constant function---no matter what $q$ is, it always returns $p$. And the reason it's named $\sf{S}$ is from the German for ``fuse''.} On the other hand, if you try to find a term that has the type $((A \to B) \to A) \to A$, you'll see that you can't.
+
+\subsection{Curry--Howard, part 3}
+
+\simp Well, big deal. Theorems in zeroth-order implicational logic correspond to functions in simply typed lambda calculus, and vice versa. Is that all the Curry--Howard correspondence is about?
+
+\salv Remember how we showed that $\sf{MP}$, $\sf{K}$, and $\sf{S}$ were enough to show the deduction theorem? That means that all inhabited types in simply typed lambda calculus can be written in $\sf{K}$s and $\sf{S}$s. For example, $\sf{S}\sf{K}\sf{K} : A \to A$.
+
+\simp That's cool and all. But again, I'm left wondering: what does this actually \emph{mean}? Once again, we've only established a connection between \emph{syntax}. We haven't talked at all about what this correspondence means for \emph{semantics}.
+
+\salv Alright. What does it mean to say $\pi : \sf{real}$?
+
+\simp It means that $\pi$ is a term that is $\sf{real}$.
+
+\salv Right. Now, in $p \mapsto q \mapsto qp$, we saw that $p : A$. But what \emph{is} $A$, other than just being some type? What does it represent, according to Curry--Howard?
+
+\simp It represents the proposition $A$. In particular, it represents the proof of the proposition $A$. Wait. So that means that $p$, this term itself, \emph{is} the proof of $A$?
+
+\salv That's right. Propositions \emph{are} types. A term of a certain type is a \emph{proof} that the proposition is true. We can read $:$ not only as ``has the type'' but ``is a proof of''. In particular, a proposition can be proven if and only if its type is inhabited.
+
+\simp I guess this kinda makes sense, at least with the BHK interpretation. So one way to read $q : A \to B$ is a function that takes a term with type $A$ and returns a term with type $B$. Another way is a proof that $A$ implies $B$. So that's why we use $\to$ for both the function type and for ``implies''! But how do you interpret a statement like $\pi : \sf{real}$?
+
+\salv That means $\pi$ is a proof of $\sf{real}$---that there is a real number. The term is a \textbf{witness} that there is a term of type $\sf{real}$. Showing me a term with a certain type is the same as showing that the corresponding proposition is true. This is why, to prove $A \to \lnot\lnot A$, it is enough to show me a function that has the type $A \to \lnot\lnot A$.
+
+\simp Okay, sure. Well, what if I just say that $R$ is the type of the statement of the Riemann hypothesis. And I say, oh look, here's $r : R$. Have I proven the Riemann hypothesis?
+
+\salv Well, what is $r$? Are you building it up from other terms, or are you just creating it out of thin air? To create a type out of thin air is the same as making it an \textbf{axiom}. You have to start with \emph{something}, right?
+
+\simp Alright. We've discussed how to interpret a single type, and why ``implies'' corresponds to the type of functions. What about something like $\false$?
+
+\salv We define the type $\false$ as a type that has no terms.
+
+\simp If this is \emph{really} $\false$, then there should be a proof that $\false \to A$, for any proposition $A$. What's the corresponding function, then?
+
+\salv Well, we want $\false \to A$ to be a function that, for every term of type $\false$, gives us a term of type $A$. The empty function works, because there \emph{are} no terms of type $\false$. So, vacuously, it can have any output type we want, like $A$.
+
+\simp Sure. But how do $\land$ and $\lor$ correspond to types?
+
+\salv Well, in this case, you can go from the BHK interpretation to \emph{create} a type. We talked about how the proof of $A \land B$ should be an ordered pair of proofs, $(p, q)$, where $p : A$ and $q : B$. Using Curry--Howard to translate, the corresponding type should consist of the ordered pairs of terms $(p, q)$, where $p : A$ and $q : B$.
+
+\simp Oh, but there's a name for that! It's $A \times B$, right? At least when $A$ and $B$ are sets, the set $A \times B$ is the set of ordered pairs of elements.
+
+\salv Yeah, and we use the same notation in type theory. We call it the \textbf{product type} $A \times B$. This is in analogy to the product of sets. Note that, when $A$ and $B$ are finite sets, the size of $A \times B$ is the product of the sizes of $A$ and $B$. That's where the name ``product'' comes from.
+
+\simp That makes sense. Except in this case, $A$ and $B$ are types, not sets. But what about $\lor$? It's either something like $(A, p)$ where $p : A$ or $(B, q)$ where $q : B$. These are ordered pairs, but there's no nice way to write this as a product.
+
+\salv No. In this case we call it the \textbf{sum type} $A + B$, and just define it like that. Again, it's named ``sum'' in analogy to set theory, because when $A$ and $B$ are finite sets, the size of $A + B$ is the sum of the sizes of $A$ and $B$. This operation is better known as disjoint union.
+
+\simp So to recap: propositions are types, $\to$ is $\to$, $\false$ is the empty type, $\land$ is $\times$, and $\lor$ is $+$? That settles everything we've discussed with the BHK interpretation. But that's still not all of logic! What about $\forall$ and $\exists$?
+
+\subsection{First-order logic}
+
+So far, we've only discussed zeroth-order logic. Now that we'll start discussing $\forall$ and $\exists$, we need to move to \textbf{first-order logic}.
+
+In first-order logic, we can use $\forall$ and $\exists$, which are known as quantifiers. But we can only quantify over variables. In particular, we can't quantify over propositions. To make the distinction, we'll use $x, y, z, \dots$ for variables and $A, B, C, \dots$ for propositions. So $\forall x$ is allowed, in first-order logic, but $\forall A$ is not.
+
+This is an important distinction, which we'll keep in mind as we go on. But it's also quite subtle, and I had a hard time wrapping my head around it at first. It's true that we didn't pay too much attention to this. We proved things like $(A \to B) \to (B \to C) \to A \to C$ without thinking too hard about what $A$, $B$, and $C$ are. Strictly speaking, we didn't prove ``For all propositions $A$, $B$, and $C$, \dots.'' That is a fact of second-order logic. Instead, what we showed, was that for \emph{these specific} $A$, $B$ and $C$, this fact was true.
+
+And yes, it's true that we \emph{can} prove this for \emph{any} possible combination of $A$, $B$, and $C$, simply by following the same steps. But the language of zeroth-order logic doesn't let us say anything about \emph{all} $A$, $B$, and $C$. To do that, we'll have to build up more tools. To go to second-order logic, we first need to talk about first-order logic.
+
+What \emph{is} a variable? Well, imagine a proposition like ``$2\cdot1$ is even.'' Now imagine another proposition, like ``$2\cdot21$ is even.'' And imagine ``$2\cdot3$ is even.'' These are all (zeroth-order) propositions of the same form: ``$2x$ is even'', where $x$ is some integer. If we want to say something about all integers in general, we can say ``For all integers $x$, $2x$ is even.'' Let $\sf{even}(y)$ be ``$y$ is even''. A proposition like $\sf{even}(y)$, with a variable like $y$ in it, is called a \textbf{predicate}. Our statement can now be written as $\forall x: \ZZ, \sf{even}(2x)$.
+
+What's the BHK interpretation? Well, how would you prove $\forall x: S, Ax$? You need to produce a proof of $Ax$, no matter what $x$ in $S$ that I give you. This means $\forall x: S, Ax$ needs to be a \emph{function}: it converts elements $x$ of $S$ to a proof of $Ax$. In particular, $\forall x: \ZZ, \sf{even}(2x)$ needs to be a function that converts an integer $x$ to a proof that $2x$ is even. Now consider \[
+(\forall x:S, Ax \to Bx) \to (\forall x:S, Ax) \to (\forall x:S, Bx).\] How do we prove this?\footnote{We'll use the standard convention that $\forall$ and $\exists$ stretch out as far as they can. So $\forall x: S, Ax \to Bx$ should be interpreted as $\forall x: S, (Ax \to Bx)$, which is different from $(\forall x: S, Ax) \to Bx$.} Again, the proof will be a function, so let's name the inputs. Suppose that $p$ is $\forall x:S, Ax\to Bx$ and $q$ is $\forall x:S, Ax$. We need to show that $\forall x:S, Bx$. This itself should be a function, so let's name its input $x$. So far, we have $p \mapsto q \mapsto x \mapsto $. Now we need to get $Bx$. Well, we get that $qx$ is $Ax$. Also, $px$ is $Ax \to Bx$, so $px(qx)$ is $Bx$. Our proof is $p \mapsto q \mapsto x \mapsto px(qx)$. Looks familiar?
+
+Similarly, how do we prove $\exists x: S, Ax$? To show that something exists, you have to give me the thing you say exists. A proof of $\exists x: S, Ax$ should be an ordered pair of $x$, and a proof of $Ax$.
+
+Let's say that $\sf{prime}(n)$ is the predicate ``$n$ is prime'', and $\sf{factor}(a, b)$ is the predicate ``$a$ is a factor of $b$''. You can write statements like $\exists n: \NN, \sf{prime}(n) \land \sf{factor}(n, 57)$, and a proof of this could be $(3, (p, q))$, where $p$ is a proof of $\sf{prime}(3)$ and $q$ is a proof of $\sf{factor}(3, 57)$. We can even write things like $\forall n: \NN, \exists p: \NN, \sf{prime}(p) \land \sf{factor}(p, n)$, the statement that every natural number has a prime factor.
+
+As an example, consider $(\exists x, A \land Bx) \to (A \land \exists x, Bx)$. How do we prove this? The proof is a function. Its input would be something like $(x, (p, q))$, where $p$ is a proof of $A$ and $q$ is a proof of $Bx$. What we want to return is this shuffled around. Please check that $(x, (p, q)) \mapsto (p, (x, q))$ makes sense as a proof of this fact.
+
+We can prove relationships between these two. For example, how would we prove $(\exists x: S, \lnot Ax) \to (\lnot \forall x: S, Ax)$?  This is a pretty complicated example, so please think about it first. It might help to interpret this intuitively.
+
+So, the proof is a function. If we expand all the $\lnot$s, we get \[
+(\exists x: S, Ax \to \false) \to (\forall x: S, Ax) \to \false.\] This function has two inputs. The first is an ordered pair, so we'll name it $(x, p)$, where $p$ is the proof of $Ax \to \false$. The second input is $\forall x: S, Ax$, a function, which we'll name $q$. We need to get $\false$. Indeed, we see that $qx$ is $Ax$, and thus $p(qx)$ is $\false$. So this function is $(x, p) \mapsto q \mapsto p(qx)$.
+
+Interestingly, while it is true that $(\exists x: S, \lnot Ax) \to (\lnot \forall x:S, Ax)$, it is \emph{not} true, at least in the BHK interpretation, that $(\lnot \forall x:S, Ax) \to (\exists x: S, \lnot Ax)$. This is another one of those things where classical logic is different from constructive logic. On the other hand, it \emph{is} true that $\lnot \exists x: S, Ax$ is equivalent to $\forall x: S, \lnot Ax$; can you prove it?
+
+In summary, in the BHK interpretation, $\forall x:S, Ax$ is a function that takes a variable $x$ and returns a proof of $Ax$, and $\exists x:S, Ax$ is an ordered pair of a variable $x$ and a proof of $Ax$.
+
+\subsection{Dependent types}
+
+Let's go back to Simplicio. What do $\forall$ and $\exists$ correspond to in type theory? Let's do what Salviati did, and use Curry--Howard to find the corresponding type.
+
+We know that $\forall x:S, Ax$ should be a function. It takes in the variable $x$ to produce a proof of $Ax$. Now we have to be very careful here. $Ax$ is a proposition, so it must be a type. But $x$ is a variable, not a proposition! So it shouldn't be a type. The natural way to interpret this is to make $x$ a \emph{term} of type $S$.
+
+We get that $\forall x: S, Ax$ is a function that takes the term $x : S$ and converts it to $p : Ax$. What is the type of this function? We could try $S \to Ax$. But this isn't well-defined, because while we know what $S$ and $A$ are, we don't know what $x$ is. We could try to write its type as $x \to Ax$. Now the information from $x$ is contained in the type. But this isn't right either, because $x$ is the \emph{input}, not the type of the input.
+
+So this is a different kind of function, one we can't write using our current notation. In this case, we say this function has a \textbf{dependent type}---its type \emph{depends} on a certain term. This specific case, where it depends on the function input, is a \textbf{dependent function type}. The notation we'll use for it is the same as the logical notation, so we'll write the type of such a function as $\forall x: S, Ax$.
+
+I know this sounds pretty abstract, so let's think about an example. Let's define a type of integer tuples, which we'll call $\sf{inttup}(n)$. The type will include the length of the tuple, which is $n$. Now we can make a function like $n \mapsto (0, \ldots, 0)$, where there are $n$ zeroes. This takes a natural number $n : \sf{nat}$ and returns the tuple $(0, \ldots, 0) : \sf{inttup}(n)$. It wouldn't be enough information to tell us that the function has type $\sf{nat} \to \sf{inttup}(n)$. What's the $n$ in $\sf{inttup}(n)$? This is why we write \[
+  n \mapsto (0, \ldots, 0) : \forall n: \sf{nat}, \sf{inttup}(n).
+\]
+
+Here's another example. Let's say there's a type $\sf{even}(n)$. Propositions are types, so we won't differentiate between $\sf{even}(n)$, the proposition that $n$ is even, and the \emph{type} $\sf{even}(n)$. The type means that, if $p : \sf{even}(n)$, then $p$ is a \emph{proof} that $n$ is even.
+
+Now the type $\forall n: \sf{int}, \sf{even}(2n)$ would be the type of functions that convert an integer $n : \sf{int}$ to a proof $p : \sf{even}(2n)$. We can't write down such a function yet, since we haven't defined $\sf{even}(n)$, but we will eventually.
+
+In particular, this means that predicates like $\sf{even}(n)$ correspond to a dependent type. So what does a dependent type like $\sf{inttup}(n)$ correspond to? Just like how the type $\sf{real}$ is the proposition ``there exists a real number'', the type $\sf{inttup}(n)$ is the proposition ``there exists a tuple of integers with length $n$.'' So \textbf{predicates correspond to dependent types}.
+
+Note the general function type $A \to B$ is just a special case of the dependent function type $\forall x: A, B$, when the output type $B$ does not depend on $x$. For example, you can consider the function $x \mapsto \floor{x} : \sf{real} \to \sf{int}$. Please convince yourself that the type of this function can also be $\forall x: \sf{real}, \sf{int}$. The type of $\sf{int}$ just doesn't depend on the value of $x$. Because of this: \[
+  A \to B \text{ is an abbreviation for } \forall x: A, B.
+\]
+
+What about $\exists x: S, Ax$? It's an ordered pair of the variable $x$, and a proof of $Ax$. Again, we can try writing its type as $S \times Ax$, but $Ax$ depends on what $x$ is. Neither does $x \times Ax$ work, because $x$ is a term, and not a type. In this case, this is a \textbf{dependent product type}, where the type of the second element depends on the value of the first element.\footnote{Some sources will write $\Pi x: S, Ax$ for what we call the dependent function type, and call \emph{that} the dependent product type. Then they'll write $\Sigma x: S, Ax$ for what we call the dependent product type, and call that the dependent sum type. I don't like this terminology. Our choice makes it so that function and product types are special cases of their dependent versions.} We again use the notation $\exists x : S, Ax$ for this kind of ordered pair.
+
+As an example, the type $\exists n: \sf{int}, \sf{even}(n)$ is the type of ordered pairs where the first element is $n : \sf{int}$, and the second element is $p : \sf{even}(n)$, a proof that $n$ is even. Again, the dependent product type is a generalization of the normal product type. Please convince yourself that the definition \[
+  A \times B \text{ is an abbreviation for } \exists x: A, B
+\]
+makes sense.
+
+\subsection{Polymorphism}
+
+We've been pretty careful about specifying we were only quantifying over variables, and not propositions. When we move up to \textbf{second-order logic}, we can now quantify over propositions. And this means \emph{all} propositions; a proposition can quantify itself!
+
+We'll use the same notation as previously, except we will write $\prop$ to refer to the type of propositions. So for example, we can write $\forall A: \prop, A \to A$. This is the statement ``for all propositions $A$, $A$ implies $A$.'' Again, \emph{all} propositions.
+
+Let's try to apply the BHK interpretation to $\forall A: \prop, A \to A$. We want a function that takes in a proposition $A$, and then returns a proof of $A \to A$. Well, such a function could be $A \mapsto x \mapsto x$. It takes in a proposition $A$---the proposition itself, and not a proof of it---then takes in a proof of $A$, and then returns the same proof.
+
+By Curry--Howard, this should correspond to some type, but what? We can try to write it as $A \to A \to A$. But that doesn't work, because the first input is $A$ \emph{itself}, not a term of type $A$. We know from Curry--Howard that propositions are types, so $A$ is a general type. That means that this function takes in a type as input, which isn't something we've seen before.\footnote{In most sources, this would be written as $\Lambda A . \lambda x. x$, with the $\Lambda$ indicating that $A$ is a type, and not a term. We instead use the type of the function, in this case $\forall A: \prop, A \to A$, to differentiate which inputs are types and terms.}
+
+To write its type, we need to refer to the type of types. As propositions are types, we call this type $\prop$. Now, is the type $\prop \to A \to A$? That doesn't work either, because we don't know what $A$ is. Again, the solution is to use a dependent type: \[
+  A \mapsto x \mapsto x : \forall A: \prop, A \to A.
+\]
+
+So, what's the difference? Our dependent types only used to quantify over a single type, like $\forall x: S, Ax$. This allowed us to write functions where the output type depends on an input \emph{term}. But now we can quantify over types themselves, like $\forall A: \prop, A \to A$. This makes functions have output type depending on an input \emph{type}. Again, note the difference we're drawing between variables, which correspond to terms, and propositions, which correspond to types.
+
+A function that takes a type as input is \textbf{polymorphic}. This turns out to be a very natural concept for functions. You can consider, say, the identity function, $x \mapsto x$. Without polymorphism, you'd need to have an identity that's $\sf{int} \to \sf{int}$, and another identity that's $\sf{real} \to \sf{real}$, and another identity that's $\sf{nat} \to \sf{nat}$, and so on. But now, we can just use the polymorphic function $A \mapsto x \mapsto x$, with type $\forall A: \prop, A \to A$. If we want an identity function for $\sf{int}$s, we just plug it in: $(A \mapsto x \mapsto x)(\sf{int})$ would be $x \mapsto x : \sf{int} \to \sf{int}$.
+
+Note that \textbf{quantifying over propositions corresponds to polymorphic functions}. We saw the example $\forall A: \prop, A \to A$, which is both ``for all propositions $A$, $A$ implies $A$'', and the type of the polymorphic function $A \mapsto x \mapsto x$. We can go back to the functions $\sf{K}$ and $\sf{S}$, and see them as they truly are. They are both propositions that quantify over propositions, \emph{and} polymorphic functions:
+\begin{align*}
+\sf{K} &= A \mapsto B \mapsto p \mapsto q \mapsto p \\
+&: \forall A: \prop, \forall B: \prop, A \to B \to A, \\
+\sf{S} &= A \mapsto B \mapsto C \mapsto p \mapsto q \mapsto r \mapsto pr(qr) \\
+&: \forall A: \prop, \forall B: \prop, \forall C: \prop,
+(A \to B \to C) \to (A \to B) \to A \to C.
+\end{align*}
+
+\clearpage
+\section{The calculus of inductive constructions}
+
+\subsection{Type constructors}
+
+Let's take a step back and think about what we've done so far.
+
+\begin{itemize}
+\item We began with the simply typed lambda calculus, with things like $x \mapsto \floor{x} : \sf{real} \to \sf{int}$. Functions take a term ($x$) and return a term ($\floor{x}$). These correspond to implication.
+
+\item We then added dependent types, with things like $n \mapsto (0, \ldots, 0) : \forall n: \sf{nat}, \sf{inttup}(n)$. Dependent types take a term ($n$) and return a type ($\sf{inttup}(n)$). These correspond to predicates.
+
+\item We then added polymorphism, with things like $A \mapsto x \mapsto x : \forall A: \sf{Prop}, A \to A$. Polymorphic functions take a type ($A$) and return a term ($x \mapsto x$). These correspond to quantifying propositions.
+\end{itemize}
+
+If we think about this table, we've filled in three out of the four entries:
+
+\begin{center}
+\begin{tabular}{ccc}
+(row) $\to$ (column) & terms & types \\
+terms & (normal) functions & dependent types \\
+types & polymorphic functions & ?
+\end{tabular}
+\end{center}
+
+The last piece we need are functions that go from types to types. We'll start by giving an example of why such a thing would be useful, then we'll try to recover what they mean logically. Note that this is the opposite of what we've been doing so far; usually we start with the logic and find the type theory equivalent. But Curry--Howard means we can do both directions, so we'll try doing the other direction this time.
+
+We have dependent types, which are types that depend on terms, like $\sf{inttup}(n)$, the type of tuples of integers of length $n$. We can imagine a different approach to this type, like $\sf{triple}(A)$. Here $A$ is a type, and $\sf{triple}(A)$ is the type of triples of terms of type $A$. For example, this would mean that $\sf{inttup}(3)$ and $\sf{triple}(\sf{int})$ are both triplets of integers. We can imagine a function like $A \mapsto x \mapsto (x, x, x)$, which takes in a type $A$, a term $x: A$, and then returns a triplet of $x$s. Please check that this makes sense: \[
+  A \mapsto x \mapsto (x, x, x): \forall A: \prop, A \to \sf{triple}(A).
+\]
+A type that depends on another type is a \textbf{type constructor}. The name comes from the fact that it constructs a new type out of an old one, like $\sf{triple}(\sf{int})$ from $\sf{int}$. Note the difference with a dependent type: a dependent type makes a new type out of a \emph{term}, but a type constructor makes a new type out of a \emph{type}. Two other examples of type constructors include the product and sum types: both of them take two types and return a new type. In fact, $\to$ itself is a type constructor!
+
+Now, what would this correspond to logically? Let's compare type constructors to dependent types. Dependent types take terms and return types. By Curry--Howard, terms correspond to variables, and types correspond to propositions. That means dependent types correspond to something that takes a variable and returns a proposition. But this is precisely what a predicate is!
+
+By analogy, a type constructor should be something that takes a \emph{proposition} and returns another proposition. We want some kind of predicate over \emph{other propositions}. This requires us going up another step of logic, because so far we've only seen predicates over variables. For example, we could come up with a predicate like $\sf{excludedmiddle}(A)$, which means ``$A \lor \lnot A$.'' Then we could make statements like $\forall A: \prop, \sf{excludedmiddle}(A)$, which is the law of excluded middle.
+
+So we can think of predicates over propositions. I don't think there's a good name for these in the literature. Let's call these \textbf{higher-order predicates}, to differentiate them from predicates over variables. By adding higher-order predicates into our logic, we get what we call \textbf{higher-order logic}.\footnote{As to why it's called higher-order, I asked a \href{https://math.stackexchange.com/questions/4232108}{math.SE question} about this.} 
+
+\subsection{The lambda cube}
+
+The three things we added---dependent types, polymorphism, and type constructors---can be combined in different sorts of ways to produce different sorts of systems. The three things are, in fact, fully independent of each other, leading to $2^3 = 8$ different possible systems. These systems are presented in a cube like this.
+
+\begin{center}
+\begin{tikzcd}
+& \lambda\omega \arrow[rr] & & \lambda C \\
+\lambda 2 \arrow[ru] \arrow[rr] & & \lambda P2 \arrow[ru] & \\
+& \lambda\underline{\omega} \arrow[rr] \arrow[uu] & & \lambda P \underline{\omega} \arrow[uu] \\
+\lambda\to \arrow[ru] \arrow[uu] \arrow[rr] & & \lambda P \arrow[ru] \arrow[uu] &
+\end{tikzcd}
+\end{center}
+
+In the lower left corner, $\lambda \to$, is the simply typed lambda calculus. By going from left to right, we add dependent types. By going from bottom to top, we add polymorphism. By going from bottom-left to top-right, we add type operators. Each of the individual systems has a name, but that doesn't particularly matter for us---what matters more is the fact that these three things are independent, and can be combined.
+
+For example, we can conceive of combining type constructors and dependent types, to produce a type that depends on both another type and a term. Let's say $A: \prop$. Then we can consider the type of tuples with $n$ terms of type $A$, which we'll call $\sf{tup}(A, n)$. Note that, as types, $\sf{tup}(\sf{int}, n)$ is the same type as $\sf{inttup}(n)$ from earlier. Now you can define a function like $A \mapsto n \mapsto x \mapsto (x, \ldots, x)$, which takes in $A$, $n : \sf{nat}$, and then a term $x : A$ returning a tuple of $n$ $x$s. This function would have type $\forall A: \prop, \forall n: \sf{nat}, A \to \sf{tup}(A, n)$.
+
+We can also conceive of combining type constructors and polymorphism. For example, we can define the function \[
+  \sf{and} = A \mapsto B \mapsto (\forall C: \prop, (A \to B \to C) \to C)
+  : \prop \to \prop \to \prop.
+\]
+This is both a type constructor, because it takes two types and returns a type, as well as a polymorphic function, because it is a function that takes a type as input.\footnote{Notably, $\sf{and}$ isn't just an abbreviation that we're writing. It's an actual function we're declaring within the system, because we have type constructors! Without type constructors, $\sf{and}$ would just have to be an abbreviation that we're making ``above'' the actual system we're working in.} To convince you why this can be called $\sf{and}$, consider this function: \[
+  A \mapsto B \mapsto X \mapsto XA(\sf{K}AB)
+  : \forall A: \prop,
+  \forall B: \prop,
+  \sf{and}(A, B) \to A.
+\]
+Here, $\sf{K}$ is the function we defined earlier. We claim this function has type $\forall A: \prop, \forall B: \prop, \sf{and}(A, B) \to A$. First, note that $X$ begins with type $\sf{and}(A, B)$, and so the type of $X$ is $\forall C: \prop, (A \to B \to C) \to C$. By finding $XA$, we get the type $(A \to B \to A) \to A$. Finally, note that $\sf{K}AB$ is a function with type $A \to B \to A$, so we can indeed feed it as input to $XA$, giving a result of type $A$. This shows that it indeed has that type. By Curry--Howard, this means this is also a proof that $\forall A: \prop, \forall B: \prop, \sf{and}(A, B) \to A$.
+
+Another example. We can combine dependent types and polymorphism to prove a statement about relations. For example, $a < b$ is a relation on the reals, and $a \mid b$ is a relation on the integers. Generally, a relation on a type $A$ is a predicate $R(a, b)$. So $R$ is a dependent type, of type $\forall A: \prop, A \to A \to \prop$. Then we can write the following proposition:
+\begin{align*}
+&\forall A: \prop, \forall R: A \to A \to \prop,\\
+&(\forall x: A, \forall y: A, Rxy \to Ryx \to \false) \to (\forall x: A, Rxx \to \false).
+\end{align*}
+This proposition claims that an antisymmetric relation is also antireflexive. The proof needs to be a polymorphic function of this type. We can start out by writing the inputs, $A \mapsto R \mapsto p \mapsto x \mapsto q \mapsto$. Here, $p : \forall x: A, \forall y: A, Rxy \to Ryx \to \false$, and $q: Rxx$. Please check that $pxxqq$ gives something of type $\false$, so a function with this type is $A \mapsto R \mapsto p \mapsto x \mapsto q \mapsto pxxqq.$
+
+By combining type constructors, we can write predicates on relations. A relation itself is something of type $\forall A: \prop, A \to A \to \prop$. So a predicate on a relation is of type $\forall A: \prop, (A \to A \to \prop) \to \prop$. So we can write things like:
+\begin{align*}
+\sf{relpred} &= \forall A: \prop, (A \to A \to \prop) \to \prop \\
+\sf{reflexive} &= A \mapsto R \mapsto \forall x: A, Rxx: \sf{relpred} \\
+\sf{symmetric} &= A \mapsto R \mapsto \forall x: A, \forall y: A, Rxy \to Ryx: \sf{relpred} \\
+\sf{transitive} &= A \mapsto R \mapsto \forall x: A, \forall y: A, \forall z: A, Rxy \to Ryz \to Rxz: \sf{relpred}.
+\end{align*}
+Even with all this notation, writing out propositions tend to get pretty long. As an exercise, please write out a proof for
+\begin{align*}
+&\forall A: \prop, \forall R: A \to A \to \prop,\\
+&\sf{symmetric}(A, R) \to \sf{transitive}(A, R) \to (\exists x: A, \exists y: A, Rxy) \to \sf{reflexive}(A, R),
+\end{align*}
+the proposition that a symmetric, transitive, and non-empty relation is also reflexive.
+
+\subsection{Pure type systems}
+
+The \textbf{calculus of constructions} is $\lambda C$, the system at the opposite corner of the cube from $\lambda \to$. This is the system we get when we add dependent types, polymorphism, and type constructors, all together with simply typed lambda calculus.
+
+Now, the way we built up to the calculus of constructions was pretty ad hoc. We started with simply typed lambda calculus, and then added a bunch of random things. But there is a connection between all the things we introduced! They all introduced some sort of function going from terms or types to terms or types. By thinking in the level of pure type systems, we can make this connection clear.
+
+Please think about the relationship between $\mapsto$ and $\to$. For example, let's go back to the function $x \mapsto \floor{x} : \sf{real} \to \sf{int}$. The description ``$x \mapsto \floor{x}$'' describes the function in the level of terms: the function takes the term $x$ to the term $\floor{x}$. On the other hand, ``$\sf{real} \to \sf{int}$'' goes one step higher, and describes the function in the level of types: the function takes (something in $\sf{real}$) to (something in $\sf{int}$).
+
+Similarly, consider a type constructor like $\sf{triple}$, which we'll write as $A \mapsto (A, A, A) : \prop \to \prop$. Again, ``$A \mapsto (A, A, A)$'' describes the function in the level of types: the function takes the type $A$ to the type of triplets $(A, A, A)$. Then ``$\prop \to \prop$'' goes one step higher, and describes the function in a level \emph{above} types: the function takes (something in $\prop$) to (something in $\prop$).
+
+By going from $\mapsto$ to $\to$, we go ``one level higher''. The big idea of \textbf{pure type systems} is by going \emph{another level higher}, from $\to$ to $\toto$.\footnote{I am inventing notation here. As we've already discussed, in most sources, instead of $\mapsto$ and $\to$, they use $\lambda$ and $\forall$ (or $\Pi$). And in literally every other source, instead of $\toto$, they use sets of triplets of sorts. But I think that obscures this relationship.} To specify a pure type system, we list down the things we can $\toto$ on.
+
+For example, in simply typed lambda calculus, we have $\prop$. The only thing we can $\toto$ on is $\prop \toto \prop$. As $\sf{real}: \prop$ and $\sf{int}: \prop$, we can make $\sf{real} \to \sf{int}$, from the rule $\prop \toto \prop$. The rule also means that $\sf{real} \to \sf{int}: \prop$. Because $\sf{real} \to \sf{int}$ exists, we can make things of type $\sf{real} \to \sf{int}$, by taking, for example, $x: \sf{real}$ and $\floor{x}: \sf{int}$ and saying $x \mapsto \floor{x} : \sf{real} \to \sf{int}$.
+
+More formally:
+\begin{itemize}
+\item A pure type system has a list of \textbf{sorts} $\sf{A}, \sf{B},$ etc. We specify relationships between the sorts, like $\sf{A} : \sf{B}$. We also list down several rules, like $\sf{A} \toto \sf{B}$.
+\item If $\sf{A} \toto \sf{B}$ is a rule, $A : \sf{A}$, and $B: \sf{B}$, we can form the type $\forall a: A, B$. This itself has type $\sf{B}$.
+\item If $\forall a: A, B$ is a type, $a : A$, and $b : B$, we can form the function $a \mapsto b$. This has type $\forall a: A, B$.
+\end{itemize}
+
+Note the second rule here! This implies that, say, $\type \to \prop : \prop$, while $\prop \to \type : \type$.
+
+With the language of pure type systems, we can now specify the calculus of constructions succinctly, instead of as a hodgepodge of three separate systems on top of simply typed lambda calculus:
+\begin{itemthin}
+\item There are two sorts, $\prop$ and $\type$.
+\item The only relationship is $\prop : \type$.
+\item The rules are $\prop \toto \prop$, $\prop \toto \type$, $\type \toto \prop$, and $\type \toto \type$.
+\end{itemthin}
+Here's an example usage of these rules:
+\begin{itemize}
+\item As $\prop \toto \prop$ is a rule, $A: \prop$ and $A: \prop$, we can form the type $\forall x: A, A$. We can abbreviate this as $A \to A$. This itself has the type $\prop$, so $A \to A: \prop$.
+\item As $\type \toto \prop$ is a rule, $\prop: \type$ and $A \to A: \prop$, we can form the type $\forall A: \prop, A \to A$.
+\item As $A \to A$ is a type, $x: A$, and $x: A$, we can form the function $x \mapsto x$. This has type $A \to A$.
+\item As $\forall A: \prop, A \to A$ is a type, $A: \prop$, and $x \mapsto x: A \to A$, we can form the function $A \mapsto x \mapsto x$. This has the type $\forall A: \prop, A \to A$.
+\end{itemize}
+
+Here's another example, showing $\sf{relpred}$ can be formed from the rules:
+\begin{itemize}
+\item As $\prop \toto \type$ is a rule, $A: \prop$ and $\prop: \type$, we can form the type $\forall x: A, \prop$. We can abbreviate this as $A \to \prop$. This itself has the type $\type$.
+\item As $\prop \toto \type$ is a rule, $A: \prop$ and $A \to \prop: \prop$, we can form the type $\forall x: A, A \to \prop$. We can abbreviate this as $A \to A \to \prop$. This itself has the type $\type$.
+\item As $\type \toto \type$ is a rule, $A \to A \to \prop : \type$ and $\prop: \type$, we can form the type $\forall x: A \to A \to \prop, \prop$. We can abbreviate this as $(A \to A \to \prop) \to \prop$. This itself has the type $\type$.
+\item As $\type \toto \type$ is a rule, $\prop: \type$ and $(A \to A \to \prop) \to \prop: \type$, we can form the type $\forall A: \prop, (A \to A \to \prop) \to \prop$.
+\end{itemize}
+Note the similarity between the first two applications of the rules, and the second two applications of the rules.
+
+As an exercise, try to use the rules to show that $\sf{reflexive}$ indeed has the type $\sf{relpred}$. You want to look at each of the rule applications we did, and then do a similar one to form $\sf{reflexive}$.
+
+\subsection{Inductive types, part 1}
+
+Now that we have the calculus of constructions, the way to get the calculus of \emph{inductive} constructions is to add inductive types. Adding inductive types leads to several other complications, but for now, let's just add the inductive types.
+
+An \textbf{inductive type} consists of several \textbf{constructors}. Each constructor is either a term of the inductive type, or a function that returns a term of the inductive type. The inductive type consists of all the terms that can be made from the constructors, and \emph{only} of the terms that can be made from the constructors.
+
+Let's make our first inductive type, which we'll call $\sf{riddle}$. We'll say $\sf{riddle}$ is a $\type$ that has two constructors, $\sf{foo}$ and $\sf{bar}$. We'll write it out like this: \[
+  \sf{riddle} : \type = \begin{cases}
+    \sf{foo}&: \sf{riddle} \\
+    \sf{bar}&: \sf{riddle}.
+  \end{cases}
+\]
+The first constructor says that $\sf{foo}$ is a term of type $\sf{riddle}$. The second constructor says that $\sf{bar}$ is a different term of type $\sf{riddle}$. Because these are the only two constructors, the only terms in $\sf{riddle}$ are $\sf{foo}$ and $\sf{bar}$.
+
+When we defined an inductive type, we gave its constructors. After defining the type, we also get its partner \textbf{destructor}.\footnote{In most sources, these are called recursors or eliminators. We call them destructors as the opposite of constructors. Coq and Lean both have destructors, but they instead focus on pattern-matching and fixpoints, which are more convenient to use.} If we want to define a function with type $\sf{riddle} \to T$, we have to use the destructor. The idea is that we need to give what things will get taken to in each possible constructor. That means if we want to specify a function $P$, we need to say what $P(\sf{foo}) : T$ is, and we need to say what $P(\sf{bar}) : T$ is. After specifying both of these, we now have a function $\sf{riddle} \to T$ So its destructor, which we'll name $\sf{ndestruct}$ for reasons to be clear later, is a function with the type \[
+\sf{ndestruct}_{\sf{riddle}}:
+\underbrace{\forall T: \type}_{\text{return type}},
+\underbrace{T}_{P(\sf{foo})} \to
+\underbrace{T}_{P(\sf{bar})} \to
+\underbrace{\sf{riddle} \to T}_{\text{the function}}.
+\]
+
+Let's define a function $\sf{riddle} \to \sf{int}$, that will take $\sf{foo}$ to $0$ and $\sf{bar}$ to $1$. First, we specify the type that the function will return, which is $\sf{int}$, as the first input. This is the $T$ in the type of $\sf{ndestruct}_\sf{riddle}$. Second, we specify where $\sf{foo}$ will go to, which is $0$. Third, we specify where $\sf{bar}$ will go to, which is $1$. After putting these in, we're left with a function $\sf{riddle} \to T$, where $T$ is $\sf{int}$, just like we wanted! So \[
+  \sf{ndestruct}_{\sf{riddle}}(\sf{int})(0)(1) = x \mapsto
+  \begin{cases}
+  0 & \text{if $x$ is }\sf{foo} \\
+  1 & \text{if $x$ is }\sf{bar}
+  \end{cases} : \sf{riddle} \to \sf{int}.
+\]
+As another example, we can define a function that takes \emph{two} things of type $\sf{riddle}$, and output $\sf{bar}$ if at least one of them is $\sf{bar}$, and $\sf{foo}$ otherwise. In this case, we need two layers of functions. For the first layer, we want to return a function with type $\sf{riddle} \to \sf{riddle}$, and in the second layer, we just return something with type $\sf{riddle}$. So \[
+  \sf{ndestruct}_\sf{riddle}(
+  \sf{riddle} \to \sf{riddle})(
+  y \mapsto y)(
+  y \mapsto \sf{bar}
+  ) : \sf{riddle} \to \sf{riddle} \to \sf{riddle}
+\]
+should work. Please spend a few moments thinking about why it should work. This is because this evaluates to \[
+  x \mapsto
+  \begin{cases}
+  y \mapsto y & \text{if $x$ is }\sf{foo} \\
+  y \mapsto \sf{bar} & \text{if $x$ is }\sf{bar}
+  \end{cases}
+\]
+
+The reason we named it $\sf{riddle}$ is because this type might be familiar to you! Here are better names for this type and its constructors: \[
+  \sf{bool} : \type = \begin{cases}
+    \sf{false}&: \sf{bool} \\
+    \sf{true}&: \sf{bool}.
+  \end{cases}
+\]
+The function we just defined is the $\sf{or}$ function on two $\sf{bool}$s: it returns $\sf{true}$ if either one is $\sf{true}$, and $\sf{false}$ otherwise. So it turns out that as soon as we have inductive types, we already have booleans! As an exercise, think about other boolean operators.
+
+If we want the output of the function to be all of the same type, then the destructor we have, the \textbf{non-dependent destructor}, is enough. But we can generalize this by having different output types for different inputs. If we were silly, we could want a function that brings $\sf{false}$ to $0 : \sf{int}$, and $\sf{true}$ to $\pi : \sf{real}$.
+
+This is why, in the \textbf{dependent destructor}, instead of specifying the output type $T$, we give a function $T: \sf{bool} \to \type$ that gives us the output type based on the input. So the dependent destructor has a dependent function type! It has the type \[
+  \sf{ddestruct}_\sf{bool}:
+  \underbrace{\forall T: \sf{bool} \to \type}_{\text{dependent return type}},
+  \underbrace{T(\sf{false})}_{P(\sf{false})} \to
+  \underbrace{T(\sf{true})}_{P(\sf{true})} \to
+  \underbrace{\forall x: \sf{bool}, Tx}_{\text{dependent function}}.
+\]
+
+That means if we defined the function \[
+  T = x \mapsto \begin{cases}
+    \sf{int} & \text{if $x$ is }\sf{false}\\
+    \sf{real} & \text{if $x$ is }\sf{true}
+  \end{cases} : \sf{bool} \to \type,
+\]
+perhaps using $\sf{ndestruct}$, then the function we want is \[
+  \sf{ddestruct}_\sf{bool}(T)(0)(\pi) = x \mapsto \begin{cases}
+    0 & \text{if $x$ is }\sf{false}\\
+    \pi & \text{if $x$ is }\sf{true}
+  \end{cases} : \forall x: \sf{bool}, Tx.
+\]
+
+Please convince yourself that $\sf{ndestruct}$ is just a special case of $\sf{ddestruct}$. The argument is that $\sf{ndestruct}(T) = \sf{ddestruct}(x \mapsto T)$, for any $T : \type$. It may not be clear why we want dependent destructors now, but there's a good reason that'll become clearer later.
+
+\subsection{Inductive types, part 2}
+
+Let's create our second inductive type, which we'll call $\sf{riddle}$. We'll say $\sf{riddle}$ is a $\type$ that has two constructors, $\sf{foo}$ and $\sf{bar}$. We'll write it out like this: \[
+  \sf{riddle} : \type = \begin{cases}
+    \sf{foo}&: \sf{riddle} \\
+    \sf{bar}&: \sf{riddle} \to \sf{riddle}.
+  \end{cases}
+\]
+The first constructor says that $\sf{foo}$ is a term of type $\sf{riddle}$. The second constructor says that, if $x : \sf{riddle}$, then $\sf{bar}(x) : \sf{riddle}$. Because these are the only two constructors, the only terms in $\sf{riddle}$ are those that can be derived from these two rules. This means all the terms in $\sf{riddle}$ look like \[
+  \sf{foo}, \sf{bar}(\sf{foo}), \sf{bar}(\sf{bar}(\sf{foo})), \sf{bar}(\sf{bar}(\sf{bar}(\sf{foo}))), \ldots.
+\]
+What is the type of $\sf{ndestruct}_\sf{riddle}$? Well, if we want to define a function $P$, we start with the output type $T : \type$. Then we have to specify what $P(\sf{foo})$ is. What about $P(\sf{bar}(x))$? Please think for a moment.
+
+A reasonable way to define $P(\sf{bar}(x))$ would be based on both $x$ and $Px$. To compute $Px$, then, we need to recurse on $x$, by following all the steps again. This means we want a function that, given $x$ and $Px$, gives us $P(\sf{bar}(x))$. The type of this function will be $T \to T$. Thus \[
+\sf{ndestruct}_{\sf{riddle}}
+:
+\underbrace{\forall T: \type}_{\text{return type}},
+\underbrace{T}_{P(\sf{foo})} \to
+\underbrace{(\sf{riddle} \to T \to T)}_{x\smapsto Px\smapsto P(\sf{bar}(x))} \to
+\underbrace{\sf{riddle} \to T}_{\text{the function}}.
+\]
+Let's write a function that doubles the number of $\sf{bar}$s in a term of type $\sf{riddle}$. Say this function is $\sf{double}$. First, $T$ is $\sf{riddle}$. Second, $\sf{double}(\sf{foo})$ would remain $\sf{foo}$. Third is the tricky case: if we have the answer for $\sf{double}(x)$, how can we find $\sf{double}(\sf{bar}(x))$? Please think about this for a moment.
+
+Let's say we have $x = \sf{bar}(\sf{bar}(\sf{foo}))$. Then $\sf{double}(x) = \sf{bar}(\sf{bar}(\sf{bar}(\sf{bar}(\sf{foo}))))$. And let's say we now want the doubled version of $\sf{bar}(x)$. Well, $\sf{bar}(x)$ has three $x$s, and we want six. We saw $\sf{double}(x)$ has four $x$s. So if we take $\sf{double}(x)$ and add two $\sf{bar}$s in front, we get $\sf{double}(\sf{bar}(x))$! That means the function we want, should be $x \mapsto p \mapsto \sf{bar}(\sf{bar}(p))$. So please check that \[
+\sf{double}
+= \sf{ndestruct}_\sf{riddle}(\sf{riddle})(\sf{foo})(x \mapsto p \mapsto \sf{bar}(\sf{bar}(p))) : \sf{riddle} \to \sf{riddle}
+\]
+is indeed the function we want. Please check that everything has the right type. Then, if we wanted to compute $\sf{double}(\sf{bar}(\sf{foo}))$, check that \[
+  \sf{double}(\sf{bar}(\sf{foo}))
+  = (x \mapsto p \mapsto \sf{bar}(\sf{bar}(p)))
+  (\sf{foo})(\sf{double}(\sf{foo}))
+\]
+is the first step of the computation. The fact that the constructor is $\sf{bar}(x)$ selects the second part of the destructor. The inputs to that function are $x$ and $\sf{double}(x)$, which in this case, are $\sf{foo}$ and $\sf{double}(\sf{foo})$.
+
+We now ask the reader to think about the type of $\sf{ddestruct}$:
+\begin{align*}
+\sf{ddestruct}_{\sf{riddle}}:\,
+& \forall T: \sf{riddle} \to \type,\\
+&T(\sf{foo}) \to (\forall x: \sf{riddle}, Tx \to T(\sf{bar}(x))) \to \forall x: \sf{riddle}, Tx.
+\end{align*}
+Mentally label each of the parts of this type with what they're supposed to be. What is $T$ here? What is $\forall x: \sf{riddle}, Tx \to T(\sf{bar}(x))$? Why does this work?
+
+The reason we named it $\sf{riddle}$ is because this type might be familiar to you! Here are better names for this type and its constructors: \[
+  \sf{nat} : \type = \begin{cases}
+    O &: \sf{nat} \\
+    S &: \sf{nat} \to \sf{nat}.
+  \end{cases}
+\]
+These are the natural numbers, where $O$ is zero, and, say, $S(S(SO))$ is three. The letter $S$ is chosen to stand for ``successor'', so adding $S$ in front of a $\sf{nat}$ gives the next natural number. Then $\sf{double}$ indeed doubles a $\sf{nat}$.
+
+Now that we have $\sf{nat}$, let's define $\sf{add}$ on it. It's easier to start with the special case $\sf{add}(x)$, where we're adding $x$ to some $\sf{nat}$. Please check that this works: \[
+  \sf{add}(x) = \sf{ndestruct}_\sf{nat}(\sf{nat})
+  (\underbrace{x}_{\sf{add}(x)(O)})
+  (\underbrace{y \mapsto p \mapsto Sp}_{y\smapsto\sf{add}(x)(y)\smapsto\sf{add}(x)(Sy)}) : \sf{nat} \to \sf{nat}
+\]
+This means that \[
+  \sf{add} = x \mapsto \sf{ndestruct}_\sf{nat}(\sf{nat})(x)(y \mapsto p \mapsto Sp) : \sf{nat} \to \sf{nat} \to \sf{nat}.
+\]
+
+\subsection{Curry--Howard, part 4}
+
+\simp Inductive types sure are cool.
+
+\salv Truly!
+
+\simp But we haven't talked about Curry--Howard in a while. I really want to know: what's the logical interpretation of all of this? We talked about how $\pi : \sf{real}$ corresponds to ``$\pi$ is a proof that there exists a real number.'' And sure, I guess it makes sense that $O: \sf{nat}$ is ``$O$ is a proof that there is a natural number.'' But what about $S: \sf{nat} \to \sf{nat}$?
+
+\salv What \emph{about} $S : \sf{nat} \to \sf{nat}$? It is a proof that ``there is a natural number'' implies ``there is a natural number.''
+
+\simp Not a very exciting fact.
+
+\salv No, not really. It turns out that inductive types are better when it comes to \emph{defining} things we can use Curry--Howard with. Consider, for example, our previous predicate $\sf{even}(n)$. Let's say we wanted to define $\sf{even} : \sf{nat} \to \prop$ as an inductive type. How would we do that?
+
+\simp Well, to define an inductive type, we need to define constructors. Constructors are things of a given type we say exist. So I guess one reasonable constructor would be $\sf{evenO}: \sf{even}(O)$.
+
+\salv Yes, that makes sense. This means that the term $\sf{evenO}$ is a proof that $\sf{even}(O)$. Now how could we get things like $\sf{even}(S(S(S(SO))))$?
+
+\simp Hm. I guess we can do something similar to what we did for $\sf{nat}$. Kind of like, if we knew $\sf{even}(x)$, we want to say $\sf{even}(S(Sx))$. Would the other constructor be $\sf{evenSS}: \sf{even}(x) \to \sf{even}(S(Sx))$?
+
+\salv Close! You need to define what $x$ is.
+
+\simp Right, $\sf{evenSS}: \forall x: \sf{nat}, \sf{even}(x) \to \sf{even}(S(Sx))$.
+
+\salv Yes, exactly. That gives us this definition:\[
+  \sf{even} : \sf{nat} \to \prop = \begin{cases}
+    \sf{evenO} &: \sf{even}(O) \\
+    \sf{evenSS} &: \forall x: \sf{nat}, \sf{even}(x) \to \sf{even}(S(Sx)).
+  \end{cases}
+\]
+
+\simp That actually makes a lot of sense! The first constructor is kind of like an axiom, saying ``zero is even.'' The second constructor is another axiom, saying ``for all natural numbers $x$, if $x$ is even, then $S(Sx)$ is also even.''
+
+\salv Using this inductive type, how would you prove that $S(S(S(SO)))$ is even?
+
+\simp Well, we need something of the type $\sf{even}(S(S(S(SO))))$. We know that $\sf{evenO} : \sf{even}(O)$. By applying $\sf{evenSS}$, we get that $\sf{evenSS}(O)(\sf{evenO}) : \sf{even}(S(SO))$. And then we apply it again, giving us \[
+  \sf{evenSS}(
+    S(SO))(
+    \sf{evenSS}(O)(\sf{evenO})
+  ) : \sf{even}(S(S(S(SO)))).
+\]
+
+\salv Right. By Curry--Howard, this corresponds to the following proof:
+\begin{itemthin}
+\item We know that $O$ is even by $\sf{evenO}$.
+\item From $\sf{evenSS}$ applied to $O$, because $O$ is even, we know $S(SO)$ is also even.
+\item From $\sf{evenSS}$ applied to $S(SO)$, because $S(SO)$ is even, we know $S(S(S(SO)))$ is also even.
+\end{itemthin}
+
+\simp That's neat. But I wanted to prove less obvious things.
+
+\salv Alright then. Let's go about proving $\forall x: \sf{nat}, \sf{add}(O)(x) = x$.
+
+\simp Wait, but isn't that obvious?
+
+\salv Not at all. By substituting $O$ into $\sf{add}$, we get \[
+  \sf{add}(O)
+  = \sf{ndestruct}_\sf{nat}(\sf{nat})(O)(y \mapsto p \mapsto Sp): \sf{nat} \to \sf{nat}.
+\]
+What does this mean, again?
+
+\simp Hm. This means $\sf{add}(O)$ is a function that takes some $\sf{nat}$. If it's $O$, the result is $O$, which is what we want, so that's fine. Otherwise, it's $Sx$ for some $x$. Then the result will have to depend on what $\sf{add}(O)(x)$ is. And then the result of \emph{that} will depend on whether $x$ is $O$ or not\dots
+
+\salv Looks like you're getting stuck in a loop.
+
+\simp Do we need induction here? I suppose we need induction. The ``normal'' proof would be, because $\sf{add}(O)(x) = x$ by inductive hypothesis, then $\sf{add}(O)(Sx) = S\sf{add}(O)(x) = Sx$, as desired. How do we do induction, then?
+
+\subsection{Curry--Howard, part 5}
+
+Recall $\sf{ddestruct}_\sf{nat}$:
+\begin{align*}
+\sf{ddestruct}_{\sf{nat}}:\,
+& \forall T: \sf{nat} \to \type,\\
+&TO \to (\forall x: \sf{nat}, Tx \to T(Sx)) \to \forall x: \sf{nat}, Tx.
+\end{align*}
+This should be read like this: ``If $T$ is a function from naturals to types, and we give something of type $TO$, and for all $x$, we give a function that changes something of type $Tx$ to something of type $T(Sx)$, then we have a function from each natural $x$ to $Tx$.''
+
+This is restricted in the sense that $T: \sf{nat} \to \type$. What if we wanted to have something $\sf{nat} \to \prop$? Thankfully, as $\prop: \type$, a special case of $\sf{ddestruct}_\sf{nat}$ is what we'll call $\sf{pdestruct}_\sf{nat}$, where we have $P: \sf{nat} \to\prop$ instead. Here, the $\sf{p}$ in the name stands for $\prop$:
+\begin{align*}
+\sf{pdestruct}_{\sf{nat}}:\,
+& \forall P: \sf{nat} \to \prop,\\
+&PO \to (\forall x: \sf{nat}, Px \to P(Sx)) \to \forall x: \sf{nat}, Px.
+\end{align*}
+This should be read like this: ``If $P$ is a proposition about naturals, and we prove $PO$, and for all $x$, we prove $Px$ implies $P(Sx)$, then $P$ is true for all naturals.''
+
+Yes, propositions \emph{are} types. These types all lie in $\prop$. But we want to maintain the difference between $\prop$, which in a sense are ``small types'', and $\type$, which are ``big types''. This is for technical reasons we won't talk about until later.
+
+Going back to $\sf{pdestruct}_{\sf{nat}}$, we see it's the induction principle for the natural numbers. The fact that we can do induction on inductive types is why they're called inductive types in the first place. Let's get back to Salviati and Simplicio, as they use this to prove $\sf{add}(O)(x) = x$.
+
+\salv Step back from thinking about how to do induction. Propositions are types. How do we prove a proposition?
+
+\simp We write down a term with the type we want to prove.
+
+\salv Right. We want to prove $\forall x: \sf{nat}, \sf{add}(O)(x) = x$. Think back to BHK. What kind of term is this? What does it do?
+
+\simp This has to be a function. The function takes in any $x : \sf{nat}$, and returns a term with the type $\sf{add}(O)(x) = x$. Wait a second. I don't think we have \emph{any} terms with $=$ in their type.
+
+\salv No, no we don't. We'll have to make some. Let's use $\sf{eq}$, to remind us that this is a predicate we're defining. We'll need to come up with something that gives us predicates of the type $\sf{eq}(x)(y)$. How do we define it? When's the last time we had to define a predicate?
+
+\simp We defined $\sf{even}$ using an inductive type. So I guess we can define $\sf{eq}$ using an inductive type. I guess the really important constructor is $\sf{eq}(x)(x)$ for all $x$. We'll see if we can get by with that. So, this definition? \[
+\sf{eq}: \sf{nat} \to \sf{nat} \to \prop =
+  \begin{cases}
+  \sf{reflexivity}&: \forall x: \sf{nat}, \sf{eq}(x)(x).
+  \end{cases}
+\]
+
+\salv Sure. Alright, back to the problem. We need a function that takes any $x : \sf{nat}$, and returns a term with the type $\sf{eq}(\sf{add}(O)(x))(x)$. In particular, we need a function that goes from $\sf{nat}$ to something else.
+
+\simp Ah, so we need a destructor! The proof should be something of the form \[
+  \sf{pdestruct}_\sf{nat}(x \mapsto \sf{eq}(\sf{add}(O)(x))(x))
+  (\text{something})(\text{something}).
+\]
+So \emph{this} is why we wanted to have the more generally typed version of the destructor. The output type we want depends on what $x$ is.
+
+\salv What are the somethings? What are their types?
+
+\simp Oh! Let me annotate it: \[
+  \sf{pdestruct}_\sf{nat}
+  (\cdots)
+  (\underbrace{\text{something}}_{\sf{eq}(\sf{add}(O)(O))(O)})
+  (\underbrace{\text{something}}_{\forall x:\,\sf{nat},\,\sf{eq}(\sf{add}(O)(x))(x)\sto\sf{eq}(\sf{add}(O)(Sx))(Sx)}).
+\]
+
+\salv Alright. Now let's construct terms of those types.
+
+\simp Well, for the first one. The term $\sf{add}(O)(O)$ just simplifies to $O$, so we only need something of the type $\sf{eq}(O)(O)$, right? And a term of that type would be $\sf{reflexivity}(O) : \sf{eq}(O)(O)$!
+
+\salv Yes! We can simplify terms and it'll stay the same. That fills in the blank for the first something. What about the second something? We need a function with the type $\forall x: \sf{nat}, \sf{eq}(\sf{add}(O)(x))(x) \to \sf{eq}(\sf{add}(O)(Sx))(Sx)$.
+
+\simp We start with $x \mapsto p \mapsto$, so $p : \sf{eq}(\sf{add}(O)(x))(x)$. We need a term with type $\sf{eq}(\sf{add}(O)(Sx))(Sx)$. Now how do we deal with $\sf{add}(O)(Sx)$?
+
+\salv Well, recall the definition for $\sf{add}(O)$. We're in the second case, where we have $Sx$. The first input's $x$, the second input, which is $p$, is the result for $\sf{add}(O)(x)$. The result is $Sp$, which is\dots
+
+\simp Oh, $S\sf{add}(O)(x)$. Alright. So that means $\sf{add}(O)(Sx)$ simplifies to $S\sf{add}(O)(x)$. We need to produce a term of the type $\sf{eq}(S\sf{add}(O)(x))(Sx)$. We have $p$, which is a term of the type $\sf{eq}(\sf{add}(O)(x))(x)$. Hm. I'm not sure how to do this. I think I want a proposition about $\sf{eq}$. Something like, $\sf{eq}(x)(y)$ means $\sf{eq}(fx)(fy)$, for a function $f$.
+
+\salv Sure. For now, let's add that as a constructor for $\sf{eq}$, and then we can get back to proving it later. Here: \[
+\sf{eq}: \dots =
+  \begin{cases}
+  \sf{reflexivity}&: \forall x: \sf{nat}, \sf{eq}(x)(x)\\
+  \sf{fequal}&: \forall x: \sf{nat}, \forall y: \sf{nat},\\
+  &\;\sf{eq}(x)(y) \to (\forall f: \sf{nat} \to \sf{nat}, \sf{eq}(fx)(fy)).
+  \end{cases}
+\]
+
+\simp Alright. So we have $p : \sf{eq}(\sf{add}(O)(x))(x)$. That means that \[
+\sf{fequal}(\sf{add}(O)(x))(x)(p)(S) : \sf{eq}(S\sf{add}(O)(x))(Sx).\]
+
+\salv So what's our final proof?
+
+\simp Okay, this is pretty long. Unsurprising, I guess, given that it has to do all the work of a paper proof. But I'm pretty sure this is it:
+\begin{align*}
+  \sf{pdestruct}_\sf{nat}
+  &(x \mapsto \sf{eq}(\sf{add}(O)(x))(x))\\
+  &(\sf{reflexivity}(O))\\
+  &(x \mapsto p \mapsto \sf{fequal}(\sf{add}(O)(x))(x)(p)(S))\\
+  :\,& \forall x: \sf{nat}, \sf{eq}(\sf{add}(O)(x))(x).
+\end{align*}
+
+\salv Yeah. To summarize, we learned that each of the constructors of an inductive type correspond to an axiom about that type. We can do induction on inductive types---that's why it's called an \emph{inductive} type. We also learned that the destructor isn't just used for defining functions from an inductive type, it's also used for induction.
+
+\vspace{0.5em}
+
+These inductive proofs are really tricky and somewhat tedious to write on paper, especially compared to the previous Curry–Howard things we've been doing, but I think it's instructive to work through one of these at least once in your life.
+
+Proof assistants are called proof assistants because they help in making a lot of this work simpler. They keep track of the ``somethings'' that need to be filled in, and check that they have the types that they should have. Type theory provides a very natural language for this, not only giving us a good basis for formalizing what a proof means, but making it amenable to using a computer to work out.
+
+\clearpage
+
+\section{Technical issues}
+
+\subsection{Annotated types}
+
+We now dive into technical details for inductive types. We mentioned earlier that we'll talk about the proof of $\sf{fequal}$, so we'll go through it here. In the process, we'll make the difference between $\sf{ddestruct}$, the destructor that goes $\to \type$, and $\sf{pdestruct}$, the destructor that goes $\to \prop$, even clearer.
+
+Recall our definition for $\sf{even}$: \[
+  \sf{even} : \sf{nat} \to \prop = \begin{cases}
+    \sf{evenO} &: \sf{even}(O) \\
+    \sf{evenSS} &: \forall x: \sf{nat}, \sf{even}(x) \to \sf{even}(S(Sx)).
+  \end{cases}
+\]
+This is a different kind of inductive type, one called an \textbf{annotated (inductive) type}. This is because, instead of defining something in $\sf{A}$, we define something $\dots \to \sf{A}$.
+
+As another example of an annotated type, here's $\sf{inttup}$, from earlier. We want $\sf{inttup}(3)$ to be the type of tuples with $3$ integers. We can now define these using annotated types: \[
+  \sf{inttup} : \sf{nat} \to \type = \begin{cases}
+  \sf{tupO} &: \sf{inttup}(O) \\
+  \sf{tupS} &: \forall x: \sf{nat}, \sf{inttup}(x) \to \sf{int} \to \sf{inttup}(Sx).
+  \end{cases}
+\]
+The tuple $(-1, -2, -3)$ would now be encoded as \[
+  \sf{tupS}(2)(\sf{tupS}(1)(\sf{tupS}(0)(\sf{tupO})(-1))(-2))(-3).
+\]
+Here is its $\sf{ndestruct}$, with annotations indicating the function $P$:
+\begin{align*}
+\sf{ndestruct}_\sf{inttup}:\,
+&\underbrace{\forall T: \type}_{\text{return type}},
+\underbrace{T}_{P(\sf{tupO})} \to\\
+&\underbrace{(\forall x: \sf{nat}, \sf{inttup}(x) \to T \to \sf{int} \to T)}_{x\smapsto t \smapsto Pt \smapsto a \smapsto P(\sf{tupS}(x)(t)(a))} \to
+\underbrace{\forall x: \sf{nat}, \sf{inttup}(x) \to T}_{\text{the function}}.
+\end{align*}
+So, if we had some function $\sf{intplus} : \sf{int} \to \sf{int} \to \sf{int}$, we can write a function $\sf{total}$ that takes the total of an $\sf{inttup}$:
+\begin{align*}
+\sf{total} &=
+\sf{ndestruct}_\sf{inttup}
+(\underbrace{\sf{int}}_{\text{return type}})
+(\underbrace{0}_{\sf{total}(\sf{tupO})})
+(\underbrace{x \mapsto t \mapsto T \mapsto a \mapsto \sf{intplus}(T)(a)}_{x\smapsto t \smapsto \sf{total}(t) \smapsto a \smapsto \sf{total}(\sf{tupS}(x)(t)(a))}) \\
+&: \forall x: \sf{nat}, \sf{inttup}(x) \to \sf{int}.
+\end{align*}
+Similarly, we can write its $\sf{ddestruct}$. The tricky thing is that the dependent output type, $T$, wouldn't just be $\sf{inttup}(x) \to \type$. It needs to know what $x$ is! So it's
+\begin{align*}
+\sf{ddestruct}_\sf{inttup}:\,
+& \forall T: (\forall x: \sf{nat}, \sf{inttup}(x) \to \type),\\
+& TO(\sf{tupO}) \to \\
+& (\forall x: \sf{nat}, \forall t: \sf{inttup}(x), Txt \to \forall a: \sf{int}, T(Sx)(\sf{tupS}(x)(t)(a))) \to \\
+& \forall x: \sf{nat}, \forall t: \sf{inttup}(x), Txt.
+\end{align*}
+The $\sf{pdestruct}$ would be the same, except with $\type$ changed to $\prop$.
+
+In the particular case of $\dots \to \prop$, we call it an \textbf{inductive predicate}, because it's a predicate that's also an inductive type. So $\sf{even}$ is an inductive predicate. The thing about inductive predicates is that they don't have $\sf{ndestruct}$ or $\sf{ddestruct}$. As predicates lie in $\dots \to \prop$, and $\prop : \type$, for technical reasons, we can't have a function that goes ``up'' to $\type$. For even \emph{more} technical reasons, the $\sf{pdestruct}$ looks slightly different for inductive predicates. Here's the $\sf{pdestruct}$ for $\sf{even}$:
+\begin{align*}
+\sf{pdestruct}_\sf{even}:\,
+& \forall P: \sf{nat} \to \prop,\\
+& PO \to
+  (\forall x: \sf{nat}, \sf{even}(x) \to Px \to P(S(Sx))) \to
+  \forall x: \sf{nat}, \sf{even}(x) \to Px.
+\end{align*}
+This should be read as ``If $P$ is a proposition about naturals, and we prove $PO$, and for all $x$, we prove that $Px$ and $x$ being even implies $P(S(Sx))$, then $P$ is true for all even naturals.''
+
+In particular, note that $P$ isn't about $\sf{even}(x)$, because that \emph{itself} is a proposition. Instead, $P$ is about $x$, the input to the predicate $\sf{even}$. This is in contrast to the destructors for our other inductive types, like $\sf{ddestruct}_{\sf{inttup}}$, where $T$ gets \emph{all} the information that goes into constructing the inductive type.
+
+We now recall the definition for $\sf{eq}$: \[
+\sf{eq}: \sf{nat} \to \sf{nat} \to \prop =
+  \begin{cases}
+  \sf{reflexivity}&: \forall x: \sf{nat}, \sf{eq}(x)(x),
+  \end{cases}
+\]
+and write down its $\sf{pdestruct}$:
+\begin{align*}
+\sf{pdestruct}_\sf{eq}:\,
+& \forall P: \sf{nat} \to \sf{nat} \to \prop, \\
+& (\forall x: \sf{nat}, Pxx) \to
+  \forall x: \sf{nat}, \forall y: \sf{nat}, \sf{eq}(x)(y) \to Pxy.
+\end{align*}
+This now allows us to write a very short proof of $\sf{fequal}$. It is simply \[
+  \sf{pdestruct}_\sf{eq}(\forall x: \sf{nat}, \forall y: \sf{nat}, \forall f: \sf{nat} \to \sf{nat}, \sf{eq}(fx)(fy))(\sf{reflexivity}(fx)).
+\]
+We ask the reader to verify that it works. As further exercise, you can try to prove theorems like $\forall x: \sf{nat}, \forall y: \sf{nat}, \sf{eq}(\sf{add}(x)(y))(\sf{add}(y)(x))$, or $\forall x: \sf{nat}, \sf{even}(\sf{add}(x)(x))$, or even $\forall x: \sf{nat}, \sf{even}(x) \to \exists y: \sf{nat}, \sf{eq}(x)(\sf{add}(y)(y))$.
+
+\subsection{Parametrized types}
+
+Now that we've written $\sf{inttup}$, we can try to write $\sf{tup}$, a generalized version of $\sf{inttup}$. We want, say, $\sf{tup}(\sf{int})(3)$ to be the type of tuples of $3$ integers. Here's an attempt to define it with an annotated type:
+\begin{align*}
+\sf{tup}&: \type \to \sf{nat} \to \type =\\
+&\begin{cases}
+\sf{tupO}&: \forall T: \type, \sf{tup}(T)(O) \\
+\sf{tupS}&: \forall T: \type, \forall x: \sf{nat}, \sf{tup}(T)(x) \to T \to \sf{tup}(T)(Sx).
+\end{cases}
+\end{align*}
+But there's a problem with this definition. Let's say you wanted to write a $\sf{total}$ function on $\sf{tup}(\sf{int})$. You wouldn't actually be able to do this, because $\sf{ndestruct}_{\sf{int}}$ requires whatever function you're defining to work on \emph{all} possible $\sf{tup}$s, including things like $\sf{tup}(\sf{bool})$, for example.
+
+Instead, we create a \textbf{parametrized (inductive) type}:
+\begin{align*}
+\sf{tup}&: \type \to \sf{nat} \to \type = \\
+&\forall T: \type, \begin{cases}
+\sf{tupO}&: \sf{tup}(T)(O) \\
+\sf{tupS}&: \forall x: \sf{nat}, \sf{tup}(T)(x) \to T \to \sf{tup}(T)(Sx).
+\end{cases}
+\end{align*}
+Now, $\sf{tup}(\sf{int})$ is its own inductive type, $\sf{tup}(\sf{bool})$ is its own inductive type, and so on.\footnote{There are technicalities here. We're not quite allowed to use $\type$ to construct another $\type$, for reasons we'll explain later. But we'll ignore that for now.} Note that $\sf{tupO}$ and $\sf{tupS}$ still take $T$ as an input. But it differs from the previous one in that the destructor is different, where there is only a single $\forall T$ on the outside, rather than multiple $\forall T$s inside each part of the destructor. Again, annotations indicate the function $P$:
+\begin{align*}
+\sf{ndestruct}_\sf{tup}:\,
+&\underbrace{\forall T: \type}_{\sf{tup}\text{ type}},
+\underbrace{\forall R: \type}_{\text{return type}},
+\underbrace{R}_{P(\sf{tupO}(T))} \to\\
+&\underbrace{(\forall x: \sf{nat}, \sf{tup}(T)(x) \to R \to T \to R)}_{x\smapsto t \smapsto Pt \smapsto a \smapsto P(\sf{tupS}(T)(x)(t)(a))} \to
+\underbrace{\forall x: \sf{nat}, \sf{tup}(T)(x) \to R}_{\text{the function}}.
+\end{align*}
+With annotated types, we now have all the ingredients to build up pretty much everything from scratch. For example, here is the sum type: \[
+\sf{sum}: \type \to \type \to \type =
+\forall A: \type, \forall B: \type, 
+  \begin{cases}
+  \sf{suml}&: A \to \sf{sum}(A)(B) \\
+  \sf{sumr}&: B \to \sf{sum}(A)(B).
+  \end{cases}
+\]
+The first constructor, $\sf{suml}$, says that if you have something of type $A$, then you can create something of type $\sf{sum}(A)(B)$. Similarly, the second constructor, $\sf{sumr}$, says that if you have something of type $B$, then you can create something of type $\sf{sum}(A)(B)$. That means anything of type $\sf{sum}(A)(B)$ is either an object of type $A$ or of type $B$, which is exactly what we want the sum type to be.
+
+As another example, consider $\exists x: S, Ax$. Here, note that $S: \type$ and $A : S \to \prop$. We can define $\sf{exists}(S)(A)$ with a parametrized type:
+\begin{align*}
+\sf{exists}&: \forall S: \type, (S \to \prop) \to \prop =\\
+&\quad\!\forall S: \type, \forall A:S \to \prop, \begin{cases}
+  \sf{example}&: \forall x: S, Ax \to \sf{exists}(S)(A).
+\end{cases}
+\end{align*}
+The only constructor, $\sf{example}$, says that ``for all $x$, if $Ax$, then $\sf{exists}(S)(A)$.'' The destructor for $\sf{exists}$ could then give us that $x$. In particular, the function \[
+  \sf{ddestruct}_\sf{exists}(S)(A)(x \mapsto A \mapsto x) : \sf{exists}(S)(A) \to S
+\]
+takes a claim $\sf{exists}(S)(A)$ and returns $x : S$ such that $Ax : \prop$.
+
+Annotated types are also the proper way to define $\sf{eq}$, to extend over a general type $T$ rather than just $\sf{nat}$. In this manner we can build up all the mathematics we'd reasonably want. We encourage the reader to think about defining $\le$, and proving things like $\forall x: \sf{nat}, \forall y: \sf{nat}, x \le \sf{add}(x)(y)$.
+
+\subsection{Constructors}
+
+Despite all this discussion, we've still hand-waved a lot of details about how exactly inductive types can be made.
+
+There are genuine conditions on the constructors for inductive types. In order for a constructor of a type $T$ to make sense, they have to be things that return $T$ somehow. So $A \to T$ can be a constructor for $T$, but $T \to A$ cannot be a constructor for $T$.
+
+Even more important is that not \emph{anything} can be a constructor for $T$, just because it returns $T$. There's the requirement that the occurrences of $T$ be \emph{strictly positive}. That means that $T$ cannot appear in an input to an input of a constructor, but it can appear anywhere else. In a constructor of type \[
+\left(\forall ab: A \to B, C \to D\right) \to (\forall e: E, F) \to G \to H,
+\]
+the strictly positive positions are $D$, $F$, $G$, and $H$.
+
+The reason we have this requirement is because without it, we wouldn't have well-formed inductive types. That is, we can define inductive types that lead to contradictions. The simplest example is a constructor like $c: (T \to \false) \to T$. If we allowed this constructor, then we can write a function $f : T \to (T \to \false)$ using the destructor. Now $t \mapsto ft : T \to \false$, and $c(t \mapsto ft) : T$ and thus $(t \mapsto ft)(c(t \mapsto ft)) : \false$, and we have a contradiction.
+
+If we follow these rules for making constructors, we \emph{do} get well-formed inductive types. Here, ``well-formed'' means that we can do induction on them: we can take something formed by constructors, and get something ``smaller and smaller'', until eventually we reach a ``base case''. The reasoning for this is technical, so we'll skip it.
+
+Given well-formed constructors, another technicality is how we form the corresponding parts of the destructor. We focus on $\sf{ndestruct}$, because $\sf{ddestruct}$ is similar. Let's take this example constructor: \[
+c = \left(\forall ab: A \to B, C \to D\right) \to (\forall e: E, T) \to T \to T,
+\]
+and write its corresponding part of the destructor. Let $R$ be our return type. First, we split up the outermost $\to$s, and work on each input separately, from left to right:
+\begin{itemthin}
+\item The first input has no $T$s at all, so it carries over entirely.
+\item The second input has a $T$, so it gets turned to $(\forall e: E, T) \to \forall e: E, R$. We carry the original, then carry it, changing $T$ to $R$.
+\item The third input has a $T$, so it gets turned to $T \to R$.
+\item The last one is the output of the constructor, which is always turned to $R$.
+\end{itemthin}
+The corresponding part of the destructor would have the type \[
+\underbrace{\left(\forall ab: A \to B, C \to D\right)}_{x} \to
+\underbrace{(\forall e: E, T)}_{y} \to
+\underbrace{(\forall e: E, R)}_{e\smapsto P(ye)} \to
+\underbrace{T}_{z} \to
+\underbrace{R}_{Pz} \to
+\underbrace{R}_{P(cxyz)},
+\]
+where we've annotated each input assuming the function was $P$.
+
+There are again technical issues here. We assume that $T$ is $\dots \to \type$, because if $T$ was $\dots \to \prop$, the destructor would look slightly different. It is in inductive types that the difference between $\prop$ and $\type$ becomes more felt, as consequences of the relationship $\prop : \type$.
+
+It is also possible for there to be mutually inductive types, which adds another layer to the technicalities. These allow several inductive types to have each other as constructors. Checking that these are well-formed requires formulating a slightly different kind of strict positivity.
+
+There are also things known as co-inductive types. Inductive types have to reach a ``base case'', but co-inductive types remove this restriction. As I understand it, the theory of inductive types is still relatively young compared to the rest of type theory.
+
+\subsection{Universes}
+
+We've already run into some difficulties thinking about $\prop$ and $\type$ and the difference between them, that we've mostly swept away. It is now time to think about these head-on. Recall our definition of pure type systems. Part of the rules say that, if $\sf{A} \toto \sf{B}$ is a rule, and $A : \sf{A}$ and $B: \sf{B}$, then $\forall a: A, B$ is a type. Consider:
+\[
+\sf{id} = A \mapsto x \mapsto x : \forall A: \prop, A \to A.
+\]
+This is a perfectly normal function. We outlined in the section on pure type systems how to create this function using the rules. The two steps I want to highlight are how the type is made. I'll reproduce them here, with the thinking behind:
+\begin{itemize}
+\item We want to form $A \to A$. Well, $A: \prop$ and $A: \prop$, so we need the rule $\prop \toto \prop$. We do! So:
+\begin{itemize}
+  \item As $\prop \toto \prop$ is a rule, $A: \prop$ and $A: \prop$, we can form $A \to A: \prop$.
+\end{itemize}
+\item We want to form $\forall A: \prop, A \to A$. Well, $\prop: \type$ and $A \to A: \prop$, from earlier. So we need the rule $\type \toto \prop$. We do! So:
+\begin{itemize}
+  \item As $\type \toto \prop$ is a rule, $\prop: \type$ and $A \to A: \prop$, we can form $\forall A: \prop, A \to A$.
+\end{itemize}
+\end{itemize}
+
+As we mentioned earlier, the $\forall A: \prop$ here quantifies over \emph{all} propositions, including itself! This means that $\prop$ is an \textbf{impredicative} sort, as $\prop$s themselves can quantify over $\prop$s. The rule $\type \toto \prop$ is what allows this.
+
+Now consider this function: \[
+\sf{id?} = A \mapsto x \mapsto x : \forall A: \type, A \to A.
+\]
+This may seem like an okay function, but if we try to apply the same process, we run into a snag. We have $A \to A: \type$, good so far. Then, to produce $\forall A: \type, A \to A$, we'd need the type of $\type$. But the problem is that $\type$ doesn't \emph{have} a type!
+
+How do we patch this up? The impulse is to say $\type : \type$. But this runs into a problem, where we can derive a contradiction, by using the ideas from Russell's paradox. Let's create this inductive type called $\sf{box}$: \[
+  \sf{box}: \type =
+  \begin{cases}
+  \sf{filtermap}: \forall T: \type, (T \to \prop) \to (T \to \sf{box}) \to \sf{box}.
+  \end{cases}
+\]
+This is a kind of inductive type we've accepted so far. It actually implicitly uses $\type : \type$, because we are using $T$, which is a $\type$, to construct $\sf{box}$, which also lies in $\type$. Something like $\sf{filtermap}(T)(P)(F)$ is intended to be the box that contains all $Ft : \sf{box}$ for all $t : T$ that satisfy $Pt : \prop$.
+
+We can now write what it means for $B : \sf{box}$ to be inside another box:
+\begin{align*}
+\sf{inside}(B) &=\sf{ndestruct}_{\sf{box}}(\prop)(
+  T \mapsto
+  \mkern-10mu
+  \underbrace{P}_{T\sto \prop}
+  \mkern-10mu
+  \mapsto
+  \mkern-10mu
+  \underbrace{F}_{T\sto \sf{box}}
+  \mkern-10mu
+  \mapsto
+  \sf{exists}(T)(t \mapsto Pt \land \sf{eq}(B)(Ft))
+  ).
+\end{align*}
+Here we use the $\sf{exists}$ inductive type from earlier, as well as $\land$, which we could define with an inductive type.\footnote{A technical note here is that we need a parametrized $\sf{eq}$ to say this, and this would technically be $\sf{eq}(\sf{box})(B)(Ft)$. But from here, and for the rest of the write-up, we'll omit the parameter on $\sf{eq}$ due to laziness.} Now, define \[
+  \sf{russell} = \sf{filtermap}(\sf{box})(t \mapsto \lnot \sf{inside}(t)(t))(t \mapsto t).
+\]
+It is possible to prove that, given a box $B : \sf{box}$, it's equivalent that $\lnot \sf{inside}(B)(B)$ and $\sf{inside}(B)(\sf{russell})$. The forward direction follows from definition, after simplifying. In the backward direction, we have a proof that $\sf{inside}(B)(\sf{russell})$, which simplifies to $\sf{exists}(T)(t \mapsto \lnot\sf{inside}(t)(t) \land \sf{eq}(B)(t))$, and using destructors to replace $t$ with $B$ yields the conclusion we want.
+
+Given these, we now take $B$ as $\sf{russell}$ and get both $\lnot \sf{inside}(\sf{russell})(\sf{russell})$ and $\sf{inside}(\sf{russell})(\sf{russell})$, which gives $\false$, a contradiction. So saying that $\type : \type$, while it seems nice, leads to a bad type theory.\footnote{The reason we don't have this contradiction with $\prop$ is that the destructor for $\prop$ is different than the destructor for $\type$. We can't repeat this construction in $\prop$ because of that.}
+
+The way this is fixed, in the calculus of inductive constructions, is with \textbf{universes}. Along with $\prop$, we create the universe of sorts $\type_0, \type_1, \type_2, \ldots$, one for each natural number. We also add $\set$, as a ``small type'' that is different from $\prop$. This is the pure type system of the calculus of inductive constructions:
+
+\begin{itemthin}
+\item The sorts are $\set, \prop, \type_0, \type_1, \type_2, \ldots$.
+
+\item The relationships are $\set : \type_0$, $\prop : \type_0$, and $\type_i : \type_{i+1}$.
+
+\item The rules are:
+\vspace{-0.5em}
+\begin{itemthin}
+\item $\prop \toto \prop, \prop \toto \set, \set \toto \prop, \set \toto \set$,
+\item $\type_i \toto \prop$,
+\item and the special rule $\type_i \toto \type_j$, where we actually assign the result with type $\type_{\max\cbr{i, j}}$ instead of just $\type_j$.
+\end{itemthin}
+\end{itemthin}
+
+In the full calculus, instead of doing a bunch of definitions in $\type$, we mostly put our definitions in $\set$, unless we really need to go up to $\type$. Also note that the only sorts that can $\toto \type$ are $\type$s in the first place.
+
+Let's talk about the difference between $\prop$ and $\set$. Again, let's consider the function $\sf{id}$:
+\[
+  \sf{id} = A \mapsto x \mapsto x : \forall A: \prop, A \to A.
+\]
+The formation for $\forall A: \prop, A \to A$, as $\prop : \type_0$ and $A \to A : \prop$, relies on $\type_0 \toto \prop$. So this is still fine. Even in this system, $\prop$ is still impredicative. On the other hand, we can't write \[
+  \sf{id} = A \mapsto x \mapsto x : \forall A: \set, A \to A.
+\]
+If we tried to form this type, as $\set : \type_0$ and $A \to A : \set$, we'd need the rule $\type_0 \toto \set$. But we don't have that! So we \emph{can't} write this function. That's the big difference between $\set$ and $\prop$: $\prop$ is impredicative and $\set$ is not.
+
+Now, what about this version of $\sf{id}$? \[
+  \sf{id} = A \mapsto x \mapsto x : \forall A: \type, A \to A.
+\]
+Again, let's try to form the type. We didn't put the indices in the $\type$, because in practice, we omit the index and check that we can assign indices to make everything work. So, if we're making $A: \type_0$, that means $A \to A: \type_0$. As $\type_0 : \type_1$, we need the rule $\type_1 \toto \type_0$, which we do have. This places $\forall A: \type_0, A \to A : \type_1$. In general, we can see that if $A: \type_i$, then $\forall A: \type_i, A \to A : \type_{i+1}$.
+
+So this \emph{is} a good definition, and we can write things like $\sf{id}(\sf{nat})$ and whatever. On the other hand, we \emph{can't} write $\sf{id}(\sf{id})$, because if $\sf{id}$ takes in $A : \type_i$, the type of $\sf{id}$'s type is $\type_{i+1}$, and we can't put $\type_{i+1}$ into something that takes $\type_i$.
+
+\subsection{Equality}
+
+Let's talk about the type theory thing I understand the least, which is the notion of equality, and how it differs depending on the flavor of type theory you're using.
+
+We first discuss the difference between intension and extension. And yes, that's intension with an `s'. Consider these two functions: $x \mapsto 3(2x + 6) : \sf{int} \to \sf{int}$, and $x \mapsto 2(3x + 9) : \sf{int} \to \sf{int}$. These two functions have a different \textbf{intension}: the way they compute their results are different, and we can tell that just by looking at it. On the other hand, we know that these functions have the same \textbf{extension}: for the same inputs, the functions will give the same outputs.
+
+\begin{itemize}
+\item First of all, there's \textbf{definitional equality}, or intensional equality. If we set one thing to be equal to another, by \emph{definition}, then they are definitionally equal. So for example, $2$ is definitionally equal to $S(SO)$.
+
+\item Looser is \textbf{computational equality}, or judgmental equality. Two things are computationally equal if they simplify to two things that are definitionally equal. So for example, $(x \mapsto x)2$ and $2$ are computationally equal.
+
+\item Even looser is \textbf{propositional equality}, or extensional equality. For example, $\sf{add}(a)(b)$ is propositionally equal to $\sf{add}(b)(a)$. We represented this with $\sf{eq}$, which is of type $\prop$, which is why it's called propositional equality.
+\end{itemize}
+
+There are two big flavors of type theory, intensional type theory, and extensional type theory. \textbf{Intensional type theory} is the one we've been building up so far. Definitional equality is a thing, by how we defined type theory. It is also by definition that, if two things are computationally equal, we can replace them with one another. On the other hand, even if things are propositionally equal, we can't always freely replace them for each other.
+
+We've shown things like $\sf{fequal}$, which state that if $\sf{eq}(x)(y)$, then $\sf{eq}(fx)(fy)$. But note that we started with propositional equality, and we ended once again with propositional equality. Sure, $\sf{fequal}$ can solve some of our problems with replacing $x$ and $y$ within \emph{terms}. For example, we can use $f = t \mapsto \sf{plus}(t)(2)$ to show $\sf{eq}(\sf{plus}(x)(2))(\sf{plus}(y)(2))$. But what happens if they're in \emph{types}? Suppose $P: \forall n: \sf{nat}, \sf{inttup}(n) \to \prop$. If you knew $\forall a: \sf{inttup}(x), Pxa$, is it true that $\forall a: \sf{inttup}(y), Pya$? The answer is \emph{yes}, but it takes effort to prove it.
+
+In \textbf{extensional type theory}, we add the rule that if things are propositionally equal to each other, they are also computationally equal to each other. If we've found something of type $\sf{eq}(x)(y)$, then we can freely replace $x$ for $y$ \emph{anywhere}. This makes our previous problem much easier. But it's also not a rule that means anything \emph{computationally}, unlike our other rules. It also makes type checking undecidable, which we don't want for many applications.\footnote{I don't actually have a good example for why we don't usually do extensional type theory. If you have any you should tell me.}
+
+Equality turns out to be an active area of research in type theory, and people are investigating what it means for two things to be equal. The field of \textbf{homotopy type theory} arises from taking intensional type theory, interpreting it using homotopy (whatever that means), and adding the univalence axiom, which is an axiom about equality. It's a fascinating field that I wish I knew more about.
+
+\subsection{Axioms}
+
+There are various strengths of axioms to add to our theory, all equality-related up until the end:
+
+\begin{itemize}
+\item There's \textbf{unicity of identity proofs}. This states that if $a: \sf{eq}(x)(y)$ and $b: \sf{eq}(x)(y)$, then $\sf{eq}(a)(b)$. Because the only constructor for $\sf{eq}$ is $\sf{reflexivity}$, that means that all proofs of equality are propositionally equal to $\sf{reflexivity}$.
+
+\item There's \textbf{proof irrelevance}. This states that if $P : \prop$, $a : P$, and $b : P$, then $\sf{eq}(a)(b)$, or that any two proofs of the same proposition are propositionally equal. We can derive unicity of identity proofs from this.
+
+\item There's \textbf{propositional extensionality}. This states that if $P$ and $Q$ are $\prop$s, $P \to Q$, and $Q \to P$, then $\sf{eq}(P)(Q)$, or that equivalent propositions are propositionally equal. If two propositions imply each other, then they have the same extension, and that's how it gets its name. We can derive proof irrelevance from this.
+
+\item There's \textbf{predicate extensionality}. This states that if $P$ and $Q$ are both $A \to \prop$, then if $\forall x : A, Px \to Qx$ and $\forall x : A, Qx \to Px$, we get $\sf{eq}(P)(Q)$. Equivalent predicates are propositionally equal. We can derive propositional extensionality from this.
+
+\item There's \textbf{functional extensionality}. This states that if $f$ and $g$ are $A \to B$ and $\forall x: A, \sf{eq}(fx)(gx)$, then $\sf{eq}(f)(g)$. This is the equality of functions we use in set theory. Propositional extensionality and functional extensionality can be used to prove predicate extensionality.
+
+\item There's \textbf{axiom of choice}. This states that if $R: A \to B \to \prop$, and $\forall x: A, \sf{exists}(B)(y \mapsto Rxy)$, then $\sf{exists}(A \to B)(f \mapsto \forall x: A, Rx(fx))$. This is a functional way to state the more familiar axiom of choice: $R$ is a family of sets with $x$ as the indices and $y$ as the elements, and $f$ is the choice function that associates each index with an element.
+
+\item There's \textbf{excluded middle}. This states that for all $P: \prop$, either $P$ or $\lnot P$. A result known as Diaconescu's theorem states that propositional extensionality, functional extensionality, and the axiom of choice, imply excluded middle.
+\end{itemize}
+
+So behold, the steady ladder that goes from seemingly ``weak'' extensionality axioms, all the way to classical logic. I think Diaconescu's theorem is really fascinating, and shows just how ``classical'' the axiom of choice is.
+
+\subsection{What next?}
+
+If you're interested in learning more, probably a good next step would be to ``properly'' learn how type theory is built. There's the concepts of contexts and judgments, and it's nice to read the conversion rules and typing rules in full rigor. There's the metatheory, with formal semantics and Heyting algebras and proofs as to when type checking is or isn't decidable. There are proof assistants like Coq and Lean in active development that use the theory we've built. There's homotopy type theory, which streches out the Curry--Howard isomorphism even more.
+
+And you can learn all of these by doing some more reading:
+
+\begin{thebibliography}{99}
+
+\bibitem{avigad} Avigad, Jeremy, Leonardo de Moura, and Soonho Kong. ``Theorem proving in Lean.'' (2015).
+
+Intro-level textbook about working with Lean. Examples drawn from math.
+
+\bibitem{barendregt} Barendregt, Henk P. ``Lambda calculi with types.'' (1992).
+
+Introduced the lambda cube. Talks about both Curry--style (implicitly-typed) and Church--style (explicitly-typed) lambda calculus.
+
+\bibitem{bertot} Bertot, Yves, and Pierre Castéran. \emph{Interactive theorem proving and program development: Coq'Art: the calculus of inductive constructions.} Springer Science, Business Media, 2013.
+
+Intro-level textbook about working with Coq. Draws many of its examples from program verification, and several from math too.
+
+\bibitem{chlipala} Chlipala, Adam. \emph{Certified programming with dependent types: a pragmatic introduction to the Coq proof assistant.} MIT Press, 2013.
+
+More advanced introduction to working with Coq. A focus on program verification, but an excellent resource for Coq's theory too.
+
+\bibitem{paulin} Paulin-Mohring, Christine. ``Inductive definitions in the system Coq rules and properties.'' Springer, Berlin, Heidelberg, 1993.
+
+Introduction to inductive types. It explains the rules in more detail, and talks a bit about how inductive types actually work in Coq, where destructors aren't primitive, but built up from other language constructs.
+
+\bibitem{sorensen} Sørensen, Morten Heine, and Pawel Urzyczyn. \emph{Lectures on the Curry-Howard isomorphism.} Elsevier, 2006.
+
+Comprehensive textbook development from untyped lambda calculus to pure type systems. Goes over classical logic, sequent calculus, and formal semantics.
+
+\bibitem{univalent} The Univalent Foundations Program, Institute for Advanced Study. \emph{Homotopy type theory: Univalent foundations of mathematics.} 2013.
+
+The huge homotopy type theory book. I've barely read it, so I can't really comment.
+
+\end{thebibliography}
+
+\end{document}

@@ -1,0 +1,89 @@
+\documentclass[11pt,paper=letter]{scrartcl}
+\usepackage[wide]{cjquines}
+\usepackage{minted}
+
+\renewcommand{\sf}{\mathsf}
+
+\begin{document}
+
+\title{Curry--Howard by example}
+\subtitle{Tiny Explanations 4}
+\author{Carl Joshua Quines}
+\date{June 4, 2021}
+
+\maketitle
+
+\begin{itemize}[leftmargin=*]
+\item The type of $\pi$ is $\sf{real}$.
+\item The type of $3$ is $\sf{int}$, for integer.
+\item The type of $3$ can also be $\sf{real}$. But the $\sf{int}$ $3$ and $\sf{real}$ $3$ are different, because they have different types. For the rest of the examples we'll assume $3$ has type $\sf{int}$.
+\item The type of $x \mapsto \floor{x}$ is $\sf{real} \to \sf{int}$, because it takes a real number to an integer.
+\item We write $(x \mapsto \floor{x})(\pi) = 3$. By applying a function of type $\sf{real} \to \sf{int}$ to something of type $\sf{real}$, we get something of type $\sf{int}$.
+\item The type of $x \mapsto -x$ is $\sf{int} \to \sf{int}$ when it takes integers to integers. It can also be $\sf{real} \to \sf{real}$, when it takes reals to reals. These are two different functions, because they have different types.
+\item The type of $x \mapsto x + 3$, when it takes integers, is $\sf{int} \to \sf{int}$.
+\item We cannot write $(x \mapsto x + 3)(\pi)$, because the types don't match. $x \mapsto x + 3$ wants an input of type $\sf{int}$, but $\pi$ is of type $\sf{real}$.
+\item Functions can return functions. Think of $+$ as a function that takes an $\sf{int}$, like $3$, and returns a function like $x \mapsto x+3$, which has type $\sf{int} \to \sf{int}$. Concretely, $+$ is $x \mapsto (y \mapsto y + x)$. This has type $\sf{int} \to (\sf{int} \to \sf{int})$.
+\item We write $+(3)(4) = 7$. First, $+$ has type $\sf{int} \to (\sf{int} \to \sf{int})$, so $+(3)$ has type $\sf{int} \to \sf{int}$. So, $+(3)(4)$ should have type $\sf{int}$.
+\item As another example, consider $A = y \mapsto (z \mapsto y(z))$. This is ``apply''. You can write $A(x \mapsto -x) = z \mapsto (x \mapsto -x)(z) = z \mapsto -z$.
+\item If we have some function $f$, and we're given that $f(\pi) = 3$, then we can \emph{infer} that $f$ has type $\sf{real} \to \sf{int}$.
+\item If we have some function $f$, and we see $f(\pi)$, we can also infer that $f$ has type $\sf{real} \to \alpha$, for some type $\alpha$.
+\item If we have some function $f$, and we see $f(x)$, we can infer that $f$ has type $\alpha \to \beta$ and $x$ has type $\alpha$, for some types $\alpha$ and $\beta$.
+\item The type of $I = x \mapsto x$ is $\alpha \to \alpha$ for some type $\alpha$. What is $\alpha$? It depends on the type of $x$. We say that the type of this function is \emph{parametrized} over $\alpha$. Because this function can take different types, this function is \emph{polymorphic}.
+\item The type of $K = x \mapsto (y \mapsto x)$ is $\alpha \to (\beta \to \alpha)$.
+\item What is the type of $A = y \mapsto (z \mapsto y(z))$? Say $z$ has type $\alpha$. Then:
+\begin{itemize}
+\item From $y(z)$, we infer $y$ takes the type of $z$, which is $\alpha$.
+\item There are no other restrictions to the output type, so let's say $y(z)$ has type $\beta$.
+\item This means $y$ itself is $\alpha \to \beta$.
+\item This means $A$ itself has type $(\alpha \to \beta) \to (\alpha \to \beta)$.
+\end{itemize}
+\item What is the type of $S = x \mapsto \left(y \mapsto \left(z \mapsto x(z)(y(z))\right)\right)$? Say $z$ has type $\alpha$. Then:
+\begin{itemize}
+\item From $y(z)$, we infer $y$ takes the type of $z$, which is $\alpha$.
+\item There are no other restrictions to the output type, so let's say $y(z)$ has type $\beta$.
+\item This means $y$ itself is $\alpha \to \beta$.
+\item From $x(z)$, we infer $x$ takes the type of $z$, which is $\alpha$.
+\item From $x(z)(y(z))$, we infer $x(z)$ takes the type of $y(z)$, which is $\beta$.
+\item There are no other restrictions, so let's say $x(z)(y(z))$ has type $\gamma$.
+\item This means $x(z)$ itself has type $\beta \to \gamma$.
+\item This means $x$ itself has type $\alpha \to (\beta \to \gamma)$.
+\item This means $S$ itself has type $\left(\alpha \to (\beta \to \gamma)\right) \to \left((\alpha \to \beta) \to \left(\alpha \to \gamma\right)\right)$.
+\end{itemize}
+\item This process doesn't always work. As a simple example, what is the type of $x \mapsto x(x)$?
+\item What is the type of $A(I)$?
+\begin{itemize}
+\item We see $I$ has type $\alpha \to \alpha$.
+\item We see $A$ has type $(\alpha \to \beta) \to (\alpha \to \beta)$. For clarity, we'll use different letters, and say $A$ has type $(A \to B) \to (A \to B)$.
+\item In particular, $A$ takes input of type $A \to B$, and outputs type $A \to B$.
+\item For the type of $I$ to match the input type of $A$, we want to match $\alpha \to \alpha$ with $A \to B$. To do this, we take $A = \alpha$ and $B = \alpha$.
+\item The output type of $A$ is $A \to B$. So after applying $I$, the type of $A(I)$ will be $\alpha \to \alpha$.
+\end{itemize}
+\item What is the type of $S(K)$?
+\begin{itemize}
+\item We see $K$ has type $\alpha \to (\beta \to \alpha)$.
+\item We see $S$ has type $\left(A \to (B \to C)\right) \to \left((A \to B) \to \left(A \to C\right)\right)$.
+\item In particular, $S$ takes input of type $A \to (B \to C)$, and outputs type $(A \to B) \to (A \to C)$.
+\item For the type of $K$ to match the input type of $S$, we want to match $\alpha \to (\beta \to \alpha)$ with $A \to (B \to C)$. To do this, we take $A = \alpha$, $B = \beta$, and $C = \alpha$.
+\item The output type of $S$ is $(A \to B) \to (A \to C)$. So after applying $K$, the type of $S(K)$ will be $(\alpha \to \beta) \to (\alpha \to \alpha)$.
+\end{itemize}
+\item What is the type of $S(K)(K)$?
+\begin{itemize}
+\item We see $K$ has type $\alpha \to (\beta \to \alpha)$.
+\item We see $S(K)$ has type $(A \to B) \to (A \to A)$.
+\item For the type of $K$ to match the input type of $S(K)$, we want to match $\alpha \to (\beta \to \alpha)$ with $A \to B$. To do this, we take $A = \alpha$ and $B = \beta \to \alpha$.
+\item The output type of $S(K)$ is $A \to A$. So after applying $K$, the type of $S(K)(K)$ will be $\alpha \to \alpha$.
+\end{itemize}
+\item In fact, we can rewrite $S(K)(K)(x)$ as $x$: $S(K)(K)(x) = K(x)(K(x)) = x$.
+\item If I gave you the proof of $A$, and a proof of $A \implies B$, you can produce a proof of $B$. If I gave you a term of type $\alpha$, and a term of type $\alpha \to \beta$, you can produce a term of type $\beta$.
+\item Our derivation for the type of $S(K)(K)$ can be thought of as a proof, that given the propositional schema \[
+\kappa: A \implies (B \implies A)
+\] and \[
+\sigma: (A \implies (B \implies C)) \implies \left((A \implies B) \implies (A \implies C)\right),
+\] we can derive the theorem $A \implies A$. First we apply $\kappa$ to $\sigma$, then we apply $\kappa$ again. The term $S(K)(K)$ \emph{itself} carries the proof.
+\item Given the propositional schema $\kappa$ and $\sigma$, we can derive the theorem \[
+(B \implies C) \implies \left( (A \implies B) \implies (A \implies C)\right).
+\] The proof is to consider the type of $S(K(S))(K)$. (Check this!)
+\item This relationship between type systems and proofs is known as the \emph{Curry--Howard correspondence}, and it forms part of the basis of several versions of type theory.
+\end{itemize}
+
+\end{document}
