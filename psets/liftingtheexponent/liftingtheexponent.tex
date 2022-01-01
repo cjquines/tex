@@ -73,10 +73,10 @@ $$\nu_p\del{\del{a^{p^{\alpha}}}^\beta - \del{b^{p^{\alpha}}}^\beta} = \nu_p\del
 which means we only have to show the case when $\nu_p(n) = 0$. This is already our inductive step! So these two cases, the one where $\nu_p(n) = 0$ and $n = p$, will form the two base cases of our induction.
 
 The case $\nu_p(n) = 0$ is easy. Write
-$$\nu_p(a^n - b^n) = \nu_p(a - b) \quad \iff \quad \nu_p\del{\frac{a^p - b^p}{a - b}} = 0;$$
+$$\nu_p(a^n - b^n) = \nu_p(a - b) \quad \iff \quad \nu_p\del{\frac{a^n - b^n}{a - b}} = 0;$$
 where we get the second equation by transposing $\nu_p(a - b)$ and applying the quotient rule. We only need to show that 
-$$p \nmid a^{p-1} + a^{p-2}b + \cdots + b^{p-1}.$$
-This follows because $a \equiv b \pmod p$, so substitute this to get $$a^{p-1} + a^{p-1} + \cdots + a^{p-1} \equiv n a^{p-1} \not\equiv 0.$$
+$$p \nmid a^{n-1} + a^{n-2}b + \cdots + b^{n-1}.$$
+This follows because $a \equiv b \pmod p$, so substitute this to get $$a^{n-1} + a^{n-1} + \cdots + a^{n-1} \equiv n a^{n-1} \not\equiv 0.$$
 The other base case, $n = p$, is harder. We need to show that
 $$\nu_p(a^p - b^p) = \nu_p(a - b) + 1 \quad \iff \quad \nu_p\del{\frac{a^p - b^p}{a - b}} = 1.$$
 There are two parts here. First, we want to show

@@ -591,8 +591,6 @@
 \newcommand{\RR}{\mathbb R}
 \newcommand{\ZZ}{\mathbb Z}
 
-\newcommand{\Id}{\mathrm{Id}}
-
 \newcommand{\dang}{\measuredangle}
 \newcommand{\ray}[1]{\overrightarrow{#1}} 
 \newcommand{\seg}[1]{\overline{#1}}
@@ -601,6 +599,14 @@
 \newcommand{\dg}{^\circ}
 \newcommand{\dydx}{\frac{dy}{dx}\,}
 \newcommand{\ddx}{\frac{d}{dx}\,}
+
+\renewcommand{\land}{\wedge}
+\renewcommand{\lor}{\vee}
+\renewcommand{\lnot}{\neg}
+\newcommand{\true}{\top}
+\newcommand{\false}{\bot}
+
+\newcommand{\restrict}[2]{\left.#1\right|_{#2}}
 
 \ifcjqnoimport
 
@@ -619,6 +625,7 @@
   \DeclareMathOperator{\Gal}{Gal}
   \DeclareMathOperator{\GL}{GL}
   \DeclareMathOperator{\Hom}{Hom}
+  \DeclareMathOperator{\Id}{Id}
   \DeclareMathOperator{\im}{im}
   \DeclareMathOperator{\Ker}{Ker}
   \DeclareMathOperator{\Mor}{Mor}
@@ -632,8 +639,13 @@
 
   \newcommand{\bm}[1]{\begin{bmatrix}#1\end{bmatrix}}
   \newcommand{\vm}[1]{\begin{vmatrix}#1\end{vmatrix}}
+
   \newcommand{\e}[1]{\EE\sbr{#1}}
   \newcommand{\p}[1]{\PP\sbr{#1}}
+
+  \newcommand{\bij}{\xrightarrow{\sim}}
+  \newcommand{\inj}{\hookrightarrow}
+  \newcommand{\surj}{\twoheadrightarrow}
 \fi
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

@@ -6,8 +6,6 @@
 \renewcommand{\land}{\wedge}
 \renewcommand{\lor}{\vee}
 \renewcommand{\lnot}{\neg}
-\newcommand{\true}{\top}
-\newcommand{\false}{\bot}
 \newcommand{\vc}[1]{\vcenter{\hbox{#1}}}
 \newcommand{\simp}{\vspace{0.5em}\noindent\hangindent=2em\textsc{simplicio:} }
 \newcommand{\salv}{\vspace{0.5em}\noindent\hangindent=2em\textsc{salviati:} }
@@ -48,7 +46,7 @@ The intended pre-requisites:
 \begin{itemize}
 \item You're familiar with logical notation, enough that you know how to read $\forall x: \RR, \exists y: \RR, x + y = 0$ and have it make sense.
 
-\item You know some classical logic, enough that the statement ``if either $A$ or $B$, and $A$ implies not $B$, then $B$'' makes sense.
+\item You know some classical logic, enough that the statement ``if $A$ or $B$, and not $A$ implies $B$, then $B$'' makes sense.
 
 \item You know enough set theory to know the definition of a function $f : A \to B$ as a subset of $A \times B$ satisfying certain properties.
 
@@ -861,7 +859,7 @@ Let's make our first inductive type, which we'll call $\sf{riddle}$. We'll say $
 \]
 The first constructor says that $\sf{foo}$ is a term of type $\sf{riddle}$. The second constructor says that $\sf{bar}$ is a different term of type $\sf{riddle}$. Because these are the only two constructors, the only terms in $\sf{riddle}$ are $\sf{foo}$ and $\sf{bar}$.
 
-When we defined an inductive type, we gave its constructors. After defining the type, we also get its partner \textbf{destructor}.\footnote{In most sources, these are called recursors or eliminators. We call them destructors as the opposite of constructors. Coq and Lean both have destructors, but they instead focus on pattern-matching and fixpoints, which are more convenient to use.} If we want to define a function with type $\sf{riddle} \to T$, we have to use the destructor. The idea is that we need to give what things will get taken to in each possible constructor. That means if we want to specify a function $P$, we need to say what $P(\sf{foo}) : T$ is, and we need to say what $P(\sf{bar}) : T$ is. After specifying both of these, we now have a function $\sf{riddle} \to T$ So its destructor, which we'll name $\sf{ndestruct}$ for reasons to be clear later, is a function with the type \[
+When we defined an inductive type, we gave its constructors. After defining the type, we also get its partner \textbf{destructor}.\footnote{In most sources, these are called recursors or eliminators. We call them destructors as the opposite of constructors. Coq and Lean both have destructors, but they instead focus on pattern-matching and fixpoints, which are more convenient to use.} If we want to define a function with type $\sf{riddle} \to T$, we have to use the destructor. The idea is that we need to give what things will get taken to in each possible constructor. That means if we want to specify a function $P$, we need to say what $P(\sf{foo}) : T$ is, and we need to say what $P(\sf{bar}) : T$ is. After specifying both of these, we now have a function $\sf{riddle} \to T$. So its destructor, which we'll name $\sf{ndestruct}$ for reasons to be clear later, is a function with the type \[
 \sf{ndestruct}_{\sf{riddle}}:
 \underbrace{\forall T: \type}_{\text{return type}},
 \underbrace{T}_{P(\sf{foo})} \to
@@ -1460,7 +1458,7 @@ So behold, the steady ladder that goes from seemingly ``weak'' extensionality ax
 
 \subsection{What next?}
 
-If you're interested in learning more, probably a good next step would be to ``properly'' learn how type theory is built. There's the concepts of contexts and judgments, and it's nice to read the conversion rules and typing rules in full rigor. There's the metatheory, with formal semantics and Heyting algebras and proofs as to when type checking is or isn't decidable. There are proof assistants like Coq and Lean in active development that use the theory we've built. There's homotopy type theory, which streches out the Curry--Howard isomorphism even more.
+If you're interested in learning more, probably a good next step would be to ``properly'' learn how type theory is built. There's the concepts of contexts and judgments, and it's nice to read the conversion rules and typing rules in full rigor. There's the metatheory, with formal semantics and Heyting algebras and proofs as to when type checking is or isn't decidable. There are proof assistants like Coq and Lean in active development that use the theory we've built. There's homotopy type theory, which stretches out the Curry--Howard isomorphism even more.
 
 And you can learn all of these by doing some more reading:
 
