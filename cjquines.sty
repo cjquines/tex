@@ -26,6 +26,7 @@
 \newif\ifcjqnoimport\cjqnoimportfalse
 \newif\ifcjqnodefault\cjqnodefaultfalse
 \newif\ifcjqnoextlink\cjqnoextlinkfalse
+\newif\ifcjqnounicode\cjqnounicodefalse
 
 \newif\ifcjqwide\cjqwidefalse
 \newif\ifcjqthin\cjqthinfalse
@@ -40,6 +41,7 @@
 \DeclareOption{noimport}{\cjqnoimporttrue}
 \DeclareOption{nodefault}{\cjqnodefaulttrue}
 \DeclareOption{noextlink}{\cjqnoextlinktrue}
+\DeclareOption{nounicode}{\cjqnounicodetrue}
 
 \DeclareOption{wide}{\cjqwidetrue}
 \DeclareOption{thin}{\cjqthintrue}
@@ -71,13 +73,21 @@
     microtype,
     multicol,
     sansmath,
-    thmtools
+    thmtools,
+    xcolor
   }
-  \RequirePackage[colorlinks=true, allcolors=MidnightBlue]{hyperref}
   \PassOptionsToPackage{dvipsnames}{color}
   \PassOptionsToPackage{dvipsnames}{xcolor}
   \definecolor{MidnightBlue}{RGB}{0,81,120}
   \definecolor{DarkMidnightBlue}{RGB}{0,40,60}
+  \definecolor{Black}{RGB}{0,0,0}
+  \RequirePackage[colorlinks=true, allcolors=MidnightBlue]{hyperref}
+
+  \ifcjqnounicode
+
+  \else
+    \RequirePackage[T1]{fontenc}
+  \fi
 
   \ifcjqnoextlink
 
