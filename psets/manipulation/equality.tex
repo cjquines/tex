@@ -1,0 +1,192 @@
+\documentclass[11pt,paper=letter]{scrartcl}
+\usepackage[alttitle]{cjquines}
+
+\begin{document}
+
+\title{Equality cases}
+\author{CJ Quines}
+\date{May 15, 2022}
+
+\maketitle
+
+\subsubsection*{Warmup}
+
+\begin{enumerate}
+
+\item (Hong Kong TST 2021) Find all real triples $(a,b,c)$ satisfying
+\[(2^{2a}+1)(2^{2b}+2)(2^{2c}+8)=2^{a+b+c+5}.\]
+
+\textbf{Sketch:} Let $x, y, z = 2^a, 2^b, 2^c$, which are positive. We can apply AM--GM to get $x^2 + 1 \ge 2x$, $y^2 + 2 \ge 2\sqrt2 y$, $z^2 + 8 \ge 4\sqrt2 z$. Multiply them all to get the original equation, but with an inequality. Because we're given it's an equality, we must have equality cases for all the original inequalities. Thus $(x, y, z) = (1, \sqrt2, 2\sqrt2)$, so $(a, b, c) = (0, \frac12, \frac32)$.
+
+\item Find all real triples $(x, y, z)$ such that \[
+x^5 - y^2 = 28 \qquad
+y^5 - z^2 = 28 \qquad
+z^5 - x^2 = 28.
+\]
+
+\textbf{Sketch:} As $x^5 = y^2 + 28 > 0$, all are positive. Let $f(x) = \sqrt[5]{x^2 + 28}$. This is increasing over the positive reals, which means that if $a > b$, then $f(a) > f(b)$. Now rewrite the given as $f^3(x) = f^2(x) = f(x) = x$. (For this article we'll use $f^n(x)$ to mean $f$ applied $n$ times to $x$.)
+
+Suppose that $f(x) > x$. As $f$ is increasing, we get $f^2(x) > f(x)$, and $f^3(x) > f^2(x)$, so $f^3(x) > x$. Similarly, if $f(x) < x$, then $f^3(x) < x$. But because $f^3(x) = x$, neither of $f(x) > x$ and $f(x) < x$ are true. It follows $f(x) = x$. We can find the positive solution $x = 2$, and as $f$ is increasing, it must be the only solution.
+
+\end{enumerate}
+
+\subsubsection*{Theory}
+
+We'll think about the equality cases of inequalities. The trick is to set up an inequality, show that equality is achieved, and use the equality case to solve for something. One pattern is to combine inequalities to get an equality. For example, if you could show that $a \ge b \ge c \ge \cdots \ge a$, then equality must hold for all the signs in between. Or if you're given $a \ge x$, $b \ge y$, $c \ge z$, and you prove that $a + b + c = x + y + z$, equality must hold in the original inequalities.
+
+The other pattern is to think about the behavior of functions. We say a function is \textit{monotonic} if it is increasing or decreasing. A monotonic function is also injective. Further, if $f$ is monotonic and $f^n(x) = x$, then $f(x) = x$. We'll use these facts for these problems, but they're also useful for functional equations in general.
+
+\subsubsection*{Examples}
+
+\begin{enumerate}
+
+\item Let $n > 3$ be an integer. Find all tuples of real numbers $(a_1, \ldots, a_{n+2})$ that satisfy $a_{n+1} = a_1$, $a_{n+2} = a_2$, and
+\begin{align*}
+  a_1 - 3a_2 + 2a_3 &\ge 0 \\
+  a_2 - 3a_3 + 2a_4 &\ge 0 \\
+  & \vdotswithin{=} \\
+  a_n - 3a_{n+1} + 2a_{n+2} &\ge 0.
+\end{align*}
+
+\textbf{Sketch:} We add everything to get $0 \ge 0$, which is an equality, so each of the original inequalities are also equalities. Write these as, for example, $a_1 - a_2 = 2(a_2 - a_3)$. That means if $f(x) = 2x$, then \[
+  a_1 - a_2 = f(a_2 - a_3) = f^2(a_3 - a_4) = \cdots = f^n(a_1 - a_2).
+\]
+But as $f$ is monotonic, it follows $f(a_1 - a_2) = a_1 - a_2$, or $a_1 = a_2$. By symmetry, all variables must be equal; it can be checked these are all solutions.
+
+\item Find all triples of positive reals $(x, y, z)$ such that \[
+x + y^2 + z^3 = 3 \qquad
+y + z^2 + x^3 = 3 \qquad
+z + x^2 + y^3 = 3.
+\]
+
+\textbf{Sketch:} Add all the equations to get \[
+  (x^3 + x^2 + x - 3)
+  + (y^3 + y^2 + y - 3)
+  + (z^3 + z^2 + z - 3)
+  = 0.
+\]
+Let $f(x) = x^3 + x^2 + x - 3$; then $f(x) + f(y) + f(z) = 0$. Note that $f$ is increasing over the positive reals, so the only solution to $f(x) = 0$ is $x = 1$. If $x = y = z = 1$, then we're done, so suppose that's not the case.
+
+Because $f$ is increasing, one of the variables is less than $1$, and one of the variables is greater than $1$. WLOG, suppose $x < 1$ and $z > 1$. We now consider both cases for $y$. If $y \ge 1$, then $x > x^3$, $y^2 \ge y$, and $z^3 > z^2$. Adding the inequalities gives $3 > 3$, contradiction. Similarly, we can find a contradiction when $y < 1$.
+
+\item (USA 1989) Let $u$ and $v$ be positive real numbers such that \[
+  (u + u^2 + \cdots + u^8) + 10u^9 = (v + v^2 + \cdots + v^{10}) + 10v^{11} = 8.
+\]
+Determine, with proof, which of $u$ and $v$ is larger.
+
+\textbf{Sketch:} Let $f(x) = x + \cdots + 10x^9$ and $g(x) = x + \cdots + 10x^{11}$; rewrite as $f(u) = g(v) = 8$. We now investigate the behavior of $f$ and $g$.
+
+They have a lot of equal terms, encouraging us to do $g(x) - f(x)$. This factors as $x^9(x + 1)(10x - 9)$. That means when $x = 0$, both $f$ and $g$ are equal to $0$, and when $x = \frac9{10}$, both $f$ and $g$ are equal to $9$. Further, over $0 < x < \frac9{10}$, both $f$ and $g$ are increasing. That means that $u$ and $v$ are in this interval. Finally, in this interval, we can see that $g(x) - f(x)$ is negative, so $g(x) < f(x)$. If $u \ge v$, then $f(u) \ge f(v) > g(v)$, contradiction.
+
+\textbf{Remark:} Note that most of this problem wasn't about $u$ or $v$, it was about $f$ and $g$.
+
+\end{enumerate}
+
+\subsubsection*{Problems}
+
+\begin{enumerate}
+
+\item Let $n > 2$ be an integer. Find all sets of $n$ real numbers such that each number is the sum of the squares of the other $n - 1$ numbers. \hint{\ref{h:1}}
+
+\item (Romania JBMO TST 2006) Find all real numbers $a$ and $ b$ such that
+\[ 2(a^2 + 1)(b^2 + 1) = (a + 1)(b + 1)(ab + 1). \]
+
+\item (PEMNAS 2019) Find all real triples $(x, y, z)$ such that
+\[ \frac x 2 + \frac1x = y \qquad \frac y 2 + \frac1y = z \qquad \frac z 2 + \frac1z = x. \]
+\hint{\ref{h:1}}
+
+\item (Austria 2008) Let $n \ge 4$ be an integer and $a > 0$ be a real number. Find all tuples of positive reals $(x_1, \ldots, x_{n+2})$ that satisfy $x_{n+1} = x_1$, $x_{n+2} = x_2$, and \[
+  x_1x_2(3a - 2x_3) = x_2x_3(3a - 2x_4) = \cdots =
+  x_nx_{n+1}(3a - 2x_{n+2}) = a^3.
+\]
+\hint{\ref{h:2}}
+
+\item (Czech-Polish-Slovak 2005) Solve the system of equations
+\begin{align*}
+  x_1+x_2^2+\dots+x_n^n&=n \\
+  x_1+2x_2+\dots+nx_n&=\frac{n(n+1)}{2}
+\end{align*}
+for $n$-tuples $(x_1, x_2, \dots, x_n)$ of nonnegative real numbers.
+\hint{\ref{h:3}}
+
+\item (ISL 1993) Let $a > 1$ be a real number. Find all tuples of real numbers $(x_1, x_2, \ldots, x_{1001})$ that satisfy $x_{1001} = x_1$ and \[
+  x_1^2 = ax_2 + 1 \qquad
+  x_2^2 = ax_3 + 1 \qquad
+  \cdots \qquad
+  x_{1000}^2 = ax_{1001} + 1.
+  \]
+\hints{\ref{h:1} \ref{h:4}}
+
+\end{enumerate}
+
+\subsubsection*{Harder problems}
+
+\begin{enumerate}[resume]
+
+\item (\href{https://artofproblemsolving.com/community/c6h2647374p22910593}{V-217}) Let $a$, $b$, and $c$ be any three complex numbers satisfying $a + b + c = 0$, $|a| \le |b| \le |c|$, and $|a - b| \ge |b - c|$. Find all real $x$ such that $|b + c|^x + |b - c|^x = \left( |b| + |c| \right)^{x}$.
+\hints{\ref{h:5} \ref{h:6}}
+
+\item (Greece TST 2020) Find all functions $f \from \RR_{>0} \to \RR_{>0}$ such that \[
+  f(xf(y))+f(yf(z))+f(zf(x))=xy+yz+zx,\]
+for all positive real numbers $x, y, z$.
+\hint{\ref{h:7}}
+
+\item (Bulgaria 2022) Let $n\geq 4$ be a positive integer and $x_{1},x_{2},\ldots ,x_{n},x_{n+1},x_{n+2}$ be real numbers such that $x_{n+1}=x_{1}$ and $x_{n+2}=x_{2}$. If there exists an $a>0$ such that
+\[x_{i}^2=a+x_{i+1}x_{i+2}\quad\forall 1\leq i\leq n\]then prove that at least $2$ of the numbers $x_{1},x_{2},\ldots ,x_{n}$ are negative.
+\hints{\ref{h:8} \ref{h:9}}
+
+% https://artofproblemsolving.com/community/c6h2825861p24986353
+
+\item (USA TST 2007) Let $n$ be a positive integer and let $a_1 \le a_2 \le \dots \le a_n$ and $b_1 \le b_2 \le \dots \le b_n$ be two nondecreasing sequences of real numbers such that
+\[ a_1 + \dots + a_i \le b_1 + \dots + b_i \text{ for every } i = 1, \dots, n \]
+and
+\[ a_1 + \dots + a_n = b_1 + \dots + b_n. \]
+Suppose that for every real number $m$, the number of pairs $(i,j)$ with $a_i-a_j=m$ equals the numbers of pairs $(k,\ell)$ with $b_k-b_\ell = m$. Prove that $a_i = b_i$ for $i=1,\dots,n$.
+\hint{\ref{h:10}}
+
+\end{enumerate}
+
+\subsubsection*{Hints}
+
+\begin{enumerate}
+\item \label{h:6} Compare $|a|$ and $|b-c|$ to $|c|$ and $|a-b|$.
+\item \label{h:10} What is $\sum_{i < j} a_i - a_j$? What about for $b$?
+\item \label{h:8} First show that one is negative. For the sake of contradiction, WLOG only $x_1$ is negative.
+\item \label{h:2} The right-hand side is positive, and two factors on the left-hand side are positive.
+\item \label{h:4} Do case work on the size of $x_i$.
+\item \label{h:1} Careful about positive numbers.
+\item \label{h:3} How do you get an inequality with both $x^n_n$ and $nx_n$?
+\item \label{h:5} How can you use $a + b + c = 0$ to turn an inequality into an equality?
+\item \label{h:9} The system's homogeneous, so we can actually set $x_1 = -1$.
+\item \label{h:7} We can't plug in $0$, but we can plug in a small positive number, say, $\varepsilon$.
+\end{enumerate}
+
+\subsubsection*{Sketches}
+
+\begin{enumerate}
+
+\item Each number is a sum of squares, so they're all positive. We get $x_1^2 + x_1 = \cdots = x_n^2 + x_n$. But $x^2 + x$ is increasing over positive reals, so they must all be equal.
+
+\item By Cauchy, $ (1 + 1)(a^2 + 1) \ge (a + 1)^2 $, etc. Multiply all to get square of original equation, so we must have the equality case of $a = b = 1$.
+
+\item Letting $f(x) = \frac x4 + \frac 1x + 1$, we write $f(x^2) = y^2$, etc. This is increasing over the positive reals, and we get $x = y = z = \pm\sqrt2$.
+
+\item As $x_1, x_2, a^3$ are positive, $3a - 2x^3$ is also positive. Apply AM--GM to get $x_1 + x_2 \ge 2x_3$. Add all to conclude all equal.
+
+\item By AM--GM we have $x_i^i + (i - 1) \ge ix_i$. Add all to conclude $x_i = 1$.
+
+\item In case $-1 < x_i < 0$ for all $i$, we get that if $x_i \ge x_j$ then $x_{i+1} \le x_{j+1}$, whence all odd and all even equal. In case $x_i \ge 1$ for all $i$, they are similarly all equal.
+
+\item Use $a + b + c = 0$ to show $|c - b|^2 + 3|a|^2 = |a - b|^2 + 3|c|^2$; equality follows in the originals. The points $a, b, c$ form an equilateral triangle, so WLOG $c = be^{2\pi i/3}$. Substitute to find $x = 2$.
+
+\item Take the limit as $z \to 0$ to conclude $f(xf(y)) \le xy$. Sum to conclude equality. Substitute $y = 1$ in $f(xf(y)) = xy$ and conclude.
+
+\item As $x_i^2 > x_{i+1}x_{i+2}$, if all non-negative, multiply all to get contradiction. Suppose $x_1 < 0$, and assume all else non-negative. As the system is homogeneous, WLOG $x_1 = -1$. Then $1 = x_1^2 = a + x_2x_3 > a$, and $x_2^2 > a$. But $0 \le x_n^2 = a + x_1x_2 = a - x_2 < a - \sqrt a < 0$.
+
+\item The condition gives $\sum_{i < j} (a_i - a_j) = \sum_{i < j} (b_i - b_j)$. Rewrite this as
+$$(1-n)\sum_{i=1}^n a_i + 2\sum_{i=1}^{n-1}(a_1+a_2+\dots+a_i) = (1-n)\sum_{i=1}^n b_i + 2\sum_{i=1}^{n-1}(b_1+b_2+\dots+b_i).$$
+The first terms are equal; add the given inequalities to conclude.
+
+\end{enumerate}
+
+\end{document}

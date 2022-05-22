@@ -24,7 +24,7 @@
 
 \item Let $A_1, A_2, \ldots, A_6$ be $4$-element subsets of $S = \left\{ 1, 2, \ldots, 8 \right\}$. Suppose each element in $S$ is in exactly $r$ of the $A_i$s. Find $r$.
 
-\textbf{Sketch:} Count the number of (subset, element) pairs such that the element is in the subset. There are six subsets with four elements each, and eight elements in $r$ subsets each. Thus $6 \times 4 = 8r$ so $r = 3$.
+\textbf{Sketch:} Count the number of (subset, element) pairs such that the element is in the subset. There are $6$ subsets with $4$ elements each, and $8$ elements in $r$ subsets each. Thus $6 \times 4 = 8r$ so $r = 3$.
 
 \end{enumerate}
 
@@ -58,7 +58,7 @@ The incidence matrix is not a method, just a tool. The method we'll explore is d
 
 \cbycols We want the number of ones in each column, but we don't know that, so instead we bound. Suppose a column had $4$ ones. Then the rows that had those ones must have $2$ other ones, so there are $8$ more ones among those rows. But no two of these ones can be in the same column, otherwise there would be two students who got two or more common problems. There are only $7$ remaining columns, so this is impossible. Thus, there are at most $3$ ones in each column. There are $8$ columns with at most $3$ each, giving at most $24$ in total.
 
-Thus $3s \le 24$, so $s \le 8$. It remains to find a construction.
+Thus $3s \le 24$, so $s \le 8$. It remains to find a construction; this isn't too bad.
 
 \textbf{Remark 1:} Please remember how we bounded the number of ones in each column. We won't have another example with this trick, but it will appear several times in the problems.
 
@@ -125,6 +125,13 @@ Combining the two counts, $15n \le \binom n2$, thus $n \ge 31$ as desired.
 
 \item (Balanced block designs) Let $A_1, A_2, \ldots, A_b$ be $k$-element subsets of $ S = \left\{ 1, 2, \ldots, v \right\} $. Suppose each pair of elements in $S$ is in exactly $\lambda$ of the $A_i$s. Prove that each element in $S$ is contained in exactly $r$ of the $A_i$s, for $r = \lambda(v-1)/(k-1) = bk/v$. \hint{\ref{h:1}}
 
+\item (Projective planes) Let $n$ and $k$ be integers greater than $1$. Suppose that $A_1, \ldots, A_k$ are $3$-element subsets of $S = \{1, 2, \ldots, n\}$ such that:
+\begin{itemize}
+  \item for $1 \le i < j \le k$, $|A_i \cap A_j| = 1$, and
+  \item for $1 \le \ell < m \le n$, there is exactly one $A_i$ such that $\{\ell, m\} \subseteq A_i$.
+\end{itemize}
+What are all possible values of $n$?
+
 \item (USA TST 2005) Let $n$ be an integer greater than $1$. For a positive integer $m$, let $S_m = \{1, 2, \ldots, mn\}$. Suppose there exists a $2n$-element set $T$ such that
 \begin{enumerate}
   \item each element of $T$ is an $m$-element subset of $S_m$,
@@ -190,6 +197,10 @@ Determine the maximum possible value of $m$ in terms of $n$. \hint{\ref{h:2}}
 \item We count row pairs of ones, where one of the ones is in a given column. \cbyrows If the given column has $r$ ones, each gives $k-1$ pairs along its row. \cbycols If we pick one of the other $v-1$ columns, there are $\lambda$ rows that contain a pair. Thus $r(k-1) = \lambda(v-1)$. The $bk = vr$ follows from counting all the ones.
 
 \textbf{Remark:} Note that $v$, $k$, and $\lambda$ determine $b$ and $r$. We call the family of subsets a $2$-balanced design, because the subsets are balanced with respect to the $2$-element subsets of $S$. We want to prove that every $2$-balanced design is also $1$-balanced. In fact, for every $s < t$, every $t$-balanced design is also $s$-balanced; the proof is similar.
+
+\item This is a special case of the previous problem. We see that $r = \frac{n-1}2 = \frac{3k}{n}$. We then count column pairs of ones. \cbyrows Each pair of rows gives one, so $\binom k2$. \cbycols Each column has $\binom r2$ pairs, giving $n\binom r2$. All the info gives $n = 7$. The construction is given by the \href{https://en.wikipedia.org/wiki/Fano_plane}{Fano plane}.
+
+\textbf{Remark:} Note that each set contains $3$ points and each point is in $3$ sets. For every prime power $p^n$, there's a similar construction with the $3$ in the problem replaced with $p^n + 1$; these are known as the finite projective planes. It's unknown whether there's a finite projective plane not of this form.
 
 \item We count column pairs of ones. \cbyrows There are $ \binom{2n}{2} $ pairs of rows, and each pair of row has at most one pair. \cbycols Each of the $mn$ columns has exactly two ones. Thus $mn \le \binom{2n}{2}$, so $m \le 2n - 1$. It remains to find a construction; consider $2n$ lines in general position.
 
