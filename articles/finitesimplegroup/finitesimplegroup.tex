@@ -1,0 +1,591 @@
+\documentclass[11pt,paper=letter]{scrartcl}
+\usepackage[alttitle,boxthm,noextlink]{cjquines}
+
+\definecolor{Blue}{RGB}{0,100,200}
+\definecolor{Orange}{RGB}{200,100,0}
+\hypersetup{allcolors=Blue}
+
+\renewcommand{\bluebf}[1]{{\bfseries \color{Blue} #1}}
+\renewcommand\wp[1]{\paragraph{\textcolor{Blue}{#1.}} \hspace{-1em}}
+\newcommand\wl[1]{\label{w:#1}}
+
+\newcommand\oww[1]{\textit{Also: #1.}}
+
+\makeatletter
+\newcommand\@wo[2][]{\hyperref[w:#1]{#2}}
+\newcommand\wo{\@dblarg\@wo}
+
+\patchcmd{\hyper@link@}
+{{\Hy@tempb}{#4}}
+{{\Hy@tempb}{#4%
+\ltx@ifempty{#2}{}{$\dg$}}}
+{}{}
+\makeatother
+
+\mdfdefinestyle{mdbox}{%
+  linewidth = 3pt,
+  skipabove = 12pt,
+  skipbelow = 0pt,
+  innerleftmargin = 7pt,
+  innerrightmargin = 10pt,
+  innerbottommargin = 7pt,
+  linecolor = Orange,
+  backgroundcolor = Orange!5,
+  hidealllines = true,
+  leftline = true,
+  leftmargin = -10pt,
+  rightmargin = -10pt
+}
+
+\declaretheoremstyle[
+  headfont = \sffamily \bfseries \color{Orange},
+  bodyfont = \normalfont,
+  mdframed = {style=mdbox}
+]{exbox}
+
+\begin{document}
+
+\title{Every Reference in ``Finite Simple Group (of Order Two)''}
+\subtitle{(And Possibly, Math (But No Promises))}
+\author{CJ Quines}
+\date{July--August 2022}
+
+\maketitle
+
+These are notes for a \href{https://esp.mit.edu/learn/HSSP/2022_Summer/catalog#class_15041}{Summer HSSP 2022} class aimed at high schoolers. Its ambitious goal is to cover every reference used in the Klein Four's song, ``Finite Simple Group (of Order Two)''. Because of that ambitious goal, we will throw rigorous math out the window, and everything will be at the mercy of intuition and incorrect explanations.
+
+These notes will be more detailed than explanations we'll have in class, but in class I can draw pictures and answer questions much more easily.
+
+\section{Functions (July 16)}
+
+If I know my high school curriculum right, then it's likely you know some of these.
+
+\wp{relation, well-defined}
+\wl{relation}
+\wl{well-defined}
+\oww{ill-defined}
+Given two sets $X$ and $Y$, a (binary) \bluebf{relation} is a set of some ordered pairs $(x, y)$, where $x \in X$ and $y \in Y$. In other words, a relation over $X$ and $Y$ is a subset of $X \times Y$.
+
+This is a concept you've probably heard about before, we're now just giving it a name. Many things in math are relations. Chances are, if you use the phrase ``$x$ is (something) of $y$'' or ``$x$ is (something) to $y$'', you're describing a relation. For example:
+
+\begin{itemize}
+  \item ``is a factor of'' is a relation over the sets $\ZZ$ and $\ZZ$. It's the set of all $(x, y)$ such that $x$ is a factor of $y$. The pairs $(2, 4)$ and $(-4, 8)$ are in the relation, while $(3, 8)$ and $(0, 3)$ aren't.
+  \item ``is the square root of'' is another relation over the sets $\ZZ$ and $\ZZ$. It's the set of all $(x, y)$ such that $x = y^2$, which includes $(2, 4)$ and $(-2, 4)$. As we can guess from here, it's a common case that $X$ and $Y$ are the same---in which case, we can drop $Y$, and just say it's a relation over $X$.
+  \item ``is double'' is a third relation over $\ZZ$. It's the set of all $(x, y)$ such that $x = 2y$. Note that not every $x$ has a $y$ that relates to it---that doesn't stop it from being a relation.
+  \item ``is equal to'' is another relation over $\ZZ$. It can also be a relation over $\RR$, or over $\QQ$, or a relation between $\ZZ$ and $\RR$, and so on. These are all different relations, because they have different sets. It's not enough to say something is a relation, you have to say which set it's a relation over.
+  \item ``has the Social Security number'' is a relation over the set of people and nine-digit numbers. It's the set of all $(x, y)$ such that $x$ has the Social Security number $y$. Like the previous example, not every person has a Social Security number, but it's still a relation.
+\end{itemize}
+
+All relations we've talked about are \bluebf{well-defined}: there's a unique way to interpret it. The opposite of well-defined is \textbf{ill-defined}. An example of an ill-defined relation is ``is friends with'' over the set of people. There's no clear definition of what friends means. There are more subtle examples of ill-defined relations. Consider the relation ``has the last digit'', over the real numbers. That's not well-defined: what's the last digit of $\frac1{11}$?
+
+\begin{remboxed}
+  Even if you only considered terminating decimals, ``has the last digit'' still isn't well-defined. For example, $1$ can also be written as $0.999\dots$.
+\end{remboxed}
+
+\wp{domain, image}
+\wl{domain}
+\wl{image}
+\oww{codomain, preimage}
+Given a relation over $X$ and $Y$, we call $X$ the \bluebf{domain} of the relation and $Y$ the \textbf{codomain} of the relation.
+
+Let's consider the relation ``has the Social Security number''. We defined its domain as the set of all people, and its codomain as the set of all nine-digit numbers. But \href{https://en.wikipedia.org/wiki/Social_Security_number#Valid_SSNs}{not all nine-digit numbers} are Social Security numbers, like 000-00-0000. The codomain of this relation is thus larger than its ``active'' codomain, or the nine-digit numbers that are actually \textit{used}.
+
+The image is the set of the codomain's elements that are ``used''. More precisely, the \bluebf{image} of a relation is the set of all $y$ such that $(x, y)$ is in the relation, for some $x$.
+
+\begin{remboxed}
+  You might have heard the word ``range'' before. We'll never use that word, because it's ambiguous: does it mean codomain or image?
+\end{remboxed}
+
+You might be wondering what the ``opposite'' of an image is. What's the set of all $x$ such that $(x, y)$ is in the relation, for some $y$? There's no widely agreed name for this, but we'll call it the \textbf{preimage}. The preimage of the ``has the Social Security number'' relation is the set of all people who have Social Security numbers.
+
+\begin{exrboxed}
+  What are the domains and images of the relations we gave as examples?
+\end{exrboxed}
+
+\wp{function}
+\wl{function}
+You're probably familiar with the concept of a function as a machine: it takes an input, and produces an output. More precisely, a \bluebf{function} from $X$ to $Y$ is a relation over $X$ and $Y$, such that for any $x$, there is \textit{exactly} one $y$ such that $(x, y)$ is in the relation. Exactly one means that:
+
+\begin{itemize}
+  \item it can't be less than one. The relation ``is double'' over $\ZZ$ is not a function, because, for example, there's no $y$ such that $(1, y)$ is in the relation.
+  \item it can't be more than one. The relation ``is a factor of'' over $\ZZ$ is not a function, because, for example, both $(1, 2)$ and $(1, 3)$ are in the relation.
+\end{itemize}
+
+Of the examples we mentioned earlier, ``is the square root of'' over $\ZZ$ and ``is equal to'' over $\ZZ$ were functions.
+
+Functions appear so often that we have special notation for them. We often represent functions with letters like $f$, and say $f : X \to Y$. Instead of saying $(x, y)$ is in the function, we say $f(x) = y$. That way, we can think of $f$ as the ``machine'': it takes an input, $x$, and returns an output, $y$. We'll talk about functions with this language moving forward.
+
+Note that this notation is only \textit{well-defined} for functions:
+
+\begin{itemthin}
+  \item for the relation ``is double'' over $\ZZ$, the notation isn't defined for some $x$s. What's $f(3)$?
+  \item for the relation ``is a factor of'' over $\ZZ$, the notation is ambiguous for some $x$s. What's $f(1)$?
+\end{itemthin}
+
+This shows us another meaning of the term \textit{well-defined}. A notation is well-defined if it means something, and exactly one thing, for any way you can write it.
+
+\begin{exrboxed}
+  Of the relations we talked about that weren't functions, some of them could be ``made into'' functions. For example, ``has the Social Security number'' can be turned into a function, if we considered it as a relation over a different domain and image. Which of the relations can be turned to functions this way?
+\end{exrboxed}
+
+\begin{exrboxed}
+  Two of the lines of the song are ``But lately our relation's not so well-defined / And I just can't function without you''. How are these two lines related to each other? Do you find this funny?
+\end{exrboxed}
+
+\wp{one-to-one}
+\wl{one-to-one}
+\oww{transpose, injective, surjective, bijective, inverse function}
+Here's one important difference between ``is the square root of'' and ``is equal to''. The function ``is the square root of'' over $\ZZ$ isn't a function the ``other way around''.
+
+Given any relation over $X$ and $Y$, we can construct a new relation over $Y$ and $X$, by flipping the $(x, y)$s to $(y, x)$s. We call this the \textbf{transpose} of the relation. When is the transpose of a function still a function? Remember that for a relation to be a function, it needs to follow two rules:
+
+\begin{itemize}
+  \item Every $x$ has to be related to \textit{at most one} $y$. Because $(2, 4)$ and $(-2, 4)$ are in the relation, then both $(4, 2)$ and $(4, -2)$ are in the transpose relation.
+  \item Every $x$ has to be related to \textit{at least one} $y$. There's no $x$ such that $(x, -1)$ is in the relation. Thus, there's no $y$ such that $(-1, y)$ is in the transpose relation.
+\end{itemize}
+
+A function that \textit{does} follow these two rules for its transpose relation has a special name. If a function's transpose follows the first rule, we call the original function \textbf{injective}. If a function's transpose follows the second rule, we call the original function \textbf{surjective}.
+
+A function that is both injective and surjective is called \textbf{bijective}. That means that its transpose is also a function, which we call its \textbf{inverse}. In a bijective function, every $x$ is related to exactly one $y$, and every $y$ is related to exactly one $x$.
+
+\begin{exrboxed}
+  Stop and think about these definitions! If you've seen these words before, then they're probably different definitions than what you're used to. In that case, convince yourself they're the same definition.
+\end{exrboxed}
+
+Another word for injective is \bluebf{one-to-one}, and another word for bijective is \bluebf{one-to-one correspondence}. Due to the potential for confusion, mathematicians avoid using them in practice. That means we're stuck using the names injective, surjective, and bijective, although at least those names are consistent. I also pronounce them with the abbreviations ``inj'', ``surj'', and ``bij'', and I personally find those pronunciations hilarious.
+
+\section{Group theory (July 16--23)}
+
+\wp{group, associative, identity, order}
+\wl{group}
+\wl{associative}
+\wl{identity}
+\wl{order}
+\oww{operation, inverse, subgroup}
+A (binary) \textbf{operation} over a set $G$ is a function that takes two elements of $G$ and returns another element of $G$. Some examples are $+$ and $\times$ over $\QQ$. While we could write them with the function notation of $+(2, 3) = 5$, we write them with the symbol in between instead, like $2 + 3 = 5$.
+
+A \bluebf{group} consists of a set and an operation with some properties. Some examples:
+
+\begin{itemthin}
+  \item The operation $+$ over $\ZZ$ forms a group.
+  \begin{itemthin}
+  \item It's \bluebf{associative}, meaning $a + (b + c) = (a + b) + c$.
+  \item There's an \bluebf{identity}, $0$, which means $a + 0 = 0 + a = a$.
+  \item There's also an \textbf{inverse} for each $a$, called $-a$, which means $a + (-a) = (-a) + a = 0$.
+  \end{itemthin}
+  \item The operation $\times$ over the non-zero rational numbers $\QQ^*$ forms a group.
+  \begin{itemthin}
+  \item It's \textit{associative}, meaning $a \times (b \times c) = (a \times b) \times c$.
+  \item There's an \textit{identity}, $1$, which means $a \times 1 = 1 \times a = a$.
+  \item There's also an \textit{inverse} for each $a$, called $a^{-1}$, which means $a \times a^{-1} = a^{-1} \times a = 1$.
+  \end{itemthin}
+\end{itemthin}
+
+We'll name the first group $\ZZ^+$ and the second group $ \QQ^{\times} $. Read out, these are ``the additive group of integers'' and ``the multiplicative group of rationals''.
+
+Here are some things that are not groups. Why?
+
+\begin{itemthin}
+  \item The operation $-$ over $\ZZ$.
+  \item The operation $\times$ over (all) the rational numbers $\QQ$.
+  \item The operation $\times$ over $\ZZ$.
+\end{itemthin}
+
+Here are some things that are groups. Convince yourself that they are groups.
+
+\begin{itemize}
+  \item The operation ``addition, then divide by $n$ and take the remainder'' over the set $ \left\{ 0, 1, \ldots, n - 1 \right\} $ is a group. We call this $\ZZ/n\ZZ$, or ``the additive group of integers modulo $n$''.
+  \begin{itemize}
+    \item We'll write its operation as $+$, because it's kinda like addition. In the group $\ZZ/5\ZZ$, $2 + 4 = 1$. But note that this is a different operation than normal addition. When we want to emphasize the difference, we'll use different symbols.
+    \item Another name for this group is ``the cyclic group of order $n$''. The \bluebf{order} of a group is the number of elements in its set, and the set of $\ZZ/n\ZZ$ has $n$ elements.
+  \end{itemize}
+  \begin{remboxed}
+    Note that we write $\ZZ/n\ZZ$ for both the set and the group. Unfortunately, it's common to write the group and the set using the same symbols. This can be confusing, but we'll try to make it clear what we mean.
+  \end{remboxed}
+  \item The operation ``multiplication, then divide by $n$ and take the remainder'' over the set $ \left\{ 1, 2, \ldots, p - 1 \right\} $ is a group, if $p$ is a prime. We call this $(\ZZ/p\ZZ)^\times$, or the ``multiplicative group of integers modulo $p$''.
+  \begin{itemize}
+    \item It's not obvious that every element has an inverse, but it's true! For example, if $p = 7$, then you can check that $ 2 \times 4 = 3 \times 5 = 6 \times 6 = 1$.
+  \end{itemize}
+  \begin{exrboxed}
+    Why does $p$ have to be prime?
+  \end{exrboxed}
+  \item Consider this sheet of paper. Rotate it however you want, as long as it stays in portrait. Each rotation can be an element of a set. There are four rotations: don't rotate, turn upside-down, flip, and flip and turn upside-down. This is a group with the operation ``apply the second rotation, and then the first one''.
+  \begin{itemize}
+    \item It might be weird thinking of a set whose elements are rotations. But you can think of the previous groups as having elements that also ``apply'' to something. For example, an element $n$ of $\ZZ^+$ can be thought of as adding $2n$ to $42$. The identity doesn't change the number you're working with, and inverses ``return'' to the same number.
+    \begin{remboxed}
+      This is called a \textit{group action}, because its elements ``act'' on an object. I think it's the right way to think of many groups. All groups have a group action.
+    \end{remboxed}
+    \item This group has many names. This is called the ``dihedral group of order $4$'', or $D_4$. This is also called the ``group of symmetries of a rectangle''. This is also known as the Klein four-group. The Klein Four, the people who wrote the song we're studying, is named after this group.
+  \end{itemize}
+  \begin{exrboxed}
+    What is the group of symmetries of a square? How many elements does it have?
+  \end{exrboxed}
+\end{itemize}
+
+A \textbf{subgroup} of a group is a subset of its elements that forms a group under the same operation. For example, a subgroup of $\ZZ$ is $3\ZZ$, the group with operation $+$ and elements $ \left\{ \ldots,-3, 0, 3, \ldots \right\} $. Another subgroup is the trivial group, the group with only the element $0$. (There's not much choice for what the operation should be!)
+
+\wp{kernel, quotient}
+\wl{kernel}
+\wl{quotient}
+\oww{homomorphism, isomorphism}
+We care about how groups talk to each other. In fact, we care about this far more than groups themselves.
+
+Consider the function $f : \ZZ \to \ZZ/3\ZZ$, that's ``divide by $3$ then take the remainder''. For example, $f(5) = 2$, and $f(7) = 1$. Let's consider the groups $\ZZ^+$ and $\ZZ/3\ZZ$. For clarity, we'll write the operation of the first group as $+$, and the operation of the second group as $\oplus$.
+
+How does $f$ interact with our two groups? Well, a group is about its operations, so let's see how it affects the two operations $+$ and $\oplus$. Consider an operation like $5 + 7$. One way to apply $f$ is to do $f(5 + 7)$. Another way is $f(5) \oplus f(7)$. In the first case, we get $f(12) = 0$. In the second case, we get $2 \oplus 1 = 0$. And we get the same result!
+
+In a sense, $f$ is a function that \textit{maintains the operation}. You could also say that it \textit{commutes} with the operation: it doesn't matter whether you apply $+$ and then $f$, or $f$ and then $\oplus$. If we have an group with operation $+$ over set $G$, and a group with operation $\oplus$ over set $H$, then a \textbf{homomorphism} $f : G \to H$ is a function such that $f(a + b) = f(a) \oplus f(b)$.
+
+An important kind of homomorphism is an \textbf{isomorphism}, which is a homomorphism that is also a bijection. We say that two groups that have an isomorphism are actually the same group. An example is how $\ZZ$ is isomorphic to $3\ZZ$, with the isomorphism being ``multiply by three''.
+
+\begin{exrboxed}
+  Convince yourself that $\ZZ/6\ZZ$ has an isomorphism to $(\ZZ/7\ZZ)^\times$.
+\end{exrboxed}
+
+We now define \bluebf{kernel} and \bluebf{quotient}, but I already have a nice writeup about this called \href{https://cjquines.com/files/canonicaldecomposition.pdf}{Canonical decomposition and the first isomorphism theorem}, so I won't repeat it here.
+
+\begin{exrboxed}
+  Two of the lines of the song are ``I'm living in the kernel of a rank-one map / From my domain its image looks so blue''. If you're in the kernel, why would your image ``look blue''? Do you find this funny?
+\end{exrboxed}
+
+\wp{simple group, finite}
+\wl{simple group}
+\wl{finite}
+\oww{normal, abelian}
+Let's say $f : G \to H$ is a homomorphism. We've talked about the set of elements $\ker f$. Not only is it a subset of the elements of $G$, it's actually a \textit{subgroup} of $G$!
+
+\begin{exrboxed}
+  Convince yourself that $\ker f$ is a subgroup of $G$. Does the operation stay in $\ker f$? Does it have an identity? Does it have inverses? The only information we have about $\ker f$ is that it's the kernel of a homomorphism, but homomorphisms are a lot of information.
+\end{exrboxed}
+
+Not only is $\ker f$ a subgroup of $G$, but it's a special kind of subgroup called a normal subgroup. A \textbf{normal subgroup} is a subgroup that is the kernel of some homomorphism. Non-normal subgroups exist, but not in \textbf{abelian groups}, a group where $a \times b = b \times a$ for all $a$ and $b$.
+
+\begin{remboxed}
+  The smallest example of a non-normal subgroup is in the group of symmetries of an equilateral triangle, $D_6$. Any subgroup of order two is a non-normal subgroup. One way to check this is to try to look for a homomorphism $D_6 \to \ZZ/3\ZZ$.
+\end{remboxed}
+
+A \bluebf{simple group} is a non-trivial group whose only normal subgroups are the trivial group and itself. If this sounds a lot like the definition of ``prime'', then you're right. The cyclic groups of prime order are all simple groups.
+
+A group is \bluebf{finite} if its order is finite. In a sense, a finite simple group is like a prime number, in that they're the ``building blocks'' of finite groups. If a finite group isn't simple, then it has a simple subgroup. The counterpart of the statement that all positive integers have a unique prime factorization would be the Jordan--H\"older theorem.
+
+Finite simple groups are pretty deep. One of the big projects of mathematics, spanning roughly from the 1950s to the 2010s, was to find all the finite simple groups. We know that the cyclic groups of prime order are simple, and in fact, they're the only finite simple abelian groups.
+
+\begin{exrboxed}
+  The refrain of the song mentions a ``finite simple group of order two''. How many groups of order two are there? Try to construct these groups, by starting with two elements, and going over the possibilities for what the operation could be.
+\end{exrboxed}
+
+\section{Metric topology (TBD)}
+
+\wp{open}
+\wl{open}
+\oww{metric space, metric, subspace}
+If a group consists of a set and an operation, a metric space consists of a set and a \textbf{metric}. A metric over a set $M$ is a function $d : M \times M \to \RR_{\geq 0} $. The metric function should be interpreted as the ``distance'' between two elements in $M$, which we call \textit{points}.
+
+A \textbf{metric space} consists of a set and a metric with some properties:
+
+\begin{itemize}
+  \item It is symmetric, so $d(x, y) = d(y ,x)$.
+  \item It is positive definite, so $d(x, y) = 0$ if and only if $x = y$.
+  \item It has the triangle inequality, so $d(x, y) + d(y, z) \ge d(x, z)$.
+\end{itemize}
+
+Here are some things that are metric spaces. Convince yourself that they are metric spaces.
+
+\begin{itemize}
+  \item The normal distance function over $\RR^2$ gives a metric space. The metric is $$d((x_1, x_2 ), (y_1, y_2 )) = \sqrt{ \left( x_1 - x_2 \right)^{2} + \left( y_1 - y_2 \right)^{2} }. $$
+  \begin{itemize}
+    \item In fact, any $\RR^n$ is a metric space with this distance. Further, any subset of $\RR^n$ can be made into a metric space, with the same distance.
+    \item In the case of $\RR$, the metric becomes ``absolute difference''.
+    \item A subspace of $\RR$ is $\QQ$, with the same metric of absolute difference.
+  \end{itemize}
+  \begin{remboxed}
+    We'll overload notation, just like we did with groups, by writing $\RR^2$ for both the set of points and the metric space, but we'll be claer which is which.
+  \end{remboxed}
+  \item The taxicab distance function over $\RR^2$ also gives a metric space, where the distance function is \[
+      d((x_1, x_2 ), (y_1, y_2 )) = \abs{x_1 - x_2 } + \abs{ y_1 - y_2}.
+    \]
+  \item There's the discrete metric, where given any set, define $d(x, y) = 1$ if $x \ne y$ and $d(x, y) = 0$ if $x = y$.
+  \begin{remboxed}
+    This is a specific case of a metric space on a connected simple graph, where the metric is the length of the shortest path between two vertices.
+  \end{remboxed}
+  \item Let $p$ be a prime. There's the $p$-adic metric over $\QQ$, where $d(x, y) = p^{-i}$, and $i$ is defined such that $p^i(x - y)$, in simplest form, has neither numerator nor denominator divisible by $p$. For example, when $p = 2$, the $2$-adic distance between $\frac38$ and $\frac14$ is $8$.
+  \begin{exrboxed}
+    Check that the triangle inequality is satisfied for the $p$-adic metric.
+  \end{exrboxed}
+\end{itemize}
+
+\begin{remboxed}
+  Although the last two examples of metrics don't feel really ``distance-y'', you can still think of a metric as a distance and follow along pretty well. You can get pretty far thinking about metric spaces just by considering $ \RR^{2} $. Compare this to groups, where we didn't even discuss non-abelian groups that much, which are completely different from abelian groups.
+\end{remboxed}
+
+A \textbf{subspace} of a metric space is a subset of its points, with the same metric. This is always a metric space, unlike subgroups.
+
+Finally, an \bluebf{open subset} of a metric space is a subset of its points such that, for any $x$ in the subset, all points that are ``close enough'' to $x$ are in the subset too. This is a kind of $\epsilon$ thing: if you want to show me that something is an open set, I'll name a point $x$ in the open set, and you give me a distance $\epsilon$, such that all points of distance at most $\epsilon$ to $x$ are in the subset too. One typical example to think of is a circle in $\RR^2$ without its boundary. Another are the open intervals in $\RR$.
+
+\begin{exrboxed}
+  What are the open sets in the discrete metric space?
+\end{exrboxed}
+
+\wp{dense}
+\wl{dense}
+\oww{converge, closed, closure}
+There are also these things called closed sets. A closed subset is, unlike what the name suggests, \textit{not} the opposite of an open subset. There are, in fact, sets that are both closed and open. And most sets are \textit{neither} closed nor open! I want to say this now, before we get into definitions, because it's that important.
+
+Consider an infinite sequence of points in a metric space, say, $ x_1, x_2 , \ldots $. We say that the sequence \textbf{converges} to $ x $, for some $x$ also in the metric space, if the sequence gets permanently as close to $x$ as we want to go. You can think of this as another $\epsilon$ thing. If you want to show me a sequence converges to $x$, I'll name a distance $\epsilon$, and you'll have to give me an $N$, such that all of $x_N, x_{N+1}, \ldots$ are distance at most $\epsilon$ to $x$.
+
+As an example, think of the sequence $3, 3.1, 3.14, 3.141, \ldots$. Considered as a sequence over $\RR$, this converges to $\pi$. If I say an $\epsilon$ like $0.01$, you could say, ``well, all the things from $3.14, 3.141, \ldots$ have distance at most $0.01$ to $\pi$.'' But it doesn't converge over $\QQ$!
+
+Now, a \textbf{closed subset} of a metric space is a subset of its points such that, for any sequence of points in the subset that does converge, the point it converges to is in the subset. Typical examples are circles in $\RR^2$, with their boundary, and closed intervals in $\RR$.
+
+\begin{exrboxed}
+  Think about the sets $[0, 1)$ and $ \varnothing $ in $\RR$. Are they open, closed, neither, both? Now that I've given you reasons why these names are bad, here's the only reason they're good: a subset is open if its complement is closed, and vice versa. Convince yourself this is true by drawing some pictures.
+\end{exrboxed}
+
+Another way to think about closed subsets is through its closure. Say you did take a subset, find all the convergent sequences, and take the set of points they converge to. That set is the \textbf{closure} of the original subset, the smallest closed set containing a subset. A set is closed if it's its own closure.
+
+Finally, a set of a metric space is \bluebf{dense} if its closure is the whole metric space. The typical example is that $\QQ$ is dense in the metric space $\RR$. To see why every point in $\RR$ is the result of a convergent sequence, think of the $\pi$ example we had earlier. The much harder part to prove is that these are the \textit{only} points that sequences in $\QQ$ converge to, although depending on how you define $\RR$, you could say that it's the closure of $\QQ$.
+
+\begin{exrboxed}
+  One line of the song mentions ``My heart was open but too dense.'' We just mentioned that $\QQ$ is dense in $\RR$, but is it open in $\RR$?
+\end{exrboxed}
+
+\wp{continuous, mirror pair}
+\wl{continuous}
+\wl{mirror pair}
+\oww{homeomorphic}
+Groups talk to each other through homomorphisms. Metric spaces talk to each other through \textbf{continuous functions}. Homomorphisms maintain the group operation: a function $f$ is a homomorphism if $f(a + b) = f(a) \oplus f(b)$. Continuous functions maintain convergence: a function $f$ is continuous if $ x_1 , x_2 ,\ldots $ converges to $ x $ means that $f(x_1), f(x_2), \ldots$ converges to $f(x)$.
+
+Two groups that are the same are isomorphic. Two metric spaces that are the same are \textbf{homeomorphic}. An isomorphism is a bijective homomorphism. A homeomorphism is a bijective continuous function\dots whose inverse function is also continuous. As an example, the square's boundary is homeomorphic to a circle's boundary. The old joke is that donuts and coffee cups are homeomorphic. An object is always homeomorphic to its \bluebf{mirror pair}---which just means what you think it means.
+
+\begin{remboxed}
+  The ``inverse function is also continuous'' is an important condition. For example, consider $[0, 1)$ and a circle's boundary: there's a bijective continuous function, but the inverse isn't continuous.
+\end{remboxed}
+
+\wp{path, smooth}
+\wl{path}
+\wl{smooth}
+A continuous function $p$ from $[0, 1]$ to a metric space is called a \bluebf{path} in that metric space. It should line up with your intuition about what a path is: a curve connecting one point, $p(0)$, to another, $p(1)$. The fact that it's a continuous means that the path doesn't jump.
+
+The song mentions a ``path to love'' that's ``never smooth''. I don't think there's actually a definition for what a smooth path is. The most common definition of smooth comes from calculus. A function is \bluebf{smooth} if you can take its derivative infinitely many times. There's a notion of taking a derivative of a path, called the \textit{metric derivative}, which is the instantaneous distance traveled at a given point, but I've never heard of it outside this one Wikipedia article I read.
+
+\begin{exrboxed}
+  The second line of the song says that, even though the narrator's path to love isn't smooth, it's continuous. If you know what a derivative is, convince yourself that being continuous is a far cry from being smooth. Is it funny yet?
+\end{exrboxed}
+
+\wp{simply connected}
+\wl{simply connected}
+\oww{clopen, connected, path-connected, homotopy}
+A set that is both closed and open is called \textbf{clopen}. We say a space is \textbf{connected} if it has no non-empty clopen sets.
+
+Most of the spaces we've seen so far are connected, but one exception is $\QQ$ with the absolute distance metric. Consider the set of numbers in $\QQ$ less than $\sqrt2$. Seeing that it's open shouldn't be too hard. Seeing that it's closed might be a bit harder, but remember that we're in the metric space $\QQ$, and not $\RR$, so for it to be closed, we only have to consider sequences that converge in $\QQ$. Thus, this set is clopen, and $\QQ$ is disconnected.
+
+\begin{exrboxed}
+  Consider the absolute distance metric and the set of real numbers in $[0, 1] \cup [2, 3]$. This is a metric space. Convince yourself that $[0, 1]$ is a clopen set in this space. Thus, this space is disconnected.
+\end{exrboxed}
+
+A \textbf{ path-connected } space is one that has a path joining any two points in it. The metric space $\RR$ is path-connected, but not the metric space $[ 0, 1 ] \cup [ 2, 3 ]$, over the same metric.
+
+\begin{remboxed}
+  All path-connected spaces are connected, but not vice-versa! My favorite example is to think about the comb space. We'll use the fact that if $L$ is a subspace of $M$, which is a subspace of the closure of $L$, and $L$ and its closure are both connectde, then so is $M$. We won't prove this, but think about why it feels true.
+
+  Consider the comb, which is a subspace of $\RR^2$ with the usual distance metric. It consists of the line joining $(0, 0)$ to $(1, 0)$, which is its shaft, and a bunch of lines joining $ \left( \frac{1}{n} , 0 \right) $ to $ \left( \frac{1}{n} , 1 \right) $, and a line joining $ \left( 0, 0 \right) $ to $ \left( 0, 1 \right) $. This is connected. Now remove the last line; this is still connected, and its closure is the comb space. If we add back the point $(0, 1)$, it follows that it's still connected. But this last space isn't path-connected, as there's no path from $(0, 0)$ to $(0, 1)$.
+\end{remboxed}
+
+A \textbf{homotopy} between two paths is a continuous deformation from one path to the other. The formal definition involves a continuous function from $[0, 1]$ to paths in the metric space, such that at $0$ it's the first path and at $1$ it's the last path. There's no good way of explaining this without \href{https://commons.wikimedia.org/wiki/File:HomotopySmall.gif}{a picture}.
+
+A space is \bluebf{simply connected} if it's path-connected, and, for any two points, all the paths joining them have homotopies between them. The space $\RR^2$ is simply connected. If you take out a hole in the middle, it isn't, because there's no homotopy between two paths that go around the hole in different ways.
+
+\begin{remboxed}
+  One of the lines of the song is ``When we first met, we simply connected''. There's no math joke here, it's just a pun.
+\end{remboxed}
+
+\section{Set theory (TBD)}
+
+\wp{separable}
+\wl{separable}
+\oww{countable}
+Consider the statement ``the intersection of any number of open sets is open.'' We can try to prove this by induction on the number of sets. When you have $n = 1$ set, then it's open. Otherwise, you can take the intersection of the first $n - 1$ sets, which is open by inductive hypothesis, and you only need to show that the intersection of two open sets is open.
+
+\begin{exrboxed}
+  Prove that the intersection of two open sets is open! Think of the ``challenge'' definition. Let's say I pick a point in the intersection of two open sets, and you need to give me an $\epsilon$ that works. How can you use the fact that the original sets were open, to find one that works?
+\end{exrboxed}
+
+Of course, this statement isn't actually true, because it's not true for an infinite number of sets! Indeed, the sets $ \left( - \frac{1}{n} , \frac{1}{n} \right) $ are all open, but their intersection is just $ \left\{ 0 \right\}  $, which isn't open.
+
+This example shows that things get tricky when we jump from finite to infinite. A large part of set theory is about dealing with infinity, and what happens when you deal with really large things. And part of that is counting, and labeling the sizes of sets. We say a set is \textbf{countable} if it is finite, or if there is a bijection between it and the natural numbers.
+
+As an example, the integers and the rational numbers are all countable, and so is ``all numbers that can be described with a single sentence''. We'll explain why fully in class, but the basis of the proof is \href{https://proofwiki.org/wiki/Rational_Numbers_are_Countably_Infinite}{why the rationals are countable}. The real numbers are uncoutable, which we'll show later.
+
+And completely unrelated to any of that, but because I have to define it anyway, a metric space is \bluebf{separable} if it contains a countable, dense subset. The space $\RR$ with the absolute distance metric is separable because it contains $\QQ$. The discrete space is never separable, no matter how big you make it.
+
+\begin{remboxed}
+  The reason it's called ``separable'' is because you can imagine this countable, dense subset, as ``separating'' the space. For example, in $\RR$, any two real numbers are ``separated'' by a rational number.
+\end{remboxed}
+
+\wp{class}
+\wl{class}
+\oww{power set}
+As I said, a large part of set theory is about dealing with infinities. Part of the reason why that's tricky is because dealing with infinities can lead to weird questions about ``what is a set?''
+
+I promised a proof of why the real numbers aren't countable, and the reason is Cantor's paradox. Given a set $S$, let $2^S$ be its \textbf{power set}, or the set of its subsets. Cantor's diagonal argument says that there's never a surjective function $f : S \to 2^S$. If we did, what goes wrong?
+
+The idea is to imagine a table, with the elements of $S$ going down the rows and columns. Each row corresponds to applying $f$ to that element, say $x$. It results in a subset of $S$, so across that row we write $1$s or $0$s, corresponding to whether the element in the column appears in $f(x)$ or not. Then we ``invert'' the diagonal to get a new subset, which can't be in this list by construction. A similar argument shows that there's no surjective function from $\NN$ to $\RR$, which shows that the real numbers aren't countable.
+
+Why is this important? This means that we can't just define a set as ``any collection of objects''. Because if this was a set, which we can call $V$, then $V$ would contain each of its subsets. But that would mean that there's a surjective function from $V$ to $2^V$, contradiction! That means $V$ can't be a set. This is Cantor's paradox.
+
+If $V$ isn't a set, does it even exist at all? Well, we can clearly \textit{define} $V$, so it has to, right? And if it's not a set, what is it? For convenience, we call it a \bluebf{class}. It's the collection of sets which satisfy some property, in this case, being a set. It's not a set itself, as that leads to the size issues we talked about, but set theorists find the need to work with classes anyway.
+
+\wp{axiom of choice}
+\wl{axiom of choice}
+\oww{axiom, well-ordering theorem}
+We just talked about how we can't just say sets are collections of objects. If so, then what \textit{are} sets? In the twentieth century, mathematicians working on foundations gave the widely-agreed upon answer that we use today: a set is something that can be built from a certain list of rules, which we call \textbf{axioms}.
+
+These include rules like ``the empty set is a set'' and ``we can take unions of sets'' and so on. The list of axioms most mathematicians agree to use is called ZFC, which stands for the Zermelo--Fraenkel with choice. As you can tell from the name alone, this ``choice'' axiom is apparently important enough to get its own letter in the acronym! We use ZF to refer to the ZFC axioms without choice.
+
+The \bluebf{axiom of choice} says that given a set of non-empty sets, you can pick an element out of each set, and make a new set. The typical example is to imagine lots of drawers with socks. The axiom of choice says that you can pick a sock from each drawer. If it sounds simple to you, then in a sense, it is---it only gets complicated when you deal with infinite things.
+
+That's because the axiom of choice is equivalent to this axiom called the \textbf{well-ordering theorem}. A well-ordering of a set is a way to define ``less than'' on its elements, such that every subset of the set has a least element, according to this ``less than''. The well-ordering theorem says that every set has a well-ordering.
+
+\begin{remboxed}
+  Here, equivalent means that you can prove one given the other. More precisely, if you take the axioms of ZF, you can prove that the well-ordering theorem implies the axiom of choice, and that the axiom of choice implies the well-ordering theorem.
+\end{remboxed}
+
+The natural numbers, for example, have a well-ordering given by $<$. The integers aren't well-ordered by $<$, because the set of negative integers doesn't have a least element. On the other hand, they \textit{are} well-ordered by an ordering like ``the smallest absolute value, but in the event of a tie, the negative number is smaller''. Those make sense---but what about something like the real numbers? The well-ordering theorem tells us that \textit{this} is well-ordered too, which I find harder to believe.
+
+\begin{exrboxed}
+  The axiom of choice and well-ordering theorem aren't as controversial on countable sets. Convince yourself that the rational numbers are well-ordered by coming up with a well-ordering. But don't try too hard to come up with one for the real numbers---it can be proven that there's no formula that describes one, even if one exists.
+\end{exrboxed}
+
+\wp{chain, upper bound}
+\wl{chain}
+\wl{upper bound}
+\oww{poset, maximal element, Zorn's lemma}
+
+The axiom of choice and well-ordering theorem are both equivalent to a third theorem, called Zorn's lemma. The statement is a bit complicated: ``if every chain in a poset has an upper bound, then it has a maximal element.'' We'll explain what those words mean.
+
+\begin{remboxed}
+  There's a classic joke about how the three are equivalent, which I've heard attributed to Jerry Bona: ``The axiom of choice is obviously true, the well-ordering thoerem is obviously false, and who can tell about Zorn's lemma?''
+\end{remboxed}
+
+A \textbf{poset}, short for partially-ordered set, is a set with a relation satisfying certain properties. The relation has to be reflexive, so $(x, x)$ is always in the relation. It must be anti-symmetric, which means that if $(x, y)$ and $(y, x)$ are both in the relation, then $(x, x)$ is too. And it must be transitive: if $(x, y)$ and $(y, z)$ are in the relation, so is $(x, z)$. We typically write this relation with a $\le$ sign, but note that it's not exactly the same as $\le$ over numbers.
+
+The typical example of a poset is the ``is a factor of'' relation on the positive integers, that we talked about way, way earlier. It's not necessary that, given two integers, one is a factor of the other---that's what puts the ``partial'' in ``partially-ordered''. Other examples are ``is less than or equal to'' over the real numbers, or the ``is a subset of'' relation, over the subsets of a given set. We'll talk about the ``is a factor of'' poset as an example for the rest of this section, but in class, we'll draw pictures of \textit{Hasse diagrams}, which are a way to visualize smaller posets.
+
+A \bluebf{chain} is a subset of a poset, whose elements can all be compared with each other. For example, $ \left\{ 2, 8, 24, 1, 72 \right\} $ is a chain. Chains can be infinite, like $ \left\{ 1, 2, 4, 8, \dots \right\} $. An \bluebf{upper bound} of a chain is an element $u$, such that for each element $c$ in the chain, $(c, u)$ is in the relation. The second chain we gave doesn't have an upper bound, but the first chain has several, like $72$ or $144$.
+
+A \textbf{maximal element} of a poset is an element $m$, such that $(m, M)$ isn't in the relation for any $M$. Our ``is a factor of'' poset doesn't have any maximal elements. Finally, \textbf{Zorn's lemma} says that if every chain in a poset has an upper bound, then there has to be some maximal element.
+
+\begin{exrboxed}
+  Two lines of the song are ``You're the upper bound in the chains of my heart / You're my axiom of choice, you know it's true''. What's the joke here? Do you find it funny?
+\end{exrboxed}
+
+\section{Linear algebra (TBD)}
+
+\wp{tensor}
+\wl{tensor}
+\oww{vector, vector space}
+
+\wp{map, operator, rank}
+\wl{map}
+\wl{operator}
+\wl{rank}
+
+\wp{complexification}
+\wl{complexification}
+
+\section{Differential geometry (TBD)}
+
+\wp{wedge, form}
+\wl{wedge}
+\wl{form}
+
+\wp{principal bundle}
+\wl{principal bundle}
+\oww{bundle}
+
+\wp{stable equivalence}
+\wl{stable equivalence}
+
+\section{Category theory (TBD)}
+
+% group objects and universal properties
+
+\wp{directed system, faithful, forgetful, free, functor, limit}
+\wl{directed system}
+\wl{faithful}
+\wl{forgetful}
+\wl{free}
+\wl{functor}
+\wl{limit}
+  % https://math.stackexchange.com/questions/2426428/direct-limit-of-a-directed-system
+
+\section{Proof (TBD)}
+
+\wp{corollary, prove, proposition, QED, without loss of generality}
+\wl{corollary}
+\wl{prove}
+\wl{proposition}
+\wl{QED}
+\wl{without loss of generality}
+
+\section{Conclusion (TBD)}
+
+\section{Lyrics}
+
+\noindent
+The \wo{path} of love is never \wo{smooth} \\
+But mine's \wo{continuous} for you \\
+You're the \wo{upper bound} in the \wo[chain]{chains} of my heart \\
+You're my \wo[axiom of choice]{axiom of choice,} you know it's true \\
+
+\noindent
+But lately our \wo[relation]{relation's} not so \wo{well-defined} \\
+And I just can't \wo{function} without you \\
+I'll \wo[prove]{prove} my \wo{proposition} and I'm sure you'll find \\
+We're a \wo{finite} \wo[simple group]{simple} \wo{group} of \wo{order} two \\
+
+\noindent
+I'm losing my \wo{identity} \\
+I'm getting \wo{tensor} every day \\
+And \wo{without loss of generality} \\
+I will assume that you feel the same way \\
+
+\noindent
+Since every time I see you, you just \wo{quotient} out \\
+The \wo{faithful} \wo{image} that I \wo{map} into \\
+But when we're \wo{one-to-one} you'll see what I'm about \\
+Cause we're a finite simple group of order two \\
+
+\noindent
+Our \wo[stable equivalence]{equivalence was stable} \\
+A \wo[principal bundle]{principal love bundle} sitting deep inside \\
+But then you drove a \wo{wedge} between our \wo[form]{two-forms} \\
+Now everything is so \wo[complexification]{complexified} \\
+
+\noindent
+When we first met, we \wo{simply connected} \\
+My heart was \wo{open} but too \wo{dense} \\
+Our \wo[directed system]{system was already directed} \\
+To have a finite \wo{limit}, in some sense \\
+
+\noindent
+I'm living in the \wo{kernel} of a \wo[rank]{rank-one} map \\
+From my \wo{domain}, its image looks so blue \\
+Cause all I see are zeroes, it's a cruel trap \\
+But we're a finite simple group of order two \\
+
+\noindent
+I'm not the smoothest \wo{operator} in my \wo{class} \\
+But we're a \wo{mirror pair}, me and you \\
+So let's apply \wo{forgetful} \wo[functor]{functors} to the past \\
+And be a finite simple group, a finite simple group \\
+Let's be a finite simple group of order two \\
+(Why not three?) \\
+
+\noindent
+I've proved my proposition now, as you can see \\
+So let's both be \wo{associative} and \wo{free} \\
+And by \wo[corollary]{corollary,} this shows you and I to be \\
+Purely \wo[separable]{inseparable,} \wo{QED} \\
+
+\end{document}
