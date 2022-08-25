@@ -56,7 +56,7 @@ These are notes for a \href{https://esp.mit.edu/learn/HSSP/2022_Summer/catalog#c
 
 These notes will be more detailed than explanations we'll have in class, but in class I can draw pictures and answer questions much more easily.
 
-\section{Functions (July 16)}
+\section{Functions (July 9)}
 
 If I know my high school curriculum right, then it's likely you know some of these.
 
@@ -154,7 +154,7 @@ A function that is both injective and surjective is called \textbf{bijective}. T
 
 Another word for injective is \bluebf{one-to-one}, and another word for bijective is \bluebf{one-to-one correspondence}. Due to the potential for confusion, mathematicians avoid using them in practice. That means we're stuck using the names injective, surjective, and bijective, although at least those names are consistent. I also pronounce them with the abbreviations ``inj'', ``surj'', and ``bij'', and I personally find those pronunciations hilarious.
 
-\section{Group theory (July 16--23)}
+\section{Group theory (July 9--16)}
 
 \wp{group, associative, identity, order}
 \wl{group}
@@ -162,7 +162,7 @@ Another word for injective is \bluebf{one-to-one}, and another word for bijectiv
 \wl{identity}
 \wl{order}
 \oww{operation, inverse, subgroup}
-A (binary) \textbf{operation} over a set $G$ is a function that takes two elements of $G$ and returns another element of $G$. Some examples are $+$ and $\times$ over $\QQ$. While we could write them with the function notation of $+(2, 3) = 5$, we write them with the symbol in between instead, like $2 + 3 = 5$.
+A (binary) \textbf{operation} over a set $G$ is a function that takes two elements of $G$ and returns another element of $G$. Some examples are $+$ and $\cdot$ over $\QQ$. While we could write them with the function notation of $+(2, 3) = 5$, we write them with the symbol in between instead, like $2 + 3 = 5$.
 
 A \bluebf{group} consists of a set and an operation with some properties. Some examples:
 
@@ -173,11 +173,11 @@ A \bluebf{group} consists of a set and an operation with some properties. Some e
   \item There's an \bluebf{identity}, $0$, which means $a + 0 = 0 + a = a$.
   \item There's also an \textbf{inverse} for each $a$, called $-a$, which means $a + (-a) = (-a) + a = 0$.
   \end{itemthin}
-  \item The operation $\times$ over the non-zero rational numbers $\QQ^*$ forms a group.
+  \item The operation $\cdot$ over the non-zero rational numbers $\QQ^*$ forms a group.
   \begin{itemthin}
-  \item It's \textit{associative}, meaning $a \times (b \times c) = (a \times b) \times c$.
-  \item There's an \textit{identity}, $1$, which means $a \times 1 = 1 \times a = a$.
-  \item There's also an \textit{inverse} for each $a$, called $a^{-1}$, which means $a \times a^{-1} = a^{-1} \times a = 1$.
+  \item It's \textit{associative}, meaning $a \cdot (b \cdot c) = (a \cdot b) \cdot c$.
+  \item There's an \textit{identity}, $1$, which means $a \cdot 1 = 1 \cdot a = a$.
+  \item There's also an \textit{inverse} for each $a$, called $a^{-1}$, which means $a \cdot a^{-1} = a^{-1} \cdot a = 1$.
   \end{itemthin}
 \end{itemthin}
 
@@ -187,8 +187,8 @@ Here are some things that are not groups. Why?
 
 \begin{itemthin}
   \item The operation $-$ over $\ZZ$.
-  \item The operation $\times$ over (all) the rational numbers $\QQ$.
-  \item The operation $\times$ over $\ZZ$.
+  \item The operation $\cdot$ over (all) the rational numbers $\QQ$.
+  \item The operation $\cdot$ over $\ZZ$.
 \end{itemthin}
 
 Here are some things that are groups. Convince yourself that they are groups.
@@ -204,8 +204,11 @@ Here are some things that are groups. Convince yourself that they are groups.
   \end{remboxed}
   \item The operation ``multiplication, then divide by $n$ and take the remainder'' over the set $ \left\{ 1, 2, \ldots, p - 1 \right\} $ is a group, if $p$ is a prime. We call this $(\ZZ/p\ZZ)^\times$, or the ``multiplicative group of integers modulo $p$''.
   \begin{itemize}
-    \item It's not obvious that every element has an inverse, but it's true! For example, if $p = 7$, then you can check that $ 2 \times 4 = 3 \times 5 = 6 \times 6 = 1$.
+    \item It's not obvious that every element has an inverse, but it's true! For example, if $p = 7$, then you can check that $ 2 \cdot 4 = 3 \cdot 5 = 6 \cdot 6 = 1$.
   \end{itemize}
+  \begin{exrboxed}
+    For small groups, we can draw its ``operation table'', which is a table that shows the results of applying its operations on any pair of elements. We write its elements across the rows, and then write it again across the columns. In each entry of the table, the one in the row $a$ and column $b$, we write the result of the operation on $a$ and $b$. Draw the operation table for $(\ZZ/7\ZZ)^\times$.
+  \end{exrboxed}
   \begin{exrboxed}
     Why does $p$ have to be prime?
   \end{exrboxed}
@@ -218,11 +221,19 @@ Here are some things that are groups. Convince yourself that they are groups.
     \item This group has many names. This is called the ``dihedral group of order $4$'', or $D_4$. This is also called the ``group of symmetries of a rectangle''. This is also known as the Klein four-group. The Klein Four, the people who wrote the song we're studying, is named after this group.
   \end{itemize}
   \begin{exrboxed}
-    What is the group of symmetries of a square? How many elements does it have?
+    What are the inverses of each element in the Klein-four group? Draw its operation table. What about the group of symmetries of a square: how many elements does it have? Can you draw its operation table?
   \end{exrboxed}
 \end{itemize}
 
+\begin{exrboxed}
+  Prove that a group has only one identity element. To start, suppose that, instead, you had two different ones called $e$ and $f$. Then, what is $ef$? Similarly, can an element have more than one inverse?
+\end{exrboxed}
+
 A \textbf{subgroup} of a group is a subset of its elements that forms a group under the same operation. For example, a subgroup of $\ZZ$ is $3\ZZ$, the group with operation $+$ and elements $ \left\{ \ldots,-3, 0, 3, \ldots \right\} $. Another subgroup is the trivial group, the group with only the element $0$. (There's not much choice for what the operation should be!)
+
+\begin{exrboxed}
+  There are five subgroups of the Klein-four group. One of them is the group itself. Another is the subgroup containing just its identity element. What are the other three?
+\end{exrboxed}
 
 \wp{kernel, quotient}
 \wl{kernel}
@@ -258,7 +269,7 @@ Let's say $f : G \to H$ is a homomorphism. We've talked about the set of element
   Convince yourself that $\ker f$ is a subgroup of $G$. Does the operation stay in $\ker f$? Does it have an identity? Does it have inverses? The only information we have about $\ker f$ is that it's the kernel of a homomorphism, but homomorphisms are a lot of information.
 \end{exrboxed}
 
-Not only is $\ker f$ a subgroup of $G$, but it's a special kind of subgroup called a normal subgroup. A \textbf{normal subgroup} is a subgroup that is the kernel of some homomorphism. Non-normal subgroups exist, but not in \textbf{abelian groups}, a group where $a \times b = b \times a$ for all $a$ and $b$.
+Not only is $\ker f$ a subgroup of $G$, but it's a special kind of subgroup called a normal subgroup. A \textbf{normal subgroup} is a subgroup that is the kernel of some homomorphism. Non-normal subgroups exist, but not in \textbf{abelian groups}, a group where $a \cdot b = b \cdot a$ for all $a$ and $b$.
 
 \begin{remboxed}
   The smallest example of a non-normal subgroup is in the group of symmetries of an equilateral triangle, $D_6$. Any subgroup of order two is a non-normal subgroup. One way to check this is to try to look for a homomorphism $D_6 \to \ZZ/3\ZZ$.
@@ -274,7 +285,7 @@ Finite simple groups are pretty deep. One of the big projects of mathematics, sp
   The refrain of the song mentions a ``finite simple group of order two''. How many groups of order two are there? Try to construct these groups, by starting with two elements, and going over the possibilities for what the operation could be.
 \end{exrboxed}
 
-\section{Metric topology (TBD)}
+\section{Metric topology (July 16--23)}
 
 \wp{open}
 \wl{open}
@@ -283,11 +294,11 @@ If a group consists of a set and an operation, a metric space consists of a set 
 
 A \textbf{metric space} consists of a set and a metric with some properties:
 
-\begin{itemize}
+\begin{itemthin}
   \item It is symmetric, so $d(x, y) = d(y ,x)$.
   \item It is positive definite, so $d(x, y) = 0$ if and only if $x = y$.
   \item It has the triangle inequality, so $d(x, y) + d(y, z) \ge d(x, z)$.
-\end{itemize}
+\end{itemthin}
 
 Here are some things that are metric spaces. Convince yourself that they are metric spaces.
 
@@ -310,7 +321,7 @@ Here are some things that are metric spaces. Convince yourself that they are met
   \end{remboxed}
   \item Let $p$ be a prime. There's the $p$-adic metric over $\QQ$, where $d(x, y) = p^{-i}$, and $i$ is defined such that $p^i(x - y)$, in simplest form, has neither numerator nor denominator divisible by $p$. For example, when $p = 2$, the $2$-adic distance between $\frac38$ and $\frac14$ is $8$.
   \begin{exrboxed}
-    Check that the triangle inequality is satisfied for the $p$-adic metric.
+    Check that the triangle inequality is satisfied for the $p$-adic metric. This is actually somewhat hard, but at least convince yourself that it's a metric.
   \end{exrboxed}
 \end{itemize}
 
@@ -320,10 +331,16 @@ Here are some things that are metric spaces. Convince yourself that they are met
 
 A \textbf{subspace} of a metric space is a subset of its points, with the same metric. This is always a metric space, unlike subgroups.
 
-Finally, an \bluebf{open subset} of a metric space is a subset of its points such that, for any $x$ in the subset, all points that are ``close enough'' to $x$ are in the subset too. This is a kind of $\epsilon$ thing: if you want to show me that something is an open set, I'll name a point $x$ in the open set, and you give me a distance $\epsilon$, such that all points of distance at most $\epsilon$ to $x$ are in the subset too. One typical example to think of is a circle in $\RR^2$ without its boundary. Another are the open intervals in $\RR$.
+Finally, an \bluebf{open subset} of a metric space is a subset of its points such that, for any $x$ in the subset, all points that are ``close enough'' to $x$ are in the subset too. Specifically, if you want to prove to me that something is an open subset, I'll name a point $x$ in the open set. Then you'll show me a ball around $x$, one that has ``radius $\epsilon$'', and show me this ball is contained in the open set.
+
+\begin{remboxed}
+  We're going to begin using \href{https://en.wikipedia.org/wiki/Interval_(mathematics)}{interval notation} here.
+\end{remboxed}
+
+Let's think of $\RR$, and the set $(-1, 1)$. If you want to show me this is open, I'll name a point in the subset, like $0.8$. Then you can show me a ball, like the ball of radius $0.1$. ``Look at every point with distance less than $0.1$ to $0.8$,'' you'll say. ``See that all of those points are in the subset.'' An example of a set that \textit{isn't} open is the set of all $x$ such that $(-1, 1]$. If I name the point $1$ in the subset, you can't give me a ball that contains it, that's also in the subset.
 
 \begin{exrboxed}
-  What are the open sets in the discrete metric space?
+  Here are two sets in $\RR^2$: a circle, with its boundary, and a circle without its boundary. Which of these two are open? What are the open sets in the discrete metric space? What are all the open sets in $\QQ$?
 \end{exrboxed}
 
 \wp{dense}
@@ -335,10 +352,10 @@ Consider an infinite sequence of points in a metric space, say, $ x_1, x_2 , \ld
 
 As an example, think of the sequence $3, 3.1, 3.14, 3.141, \ldots$. Considered as a sequence over $\RR$, this converges to $\pi$. If I say an $\epsilon$ like $0.01$, you could say, ``well, all the things from $3.14, 3.141, \ldots$ have distance at most $0.01$ to $\pi$.'' But it doesn't converge over $\QQ$!
 
-Now, a \textbf{closed subset} of a metric space is a subset of its points such that, for any sequence of points in the subset that does converge, the point it converges to is in the subset. Typical examples are circles in $\RR^2$, with their boundary, and closed intervals in $\RR$.
+Now, a \textbf{closed subset} of a metric space is a subset of its points such that, for any sequence of points in the subset that does converge, the point it converges to is in the subset. Typical examples are circles in $\RR^2$, with their boundary, and in $\RR$, things like the set of all $x$ such that $[0, 1]$.
 
 \begin{exrboxed}
-  Think about the sets $[0, 1)$ and $ \varnothing $ in $\RR$. Are they open, closed, neither, both? Now that I've given you reasons why these names are bad, here's the only reason they're good: a subset is open if its complement is closed, and vice versa. Convince yourself this is true by drawing some pictures.
+  In $\RR$, with the usual metric space, think of the set of all $x$ such that $(0, 1]$. Is this open, closed, neither, both? What about the empty set? Now that I've given you reasons why these names are bad, here's the only reason they're good: a subset is open if its complement is closed, and vice versa. Convince yourself this is true by drawing.
 \end{exrboxed}
 
 Another way to think about closed subsets is through its closure. Say you did take a subset, find all the convergent sequences, and take the set of points they converge to. That set is the \textbf{closure} of the original subset, the smallest closed set containing a subset. A set is closed if it's its own closure.
@@ -358,7 +375,7 @@ Groups talk to each other through homomorphisms. Metric spaces talk to each othe
 Two groups that are the same are isomorphic. Two metric spaces that are the same are \textbf{homeomorphic}. An isomorphism is a bijective homomorphism. A homeomorphism is a bijective continuous function\dots whose inverse function is also continuous. As an example, the square's boundary is homeomorphic to a circle's boundary. The old joke is that donuts and coffee cups are homeomorphic. An object is always homeomorphic to its \bluebf{mirror pair}---which just means what you think it means.
 
 \begin{remboxed}
-  The ``inverse function is also continuous'' is an important condition. For example, consider $[0, 1)$ and a circle's boundary: there's a bijective continuous function, but the inverse isn't continuous.
+  The ``inverse function is also continuous'' is an important condition. For example, consider these two metric spaces. The first is the subspace $[0, 1)$ in $\RR$. The second set is a circle's boundary, a subspace of $\RR^2$. There's bijective continuous functions, but no matter which you pick, their inverses aren't continuous.
 \end{remboxed}
 
 \wp{path, smooth}
@@ -380,18 +397,18 @@ A set that is both closed and open is called \textbf{clopen}. We say a space is 
 Most of the spaces we've seen so far are connected, but one exception is $\QQ$ with the absolute distance metric. Consider the set of numbers in $\QQ$ less than $\sqrt2$. Seeing that it's open shouldn't be too hard. Seeing that it's closed might be a bit harder, but remember that we're in the metric space $\QQ$, and not $\RR$, so for it to be closed, we only have to consider sequences that converge in $\QQ$. Thus, this set is clopen, and $\QQ$ is disconnected.
 
 \begin{exrboxed}
-  Consider the absolute distance metric and the set of real numbers in $[0, 1] \cup [2, 3]$. This is a metric space. Convince yourself that $[0, 1]$ is a clopen set in this space. Thus, this space is disconnected.
+  Consider the absolute distance metric and the set of real numbers in $[0, 1] \cup [2, 3]$. This is a metric space. Convince yourself that $[0, 1]$ is a clopen set in this space. Thus, this space is disconnected. Does this definition match what you imagine it means for a space to be ``connected''?
 \end{exrboxed}
 
 A \textbf{ path-connected } space is one that has a path joining any two points in it. The metric space $\RR$ is path-connected, but not the metric space $[ 0, 1 ] \cup [ 2, 3 ]$, over the same metric.
 
 \begin{remboxed}
-  All path-connected spaces are connected, but not vice-versa! My favorite example is to think about the comb space. We'll use the fact that if $L$ is a subspace of $M$, which is a subspace of the closure of $L$, and $L$ and its closure are both connectde, then so is $M$. We won't prove this, but think about why it feels true.
+  All path-connected spaces are connected, but not vice-versa! My favorite example is to think about the comb space. We'll use the fact that if $L$ is a subspace of $M$, which is a subspace of the closure of $L$, and $L$ and its closure are both connected, then so is $M$. We won't prove this, but think about why it feels true.
 
   Consider the comb, which is a subspace of $\RR^2$ with the usual distance metric. It consists of the line joining $(0, 0)$ to $(1, 0)$, which is its shaft, and a bunch of lines joining $ \left( \frac{1}{n} , 0 \right) $ to $ \left( \frac{1}{n} , 1 \right) $, and a line joining $ \left( 0, 0 \right) $ to $ \left( 0, 1 \right) $. This is connected. Now remove the last line; this is still connected, and its closure is the comb space. If we add back the point $(0, 1)$, it follows that it's still connected. But this last space isn't path-connected, as there's no path from $(0, 0)$ to $(0, 1)$.
 \end{remboxed}
 
-A \textbf{homotopy} between two paths is a continuous deformation from one path to the other. The formal definition involves a continuous function from $[0, 1]$ to paths in the metric space, such that at $0$ it's the first path and at $1$ it's the last path. There's no good way of explaining this without \href{https://commons.wikimedia.org/wiki/File:HomotopySmall.gif}{a picture}.
+A \textbf{homotopy} between two paths is a continuous deformation from one path to the other. The formal definition involves a continuous function from $[0, 1]$ to paths in the metric space, such that at $0$ it's the first path and at $1$ it's the last path. There's no good way of explaining this without \href{https://commons.wikimedia.org/wiki/File:HomotopySmall.gif}{a picture}, and I'll draw more in class.
 
 A space is \bluebf{simply connected} if it's path-connected, and, for any two points, all the paths joining them have homotopies between them. The space $\RR^2$ is simply connected. If you take out a hole in the middle, it isn't, because there's no homotopy between two paths that go around the hole in different ways.
 
@@ -399,7 +416,7 @@ A space is \bluebf{simply connected} if it's path-connected, and, for any two po
   One of the lines of the song is ``When we first met, we simply connected''. There's no math joke here, it's just a pun.
 \end{remboxed}
 
-\section{Set theory (TBD)}
+\section{Set theory (July 23--30)}
 
 \wp{separable}
 \wl{separable}
@@ -420,6 +437,10 @@ And completely unrelated to any of that, but because I have to define it anyway,
 
 \begin{remboxed}
   The reason it's called ``separable'' is because you can imagine this countable, dense subset, as ``separating'' the space. For example, in $\RR$, any two real numbers are ``separated'' by a rational number.
+\end{remboxed}
+
+\begin{remboxed}
+  This is somewhat ingenious, as I'm pretty sure the ``purely inseparable'' in the song refers to a \href{https://en.wikipedia.org/wiki/Purely_inseparable_extension}{purely separable extension}, as in field theory. But I don't have time to develop fields, and this is close enough, that I'm fine with the lie.
 \end{remboxed}
 
 \wp{class}
@@ -460,7 +481,6 @@ The natural numbers, for example, have a well-ordering given by $<$. The integer
 \wl{chain}
 \wl{upper bound}
 \oww{poset, maximal element, Zorn's lemma}
-
 The axiom of choice and well-ordering theorem are both equivalent to a third theorem, called Zorn's lemma. The statement is a bit complicated: ``if every chain in a poset has an upper bound, then it has a maximal element.'' We'll explain what those words mean.
 
 \begin{remboxed}
@@ -479,56 +499,332 @@ A \textbf{maximal element} of a poset is an element $m$, such that $(m, M)$ isn'
   Two lines of the song are ``You're the upper bound in the chains of my heart / You're my axiom of choice, you know it's true''. What's the joke here? Do you find it funny?
 \end{exrboxed}
 
-\section{Linear algebra (TBD)}
+\section{Linear algebra (July 30--August 6)}
 
-\wp{tensor}
-\wl{tensor}
-\oww{vector, vector space}
-
-\wp{map, operator, rank}
+\wp{map, operator}
 \wl{map}
 \wl{operator}
+\oww{vector space, linear, vector, scalar}
+A \textbf{vector space} (over $\RR$) is a set where you can add any two elements, and you multiply them by real numbers.
+
+An example are the real polynomials with degree at most two. You can add two quadratics to get another quadratic, and you can multiply a quadratic by a real number to get another quadratic. The important property is that these \textit{commute}, so that $2 (x^2 + 2x + 4) + 2 (-3x + 1)$ is the same as $2 (x^2 + 2x + 4 - 3x + 1)$.
+
+Specifically, a vector space is an operation $+$ that makes the set $V$ an abelian group, and a function $\cdot: \RR \times V \to V$ such that, for $k, \ell \in \RR$ and $u, v \in V$:
+
+\begin{itemthin}
+  \item $k(u + v) = ku + kv$ and $k(\ell v) = \ell (kv)$,
+  \item $(k + \ell)v = kv + \ell v$,
+  \item $1v = v$ and $0v = 0$. The $0$ on the right is the identity for the group over $V$.
+\end{itemthin}
+
+The elements of a vector space are called \textbf{vectors}, and the real numbers are called \textbf{scalars}. The important condition is the first one, which means that multiplication is \textbf{linear}.
+
+The most important vector space over $\RR$ is $\RR^n$, which is $n$ copies of $\RR$. The vector $(1, 2, 4)$ is an element of $\RR^3$. Adding it to the vector $(2, -3, 5)$ gives the vector $(3, -1, 9)$. Multiplying this sum by $ \frac{1}{3} $ gives us the vector $(1, - \frac{1}{3} , 3)$. Note that this is kinda the same as our vector space of quadratics earlier, but written differently.
+
+\begin{remboxed}
+  In a deep sense, $\RR^n$ is the only ``finite-dimensional'' vector space over $\RR$. There are many infinite-dimensional vector spaces, like the polynomials with real coefficients, or the functions from $\RR \to \RR$.
+\end{remboxed}
+
+A \textbf{linear} \bluebf{map} is a function from one vector space to another that is also linear. That means that if $f : U \to V$ is a linear map, then for any $u, v \in U$ and $k \in \RR$, \[
+  f(u + v) = f(u) + f(v) \text{ and } f(kv) = kf(v).
+\]
+An example of a linear map from $\RR^3 \to \RR^2$ takes $(a, b, c)$ to $(a + 2b + 4c, 0)$. Another example is from the quadratic polynomial vector space earlier to itself, which takes $ax^2 + bx + c$ to $cx^2 + bx + a$. When the domain and codomain of the map are the same, we call it a linear \bluebf{operator}.
+
+\begin{remboxed}
+  The terms \textit{map} and \textit{operator} are, in general, other names for \textit{function}. The continuous functions between metric spaces are better known as \textit{continuous maps}. Another word that's a synonym is \textit{morphism}, and homomorphisms, isomorphisms, and homeomorphisms, are all kinds of morphisms. Some people will make distinctions, but I think they all mean the same thing. That's why when the song mentions the ``smoothest operator'', it just refers to a smooth function.
+\end{remboxed}
+
+\wp{rank}
 \wl{rank}
+\oww{subspace, dimension}
+A \textbf{subspace} is, you guessed it, a subset of a vector space that's also a vector space. An example of a subspace in $\RR^3$ is the set of all $(0, k, 0)$ vectors for $k \in \RR$. Check that it's a vector space: you can add two vectors, and you can multiply by scalars. (We don't need to check for linearity, as that's covered by the parent space.)
 
-\wp{complexification}
+A subtler example of a subspace is the set of all $(a, b, c)$ vectors such that $a + 2b + 4c = 0$. Agan, you can check that adding two vectors in this subspace stays in the subspace, and so does multiplying by scalars. Another important fact is that this is the kernel of the linear map taking $(a, b, c)$ to $a + 2b + 4c$, and in general, the kernel of a linear map is always a subspace.
+
+The \textbf{dimension} of a vector space is how many $\RR$-subspaces it's made out of. $\RR^3$ has dimension $3$, and so does the quadratic polynomial vector space. The space of all $(0, k, 0)$ vectors, for $k \in \RR$, has dimension $1$. The space of vectors $(a, b, c)$ satisfying $a + 2b + 4c = 0$ has dimension $2$, because it's made out of the space of all $(-4c, 0, c)$ and $(-2b, b, 0)$ vectors.
+
+A linear map gives us two important subspaces. We've already seen that the kernel is a subspace, but so is the image, from the fact that a linear map is linear. The \textbf{rank} of a linear map is the dimension of its image. We'll draw a nice picture in class of the important \textit{rank-nullity theorem}, which will be useful for this exercise:
+
+\begin{exrboxed}
+  Three lines of the song go ``I'm living in the kernel of a rank-one map / From my domain, its image looks so blue / Cause all I see are zeroes, it's a cruel trap''. If you're in a rank-one map, why would its image look so blue (at least compared to maps with higher ranks)? If you're in the kernel of a map, why would you only see zeroes?
+\end{exrboxed}
+
+\wp{tensor, complexification}
+\wl{tensor}
 \wl{complexification}
+\oww{tensor product, dual space}
+A \textbf{tensor product} is a way to glue two vector spaces $V$ and $W$ together. The elements of $V \otimes W$ are just the set of elements $v \otimes w$, treated as a vector space. The elements are only different up to multiplication by a scalar, so for $k \in \RR$, $k(v \otimes w) = (kv) \otimes w = v \otimes (kw)$.
 
-\section{Differential geometry (TBD)}
+Consider the vector space $V$ of polynomials that are at most degree $2$, and the vector space $W$ of polynomials that are at most degree $1$. The tensor product is also linear in both of its arguments, which allows us to do calculations like this:
+\begin{align*}
+  (x^2 + 2x + 3) \otimes (2x + 1)
+  &= x^2 \otimes (2x + 1) + 2x \otimes (2x + 1) + 3 \otimes (2x + 1) \\
+  &= x^2 \otimes 2x + x^2 \otimes 1 + 2x \otimes 2x + 2x \otimes 1 + 3 \otimes 2x + 3 \otimes 1 \\
+  &= 2(x^2 \otimes x) + (x^2 \otimes 1) + 2(x \otimes x) + 2(x \otimes 1) + 6(1 \otimes x) + 3(1 \otimes 1).
+\end{align*}
+If this looks an awful lot like polynomial multiplication, you'd be right! The difference is that the tensor product doesn't care about what $V$ and $W$ actually \textit{mean}. The only property of the tensor product is that it's linear and it floats scalars. For example, $x \otimes 1 \ne 1 \otimes x$.
+
+The elements of a tensor product are called \bluebf{tensors}. The point of tensors is that they represent linear maps. As an example, note that the set of linear maps $\RR^3 \to \RR$ is also a vector space. We call this the \textbf{dual space} of $\RR^3$, and write it as $(\RR^3)^{\vee}$
+
+\begin{exrboxed}
+Convince yourself this is true! Every linear map $\RR^3 \to \RR$ takes $(a, b, c)$ to $ka + \ell b + mc$, for some $k, \ell, m \in \RR$. How do you add two linear maps? How do you multiply by scalars? Is multiplication linear?
+\end{exrboxed}
+
+Now consider the linear map $\RR^3 \to \RR^2$ that takes $(a, b, c)$ to $(a + 2b + 4c, 4a + 2b + c)$. This is really just two linear maps $\RR^3 \to \RR$, one that goes $(a, b, c)$ to $a + 2b + 4c$, and another that goes $(a, b, c)$ to $4a + 2b + c$, but glued together. If you tensor the first linear map with $(1, 0)$ and the second linear map with $(0, 1)$, you end up with a linear map from $\RR^3 \to \RR^2$.
+
+The \bluebf{complexification} of a vector space $V$ is $V \otimes \CC$, but instead of multiplying by just real numbers, we also allow multiplying by complex numbers. Complexifying $\RR^n$ gives the vector space $\CC^n$, where you can add two vectors and multiply vectors by complex numbers.
+
+\section{Differential geometry (August 6)}
 
 \wp{wedge, form}
 \wl{wedge}
 \wl{form}
+The \bluebf{wedge product} of a space $V$ with itself is $V \otimes V$, except instead of $\otimes$ we write $\wedge$, and we have one extra condition: $ v \wedge v = 0 $. We write it as $\Lambda^2(V)$.
+\begin{exrboxed}
+  Using this condition, show that $ v \wedge w = - w \wedge v $. To do this, start with $(v + w) \wedge (v + w) = 0$, then use the fact that $\wedge$ is linear on both sides.
+\end{exrboxed}
+Here's the reason why we care about the wedge product. Consider $\RR^2$, and let's rewrite the wedge product of two vectors $(a, b) \wedge (c, d)$ in terms of just $(1, 0) \wedge (0, 1)$:
+\begin{align*}
+  (a, b) \wedge (c, d) &=
+  ac((1, 0) \wedge (1, 0))
+  + ad((1, 0) \wedge (0, 1))
+  + bc((0, 1) \wedge (1, 0))
+  + bd((0, 1) \wedge (0, 1)) \\
+  &= (ad - bc)((1, 0) \wedge (0, 1)).
+\end{align*}
+What is $ad - bc$? It's the area of a parallelogram formed by the vectors $(a, b)$ and $(c, d)$. I'd add a picture here, but I'm not going to draw pictures, go to class!
+\begin{exrboxed}
+  Fill in the missing steps in the above calculation.
+\end{exrboxed}
+We can also generalize the wedge product to $\Lambda^n(V)$ in general, but that won't be important to us. The important cases are $n = 0$, which is the empty vector space, $n = 1$, which is $V$, and $n = 2$, which we saw.
+
+An $n$-\bluebf{form} over a vector space $V$ is a smooth function from $V \to \Lambda^n(V^{\vee})$, where here, $V^{\vee}$ is the dual space. Let's take $V = \RR^3$. Recall that the dual space is the space of functions $\RR^3 \to \RR$. So a $1$-form over $\RR^3$ takes each point in the space and maps it to a function from $\RR^3$ to $\RR$. And a $2$-form maps each point to something that can be represented as the ``area'' spanned by two such functions. It's, uh, the algebraic definition isn't great without more details.
+
+\begin{exrboxed}
+  At least this explains the pun ``But then you drove a wedge between our $2$-forms''. Attempt to find humor in this line.
+\end{exrboxed}
+
+The geometric definition is better. A differential form is something you can sum over. If you have a $0$-form on $\RR^3$, and you have a bunch of points, the $0$-form takes each point to a real number, and then you can sum over them.
+
+If you have a $1$-form on $\RR^3$, and you're walking along a curve, then along each point in the curve you have a vector representing where you're facing. That vector is also in $\RR^3$. The $1$-form takes where you're standing to a function from $\RR^3$ to $\RR$, so by plugging in the direction you're facing, you get a real number. There are a bunch of real numbers along the path you walk, and you can sum over them. And then a $2$-form allows you to sum over a tiny area.
+
+\begin{remboxed}
+  Technically, I should be saying ``integrate over'' instead of ``sum over''. A $1$-form is something like $f(x)\,dx$, which takes a point $x$ and returns a function that takes a facing direction, $dx$, and returns a real number, $f(x)\,dx$. Except, not really. I don't understand it myself.
+\end{remboxed}
 
 \wp{principal bundle}
 \wl{principal bundle}
-\oww{bundle}
+\oww{vector bundle, frame bundle}
+We've now thought about a $1$-form, which we can think of as assigning each point in $V$ a vector in $V^\vee$. Really, an $n$-form is a way to take a vector space as a ``geometric'' object, and to each point attach something ``algebraic'' on it, in this case, a function in the wedge product of the dual space. This is similar to the idea behind bundles.
+
+A \textbf{vector bundle} is a bundle involving vector spaces. It takes a geometric object, in our case, a metric space, and to each point in the metric space attaches a whole \textit{vector space}. Yes, that's right, an entire vector space. The requirement is that the vector space changes continuously along the metric space, whatever that means.
+
+For example, consider the boundary of the unit circle in $\RR^2$ as a metric space. We can attach to each point of the unit circle a copy of $\RR$, pointed in different directions. There are two different ways to do so: one gives a cylinder-like thing, and one gives a M\"obius-strip-like thing. Another important example of vector bundles are tangent bundles, like attaching $\RR^2$ to each point on the surface of a sphere in a way that doesn't intersect the sphere again.
+
+In a \bluebf{principal $G$-bundle}, the algebraic thing we attach is a group $G$. ``But CJ,'' you ask, ``how is it possible to place a group in space?'' Well, if you follow along each element of the group, you get a copy of the original metric space. The group is important because it allows us to ``multiply'' each of these copies with an element of the group, mapping it to another copy.
+
+Consider the group $\ZZ/2\ZZ$, and let's think about possible $\ZZ/2\ZZ$-bundles over the boundary of the unit circle. You have two circles. Applying the identity to each circle gives the same circle, applying the other element maps it to the other one. How are the circles related? They can ``twist'' around each other in space, as long as it's continuous. This leads to two possible structures again: a cylinder-like thing, and a M\"obius-strip-like thing. I promise this will make more sense once we make some drawings in class. This kind of principal bundle is called a \textbf{frame bundle}, and in particular, it's the frame bundle of the vector bundle we talked about earlier.
+
+\begin{exrboxed}
+  One line of the song goes ``A principal love bundle sitting deep inside''. This implies that the narrator's love for the other person forms a group. Which group would it be? What do you think a principal love bundle over a metric space would look like?
+\end{exrboxed}
 
 \wp{stable equivalence}
 \wl{stable equivalence}
+Recall what it means to take the tensor prodcut of two vector spaces: it's gluing them together. In a similar way, we can take the tensor product of two vector bundles over the same metric space, by taking the tensor product of vector spaces at each point in the metric space. Two vector bundles are in a \bluebf{stable equivalence} if, after tensoring them by $\RR^k$ for some $k$, they become isomorphic.
 
-\section{Category theory (TBD)}
+\begin{remboxed}
+  If it wasn't already clear since the beginning of this section, I don't actually know any differential geometry, and so I don't know how to explain this well. Oops! As the title of the class said, no promises about the math.
+\end{remboxed}
 
-% group objects and universal properties
+\section{Category theory (August 6--August 13)}
 
-\wp{directed system, faithful, forgetful, free, functor, limit}
+\wp{directed system}
 \wl{directed system}
-\wl{faithful}
-\wl{forgetful}
+\oww{category, compose}
+The point of category theory is to take many different mathematical objects we've been studying, and find a way to describe them that generalizes over them all. It comes from the realization that, in many cases, we care just as much, if not more, about \textit{how} objects talk to each other, rather than the objects themselves. For example, consider the isomorphism: it's a concept that applies in multiple places, and in each place, it's kinda the same thing. In fact, isomorphisms aren't really about the objects; they're about the maps between them.
+
+In a \textbf{category}, we have a class of objects, and for any pair of objects, a class of maps between them. (I'm using \textit{class} to be technical, but you can replace it with \textit{set} if you want.) Further, we can \textbf{compose} maps: if you have a map $f \from A \to B$ and a map $g \from B \to C$, you can make a map $gf \from A \to C$. Each object has an identity map to itself, and composing a function with any identity map gives the same function.
+
+Note that we're defining an identity map with respect to how it works with other maps. In fact, that's the \textit{only} way to define an identity map, because we can't look ``inside'' the objects to find out what an identity is. Again, that's the point of category theory: we're looking at the maps, not the objects.
+
+Some examples:
+
+\begin{itemize}
+  \item There's a category of objects, called $ \cat{Grp} $. The objects are groups, the maps are homomorphisms, and composition is function composition.
+  \item There's a category of metric spaces, called $ \cat{Met} $. The objects are metric spaces, the maps are continuous functions, and composiiton is function composition.
+  \item There's a category of vector spaces, called $ \cat{Vect} $. The objects are metric spaces, the maps are linear maps, and composition is function composition.
+  \item There's a category of sets, called $ \cat{Set} $. The objects are sets, the maps are \textit{any} functions, and composition is function composition.
+\end{itemize}
+
+Now, an \textit{isomorphism} between two objects $A$ and $B$, in \textit{any} category, is a map $f \from A \to B$, such that there exists a map $g \from B \to A$, such that $gf$ is the identity on $A$, and $fg$ is the identity on $B$. See how we unified so many definitions into a single, category-theoretic construction?
+
+Note that the information in a category isn't just the objects and their maps. The most important information is actually how they compose! Composition gives us information: we can specify that two maps compose to a given map.
+
+\begin{exrboxed}
+  The classic joke about this is that any group is a one-object category where every map is an isomorphism: the elements of the group corresond to the maps. Convince yourself that this is true.
+\end{exrboxed}
+
+For completion's sake, I also have to give the definition of a directed system, but it won't be super relevant to our discussion. Suppose you had a poset $S$ and a category $\cat{C}$. A \bluebf{directed system} is a set of objects $A_i$, where $i$ ranges over $S$, with a morphism $f_{ij} \from A_i \to A_j$, such that if $i \le j \le k$ then they compose in the way you'd expect them to.
+
+\wp{free}
 \wl{free}
+\oww{commutative diagram, universal construction}
+If for some reason you wanted to think about the ``inside'' of an object, there's a way around that. It's to consider maps between a special kind of object to that object. For example, consider the set with one element in $\cat{Set}$. (There are many sets with one element, but they are all isomorphic.) A map from the set with one element ``points to'' a single element in another set.
+
+Or as another example, consider $\ZZ$ in $\cat{Grp}$. How do you construct a homomorphism from $\ZZ$ to a group? Well, $0$ has to go to the identity. And $1$ has to go to some element. But as soon as you've decided where $1$ goes, you've decided where every other element in $\ZZ$ goes to. Thus, a map from $\ZZ$ to a group is determined by a single element in the group, and we can think of this as ``pointing to'' a single element.
+
+As another example, think of the discrete space with one element, in $\cat{Met}$. These kinds of objects, which point to a ``single thing'' inside an object, are all \bluebf{free} objects.
+
+\begin{exrboxed}
+  What about the discrete space with two elements? What are the continuous maps from that space to another metric space?
+\end{exrboxed}
+
+What do all these free objects have in common, however? Let's think about $\ZZ$ in $\cat{Grp}$ again. Consider a diagram, where we draw a set with one element, a map from this set to $\ZZ$, and a map from this set to some group $G$. Here, these are maps in $\cat{Set}$, but don't worry about that just yet.
+
+We want to interpret the second map as ``pointing to'' a single element in $G$. But we can only talk about maps, right? So what's the corresponding map in $\cat{Grp}$ that goes from $\ZZ$ to $G$? There are several, but there's only one that composes with the inclusion to give the same result. There's only one map that makes this a \textbf{commutative diagram}. That's what makes $\ZZ$ a free object: there's only one map that makes the compositions the same no matter what. If there were two elements, the corresponding free object is called $F_2$, ``the free group generated by two elements''.
+
+In general, we can draw diagrams and say that they \textit{commute} if, no matter what order you follow the arrows in, you get the same result. Thinking about making things commute allows us to specify some kinds of properties nicely. For example, if you had a set $S$ in $\cat{Set}$, and a map $f \from S \times S \to S$, you can draw a diagram expressing what it means for $f$ to be \textit{associative}. So now, associativity, which we used to talk about with respect to elements, can actually be defined just in terms of arrows! That's why commutative diagrams are so important in category theory: forcing things to commute is what allows us to define things more specifically, especially when we have ``so little'' to work with.
+
+To make an object by showing it's something that makes a diagram commute, in a specific way, is to do a \textbf{universal construction}. We just showed the universal construction for free objects. We can also do a universal construction of what a product is, which allows us to talk about $A \times B$ in more categories than just $\cat{Set}$.
+
+The idea is that we care about the projections of $A \times B$ to $A$ and $B$. These projections are maps, $p_A$ and $p_B$, that take a pair and return the first or second element. If we can only talk about maps, how do we characterize the maps that go through $A \times B$? Suppose we had a set $S$ and a map $f \from S \to A \times B$. Well, we have a map $p_A \from A \times B \to A$, so we have a map $p_Af \from S \to A$, and similarly a map $p_Bf \from S \to B$. Of course, given any set $S$, there are always going to be maps to $A$ and maps to $B$. But $A \times B$ has a special property that you can go \textit{in reverse}: if you had $S$ with maps $q_A \from S \to A$ and $q_B \from S \to B$, then there's only one way to map from $S$ to $A \times B$ to make everything commute nicely. In a way, that's the ``most universal way'' to map to $A$ and $B$, the way to do it without losing information.
+
+We can call an object $A \times B$ if it has two maps, $p_A \from A \times B \to A$ and $p_B \from A \times B \to B$, such that for any other object $S$ with maps $q_A \from S \to A$ and $q_B \from S \to B$, there exists a \textit{unique} map $f \from S \to A \times B$ such that everything commutes.
+
+\begin{exrboxed}
+  Prove that all the objects that satisfy these properties are ismoprhic. The proof is similar to what we did to show a group has only one identity element. Thus, we can always talk about ``the'' product.
+\end{exrboxed}
+
+% https://math.stackexchange.com/questions/2426428/direct-limit-of-a-directed-system
+
+\wp{functor, forgetful, faithful}
 \wl{functor}
+\wl{forgetful}
+\wl{faithful}
+We earlier wanted to talk about mapping \textit{between two categories}, when defining free objects. The way to do this is a \bluebf{functor}, which is a map between two categories. We can make a functor $F \from \cat{Grp} \to \cat{Set}$. This functor takes objects in $\cat{Grp}$ to objects in $\cat{Set}$, and maps in $\cat{Grp}$ to maps in $\cat{Set}$. This means functors also carry diagrams to diagrams. So now, we can talk about ``a map between $\ZZ$ to $G$ in $\cat{Set}$'', which corresponds to a map between $\ZZ$ to $G$ in $\cat{Grp}$, that the functor takes to a map to their images in $\cat{Set}$.
+
+Now in $\cat{Set}$ we can draw what we want to happen. We have a set $S$ with one element, we have $F(\ZZ)$, and we have $F(G)$. We also have a map from $S$ to $F(\ZZ)$, and a map from $S$ to $F(G)$. Once again, there are multiple maps between $F(\ZZ)$ to $F(G)$, except this time, there are multiple maps that even make the diagram commute. But only one of these maps is in the image of $F$. That's the universal property that free objects have: they're an object such that there's only one map that makes this diagram commute.
+
+Our map from $\cat{Grp}$ to $\cat{Set}$ is an example of a \bluebf{forgetful} functor: it ``forgets'' some of the information in $\cat{Grp}$. There's no formal definition for a forgetful functor. Another kind of functor is a \bluebf{faithful} functor, which is a functor that's surjective on diagrams.
+
+\begin{exrboxed}
+  One line of the song goes ``The faithful image that I map into''. If you were a faithful functor, what would your image map into? The line before that talks about ``quotienting out'' this image. If you quotient out a faithful image, what's left?
+\end{exrboxed}
+
+\wp{limit}
 \wl{limit}
-  % https://math.stackexchange.com/questions/2426428/direct-limit-of-a-directed-system
+\oww{$n$-category, natural transformation, discrete category, cone}
+If you thought category theory was already pretty meta, it's about to get more meta.
 
-\section{Proof (TBD)}
+\begin{remboxed}
+  Here, ``meta'' is an adjective that describe something that describes itself, or is somehow self-referential. I can write essays about penguins, and that's just an essay. If I write an essay about how I write essays, that's meta. Category theory is doing math on math, which is pretty meta.
+\end{remboxed}
 
-\wp{corollary, prove, proposition, QED, without loss of generality}
-\wl{corollary}
-\wl{prove}
-\wl{proposition}
-\wl{QED}
+Remember when we talked about homotopy? You have points, and then you have paths between points. Then you also have homotopies, which are like paths between paths. Well, in a $2$-category, you have objects, and you have maps between objects. But you also have $2$-maps, which are maps between maps.
+
+In an \textbf{$n$-category}, not only do we have objects and maps, but we have $2$-maps between maps, and $3$-maps between $2$-maps, and so on up to $n$. A $0$-category just has objects and no maps, a $1$-category is what we've been discussing so far.
+
+Now, the class of categories actually forms a category in itself, called $\cat{Cat}$. The objects are categories and the maps are functors between them, and each category has an identity functor. In the $2$-category version of $\cat{Cat}$, we have maps between maps, and those maps are called \textbf{natural transformations}. Then $3$-maps in $\cat{Cat}$ are called modifications, which is a name I've barely heard used. There are no more names after that, because mathematicians don't count higher than $3$.
+
+What do natural transformations look like? A natural transformation $n$ must be between one functor and another, let's say $F \from \cat{C} \to \cat {D}$ and $G \from \cat{C} \to \cat{D}$. Then these functors would, say, take a map $f \from A \to B$, in $\cat{C}$, to two maps in $\cat{D}$, which are $F(f) \from F(A) \to F(B)$ and $G(f) \from G(a) \to G(b)$. Then a natural transformation takes $F(A)$ to $G(A)$, and $F(B)$ to $G(B)$, and it must commute in the natural way. In other words, a natural transformation specifies maps between images of functors, and require them to commute.
+
+What are the free objects in $\cat{Cat}$? Let's think about the one pointed to by a one-element set for now. It's a category that'll have one object. It has one map, the identity. And that's it. This category is called $\cat{1}$. Now the way we can talk about a specific object in a category is by giving a functor from $\cat{1}$ to this category. Similarly, we have the categories $\cat{2}, \cat{3}, \dots$. These are called \textbf{discrete categories}, in analogy to discrete space.
+
+Consider two functors from $\cat{2}$ to $\cat{Set}$. The first, $F$, has each object in $\cat{2}$ point to two distinct sets $A$ and $B$, respectively. The second, $\Delta_S$, has both objects point to some set $S$. Now, is there a natural transformation between these two functors? Well, it would have two parts: a map $q_A \from S \to A$ and a map $q_B \from S \to B$. This is now similar to the setup of the universal construction for a product.
+
+Say you replaced $\cat{2}$ with a different category, say $\cat{J}$, and you have a functor $F \from \cat{J} \to \cat{C}$ and a functor $\Delta_S \from \cat{J} \to \cat{C}$, and a natural transformation that works. This is called a \textbf{cone}. A \bluebf{limit} is a universal cone, so you can think of it as a big generalization of a product. I refuse to explain further, mostly because I don't understand any of this myself.
+
+\begin{remboxed}
+  Two of the lines in the song go ``Our system was already directed / To have a finite limit in some sense''. Now that we've seen what a directed system and a limit are, we can understand that these two line didn't refer to anything mathematically, they were just puns on their names.
+\end{remboxed}
+
+\section{Proof (August 13)}
+
+\wp{proof}
+\wl{proof}
+Believe it or not, we're done with the mathematical content of this course. For some parting words, I'll talk a bit about the philosophy behind math.
+
+What is a \bluebf{proof}? It's not enough to say it's just a convincing argument, because then you have to ask: convincing to whom? One might go all the way and just say a proof is just a matter of convincing the person you're talking to that something is true. That perhaps proof, in math, is just like science, which is a continuous process of updating our knowledge and broadcasting our results to each other and replicating results when we aren't convinced. But that's not enough to account for how the mathematics community, as a whole, disagrees on so little things, compared to other fields.
+
+On the completely opposite side, one might say that a proof is a series of steps that a computer can follow along step-by-step to check that something is true. We can imagine a computer that's loaded all the definitions and rules, and whenever you write a proof you have to specify which rule you're applying and how, much like the boring two-column proofs I did in geometry back in high school. But that's not how we write proofs, isn't it?
+
+I won't answer this question fully here, but that's something to think about.
+
+\wp{without loss of generality}
 \wl{without loss of generality}
+Mathematicians like repeating certain phrases, like \bluebf{without loss of generality}. We've used this phrase ourselves, several times. For example, when we talked about groups with two elements, which are named $a$ and $b$, we said, ``without loss of generality, assume the identity element is $a$.'' This means that even if we're assuming that it's $a$, and not $b$, it'd still work the other way around---we'd just have to swap $a$ and $b$ through our proof. As another example, if we wanted to prove something like $x^2 + y^2 \ge 2xy$ for all real numbers $x$ and $y$, we could say, ``without loss of generality, assume $x \ge y$.''
 
-\section{Conclusion (TBD)}
+We like abbreviations, so sometimes we abbreviate that with WLOG, especially when writing on blackboards. Other abbreviations include FTSOC or FSOC, ``for the sake of contradiction'', NTS or WTS or WTP or whatever variation, which is ``need to show'' or ``want to show'' or ``want to prove'', TFAE, ``the following are equivalent'', and WRT, ``with respect to''.
+
+\wp{QED}
+\wl{QED}
+One abbreviation is \bluebf{QED}, short for \textit{quod erat demonstrandum}, Latin for ``which was to be demonstrated''. It's a way to say, ``I've proven what I needed to prove, and I'm done,'' mic drop. It's rarely used in actual writing these days, even on blackboards. Instead, people end proofs with things like $\square$ or $\blacksquare$, a symbol called the halmos. These days, you only say QED if you're trying to sound fancy after ending an argument. Although if you're trying to be funny, I like WWWWW instead, for ``which was what we wanted''.
+
+\wp{proposition, corollary}
+\wl{proposition}
+\wl{corollary}
+\oww{theorem, lemma}
+The trifecta of higher math classes and textbooks is definition, \textbf{theorem}, proof. You go over a definition, you go over a theorem, you go over its proof, and then repeat. We've talked about being well-defined (all the way in the first week!) and we just talked about proof. A theorem is just a statement that can be proved.
+
+But perhaps I'd classify them as \bluebf{propositions} instead. A proposition is what some people use to refer to a smaller theorem. It's a result that's not quite as important, not enough to get the big ``theorem'' title. But it stands alone, and is important in its own right.
+
+An even smaller proposition would be a \textbf{lemma}. These results are small enough that they're often used in the proof of a proposition or two, and then not referred to again. On the other hand, the naming for these vary a lot. Some things are called lemmas only because their proof is short. While other things are called lemmas because their result is useful for \textit{much} more than a proof or two. The ones that come to my mind include B\'ezout's lemma, the Borel--Cantelli lemma, Farkas's lemma, the fixed-point lemma, the Lov\'asz local lemma, Schur's lemma, the snake lemma, the Yoneda lemma, and of course Zorn's lemma.
+
+A \bluebf{corollary} is a statement that follows directly-ish from a theorem, but is useful or notable enough to be called out in its own right. The Pythagorean theorem, for example, could be considered a corollary of the law of cosines. What is considered to be ``directly-ish'' following from a theorem is not clear-cut, though.
+
+\begin{exrboxed}
+  The last stanza mentions ``I've proved my proposition now, as you can see / [\dots] / And by corollary, this shows you and I to be / Purely inseparable, QED.'' Why is this funny?
+\end{exrboxed}
+
+\section{Conclusion (August 13)}
+
+There's so many things I wanted to cover, which I didn't not only because we didn't have the time, but also because I don't know about them myself. If you took the time to fully understand every concept we dicussed in class, you'd be well on your way to getting a higher math education. If you're interested in learning more, here's some references.
+
+\begin{itemize}
+\item General:
+\begin{itemize}
+  \item \href{https://venhance.github.io/napkin/Napkin.pdf}{An Infinitely Large Napkin}. Roughly follows the same philosophy of higher math for high-school students. Using the chapter numbering in v1.5.20220708, our group theory covers chapters 1 and 3, and a bit of 17. Our topology covers chapter 2, and a bit of 6 and 7. Our set theory overlaps with chapter 81. Our linear algebra covers chapters 9, 11, and a bit of 12. Our differential geometry kinda covers chapter 43, but not really? Our category theory kinda covers chapters 60 to 62.
+  \item \href{https://press.princeton.edu/books/hardcover/9780691118802/the-princeton-companion-to-mathematics}{The Princeton Companion to Mathematics}. A fantastic book I wish I'd read earlier, and the one I wish I'd written. You should now be familiar with enough to read around half of the book. I find it way more accessible than other general math texts like Wikipedia or MathWorld. Both are great, it's just that this book is outstanding.
+\end{itemize}
+\item Group theory:
+\begin{itemize}
+  \item \href{https://bookstore.ams.org/clrm-32/}{Visual Group Theory}. The one book that finally got me understanding quotients. If you only read one book in this list, read this one, please! To discuss groups without drawing pictures is to not do it justice.
+  \item Tim Gowers's posts on \href{https://gowers.wordpress.com/2011/11/20/normal-subgroups-and-quotient-groups/}{quotient groups} and \href{https://gowers.wordpress.com/2011/11/20/normal-subgroups-and-quotient-groups/}{group actions}. These are pretty good.
+  \item \href{http://home.ustc.edu.cn/~liweiyu/documents/Algebra, Second Edition, Michael Artin.pdf}{Algebra, Artin}. It's the book I first learned much of my abstract algebra from, because it's a standard textbook. It's okay.
+\end{itemize}
+\item Metric topology:
+\begin{itemize}
+  \item \href{https://link.springer.com/book/10.1007/978-3-319-17771-7}{Real Mathematical Analysis}. Despite the name, I've only ever read this book for the topology parts, and never the analysis parts. You have my permission to only read chapter 2.
+  \item \href{https://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.368.3775&rep=rep1&type=pdf}{A Course in Metric Geometry}. Has grad students as an audience, but the first two chapters are relatively accessible.
+  \item \href{http://mathcenter.spb.ru/nikaan/2019/topology/4.pdf}{Topology, Munkres}. Like Artin, it's a textbook. It's okay. It starts with general point-set topology rather than the metric topology we've developed. This is more standard, but I also find it harder to draw pictures of.
+\end{itemize}
+\item Set theory:
+\begin{itemize}
+  \item Logic as Mathematics. This is an upcoming textbook by Henry Cohn. It is the best undergraduate math textbook I've ever read, and its first chapter is among the best first chapters across all math books I've ever read. I realize it's weird to recommend a book that hasn't come out yet, but it's great.
+  \item \href{https://en.wikipedia.org/wiki/Naive_Set_Theory_(book)}{Naive Set Theory}. If Cohn's book is the best set theory textbook I've read, this is second best. Doesn't have as much about logic, but it does cover the set theory stuff we've discussed.
+\end{itemize}
+\item Linear algebra:
+\begin{itemize}
+  \item \href{https://www.math.brown.edu/streil/papers/LADW/LADW.html}{Linear Algebra Done Wrong}, \href{https://linear.axler.net/}{Linear Algebra Done Right}. As their titles suggest, the two books complement each other well. If you like the abstractness of group theory, and want more abstract stuff, read LADR first. If you're literally anyone else, read LADW first. But I'd recommend reading both.
+  \item \href{https://www.amazon.com/Introduction-Algebra-Student-Mathematical-Library/dp/0821844199}{A (Terse) Introduction to Linear Algebra}. If not for its prerequisites, this would be my top recommendation. A little knowledge in abstract algebra makes studying linear algebra a bit more motivated, which this book follows in stride.
+\end{itemize}
+\item Differential geometry:
+\begin{itemize}
+  \item I don't actually know any differential geometry, and can't make recommendations here. Maybe check \href{https://mathoverflow.net/questions/395/reading-list-for-basic-differential-geometry}{this MathOverflow question}? I might read \href{https://math.berkeley.edu/~jchaidez/materials/reu/lee_smooth_manifolds.pdf}{Introduction to Smooth Manifolds} next.
+\end{itemize}
+\item Category theory:
+\begin{itemize}
+  \item \href{https://s3.amazonaws.com/arena-attachments/325201/2ff932bf546d8985eb613fccf02b69c7.pdf}{Conceptual Mathematics}. Get the second edition if you can. If you don't have the prerequisites for my other recommendations, then read this.
+  \item \href{https://arxiv.org/abs/1612.09375}{Basic Category Theory}. My top recommendation if you \textit{do} have the prerequisites for it. I think category theory might be better learned after you know enough algebra anyway.
+  \item \href{https://github.com/hmemcpy/milewski-ctfp-pdf/}{Category Theory for Programmers}. Probably my favorite treatment of categories\dots if there weren't so many examples in C++. Best if you have more programming than math experience.
+\end{itemize}
+\item Philosophy of mathematics:
+\begin{itemize}
+  \item \href{https://en.wikipedia.org/wiki/The_Mathematical_Experience}{The Mathematical Experience}. This is a big book, but it's one of the few on this list I've read cover to cover. I still read it again, from time to time. It's just that good.
+  \item \href{https://en.wikipedia.org/wiki/Letters_to_a_Young_Mathematician}{Letters to a Young Mathematician}. You might've heard of Hardy's A Mathematician's Apology. I think this is the better version.
+\end{itemize}
+\end{itemize}
 
 \section{Lyrics}
 
@@ -541,7 +837,7 @@ You're my \wo[axiom of choice]{axiom of choice,} you know it's true \\
 \noindent
 But lately our \wo[relation]{relation's} not so \wo{well-defined} \\
 And I just can't \wo{function} without you \\
-I'll \wo[prove]{prove} my \wo{proposition} and I'm sure you'll find \\
+I'll \wo[proof]{prove} my \wo{proposition} and I'm sure you'll find \\
 We're a \wo{finite} \wo[simple group]{simple} \wo{group} of \wo{order} two \\
 
 \noindent

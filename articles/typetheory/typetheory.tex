@@ -326,7 +326,7 @@ We are getting at the heart of the distinction between \textbf{constructive logi
 \item To say $\lnot A$ is false is to prove that there's no proof that $A$ gives $\false$.
 \item To say $\lnot \lnot A$ is true is to prove that there's no proof that $A$ gives $\false$.
 \end{itemthin}
-In constructive logic, $A$ and $\lnot\lnot A$ mean different things, and it's not always true that $A \to \lnot\lnot A$! This actually makes sense, given Gödel's incompleteness theorems, which say that there will always be some true statements we can't prove.
+In constructive logic, $A$ and $\lnot\lnot A$ mean different things, and it's not always true that $\lnot\lnot A \to A$! This actually makes sense, given Gödel's incompleteness theorems, which say that there will always be some true statements we can't prove.
 
 This means that, in constructive logic, statements like the law of excluded middle ($A \lor \lnot A$) or double negation elimination ($\lnot \lnot A \to A$) aren't true for all $A$. On the other hand, even if double negation \emph{elimination} is false, double negation \emph{introduction} ($A \to \lnot\lnot A$) is true. Our constructive logic is positive implicational logic with $\lnot$, so we can still use the deduction theorem. To prove $A \to \lnot\lnot A$, we need to prove $A \to (A \to \false) \to \false$. But this follows from $\sf{MP}$, and deduction twice.
 \begin{align*}
