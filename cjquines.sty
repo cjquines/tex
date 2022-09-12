@@ -378,7 +378,7 @@
       backgroundcolor = MidnightBlue!5,
       hidealllines = true,
       leftline = true,
-      font = \small,  
+      font = \small,
       leftmargin = -10pt,
       rightmargin = -10pt
     }
@@ -418,14 +418,14 @@
       linecolor = Gray,
       nobreak = true,
     }
-    
+
     \declaretheoremstyle[
       headfont = \sffamily \bfseries \color{Black},
       mdframed = {style=mdbox},
       headpunct = {\\[3pt]},
       postheadspace = {0pt}
     ]{thmbox}
-    
+
     \declaretheorem[style=thmbox,name=Theorem]{theorem}
     \declaretheorem[style=thmbox,name=Lemma,sibling=theorem]{lemma}
     \declaretheorem[style=thmbox,name=Corollary,sibling=theorem]{corollary}
@@ -434,9 +434,9 @@
     \declaretheorem[style=thmbox,name=Lemma,numbered=no]{lemma*}
     \declaretheorem[style=thmbox,name=Corollary,numbered=no]{corollary*}
     \declaretheorem[style=thmbox,name=Proposition,numbered=no]{proposition*}
-    
+
     \theoremstyle{definition}
-    
+
     \newtheorem{answer}[theorem]{Answer}
     \newtheorem{case}[theorem]{Case}
     \newtheorem{claim}[theorem]{Claim}
@@ -449,7 +449,7 @@
     \newtheorem{problem}[theorem]{Problem}
     \newtheorem{remark}[theorem]{Remark}
     \newtheorem{question}[theorem]{Question}
-    
+
     \newtheorem*{answer*}{Answer}
     \newtheorem*{case*}{Case}
     \newtheorem*{claim*}{Claim}
@@ -475,20 +475,45 @@
   \RequirePackage[linguistics]{forest}
   \apptocmd{\forest}{for tree={s sep+=1mm, inner sep=0, l=0}}{}{}
   \RequirePackage{xparse,tipa,phonrule,gb4e}
+  \microtypesetup{nopatch=footnote}
+  % this is for tipauni, as opposed to tipa
+  % \let\ts\@undefined
 
   \ifcjqparskip
     \pretocmd{\exe}{\vspace{-0.5em}}{}{}
     \pretocmd{\endexe}{\vspace{-0.5em}}{}{}
   \fi
 
-  \let\i\textipa
-  \newcommand{\sh}{\super{h}}
-  \renewcommand{\sc}[1]{{\scshape #1}}
+  % syntax
   \newcommand{\vp}{\textit{v}P}
   \newcommand{\vb}{\textit{v}'}
   \newcommand{\vv}{\textit{v}}
+
+  % glossing
+  \renewcommand{\sc}[1]{{\scshape #1}}
   \renewcommand{\lb}[1]{_{\text{#1}}}
 
+  % ipa
+  \let\i\textipa
+  \newcommand{\si}[1]{\i{/#1/}}
+  \newcommand{\bi}[1]{\i{[#1]}}
+  \newcommand{\eb}{\textcloseepsilon}
+  \newcommand{\jb}{\textbardotlessj}
+  \newcommand{\ny}{\textltailn}
+  \newcommand{\hb}{\textcrh}
+  \newcommand{\bl}{\textbeltl}
+  \newcommand{\lZ}{\textlyoghlig}
+  \newcommand{\wi}{\textturnmrleg}
+  \newcommand{\tS}{\textteshlig}
+  \newcommand{\dZ}{\textdyoghlig}
+  \newcommand{\Pb}{\textbarglotstop}
+  \newcommand{\PPb}{\textbarrevglotstop}
+  \newcommand{\ctz}{\textctz}
+  \newcommand{\LR}{\textturnlonglegr}
+  \newcommand{\XS}{\texththeng}
+  \newcommand{\sh}{\super{h}}
+
+  % \move definition
   \def\@cjqaddto#1#2{\expandafter\def\expandafter#1\expandafter{#1#2}}
   \def\@cjqreplacestrings#1#2{%
     \def\tmp##1#1##2\end{%
@@ -605,7 +630,7 @@
 \newcommand{\ZZ}{\mathbb Z}
 
 \newcommand{\dang}{\measuredangle}
-\newcommand{\ray}[1]{\overrightarrow{#1}} 
+\newcommand{\ray}[1]{\overrightarrow{#1}}
 \newcommand{\seg}[1]{\overline{#1}}
 \newcommand{\arc}[1]{\wideparen{#1}}
 
