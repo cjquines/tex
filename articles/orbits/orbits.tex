@@ -1,0 +1,310 @@
+\documentclass[11pt,paper=letter]{scrartcl}
+\usepackage[alttitle]{cjquines}
+
+\newcommand{\orb}[1]{\mathrm{orb}(#1)}
+\newcommand{\orbf}[2]{\mathrm{orb}_{#1}(#2)}
+
+\begin{document}
+
+\title{Orbits}
+\author{CJ Quines}
+\date{May 1, 2023}
+
+\maketitle
+
+\subsubsection*{Warmup}
+
+(IMO 1987) Prove that there is no function $f \from \NN \to \NN$ such that $f(f(n))=n+1987$ for all $n$.
+\begin{enumerate}[(a)]
+\item In the equation, substitute $f(n)$ for $n$. In the equation, apply $f$ to both sides. Show that this means $f(f(n)) \equiv n \pmod{1987}$.
+\item Consider a directed graph with the vertices $0, 1, \ldots, 1986$. Draw an arrow $n \to f(n)$. What does $f(f(n)) \equiv n \pmod{1987}$ mean?
+\item In this graph, every vertex is in a cycle. What are the possible cycle sizes in this graph? Conclude there exists $a$ such that $a \equiv f(a) \pmod{1987}$.
+\item Hence, $f(a) = a + 1987k$ for some $k \in \ZZ$. Hence $f(f(a)) = f(a + 1987k) = f(a) + 1987k$. Then get a contradiction.
+\end{enumerate}
+
+\subsubsection*{Definitions}
+
+Let $S$ be a set. Given $f \from S \to S$:
+\begin{itemize}
+\item $f^0$ is the identity function on $S$.
+\item $f^n = f \circ f^{n-1}$, for all positive integers $n$. Thus $f^3(x) = f(f(f(x)))$.
+\item The \textbf{preimage} of $y$ is $f^{-1}(y) = \{x \in S \mid f^1(x) = y\}$. We can similarly define $f^{-2}, f^{-3}, \ldots$
+\item We can extend $f$ to subsets of $S$ by saying $f(X) = \{ f(x) \mid x \in X \}$, and similarly for $f^n$.
+\item The \textbf{orbit} of $x$, written $\orbf{f}{x}$, is $\{x, f(x), f^2(x), \ldots\}$. When $f$ is clear, we write $\orb{x}$.
+\item The \textbf{period} of $x$ is the smallest $n$ such that $f^n(x) = x$. If it exists, we call $x$ \textbf{periodic}.
+\item A \textbf{fixed point} of $f$ is an $x$ with period $1$.
+\item The \textbf{functional graph} of $f$ is a directed graph with vertices in $S$, and arrows from $x$ to $f(x)$.
+\end{itemize}
+\vspace{\itemsep}
+These aren't quite standard, so define them when you use them. Facts with no proof necessary:
+\begin{itemize}
+\item The period of $x$, if it exists, equals the size of its orbit. We abuse notation and write $\orb{x}$ for both the orbit and period of $x$.\footnote{You can tell it's the orbit if it's a set, and it's the period if it's a number. If $x$ isn't periodic, we won't use $\orb{x}$ as a number.}
+\item If $f^n(x) = x$, we must have $\orb{x} \mid n$. Make sure you know why!\footnote{Compare this fact about orders: Let $m$ be the smallest positive integer such that $a^m \equiv 1 \pmod p$. Then if $a^n \equiv 1 \pmod p$, we must have $m \mid n$. Why does this follow from the fact about orbits?}
+\item If $y \in \orb{x}$, then $\orb{y} \subseteq \orb{x}$. If they're both periodic, $\orb{x} = \orb{y}$.
+\item In the functional graph, every vertex has outdegree $1$. Conversely, a graph where each vertex has outdegree $1$ is a functional graph.
+\item In the functional graph, if $S$ is finite, each connected component has exactly one directed cycle. The rest of the component is a bunch of trees leading into the cycle. The converse is also true. If $S$ is infinite, then instead of a cycle, it can have a ray or a line, but it still has exactly one of these three.
+\item In the functional graph, if $f$ is injective, each vertex has indegree at most $1$. Then connected components are exactly cycles, rays, or lines.
+\end{itemize}
+The connected component fact is important, because the connected components partition $S$. This is what we used for (c) in the warmup to conclude that there's a cycle of size $1$. It's a way to frame the problem that makes it easier to reason globally.
+
+\subsubsection*{Examples}
+
+\begin{enumerate}
+\item (Floyd 1957) Let $S$ be a finite set, and $f \from S \to S$. Show that, for every $x \in S$, there exists a positive integer $n$ such that $f^n(x) = f^{2n}(x)$.
+
+\textbf{Sketch:} Let $a$ be the smallest non-negative integer such that $f^a(x)$ is periodic, and let $\ell = \orb{f^a(x)}$. Then $f^{a + i}(x) = f^{a + i + k\ell}(x)$ for every non-negative $i$ and $k$. Pick large $k$, $i = k\ell - a$, and $n = k\ell$.
+
+\textbf{Remark:} A similar argument shows there's $N$ such that $f^N(x) = f^{2N}(x)$ for \textit{all} $x \in S$.
+
+\item (Peru TST 2019) In each cell of a chessboard with $2$ rows and $2019$ columns a real number is written so that:
+\begin{itemize}
+\item There are no two numbers written in the first row that are equal to each other.
+\item The numbers written in the second row coincide with (in some another order) the numbers written in the first row.
+\item The two numbers written in each column are different and they add up to a rational number.
+\end{itemize}
+Determine the maximum quantity of irrational numbers that can be in the chessboard.
+
+\textbf{Sketch:} Let $S$ be the set of numbers in the first row, and $f \from S \to S$ take a number to the one below it. A cycle with an irrational number has all irrational numbers and even length. Cycles partition $S$, so some cycle has odd length, and third condition means no cycles of length $1$.
+
+\item (Iran 1992) Let $X$ be a finite set, and $f: X \to X$. Suppose there exists a prime $p$ such that $f^p(x) = x$ for all $x \in X$. Let $Y = \{x \in X \mid f(x) \neq x\}$. Prove that $p \mid |Y|$.
+
+\textbf{Sketch:} If $f^p(x) = x$, then $\orb{x} \mid p$, and thus is either $1$ or $p$. The functional graph's connected components are all cycles of length $1$ or $p$, but these partition $X$.
+
+\item (ELMO SL 2018) Let $f \from \RR \to \RR$ be bijective. Does there always exist infinitely many $g \from \RR \to \RR$ such that $f(g(x)) = g(f(x))$ for all $x \in \RR$?
+
+\textbf{Sketch:} Yes. Consider the functional graph. If we have a line, we can let $g = f^n$ on the chain and let $g$ fix everything else. Otherwise it's infinitely many disjoint cycles. Pick any cycle; we can let $g = f$ on this cycle and let $g$ fix everything else.
+\end{enumerate}
+
+\subsubsection*{Problems}
+
+\begin{enumerate}
+
+\item (Russia TST 2020) Let $f(x) = x^2 + ax - 1$ for some real $a$. Sasha found $50$ real roots of the equation $f^{47}(x) = x$. Prove that this equation has at least $96$ real roots.
+\hint{\ref{h:1}}
+
+\item (Macedonia TST 2021) Let $S=\{1, 2, 3, \dots 2021\}$ and $f:S \to S$ be a function such that $f^{n}(n)=n$ for each $n \in S$. Find all possible values for $f(2021)$.
+\hint{\ref{h:2}}
+
+\item (Japan 2022) Find all functions $f \from \NN \to \NN$, such that for any positive integers $m$ and $n$,
+$$f^{f(n)}(m)+mn=f(m)f(n).$$
+\hints{\ref{h:3} \ref{h:4}}
+
+\item (USA 2019) A function $f \from \NN \to \NN$ satisfies \[f^{f(n)}(n)=\frac{n^2}{f(f(n))}\]for all positive integers $n$. Find all possible values of $f(1000)$.
+\hints{\ref{h:3} \ref{h:5}}
+
+\item (ISL 2017) Let $S$ be a finite set, and let $f \from S \to S$. Suppose that $f \circ g \circ f \ne g \circ f \circ g$ for every $g \from S \to S$ with $g \ne f$. Show that $f(f(S)) = f(S)$.
+\hints{\ref{h:27} \ref{h:28}}
+
+\item (Taiwan TST 2021) Let $g(x) = (|x|+|x-1|-1)/2$. Find all $f \from \NN \to \NN$ such that
+\[f^{g(f(x)-x)}(x)=x\]
+for all positive integers $n$.
+\hint{\ref{h:6}}
+
+\item (ISL 2009) Let $P(x)$ be a non-constant polynomial with integer coefficients. Prove that there is no function $T \from \ZZ \to \ZZ$ such that the number of integers $x$ with $T^n(x)=x$ is equal to $P(n)$ for every positive integer $n$.
+\hints{\ref{h:7} \ref{h:8}}
+
+\item (Korea Winter Camp 2017) Find all functions $f : \mathbb{N} \to \mathbb{N}$ satisfying the following conditions:
+\begin{itemize}
+\item For every $n \in \mathbb{N}$, $f^{n}(n) = n$.
+\item For every $m, n \in \mathbb{N}$, $\lvert f(mn) - f(m) f(n) \rvert < 2017$. \hints{\ref{h:9} \ref{h:3}}
+\end{itemize}
+
+\end{enumerate}
+
+\subsubsection*{Harder problems}
+
+\begin{enumerate}[resume]
+\item (APMO 2013) Let $a, b$ be positive integers, and let $A, B$ be finite disjoint sets, such that if $i \in A \cup B$, then $i + a \in A$ or $i - b \in B$. Show that $a|A| = b|B|$.
+\hints{\ref{h:29} \ref{h:30}}
+
+\item (ELMO 2021) Let $n > 1$ be an integer and let $a_1, a_2, \ldots, a_n$ be integers such that $n \mid a_i-i$ for all integers $1 \leq i \leq n$. Prove there exists an infinite sequence $b_1,b_2, \ldots$ such that
+\begin{itemize}
+  \item $b_k\in\{a_1,a_2,\ldots, a_n\}$ for all positive integers $k$, and
+  \item $\displaystyle\sum\limits_{k=1}^{\infty}\frac{b_k}{n^k}$ is an integer. \hints{\ref{h:10} \ref{h:11}}
+\end{itemize}
+
+\item (China 2014) Let $f \from X \to X$, where $X=\{1,2,\ldots ,100\}$, be a function satisfying:
+\begin{itemize}
+  \item $f(x)\neq x$ for all $x \in X$; and
+  \item for any $A \subseteq X$ such that $|A|=40$, we have $A \cap f(A) \neq\varnothing$.
+\end{itemize}
+Find the minimum $k$ such that for any such function $f$, there exist a subset $B \subseteq X$, where $|B| = k$, such that $B\cup f(B)=X$.
+\hints{\ref{h:12} \ref{h:13}}
+
+\item (USA TST 2020) Find all integers $n \ge 2$ for which there exists an integer $m$ and a polynomial $P(x)$ with integer coefficients satisfying the following three conditions:
+\begin{itemize}
+\item $m > 1$ and $\gcd(m,n) = 1$;
+\item the numbers $P(0)$, $P^2(0)$, $\ldots$, $P^{m-1}(0)$ are not divisible by $n$; and
+\item $P^m(0)$ is divisible by $n$.
+\hints{\ref{h:17} \ref{h:18}}
+\end{itemize}
+
+\item (ISL 2012) Let $f: \mathbb{N} \rightarrow \mathbb{N}$. Suppose that for every $n \in \mathbb{N}$ there exists a $k \in \mathbb{N}$ such that $f^{2k}(n) = n + k$, and let $k_n$ be the smallest such $k$. Prove $k_1, k_2, \ldots$ is unbounded.
+\hints{\ref{h:14} \ref{h:15} \ref{h:16}}
+
+\item (ISL 2010) The rows and columns of a $2^n \times 2^n$ table are numbered from $0$ to $2^{n}-1.$ The cells of the table have been coloured with the following property being satisfied: for each $0 \leq i,j \leq 2^n - 1,$ the $j$-th cell in the $i$-th row and the $(i+j)$-th cell in the $j$-th row have the same colour. (The indices of the cells in a row are considered modulo $2^n$.) Prove that the maximal possible number of colours is $2^n$.
+\hints{\ref{h:19} \ref{h:20} \ref{h:21}}
+
+\item (RMM 2019) Find all pairs of integers $(c, d)$, both greater than 1, such that for any prime $p > c(2c + 1)$, and any monic integer polynomial $Q$ with degree $d$, there exists $S \subseteq \ZZ$ such that
+\begin{itemize}
+\item $\displaystyle \frac{|S|}{p} \le \frac{2c-1}{2c+1}$, and
+\item $\displaystyle \bigcup_{s \in S} \left\{s, Q(s), Q^2(s)), Q^3(s), \dots\right\} \equiv \{0, 1, \ldots, p -1\} \pmod{p}$.
+\hints{\ref{h:24} \ref{h:25} \ref{h:26}}
+\end{itemize}
+
+\item (ISL 2015) Let $f: \NN \to \NN$. Suppose that:
+\begin{itemize}
+\item if $m, n \in \NN$, then $\dfrac{f^n(m) - m}{n} \in \NN$; and
+\item the set $\NN \setminus \{f(n) \mid n\in \NN\}$ is finite.
+\end{itemize}
+Prove that $f(1) - 1, f(2) - 2, f(3) - 3, \ldots$ is periodic.
+\hints{\ref{h:3} \ref{h:22} \ref{h:23}}
+\end{enumerate}
+
+\subsubsection*{Hints}
+
+\begin{enumthin}
+\item \label{h:29} Show that the graph with edges $i \to j$ if $j = i + a \in A$ or $j = i - b \in B$ is a functional graph.
+\item \label{h:20} What's the size of the orbit of $(1, 1)$? Try small $n$ and guess the pattern.
+\item \label{h:3} Start by showing injectivity.
+\item \label{h:12} Take a maximum matching in the underlying undirected graph.
+\item \label{h:26} Of the vertices not in isolated cycles, at least $\frac1d$ are in the range of $Q$. This is a good enough bound.
+\item \label{h:16} Each connected component corresponds to a fixed value of $f^{2x}(a) - x$, so $\orbf{f^2}{a}$ contains all but finitely many positive integers.
+\item \label{h:24} Answer is $c \ge d$. If $c < d$, take $Q(x) = x^d$ and some $p \equiv 1 \pmod d$ prime.
+\item \label{h:18} For the function $P \bmod p^e$, prove that if $q \mid \orb{0}$, then $q \le p$.
+\item \label{h:2} The answer is everything divisible by $43$.
+\item \label{h:10} Think about how $\sum \frac{b}{n^k} = \frac{b}{n} + \frac{1}{n}\sum \frac{b}{n^k}$. You're looking for periodic $b$.
+\item \label{h:28} Show there exists $n$ such that $f^{n + 2} = f^{2n + 1}$.
+\item \label{h:22} You want to show each orbit is an arithmetic sequence.
+\item \label{h:30} Use the fact that an orbit returns to itself to count the number of vertices in $A$ and in $B$.
+\item \label{h:4} Show that any two numbers are in the same orbit.
+\item \label{h:13} If the maximum matching has size $2m$, the $100 - 2m$ vertices outside it have to be an independent set.
+\item \label{h:8} Evaluate $P$ on primes and products of primes.
+\item \label{h:17} The answer is all $n$ such that there are primes $q < p$ where $p \mid n$ and $q \nmid n$. If so, we can set $m = q$ and interpolate to find $P$.
+\item \label{h:23} If the first differences of an orbit are bounded, show it has to be an arithmetic sequence. If it's unbounded, show it has density $0$.
+\item \label{h:15} If the $k$s are upper bounded, show there's a finite number of connected components.
+\item \label{h:11} Take indices mod $n$, and set $f(i) = (a_{-i} + i)/n$.
+\item \label{h:6} The difference between consecutive terms in the orbit is $0$ or $1 \pmod{\orb{x}}$, but at the end of the orbit we go back to $x$.
+\item \label{h:14} Consider the functional graph of $f^2$. Show it has no cycles.
+\item \label{h:1} How many things have orbit $47$?
+\item \label{h:7} If $c_d$ is the number of cycles of length $d$, then $P(n) = \sum_{d \mid n} d \cdot c_d$.
+\item \label{h:27} Pick some $g$ that forces $f \circ g \circ f = g \circ f \circ g$.
+\item \label{h:19} Think about $f(j, i) = (i + j, j) \bmod 2^n$.
+\item \label{h:9} The second condition is only for multiplicativity; you can replace it with $f(mn) = f(m)f(n)$.
+\item \label{h:21} The key claims are $\nu_2(F_{6m}) = \nu_2(m) + 3$ and $\nu_2(F_{6m-1} - 1) = \nu_2(F_{6m+1} - 1) = \nu_2(m) + 2$.
+\item \label{h:25} $Q$ can have at most $d$ fixed points. Vertices of the functional graph have maximum indegree $d$.
+\item \label{h:5} Let $m = \min \orb{n}$, what does the equation give?
+\end{enumthin}
+
+\subsubsection*{Sketches}
+
+\begin{enumerate}
+
+\item If $f^{47}(x) = x$ then $\orb{x}$ is $1$ or $47$. There's two points with orbit $1$, so there's at least $48$ points with orbit $47$. In particular, the $48$ points have to come from at least two different orbits of size $47$, meaning there's actually at least $94$ points with orbit $47$.
+
+\item We have $\orb{2021} \mid 43 \cdot 47$, casework on $\orb{2021}$. If $1$, it's $2021$. If $2021$, it's impossible as $f(1) = 1$. If $47$, it's also impossible: if $n \in \orb{2021}$, then $47 \mid n$, but there's only $43$ such $n$, which is less than $47$. Similarly if $43$, everything in orbit is divisible by $43$. We can set $f(2021)$ to any of these.
+
+\item Answer is $f(n) = n + 1$, check it works. Show injectivity by $P(a, n)$ and $P(b, n)$. By $P(n, n)$ we get $f(n) > n$. Functional graph is disjoint rays. By $P(a, b)$ and $P(b, a)$, we get $a$ and $b$ are in the same orbit, thus the ray has all of $\NN$.
+
+\item Answer is all evens, give construction. Show injectivity by $P(a)$ and $P(b)$. Let $m = \min \orb{n}$. Then $P(m)$ means $f^{f(m)}(m)f^2(m) = m^2$. Factors in LHS are both in $\orb{n}$, so by minimality they're both $m$. Thus $f^2(m) = m$, and $\orb{n}$ has size $2$, and thus $f^2(n) = n$ for all $n$. Equation is now $f^{f(n)}(n) = n$. Argue by parity that $f(1000)$ can't be odd.
+
+\item By a similar argument to Floyd, there's some $n$ such that $f^{n+2} = f^{2n+1}$. (If it's eventually periodic, it has period $N$. Pick large $n$ such that $n \equiv -1 \pmod N$.) Set $g = f^n$. Then $f \circ g \circ f = g \circ f \circ g$ so $g = f = f^n$, and thus $f$ is a bijection on $f(S)$.
+
+\item Answer is $f(x) = x$ or $x + 1$ pointwise; i.e.\ we can pick $x$ or $x+1$ for different $x$s. Suppose $g(f(x) - x) > 0$, then $\orb{x}$ exists, and $\orb{x} \mid g(f(x) - x)$, hence $f(x) - x \equiv 0 \text{ or } 1 \pmod{\orb{x}}$. In particular, the difference between consecutive terms in the orbit is $0$ or $1 \pmod{\orb{x}}$, but at the end of the orbit we go back to $x$, so they're all $0$. If $g(f(x) - x) = 0$, then $f(x) = x$ or $x + 1$ anyway.
+
+\item Take the functional graph. We can ignore everything not in a cycle. Let $c_d$ be the number of cycles of length $d$, then $P(n) = \sum_{d \mid n} d \cdot c_d$. For prime $p$ we get $P(p) \equiv c_1 \pmod p$, hence $P(0) \equiv c_1 \pmod p$ for all primes $p$, and thus $P(0) = c_1$. Also, $P(pq) \equiv c_1 + qc_q \pmod p$. Hence $qc_q \equiv 0 \pmod p$ for any other prime $q$, hence $c_q = 0$. Hence $P(q) = c_1$ for all primes $q$, and $P$ is constant, contradiction.
+
+\item Answer is $f(n) = n$, check it works. The hard part is showing second condition gives multiplicativity, which we prove later; for now assume $f(mn) = f(m)f(n)$. Show injectivity by $P(a)$ and $P(b)$. For prime $p$, we get $\orb{p} \mid p$. If $\orb{p} = p$, then everything in its orbit must also be divisible by $p$, so $f^{p-1}(p) = kp$ for some $p$. Then $p = f^p(p) = f(f^{p-1}(p)) = f(kp) = kf(p)$ by multiplicativity. But $f(p)$ is also in the orbit, and also divisible by $p$, hence $k = 1$ and $f(p) = p$.
+
+Now we show multiplicativity. If $f(mn) \ne f(m)f(n)$, then
+\begin{align*}
+f(k) &\le \abs{f(mn) - f(m)f(n)}f(k) \\
+     &= \abs{f(mn)f(k) - f(m)f(n)f(k)} \\
+     &\le \abs{f(mn)f(k) - f(mnk)} + \abs{f(mnk) - f(m)f(nk)} + \abs{f(m)f(nk) - f(m)f(n)f(k)} \\
+     &= \abs{f(mn)f(k) - f(mnk)} + \abs{f(mnk) - f(m)f(nk)} + f(m)\abs{f(nk) - f(n)f(k)} \\
+     &< 2017 + 2017 + f(m) \cdot 2017.
+\end{align*}
+where the third line follows from the triangle inequality. This means $f$ is bounded above, but $f$ is surjective by first condition, so this is absurd.
+
+\item Consider graph with vertices $A \cup B$ and $i \to j$ if $j = i + a \in A$ or $j = i - b \in B$. We're given each vertex has outdegree at least $1$. But a vertex can have indegree at most $1$, so outdegrees are exactly $1$. This is a functional graph, and consists of disjoint cycles. If the orbit of $i$ has $x$ edges that add $a$ and $y$ edges that subtract $b$, then its orbit has $x$ elements in $A$ and $y$ in $B$. But $i = i + ax - by$ so $x/y = b/a$; summing over orbits gives the answer.
+
+\item Take indices mod $n$ and let $f \from \ZZ \to \ZZ$ be $f(i) = (a_{-i} + i)/n$. Then $f$ is upper bounded, so we must have a cycle starting at some $x$. Then if $k = \orb{x} - 1$, we get \[
+  x = \frac{a_{-f^{k}(x)} + f^{k}(x)}{n} = \frac{a_{-f^{k}(x)}}{n} + \frac{a_{-f^{k-1}(x)} + f^{k-1}(x)}{n^2} = \cdots = \left(\sum_{i = 0}^{k - 1} \frac{a_{-f^{k-i}(x)}}{n^{i+1}}\right) + \frac{x}{n^k},
+\]
+which is an integer, and we can keep going and pick $b_i$s appropriately.
+
+\item Restate with functional graphs. First condition is no self-loops. Second condition is no independent sets of size $40$. We are asking for minimum vertex cover. The duality between independent set and vertex covers kinda works. Take a maximum matching in the undirected graph, say size $2m$. The $100 - 2m$ vertices outside are an independent set, so $100 - 2m < 40$ and $m \ge 31$. Take the tails of the edges in the matching, and all vertices outside the matching, total of $m + 100 - 2m \le 69$ vertices. Construction is $30$ triangles, an involution, and point the remaining $8$ vertices to a vertex in the involution.
+
+\item The answer is all $n$ such that there are primes $q < p$ where $p \mid n$ and $q \nmid n$. Suppose $n$ satisfies this. Set $m = q$ and interpolate to find $P(0), P^2(0), \ldots, P^{q-1}(0), P^q(0) \equiv 1, 2, \ldots, q - 1, 0 \pmod{p^{\nu_p(n)}}$ and $P(0) \equiv 0$ for all other primes dividing $n$. This is the construction.
+
+Let $p$ be a prime, and write $o(e) = \orbf{P \bmod p^e}{0}$. We claim that if $q$ is a prime such that $q \mid o(e)$, then $q \le p$. If we can show this we're done, as then $m$ can't satisfy $\gcd(m, n) = 1$. Prove through induction on $e$. For $e = 1$ the orbit can only take on $p$ values anyway. For inductive case, as $P^{o(e)}(0) \equiv 0 \pmod{p^e}$, we also have $P^{o(e)}(0) \equiv 0 \pmod{p^{e-1}}$, and hence $o(e-1) \mid o(e)$. But one of $o(e-1), 2o(e-1), \ldots, (p-1)o(e-1)$ is $0$ by pigeonhole, so $o(e)$ must equal one of them. Either $q$ divides the first factor which is less than $p$, or divides the second factor, which works by inductive hypothesis.
+
+\item First, $f$ has no cycles. If it did, we can set $x = \max \orbf{f}{n}$, then by condition $f^{2k_x}(x) = x + k_x$ is also in $\orbf{f}{n}$, contradicting maximality. Pick some $a$. Define $g \from \orbf{f^2}{a} \to \orbf{f^2}{a}$ as \[
+  g(f^{2i}(a)) = f^{2i + 2k_{f^{2i}(a)}}(a) = f^{2k_{f^{2i}(a)}}(f^{2i}(a)) = f^{2i}(a) + k_{f^{2i}(a)},
+\]
+the third equality from the problem statement. Note that $g$ is injective by minimality of $k_{f^{2i}(a)}$. Further, $g$ has no cycles because $f$ has no cycles. Thus $g$'s functional graph is disjoint rays. Suppose the $k$s are upper bounded by $M$. Then $g(x) = x + k_{\text{whatever}} \le x + M$, so each ray has density $\ge \frac{1}{M}$, and there's at most $M$ rays.
+
+Let $\orbf{g}{f^{2i}(a)}$ be one of the rays. If $f^{2x}(a) \in \orbf{g}{f^{2i}(a)}$, expanding the definition shows \[
+  f^{2x}(a) = f^{2i}(a) + x - i \le x + \max\{f^{2i}(a) - i\} = x + m,
+\]
+for some constant $m$, taken over the maximum of all the rays in $g$. (This is why we need a finite number of rays.) Thus the $x$th term in $\orbf{f^2}{a}$ is at most $x + m$, and $\orbf{f^2}{a}$ contains all but finitely many positive integers. Finally, $\orbf{f}{1}$ is the disjoint union of $\orbf{f^2}{1}$ and $\orbf{f^2}{f(1)}$. But these can't be disjoint for size reasons.
+
+\item Equivalent to showing that, if $f \from \ZZ_{2^n}^2 \to \ZZ_{2^n}^2$ is $f(j, i) = (i + j, j) \bmod 2^n$, its functional graph has $2^n$ connected components. We proceed by induction. When both coordinates are even we reduce to the $2^{n-1}$ case, so there's $2^{n-1}$ components for those. We claim if at least one coordinate is odd, the orbits all have size $3 \cdot 2^{n-1}$; this would finish the problem. Note $f^k(a, b) = (aF_k + bF_{k-1}, aF_{k-1} + bF_k)$, so we need to calculate when $(a, b) \equiv f^k(a, b) \pmod{2^n}$, and this is now a number theory problem. The key claims are $\nu_2(F_{6m}) = \nu_2(m) + 3$ and $\nu_2(F_{6m-1} - 1) = \nu_2(F_{6m+1} - 1) = \nu_2(m) + 2$, and I won't bother proving these here lol.
+
+\item Answer is $c \ge d$. If $c < d$, take $Q(x) = x^d$, let $p \equiv 1 \pmod d$ be prime. Then $Q$'s range has only $1 + \frac{p-1}{d}$ elements, so $S$ must include $\frac{d-1}{d}(p - 1)$ elements, which fails the size condition.
+
+For $c \ge d$, take the functional graph of $Q$. Let $c_k$ be the number of $k$-cycles without trees pointing into them. Build $S$ by taking one vertex from each of these cycles, plus every vertex of indegree $0$. Of the $p - \sum k \cdot c_k$ vertices not in the cycles, at least $\frac{1}{d}$ of them are in the range of $Q$. ($Q$ has degree $d$, so vertices have maximum indegree $d$.) Thus we can bound the size of $S$ by \[
+  \sum c_k + \left(1 - \frac{1}{d}\right)\left(p - \sum k \cdot c_k\right)
+  = \frac{d-1}{d} \cdot p + \frac{1}{d} \cdot c_1 - \sum \frac{(k - 1)d - k}{d} \cdot c_k
+  \le \frac{d-1}{d} \cdot p + 1,
+\]
+the last inequality by $c_1 \le d$. As $p > c(2c + 1)$, this bound works.
+
+\item Show injectivity by $P(x, n)$ and $P(y, n)$ for large $x, y$. Functional graph is a finite number of disjoint rays by second condition. We claim each orbit is either an arithmetic sequence or has density $0$. Set $g(a) = f^a(x) - x$. Then $g(0) = 0$, and from $P(f^b(x), a - b)$, we get $a - b \mid g(a) - g(b)$.
+
+Suppose $d_n = g(n + 1) - g(n)$ was upper bounded by $N$. From $a - b \mid d_a - d_b$, setting $a - b > N$ for enough differences we can force $d_n$ to be constant, and then $g$ is an arithmetic sequence, and we're done. Now suppose it was unbounded. Again from $a - b \mid d_a - d_b$, setting $a - b > d_b$ shows it eventually only contains numbers at least $d_b$, and so the density is at most $ \frac{1}{d_b} $, and this is true for any $d_b$, so it's density $0$.
+
+The orbits have to cover $\NN$, and they're all infinite, so they can't have density $0$. Thus each orbit is an arithmetic sequence and we're done.
+\end{enumerate}
+
+\end{document}
+
+\item (IMO 2006/5) Let $P(x)$ be a polynomial of degree $n > 1$ with integer coefficients and let $k$ be a positive integer. Consider the polynomial $Q(x) = P(P(\ldots P(P(x)) \ldots ))$, where $P$ occurs $k$ times. Prove that there are at most $n$ integers $t$ such that $Q(t) = t$.
+
+% https://artofproblemsolving.com/community/c6h101487p572821
+
+\item (IMC 2013) If $a\in\mathbb Z$ is a given number, then determine all injective functions $f:\mathbb Z\to\mathbb Z$ for which $f(f(x))=f(x)+a$ for all $x\in\mathbb Z$.
+
+% https://artofproblemsolving.com/community/c6h2591011p22335987
+
+\item (IMO 2015/6) The sequence $a_1,a_2,\dots$ of integers satisfies the conditions:
+\begin{enumerate}[(i)]
+  \item $1\le a_j\le2015$ for all $j\ge1$,
+  \item $k+a_k\neq \ell+a_\ell$ for all $1\le k<\ell$.
+\end{enumerate}
+Prove that there exist two positive integers $b$ and $N$ for which\[\left\vert\sum_{j=m+1}^n(a_j-b)\right\vert\le1007^2\]for all integers $m$ and $n$ such that $n>m\ge N$.
+
+% https://artofproblemsolving.com/community/c6h1113168p17373369
+
+\item (HMIC 2020) Some bishops and knights are placed on an infinite chessboard, where each square has side length $1$ unit. Suppose that the following conditions hold:
+\begin{itemize}
+  \item For each bishop, there exists a knight on the same diagonal as that bishop (there may be another piece between the bishop and the knight).
+  \item For each knight, there exists a bishop that is exactly $\sqrt{5}$ units away from it.
+  \item If any piece is removed from the board, then at least one of the above conditions is no longer satisfied.
+\end{itemize}
+If $n$ is the total number of pieces on the board, find all possible values of $n$.
+
+% https://artofproblemsolving.com/community/c6h2052359p14590975
+
+\item (Taiwan TST 2019) Find all positive integers $n$ with the following property: we can fill each cell of an $n \times n$ grid with one of $\uparrow, \downarrow, \leftarrow, \rightarrow$, such that
+\begin{itemize}
+\item Starting from any cell, if we follow the arrows, we go back to the starting cell.
+\item For every row, except the first and the last, there's an equal number of $\uparrow$ and $\downarrow$.
+\item For every column, except the first and the last, there's an equal number of $\leftarrow$ and $\rightarrow$.
+\end{itemize}
+
+% https://artofproblemsolving.com/community/c6h2047451p19652880
+
+\item (St.\ Petersburg 2014) A child stands in each cell of an $n \times n$ table. Each child looks at an adjacent cell, seeing either the back or ear of another child. What is the minimum number of children that see an ear?
+
+% https://artofproblemsolving.com/community/c6h1533987p9242062

@@ -1,0 +1,217 @@
+\documentclass[11pt,paper=letter]{scrartcl}
+\usepackage[alttitle]{cjquines}
+
+\begin{document}
+
+\title{Chains and antichains}
+\author{CJ Quines}
+\date{April 10, 2023}
+
+\maketitle
+
+\subsubsection*{Warmup}
+
+Call two positive integers $a$ and $b$ \textit{friends} if either $a \mid b$ or $b \mid a$, and \textit{enemies} otherwise.
+\begin{enumthin}
+\item Find $4$ positive integers, such that in every subset of $3$ integers, there is a pair of friends and a pair of enemies.
+\item Given $5$ positive integers, prove there's some subset of $3$ integers that are either pairwise friends, or pairwise enemies. (``Pairwise friends'' means every pair is a pair of friends.)
+\item What if instead of positive integers we had people? (Assume friendship is symmetric.)
+\end{enumthin}
+
+\subsubsection*{Definitions}
+
+A partially ordered set, or \textbf{poset}, is a set $P$ with a binary relation $\le$ that, for all $x, y, z \in P$, is:
+\begin{itemthin}
+\item reflexive: $x \le x$;
+\item antisymmetric: if $x \le y$ and $y \le x$, then $x = y$; and
+\item transitive: if $x \le y$ and $y \le z$, then $x \le z$.
+\end{itemthin}
+We say $x$ and $y$ are \textbf{comparable} if $x \le y$ or $y \le x$, and \textbf{incomparable} otherwise.
+
+\vspace{1em}
+\noindent
+Poset examples:
+\begin{itemthin}
+\item $\NN$ with divisibility. Many pairs are incomparable.
+\item $\RR$ with $\le$. All pairs are comparable.
+\item The power set of $\{1, 2, \ldots, n\}$ with $\subseteq$. In fact, it can be any set of sets with $\subseteq$.
+\item People with the ``ancestor of'' relation. In fact, any directed acyclic graph with reachability.
+\item $\RR^2$ with $(a, b) \le (c, d)$ if $a \le c$ and $b \le d$. Points to bottom-left or top-right are comparable.
+\end{itemthin}
+Poset non-examples. Think about why:
+\begin{itemthin}
+\item $\RR$ with $a \le b$ if $a \le b$ and $|a - b| \le 1$.
+\item $\RR^2$ with $(a, b) \le (c, d)$ if $a + b \le c + d$.
+\item $\NN$ with $a \le b$ if $\floor{a/2} \le \floor{b/2}$.
+\end{itemthin}
+\vspace{1em}
+\noindent
+A subset is a \textbf{chain} if it's pairwise comparable, and an \textbf{antichain} if it's pairwise incomparable.
+\begin{itemthin}
+\item In $\NN$ with divisibility, the set of $81$'s divisors make a chain. The set of $24$'s divisors don't.
+\item In $\RR$ with $\le$, all subsets are chains. All antichains have size $0$ or $1$.
+\item In the power set of $\{1, 2, \ldots, n\}$ with $\subseteq$, the subsets with $1$ are neither a chain nor an antichain.
+\item In people with the ``ancestor of'' relation, the people in this room (probably) form an antichain.
+\item In $\RR^2$ with $\le$, chains are ``increasing'' and antichains are ``decreasing''.
+\end{itemthin}
+\vspace{1em}
+\noindent
+\textbf{Remark:} We can also define posets with a binary relation $<$ that is, for all $x, y, z \in P$,
+\begin{itemthin}
+\item irreflexive: $x \not< x$;
+\item asymmetric: if $x < y$, then $y \not< x$; and
+\item transitive: if $x < y$ and $y < z$, then $x < z$.
+\end{itemthin}
+Convince yourself why. Fun fact: you can omit ``irreflexive'' or ``antisymmetric'', but not both.
+
+\subsubsection*{Mirsky, Dilworth, and Erd\H{o}s--Szekeres}
+
+\begin{enumerate}
+
+\item (Mirksy) Let $P$ be a finite poset. The minimum number of antichains whose union is $P$ equals the maximum size of a chain. (This is called the \textit{height} of $P$.)
+
+\textbf{Sketch:} For each element $x$, let $N(x)$ be the maximum size of a chain with largest element $x$. Let $N^{-1}(s)$ be the set of all $x$ such that $N(x) = s$. Each $N^{-1}(s)$ is an antichain. (Why?) The union of $N^{-1}(1), N^{-1}(2), \ldots$ is $P$.
+
+\item (Dilworth) Let $P$ be a finite poset. The minimum number of chains whose union is $P$ equals the maximum size of an antichain. (This is called the \textit{width} of $P$.)
+
+\textbf{Remark:} Proof is omitted because it's not important today. It's harder than Mirsky's. The usual approach is to induct on $|P|$. Feel free to look up the proof later.
+
+\item (Dilworth--Mirsky) In a poset with $ab + 1$ elements, there is a chain of size $a + 1$ or an antichain of size $b + 1$.
+
+\textbf{Sketch:} If there isn't a chain of size $a + 1$, the maximum size of a chain is at most $a$. By Mirsky, the minimum number of antichains whose union is $P$ is at also at most $a$. Make the antichains disjoint by removing elements as needed. There are $ab + 1$ elements in at most $a$ antichains; by pigeonhole some antichain has at least $b + 1$ elements.
+
+\textbf{Remark 1:} There's a similar proof with Dilworth, which is why I called it Dilworth--Mirsky. That's not a real theorem name. You can cite it as Dilworth's theorem too. You can also state the result and say it's well-known; you don't need to know the names.
+
+\textbf{Remark 2:} There are posets with $ab$ elements without chains of size $a + 1$ and antichains of size $b + 1$. For example, consider $b$ chains of size $a$, such that elements from different chains are incomparable. This means Dilworth--Mirsky is sharp, which means we can't make $ab + 1$ smaller. Many of our problems don't talk about sharpness, but I invite you to think about it!
+
+\item (Erd\H{o}s--Szekeres) In a sequence of $ab + 1$ distinct real numbers, there is an increasing subsequence of length $a + 1$ or a decreasing subsequence of length $b + 1$.
+
+\textbf{Sketch:} Consider the poset with $<$ and apply Dilworth--Mirsky.
+
+\textbf{Remark 1:} The usual proof is Seidenberg's, which uses pigeonhole. If you haven't seen it, I recommend looking it up; it's nice.
+
+\textbf{Remark 2:} Many of the solutions today can be written in terms of Erd\H{o}s--Szekeres rather than Dilworth--Mirsky. In fact it's more common to do so, and you'll sometimes read solutions that recast the problem heavily so Erd\H{o}s--Szekeres can be applied. I think this obscures the underlying poset and makes the solution harder to understand.
+
+\end{enumerate}
+
+\subsubsection*{Examples}
+
+\begin{enumerate}
+
+\item (\href{https://mathoverflow.net/questions/421100/is-there-a-configuration-of-5-points-on-the-plane-where-any-two-can-be-covered-b/421101#421101}{\!}) Let $S$ be a set of points on the plane. Suppose that every pair of points in $S$ can be covered by an axis-aligned rectangle that doesn't cover any other point. What is the maximum size of $S$?
+
+\textbf{Sketch:} It's $4$, construction is a tilted square. Consider poset on $S$ with relation $(a, b) \le (c, d)$ if $a \le c$ and $b \le d$. By Dilworth--Mirsky, if $|S| \ge 2 \cdot 2 + 1$, there's monotonic subsequence with $2 + 1$ points, say $A, B, C$. Then covering $A$ and $C$ also covers $B$.
+
+\textbf{Remark:} If you're asked for the minimum or maximum, you also have to show sharpness, typically by giving an example.
+
+\item (Iran 2006) Let $k$ be a positive integer, and let $S$ be a set of open intervals on the real line. Suppose that among any $k + 1$ of these intervals, there are two with a non-empty intersection. Prove that there exists a set of $k$ points on the real line such that each interval in $S$ contains at least one of them.
+
+\textbf{Sketch:} Consider poset on $S$ with relation $(a, b) \le (c, d)$ if $b \le c$. Condition means that chains have size at most $k$. Mirsky means $S$ is union of $k$ antichains. Each antichain has some shared point, choose that.
+
+\item (Erd\H{o}s 1947) If we color the edges of $K_{ab + 1}$ with red and blue, prove there's a red $P_{a + 1}$ or a blue $K_{b + 1}$. (The graph $K_n$ has $n$ vertices, with edges between each pair of vertices. The graph $P_n$ has $n$ vertices, with edges between the $i$th and $(i+1)$st vertices.)
+
+\textbf{Sketch:} Order the vertices. Consider poset with relation $v \le u$ if there's a path from $v$ to $u$ with only red edges and ascending vertices. Chains are red paths. Incomparable vertices are connected by blue edges, so antichains are blue $K_n$s. By Dilworth--Mirsky, either $a + 1$ chain or $b + 1$ antichain.
+
+\item (LMPT 1994) Given $n^5 + 1$ convex polygons, prove that we can choose $n + 1$ that are either pairwise intersecting or pairwise disjoint.
+
+\textbf{Hint:} Let $k$ and $n$ be positive integers. Let $P_1, \ldots, P_{k-1}$ be posets over the same set $S$ with $n^k + 1$ elements. Prove there exists a subset of $S$ with $n + 1$ elements, that's a chain in some $P_i$, or an antichain in all $P_i$s.
+
+\textbf{Sketch:} Define four posets on convex polygons such that two are disjoint iff they're comparable in one of the posets. ($A \le B$ if: $A$ lies entirely below $B$, $A$ lies entirely above $B$, $A$ lies to the bottom-left-ish of $B$, $A$ lies to the top-left-ish of $B$.)
+
+Dilworth--Mirsky on first one, either $n + 1$ chain that's pairwise disjoint, or $n^4 + 1$ antichain. Restrict to $n^4 + 1$, Dilworth--Mirsky on second one, either $n + 1$ chain that's pairwise disjoint, or $n^3 + 1$ antichain, etc. If set is antichain in all posets, it's intersecting.
+
+\end{enumerate}
+
+\subsubsection*{Problems}
+
+\begin{enumerate}
+
+\item (Romania TST 2005) Let $n$ be a positive integer and let $X$ be a set of $n^2+1$ positive integers such that in any subset of $X$ with $n+1$ elements there exist two elements $x\neq y$ such that $x\mid y$. Prove that there exists a subset $\{x_1,x_2,\ldots, x_{n+1} \} \in X$ such that $x_i \mid x_{i+1}$ for all $i=1,2,\ldots, n$.
+
+\item (\href{https://math.stackexchange.com/questions/3689295/how-many-whole-rectangles-can-you-catch-in-a-grid/3704482#3704482}{\!}) Let $R$ be a set of $n^2 + 1$ disjoint rectangles inside a square, whose sides are parallel to the square's sides. Prove that we can partition the square into $n$ rectangles, each of which fully contains a rectangle in $R$. \hint{\ref{h:2}}
+
+\item (MIPT Comb.\ 2019) There are $1001$ rectangles, the $i$th of which has dimensions $\ell_i \times w_i$, where $\ell_i$ and $w_i$ are positive integers such that $|\ell_i - w_i| \le 100$. Prove that there are $21$ rectangles that pairwise fit in each other, rotating by $90\dg$ if necessary. \hint{\ref{h:1}}
+
+\item (\href{https://yufeizhao.com/olympiad/algcomb.pdf}{\!}) Let $G$ be a simple graph. Suppose that it's possible to assign each vertex to one of $\chi$ colors, such that no two adjacent vertices have the same color. Suppose further that we can't do this with $\chi - 1$ colors. Prove that, in this assignment of colors, there is a path of length $\chi$, such that all vertices have different assigned colors. \hint{\ref{h:3}}
+
+\item (Bulgaria 2015) In an olympiad, students received marks in each of four areas: algebra, geometry, number theory and combinatorics. No two students got the same score in any area. A group of students is called \textit{nice} if all students in the group can be ordered in increasing order in two of the four areas. Find the least positive integer $N$ such that among any $N$ students, there exist a nice group of $10$ students. \hint{\ref{h:12}}
+% % https://artofproblemsolving.com/community/c6h1846604p12436799
+
+\item (Pach--T\"or\H{o}csik 1994)  Choose $n$ points in the plane, and draw $k^4n + 1$ segments between them. Prove there are $k + 1$ pairwise disjoint segments.
+
+\item (Kalmanson 1973) Let $n$ and $r$ be positive integers. A sequence of points in $\RR^n$ is called \textit{good} if, for each $i = 1, 2, \ldots n$, the $i$th coordinates are either increasing or decreasing. What is the maximum length of a sequence of points in $\RR^n$, such that every good subsequence has length at most $r$? \hint{\ref{h:4}}
+\end{enumerate}
+
+\subsubsection*{Harder problems}
+
+\begin{enumerate}[resume]
+\item (\href{https://drive.google.com/file/d/1zFLUE59CACJtZKi9FVByllG40dhff1VQ/view}{\!}) Given $500$ distinct points in a unit square, show there's $12$ points $A_1, A_2,\ldots,A_{12}$ such that $A_1A_2 + A_2A_3 + \cdots + A_{11}A_{12} \le 1$. \hint{\ref{h:5}}
+
+\item (USA TST 2008) For a pair $ A = (x_1, y_1)$ and $ B = (x_2, y_2)$ of points on the coordinate plane, let $ d(A,B) = |x_1 - x_2| + |y_1 - y_2|$. We call a pair $ (A,B)$ of (unordered) points harmonic if $ 1 < d(A,B) \leq 2$. Determine the maximum number of harmonic pairs among 100 points in the plane. \hints{\ref{h:6} \ref{h:7}}
+
+\item (K\'arolyi--Rosta 2001) Let $n = 2ab - a - b + 2$. If we color the edges of $K_n$ with red and blue, prove that there's a red $C_{a + 1}$ or a blue $C_{b + 1}$. (The graph $C_n$ is a cycle with $n$ vertices and $n$ edges.) \hint{\ref{h:8}}
+
+\item (Romania TST 2006) Let $m$ and $n$ be positive integers and $S$ be a subset of $ \left\{ 1, 2, \ldots, 2^mn \right\} $ with $ (2^m - 1)n + 1 $ elements. Prove that $S$ contains $m + 1$ distinct integers, $a_0, a_1, \ldots, a_m$ such that $a_{k - 1} \mid a_k$ for all $k = 1, 2, \ldots, m$. \hint{\ref{h:9}}
+
+\item (China TST 2023) In $\triangle ABC$, choose points $P_1, \ldots, P_n$ such that no three are collinear. Prove that we can partition $\triangle ABC$ into $2n + 1$ triangles, such that their vertices are among $A, B, C, P_1, \ldots, P_n$, and at least $n + \sqrt{n} + 1$ of them contain at least one of $A, B, C$. \hint{\ref{h:10}}
+
+\item (ELMO 2016) In a Cartesian coordinate plane, call a rectangle \textit{standard} if all of its sides are parallel to the $x$- and $y$- axes, and call a set of points \textit{nice} if no two of them have the same $x$- or $y$- coordinate. First, Bert chooses a nice set $B$ of $2016$ points in the coordinate plane. To mess with Bert, Ernie then chooses a set $E$ of $n$ points in the coordinate plane such that $B\cup E$ is a nice set with $2016+n$ points. Bert returns and then miraculously notices that there does not exist a standard rectangle that contains at least two points in $B$ and no points in $E$ in its interior. For a given nice set $B$ that Bert chooses, define $f(B)$ as the smallest positive integer $n$ such that Ernie can find a nice set $E$ of size $n$ with the aforementioned properties. Help Bert determine the minimum and maximum possible values of $f(B)$. \hint{\ref{h:11}}
+\end{enumerate}
+
+\pagebreak
+\subsubsection*{Hints}
+
+\begin{enumerate}
+\item \label{h:8} Choose some $p$ and the edges incident to it, do something like the third example for the rest of the graph.
+\item \label{h:4} There's a construction where each coordinate is drawn from $\{1, \ldots, r^{2^{n-1}}\}$. Induct on $n$, think about the $n = 2$ example.
+\item \label{h:10} Consider $K_{2, \sqrt{n}}$, but connect the $2$ points in the size-$2$ vertex class. Meditate on this graph.
+\item \label{h:1} Why can't we have an antichain of size $51$?
+\item \label{h:9} Think about $\{1, 2, 4, 8, \ldots\}, \{3, 6, 12, \ldots\}, \{5, 10, 20, \ldots\}, \ldots$.
+\item \label{h:6} Out of $3$ increasing or decreasing points, at most $2$ are harmonic.
+\item \label{h:11} The maximum is at most $2 \cdot 2016$, because you can add two points in $E$, to the bottom-left and top-right of each existing point. But you can remove some points, like the bottom-leftmost point in $E$.
+\item \label{h:3} Follow the third example. Order vertex colors, then consider ascending paths. The antichains contradict minimality of $\chi$.
+\item \label{h:7} The graph with harmonic edges has no $K_5$s, T\'uran's finishes.
+\item \label{h:5} Use pigeonhole to find a quadrant with $125$ points.
+\item \label{h:2} The horizontal projections of rectangles form intervals. Consider a poset on them, like the first example. What can you say about antichains and vertical projections?
+\item \label{h:12} The answer is $12^3 + 1$; recall the hint from the fourth example.
+\end{enumerate}
+
+\subsubsection*{Sketches}
+
+\begin{enumerate}
+\item Consider the $\mid$ poset. Condition means that antichains have size at most $n$. Dilworth--Mirsky means that there's a chain of size at least $n + 1$.
+
+\item The horizontal projections form a poset with $[a, b] < [c, d]$ if $b < c$. By Dilworth--Mirsky, either chain or antichain of size $n + 1$. If chains, draw verical partition; if antichains, draw horizontal partition.
+
+\item WLOG $\ell_i \le w_i$. Consider poset on rectangles with ``fits in'' relation. By Dilworth--Mirsky, either chain of size $20 + 1$ or antichain of size $50 + 1$. Antichain satisfies $\ell_1 < \cdots < \ell_{51} \le w_{51} < \cdots < w_1$ contradicting $|\ell_1 - w_1| \le 100$.
+
+\textbf{Remark:} Compare KMS 2004: Given $1001$ rectangles whose lengths and widths are in $\left\{1, 2, \ldots, 1000\right\},$ prove there exists distinct rectangles $A$, $B$, and $C$, such that $A$ fits in $B$ and $B$ fits in $C$, rotating by $90\dg$ if necessary.
+
+\item Order the colors. Consider poset on vertices with relation $v \le u$ if there's a path from $v$ to $u$ such that vertex colors in path are ascending. If there wasn't a $\chi$ length path, the maximum chain size is at most $\chi - 1$. By Mirsky there's at most $\chi - 1$ antichains that cover $G$. Antichains don't have adjacent vertices, so we can assign them different colors to get a smaller coloring, contradiction.
+
+\item Answer is $9^3 + 1$, give construction. Poset on students with relation $\le$ on both algebra and geometry. By Dilworth--Mirsky, either $9 + 1$ chain and done, or $9^2 + 1$ antichain. In latter case, poset with relation $\le$ on both geometry and number theory. By Dilworth--Mirsky, either $9 + 1$ chain and done, or $9 + 1$ antichain and done.
+
+\textbf{Remark:} Compare K\"ursch\'ak 2020: There are $N$ houses in a city. Every Christmas, Santa visits these $N$ houses in some order. Show that if $N$ is large enough, then it holds that for three consecutive years there are always are $13$ houses such that they have been visited in the same order for two years (out of the three consecutive years). Determine the smallest $N$ for which this holds.
+% % https://artofproblemsolving.com/community/c6h2521264p21392594
+
+\item Define four posets on segments such that two segments are disjoint iff they're comparable in one of the posets. Suppose otherwise, each poset has maximum chain size at most $k$. By Dilworth, segments can be partitioned into at most $k$ antichains for each poset. Label segments with $4$-tuples of antichains, have at most $k^4$ possible labels. Segments with same label are in antichains and can't be disjoint, so at most $n$ segments with given label, and at most $k^4n$ segments, contradiction.
+
+\item It's $r^{2^{n-1}}$. Consider poset with $\le$ on first and second coordinates. By Dilworth--Mirsky, if $r^{2^{n-1}} + 1$ points, then either chain or antichain $r^{2^{n-2}} + 1$. Either way first coordinate is monotonic, remove that, repeat. Construction is harder. We'll show there's a construction where each coordinate is drawn from $\{1, \ldots, r^{2^{n-1}}\}$, by induction. Take the construction for $n - 1$. For each $j = 1, \ldots, r^{2^{n-2}}$, we'll make $r^{2^{n-2}}$ copies, where we replace the $j$th coordinate with integers $\{r^{2^{n-1}}(j - 1) + 1, \ldots, r^{2^{n-1}}j\}$ monotonically. The idea is to be similar to the $n = 2$ construction.
+
+\item Divide into quadrants, some quadrant has $11 \cdot 11 + 1$ points by pigeonhole. This forms a poset with $\le$, where $(a, b) \le (c, d)$ if $a \le c$ and $b \le d$. By Dilworth--Mirsky have chain or antichain of size $11 + 1$, the horizontal and vertical projections have lengths that sum to at most $\frac12$.
+
+\item Any $2 \cdot 2 + 1$ points form a poset with $\le$, where $(a, b) \le (c, d)$ if $a \le c$ and $b \le d$. By Dilworth--Mirsky, some $2 + 1$ points $A, B, C$ is increasing or decreasing; either way $d(A, B) + d(B, C) = d(A, C)$, so at most $2$ are harmonic. Consider graph with points as vertices and harmonic pairs as edges; by condition this doesn't contain $K_5$. By Tur\'an, at most $3750$ harmonic pairs. Show achievable.
+
+\item Order the vertices. Consider edges incident to $p$. Either $ab - b + 1$ are red or $ab - a + 1$ are blue, WLOG former. Consider the poset on the $(a - 1)b + 1$ vertices, with $v \le u$ if there's a path from $v$ to $u$ with only red edges and ascending vertices. Chains are red paths, can join to $p$ to make a cycle. Incomparable vertices are connected by blue edges, so antichains are blue $K_n$s. By Dilworth--Mirsky, either $(a - 1) + 1$ chain or $b + 1$ antichain.
+
+\item Consider the $\mid$ poset. Suppose otherwise; then chains have size at most $m$. By Mirsky, $S$ is a union of $m$ antichains. Let $f(a) = \max \left\{ 2^ia \bigmid 2^ia \le 2^mn \right\}$ and $f^{-1}(r) = \left\{ a \in S \bigmid f(a) = r \right\}$. Write $r = 2^{i-1}a$. Then $f^{-1}(r) = S \cap \{a, 2a, \ldots, 2^{i-1}a\}$. Thus $|f^{-1}(r)| \le i$. But it's also $\le m$, because no two elements of $f^{-1}(r)$ can be in the same antichain. Now, $|S| = \sum |f^{-1}(r)|$ over $r$ in the range of $f$. We evaluate this sum as follows: there's $2^{m-1}n$ odd $r$, which each contribute $\le 1$ to the sum; then there's $2^{m-2}n$ even $r$ not divisible by $4$, which each contribute $\le 2$ to the sum, etc. In general, for $i = 1, \ldots, m - 1$, there's $2^{m-1-i}n$ such $r$ that contribute $\le i$ to the sum. In total we get $|S| \le (2^m - 1)n$, contradiction.
+
+\item Assign $(\angle P_iAB, \angle P_iCB)$ to each point. This forms a poset with $\le$, where $(a, b) \le (c, d)$ if $a \le c$ and $b \le d$. Apply Dilworth--Mirsky to get $k = \ceil{\sqrt n}$ points with WLOG increasing $\angle P_iAB$ and $\angle P_iCB$. Draw segments \[
+  AP_1, AP_2, \ldots, AP_k, CP_1, CP_2, \ldots, CP_k, BP_1, P_1P_2, \ldots, P_{k-1}P_k,
+\]
+to partition into $2k + 1$ good triangles, other points add at least one more good triangle.
+
+\item Let $k = 2016$. Minimum is $k - 1$, need to pick points in $E$ between each $x$-coordinate in $B$, construction is points along main diagonal. Maximum is $2k - 2\sqrt{k}$. Consider poset with $\le$ on both coordinates, and longest chain, say length $a$. Draw rectangles between points not in chain to points in chain. This shows we need to add $k - a$ points, one for each point not in longest chain. Similarly, consider longest antichain, say length $b$; we need to add $k - b$ points. In total, $2k - a - b$ points needed. By Dilworth--Mirsky, must have $ab \ge k$, by AM--GM maximum is $2k - 2\sqrt{k}$. Construction is titlted $42 \times 48$ rectangle.
+\end{enumerate}
+
+\end{document}
