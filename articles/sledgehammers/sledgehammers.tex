@@ -1,0 +1,437 @@
+\documentclass[11pt,paper=letter]{scrartcl}
+\usepackage[wide,boxthm]{cjquines}
+\declaretheorem[style=exbox,name=Theorem,numbered=no]{thmboxed*}
+\usepackage[style=alphabetic]{biblatex}
+\addbibresource{sledgehammers.bib}
+
+\newcommand{\seq}[1]{\left\{#1\right\}}
+\newcommand{\primedivs}[1]{\PP\!\left(#1\right)}
+\newcommand{\primeseq}[1]{\PP\!\seq{#1}}
+\newcommand{\zsig}{\mathcal{Z}}
+\newcommand{\zsigseq}[1]{\zsig\!\seq{#1}}
+\newcommand{\thmrating}[3]{\begin{center}\sffamily%
+\bluebf{#1.} \hfill Citability: #2 \qquad Usefulness: #3%
+\vspace{0.3em}\end{center}\noindent\!\!}
+
+\begin{document}
+
+\title{Sledgehammers in number theory}
+\author{CJ Quines}
+\date{June 15, 2023}
+
+\maketitle
+
+\begin{abstract}
+Do you like the feeling of killing flies with bazookas? Have you ever wanted to learn theorems that are useful in olympiad number theory but are too powerful to cite? Are you interested in reading things that can be actively harmful for your competition math career? Then I have the perfect handout for you\dots
+\end{abstract}
+
+\section{Notation}
+
+Standard notation I'll use:
+\begin{itemize}
+\item $\NN$ is the set of positive integers.
+\item $\ZZ[x]$ is the set of polynomials with integer coefficients.
+\item $\seq{a_n}_{n = 1}^N$ is $\{a_1, a_2, \ldots, a_N\}$. We'll also write $\seq{a_n}_{n \ge 1}$ for $\seq{a_n}_{n = 1}^{\infty}$.
+\end{itemize}
+Less standard notation I'll use:
+\begin{itemize}
+\item $\PP$ is the set of primes.
+\item $\PP(S)$, or the \textbf{prime divisors} of $S$, is the set of $p \in \PP$ such that there's some $s \in S$ with $s \ne 0$ and $p \mid s$. (Why do we have to say $s \ne 0$?)
+\end{itemize}
+Abuses of notation:
+\begin{itemize}
+\item We write $\seq{a_n}$ for $\seq{a_n}_{n \ge 1}$ because it's so common. For example, the odd positive integers are $\seq{2n - 1}$. We'll never write sets with one element, so there should be no risk of confusion.
+\item We write $\primeseq{a_n}$ instead of $\primedivs{\seq{a_n}}$.
+\end{itemize}
+
+When stating results, I'll rate them with their ``citability'', which is how fine I'd be citing it in a solution for an oly problem, and ``usefulness'', which is how applicable I think it is. These are scaled from 1 to 5, where 1 is least and 5 is most, rated based on a completely subjective assessment I totally made up. For example:
+
+\begin{thmboxed*}
+\thmrating{Irrationality of $\sqrt2$}{5}{1}
+There are no $p, q \in \ZZ$ such that $\sqrt2 = p/q$.
+\end{thmboxed*}
+
+I hope you're fine with treating results as black boxes, because I'll be skipping lots of proofs. Here we go.
+
+\section{Hammers}
+
+\subsection{Chebotarev density theorem}
+
+Stating the Chebotarev density theorem in full generality needs Galois theory. There's a bunch of weaker versions of Chebotarev, like the Frobenius or Kronecker density theorems (which also need Galois theory), or the density version of Dirichlet's theorem, which we cover later.
+
+I have this section for two reasons. First, when I later mention Chebotarev, you'll know what I'm referring to. Second is to define the notion of \textit{density} in the first place. If $S \subseteq \PP$, then there's \textit{two} notions of $S$'s density. The first is \textbf{natural density}: \[
+  \delta(S) = \lim_{N \to \infty} \frac{\abs{\{p \in S, p \le N\}}}{\abs{\{p \in \PP, p \le N\}}},
+\]
+and the second is \textbf{Dirichlet density}: \[
+  \delta'(S) = \lim_{s \to 1^+} \frac{\sum_{p \in S} \frac{1}{p^s}}{\sum_{p \in \PP} \frac{1}{p^s}}.
+\]
+Dirichlet density looks weird, but it's easier to work with analytically, which is why most results below actually use Dirichlet density. There's a result that says that if $\delta(S)$ exists, then it is equal to $\delta'(S)$. The converse isn't true, but you probably won't run into the counterexamples in practice. We'll thus be lazy and conflate the two notions of density; if you're making a density argument it doesn't matter anyway.
+
+\subsection{Schur-type results}
+
+Here's something I'll feel no qualms citing in an olympiad:
+
+\begin{thmboxed*}
+\thmrating{Schur's theorem}{5}{4}
+If $f \in \ZZ[x]$ is nonconstant, then $\primeseq{f(n)}$ is infinite.
+\end{thmboxed*}
+
+There are many proofs of this. I'll cite a result of Elsholtz in \cite{elsholtz12}, which is stronger than Schur and has an elementary counting proof:
+
+\begin{thmboxed*}
+\thmrating{Schur's theorem (growth)}{1}{1}
+Suppose that $\seq{a_n}$ has:
+\begin{itemthin}
+\item subexponential growth: for all $ \varepsilon > 0$, we have $a_n \le 2^{n^{\varepsilon}}$ as $n \to \infty$, and
+\item almost-injectivity: there's some $c$ such that each integer appears in $\seq{a_n}$ at most $c$ times.
+\end{itemthin}
+Then $\primeseq{a_n}$ is infinite.
+\end{thmboxed*}
+
+\begin{proof}
+We prove a special case, assuming $a_n > 0$ and that it's almost-injective with $c = 1$. These conditions means that $a_1, \ldots, a_n$ have $n$ distinct values. Suppose $\primeseq{a_n} = \{p_1, \ldots, p_k\}$. The main idea is to count possible prime factorizations, and show it's too few compared to the $n$ we need. If we factorize $a_n$ as $\prod p_i^{e_i}$, we must have $e_i < n^{\varepsilon}$ due to subexponential growth. That means that there's at most $(n^{\varepsilon})^k$ prime factorizations, which for large $n$, is too few.
+\end{proof}
+
+The growth version covers, for example, $\seq{\floor{\pi n^2}}$, which Schur alone doesn't. This combinatorial proof is similar to Erd\H os's proof there are infinitely many primes, which I recount in \cite{quines19}.
+
+We can also strengthen Schur to specify the density, as a corollary of Chebotarev:
+
+\begin{thmboxed*}
+\thmrating{Schur's theorem (density)}{1}{3}
+If $f \in \ZZ[x]$ is nonconstant, then $\primeseq{f(n)}$ has density at least $\frac{1}{\deg f}$.
+\end{thmboxed*}
+
+If you want a reference, check the upper bound in Lemma 3 of \cite{ballot06}.
+
+\subsection{Anti-Schur-type results}
+
+If $f \in \ZZ[x]$, then saying that $p \in \primeseq{f(n)}$ is the same as saying that $f(x) \equiv 0 \pmod p$ has a solution, or in other words, it has a root modulo $p$. Thus, Schur can be restated as ``a nonconstant polynomial has roots modulo infinitely many primes.''
+
+Can we say things about primes that $f$ \textit{doesn't} have roots in, or the set $\PP \setminus \primeseq{f(n)}$? We should rule out the case where $f$ has a linear factor (in $\QQ$): for example, $6x - 1$ has a root modulo every prime except $2$ and $3$. The tentative claim is then: a polynomial without linear factors has no roots modulo infinitely many primes.
+
+Unfortunately, this isn't true. A counterexample is $(x^2 - 2)(x^2 - 3)(x^2 - 6)$, because modulo any prime, at least one of $2$, $3$, and $6$ is a quadratic residue. So ``without linear factors'' is too weak of an assumption. The correct result requires an \textbf{irreducible} polynomial, one that can't be factored as the product of two nonconstant polynomials:
+
+\begin{thmboxed*}
+\thmrating{Anti-Schur's theorem}{1}{2}
+If $f \in \ZZ[x]$ is irreducible with $\deg f \ge 2$, then $\PP \setminus \primeseq{f(n)}$ is infinite.
+\end{thmboxed*}
+
+Another way to say this is that if $f \in \ZZ[x]$ has roots modulo every prime, then it's either reducible or linear. The previously cited Lemma 3 of \cite{ballot06} gives a density version of anti-Schur in its lower bound:
+
+\begin{thmboxed*}
+\thmrating{Anti-Schur's theorem (density)}{1}{1}
+If $f \in \ZZ[x]$ is irreducible with $\deg f \ge 2$, then $\PP \setminus \primeseq{f(n)}$ has density at least $\frac{1}{(\deg f)!}$.
+\end{thmboxed*}
+
+As an aside, $x^8 - 16$ is another counterexample to our earlier claim; it factorizes as $(x^2 - 2)(x^2 + 2)(x^4 + 4)$, which for similar reasons also has a root modulo any prime. This also serves as a counterexample to ``if something is an $n$th power modulo every prime, it's an $n$th power.'' This statement is \textit{almost} true. The Grunwald--Wang theorem classifies the exceptions, and in the $\QQ$ case, we get:
+
+\begin{thmboxed*}
+\thmrating{Grunwald--Wang theorem (for $\QQ$)}{1}{1}
+Suppose $a$ is an $n$th power modulo a set of primes with density $1$. Then either $a$ is an $n$th power, or $8 \mid a$ and $a = 2^{n/2}b^n$ for some $b$.
+\end{thmboxed*}
+
+See the discussion in 9.B of \cite{andreescu12}.
+
+\subsection{Kobayashi's theorem}
+
+While Schur-type results prove that the prime divisors of many integer sequences are infinite, there's some that it doesn't cover, like $\primeseq{2^n + 1}$, or $\primeseq{2^{2^n} + 1}$, or $\primeseq{\floor{10^n \pi}}$. I think it's open whether the third set is infinite, but the first two are covered by Kobayashi's theorem:
+
+\begin{thmboxed*}
+\thmrating{Kobayashi's theorem}{3}{3}
+Let $t \in \ZZ$ be nonzero and $\seq{a_n}$ unbounded. If $\primeseq{a_n}$ is finite, then $\primeseq{a_n + t}$ is infinite.
+\end{thmboxed*}
+
+Kobayashi's original paper \cite{kobayashi81} is one that's well-known-ish in olympiad circles, but I can only find one other paper that cites it, \cite{morton90}. I also can't find anything Hiroshi Kobayashi did outside this paper. The affiliation given is ``Ebina Highschool'', which is not only a \textit{high school}, but one I can't find any records of.
+
+No elementary proof of Kobayashi is known, but somehow it's wormed its way into olympiad canon, which raises its citability by a bit. Kobayashi's original proof uses Siegel's theorem. There's a nice proof by mavropnevma in \cite{schwarz11} that uses Thue's theorem, which I'll state in \autoref{sec:roth}. mavropnevma's proof is nice enough (and the trick common enough) that I'll reproduce it:
+
+\begin{proof}
+Write $a_n = ax^3$ and $a_n + t = by^3$ for $a$ and $b$ cubefree.\footnote{A number is cubefree if each exponent of a prime in its prime factorization is at most $2$. Alternatively, a number is cubefree if it's not divisible by a perfect cube other than $1$.} If $\primeseq{a_n}$ and $\primeseq{a_n + t}$ are finite, there's only finitely many possible $a$ and $b$, and hence a finite number of equations $by^3 - ax^3 = t$. By Thue, each has a finite number of solutions, contradicting the fact that $\seq{a_n}$ is unbounded.
+\end{proof}
+
+\subsection{Roth's theorem}
+\label{sec:roth}
+
+Let's take a brief digression to talk about Thue, and its generalization Roth's theorem. We call a polynomial \textbf{homogeneous} if each term has the same degree, like in $x^2 + xy + y^2$. The set of two-variable degree-$d$ homogeneous polynomials is written $\ZZ^d[x, y]$. For $k \in \ZZ$ and $f \in \ZZ^d[x, y]$, we want to study the Diophantine equation $f(x, y) = k$.
+
+The method for solving these depends on $d$. When $d = 1$ this is elementary. When $d = 2$ it usually reduces to a generalized Pell equation, see for example \cite{djukic07}. And when $d \ge 3$ we have Thue:
+
+\begin{thmboxed*}
+\thmrating{Thue's theorem}{1}{2}
+Let $d \ge 3$ and $k \in \ZZ$. If $f \in \ZZ^d[x, y]$ is irreducible, then $f(x, y) = k$ has finitely many integer solutions.
+\end{thmboxed*}
+
+These days it's proven as a consequence of the stronger Roth's theorem. The idea is that if $f(x, y) = k$, then $f(x/y, 1) = k/y^d$. So if $f(\alpha, 1) = k$ is a root, then $x/y$ would be an approximation to it, and Roth would finish.
+
+To state Roth, we first define an algebraic number. We say that $\alpha \in \RR$ is \textbf{algebraic} if there's some $f \in \ZZ[x]$ such that $f(\alpha) = 0$. Roth tells us that algebraic numbers can't have many ``good'' approximations:
+
+\begin{thmboxed*}
+\thmrating{Roth's theorem}{1}{1}
+Let $\alpha \in \RR \setminus \QQ$ be algebraic. Then for every $ \varepsilon > 0$, there's only finitely many solutions to $$ \abs{\alpha - \frac{x}{y}} < \frac{1}{y^{2 + \varepsilon}} $$ with relatively prime $x, y$.
+\end{thmboxed*}
+
+Roth is a deep theorem from Diophantine geometry, where algebraic geometry methods are used to tackle Diophantine equations; see \autoref{sec:dioph} for an overview.
+
+\subsection{Zsigmondy sets}
+
+Kobayashi shows that $\primeseq{2^n + 1}$ is infinite, but we can say more than that. Call $p$ a \textbf{primitive prime divisor} of some sequence $\seq{a_n}$ if $p \mid a_n$ but $p \nmid a_k$ for every $k < n$. Because $\primeseq{2^n + 1}$ is infinite, we expect there to be infinitely many primitive prime divisors as well. Zsigmondy's theorem says that primitive divisors aren't just infinite; almost all terms have them.
+
+Given a sequence $\seq{a_n}$, we define its \textbf{Zsigmondy set} $\zsigseq{a_n}$ as the set of $n \ge 1$ such that $a_n$ \textit{doesn't} have a primitive prime divisor. In other words, $n \in \zsigseq{a_n}$ if $p \mid a^n$ implies $p \mid a^k$ for some $k < n$. Then:
+
+\begin{thmboxed*}
+\thmrating{Zsigmondy's theorem}{4}{5}
+If $a$ and $b$ are relatively prime, then $\zsigseq{a^n - b^n} \subseteq \{1, 2, 6\}$. In particular:
+\begin{itemthin}
+\item $1 \in \zsigseq{a^n - b^n}$ iff $a - b = 1$,
+\item $2 \in \zsigseq{a^n - b^n}$ iff $a + b$ is a power of $2$, and
+\item $6 \in \zsigseq{a^n - b^n}$ iff $a = 2$ and $b = 1$.
+\end{itemthin}
+Similarly, $\zsigseq{a^n + b^n} = \varnothing$, with the exception of $2^3 + 1^3$.
+\end{thmboxed*}
+
+Zsigmondy is an elementary result; see \cite{michels14} for a proof. There's other theorems about Zsigmondy sets. The most useful one for olympiads would probably be Carmichael's theorem:
+
+\begin{thmboxed*}
+\thmrating{Carmichael's theorem}{2}{1}
+Let $p$ and $q$ be relatively prime with $p^2 > 4q$ and $pq \ne 0$. Define $\seq{u_n}$ by $u_0 = 0$, $u_1 = 1$, and $u_n = pu_{n-1} - qu_{n-2}$. Then $\zsigseq{u_n} \subseteq \{1, 2, 6, 12\}$.
+\end{thmboxed*}
+
+The $\seq{u_n}$ here is known as a Lucas sequence of the first kind; it's usually written $\seq{U_n(p, q)}$. Carmichael is again an elementary result, see \cite{yabuta01}.
+
+\subsection{Bertrand-type results}
+
+There's a verse about Bertrand's postulate by NJ Fine which goes ``Chebyshev said it, but I'll say it again / There's always a prime between $n$ and $2n$.'' Actually, what Bertrand conjectured and Chebyshev proved was a mildly stronger version:
+
+\begin{thmboxed*}
+\thmrating{Bertrand's postulate}{5}{3}
+If $n > 3$, then there's some prime $p$ such that $n < p < 2n - 2$.
+\end{thmboxed*}
+
+Although it's not the first proof, it's Erd\H os's proof of Bertrand that is the most famous, in part because it's elementary. The idea is to show that $\binom{2n}{n}$ must have a prime factor between $n$ and $2n$ due to size; see \cite{bogomolny18} for an exposition.
+
+A stronger result, in the direction of having a smaller interval, is Sylvester--Schur:
+
+\begin{thmboxed*}
+\thmrating{Sylvester--Schur theorem}{4}{3}
+If $n \ge 2k$, then $\binom{n}{k}$ has a prime divisor greater than $k$.
+\end{thmboxed*}
+
+The famous proof is Erd\H os's, \cite{erdos34}. In \cite{hanson73}, it's shown that it has a prime divisor greater than $\frac32 k$, with exceptions $\binom{4}{2}$, $\binom{9}{2}$, and $\binom{10}{5}$. Both results are elementary.
+
+\subsection{Analytic facts about primes}
+
+The \textbf{prime-counting function} $\pi(x)$ is the number of primes at most $x$. We then have the prime number theorem, which is big enough of a deal that it got the name ``prime number theorem'':
+
+\begin{thmboxed*}
+\thmrating{Prime number theorem}{4}{2}
+\[
+  \lim_{x \to \infty} \frac{\pi(x)}{x/\log x} = 1.
+\]
+\end{thmboxed*}
+
+There are plenty of proofs of PNT you can find at the \href{https://en.wikipedia.org/wiki/Prime_number_theorem}{Wikipedia page}, some of which are elementary. This is an \textit{ineffective} result, because it's asymptotic. The PNT tells us that $\pi(2n) - \pi(n)$ is on the other of $n/\log n$ for sufficiently large $n$, but this is an ineffective result, whereas Bertrand is effective. There are many \textit{effective} ways to state PNT, but I think the easiest to remember is Rosser's theorem:
+
+\begin{thmboxed*}
+\thmrating{Rosser's theorem}{3}{1}
+The $n$th prime is at least $n \log n$.
+\end{thmboxed*}
+
+The PNT is a foundational result of \textit{analytic number theory}, in contrast to \textit{algebraic number theory}, although the line between them is fuzzy. The earliest analytic result is probably Dirichlet's theorem, which we state using densities:
+
+\begin{thmboxed*}
+\thmrating{Dirichlet's theorem (density)}{3}{1}
+If $a$ and $d$ are relatively prime, then $\PP \cap \seq{a + nd}$ has density $ \frac{1}{\varphi(d)} $.
+\end{thmboxed*}
+
+I'll end with an observation. The ``typical'' first proof you learn of Dirichlet is quite analytic, drawing from complex analysis to look at $L$-functions and whatnot. But Dirichlet is also a consequence of Chebotarev, which needs algebraic number theory. Fuzzy lines, you know, fuzzy lines.
+
+\section{Nails}
+
+If I don't tell you which problems correspond to which theorems, then maybe this handout will be actually instructive? Who knows. Also, I make no promises that the theorems above will be helpful.
+
+\subsection{Box nails}
+
+\begin{enumerate}
+
+\item (IMO 2003/6) Let $p$ be a prime number. Prove that there exists a prime number $q$ such that for every integer $n$, the number $n^p - p$ is not divisible by $q$. \hint{\ref{h:1}}
+
+\item (ISL 2000/N4) Find all triplets of positive integers $(a,m,n)$ such that $a^m + 1$ divides $(a + 1)^n$. \hint{\ref{h:2}}
+
+\item (\cite{greenfield98}) Prove that $1, \ldots, 2n$ can be partitioned into $n$ pairs such that the sum of the numbers in each pair is prime. \hint{\ref{h:3}}
+
+\item (USAMO 2008/1) Prove that for each $n \in \NN$, there are pairwise relatively prime $k_0, k_1, \ldots, k_n$, all strictly greater than $ 1$, such that $ k_0k_1\ldots k_n-1$ is the product of two consecutive integers. \hint{\ref{h:4}}
+
+\item (\href{https://mathoverflow.net/questions/106738}{}) We call an integer \textit{$p$-smooth} if its prime divisors are all at most $p$. For which $p$ are there infinitely many pairs of consecutive $p$-smooth numbers? \hint{\ref{h:5}}
+
+\item (ISL 2011/N2) Let $d_1, \ldots, d_9$ be distinct integers and let $P(x) = (x + d_1) \cdots (x + d_9)$. Prove there exists some $N$ such that for all $x \ge N$, $P(x)$ is divisible by a prime larger than $20$. \hint{\ref{h:6}}
+
+\item (IMO 2000/5) Does there exist $n \in \NN$ such that $n$ has exactly 2000 distinct prime divisors and $n \mid 2^n + 1$? \hint{\ref{h:7}}
+
+\end{enumerate}
+
+\subsection{Common nails}
+
+\begin{enumerate}[resume]
+
+\item (ISL 2009/N3) Let $f \from \NN \to \NN$ be nonconstant, and suppose $a - b \mid f(a) - f(b)$ for all distinct $a, b \in \NN$. Show that $\primeseq{f(n)}$ is infinite. \hint{\ref{h:8}}
+
+\item (\href{https://artofproblemsolving.com/community/c6h2215487p16803077}{}) Find all $f \in \ZZ[x]$ such that $f$ is surjective modulo all sufficiently large primes. \hint{\ref{h:9}}
+
+\item (ISL 2014/N4) Let $n > 1$ be an integer. Prove that infinitely many terms of the sequence $\seq{a_k}_{k \ge 1}$, defined by $a_k = \floor{n^k/k}$ are odd. \hint{\ref{h:10}}
+
+\item (TSTST 2018/8) For which integers $b > 2$ do there exist infinitely many $n \in \NN$ such that $n^2 \mid b^n+1$? \hint{\ref{h:11}}
+
+\item (APMO 2021/2) For $P \in \ZZ[x]$ and $n \in \NN$, let $P_n$ be the number of positive integer pairs $(a,b)$ such that $a<b \leq n$ and $n \mid |P(a)|-|P(b)|$. Find all $P \in \ZZ[x]$ such that $P_n \leq 2021$ for all $n \in \NN$. \hint{\ref{h:12}}
+
+\item (USAMO 2013/5) Given $m, n \in \NN$, prove there's some $c \in \NN$ such that the numbers $cm$ and $cn$ have the same number of occurrences of each non-zero digit when written in base ten. \hint{\ref{h:13}}
+
+\end{enumerate}
+
+\subsection{Drywall nails}
+
+\begin{enumerate}[resume]
+
+\item (DeuX SL N4) Let $n \in \NN$. Prove there exists some finite $S \subseteq \NN$ such that:
+\begin{enumerate}
+\item No element of $S$ may be expressed as $a^b$ for $a \ge 1$ and $b > 1$.
+\item For any prime $p$ there exists $s \in S$ and $x \in \ZZ$ such that $x^n \equiv s \pmod p$. \hints{\ref{h:14a} \ref{h:14b}}
+\end{enumerate}
+
+\item (USAMO 2006/3) For $m \in \ZZ$, let $p(m)$ be the greatest prime divisor of $m$. By convention, we set $p(\pm 1) = 1$ and $p(0) = \infty$. Find all $f \in \ZZ[x]$ such that $\seq{p(f(n^2)) - 2n}$ is bounded above. \hints{\ref{h:15a} \ref{h:15b}}
+
+\item (ISL 2011/N6) Let $P, Q \in \ZZ[x]$, such that if $R \in \ZZ[x]$ with $R(x) \mid P(x)$ and $R(x) \mid Q(x)$, then $R$ is constant. Suppose that for every $n \in \NN$, $P(n)$ and $Q(n)$ are positive, and $2^{Q(n)} - 1 \mid 3^{P(n) - 1}$. Prove that $Q$ is constant. \hints{\ref{h:16a} \ref{h:16b}}
+
+\item (USAMO 2012/3) For which integers $n > 1$ does there exist some $\seq{a_n}$ of nonzero integers such that $a_k + 2a_{2k} + \cdots + na_{nk} = 0$ holds for every $k \in \NN$? \hints{\ref{h:17a} \ref{h:17b}}
+
+\item (Balkan 2023/3) Let $N = 2023^{2023}$, and let $\omega(n)$ be the number of distinct prime divisors of $n$. Find all $P \in \ZZ[x]$, such that whenever $n \in \NN$ with $\omega(n)>N$, then $P(n) \in \NN$ with $\omega(n)\ge\omega(P(n))$. \hints{\ref{h:18a} \ref{h:18b} \ref{h:18c}}
+
+\item (ISL 2019/N7$^+$) Prove there exist some $c > 0$ such that, for all $\varepsilon >0$, there are infinitely many $n \in \NN$ with the following property: there are infinitely many positive integers that cannot be expressed as the sum of fewer than $cn^{2 - \varepsilon}$ pairwise coprime $n$th powers. \hints{\ref{h:19a} \ref{h:19b} \ref{h:19c}}
+\end{enumerate}
+
+\pagebreak
+\section{Hints}
+
+\begin{enumthin}
+\item \label{h:18a} Set $P(x) = \alpha x^m Q(x)$; want to show $Q$ constant.
+\item \label{h:19c} Use PNT to show that $N$ is large enough relative to $n$.
+\item \label{h:1} This is an application of anti-Schur.
+\item \label{h:7} Induct on $2000$, base case $2^9 + 1$.
+\item \label{h:19a} If all $n$th powers were $0$ or $1$ mod $p^e$, how many possible residues mod $\prod p^e$ do we get by summing $m$ of them?
+\item \label{h:13} $142\,857$.
+\item \label{h:10} For even $n$, pick $p \in \primeseq{n^{n^r - 1} - 1}_{r \ge 1}$ and $k = n^rp$.
+\item \label{h:8} Let $N = f(1) \prod \primeseq{f(n)}$, and consider $f(kN + 1) - f(n)$.
+\item \label{h:18b} Make $\omega(P(n))$ big relative to $\omega(n)$ by setting $n$ as a product of specific primes.
+\item \label{h:16b} Show that infinitely many primes divide $3^{P((a \mathrm{ord}_p(2), b \mathrm{ord}_p(3))} - 1$.
+\item \label{h:5} Imitate the Kobayashi proof.
+\item \label{h:14a} The additive structure is unused, so take a primitive root mod $p$.
+\item \label{h:3} Construct so that most pairs sum to the same prime.
+\item \label{h:17a} If we constrain $a_{ij} = a_ia_j$, we only need to define on primes.
+\item \label{h:11} Answer is all except $2^k - 1$. Compare IMO 2000/5.
+\item \label{h:16a} What can you say about $P(n + a\mathrm{ord}_p(2) + b\mathrm{ord}_p(3))$?
+\item \label{h:15b} Show that there's infinitely many $n$ such that $p(f(n^2)) > 2n$.
+\item \label{h:9} Consider $f(x + 1) - f(x)$.
+\item \label{h:4} Think about $f(x) = x^2 + x + 1$.
+\item \label{h:12} Apply problem 9.
+\item \label{h:18c} Choose $n$, a product of $N+1$ primes, so $P(n) \equiv 0 \pmod{q_i}$ for $N$ primes $q_i$.
+\item \label{h:6} This is an application of Kobayashi.
+\item \label{h:19b} Set $n = 2\lcm(1, \ldots, x)$ and consider mod $N = \lcm(1, \ldots, 2x)$.
+\item \label{h:15a} We can assume $f$ is irred and nonconstant by factoring.
+\item \label{h:2} This is an application of Zsigmondy.
+\item \label{h:17b} Examine the equation mod $p, q$ for two primes in $[1, n]$.
+\item \label{h:14b} If $g$ is a primitive root mod $p$, then $g^e$ is an $n$th power iff $e \equiv 0 \pmod n$.
+\end{enumthin}
+
+\pagebreak
+\section{Sketches}
+
+\begin{enumerate}
+
+\item As $f(x) = x^p - p$ is irreducible, by anti-Schur there's some $q \in \PP \setminus \primeseq{f(n)}$ which works.
+
+\item We have $(1, m, n)$ and $(a, 1, n)$. If $a$ and $m$ aren't $1$, by Zsigmondy $a^m + 1$ has a primitive prime divisor, which does not divide $a + 1$, so $a^m + 1 \nmid (a + 1)^n$. Exception is $(2, 3, n)$.
+
+\item By Bertrand some $2n + m$ is prime; pair up $\{m, \ldots, 2n\}$ and recurse on $m - 1$.
+
+\item Let $f(x) = x^2 + x + 1$. Pick $p_0, \ldots, p_n \in \primeseq{f(n)}$, which exist by Schur. Solve $f(x) \equiv 0 \pmod{p_i}$ by CRT.
+
+\item None of them. Suppose there were consecutive numbers; write them as $ax^3$ and $by^3$ for $a$ and $b$ cubefree. We want $ax^3 - by^3 = 1$, which by Thue has finitely many solutions. Because they're $p$-smooth, there's only finitely many $a$ and $b$.
+
+\item In fact $P(x) = (x + a)(x + b)$ is enough. Let $\seq{s_n}$ be the positive integers such that $P(s_n)$ is only divisible by primes smaller than $20$. If $\seq{s_n}$ is unbounded, then $\primeseq{s_n + a}$ and $\primeseq{s_n + b}$ are both finite, contradicting Kobayashi. Thus it's bounded and we're done.
+
+\textbf{Remark:} Here is an incorrect proof. Suppose that $\primeseq{P(n)}$ was finite. By Kobayashi, if $\seq{n + a}$ has finitely many prime divisors, then $\seq{n + b}$ doesn't, contradiction. This doesn't work because it doesn't guarantee that \textit{all} sufficiently large $x$ are divisible by a prime larger than $20$.
+
+\item Yes. Define $\seq{a_n}_1^{2000}$ as $a_1 = 9$ and $a_{n + 1} = p_na_n$ where $p_n$ is a primitive prime divisor of $2^{a_n} + 1$, which exists by Zsigmondy. Then $n = a_{2000}$ works.
+
+\textbf{Remark:} Compare RMM 2014/4: Prove there are infinitely many $n$ such that $n \mid 2^n + 1$ but $n \nmid 2^{2^n + 1} + 1$.
+
+\item Suppose $\primeseq{f(n)} = \{p_1, \ldots, p_n\}$. Suppose $f(1) = \prod p_i^{e_i}$. Take $N = f(1)\prod p_i$. Then $f(1) \mid kN \mid f(kN + 1) - f(1)$, so $f(1) \mid f(kN + 1)$. If $p_i^{e_i + 1} \mid f(kN + 1)$, then $p_i^{e_i + 1} \mid N$, and $p_i^{e_i + 1} \mid f(1)$, contradiction. Hence $f(kN + 1) = f(1)$. Then $kN + 1 - n \mid f(kN + 1) - f(n) = f(1) - f(n)$, but the LHS is unbounded and the RHS is constant, and hence $f$ must be constant too, contradiction.
+
+\textbf{Remark:} Compare \href{https://artofproblemsolving.com/community/c6h1841700p12378521}{}: Let $f \in \ZZ[x]$ be nonconstant with $f(0) \ne 0$. Show that $\primeseq{f(2^n)}$ is infinite.
+
+\item All $\deg f = 1$. If nonlinear, $g(x) = f(x + 1) - f(x)$ is nonconstant so by Schur $\primeseq{g(n)}$ is infinite. For any $q \in \primeseq{g(n)}$ we have $f(x + 1) \equiv f(x) \pmod q$ for some $x$ which means $f$ can't be surjective mod $q$.
+
+\item For $n$ odd, pick $p \mid n$; then all $k = p^m$ for sufficiently large $m$ work. Several possible constructions for $n$ even, here's two (sledgehammery) ones:
+\begin{itemize}
+\item Pick large $t$ and prime $p$ with $p < 2^{2^t - t}(n/2)^{2^t} < 2p$ by Bertrand. Then $k = 2^tp$ works by checking mod $p$.
+\item Pick $p \in \primeseq{n^{n^r-1}-1}_{r \ge 1}$, which is infinite by Kobayashi or Zsigmondy. We claim $k = n^rp$ works. Indeed, $n^k \equiv n^r \pmod{k}$, by checking both mod $n^r$ and mod $p$.
+\end{itemize}
+
+\item All except $2^k - 1$. If $b = 2^k - 1$, suppose prime $p \mid n$. Then $b^{2n} \equiv 1 \pmod{p}$ so $\mathrm{ord}_p(b) \mid \gcd(2n, p - 1) = 2$, so $p \mid b^2 - 1 = (b - 1)(b + 1)$. But as $b = 2^k - 1$, this forces $p \mid b - 1$, and hence $0 \equiv b^n + 1 \equiv 2 \pmod p$, contradiction.
+
+Else, a la IMO 2000/5, define $\seq{a_n}$ by choosing odd prime $a_0 \mid b + 1$, and $a_{n + 1} = p_na_n$ where $p_n$ is a primitive odd prime divisor of $b^{a_n} + 1$, which exists by Zsigmondy. Then all $a_n$ work.
+
+\item By problem 9, we must have $\deg P = 1$. Let $P(x) = cx + d$. If $p \mid c$, fix $s$ and note $P(mp^s) \equiv P(mp^s + p^{2s-1}) \pmod{p^{2s}}$ for all $m$, contradiction for large $s$, hence $c = \pm1$. WLOG $c = 1$; show that $d \ge -2021$ due to size.
+
+\item Motivation: $c = 142\,857$ works often because of the decimal expansions of $\frac17, \ldots \frac67$ being cyclic shifts of each other. In particular, take some $k$ and prime $p$ such that $p \mid 10^km - n$, which exists by Kobayashi. Then the expansions of $\frac mp$ and $\frac np$ are shifts of each other; take $c$ to be the repeating part of $\frac 1p$.
+
+\item Set $T = \{p_1, \ldots, p_n\} \subseteq \PP$ and let $S = \{\prod T' \mid T' \subseteq T, T' \ne \varnothing\}$. For some $p \not\in T$, let $g$ be a primitive root and write $p_i = g^{e_i}$ for $e_i \in \{1, \ldots, p - 1\}$. By pigeonhole two of the partial sums in $\seq{e_1 + \cdots + e_j}_{j = 1}^n$ are equal modulo $n$; their difference gives some $e_i + \cdots + e_j \equiv 0 \pmod n$ whence $g^{e_i + \cdots + e_j} \in S$ is a perfect $n$th power.
+
+\item $f$ must split into linear factors of the form $4n - a^2$. We can assume $f$ is irred and nonconstant by factoring. By Schur, take some $p \in \primeseq{f(n^2)}$, say $p \mid f(m^2)$. Then one of $m \bmod p$ or $p - (m \bmod p)$ is $< p/2$, so there's infinitely many $n$ such that $f(n^2)$ has a prime divisor greater than $2n$.
+
+If the sequence was bounded above, there's some $k$ such that $p(f(n^2)) - 2n = k$ has infinitely many solutions, implying $2x + k \mid f(x^2)$ as polynomials. As $f(x^2)$ is even, we must have $2x - k \mid f(x^2)$ too. Hence $f(x^2) = 4x^2 - k^2$ as it's irred, and $f(x) = 4x - k^2$.
+
+\item Let $k = (P, Q)$, which is an integer. For prime $p$ let $x_p = \mathrm{ord}_p(2)$ and $y_p = \mathrm{ord}_p(3)$. Note that $x_p \mid Q(n)$ iff $p \mid 2^{Q(n)} - 1$, and similarly for $y_p$. By Zsigmondy or Kobayashi, we can pick infinitely many such $p$; choose one of them.
+
+As $x_p \mid Q(n)$, we have $x_p \mid Q(n + ax_p)$ for any $a \in \ZZ$. Thus $p \mid 2^{Q(n + ax_p)} - 1 \mid 3^{P(n + ax_p)} - 1$, thus $y_p \mid P(n + ax_p)$, thus $y_p \mid P(n + ax_p + by_p)$ for any $b \in \ZZ$. As a special case, if $x_p \mid Q(n)$, then $y_p \mid P(n)$, which means that $\gcd(x_p, y_p) \mid \gcd(P(n), Q(n)) \mid k$, and so $(x_p, y_p) \le k$.
+
+As $y_p \mid P(n)$ and $y_p \mid P(n + ax_p + by_p)$, we get $y_p \mid P(ax_p + by_p)$ as well, and thus $p \mid 3^{P(ax_p + by_p)} - 1$. By Bezout, we can pick $a, b$ such that $ax_p + by_p = \gcd(x_p, y_p)$. But then we get infinitely many primes dividing $3^{P(\gcd(x_p, y_p))} - 1$, contradiction.
+
+\item It's $n \ge 3$. We'll construct with $a_{ij} = a_ia_j$. Thus the sequence is determined by $a_p$ for prime $p$, and we only need to have $a_1 + 2a_2 + \cdots + na_n = 0$. For large enough $n$, we can use Bertrand twice to pick primes $n/4 < p < n/2$ and $n/2 < q < n$. We'll then pick $a_r = 1$ for primes not $p$ or $q$, and then pick $a_p$ and $a_q$ by Bezout. Casework is needed for which of $p$, $2p$, $3p$ are in range, plus more casework for small $n$.
+
+\item Either $P(x) = x^m$ or $P(x) = c$ with $\omega(c) \le N + 1$. Constant case is clear. Write $P(x) = \alpha x^m Q(x)$ with $Q(0) \ne 0$. If $Q$ is constant, choosing $n$ as the product of $N+1$ primes shows that $Q(x) = 1$.
+
+Suppose $Q$ is nonconstant. By Schur, pick $q_1, \ldots, q_T \in \primeseq{Q(n)}$ for some $T \gg N$ such that $q_i > |Q(0)|$, and say $q_i \mid Q(a_i)$. By Dirichlet, pick $N$ primes $p_i \equiv 1 \pmod{q_1 \cdots q_T}$ and by Dirichlet and CRT, pick prime $p_{N + 1} \equiv a_i \pmod{q_i}$. Set $n = p_1 \cdots p_{N + 1}$. We get $P(n) \equiv P(a_i) \equiv 0 \pmod{q_i}$, so $\omega(P(n)) \ge T \gg N$, contradiction.
+
+\item Fix $n$. Suppose we have $N = p_1^{e_1} \cdots p_k^{e_k}$ such that $\varphi\left(p_i^{e_i}\right) \mid n$. Then all $n$th powers are $0$ or $1$ mod $p_i^{e_i}$, so the sum of $m$ of them is $m - 1$ or $m$, because the powers have to be pairwise coprime. By CRT there's at most $2^km$ such numbers, so if $N > 2^km$ then there's $N - 2^km$ things modulo $N$ that fail, giving infinitely many. Thus we want to find infinitely many $n$ and $N$ that work.
+
+Fix $x$. Let $n = 2\lcm(1, \ldots, x)$ and $N = \lcm(1, \ldots, 2x)$; we now need estimates. Note $2N/n > x^{\pi(2x) - \pi(x)}$, counting one for each prime in $(x, 2x]$. Similarly $n \le x^{\pi(x)}$. By PNT, we get, for sufficiently large $x$,
+\begin{align*}
+  \log\left(\frac{2N}{2^{\pi(2x)}n}\right)
+  &> (\pi(2x) - \pi(x))\log x  - \pi(2x)\log 2 \\
+  &\ge (1 - \varepsilon)\pi(x)\log x \\
+  &\ge (1 - \varepsilon)\log(n),
+\end{align*}
+and rearranging shows $N > 2^{\pi(2x)}n^{2 - \varepsilon}$ as desired.
+
+\end{enumerate}
+
+\pagebreak
+\defbibnote{prenote}{I've lowered the activation energy of reading the references by adding URLs, so maybe you'll look at them. Maybe. Also, I haven't even read all of these lol.}
+\printbibliography[prenote=prenote]
+
+\section*{Acknowledgements}
+
+Thanks to tenth and Wayne Zhao for comments.
+
+\appendix
+
+\section{Diophantine geometry}
+\label{sec:dioph}
+
+One of the big ideas is that classifying by degree is insufficient, and the morally correct way is to classify based on the \textit{genus}, which is a geometric property. Say we had some $f \in \ZZ[x, y]$. The graph defined by $f(x, y) = 0$ over $\RR^2$ is the \textit{affine curve} of $f$, and say it has degree $d = \deg f$. We can then homogenize it to get some $^hf \in \ZZ^{d}[x, y, z]$, by setting $^hf(x, y, z) = z^{d}f(x/z, y/z)$. For example, $x^4 + y^4 - 1$ homogenizes to $x^4 + y^4 - z^4$. The graph defined by $^hf(x, y, z) = 0$ over $\RR\PP^2$ is a \textit{projective curve}. Here, $\RR\PP^2$ is the real projective plane, the set of points $(x, y, z)$ with $x + y + z = 1$.\footnote{You can scale by some constant $k$, because if $^hf(x, y, z) = 0$ then $^hf(kx, ky, kz) = 0$ because $^hf$ is homogeneous. If you've seen barycentric coordinates, this should look familiar.}
+
+We check if there are any \textit{singularities} on $^hf$, which is a point on the projective curve that is $0$ for each partial derivative $\partial^hf/\partial x$, $\partial ^hf/\partial y$, $\partial ^hf/\partial z$. Our example, $x^4 + y^4 - z^4$, has no singularities; we say it is \textit{nonsingular}. If it did have singularities, we'd use a procedure to \textit{resolve} the singularities, such as \textit{blowing up}. Because it's nonsingular, we can compute the \textit{genus} as $g = \binom{d-1}{2} = 3$. We count the number of \textit{points at infinity}, which are points with $z = 0$; this gives us the \textit{Euler characteristic}, which is $\chi = 2 - 2g - (\text{\# of points at infinity}) = -4$.
+
+The integer solutions to $f(x, y) = 0$ are classified by $\chi$. If $\chi > 0$ it's an infinite set, common in the $d = 2$ case. If $\chi = 0$ it's a finitely generated group, as with elliptic curves. If $\chi < 0$ it's a finite set, like in our case. This statement includes the Mordell--Weil, Siegel, and Falting theorems; together with Roth these are four of the fundamental theorems in Diophantine geometry. I picked this up from a book I didn't read: \cite{hindry13}.
+
+\end{document}

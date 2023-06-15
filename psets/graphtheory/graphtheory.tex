@@ -11,7 +11,7 @@
 
 \subsubsection*{Definitions}
 
-Graph, vertices, edges, adjacent, incident, simple graph. Subgraph, induced subgraph, spanning subgraph. Isomorphic graphs. Neighbor, degree, minimal degree $\delta$, maximal degree $\Delta$. Path $P_n$, length, cycle $C_n$, complete graph $K_n$. Connected, disconnected, connected component. Tree, forest. Directed graph, indegree, outdegree.
+Graph, vertices, edges, adjacent, incident, simple graph. Subgraph, induced subgraph. Isomorphic graphs. Neighbor, degree $\deg(v)$, minimal degree $\delta(G)$, maximal degree $\Delta(G)$. Path $P_n$, cycle $C_n$, complete graph $K_n$, clique, independent set. Connected, disconnected, component. Tree, forest. Directed, arrow, arc, tail, head, indegree $\deg^-(v)$, outdegree $\deg^+(v)$.
 
 All of these are on Wikipedia: just search for something like \href{https://www.google.com/search?q=tree+graph+theory}{tree graph theory} on Google.
 
@@ -36,26 +36,24 @@ All of these are on Wikipedia: just search for something like \href{https://www.
   That is, rather than just ``add something to $n-1$'', it looks more like ``remove something from $n$ to get $n-1$, then add it back to get $n$.'' That way, you're guaranteed to cover \emph{all} possibilities.
 
   % assume the existence of a maximum object
-  \item A graph has a cycle of length $\geq \delta + 1$. A graph has a path of length $\geq \delta$.
+  \item A graph has a path of length $\geq \delta$. A graph has a cycle of length $\geq \delta + 1$.
 
   \textbf{Sketch:} Take a longest path. Let $v$ be its last endpoint. Every one of $v$'s neighbors lie on the path, otherwise we can make the path longer. So the path has at least $\text{deg}\,v + 1$ vertices: the $\text{deg}\,v$ neighbors of $v$ and $v$ itself. The task of finding the cycle is left to the reader.
 
   \item A graph can be partitioned into two sets $V_1$ and $V_2$ such that any vertex in $V_1$ has at least as many neighbors in $V_2$ as in $V_1$ and vice versa. %take the max cut
 
-  \textbf{Sketch:} Take the partition with the most edges between $V_1$ and $V_2$. Suppose that $v \in V_1$ does not satisfy the condition. Then move $v$ to $V_2$ and show that it satisfies now. The process increases the number of edges between $V_1$ and $V_2$, contradiction. 
-\end{enumerate}
+  \textbf{Sketch:} Take the partition with the most edges between $V_1$ and $V_2$. Suppose that $v \in V_1$ does not satisfy the condition. Then move $v$ to $V_2$ and show that it satisfies now. The process increases the number of edges between $V_1$ and $V_2$, contradiction.
 
-\subsubsection*{Trees}
+  \item All of these are equivalent definitions of trees:
+  \begin{enumerate}
+    \item A tree is a connected graph with the minimum number of edges. (= We can't remove an edge from the tree without making it disconnected.)
+    \item A tree is a connected graph with $n$ vertices and $n-1$ edges.
+    \item A tree has at least two vertices of degree one.
+    \item A tree has a unique path between any two vertices.
+    \item A tree has no cycles and the maximum number of edges. (= We can't add an edge to the tree without making a cycle.)
+  \end{enumerate}
 
-A tree is a connected graph with no cycles. All of these can be cited without proof:
-
-\begin{enumerate}
-  \item A tree is a connected graph with the minimum number of edges. (= We can't remove an edge from the tree without making it disconnected.)
-  \item A tree is a connected graph with $n$ vertices and $n-1$ edges.
-  \item A tree has at least two vertices of degree one.
-  \item A tree has a unique path between any two vertices.
-  \item A tree has no cycles and has the maximum number of edges. (= We can't add an edge to the tree without making a cycle.)
-  \item Any connected graph has a spanning subgraph that is a tree (called a \emph{spanning tree}).
+  \textbf{Sketch:} Omitted.
 \end{enumerate}
 
 \subsubsection*{Problems}
@@ -63,13 +61,13 @@ A tree is a connected graph with no cycles. All of these can be cited without pr
 Not in order; sorry!
 
 \begin{enumerate}
-  \item (Putnam 1957) Let $S$ be a set of points in the plane such that the greatest distance between two points of $S$ is $1$. Show that at most $n$ pairs of points in $S$ are at distance $1$ apart.
+  \item (Putnam 1957) Let $S$ be a set of $n$ points in the plane such that the greatest distance between two points of $S$ is $1$. Show that at most $n$ pairs of points in $S$ are at distance $1$ apart.
 
   \textbf{Sketch:} Induction. If every vertex has degree $\le 2$, we are done (why?). If a vertex has degree $\ge 3$, it has a neighbor of degree $1$ (why?). So remove the vertex of degree $1$ and induct.
 
   \item (MOSC 2016) In a party attended by $2015$ guests, among any $5$ guests at most $6$ handshakes have been exchanged. Determine the maximum total number of handshakes.
 
-  \textbf{Sketch:} Induction. Replace $2015$ with $k$. If $k = 2n$, then the answer is $n^2$; if $k = 2n - 1$, then the answer is $n(n-1)$. To prove that this is attainable, use the construction shown earlier. To prove that it can't be greater than the answer, we use induction. Base case is $k = 5$. We'll only do the case $2n - 1 \implies 2n$; the reader should fill in the details of the other case. 
+  \textbf{Sketch:} Induction. Replace $2015$ with $k$. If $k = 2n$, then the answer is $n^2$; if $k = 2n - 1$, then the answer is $n(n-1)$. To prove that this is attainable, use the construction shown earlier. To prove that it can't be greater than the answer, we use induction. Base case is $k = 5$. We'll only do the case $2n - 1 \implies 2n$; the reader should fill in the details of the other case.
 
   Suppose that a graph with $2n$ vertices has $\ge n^2 + 1$ edges and it satisfies the condition in the problem. By pigeonhole, there exists a vertex with degree $\le n$. (Why? Use handshake.)
 

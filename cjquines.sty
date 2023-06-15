@@ -35,6 +35,7 @@
 
 \newif\ifcjqalttitle\cjqalttitlefalse
 \newif\ifcjqboxthm\cjqboxthmfalse
+\newif\ifcjqenumsmall\cjqenumsmallfalse
 \newif\ifcjqparskip\cjqparskipfalse
 \newif\ifcjqlinguistics\cjqlinguisticsfalse
 
@@ -45,11 +46,12 @@
 
 \DeclareOption{wide}{\cjqwidetrue}
 \DeclareOption{thin}{\cjqthintrue}
-\DeclareOption{pset}{\cjqpsettrue\cjqparskiptrue}
+\DeclareOption{pset}{\cjqenumsmalltrue\cjqpsettrue\cjqparskiptrue}
 \DeclareOption{oly}{\cjqolytrue}
 
 \DeclareOption{alttitle}{\cjqalttitletrue}
 \DeclareOption{boxthm}{\cjqboxthmtrue}
+\DeclareOption{enumsmall}{\cjqenumsmalltrue}
 \DeclareOption{parskip}{\cjqparskiptrue}
 \DeclareOption{linguistics}{\cjqlinguisticstrue}
 
@@ -68,7 +70,6 @@
     amsthm,
     asymptote,
     booktabs,
-    enumitem,
     etoolbox,
     mathtools,
     microtype,
@@ -79,6 +80,7 @@
   }
   \PassOptionsToPackage{dvipsnames}{color}
   \PassOptionsToPackage{dvipsnames}{xcolor}
+  \RequirePackage[shortlabels]{enumitem}
   \definecolor{MidnightBlue}{RGB}{0,81,120}
   \definecolor{DarkMidnightBlue}{RGB}{0,40,60}
   \definecolor{Black}{RGB}{0,0,0}
@@ -95,21 +97,22 @@
 
   \else
     \RequirePackage{fontawesome5,relsize}
-    \patchcmd{\hyper@link@}
-    {{\Hy@tempb}{#4}}
-    {{\Hy@tempb}{#4%
-    \ltx@ifempty{#2}{}{{\relsize{-1} \faIcon{external-link-alt}}}}}
-    {}{}
+    \newcommand{\extlink}{{\relsize{-1}\faIcon{external-link-alt}}}
+    \let\orighref\href
+    \renewcommand{\href}[2]{\orighref{#1}{#2\extlink}}
   \fi
 
   \newlist{itemthin}{itemize}{2}
   \setlist[itemthin]{label=\textbullet}
   \newlist{enumthin}{enumerate}{2}
-  \setlist[enumthin]{label=\arabic*.}
+  \setlist[enumthin]{label=\arabic*.,ref=\arabic*}
 
-  \ifcjqpset
-    \setlist*[itemize,enumerate]{%
-      topsep=0pt,itemsep=0em,partopsep=0pt,parsep=0.4em
+  \ifcjqenumsmall
+    \setlist*[enumerate]{%
+      label=\arabic*.,topsep=0pt,itemsep=0em,partopsep=0pt,parsep=0.4em
+    }
+    \setlist*[itemize]{%
+      label=\textbullet,topsep=0pt,itemsep=0em,partopsep=0pt,parsep=0.4em
     }
   \else
     \setlist*[itemthin,enumthin]{%
@@ -161,12 +164,12 @@
 \ifcjqpset
   \newtoggle{seenfirstsection}
   \global\togglefalse{seenfirstsection}
-  \pretocmd\@ssect
-    {\iftoggle{seenfirstsection}
+  \newcommand{\pset}[2]{
+    \iftoggle{seenfirstsection}
       {\clearpage}
       {\global\toggletrue{seenfirstsection}}
-    }{}{}
-  \newcommand{\pset}[2]{\section*{Problem #1}\textbf{Sources consulted:} #2}
+    \section*{Problem #1}\textbf{Sources consulted:} #2
+  }
 \fi
 
 \ifcjqoly
@@ -392,7 +395,7 @@
     \declaretheoremstyle[
       spaceabove = 5pt,
       spacebelow = 5pt,
-      headfont = \sffamily \bfseries \color{DarkMidnightBlue},
+      headfont = \sffamily \bfseries \color{Black!80},
       bodyfont = \normalfont
     ]{thmm}
 
@@ -404,10 +407,17 @@
 
     \theoremstyle{definition}
 
-    \declaretheorem[style=thmm,name=Problem,sibling=exboxed]{problem}
     \declaretheorem[style=thmm,name=Exercise,sibling=exboxed]{exercise}
+    \declaretheorem[style=thmm,name=Lemma,sibling=exboxed]{lemma}
+    \declaretheorem[style=thmm,name=Problem,sibling=exboxed]{problem}
     \declaretheorem[style=thmm,name=Question,sibling=exboxed]{question}
     \declaretheorem[style=thmm,name=Theorem,sibling=exboxed]{theorem}
+
+    \declaretheorem[numbered=no,style=thmm,name=Exercise]{exercise*}
+    \declaretheorem[numbered=no,style=thmm,name=Lemma]{lemma*}
+    \declaretheorem[numbered=no,style=thmm,name=Problem]{problem*}
+    \declaretheorem[numbered=no,style=thmm,name=Question]{question*}
+    \declaretheorem[numbered=no,style=thmm,name=Theorem]{theorem*}
   \else
     \mdfdefinestyle{mdbox}{%
       roundcorner = 2pt,
@@ -580,7 +590,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \newcommand{\subi}[1]{\phantom{.} \par \noindent \textbf{#1}}
-\newcommand{\bluebf}[1]{{\bfseries \color{DarkMidnightBlue} #1}}
+\newcommand{\bluebf}[1]{{\bfseries \color{MidnightBlue} #1}}
 \newcommand{\hint}[1]{%
   {\color{Black!90} \scriptsize \sffamily \textbf{Hint:} #1}
 }
@@ -604,7 +614,7 @@
 
 \newcommand{\ts}[1]{\textsc{#1}}
 \newcommand{\mf}[1]{\mathfrak{#1}}
-\renewcommand{\tt}[1]{\mbox{\texttt{#1}}}
+\newcommand{\tt}[1]{\mbox{\texttt{#1}}}
 
 \newcommand{\abs}[1]{\left\lvert #1 \right\rvert}
 \newcommand{\norm}[1]{\left\lVert #1 \right\rVert}
@@ -614,6 +624,7 @@
 \newcommand{\del}[1]{\left( #1 \right)}
 \newcommand{\cbr}[1]{\left\{ #1 \right\}}
 \newcommand{\sbr}[1]{\left[ #1 \right]}
+\newcommand{\bigmid}{\;\middle|\;}
 
 \newcommand{\cycsum}{\sum_{\mathrm{cyc}}}
 \newcommand{\symsum}{\sum_{\mathrm{sym}}}
@@ -640,6 +651,8 @@
 
 \renewcommand{\land}{\wedge}
 \renewcommand{\lor}{\vee}
+\newcommand{\bigland}{\bigwedge}
+\newcommand{\biglor}{\bigvee}
 \renewcommand{\lnot}{\neg}
 \newcommand{\true}{\top}
 \newcommand{\false}{\bot}
@@ -666,6 +679,7 @@
   \DeclareMathOperator{\GL}{GL}
   \DeclareMathOperator{\Hom}{Hom}
   \DeclareMathOperator{\Id}{Id}
+  \DeclareMathOperator{\id}{id}
   \DeclareMathOperator{\im}{im}
   \DeclareMathOperator{\Ker}{Ker}
   \DeclareMathOperator{\Mor}{Mor}
