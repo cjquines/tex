@@ -793,9 +793,9 @@ By combining type constructors, we can write predicates on relations. A relation
 Even with all this notation, writing out propositions tend to get pretty long. As an exercise, please write out a proof for
 \begin{align*}
 &\forall A: \prop, \forall R: A \to A \to \prop,\\
-&\sf{symmetric}(A, R) \to \sf{transitive}(A, R) \to (\exists x: A, \exists y: A, Rxy) \to \sf{reflexive}(A, R),
+&\sf{symmetric}(A, R) \to \sf{transitive}(A, R) \to (\forall x: A, \exists y: A, Rxy) \to \sf{reflexive}(A, R),
 \end{align*}
-the proposition that a symmetric, transitive, and non-empty relation is also reflexive.
+the proposition that a symmetric, transitive, and total relation is also reflexive.
 
 \subsection{Pure type systems}
 

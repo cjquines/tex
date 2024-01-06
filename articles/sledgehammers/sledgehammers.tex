@@ -112,7 +112,7 @@ Can we say things about primes that $f$ \textit{doesn't} have roots in, or the s
 Unfortunately, this isn't true. A counterexample is $(x^2 - 2)(x^2 - 3)(x^2 - 6)$, because modulo any prime, at least one of $2$, $3$, and $6$ is a quadratic residue. So ``without linear factors'' is too weak of an assumption. The correct result requires an \textbf{irreducible} polynomial, one that can't be factored as the product of two nonconstant polynomials:
 
 \begin{thmboxed*}
-\thmrating{Anti-Schur's theorem}{1}{2}
+\thmrating{Anti-Schur's theorem}{1}{1}
 If $f \in \ZZ[x]$ is irreducible with $\deg f \ge 2$, then $\PP \setminus \primeseq{f(n)}$ is infinite.
 \end{thmboxed*}
 
@@ -161,7 +161,7 @@ The method for solving these depends on $d$. When $d = 1$ this is elementary. Wh
 Let $d \ge 3$ and $k \in \ZZ$. If $f \in \ZZ^d[x, y]$ is irreducible, then $f(x, y) = k$ has finitely many integer solutions.
 \end{thmboxed*}
 
-These days it's proven as a consequence of the stronger Roth's theorem. The idea is that if $f(x, y) = k$, then $f(x/y, 1) = k/y^d$. So if $f(\alpha, 1) = k$ is a root, then $x/y$ would be an approximation to it, and Roth would finish.
+These days it's proven as a consequence of the stronger Roth's theorem. The idea is that if $f(x, y) = k$, then $f(x/y, 1) = k/y^d$. If $y$ is large, then $k/y^d$ is close to $0$, so we'd get that $x/y$ approximates some root $\alpha$ of $f(\alpha, 1) = 0$, and Roth would finish.
 
 To state Roth, we first define an algebraic number. We say that $\alpha \in \RR$ is \textbf{algebraic} if there's some $f \in \ZZ[x]$ such that $f(\alpha) = 0$. Roth tells us that algebraic numbers can't have many ``good'' approximations:
 
@@ -176,7 +176,7 @@ Roth is a deep theorem from Diophantine geometry, where algebraic geometry metho
 
 Kobayashi shows that $\primeseq{2^n + 1}$ is infinite, but we can say more than that. Call $p$ a \textbf{primitive prime divisor} of some sequence $\seq{a_n}$ if $p \mid a_n$ but $p \nmid a_k$ for every $k < n$. Because $\primeseq{2^n + 1}$ is infinite, we expect there to be infinitely many primitive prime divisors as well. Zsigmondy's theorem says that primitive divisors aren't just infinite; almost all terms have them.
 
-Given a sequence $\seq{a_n}$, we define its \textbf{Zsigmondy set} $\zsigseq{a_n}$ as the set of $n \ge 1$ such that $a_n$ \textit{doesn't} have a primitive prime divisor. In other words, $n \in \zsigseq{a_n}$ if $p \mid a^n$ implies $p \mid a^k$ for some $k < n$. Then:
+Given a sequence $\seq{a_n}$, we define its \textbf{Zsigmondy set} $\zsigseq{a_n}$ as the set of $n \ge 1$ such that $a_n$ \textit{doesn't} have a primitive prime divisor. In other words, $n \in \zsigseq{a_n}$ if $p \mid a_n$ implies $p \mid a_k$ for some $k < n$. Then:
 
 \begin{thmboxed*}
 \thmrating{Zsigmondy's theorem}{4}{5}
@@ -212,7 +212,7 @@ Although it's not the first proof, it's Erd\H os's proof of Bertrand that is the
 A stronger result, in the direction of having a smaller interval, is Sylvester--Schur:
 
 \begin{thmboxed*}
-\thmrating{Sylvester--Schur theorem}{4}{3}
+\thmrating{Sylvester--Schur theorem}{4}{1}
 If $n \ge 2k$, then $\binom{n}{k}$ has a prime divisor greater than $k$.
 \end{thmboxed*}
 
@@ -239,7 +239,7 @@ The $n$th prime is at least $n \log n$.
 The PNT is a foundational result of \textit{analytic number theory}, in contrast to \textit{algebraic number theory}, although the line between them is fuzzy. The earliest analytic result is probably Dirichlet's theorem, which we state using densities:
 
 \begin{thmboxed*}
-\thmrating{Dirichlet's theorem (density)}{3}{1}
+\thmrating{Dirichlet's theorem (density)}{3}{3}
 If $a$ and $d$ are relatively prime, then $\PP \cap \seq{a + nd}$ has density $ \frac{1}{\varphi(d)} $.
 \end{thmboxed*}
 
@@ -421,7 +421,7 @@ and rearranging shows $N > 2^{\pi(2x)}n^{2 - \varepsilon}$ as desired.
 
 \section*{Acknowledgements}
 
-Thanks to tenth and Wayne Zhao for comments.
+Thanks to tenth, Wayne Zhao, and Zi Song Yeoh for comments.
 
 \appendix
 

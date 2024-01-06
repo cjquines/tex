@@ -1,0 +1,208 @@
+\documentclass[11pt,paper=letter]{scrartcl}
+\usepackage[alttitle]{cjquines}
+
+\newcommand{\pl}{\parallel}
+
+\begin{document}
+
+\title{Parallel sum}
+\author{CJ Quines}
+\date{January 6, 2024}
+
+\maketitle
+
+\subsubsection*{Warmup}
+
+\begin{enumerate}
+\item (\href{https://en.wikipedia.org/wiki/Optic_equation}{Optic equation}) A lens of negligible thickness and focal length $f$ has distance $a$ to an object and $b$ to the object's image. Prove that $ \dfrac{1}{f} = \dfrac{1}{a} + \dfrac{1}{b} $.
+
+\item Two resistors, of resistance $A\,\Omega$ and $ B\,\Omega $, are connected in parallel. Let $T$ be their equivalent overall resistance. Prove that $ \dfrac{1}{T} = \dfrac{1}{A} + \dfrac{1}{B} $.
+
+\item (\href{https://en.wikipedia.org/wiki/Crossed_ladders_problem}{Crossed ladders}) In the diagram, $AB \pl CD \pl EF$. Prove that $ \dfrac{1}{CD} = \dfrac{1}{AB} + \dfrac{1}{EF} $.
+\begin{center}
+\begin{asy}
+size(5cm);
+pair A = origin;
+pair B = (2, 5);
+pair E = (10, 0);
+pair F = E+(B-A)*0.7;
+pair D = extension(A, F, B, E);
+pair C_prime = D+E-F;
+pair C = extension(A, E, C_prime, D);
+
+draw(A--B);
+draw(C--D);
+draw(E--F);
+draw(A--E);
+draw(A--F);
+draw(B--E);
+
+dot("$A$", A, SW);
+dot("$B$", B, NW);
+dot("$E$", E, SE);
+dot("$F$", F, NE);
+dot("$D$", D, N);
+dot("$C$", C, S);
+\end{asy}
+\end{center}
+
+\item Pump A can fill a pool in $a$ hours, and pump B can fill the same pool in $b$ hours. If both pumps are used at the same time, it takes $t$ hours. Prove that $ \dfrac{1}{t} = \dfrac{1}{a} + \dfrac{1}{b} $.
+\end{enumerate}
+
+\subsubsection*{Definition}
+
+Let $ \RR^* = \RR \cup \{\infty\} $. The \textbf{parallel sum} operator (also known as \textit{harmonic sum}, \textit{reduced sum}, \textit{reciprocal sum}, or the same terms but with \textit{addition} instead of \textit{sum}), over $\RR^*$, is defined by \[
+  a \pl b = \frac{ab}{a + b}.
+\]
+In other words, \[
+  \frac{1}{a \pl b} = \frac{1}{a} + \frac{1}{b}.
+\]
+In the order of operations, we'll take parallel to be between multiplication and addition, so $ab \pl c = (ab) \pl c$ and $a + b \pl c = a + (b \pl c)$.
+
+\vspace{1em}
+\noindent
+It's called ``parallel'' because of resistors. Resistors connected \textit{in parallel} have total resistance equal to their parallel sum. We can also think of how, in crossed ladders, we had three \textit{parallel} line segments, and the length of the center segment was the parallel sum of the other two lengths. Or how, with pumps working \textit{in parallel}, the time taken is the parallel sum of the individual times.
+
+\vspace{1em}
+\noindent
+Around the first third of problems in this set are algebraic properties, and the rest are some random, kinda unrelated, appearances in geometry. It's not clear to me whether they're related---if you figure something out, email me: \mailto{cj@cjquines.com}.
+
+\subsubsection*{Problems}
+
+\begin{enumerate}
+
+\item Which of the following properties about $\pl$ are true? Can you ``fix'' the false properties so that they're true?
+\begin{enumerate}[label*=\arabic*]
+\item It's commutative: $a \pl b = b \pl a$.
+\item It's associative: $a \pl (b \pl c) = (a \pl b) \pl c$.
+\item Repeated parallel sum is multiplication: $\underbrace{a \pl a \pl \cdots \pl a}_{b\text{ times}} = ab$.
+\item There's an identity: $a \pl \infty = a$.
+\item There's inverses: $a \pl -a = \infty$.
+\item Zero is absorbing: $a \pl 0 = 0$.
+\item Multiplication distributes: $a(b \pl c) = ab \pl ac$.
+\item Exponentiation distributes: $a^{b \pl c} = a^b \pl a^c$.
+\item Parallel sum of logarithms: $\log_b a \pl \log_c a = \log_{bc} a$.
+\item The binomial theorem works: $(a \pl b)^2 = a^2 \pl 2ab \pl b^2$.
+\item Polynomials work: $ x^2 \pl -5x \pl 6 = (x \pl -2)(x \pl -3) = 0$ has solutions $x = 2$ and $x = 3$.
+\end{enumerate}
+
+\item As a Diophantine equation, it's the \href{https://en.wikipedia.org/wiki/Optic_equation}{optic equation}:
+\begin{enumerate}[label*=\arabic*]
+\item \label{p:sfft} Given $a \pl b = c$, prove that $(a - c)(b - c) = c^2$.
+\item Find all pairs of positive integers $(a, b)$ such that $a \pl b = 25$.
+\item (\href{https://bmos.ukmt.org.uk/home/bmo2-2005.pdf}{BMO2 2005/1}) Let $c$ be a positive integer. Suppose there are $2005$ pairs of positive integers $(a, b)$ such that $a \pl b = c$. Prove that $c$ is a perfect square.
+\item \label{p:perfect-squares} Let $a, b, c$ be positive integers such that $a \pl b = c$. Prove that $a^2 + b^2 + c^2$ is a perfect square. If $(a, b) = 1$, prove that $a + b$ and $abc$ are perfect squares.
+\end{enumerate}
+
+\item Some properties related to \href{https://en.wikipedia.org/wiki/Transport_of_structure}{transport of structure}:
+\begin{enumerate}[label*=\arabic*]
+\item Note $2 + 3 = 5$ and $\dfrac{1}{2} \pl \dfrac{1}{3} = \dfrac{1}{5}$. Similarly, $3 \pl 6 = 2$ and $\dfrac{1}{3} + \dfrac{1}{6} = \dfrac{1}{2}$. Is this coincidence?
+\item We call this \textit{dualizing}: you can dualize an equation by taking reciprocals, and swapping $+$ and $\pl$. Convince yourself that dualizing a true equation also gives a true equation.
+\item Prove that $1 = \left(\dfrac{1}{a} + \dfrac{1}{b}\right)(a \pl b)$. What do you get by dualizing this?
+\item \label{p:sum-product-identity} Prove that $ab = (a + b)(a \pl b)$. As a special case, $a = (a + 1)(a \pl 1)$. What do you get by dualizing this?
+\item \label{p:infinite-series} Prove that $\displaystyle a + 1 = \sum_{i = 0}^{\infty} (a \pl 1)^i$. What do you get by dualizing this?
+\item Let $A$ be the arithmetic mean and $H$ the harmonic mean, so for example, $A(a, b) = \dfrac{a + b}{2}$. How are $H(a, b)$ and $a \pl b$ related? What about $H(a, b, c)$ and $a \pl b \pl c$? Why is $\pl$ also called the \textit{harmonic sum}?
+\item \label{p:field} If you know what a field is: Let $K = \RR^* \setminus \{0\}$. Convince yourself that $K$ is a field, with addition $\pl$ and multiplication $\cdot$. Why do we need to remove $0$? Prove that this field is isomorphic to $\RR$.
+\end{enumerate}
+
+\item \href{https://www.johndcook.com/blog/2023/07/06/lehmans-inequality-circuits-and-latex/}{Lehman's inequality}:
+\begin{enumerate}[label*=\arabic*]
+\item \label{p:lehman1} Let $f \from \RR^+ \to \RR^+$ be defined as $f(x) = x \pl a$. Show that $f(x + y) \ge f(x) + f(y)$.
+\item Show that $(a + b) \pl (c + d) \ge (a \pl c) + (b \pl d)$. When does equality hold?
+\item Show that \[
+  (a_1 + \cdots + a_n) \pl (b_1 + \cdots + b_n) \ge (a_1 \pl b_1) + \cdots (a_n \pl b_n).
+\]
+Note that this is \href{https://en.wikipedia.org/wiki/Minkowski_inequality}{Minkowski's inequality} with an exponent of $-1$.
+\item Lehman's inequality proper: Show that \[
+  (a_{11} + \cdots + a_{1n}) \pl \cdots \pl (a_{m1} + \cdots + a_{mn})
+  \ge (a_{11} \pl \cdots \pl a_{m1}) + \cdots + (a_{1n} \pl \cdots \pl a_{mn}).
+\]
+The original proof involved an $m \times n$ grid of resistors, if you care about circuits.
+\end{enumerate}
+
+\item \href{https://en.wikipedia.org/wiki/Inverse_Pythagorean_theorem}{Inverse Pythagorean theorem}:
+\begin{enumerate}[label*=\arabic*]
+\item \label{p:pythag1} Let $ABC$ be a triangle with $\angle BAC = 90\dg$. Let $d$ be the distance from $A$ to $BC$. Prove that $d^2 = AB^2 \pl AC^2$.
+\item \label{p:pythag2} Let $ABCD$ be a tetrahedron with $\angle BAC = \angle CAD = \angle DAB = 90\dg$. Let $d$ be the distance from $A$ to the plane $BCD$. Prove that $d^2 = AB^2 \pl AC^2 \pl AD^2$.
+\end{enumerate}
+
+\item Angle bisectors, though some may be hidden:
+\begin{enumerate}[label*=\arabic*]
+\item (\href{https://www.cut-the-knot.org/triangle/AngleBisectorTheorem.shtml\#rhombus}{Rhombus lemma}) \label{p:bi} In $\triangle ABC$, points $D$ and $E$ are on $AB$ and $AC$ such that $CD$ bisects $\angle ACB$ and $BC \pl DE$. Prove that $EC = BC \pl AC$.
+\item In $\triangle ABC$, points $D$ and $E$ are on $AB$ and $AC$ such that $CD$ bisects $\angle ACB$ and $CD \perp DE$. Prove that $EC = 2(BC \pl AC)$.
+\item \label{p:nomogram-60} In equilateral $\triangle ABC$, let $D$ be a point on $(ABC)$ such that $D$ is on the arc $BC$ not containing $A$. Let $P = AD \cap BC$. Prove that $DP = BP \pl CP$.
+\item (\href{https://en.wikipedia.org/wiki/Nomogram\#Parallel-resistance/thin-lens}{Nomogram}) In $\triangle ABC$, $\angle ABC = \angle ACB = 45\dg$. Let $D$ be a point on $(ABC)$ such that $D$ is on the arc $BC$ not containing $A$. Let $P = AD \cap BC$. Prove that $DP = \sqrt{2}(BP \pl CP)$.
+\end{enumerate}
+
+\item Squares and triangles:
+\begin{enumerate}[label*=\arabic*]
+\item (\href{https://www.gogeometry.com/problem/p305_square_triangle_angle_side.htm}{\!}) \label{p:square0} Let $ABCD$ be a square, and $E$ a point on $CD$. Let $F = AE \cap BC$, and $G = AE \cap BD$. Prove that $AG = AE \pl AF$. Prove that $AB^2 = AE^2 \pl AF^2$.
+\item \label{p:square1} In $\triangle ABC$ with $\angle BAC = 90\dg$, points $D$, $E$, and $F$ are on sides $AB$, $BC$, and $CA$, respectively, such that $ADEF$ is a square. Prove that the side length of the square is $AB \pl AC$. Why is this a special case of \ref{p:bi}?
+\item \label{p:square2} A square is inscribed in $\triangle ABC$, such that one side lies on $BC$, and the other two vertices lie on $AB$ and $CA$. Let $h$ be the length of the altitude to $BC$. Prove that the side length of the square is $h \pl BC$. Why does this generalize \ref{p:square1}?
+\item In $\triangle ABC$ with $\angle BAC = 90\dg$, a square is inscribed as in \ref{p:square1} with side length $s$, and a square is inscribed as in \ref{p:square2} with side length $t$. Prove that $s^2 = t^2 \pl BC^2$.
+\end{enumerate}
+
+\item Configuration issues:
+\begin{enumerate}[label*=\arabic*]
+\item \label{p:config1} Choose non-collinear points $A$, $B$, $C$. Choose $D$ such that $CD \pl AB$. Let $E = AC \cap BD$, and let $F \in AD$ such that $CD \pl EF$. Is it always true that $AC + CE = AE$?
+\item Given parallel segments $AB \pl CD$, define the directed ratio $\dfrac{AB}{CD}$ to be positive if $AB$ and $CD$ point in the same direction, and negative if they point in opposite directions. In \ref{p:config1}, prove that $\dfrac{AC}{AE} + \dfrac{CE}{AE} = 1$, where ratios are directed.
+\item For simplicity, we'll say $AC + CE = AE$, where lengths are directed. We say this only if we can convert the statement to one with directed ratios. In \ref{p:config1}, prove that $CD = EF \pl AB$, where lengths are directed.
+\end{enumerate}
+
+\item Is there something projective going on?
+\begin{enumerate}[label*=\arabic*]
+\item (\href{https://www.gogeometry.com/problem/p389_triangle_parallel_cevian_harmonic_mean.htm}{\!}) \label{p:proj1} In $\triangle ABC$, points $D$, $E$, and $F$ are on $BC$, $CA$, and $AB$ respectively, such that $DE \pl AB$ and $DF \pl CA$. Let $P = BE \cap DF$ and $Q = CF \cap DE$. Prove that $PQ = BD \pl DC$.
+\item (\href{https://en.wikipedia.org/wiki/Complete_quadrangle\#Projective_properties}{Complete quadrangle}) Let $ABCD$ be a quadrilateral, $E = AB \cap CD$, $G = AC \cap BD$, $F = EG \cap AD$, and $H = EG \cap BC$. Prove that $EG = 2(EF \pl EH)$.
+\item (\href{https://en.wikipedia.org/wiki/Harmonic_quadrilateral}{Harmonic quadrilaterals}) Let $\omega$ be a circle and $P$ a point outside it. Choose distinct points $A, B, X, Y$ on $\omega$ such that $P$, $A$, and $B$ are collinear, and $PX$ and $PY$ are tangent to $\omega$. Let $Q = AB \cap XY$. Prove that $PQ = 2(PA \pl PB)$.
+\item (\href{https://math.stackexchange.com/questions/1092627}{\!}) Let $G$ be the centroid of $\triangle ABC$. A line through $G$ intersects $BC$, $CA$, and $AB$ at $D$, $E$, and $F$. Suppose that $GD \le GE \le GF$. Prove that $GD = GE \pl GF$.
+\item (\href{https://www.gogeometry.com/problem/p750-complete-quadrilateral-diagonal-parallel-metric-relations-high-school-college.htm}{\!}) \label{p:proj5} Let $ABCD$ be a quadrilateral, $E = AB \cap CD$, and $F = AD \cap BC$. Let $A', C', E', F'$ be points on line $BD$ such that $AA' \pl CC' \pl EE' \pl FF'$ and $AA' < CC'$. Prove that $AA' = CC' \pl EE' \pl FF'$.
+\end{enumerate}
+
+\item Tangents and circles:
+\begin{enumerate}[label*=\arabic*]
+\item (\href{https://en.wikipedia.org/wiki/Descartes'_theorem}{Descartes' theorem}) Three pairwise externally tangent circles have a common external tangent. Suppose the circles have radii $a > b > c$. Prove that $\sqrt{c} = \sqrt{a} \pl \sqrt{b}$.
+\item (\href{https://www.gogeometry.com/problem/p311_circle_inscribed_semicircle_chord.htm}{\!}) \label{p:circle-in-segment} Let $AB$ be a diameter of circle $\Omega$. Let $\omega$ be a circle tangent to $AB$ at $C$ and internally tangent to $\Omega$ at $D$. Prove that $CD^2 = 2(AC^2 \pl CB^2)$.
+\item (\href{https://en.wikipedia.org/wiki/Twin_circles}{Twin circles}) Let $A$, $B$, and $C$ be three collinear points. Let $\Omega$ be the circle with diameter $AC$, and $\omega$ be the circle with diameter $AB$. Let $D$ be a point on $\Omega$ such that $BD \perp AC$. Let $r$ be the radius of the circle internally tangent to $\Omega$, externally tangent to $\omega$, and tangent to $BD$. Prove that $r = AB \pl BC$.
+\end{enumerate}
+
+\item The inradius:
+\begin{enumerate}[label*=\arabic*]
+\item Let $\triangle ABC$ have inradius $r$ and altitudes $h_a$, $h_b$, and $h_c$. Prove that $r = h_a \pl h_b \pl h_c$.
+\item Let $\triangle ABC$ have inradius $r$ and exradii $r_a$, $r_b$, and $r_c$. Prove that $r = r_a \pl r_b \pl r_c$.
+\item (\href{https://en.m.wikipedia.org/wiki/Euler's_theorem_in_geometry}{Euler's theorem}) Let $\triangle ABC$ have inradius $r$ and circumradius $R$. Let $d$ be the distance from the incenter to the circumcenter. Prove that $r = (R - d) \pl (R + d)$.
+\item (\href{https://lvnaga.wordpress.com/2014/05/13/bi-centric-polygons/}{\!}) Let $ABCD$ be a quadrilateral with an inscribed and circumscribed circle. Let $I$ be the incenter and $r$ the inradius. Prove that $r^2 = AI^2 \pl CI^2$.
+\item (\href{https://www.cut-the-knot.org/Curriculum/Geometry/Fuss.shtml}{Fuss's theorem}) Let $ABCD$ be a quadrilateral with an inscribed and circumscribed circle. Let $r$ be the inradius, $R$ the circumradius, and $d$ the distance from the incenter to the circumcenter. Prove that $r^2 = (R - d)^2 \pl (R + d)^2$.
+\end{enumerate}
+
+\end{enumerate}
+
+\pagebreak
+\subsubsection*{Selected sketches}
+
+\begin{enumerate}
+\item[\ref{p:perfect-squares}] Work with \ref{p:sfft}. Assume $(a, b, c) = 1$. If $p \mid c$ then $p \mid a - c$ or $p \mid b - c$. It can't be both, as otherwise $p \mid (a, b, c)$. Thus, $p^2 \mid a - c$ or $p^2 \mid b - c$. This is true for every prime, so $a - c$ and $b - c$ are perfect squares, say $a - c = m^2, b - c = n^2$ and $c = mn$; substituting the parametrization and factoring works.
+
+\item[\ref{p:infinite-series}] By \ref{p:sum-product-identity}, $a = (a + 1)(a \pl 1)$, which is $\dfrac{a}{a + 1} = a \pl 1$. Hence $1 - \dfrac{a}{a + 1} = 1 - a \pl 1$; take the reciprocal of both sides, and expand the RHS as an infinite geometric series.
+
+\item[\ref{p:field}] The map $x \mapsto \dfrac{1}{x}$ is a bijection $\RR \to K$, as sets. It preserves addition, multiplication, and sends identities to identities; it follows $K$ must also be a field, and one isomorphic to $\RR$. A decent number of properties of $\pl$ drop from this from field axioms (though you have to prove the $0$ case separately).
+
+\item[\ref{p:lehman1}] The second derivative of $f$ is $-\dfrac{2a^2}{(x + a)^3}$ so it's concave. (It's only over $\RR^+$.) Hence $ f \left( \dfrac{x + y}{2} \right) \ge \dfrac{f(x) + f(y)}{2} $, then use distributivity.
+
+\item[\ref{p:pythag2}] Let $C' \in CD$ such that $AC' \perp CD$. Apply \ref{p:pythag1}: $AC'^2 = AC^2 \pl AD^2$. Apply \ref{p:pythag2}: $d^2 = AB^2 \pl AC'^2 = AB^2 \pl AC^2 \pl AD^2$. Alternatively, use De Gua's theorem; see \href{https://cjquines.com/files/obscuregeothms.pdf}{Obscure geometry theorems}, page 15. (Anything to publicize my own work\dots)
+
+\item[\ref{p:bi}] Let $F \in BE$ such that $AF \pl BC$. Angle chase to get $\triangle EDC$ and $\triangle ACF$ are isosceles with $EC = ED$ and $AF = AC$. By crossed ladders, $ED = BC \pl AF$, so $EC = BC \pl AC$.
+
+\item[\ref{p:nomogram-60}] Angle chase to get $\angle CDP = \angle PDB = 60\dg$. Construct $B' \in BD$ and $C' \in CD$ such that $\triangle PB'D$ and $\triangle PC'D$ are equilateral. By similarity, $\dfrac{BP}{BC} = \dfrac{PB'}{CD} = \dfrac{PD}{CD}$ and $\dfrac{CP}{BC} = \dfrac{PC'}{BD} = \dfrac{PD}{BD}$. Add to get $\dfrac{BP + CP}{BC} = \dfrac{PD}{CD} + \dfrac{PD}{BD}$. LHS is $1$, rearrange to get $DP = BP \pl CP$.
+
+\item[\ref{p:square0}] Let $H \in AD$ such that $GH \perp AD$. By similarity, $AG$, $AE$, and $AF$ are proportional to $HG$, $DE$, and $AB$, but by crossed ladders $HG = DE \pl AB$.
+
+\item[\ref{p:square2}] Construct square $BCDE$ such that $A$ and $D$ are on the same side of $BC$. Let $F \in BC$ such that $AF \perp BC$. Let $B' = AB \cap EF$ and $C' = AC \cap DF$. There's a homothety centered at $F$ taking $DE$ to $C'B'$, which takes the square $BCDE$ to the desired square. By crossed ladders, its side length is $AF \pl BE = h \pl BC$. (If we constructed the square external to $\triangle ABC$, there's a similar homothety centered at $A$---does this give another solution?)
+
+\item[\ref{p:proj1}] Construct $G$ such that $BDGF$ is a parallelogram. Prove that $PQ \pl BC$. Then by crossed ladders, $PQ = FG \pl DC = BD \pl DC$.
+
+\item[\ref{p:proj5}] This is a purely affine statement, so take an affine transformation sending $C$ to infinity. Then $CC' = \infty$, and the statement reduces to crossed ladders.
+
+\item[\ref{p:circle-in-segment}] Let $E = AD \cap (BCD)$ and $F \in AD$ such that $CF \perp AD$. Angle chase: $\triangle ACE$, $\triangle ECB$, $\triangle CFD$ are all right isosceles. By \ref{p:pythag1}: $CF^2 = AC^2 \pl CE^2$, but as $CF\sqrt{2} = CD$, $CD^2 = 2(AC^2 \pl CB^2)$.
+\end{enumerate}
+
+\end{document}
