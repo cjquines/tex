@@ -2,7 +2,7 @@
 \usepackage[wide]{cjquines}
 \usepackage{etoolbox,proof,tikz-cd}
 
-\renewcommand{\sf}{\mathsf}
+\newcommand{\sf}{\mathsf}
 \renewcommand{\land}{\wedge}
 \renewcommand{\lor}{\vee}
 \renewcommand{\lnot}{\neg}
@@ -257,12 +257,12 @@ Finally,
 \infer[^\sf{MP}]
 {A \to B}
 {
-\infer*[^\text{(above)}]{P \to B}{\Delta}
+\infer*[^\text{(above)}]{A \to P}{\Delta}
 &
-\infer[^\sf{MP}]{(P \to B) \to A \to B}{
+\infer[^\sf{MP}]{(A \to P) \to A \to B}{
 \infer*[^\text{(above)}]{A \to P \to B}{\Delta}
 &
-\infer[^\sf{S}]{(A \to P \to B) \to (P \to B) \to A \to B}{}
+\infer[^\sf{S}]{(A \to P \to B) \to (A \to P) \to A \to B}{}
 }
 }.
 \end{align*}
@@ -296,7 +296,7 @@ With the deduction theorem, it is now much easier to prove the fact $(A \to B) \
 \end{align*}
 The great thing about our proof of the deduction theorem is that, if we wanted to, we can actually \emph{construct} the inferences we used, by going backwards using the proof.
 
-As an exercise, please prove $\sf{K}$ and $\sf{S}$ using just $\sf{MP}$ and the deduction theorem. This means that ($\sf{MP}$, deduction theorem) can prove, and be proven with, ($\sf{MP}$, $\sf{K}$, $\sf{S}$). This means these two systems are equivalent to each other!
+As an exercise, please prove $\sf{K}$ and $\sf{S}$ using $\sf{MP}$, the deduction theorem, and $\sf{Ref.}$ and $\sf{Sub.}$. This means that ($\sf{MP}$, deduction theorem) can prove, and be proven with, ($\sf{MP}$, $\sf{K}$, $\sf{S}$) where again we take $\sf{Ref.}$ and $\sf{Sub.}$ as implicit. This means these two systems are equivalent to each other!
 
 \subsection{Constructive negation}
 
