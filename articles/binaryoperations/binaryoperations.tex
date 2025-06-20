@@ -1,0 +1,330 @@
+\documentclass[11pt,paper=letter]{scrartcl}
+\usepackage[alttitle]{cjquines}
+
+\newcommand{\qover}{\mathbin{/}}
+\newcommand{\qunder}{\mathbin{\backslash}}
+\newcommand{\sleft}{\triangleright}
+\newcommand{\sright}{\triangleleft}
+
+\begin{document}
+
+\title{Binary operations}
+\author{CJ Quines}
+\date{June 19, 2025}
+
+\maketitle
+
+\subsubsection*{Warmup (fake)}
+
+\begin{enumerate}
+\item Let $f \from \RR^2 \to \RR$ be a function. Suppose there exists $\ell, r \in \RR$ such that for all $x \in \RR$, $f(\ell, x) = f(x, r) = x$. Prove that $\ell = r$.
+
+\item Let $f \from \RR^2 \to \RR$ be a function. Suppose that for all $x, y \in \RR$ there exists a unique $z \in \RR$ such that $f(x, z) = y$. Prove there exists $g \from \RR^2 \to \RR$ such that for all $x, y \in \RR$, \[
+  f(x, g(x, y)) = g(x, f(x, y)) = y.
+\]
+
+\item Let $f, g \from \RR^2 \to \RR$ be functions. Suppose there exists $i, j \in \RR$ such that \begin{align*}
+    f(i, x) = f(x, i) &= g(j, x) = g(x, j) = x, \\
+    f(g(x, y), g(z, w)) &= g(f(x, z), f(y, w)),
+\end{align*}
+for all $x, y, z, w \in \RR$. Prove that $f$ and $g$ are the same function.
+\end{enumerate}
+
+\subsubsection*{Words}
+
+As the title suggests, these warmups are about binary operations.\footnote{I had to start with FEs to make it look like an olympiad handout.} Here's a bunch of words about binary operations; italic ones are rare enough that I'd define them when I talk or do writeups.
+
+\vspace{-0.5em}
+\begin{itemize}
+\item For a binary operation $\star$ over $S$, if for all $x, y, z \in S$:
+\begin{itemize}
+\item $\ell$ is its \textbf{left identity} if $\ell \star x = x$.
+\item It's \textit{unital} if it has a left and right identity.
+\item It's \textbf{commutative} if $x \star y = y \star x$.
+\item It's \textbf{associative} if $(x \star y) \star z = x \star (y \star z)$.
+\item It's \textit{left cancellative} if $x \star y = x \star z$ implies $y = z$.
+\item It has \textit{left quotients} if there exists a unique $d$ such that $x \star d = y$.
+\item It \textbf{left distributes} over $\circ$ if $x \star (y \circ z) = (x \star y) \circ (x \star z)$.
+\item It's \textit{idempotent} if $x \star x = x$.
+\end{itemize}
+
+\item We also have words for a set with a binary operation satisfying certain properties:
+\begin{itemize}
+\item A \textit{magma} is a set with a binary operation.\footnote{Old texts will call this a \textit{groupoid}. These days that means something different.}
+\item A \textit{semigroup} is an associative magma.
+\item A \textbf{monoid} is a unital semigroup.
+\item A \textbf{group} is a monoid with (left and right) quotients.
+\end{itemize}
+This is in addition to phrases like ``unital magma'' or ``commutative monoid'' which hopefully have obvious definitions, and words that I'll define as-needed which appear much less often.
+\end{itemize}
+
+\subsubsection*{Notes}
+
+\begin{itemize}
+\item When we don't say what a variable $x$ ranges over, we assume it's ``for all $x \in S$'', for a set $S$ which should be clear from context.
+
+\item Note that ``closure'' ($x \star y \in S$) is part of the definition of $\star$ being a binary operation (that is, a function $\star \from S \times S \to S$).
+
+\item Sometimes we omit the operation when we only have one binary operation. For example, we can write $(a \star b) \star (c \star (d \star e))$ as $(ab)(c(de))$. Parentheses are needed when it's not associative.
+
+\item I only chose problems that (I think) could appear in an olympiad. Each one has a solution that's self-contained, and mostly involves substituting variables and rewriting equations, rather than using theory.\footnote{If I had to pin down the field of study here, I'd say it's \href{https://en.wikipedia.org/wiki/Universal_algebra}{universal algebra.} It's not quite abstract algebra. These days that refers to studying groups, rings, or fields, but we're looking at weaker structures.}
+\end{itemize}
+
+\subsubsection*{Warmup (real)}
+
+\begin{enumerate}
+\item Prove that if a binary operation has a left identity $\ell$ and a right identity $r$, then $\ell = r$.
+
+\item \label{warmup2} Suppose that $\star$ is a binary operation with left quotients. Prove there exists a binary operation $\qunder$ such that $x \star (x \qunder y) = x \qunder (x \star y) = y$.
+
+\item (\href{https://en.wikipedia.org/wiki/Eckmann\%E2\%80\%93Hilton_argument}{Eckmann--Hilton argument}) A magma has two unital operations $\star$ and $\circ$, which satisfy $(x \star y) \circ (z \star w) = (x \circ z) \star (y \circ w)$. Prove that $\star = \circ$.
+
+\end{enumerate}
+
+\subsubsection*{Quotients}
+
+Recall that $\star$ has \textbf{left quotients} if, for all $x, y \in S$, there's a unique $d \in S$ such that $x \star d = y$.
+
+\begin{enumerate}
+\item Recall that $\star$ is left cancellative if $x \star y = x \star z$ implies $y = z$. Find a ``good'' example of a left cancellative operation without a left quotient.
+
+\item \label{quotients:examples} Which of these operations have left quotients? (a) Multiplication on $\QQ$. (b) Subtraction on $\ZZ$. (c) Over $\ZZ$, the operation $a \star b = \floor{ \frac{a}{b}}$. (d) Over $\RR^2$, reflecting a point over another point.
+
+\item By warmup \autoref{warmup2}, if $\star$ has left quotients, there's some $\qunder$ such that $x \star (x \qunder y) = x \qunder (x \star y) = y$. We call $\qunder$ itself the left quotient of $\star$; you can read it as ``under''.
+
+Prove that these definitions are equivalent. In other words, if two binary operations $\star$ and $\qunder$ satisfy $x \star (x \qunder y) = x \qunder (x \star y) = y$, then there's a unique $d$ such that $x \star d = y$.
+
+\item Thus, left quotients are a way to define right inverses for a binary operation, even if it doesn't have a (left and right) identity. Which of the operations from \autoref{quotients:examples} have identities?
+
+\item Given \textit{any} binary operation $\star$ over $S$, and some $x \in S$, we define \textbf{left multiplication by $x$} as the function $L_x(y) := x \star y$. This is also called \textit{left translation}, and sometimes written $x \star -$.
+
+Prove that if $\star$ has left quotients, then $L_x$ is injective and surjective, and thus, a bijection.
+
+\item There's another way to prove $L_x$ is a bijection: by finding an inverse function. Prove there exists a function $L^{-1}_x$ such that $L_xL^{-1}_x$ and $L^{-1}_xL_x$ are both the identity.
+\end{enumerate}
+
+\subsubsection*{Quasigroups}
+
+A \textbf{quasigroup} is a magma $Q$ whose operation $\star$ has a left quotient $\qunder$ and a right quotient $\qover$:
+\begin{align*}
+  x \star (x \qunder y) &= x \qunder (x \star y) = y, \\
+  (x \qover y) \star y &= (x \star y) \qover y = x.
+\end{align*}
+
+\begin{enumerate}
+
+\item Prove that $x \qover (y \qunder x) = (x \qover y) \qunder x$.
+% x / (y \ x)
+% = (y * (y \ x)) / (y \ x) [rewrite first x with first \]
+% = y [rewrite second /]
+% (x / y) \ x
+% = (x / y) \ ((x / y) * y) [rewrite second x with first /]
+% = y [rewrite second \]
+
+\item (\href{https://proofwiki.org/wiki/Idempotent_Non-Trivial_Quasigroup_is_Not_a_Loop}{\!}) A \textbf{loop} is a quasigroup whose operation $\star$ has a left and right identity. Recall that $\star$ is idempotent if $x \star x = x$. Suppose that $Q$ is an idempotent loop. Prove that $|Q| = 1$.
+
+\item Suppose that $\star$ is associative. Prove that if $x \star b = a \star y$, then $x \qunder a = b \qover y$.
+% enough to show (bc cancellative)
+% (x * (x \ a)) * y = (x * (b / y)) * y
+%
+% LHS is a * y via defn \
+% RHS, via assoc, is x * b via defn /
+
+\item (\href{https://1lab.dev/Algebra.Quasigroup.Instances.Group\#associative-quasigroups-as-groups}{\!}) Suppose that $\star$ is associative and $Q$ is non-empty. Prove that $Q$ is a group under $\star$.
+% only thing left to show is * has an identity
+% in fact, it's e \ e: because e * x = e * x,
+% by lemma we get e \ e = x / x, so (e \ e) * x = x
+% so e \ e is an identity!
+
+\end{enumerate}
+
+\subsubsection*{Semigroups}
+
+Recall that a \textbf{semigroup} $S$ is an associative magma.
+
+\begin{enumerate}
+\item (\href{https://en.wikipedia.org/wiki/Semigroup_with_two_elements}{\!}) How many different semigroups are there with two elements? (Formally, I have to say \textit{non-isomorphic} semigroups. Informally, \textit{isomorphic} means ``same up to relabelling.'')
+
+\item (\href{https://proofwiki.org/wiki/Element_has_Idempotent_Power_in_Finite_Semigroup}{\!}) Suppose $0 < |S| < \infty$. Prove there exists some $x$ such that $xx = x$.
+
+\item (\href{https://math.stackexchange.com/a/4250000/680415}{\!}) Find all pairs $(I, Q) \in \{\text{left}, \text{right}\}^2$ that make this statement true: A semigroup with $I$ identities and $Q$ quotients is a group.
+
+\item (\href{https://math.stackexchange.com/a/203029/680415}{\!}) Recall that $\star$ is left cancellative if $x \star y = x \star z$ implies $y = z$. Suppose that $S$ is (left and right) cancellative, and that $|S|$ is finite. Prove that $S$ is a group. What if $|S|$ is infinite?
+
+\item (\href{https://math.stackexchange.com/q/2282063/680415}{\!}, \href{https://math.stackexchange.com/q/253514/680415}{\!}) We say $y$ is a \textbf{pseudoinverse} of $x$ if $xyx = x$. We say $S$ is \textbf{regular} if all elements have a pseudoinverse. Suppose $S$ is regular.
+
+Prove the following are equivalent: (a) there's a unique $x$ such that $xx = x$; (b) $S$ is (left and right) cancellative; (c) all elements have a \textit{unique} pseudoinverse; (d) $S$ is a group.
+\end{enumerate}
+
+\subsubsection*{Bands}
+
+Recall that $\star$ is idempotent if $x \star x = x$. A \textbf{band} is an idempotent semigroup.
+
+\begin{enumerate}
+\item (\href{https://proofwiki.org/wiki/Properties_of_Idempotent_Semigroup/1}{\!}) Suppose $xy = y$ and $yx = x$. Prove that $zxzy = zy$ and $zyzx = zx$.
+
+\item (\href{https://proofwiki.org/wiki/Semilattice_Induces_Ordering}{\!}) A \textbf{semilattice} is a commutative band. Given a semilattice, define a relation $\le$ by saying $x \le y$ iff $x = x \star y$. Prove that $\le$ is a partial order.
+
+That is: show that $\le$ is reflexive ($x \le x$), antisymmetric ($x \le y$ and $y \le x$ imply $x = y$), and transitive ($x \le y$ and $y \le z$ imply $x \le z$). Why does $\star$ need to be commutative?
+
+\item (\href{https://golem.ph.utexas.edu/category/2015/06/semigroup_puzzles.html}{\!}) A \textbf{rectangular band} is a semigroup satisfying $xyx = x$. Prove that $xyz = xz$. Prove that rectangular bands are bands.
+% xyz = xy(zxz) = (x(yz)x)z = xz
+%
+% xx = (xyx)x = x(yx)x = x
+
+\item (\href{https://math.stackexchange.com/q/1428262/680415}{\!}) Let $S$ be a semigroup. Prove the following are equivalent: (a) $xy = yx$ implies $x = y$; (b) $S$ is a rectangular band.
+% x = xyx = (xy)x = (yx)x = yxx = yx
+% yx = yyx = y(yx) = y(xy) = yxy = y
+%
+% x and xx commute, so x = xx
+% x and xyx commute (because xyxx = xy(xx) = xyx = (xx)yx = xxyx = xyxx)
+
+\end{enumerate}
+
+\subsubsection*{Shelves}
+
+A \textbf{left shelf} is a magma whose operation $\sleft$ left distributes over itself: $x \sleft (y \sleft z) = (x \sleft y) \sleft (x \sleft z)$. (Some texts will use $\sright$ for this, so be careful.)
+
+\begin{enumerate}
+\item (\href{https://arxiv.org/pdf/1603.08590}{\!} 1.6) Prove that a unital left shelf is associative. In other words: if there exists $1$ such that $1 \sleft x = x \sleft 1 = x$, then $\sleft$ is associative.
+% a(bc)
+% = (ab)(ac) [dist]
+% = ((ab)a)((ab)c) [dist]
+% = ((ab)(a1)) ... [1]
+% = (a(b1)) ... [undist]
+% = (ab)((ab)c) [1]
+% = ((ab)1)((ab)c) [1]
+% = (ab)(1c) [undist]
+% = (ab)c
+
+\item A \textbf{rack} is a set $R$ with two operations $\sleft$ and $\sright$, such that $R$ is a left shelf over $\sleft$ and a right shelf over $\sright$ satisfying $
+  x \sleft (y \sright x) = (x \sleft y) \sright x = y
+$.
+Prove that $x \sleft (y \sright z) = (x \sleft y) \sright (x \sleft z)$.
+% x > (y < z)
+% = x > [ ((x > y) < x) < ((x > z) < x) ]
+% = x > [ ((x > y) < (x > z)) < x) ]
+% = (x > y) < (x > z)
+
+\item (\href{https://arxiv.org/pdf/1409.8396}{\!} 2.1.3) We say $\star$ is \textbf{medial} if $(x \star y) \star (z \star w) = (x \star z) \star (y \star w)$. Let $R$ be a rack, and suppose $\sleft$ is medial. Show that $y \sleft ((z \sleft w) \sright x) = z \sleft ((y \sleft w) \sright x$.
+
+\item Recall that $\star$ is idempotent if $x \star x = x$. Let $R$ be a rack, and suppose $\sleft$ is idempotent. Prove that $\sright$ is idempotent. A \textbf{quandle} is an idempotent rack, and they represent the algebraic structure of the Reidemeister moves from knot theory!
+
+\item We say $\star$ is \textbf{left involutive} if $x \star (x \star y) = y$. Prove that an idempotent, left involutive, left shelf is a quandle. An involutive quandle is sometimes called a \textbf{kei}. Point reflection over $\RR^2$ is a kei, where you set $x \sleft y$ as the reflection of $y$ over $x$.
+
+\item (\href{https://en.wikipedia.org/wiki/Laver_table}{Laver tables}) This is tricky and long, but completely elementary.
+
+\begin{enumerate}
+\item Prove there exists a unique magma $S_N$ over $\{1, 2, \ldots, N\}$, whose binary operation $\sleft$ satisfies $x \sleft 1 = (x + 1) \bmod N$ and $x \sleft (y \sleft 1) = (x \sleft y) \sleft (x \sleft 1)$.
+
+\item Prove that $S_N$ is a left shelf if and only if $x \sleft N = N$ for all $x$.
+
+\item Suppose $S_{2^n}$ is a left shelf. Let the operations of $S_{2^n}$ and $S_{2^{n+1}}$ be $\sleft$ and $\sleft'$. Prove that $(x \sleft' y) \bmod 2^n = (x \bmod 2^n) \sleft (y \bmod 2^n)$.
+
+\item More specifically, prove that \[
+  x \sleft' y = \begin{cases}
+    (x \bmod 2^n) \sleft (y \bmod 2^n) + 2^n & \text{if $x \in (2^n, 2^{n + 1}]$} \\
+    (y \bmod 2^n) + 2^n & \text{if $x = 2^n$} \\
+    (x \bmod 2^n) \sleft (y \bmod 2^n) - (2^n \text{ or } 2^{n+1}) & \text{otherwise}.
+  \end{cases}
+\]
+Conclude by induction that $S_{2^n}$ is a left shelf.
+\end{enumerate}
+
+\end{enumerate}
+
+\subsubsection*{Single-law magmas}
+
+\begin{enumerate}
+
+\item (\href{https://artofproblemsolving.com/community/c7h466470p2612317}{Putnam 2001/A1}) An operation satisfies $(xy)x = y$. Prove that $x(yx) = y$. (It's self-dual!)
+
+\item (\href{https://artofproblemsolving.com/community/c7h2837097p25118364}{Putnam 1978/A4--}) An operation satisfies $(wx)(yz) = wz$. Prove that $(xz)y = xy$.
+
+\item (\href{https://math.stackexchange.com/a/5056626/680415}{\!}) An operation satisfies $(xy)y = y(yx) = x$. Prove that it's commutative.
+
+\item (\href{https://www.jstor.org/stable/2314563}{\!}) An operation is \textbf{central} if $(xy)(yz) = y$. Let $S$ be a central magma.
+
+\begin{enumerate}
+\item Define $L_x(y) := xy$ and $R_x(y) := yx$. Prove that $L_xR_yL_x = L_x$ and $R_xL_yR_x = R_x$.
+
+\item Suppose $|S|$ is finite. Prove that $|L_x(S)| = |R_y(S)|$. Let this value be $n$.
+
+\item Let $R_x^{-1}(z) := \{y \in S \mid xy = z\}$. Prove that $|R_x^{-1}(z)| = n$. Conclude that $|S| = n^2$.
+\end{enumerate}
+
+\item (\href{https://teorth.github.io/equational_theories/blueprint/weak-central-groupoids-chapter.html\#1485-dual}{\!}) An operation satisfies $(ab)(b(ca)) = b$. Prove that $((ac)b)(ba) = b$. (Another self-dual!)
+
+\item (\href{https://teorth.github.io/equational_theories/blueprint/infinite-model-chapter.html\#finite_imp_3994_3588}{\!}) An operation over $S$ satisfies $(a(bc))a = bc$. Prove that if $|S|$ is finite, then $a((bc)a) = bc$. Find a counterexample when $|S|$ is infinite.
+\end{enumerate}
+
+See also the \href{https://teorth.github.io/equational_theories/}{Equational Theories Project.}
+
+\subsubsection*{Actual olympiad problems}
+
+\begin{enumerate}
+
+\item (\href{https://artofproblemsolving.com/community/c6h505761p2841005}{Russia 1998/10/6}) Find all operations $\star$ over $\RR$ such that $(x \star y) \star z = x + y + z$.
+
+\item (\href{https://artofproblemsolving.com/community/c6h422571p2388880}{Estonia TST 2011/3}) Is there an associative operation over $\ZZ$ with $xxy = yxx = y$?
+
+\item (\href{https://artofproblemsolving.com/community/c6h3300188p30457791}{Belarus 2023/11/1}) Let $A, B, C$ be non-empty pairwise disjoint sets. Does there exist an associative operation over $A \cup B \cup C$ such that if $a \in A$, $b \in B$, and $c \in C$, then $ab \in C$, $bc \in A$, and $ca \in B$?
+
+\item (\href{https://artofproblemsolving.com/community/c6h1863157p12608849}{USA TSTST 2019/1}) Find all operations $\star$ over $\RR_{> 0}$ such that $x \star (y \star z) = (x \star y) \cdot c$ (where $\cdot$ is multiplication), and if $x \ge 1$, then $x \star x \ge 1$.
+% we show we have left division.
+%   if a*b = a*c, then by a, a, b and a, a, c
+%   (a*a) \times b = a*(a*b) = a*(a*c) = (a*a) \times c,
+% so b = c.
+%
+% by a, a, 1 and left division
+%   a*(a*1) = (a*a) \times 1 = a*a \implies a*1 = a.
+%
+% by a, 1, c
+%   a*(1*c) = (a*1) \times c = ac
+%
+% by a, 1, 1*c and (3) specialized with a=1
+%   a \times (1*c) = a * (1*(1*c)) = a*c.
+%
+% by 1, b, 1*c and (4)
+%   (1*b) \times (1*c) = 1*(b*(1*c)) = 1*(b \times c).
+%
+% thus 1*x is multiplicative, use cauchy and boundedness
+
+\item (\href{https://artofproblemsolving.com/community/c6h3129654p28346964}{Utah 2023/6}) Find all associative operations $\star$ over $\ZZ$ such that $+$ left distributes over $\star$. (This is ridiculously hard.)
+% LEMMA. 0*0 = 0.
+%
+% 0^m + 0^n = (0 + 0^n)^m, so 0^n is completely multiplicative;
+% in particular 0^(p^a) = a0^p.
+%
+% claim exists some x < y s.t. 0^x = 0^y.
+% if 0^p = 0 for some prime, then 0^1 = 0^p, and take 1, p.
+% else exists 0^p, 0^q with same sign. note 0^(p^|q|) = 0^(q^|p|),
+% and one's smaller than the other.
+%
+% now 0^n is eventually periodic because 0^n = 0^(n - x) * 0^x
+% = 0^(n - x) * 0^y = 0^(n - x + y), and hence bounded
+% but 0^(2^a) is only bounded if 0^2 = 0.
+%
+% (1) from (0, 0, x), 0*0 + x = x*x, so by LEMMA x*x = x.
+% (2) induct to prove 0*1*...*n = n \times (0*1).
+% -> by (1), 0*1*...*(n+1) = 0*(1*1)*(2*2)...(n*n)*(n+1)
+% -> by assoc = (0*1)*(1*2)...(n*(n+1))
+% -> rw <- defn = (0*1 + 0)*(0*1 + 1)*(0*1 + 2)...
+% -> rw <- defn = 0*1*...*n + 0*1.
+% (3) from (0, n, 0*1...*n), 0*n + 0*1*...*n = (0 + 0*...*n)*(n + 0*...*n)
+% -> rw -> defn = 0*...*2n
+% -> by (2) <=> 0*n + n \times 0*1 = 2n \times 0*1,
+% -> hence 0*n = n \times 0*1.
+% (4) let k = 0*1. by (1), k = 0*0*1*1 = k*1 = 0*k.
+% if k >= 0, then k = 0*k =(3)= k \times 0*1 = k^2, so k = 0 or 1.
+% if k < 0, then 0 = k*1 - k = (k-k)*(1-k) = 0*(1-k) = (1-k) \times k,
+% so k = 0 or 1.
+% (5) similarly 1*0 is 0 or 1. now
+%
+% m*n =(defn)| (0*(n-m)) + m =(3)= (n-m)\times(0*1) + m, if n >= m
+% | ... (m-n)\times(1*0) + n, if m >= n.
+%
+% given choices, op is either max, min, first, or last
+\end{enumerate}
+
+\end{document}

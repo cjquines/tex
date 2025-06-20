@@ -1,0 +1,282 @@
+\documentclass[11pt,paper=letter]{scrartcl}
+\usepackage[alttitle]{cjquines}
+
+\begin{document}
+
+\title{The factor lemma}
+\author{CJ Quines}
+\date{May 18, 2025}
+
+\maketitle
+
+\subsubsection*{Warmup}
+
+\begin{enumerate}
+\item Let $a$, $b$, $c$, $d$, and $p$ be positive integers.
+\begin{enumerate}
+  \item Prove that if $a \mid c$, $b \mid d$, and $p = ab$, then $p \mid cd$.
+  \item Prove that if $p \mid cd$, then there exists $a$ and $b$ such that $a \mid c$, $b \mid d$, and $p = ab$.
+\end{enumerate}
+
+\item (\href{https://artofproblemsolving.com/community/c6h220674p1223920}{Baltic 1996/6}) Let $a,b,c, d$ be positive integers such that $ab=cd$. Prove that $a+b+c+d$ is not prime.
+
+\item (Euclid's formula) Let $a,b,c$ be positive integers such that $a^2 + b^2 = c^2$, $\gcd(a, b) = 1$, and $a$ is odd. Prove that there exists integers $u$ and $v$ such that $\gcd(u, v) = 1$, $a = u^2 - v^2$, $b = 2uv$, and $c = u^2 + v^2$.
+\end{enumerate}
+
+\subsubsection*{The factor lemma}
+
+From here, we use the (standard) notation $(a, b) = \gcd(a, b)$.
+
+\begin{lemma*}[Factor lemma]
+  Let $a, b, c, d$ be positive integers such that $ab = cd$. Then there exists positive integers $p, q, r, s$ such that \[
+    a = pq,\quad b = rs,\quad c = pr,\quad d = qs,
+  \]
+  and $(q, r) = 1$.
+\end{lemma*}
+
+\begin{proof}[Proof 1]
+  Choose positive integers $q$ and $r$ such that $ \dfrac{a}{c} = \dfrac{d}{b} = \dfrac{q}{r} $ and $(q, r) = 1$. Because $ \dfrac{a}{c} $ in lowest terms is $ \dfrac{q}{r} $, there's some positive integer $p$ such that $a = pq$ and $c = pr$. Similarly, there's some positive integer $s$ such that $d = qs$ and $b = rs$.
+\end{proof}
+
+\begin{proof}[Proof 2]
+  As $a \mid cd$, there are positive integers $p$ and $q$ such that $p \mid c$, $q \mid d$, and $a = pq$. As $p \mid c$, there's a positive integer $r$ such that $c = pr$; similarly there's a positive integer $s$ such that $d = qs$. As $ab = cd$, we can solve for $b = rs$.
+\end{proof}
+
+\begin{proof}[Proof 3]
+  We claim that $ a = \dfrac{(a, c)(a, d)}{(a, b, c, d)} $. Indeed:
+  \begin{align*}
+    (a, c)(a, d) &= (a^2, ac, ad, cd) & \text{(distributivity)} \\
+                 &= (a^2, ac, ad, ab) & \text{(substitute $ab = cd$)} \\
+                 &= a(a, b, c, d), & \text{(distributivity)}
+  \end{align*}
+  as desired. We have similar equalities for $b$, $c$, and $d$. We can then choose: \[
+    p = (a, c), \quad
+    q = \frac{(a, d)}{(a, b, c, d)}, \quad
+    r = \frac{(b, c)}{(a, b, c, d)}, \quad
+    s = (b, d).
+  \]
+\end{proof}
+
+\subsubsection*{Remarks}
+
+\begin{itemize}
+\item It's also called the \href{https://services.artofproblemsolving.com/download.php?id=YXR0YWNobWVudHMvYS8wL2I3Njk1MjVjOTdjM2U5MWIxY2Q0NTkyZDQ3ZTVhNGVkMmYzOGMyLnBkZg==&rn=ZmFjdG9yLnBkZg==}{factoring lemma} and \href{https://math.stackexchange.com/questions/3771853/four-number-theorem-any-two-factorizations-ab-cd-have-a-common-refineme}{(Euler's) four number theorem}. Might as well prove it if you use it though.
+
+\item If $(a, b, c, d) = 1$, you also get $(p, s) = 1$.
+
+\item There are some generalizations I've never used, but it's an interesting exercise to prove them:
+  \begin{itemize}
+    \item If $a, c \in \RR$ and $b, d \in \ZZ$ such that $ab = cd$, then there exists $p \in \RR$ and $q, r, s \in \ZZ$ such that $a = pq$, $b = rs$, $c = pr$, $d = qs$. (Induct on $b$.)
+    \item If $a_1, \ldots, a_n$ and $b_1, \ldots, b_n$ are integers such that $\prod a = \prod b$, then there exists integers $t_{i, j}$ such that $a_i = \prod_{j} t_{i, j}$ and $b_j = \prod_{i} t_{i, j}$. (Double induct.)
+  \end{itemize}
+These are both in Erd\H{o}s and Sur\'{a}nyi's \textit{Topics in the Theory of Numbers}, which is a fun book.
+
+% \item Don't run out of letters when you use the factor lemma! Get friendly with $(a, b, c, d)$, $(e, f, g, h)$, $(k, \ell, m, n)$, $(p, q, r, s)$, $(t, u, v, w)$, $(w, x, y, z)$. And then $(a', b', c', d')$, $(a_1, b_1, c_1, d_1)$, $(A, B, C, D)$, $(\alpha, \beta, \gamma\, \delta)$, etc.
+
+\item If these words make sense: the factor lemma holds for all UFDs, so it's true not only in $\ZZ$, but also $\ZZ[i]$, $\ZZ[\omega]$, $R[X]$ for any UFD $R$ (and thus $R[X_1, \ldots, X_n]$).
+\end{itemize}
+
+\subsubsection*{Examples}
+
+\begin{enumerate}
+
+\item (\href{https://artofproblemsolving.com/community/c6h220674p1223920}{Baltic 1996/6}) Let $a,b,c, d$ be positive integers such that $ab=cd$. Prove that $a+b+c+d$ is not prime.
+
+\textbf{Sketch 1:} Write $d = \frac{ab}{c}$. Then \[
+  a + b + c + d = \frac{ac + bc + c^2 + ab}{c} = \frac{(a + c)(b + c)}{c},
+\]
+which can't be prime.
+
+\textbf{Sketch 2:} Apply factor lemma and choose \[
+  a = pq, \quad b = rs, \quad c = pr, \quad d = qs.
+\]
+Then $a + b + c + d = (p + s)(q + r)$, which can't be prime.
+
+\item (Euclid's formula) Let $a,b,c$ be positive integers such that $a^2 + b^2 = c^2$, $(a, b) = 1$, and $a$ is odd. Prove that there exists integers $u$ and $v$ such that $(u, v) = 1$, $a = u^2 - v^2$, $b = 2uv$, and $c = u^2 + v^2$.
+
+\textbf{Sketch:} From $b^2 = (c - a)(c + a)$, apply factor lemma and choose \[
+  b = pq = rs, \quad c - a = pr, \quad c + a = qs.
+\]
+From $pq = rs$, apply factor lemma again and choose \[
+  p = wx, \quad q = yz, \quad r = wy, \quad s = xz.
+\]
+Then \[
+  a = \frac{qs - pr}{2} = \frac{xyz^2 - w^2xy}{2} = \frac{xy}{2}\left(z^2 - w^2\right).
+\]
+Because $a$ is odd, considering modulo 4 shows that $2 \mid xy$. We also get that $xy \mid 2a$. Combined with $xy \mid b$ and $(a, b) = 1$, we get that $xy = 2$. Thus $a = z^2 - w^2$, $b = 2zw$, and $c = z^2 + w^2$.
+
+\item (\href{https://artofproblemsolving.com/community/c6h1214200p6032947}{Korea Final 2016/3}) Prove that $x-\dfrac{1}{x}+y-\dfrac{1}{y}=4$ has no solutions over the rationals.
+
+\textbf{Sketch:} Write $x = \frac{a}{b}, y = \frac{c}{d}$ in lowest terms. The given equation is \[
+  a^2cb - b^2cd + abc^2 - abd^2 = 4abcd.
+\]
+Because $a$ divides the RHS, it must divide the LHS, and thus $a \mid b^2cd$. But $(a, b) = 1$, so $a \mid cd$. Similarly, $b \mid cd$, $c \mid ab$, $d \mid ab$. Because $(a, b) = (c, d) = 1$, we get $ab \mid cd$ and $cd \mid ab$, so $ab = \pm cd$; for simplicity we consider only the positive case. Apply factor lemma and choose \[
+  a = pq, \quad b = rs, \quad c = pr, \quad d = qs, \quad (q, r) = 1.
+\]
+The given equation becomes \[
+  (p^2 - s^2)(q^2 + r^2) = 4pqrs.
+\]
+The RHS is $0$ modulo 4. Because $(q, r) = 1$, $q^2 + r^2 \not\equiv 0 \pmod 4$. Thus $p^2 - s^2 \equiv 0 \pmod 4$, so $p \equiv s \pmod 2$. So in fact $p^2 - s^2 \equiv 0 \pmod 8$, and the RHS is also $0$ modulo 8, so $2 \mid qr$. WLOG, $q$ is even and $r$ is odd. Via similar arguments with $a, b, c, d$, we get $4qr \mid p^2 - s^2$ and $ps \mid q^2 + r^2$, and these are in fact equalities. Now \[
+  qr = \frac{p^2 - s^2}{4} = \left( \frac{p - s}{2} \right) \left( \frac{p + s}{2} \right),
+\]
+so setting $u = \frac{p - s}{2}$ and $v = \frac{p + s}{2}$, apply factor lemma on $qr = uv$ and set \[
+  u = k\ell, \quad v = mn, \quad q = km, \quad r = \ell n, \quad (\ell, m) = 1.
+\]
+Then \begin{align*}
+  ps &= q^2 + r^2 \\
+  (k \ell + mn)(mn - k \ell) &= k^2m^2 + \ell^2n^2 \\
+  (m^2 - \ell^2)n^2 &= k^2(m^2 + \ell^2),
+\end{align*}
+and because $(\ell, m) = 1$, we get $(m^2 - \ell^2, m^2 + \ell^2) = 1$, thus $k^2 = m^2 - \ell^2$ and $n^2 = m^2 + \ell^2$. We then get $n^4 - k^4 = (2 \ell m)^2$, which has no solutions by Fermat's right triangle theorem.
+
+\end{enumerate}
+
+\subsubsection*{Problems}
+
+These are mostly direct applications.
+
+\begin{enumerate}
+
+\item (\href{https://artofproblemsolving.com/community/c6h514439p2890146}{ELMO 2009/1}) Let $a, b, c$ be positive integers such that $a^2 - bc$ is a square. Prove that $2a + b + c$ is not prime. \hint{\ref{h:1}}
+
+\item (\href{https://artofproblemsolving.com/community/c6h1126565p5209254}{Russia 2015/10/5}) A square grid can be partitioned into $n$ congruent tiles, each of size $k$. Prove that it is possible to partition it into $k$ congruent tiles, each of size $n$. \hint{\ref{h:2}}
+
+\item (\href{https://artofproblemsolving.com/community/c6h304361p1972907}{Moldova TST 2004/1}) Suppose that a natural number $n$ can be written as a sum of two squares of positive naturals in two different ways, in equations $ n = a^{2} + b^{2} = c^{2} + d^{2} $. Show that the number $n$ is composite. \hint{\ref{h:3}}
+
+\item (\href{https://artofproblemsolving.com/community/c6h3087478p27901399}{\!}) Positive integers $a,b,c,d$ satisfy $ab = cd$ and $a+b+c+d=(a-b)^2.$ Prove that $4c+1$ is a perfect square. \hints{\ref{h:4} \ref{h:5}}
+
+\item (\href{https://artofproblemsolving.com/community/c6h17474p119217}{IMO 2001/6}) Let $a > b > c > d$ be positive integers and suppose that \[ ac + bd = (b+d+a-c)(b+d-a+c). \] Prove that $ab + cd$ is not prime. \hints{\ref{h:6} \ref{h:7}}
+
+\end{enumerate}
+
+\subsubsection*{Other problems}
+
+These are less direct applications. Not necessarily harder than the last section.
+
+\begin{enumerate}[resume]
+
+\item (\href{https://artofproblemsolving.com/community/c6h1664165p10571361}{USA TSTST 2018/4(a)}) For an integer $n > 0$, denote by $\mathcal F(n)$ the set of integers $m > 0$ for which the polynomial $p(x) = x^2 + mx + n$ has an integer root. Let $S$ denote the set of integers $n > 0$ for which $\mathcal F(n)$ contains two consecutive integers. Show that $S$ is infinite but \[ \sum_{n \in S} \frac 1n \le 1. \] \hints{\ref{h:8} \ref{h:9}}
+
+\textbf{Remark:} Part (b) is: prove that there are infinitely many positive integers $n$ such that $\mathcal F(n)$ contains three consecutive integers. But it's almost a different problem.
+
+\item (\href{https://artofproblemsolving.com/community/c6h2470467p20672573}{USA TST 2021/1}) Determine all integers $s \ge 4$ for which there exist positive integers $a$, $b$, $c$, $d$ such that $s = a+b+c+d$ and $s$ divides $abc+abd+acd+bcd$. \hints{\ref{h:10} \ref{h:11}}
+
+\item (\href{https://artofproblemsolving.com/community/c6h26504p165811}{IMO 1984/6}) Let $a,b,c,d$ be odd integers such that $0<a<b<c<d$ and $ad=bc$. Prove that if $a+d=2^k$ and $b+c=2^m$ for some integers $k$ and $m$, then $a=1$. \hints{\ref{h:12} \ref{h:13}}
+
+\item (\href{https://artofproblemsolving.com/community/c6h97507p550638}{China TST 2006/7/$3-$}) Find the largest positive integer $M$ such that there exists integers $a, b, c, d$ satisfying $ad = bc$ and $M \le a < b \le c < d \le M + 49$. \hints{\ref{h:14} \ref{h:15}}
+
+\item (\href{https://artofproblemsolving.com/community/c6h1876761p12752815}{ISL 2018/N5}) Four positive integers $x,y,z$ and $t$ satisfy the relations \[ xy - zt = x + y = z + t. \]Is it possible that both $xy$ and $zt$ are perfect squares? \hints{\ref{h:16} \ref{h:17} \ref{h:18}}
+
+\item (\href{https://artofproblemsolving.com/community/c6h3024159p27195228}{RMM 2023/1}) Determine all prime numbers $p$ and all positive integers $x$ and $y$ satisfying $x^3+y^3=p(xy+p).$ \hints{\ref{h:19} \ref{h:20} \ref{h:21}}
+
+\end{enumerate}
+
+\newpage
+
+\subsubsection*{Hints}
+
+\begin{enumerate}
+
+\item \label{h:15} The key claim is $M$ works iff there's $m, n$ such that $M \le mn$ and $(m + 1)(n + 1) \le M + 49$. % p9
+\item \label{h:3} Factor lemma, then solve for $a$, $b$ in terms of $p$, $q$, $r$, $s$. % p3
+\item \label{h:7} Apply the factor lemma to get $p, q, r, s$. Factor $3(ab + cd)$, and conclude. % p5
+\item \label{h:2} Consider the area of the square. % p2
+\item \label{h:4} Factor lemma, then set $m = p + s$, $n = q + r$. Take square roots. % p4
+\item \label{h:19} Factor lemma to get $a, b, c, d$, such that $x + y = ab, x^2 - xy + y^2 = cd, p = ac, xy + p = bd$. There's two cases. Show $a = p$ and $c = 1$ gives a contradiction, for size reasons. % p11
+\item \label{h:1} Factor $a^2 - bc = n^2$. % p1
+\item \label{h:17} Solve for $x$, $y$, $a$, and substitute into $xy = a^2$. Factor this as $(pqrs)^2 = (\text{something})(\text{something})$. % p10
+\item \label{h:11} If $s$ is prime, show that $ab \equiv cd \pmod p$. Do something similar to the first solution of Baltic 1996/6. % p7
+\item \label{h:9} Show the sum is at most $\displaystyle \sum_{p, q > 1} \frac{1}{p(p - 1)q(q - 1)}$. % p6
+\item \label{h:5} Find a quadratic equation that has $m/n$ as a rational root. % p4
+\item \label{h:6} Manipulate to get $(a - b)(\text{something}) = (c + d)(\text{something})$. % p5
+\item \label{h:21} Show $d < 3$ and $d > 3$ leads to no solutions, for size reasons. Conclude. % p11
+\item \label{h:13} Do casework on each of the factors modulo $4$. % p8
+\item \label{h:18} Use size arguments on $p, q, r, s$ and conclude. % p10
+\item \label{h:10} If $s$ is composite, pick $a, b, c, d$ equal to $pq, rs, pr, qs$, then factor. % p7
+\item \label{h:12} Factor lemma, then factor $a + b + c + d$ and $a - b - c + d$. % p8
+\item \label{h:8} Use Vieta's to get an $ab = cd$ which you can factor lemma on. % p6
+\item \label{h:14} Suppose $M$ works. Use factor lemma to rewrite $a$ and $d$, then relate to the inequalities. % p9
+\item \label{h:20} When $a = 1$ and $c = p$, use $(x + y)^2 - 3xy = x^2 - xy + y^2$. Show $b \mid p$ leads to a contradiction, therefore $b \mid d - 3$. % p11
+\item \label{h:16} Let $xy = a^2$ and $zt = b^2$. Apply factor lemma on $(a - b)(a + b) = (z - x)(z - y)$. % p10
+
+\end{enumerate}
+
+\newpage
+
+\subsubsection*{Sketches}
+
+\begin{enumerate}
+
+\item We have $a^2 - bc = n^2$ or $(a - n)(a + n) = bc$. Apply Baltic 1996/6 to get $(a - n) + (a + n) + b + c$ is not prime.
+
+\item The area of the square is $s^2 = nk$. Apply factor lemma to choose $s = ab = cd$, $n = ac$, $k = bd$. Tile the square with $a \times c$ rectangles.
+
+\item WLOG $a > c$, then $(a - c)(a + c) = (d - b)(d + b)$. Apply factor lemma to choose $a - c = pq$, $a + c = rs$, $d - b = pr$, $d + b = qs$. Then $a = \frac{pq + rs}{2}$, $b = \frac{qs - pr}{2}$, and $4n = (p^2 + s^2)(q^2 + r^2)$. If $n$ was prime, then WLOG $n \mid q^2 + r^2$, and $p^2 + s^2$ is $2$ or $4$; both cases are impossible.
+
+\item Apply factor lemma to choose $a = pq$, $b = rs$, $d = pr$, $c = qs$. Set $m = p + s$, $n = q + r$. The given equation becomes $mn = (qm - sn)^2$. Write $m = (m, n)m'^2$, $n = (m, n)n'^2$. Take square roots to get $\pm m'n' = qm'^2 - sn'^2$. Then $x = \frac{m'}{n'}$ is a rational root of the quadratic $qx^2 \mp x - s = 0$. Thus its discriminant $ \left( \mp 1 \right)^2 - 4q(-s) = 4c + 1 $ is a perfect square.
+
+\item Rearrange to get \begin{align*}
+  ac + bd &= (b + d)^2 - (a - c)^2 \\
+  a^2 - b^2 - bd + ad &= d^2 - c^2 + ac + ad \\
+  (a - b)(a + b + d) &= (d + c)(d - c + a).
+\end{align*}
+Apply factor lemma to choose $a - b = pq$, $a + b + d = rs$, $d + c = pr$, $d - c + a = qs$. Add everything to get $3(a + d) = pq + rs + pr + qs$. Solve for $a, b, c, d$: \begin{align*}
+  3a &= 2pq + 2rs - pr - qs, &
+  3b &= - pq + 2rs - pr - qs, \\
+  3c &= pq + rs + pr - 2qs, &
+  3d &= - pq - rs + 2pr + 2qs.
+\end{align*}
+Do more bashing to get \begin{align*}
+  3(ab + cd) &= - p^2q^2 + r^2s^2 + p^2r^2 - q^2s^2 + pq^2s - pr^2s \\
+             &= (r^2 - q^2)(p^2 + s^2 - ps).
+\end{align*}
+
+\item Say $x^2 + mx + n = (x + a)(x + b)$ and $x^2 + (m + 1)x + n = (x + c)(x + d)$. Then $n = ab = cd$, and by factor lemma choose $a = pq$, $b = rs$, $c = pr$, $d = qs$. Also, $m + 1 = a + b + 1 = c + d$, so $(p - s)(q - r) = 1$. Both factors here must be $1$, so $n = p(p - 1)q(q - 1)$. Then \[
+  \sum_{n \in S} \frac{1}{n} \le \sum_{p,\,q > 1} \frac{1}{p(p-1)q(q-1)} = \sum_{p > 1} \left( \frac{1}{p - 1} - \frac{1}{p}\right) \left( \sum_{q > 1} \frac{1}{q - 1} - \frac{1}{q} \right) = 1
+\]
+by telescoping.
+
+\item It's all composite $s$. If $s$ is composite, write $s = mn$. Set $(p, q, r, s) = (1, 1, m - 1, n - 1)$ and $a = pq$, $b = rs$, $c = pr$, $d = qs$. This works because $s = a + b + c + d = (p + s)(q + r) = mn$, and $\cycsum abc = ab(c + d) + cd(a + b) = pqrs(a + b + c + d)$ is divisible by $s = mn = pqrs$.
+
+If $s$ is prime, then $a + b + c + d \equiv 0 \pmod p$, and $p \mid ab(c + d) + cd(a + b)$. And RHS here is $ab(- a - b) + cd(a + b) = (a + b)(cd - ab)$, so $ab \equiv cd \pmod p$. Again using a similar trick to Baltic 1996/6, write $d \equiv \frac{ab}{c} \pmod p$ and get $ \frac{(a + c)(a + d)}{c} \equiv 0 \pmod p $, contradiction.
+
+\item By factor lemma choose $a = pq$, $d = rs$, $b = pr$, $c = qs$; then $p < s$, $q < r$ and these are all odd. Also,
+\begin{align*}
+  2^m ( 2^{k - m} + 1 ) &= a + b + c + d = (s + p)(r + q), \\
+  2^m ( 2^{k - m} - 1 ) &= a - b - c + d = (s - p)(r - q).
+\end{align*}
+Now $s \pm p$ and $r \pm q$ are even, so we have four cases modulo 4:
+\begin{itemthin}
+  \item If $4 \mid s + p$ and $4 \mid r + q$, then $4 \nmid s - p$ and $4 \nmid r - q$, so $m = 2$, which is impossible for size reasons.
+  \item Similarly, we can't have $4 \mid s - p$ and $4 \mid r - q$.
+  \item If $4 \nmid s + p$ and $4 \nmid r - q$, then $2^{m - 1} \mid s - p$ and $2^{m - 1} \mid r + q$. Thus $2(s - p) \ge 2^m = pr + qs$, so $q = 1$; similarly $2(r + 1) \ge 2^m = pr + qs$, so $p = 1$, and $a = pq = 1$.
+  \item Similarly, in the remaining case we also get $a = 1$.
+\end{itemthin}
+
+\item We claim $M$ works if there's $m, n$ such that $M \le mn$ and $(m + 1)(n + 1) \le M + 49$.
+
+($\Rightarrow$) Use factor lemma to choose $a = pq$, $d = rs$, $b = pr$, $c = qs$. Then $a < b$ means $q < r$, and $b < d$ means $p < s$. Then $M \le a \le pq \le (s - 1)(r - 1)$, and we can take $m = s - 1$ and $n = r - 1$.
+
+($\Leftarrow$) WLOG $m \le n$, then take $(p, q, r, s) = (m, n, n+1, m+1)$ to get $a$, $b$, $c$, $d$.
+
+By the claim, $m + n \le 48$, and $M \le mn \le 24^2$, and indeed $24^2$ works if we take $m = n = 24$.
+
+\item No. FTSOC $xy = a^2$ and $zt = b^2$, and WLOG $z$ is largest. Then $(a - b)(a + b) = xy - z(x + y - z) = (z - x)(z - y)$. Apply factor lemma to get $z - x = pq$, $z - y = rs$, $a - b = pr$, $a + b = qs$. Note that $x + y = a^2 - b^2 = pqrs$, so we can solve to get \[
+  2x = -pq + rs + pqrs, \quad
+  2y = pq - rs + pqrs, \quad
+  2a = pr + qs.
+\]
+Substitute into $(2x)(2y) = (2a)^2$ to get $(pqrs)^2 = (p^2 + s^2)(q^2 + r^2)$. Now we do size arguments: by AM--GM the minimum is $1$, so WLOG $p = 1$, and then we get $q^2r^2 \le 2(q^2 + r^2)$, so $s = 1$ and $q = r = 2$, contradiction.
+
+\item Apply factor lemma and write $x + y = ab$, $x^2 - xy + y^2 = cd$, $p = ac$, $xy + p = bd$. As $p$ is prime, we have two cases.
+
+If $a = p$ and $c = 1$, then $x^2 - xy + y^2 = d$ and $d \ge xy$ by AM--GM. Then $p \ge (b - 1)xy$, and $x + y \ge b(b - 1)xy$, which is impossible if $b > 1$ for size reasons. Thus $b = 1$, so $p = x + y$, and $p = (x - y)^2$, which is a contradiction.
+
+Thus $a = 1$ and $c = p$. From $(x + y)^2 - 3xy = x^2 - xy + y^2$, we get $b^2 - 3bd = p(d - 3)$, and $b$ divides the LHS, so it divides the RHS. If $b \mid p$, then from $xy + p = bd$ we get $p \mid xy$, contradiction. Thus $b \mid d - 3$. We have three cases. If $d < 3$, then $b = 2$, which leads to no solutions. If $d > 3$, then $d - 3 \ge b$ and $d > b = x + y$. But then \[
+  d = \frac{xy + p}{x + y} \le \frac{xy + pd}{x + y} = \frac{x^2 + y^2}{x + y} \le x + y = b,
+\]
+contradiction. The remaining case is $d = 3$, whence $(x + y)^2 - 3xy = x^2 - xy + y^2$ becomes $b^2 - 9b + 3p = 3p$, and $b = 9$. Given that $(x, y) = 1$ and $x + y = b$, we can just check all possible $x, y$.
+
+\end{enumerate}
+
+\end{document}
