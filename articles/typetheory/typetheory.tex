@@ -21,7 +21,7 @@
 \begin{document}
 
 \title{Type Theory by Example}
-\author{Carl Joshua Quines}
+\author{CJ Quines}
 \date{September 9, 2021}
 
 \maketitle
@@ -46,7 +46,7 @@ The intended pre-requisites:
 \begin{itemize}
 \item You're familiar with logical notation, enough that you know how to read $\forall x: \RR, \exists y: \RR, x + y = 0$ and have it make sense.
 
-\item You know some classical logic, enough that the statement ``if $A$ or $B$, and not $A$ implies $B$, then $B$'' makes sense.
+\item You know some classical logic, enough that the statement ``if $A$ or $B$, and not $A$ implies not $B$, then $A$'' makes sense.
 
 \item You know enough set theory to know the definition of a function $f : A \to B$ as a subset of $A \times B$ satisfying certain properties.
 
@@ -65,15 +65,15 @@ Thanks to Nir Elber and Jason Chen for comments and suggestions. There are proba
 
 If there aren't quantifiers in zeroth-order logic, what's left? There are propositions, like true ($\true$), false ($\false$), and variables for propositions ($A, B, C, \dots$). There are connectives between propositions, like ``and'' ($\land$), ``or'' ($\lor$), ``implies'' ($\to$), and ``not'' ($\lnot$). Propositions and connectives form other propositions (e.g. $A \to \lnot B$). That's it. This is why zeroth-order logic is called \textbf{propositional calculus}. There are many kinds of propositional calculi, depending on what rules you use.
 
-Propositional calculi are also built up in levels. On the top is classical logic, where we have all of our nice connectives, each proposition is either true or false, and the law of excluded middle holds. Removing the law of excluded middle gives us constructive logic. Removing most of the connectives, leaving only $\to$ and $\lnot$, gives us implicational calculus. And below even \emph{that}, where we \emph{only} keep $\to$, we get \textbf{positive implicational calculus}. We'll study this first.
+One example is classical (propositional) logic, where we have all of our nice connectives, each proposition is either true or false, and the law of excluded middle holds. Removing the law of excluded middle gives us intuitionistic (propositional) logic. Removing most of the connectives, leaving only $\to$ and $\lnot$, gives us implicational calculus. And below even \emph{that}, where we \emph{only} keep $\to$, we get \textbf{positive implicational calculus}. We'll study this first.
 
-The rules in any symbolic logic are called \textbf{inference rules}. Given something that's true, and in a certain format, an inference rule tells us something else that's true. The essential one, in positive implicational calculus, is this one, \textbf{modus ponens}.
+The rules in any symbolic logic are called \textbf{inference rules}. Given something true that matches a template, an inference rule tells us something else that's true. The essential one, in positive implicational calculus, is \textbf{modus ponens}:
 \begin{align*}
 \infer
-{B}
-{A & A \to B}
+{\beta}
+{\alpha & \alpha \to \beta}
 \end{align*}
-The way this rule should be read is as ``if $A$ is true, and $A \to B$ is true, then $B$ is true.'' The things above the bar are called hypotheses, and the thing below is the conclusion. Here $A$ and $B$ stand for any proposition. We can replace them with other propositions, like replacing $A$ with $A \to B$ and $B$ with $B \to C$.
+The way this rule should be read is as ``if $\alpha$ is true, and $\alpha \to \beta$ is true, then $\beta$ is true.'' The things above the bar are called hypotheses, and the thing below is the conclusion. When we apply this rule, we change $\alpha$ and $\beta$ to actual propositions, like replacing $\alpha$ with $A \to B$ and $\beta$ with $B \to C$.
 \begin{align*}
 \infer
 {B \to C}
@@ -88,23 +88,23 @@ We can stack these diagrams to produce longer proofs. These can get rather long,
 {B \to C}
 {A \to B & (A \to B) \to (B \to C)}}
 \end{align*}
-Positive implicational calculus also gives us two axioms, which are inference rules that don't have ``requirements''. We'll call these rules rule $\sf{K}$ and $\sf{S}$, for reasons that will become clearer later.
+Two more rules are $\sf{K}$ and $\sf{S}$; we'll explain the names later. These are also templates, where $\alpha$, $\beta$, and $\gamma$ are replaced with actual propositions.
 \begin{align*}
 \infer[^\sf{K}]
-{A \to (B \to A)}
+{\alpha \to (\beta \to \alpha)}
 {}
 \qquad
 \infer[^\sf{S}]
-{(A \to (B \to C)) \to \left((A \to B) \to (A \to C)\right)}
+{(\alpha \to (\beta \to \gamma)) \to \left((\alpha \to \beta) \to (\alpha \to \gamma)\right)}
 {}
 \end{align*}
-Please convince yourself that $\sf{MP}, \sf{K}$, and $\sf{S}$ are true in classical logic as well. Now we can try to prove facts using just these rules. For example, consider the fact $A \to A$. We know, from classical logic, that this is true for any $A$. Can we prove it using just these three rules? Our first attempt might proceed by just trying to substitute $A$ for everything in $\sf{S}$. We want to use $\sf{MP}$, somehow, to get $A \to A$.
+Please convince yourself that $\sf{MP}, \sf{K}$, and $\sf{S}$ are true in classical logic as well. Now we can try to prove things using just these rules. For example, can we prove $A \to A$, without using any hypotheses? Our first attempt might proceed by using $\sf{S}$, and replacing everything with $A$. We want to use $\sf{MP}$, somehow, to get $A \to A$.
 \begin{align*}
 \infer[^\sf{S}]
 {(A \to (A \to A)) \to \left((A \to A) \to (A \to A)\right)}
 {}
 \end{align*}
-However, we can't immediately use this. We can make $A \to (A \to A)$ by substituting $A$ for everything in $\sf{K}$. Then we can use $\sf{MP}$. But we don't get anything useful:
+However, we can't immediately use this. We can make $A \to (A \to A)$ by using $\sf{K}$ and replacing everything with $A$. Then we can use $\sf{MP}$. But we don't get anything useful:
 \begin{align*}
 \infer[^\sf{MP}]
 {(A \to A) \to (A \to A)}
@@ -118,7 +118,7 @@ However, we can't immediately use this. We can make $A \to (A \to A)$ by substit
   {}
 }
 \end{align*}
-To get to the conclusion $A \to A$ with $\sf{MP}$, we somehow need to have produced $A \to A$ already! So instead, we use $\sf{S}$, substitute $A$ for $A$, but substitute $A \to A$ for $B$ instead. We can then use $\sf{K}$, by substituting $A \to A$ for $B$. This allows us to use $\sf{MP}$. To get the conclusion, we use $\sf{K}$ again. This gives us the following proof.
+To get to the conclusion $A \to A$ with $\sf{MP}$, we somehow need to have produced $A \to A$ already! So instead, we use $\sf{S}$, replace $\alpha$ and $\gamma$ with $A$, but replace $\beta$ with $A \to A$ instead. We can then use $\sf{K}$, where $\alpha$ is $A$ and $\beta$ is $A \to A$. This allows us to use $\sf{MP}$. To get the conclusion, we use $\sf{K}$ again. This gives us the following proof.
 \begin{align*}
 \infer[^\sf{MP}]
 {(A \to (A \to A)) \to (A \to A)}
@@ -151,131 +151,124 @@ There are lots and lots of parentheses. To reduce parentheses, we adopt the conv
 Note that this allows us to write $\sf{K}$ and $\sf{S}$ with less parentheses.
 \begin{align*}
 \infer[^\sf{K}]
-{A \to B \to A}
+{\alpha \to \beta \to \alpha}
 {}
 \qquad
 \infer[^\sf{S}]
-{(A \to B \to C) \to (A \to B) \to A \to C}
+{(\alpha \to \beta \to \gamma) \to (\alpha \to \beta) \to \alpha \to \gamma}
 {}
 \end{align*}
 Why right-associative? The simple, perhaps unsatisfying answer, is that this means we write less parentheses than we do if we treated $\to$ as left-associative. We'll give a more satisfying explanation later on when we talk about currying.
 
 \subsection{The deduction theorem}
 
-These kinds of proofs get complicated. Can you use these three rules to prove the fact that $(A \to B) \to (B \to C) \to A \to C$? This intuitively feels like something that should be true: we take $A \to B$, and we take $B \to C$, and we should be able to ``chain'' them together to get $A \to C$. Translating this to a proof straight from the axioms is kind of hard, though.
+These kinds of proofs get complicated. Can you use these three rules to prove that, without any hypotheses, $(A \to B) \to (B \to C) \to A \to C$? This intuitively feels like something that should be true: we take $A \to B$, and we take $B \to C$, and we should be able to ``chain'' them together to get $A \to C$. Translating this to a proof straight from the inference rules is kind of hard, though.
 
 It'd be really nice if, somehow, we had a sort of ``metatheorem''. Not a theorem in the implicational calculus, but a theorem \emph{about} it, proven \emph{above} it. If $\Delta$ is a list of propositions, we'd really like to prove this \textbf{deduction theorem}:
 \begin{align*}
 \vc{\infer*
-{B}
-{\Delta & A}}
+{\beta}
+{\Delta & \alpha}}
 \implies
 \vc{\infer*
-{A \to B}
+{\alpha \to \beta}
 {\Delta}}.
 \end{align*}
-Here we're using $\vdots$ to represent multiple inferences. To prove this, we'll be a bit more specific about what we can do with inferences. One rule we've been using implicitly, without mentioning it, is substitution: if we know $A$, then we can change a part $x$ to any $y$. We'll call this rule $\sf{Sub.}$, and abbreviate it as $A[x \mapsto y]$. 
+Here we're using $\vdots$ to represent multiple inferences. The $\implies$ here is shorthand; this theorem states that if we can find some chain of inferences to give the first thing, then we can find some chain of inferences gives the second thing.
 
-Another, even more basic rule, is inferring something we already have, which we'll call $\sf{Ref.}$ for reflexivity. We'll consider these two as inference rules we can \emph{always} use, no matter what system we're using. With modus ponens, this gives us our three inference rules.
-\begin{align*}
+Before we prove this theorem, let's add our final rule, for inferring something we already have. We'll call this rule $\sf{Ref.}$, for reflexivity.
+\[
 \infer[^\sf{Ref.}]
-{A}
-{\Delta & A}
-\qquad
-\infer[^\sf{Sub.}]
-{A[x \mapsto y]}
-{A}
-\qquad
-\infer[^\sf{MP}]
-{B}
-{A & A \to B}
-\end{align*}
-To prove the deduction theorem, we'll induct on the number of inferences we've made. The base case is no inferences. Now suppose that the deduction theorem is true for any sequence of $n$ inferences. Suppose that we started with $\Delta$ and $A$, and after $n+1$ inferences, end up with $B$. Then there are three cases for the last inference:
+{\alpha}
+{\Delta & \alpha}
+\]
+To prove the deduction theorem, we'll induct on the number of inferences we've made. The base case is no inferences. Now suppose that the deduction theorem is true for any sequence of $n$ inferences. Suppose that we started with $\Delta$ and $\alpha$, and after $n+1$ inferences, end up with $\beta$. Then there are two cases for the last inference:
 \begin{itemize}
-\item We used $\sf{Ref.}$. If $B$ is $A$, we need to prove $A \to B = A \to A$, which we've already done. Else $B$ is in $\Delta$. Then
+\item We used $\sf{Ref.}$. If $\beta$ is $\alpha$, we need to prove $\alpha \to \beta$, which is $\alpha \to \alpha$, which we know how to do. Else $\beta$ is in $\Delta$. Then
 \begin{align*}
 \infer[^\sf{MP}]
-{A \to B}
+{\alpha \to \beta}
 {
 \infer[^\sf{Ref.}]
-{B}
+{\beta}
 {\Delta}
 &
 \infer[^\sf{K}]
-{B \to (A \to B)}
+{\beta \to (\alpha \to \beta)}
 {}
 }.
 \end{align*}
-\item We used $\sf{Sub.}$. Then $B = B'[x \to y]$ for some $B'$, $x$, and $y$. We used at most $n$ inferences to get $B'$, so by induction, we can prove $A \to B'$. Then
-\begin{align*}
-\infer[^\sf{Sub.}]
-{(A \to B')[x \to y] = A \to B}
-{
-\vc{\infer*
-{B'}
-{\Delta & A}}
-\;\overset{\text{ind. hyp.}}{\implies}\;
-\vc{\infer*
-{A \to B'}
-{\Delta}}
-}
-\end{align*}
-\item We used $\sf{MP}$. Then there exists some $P$ such that the final step looks like
+\item We used $\sf{MP}$. Then there exists some $\varphi$ such that the final step looks like
 \begin{align*}
 \infer[^\sf{MP}]
-{B}
+{\beta}
 {
 \infer*
-{P}
-{\Delta & A}
+{\varphi}
+{\Delta & \alpha}
 &
 \infer*
-{P \to B}
-{\Delta & A}
+{\varphi \to \beta}
+{\Delta & \alpha}
 }.
 \end{align*}
 By induction hypothesis,
 \begin{align*}
 \vc{\infer*
-{P}
-{\Delta & A}}
-\;\overset{\text{ind. hyp.}}{\implies}\;
+{\varphi}
+{\Delta & \alpha}}
+\;\overset{\text{induction}}{\implies}\;
 \vc{\infer*
-{A \to P}
+{\alpha \to \varphi}
 {\Delta}}
 \qquad\qquad
 \vc{\infer*
-{P \to B}
-{\Delta & A}}
-\;\overset{\text{ind. hyp.}}{\implies}\;
+{\varphi \to \beta}
+{\Delta & \alpha}}
+\;\overset{\text{induction}}{\implies}\;
 \vc{\infer*
-{A \to P \to B}
+{\alpha \to \varphi \to \beta}
 {\Delta}}.
 \end{align*}
 Finally,
 \begin{align*}
 \infer[^\sf{MP}]
-{A \to B}
+{\alpha \to \beta}
 {
-\infer*[^\text{(above)}]{A \to P}{\Delta}
+\infer*[^\text{(above)}]{\alpha \to \varphi}{\Delta}
 &
-\infer[^\sf{MP}]{(A \to P) \to A \to B}{
-\infer*[^\text{(above)}]{A \to P \to B}{\Delta}
+\infer[^\sf{MP}]{(\alpha \to \varphi) \to \alpha \to \beta}{
+\infer*[^\text{(above)}]{\alpha \to \varphi \to \beta}{\Delta}
 &
-\infer[^\sf{S}]{(A \to P \to B) \to (A \to P) \to A \to B}{}
+\infer[^\sf{S}]{(\alpha \to \varphi \to \beta) \to (\alpha \to \varphi) \to \alpha \to \beta}{}
 }
 }.
 \end{align*}
 \end{itemize}
-With the deduction theorem, it is now much easier to prove the fact $(A \to B) \to (B \to C) \to A \to C$. The idea is that we want to write $A \to B$, $B \to C$, and $A$ as hypotheses, use $\sf{MP}$ to get $C$, then use the deduction theorem to bring down anything that's not a conclusion.
-\begin{align*}
-&\vc{\infer[^\sf{MP}]
+With the deduction theorem, it is now much easier to prove that $(A \to B) \to (B \to C) \to A \to C$. The idea is that we want to write $A \to B$, $B \to C$, and $A$ as hypotheses, use $\sf{MP}$ to get $C$, and then keep using the deduction theorem to bring each hypothesis down to the conclusion.
+
+The first step in the proof is
+\[
+\vc{\infer[^\sf{MP}]
 {C}
 {
 \infer[^\sf{MP}]{B}{A & A \to B}
 & B \to C
-}}\\
-\;\overset{\text{deduct.}}{\implies}\;&
+}}
+\;\overset{\text{deduct.}}{\implies}\;
+\vc{
+\infer*
+{A \to C}
+{A \to B & B \to C}
+}.
+\]
+You might ask: what happened to the $B$ in the middle?
+
+Well, when we apply the deduction theorem, the only things that matter are the hypotheses and conclusion, so we ignore everything in the middle.\footnote{In an alternate notation, we use the \textit{turnstile}, $\vdash$, like $A \to B, B \to C \vdash A \to C$. This emphasizes the hypotheses and conclusion, at the cost of omitting the intermediate steps.}
+
+Continuing our deductions:
+\begin{align*}
+&
 \vc{
 \infer*
 {A \to C}
@@ -296,7 +289,7 @@ With the deduction theorem, it is now much easier to prove the fact $(A \to B) \
 \end{align*}
 The great thing about our proof of the deduction theorem is that, if we wanted to, we can actually \emph{construct} the inferences we used, by going backwards using the proof.
 
-As an exercise, please prove $\sf{K}$ and $\sf{S}$ using $\sf{MP}$, the deduction theorem, and $\sf{Ref.}$ and $\sf{Sub.}$. This means that ($\sf{MP}$, deduction theorem) can prove, and be proven with, ($\sf{MP}$, $\sf{K}$, $\sf{S}$) where again we take $\sf{Ref.}$ and $\sf{Sub.}$ as implicit. This means these two systems are equivalent to each other!
+As an exercise, try using only $\sf{Ref.}$, $\sf{MP}$, and the deduction theorem, to prove $\sf{K}$ and $\sf{S}$. This means that ($\sf{Ref.}$, $\sf{MP}$, deduction theorem) can prove, and be proven with, ($\sf{Ref.}$, $\sf{MP}$, $\sf{K}$, $\sf{S}$). This gives us two equivalent systems. The system with the deduction theorem is called \textbf{natural deduction}, while the system with $\sf{K}$ and $\sf{S}$ is called a \textbf{Hilbert system}.
 
 \subsection{Constructive negation}
 
@@ -355,7 +348,7 @@ Even more interesting: $\lnot\lnot A \to A$ isn't always true, but $\lnot\lnot\l
 }
 }
 \end{align*}
-then use deduction to bring $A \to \false$ down one step. When we use deduction again, everything that was deduced from $A$ gets removed with it, leaving
+then use deduction to bring $A \to \false$ down, and $\sf{MP}$ to get $\false$. Then we use deduction again, on the hypothesis $A$. This leaves the last hypothesis, $((A \to \false) \to \false) \to \false$,
 \begin{align*}
 \vc{\infer[^\sf{MP}]
 {\false}
@@ -387,7 +380,7 @@ We just discussed what it means to prove that $\lnot A$. But what about other co
 
 \simp I mean, we've worked with the symbols only by following rules blindly. The rules $\sf{MP}$, $\sf{K}$, and $\sf{S}$ don't ``mean'' anything beyond shuffling symbols around. We keep saying that $\to$ means ``implies'', but what \emph{does} that word mean?
 
-\salv Ah, you're wondering about the difference between \emph{syntax} and \emph{semantics}. So far, yes, we've only discussed syntax. Now let's talk about semantics, or what it means for a formula to be true.\footnote{Usually, ``semantics'' in logic refers to \emph{formal semantics}. This section discusses a basis for proof-theoretic semantics. Okay, actually I'm not quite sure, but I think this is true?} Let's speak intuitively. If I asked you to prove $A \to B$, what would you do?
+\salv Ah, you're wondering about the difference between \emph{syntax} and \emph{semantics}. So far, yes, we've only discussed syntax. Now let's talk about semantics, or what it means for a formula to be true.\footnote{Usually, ``semantics'' in logic refers to \emph{formal semantics}, which deals with what mathematical objects a formula represents. This section discusses a basis for \textit{proof-theoretic} semantics.} Let's speak intuitively. If I asked you to prove $A \to B$, what would you do?
 
 \simp Well, first I'd assume that $A$ is true. Using that, I'd show that $B$ is true.
 
@@ -454,6 +447,8 @@ We just discussed what it means to prove that $\lnot A$. But what about other co
 \vspace{0.5em}
 
 This is the \textbf{Brouwer--Heyting--Kolmogorov interpretation}: interpreting $A \to B$ as a function, $A \land B$ as an ordered pair, and $A \lor B$ as another ordered pair. We'll say ``BHK interpretation'' from now on, or even simply ``BHK''.
+
+Note that BHK follows from treating proofs as mathematical objects. This is a central idea of type theory! We're representing proofs with variables, and doing things with these variables, in the same way we would if these variables represented numbers or sets. By asking how these proof-objects should interact, we get the BHK.
 
 Simplicio gave us a proof of $A \to \lnot\lnot A$. Compare it with the proof given to us by the deduction theorem. Now what about $\lnot\lnot A \to A$? Its proof would be a function that takes $(A \to \false) \to \false$ and returns $A$. But there isn't a function that does this. This corresponds to the fact that, in constructive logic, $\lnot\lnot A \to A$ isn't always true.
 
@@ -525,7 +520,7 @@ Now we draw our first big connection. You may have noticed the way we proved $A 
 {\overset{p\;\mapsto\;q\;\mapsto\;qp}{A \to (A \to \false) \to \false}}
 {}}
 \end{align*}
-Please convince yourself that \textbf{\textsf{MP} is application} and \textbf{deduction is abstraction}. This is an important correspondence known as the \textbf{Curry--Howard correspondence}, and this won't be the first time we'll encounter it. It's important enough that it gets its own section, even if it's a short one.
+Please convince yourself that \textbf{\textsf{MP} is application} and \textbf{deduction is abstraction}. (The other rule in natural deduction, $\sf{Ref.}$, corresponds to reusing a variable.) This is an important correspondence known as the \textbf{Curry--Howard correspondence}, and this won't be the first time we'll encounter it. It's important enough that it gets its own section, even if it's a short one.
 
 As an exercise, consider our proof of $\lnot\lnot\lnot A \to \lnot A$, and write it out in BHK. The easiest way is to work from the deduction-style proof we wrote earlier. You should've gotten an answer like $p \mapsto q \mapsto p(r \mapsto rq)$; check that it also matches what we'd expect from the BHK interpretation.
 
@@ -537,7 +532,7 @@ As an exercise, consider our proof of $\lnot\lnot\lnot A \to \lnot A$, and write
 
 So far in the Curry--Howard correspondence, we've shown a relationship between deduction-style proofs and lambda calculus. In particular, given a deduction-style proof, we can come up with a corresponding proof in the BHK interpretation, that happens to be a function. But for this to be a correspondence, we want to be able to go the other way around as well! Given a function in the lambda calculus, does it represent a proof of some logical fact?
 
-We can do this for some kinds of functions. Let's consider the example $p \mapsto q \mapsto qp$. The $qp$ at the end, an application, must be a result of $\sf{MP}$. Hence, if $p$ is a proposition $A$, then $q$ must be $A \to B$, for some $B$. By reversing the abstractions, the theorem must have been $A \to (A \to B) \to B$. Note that this is \emph{more} general than the statement we originally used $p \mapsto q \mapsto qp$ to prove, which was $A \to \lnot\lnot A$, or $A \to (A \to \false) \to \false$.
+We can do this for \textit{some} functions. Consider $p \mapsto q \mapsto qp$. The $qp$ at the end, an application, must be a result of $\sf{MP}$. Hence, if $p$ is a proposition $A$, then $q$ must be $A \to B$, for some $B$. By reversing the abstractions, the theorem must have been $A \to (A \to B) \to B$. Note that this is \emph{more} general than the statement we originally used $p \mapsto q \mapsto qp$ to prove, which was $A \to \lnot\lnot A$, or $A \to (A \to \false) \to \false$.
 
 On the other hand, we can't do this for all possible functions. Consider a function like $x \mapsto xx$. Again, we know from $\sf{MP}$ that if $x$ was some proposition $A$, then $x$ must be $A \to B$, for some $B$. But this is impossible! So if the correspondence isn't between deduction-style proofs and lambda calculus, what is it a correspondence between? This is solved by introducing types.
 
@@ -558,7 +553,7 @@ This allows us to do \textbf{type inference}, to determine what the type of a fu
 Now, let's go back to $p \mapsto q \mapsto qp$. What is the most general possible type of this function? We start inside. From $qp$, we know if $p : A$ and $qp : B$, then $q$ must have the type $A \to B$. This means the type is \[
   \text{(type of $p$)} \to \text{(type of $q$)} \to \text{(type of $qp$)}, \text{ or } A \to (A \to B) \to B.
 \]
-Looks familiar? As an exercise, use a similar to procedure to find the type of $p \mapsto q \mapsto p(r \mapsto rq)$. You'd start with something like, ``From $rq$, we know if $q : A$, and $rq : B$, then $r$ must have type $A \to B$\dots.''
+Looks familiar? As an exercise, use a similar procedure to find the type of $p \mapsto q \mapsto p(r \mapsto rq)$. You'd start with something like, ``From $rq$, we know if $q : A$, and $rq : B$, then $r$ must have type $A \to B$\dots.''
 
 There are reasons why the simply typed lambda calculus is, in some ways, nicer than lambda calculus. In lambda calculus, there are certain kinds of functions that aren't well-behaved. Consider $\omega = x \mapsto xx$. What happens when we try to evaluate $\omega\omega$? We get an infinite loop: by calling $\omega$ with $\omega$, the result is still $\omega\omega$. In some deep sense, this comes from the fact that we can't assign a valid type to $\omega$. What happens when we try to infer its type? From $xx$, we see $x$ is a function that takes in the type of $x$. Please convince yourself that this is impossible.
 
@@ -577,7 +572,7 @@ are functions that have the appropriate types.\footnote{This is why these are na
 
 \simp Well, big deal. Theorems in zeroth-order implicational logic correspond to functions in simply typed lambda calculus, and vice versa. Is that all the Curry--Howard correspondence is about?
 
-\salv Remember how we showed that $\sf{MP}$, $\sf{K}$, and $\sf{S}$ were enough to show the deduction theorem? That means that all inhabited types in simply typed lambda calculus can be written in $\sf{K}$s and $\sf{S}$s. For example, $\sf{S}\sf{K}\sf{K} : A \to A$.
+\salv Remember how we used $\sf{K}$ and $\sf{S}$ to get the deduction theorem? By Curry--Howard, this means that using only $\sf{K}$ and $\sf{S}$, we can write any other function in the simply typed lambda calculus. For example, $x \mapsto x$ can also be written as $\sf{S}(\sf{K})(\sf{K})$. Compare this to our proof of $A \to A$, which uses $\sf{S}$ once and $\sf{K}$ twice.
 
 \simp That's cool and all. But again, I'm left wondering: what does this actually \emph{mean}? Once again, we've only established a connection between \emph{syntax}. We haven't talked at all about what this correspondence means for \emph{semantics}.
 
@@ -760,7 +755,7 @@ The three things we added---dependent types, polymorphism, and type constructors
 \end{tikzcd}
 \end{center}
 
-In the lower left corner, $\lambda \to$, is the simply typed lambda calculus. By going from left to right, we add dependent types. By going from bottom to top, we add polymorphism. By going from bottom-left to top-right, we add type operators. Each of the individual systems has a name, but that doesn't particularly matter for us---what matters more is the fact that these three things are independent, and can be combined.
+In the lower left corner, $\lambda \to$, is the simply typed lambda calculus. By going from left to right, we add dependent types. By going from bottom to top, we add polymorphism. By going from bottom-left to top-right, we add type operators. The cube represents each system with its own symbol, but that doesn't matter for us---what matters more is the fact that these three things are independent, and can be combined.
 
 For example, we can conceive of combining type constructors and dependent types, to produce a type that depends on both another type and a term. Let's say $A: \prop$. Then we can consider the type of tuples with $n$ terms of type $A$, which we'll call $\sf{tup}(A, n)$. Note that, as types, $\sf{tup}(\sf{int}, n)$ is the same type as $\sf{inttup}(n)$ from earlier. Now you can define a function like $A \mapsto n \mapsto x \mapsto (x, \ldots, x)$, which takes in $A$, $n : \sf{nat}$, and then a term $x : A$ returning a tuple of $n$ $x$s. This function would have type $\forall A: \prop, \forall n: \sf{nat}, A \to \sf{tup}(A, n)$.
 
@@ -774,7 +769,7 @@ This is both a type constructor, because it takes two types and returns a type, 
   \forall B: \prop,
   \sf{and}(A, B) \to A.
 \]
-Here, $\sf{K}$ is the function we defined earlier. We claim this function has type $\forall A: \prop, \forall B: \prop, \sf{and}(A, B) \to A$. First, note that $X$ begins with type $\sf{and}(A, B)$, and so the type of $X$ is $\forall C: \prop, (A \to B \to C) \to C$. By finding $XA$, we get the type $(A \to B \to A) \to A$. Finally, note that $\sf{K}AB$ is a function with type $A \to B \to A$, so we can indeed feed it as input to $XA$, giving a result of type $A$. This shows that it indeed has that type. By Curry--Howard, this means this is also a proof that $\forall A: \prop, \forall B: \prop, \sf{and}(A, B) \to A$.
+Here, $\sf{K}$ is the function we defined earlier. We claim this function has type $\forall A: \prop, \forall B: \prop, \sf{and}(A, B) \to A$. First, note that $X$ begins with type $\sf{and}(A, B)$, and so the type of $X$ is $\forall C: \prop, (A \to B \to C) \to C$. By finding $XA$, we get the type $(A \to B \to A) \to A$. Finally, note that $\sf{K}AB$ is a function with type $A \to B \to A$, so we can indeed feed it as input to $XA$, giving a result of type $A$. This shows that it indeed has that type. By Curry--Howard, this means this is also a proof that $\forall A: \prop, \forall B: \prop, \sf{and}(A, B) \to A$. (Exercise: How would you define $\sf{or}$?)
 
 Another example. We can combine dependent types and polymorphism to prove a statement about relations. For example, $a < b$ is a relation on the reals, and $a \mid b$ is a relation on the integers. Generally, a relation on a type $A$ is a predicate $R(a, b)$. So $R$ is a dependent type, of type $\forall A: \prop, A \to A \to \prop$. Then we can write the following proposition:
 \begin{align*}
@@ -1143,7 +1138,7 @@ So \emph{this} is why we wanted to have the more generally typed version of the 
 
 \vspace{0.5em}
 
-These inductive proofs are really tricky and somewhat tedious to write on paper, especially compared to the previous Curry–Howard things we've been doing, but I think it's instructive to work through one of these at least once in your life.
+These inductive proofs are really tricky and somewhat tedious to write on paper, especially compared to the previous Curry--Howard things we've been doing, but I think it's instructive to work through one of these at least once in your life.
 
 Proof assistants are called proof assistants because they help in making a lot of this work simpler. They keep track of the ``somethings'' that need to be filled in, and check that they have the types that they should have. Type theory provides a very natural language for this, not only giving us a good basis for formalizing what a proof means, but making it amenable to using a computer to work out.
 
