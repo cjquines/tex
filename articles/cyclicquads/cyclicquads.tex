@@ -21,9 +21,9 @@ Identify six cyclic quadrilaterals with vertices in $\cbr{A, B, C, D, E, F, H}$.
 
 Identify nine cyclic quadrilaterals with vertices in $\cbr{A, B, C, D, E, F, P_1, P_2, Q_1, Q_2}$. % BCEF * 3, PQAF * 2, PQCD * 2, PQPQ, ABQQ
 
-\item (Right angle on intouch chord) In $\triangle ABC$, let $I$ be the incenter, and suppose the incircle is tangent to sides $BC$, $CA$, and $AB$ at points $D$, $E$, and $F$, respectively. Lines $BI$ and $CI$ intersect line $EF$ at points $P$ and $Q$, respectively.
+\item (Right angle on intouch chord) In $\triangle ABC$, let $I$ be the incenter, and $M$ the midpoint of side $BC$. Suppose the incircle is tangent to sides $BC$, $CA$, and $AB$ at points $D$, $E$, and $F$, respectively. Lines $BI$ and $CI$ intersect line $EF$ at points $P$ and $Q$, respectively.
 
-Identify four cyclic quadrilaterals with vertices in $\cbr{A, D, E, F, I, P, Q}$. Of their circumcircles, which one does $B$ lie on? What about $C$? % AIEF, BFQID, CEPID, DXPQ. BPQC is also one
+Identify thirteen cyclic quadrilaterals with vertices in $\cbr{A, B, C, D, E, F, I, P, Q}$. % AIEF, BFQID, CEPID, DMPQ, BPQC
 
 \end{enumerate}
 
@@ -47,6 +47,8 @@ Identify four cyclic quadrilaterals with vertices in $\cbr{A, D, E, F, I, P, Q}$
 
 \subsubsection*{Examples}
 
+All problems we'll discuss today can be solved by proving some quadrilateral is cyclic, then concluding.
+
 We'll use the notation $(ABC)$ to denote the circumcircle of $\triangle ABC$. With two points, $(AB)$ denotes the circle with diameter $AB$. With four or more points, $(ABCD)$ can mean either the assertion that polygon $ABCD$ is cyclic (``we will prove that $(ABCD)$\dots'') or its circumcircle (``we will prove $P$ lies on $(ABCD)$\dots''). This is standard notation; you won't need to define it.
 
 \begin{enumerate}
@@ -63,9 +65,9 @@ So, all we need to do is prove $(AFPQ)$. We now go over its pairs of vertices. W
 
 That leaves $\{P, F\}$. And $\angle QFA = 180\dg - \angle DFA = \angle DCA$, by $(ACDF)$. But $\angle DCA = \angle BCA$, and we know from earlier that this is $\angle QPA$. This shows $(AFPQ)$, which finishes.
 
-\textbf{Remark:} Why isn't $\angle QAP$ nice? Because if I tried to angle chase with it, I'd get stuck: no other points lie on lines $QA$ or $AP$, it doesn't lie on a circle we know about, it's not part of a triangle whose other angles are nice, it's not made up of angles that are nice. In contrast, $\angle QFA$ is nice because $B$ lies on line $AF$, and $D$ lies on line $QF$, and we know $(DFA)$ contains $C$ as well, and so on.
+\textbf{Remark 1:} Why isn't $\angle QAP$ nice? Because if I tried to angle chase with it, I'd get stuck: no other points lie on lines $QA$ or $AP$, it doesn't lie on a circle we know about, it's not part of a triangle whose other angles are nice, it's not made up of angles that are nice. In contrast, $\angle QFA$ is nice because $B$ lies on line $AF$, and $D$ lies on line $QF$, and we know $(DFA)$ contains $C$ as well, and so on.
 
-\textbf{Remark:} Directed angles make chasing easier, because it gets rid of the $180\dg$ things. For example, proving $(AFPQ)$ becomes $\dang QFA = \dang DFA = \dang DCA = \dang BCA = \dang BPA = \dang QPA$. Each equality here is \textit{mechanical}. Between each $=$, we keep two letters and change the other. Changing an endpoint letter works if they're collinear, and changing the middle letter works if they're concyclic.
+\textbf{Remark 2:} Directed angles make chasing easier, because it gets rid of the $180\dg$ things. For example, proving $(AFPQ)$ becomes $\dang QFA = \dang DFA = \dang DCA = \dang BCA = \dang BPA = \dang QPA$. Each equality here is \textit{mechanical}. Between each $=$, we keep two letters and change the other. Changing an endpoint letter works if they're collinear, and changing the middle letter works if they're concyclic.
 
 \item (Right angle on intouch chord) In $\triangle ABC$, let $I$ be the incenter, and suppose the incircle is tangent to sides $BC$, $CA$, and $AB$ at points $D$, $E$, and $F$, respectively. Lines $BI$ and $EF$ meet at point $P$. Prove that lines $BP$ and $CP$ are perpendicular.
 
