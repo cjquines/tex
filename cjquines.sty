@@ -725,17 +725,85 @@
     usepackage("amsmath");
     usepackage("amssymb");
     texpreamble("\RequirePackage{color}");
-    import olympiad;
-    import cse5;
-    pointpen = black;
-    pathpen = black;
-    pathfontpen = black;
-    anglepen = black;
-    anglefontpen = black;
-    pointfontsize = 8;
+
+    // Replacement for olympiad+cse5 which is not standard
+    import geometry;
+
+    // recalibrate fill and filldraw for conics
+    void filldraw(picture pic = currentpicture, conic g, pen fillpen=defaultpen, pen drawpen=defaultpen)
+        { filldraw(pic, (path) g, fillpen, drawpen); }
+    void fill(picture pic = currentpicture, conic g, pen p=defaultpen)
+        { filldraw(pic, (path) g, p); }
+
+    // olympiad stuff
+    path rightanglemark(pair A, pair B, pair C, real s=1) {
+      pair P, Q, R;
+      P=s*0.08*unit(A-B)+B;
+      R=s*0.08*unit(C-B)+B;
+      Q=P+R-B;
+      return P--Q--R;
+    }
+
+    path[] pathticks(path g, int n=1, real r=.5, real spacing=1, real s=1) {
+      path[] result;
+      pair A, B, C, direct;
+      real t, l =arclength(g), space=spacing*0.04, halftick=s*0.04, startpt;
+      if (n>0) {
+        direct = unit(dir(g,arctime(g,r*l)));
+        startpt = r*l-(n-1)/2*space;
+        for (int i=0; i<n; ++i) {
+          t=startpt+i*space;
+          B=point(g,arctime(g,t))+(0,1)*halftick*direct;
+          C=B+2*(0,-1)*halftick*direct;
+          result = result^^B--C;
+        }
+      }
+      return result;
+    }
+
+    // some geometry
+    pair foot(pair P, pair A, pair B) { return foot(triangle(A,B,P).VC); }
+    pair orthocenter(pair A, pair B, pair C) { return orthocentercenter(A,B,C); }
+    pair centroid(pair A, pair B, pair C) { return (A+B+C)/3; }
+
+    // cse5 abbreviations
+    path CP(pair P, pair A) { return circle(P, abs(A-P)); }
+    path CR(pair P, real r) { return circle(P, r); }
+    pair IP(path p, path q) { return intersectionpoints(p,q)[0]; }
+    pair OP(path p, path q) { return intersectionpoints(p,q)[1]; }
+    path Line(pair A, pair B, real a=0.6, real b=a) { return (a*(A-B)+A)--(b*(B-A)+B); }
+
+    dotfactor = 4.5;
+
     pen bluey = rgb(0.1,0.417,0.571)+1;
     pen ruddy = rgb(0.568,0.208,0.098)+1;
     pen greeny = rgb(0.302,0.568,0.098)+1;
     pen dashed = linetype(new real[] {4,4});
   \end{asydef}
+\fi
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% TSQX
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\ifcjqnoimport
+\else
+  \RequirePackage{fancyvrb}
+  \newcounter{tsqx@cnt}
+  \newwrite\tsqx@sizefile
+  \newenvironment{tsqx}[1]{%
+    \stepcounter{tsqx@cnt}%
+    \edef\tsqx@base{\jobname-tsqx-\arabic{tsqx@cnt}}%
+    \immediate\openout\tsqx@sizefile=\tsqx@base.size\relax
+    \immediate\write\tsqx@sizefile{#1}%
+    \immediate\closeout\tsqx@sizefile
+    \VerbatimOut{\tsqx@base.tsqx}%
+  }{%
+    \endVerbatimOut
+    \IfFileExists{\tsqx@base.asy}{%
+      \asyinclude{\tsqx@base}%
+    }{%
+      \typeout{No file \tsqx@base.asy.}%
+    }%
+  }
 \fi

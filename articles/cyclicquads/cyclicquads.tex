@@ -1,0 +1,435 @@
+\documentclass[11pt,paper=letter]{scrartcl}
+\usepackage[alttitle]{cjquines}
+
+\begin{document}
+
+\title{All you have to do is find a cyclic quadrilateral}
+\author{CJ Quines}
+\date{May 3, 2026}
+
+\maketitle
+
+\subsubsection*{Warmup}
+
+\begin{enumerate}
+
+\item (Orthic triangle) In $\triangle ABC$, let $D$, $E$, and $F$ denote the feet of the altitudes from $A$, $B$, and $C$, respectively, and let $H$ be its orthocenter.
+
+Identify six cyclic quadrilaterals with vertices in $\cbr{A, B, C, D, E, F, H}$. % AHEF * 3, BCEF * 3
+
+\item (ISL 2010/G1) In acute $\triangle ABC$, let $D$, $E$, and $F$ denote the feet of the altitudes from $A$, $B$, and $C$, respectively. Line $EF$ meets the circumcircle of $\triangle ABC$ at points $P_1$ and $P_2$. Lines $BP_1$ and $BP_2$ intersect $DF$ at points $Q_1$ and $Q_2$, respectively.
+
+Identify nine cyclic quadrilaterals with vertices in $\cbr{A, B, C, D, E, F, P_1, P_2, Q_1, Q_2}$. % ABCPP, BCEF * 3, PQAF * 2, PQCD * 2, PQPQ, ABQQ
+
+\item (Right angle on intouch chord) In $\triangle ABC$, let $I$ be the incenter, and $M$ the midpoint of side $BC$. Suppose the incircle is tangent to sides $BC$, $CA$, and $AB$ at points $D$, $E$, and $F$, respectively. Lines $BI$ and $CI$ intersect line $EF$ at points $P$ and $Q$, respectively.
+
+Identify thirteen cyclic quadrilaterals with vertices in $\cbr{A, B, C, D, E, F, I, M, P, Q}$. % AIEF, BFQID, CEPID, DMPQ, BPQC
+
+\end{enumerate}
+
+\subsubsection*{Advice}
+
+\begin{itemize}
+
+\item \textbf{Draw large, accurate diagrams.} Tip: rulers are more accurate than compasses, so you want to use rulers as much as possible. Using a compass only once, do you know how to draw a triangle, its incenter, and its circumcenter? If you don't, Evan Chen's \href{https://web.evanchen.cc/handouts/Constructions/Constructions.pdf}{Some Notes on Constructing Diagrams} is required reading.
+
+\item \textbf{Draw sparse, clean diagrams.} The less things in your diagram, the better. If the problem has lots of points, draw only a subset at first. Or, once you've used ``all the information'' from a point, erase it from the diagram. If the diagram gets too messy, draw another.
+
+\item \textbf{Never angle chase without a goal.} Aimless angle chasing is often easy but rarely useful. Goals could be specific things like ``prove collinear'' or ``prove concyclic'', but they can also be more general, like ``erase this point from the diagram.''
+
+\item \textbf{Guess concyclic points based on the diagram.} And collinear points too, but I think collinear points are easier to find than concyclic points, so that's not my top-level advice. I find it helpful to specifically look for cyclic quads. Accurate diagrams are powerful because they lead to better guesses. The \href{https://guessr.evanchen.cc/}{Olympiad GeoGuessr} game lets you practice this skill: it gives you a diagram, and asks you to find sets of collinear and concyclic points.
+
+\item \textbf{Use directed angles.} It's possible, but unlikely, to lose points due to configuration issues. Directed angles are an easy way to avoid many of these. Angle chasing with directed angles is easier than with normal angles; we'll see this later. I learned directed angles from Evan Chen's \href{https://web.evanchen.cc/handouts/Directed-Angles/Directed-Angles.pdf}{How to Use Directed Angles} handout.
+
+\item Want to prove a quadrilateral is cyclic via angle chasing? There's six ways to do so: choose two vertices, and show they form same (or supplementary) angles with the other two vertices. My usual strategy is to find which of these angles are related to the rest of the diagram.
+
+\end{itemize}
+
+\subsubsection*{Notation}
+
+Some standard notation (which you won't need to define in your solutions):
+
+\begin{itemthin}
+\item $(ABC)$ denotes the circumcircle of $\triangle ABC$.
+\item $(AB)$ denotes the circle with diameter $AB$.
+\item $(ABCD)$ can mean either:
+\vspace{-0.5em}
+\begin{itemthin}
+\item the assertion that polygon $ABCD$ is cyclic (``we will prove that $(ABCD)$\dots''),
+\item or its circumcircle (``we will prove $P$ lies on $(ABCD)$\dots'').
+\end{itemthin}
+\item $\dang$ is for directed angles modulo $180\dg$, as opposed to $\angle$ for standard angles.
+\end{itemthin}
+
+\subsubsection*{Examples}
+
+All problems we'll discuss today can be solved by \textbf{proving some quadrilateral is cyclic, then concluding}. This doesn't solve \textit{every} angle chasing problem, but it sure solves a lot of them.
+
+\begin{enumerate}
+
+\item (Orthic triangle) In $\triangle ABC$, let $D$, $E$, and $F$ denote the feet of the altitudes from $A$, $B$, and $C$, respectively, and let $H$ be its orthocenter. Prove that $H$ is the incenter of $\triangle DEF$.
+
+\begin{center}
+\begin{tsqx}{5cm}
+A = dir 110
+B = dir 210
+C = dir 330
+D S = foot A B C
+E NE = foot B C A
+F = foot C A B
+H 2N1E = A + B + C
+
+A--B--C--cycle
+A--D
+B--E
+C--F
+D--E--F--cycle
+
+rightanglemark A D B
+rightanglemark B E C
+rightanglemark C F A
+\end{tsqx}
+\end{center}
+
+\textbf{Sketch:} We'll show $DH$ bisects $\angle EDF$; symmetry finishes. Because $(CDEH)$, $\angle EDH = \angle ECH$. Because $(BDFH)$, $\angle HDF = \angle HBF$. Because $(BCEF)$, $\angle HBF = \angle EBF = \angle ECF = \angle ECH$. So, $\angle EDH$ and $\angle HDF$ are both equal to $\angle ECH$, which finishes.
+
+\item (ISL 2010/G1) In acute $\triangle ABC$, let $D$, $E$, and $F$ denote the feet of the altitudes from $A$, $B$, and $C$, respectively. One of the intersection points of line $EF$ and the circumcircle of $\triangle ABC$ is $P$. Lines $BP$ and $DF$ meet at point $Q$. Prove that $AP = AQ$.
+
+\begin{center}
+\begin{tsqx}{6cm}
+A = dir 70
+B = dir 210
+C = dir 330
+D S = foot A B C
+E NE = foot B C A
+F N = foot C A B
+P = IP (circumcircle A B C) (Line E F 1)
+Q = extension B P D F
+
+circumcircle A B C
+A--B--C--cycle
+A--D
+B--E
+C--F--E
+D--F--P
+B--Q--F
+
+rightanglemark A D B
+rightanglemark B E C
+rightanglemark C F A
+\end{tsqx}
+\end{center}
+
+\textbf{Sketch:} We'll show $\angle AQP = \angle QPA$. From the warmup, we guessed that $(AFPQ)$. If so, we'd get $\angle AQP = 180\dg - \angle AFP = 180\dg - \angle BFE = \angle BCE = \angle BCA$, where last step is from $(BCEF)$. Also, $\angle QPA = 180\dg - \angle BPA = \angle BCA$.
+
+So, we need to prove $(AFPQ)$. We now go over its pairs of vertices. We're using $\{F, Q\}$ to conclude, so we can't use that. And $\{A, P\}$ won't work because $\angle QAF$ isn't nice, as it's not related to the rest of the diagram. Similarly, we can rule out $\{A, F\}$ because $\angle QAP$ isn't nice, and $\{A, Q\}$ because $\angle PQF$ isn't nice. For $\{P, Q\}$, neither $\angle AQF$ nor $\angle APF$ are nice.
+
+That leaves $\{P, F\}$. And $\angle QFA = 180\dg - \angle DFA = \angle DCA$, by $(ACDF)$. But $\angle DCA = \angle BCA$, and we know from earlier that this is $\angle QPA$. This shows $(AFPQ)$, which finishes.
+
+\textbf{Remark 1:} Why isn't $\angle QAP$ nice? Because if I tried to angle chase with it, I'd get stuck: no other points lie on lines $QA$ or $AP$, it doesn't lie on a circle we know about, it's not part of a triangle whose other angles are nice, it's not made up of angles that are nice. In contrast, $\angle QFA$ is nice because $B$ lies on line $AF$, and $D$ lies on line $QF$, and we know $(DFA)$ contains $C$ as well, and so on.
+
+\textbf{Remark 2:} Directed angles make chasing easier, because it gets rid of the $180\dg$ things. For example, proving $(AFPQ)$ becomes $\dang QFA = \dang DFA = \dang DCA = \dang BCA = \dang BPA = \dang QPA$. Each equality here is \textit{mechanical}. Between each $=$, we keep two letters and change the other. Changing an endpoint letter works if they're collinear, and changing the middle letter works if they're concyclic.
+
+\item (Right angle on intouch chord) In $\triangle ABC$, let $I$ be the incenter, and suppose the incircle is tangent to sides $BC$, $CA$, and $AB$ at points $D$, $E$, and $F$, respectively. Lines $BI$ and $EF$ meet at point $P$. Prove that lines $BP$ and $CP$ are perpendicular.
+
+\begin{center}
+\begin{tsqx}{7cm}
+A = dir 140
+B = dir 210
+C = dir 330
+M S = midpoint B--C
+N NE = midpoint C--A
+I NW = incenter A B C
+D S = foot I B C
+E N = foot I C A
+F = foot I A B
+P = extension B I E F
+
+A--B--C--cycle
+incircle A B C
+B--P--C
+F--P
+E--I--D / dashed
+M--P / dashed
+
+rightanglemark A E I
+rightanglemark C D I
+\end{tsqx}
+\end{center}
+
+\textbf{Sketch:} From the warmup, we guessed that $(CDEIP)$. If so, we'd get $\angle BPC = \angle IPC = \angle IDC = 90\dg$, so we just need to prove that. One way is proving $(CEIP)$ using $\{C, P\}$; $\angle ECI$ is already nice, and $\angle EPI = \angle FPI$, which is nice because the other two angles in $\triangle FPI$ are nice. We could also use $\angle EPI = \angle FPB$, because the other two angles in $\triangle FPB$ are nice. In any case, $(CEIP)$ plus $(CDEI)$ gives $(CDEIP)$, which finishes.
+
+\textbf{Exercise:} Let $M$ and $N$ be the midpoints of sides $BC$ and $CA$. Prove that points $M$, $N$, and $P$ are collinear.
+
+\textbf{Remark:} The exercise and example show that \textbf{the $A$-touch chord, $B$-bisector, and $C$-midline concur}. A similar result holds for the excircle. This is also called the Iran lemma, named after its use in \href{https://artofproblemsolving.com/community/c6h277108p1499412}{Iran TST 2009/9}.
+
+\end{enumerate}
+
+\subsubsection*{Problems}
+
+\begin{enumerate}
+
+% \item (\href{https://artofproblemsolving.com/community/c6h1893656p12930715}{BAMO 1999/2}) Points $O$, $A$, and $B$ are collinear in that order. Let $P$ be a point on the circle with diameter $AB$. Point $Q$ lies on line $PA$ such that $OQ$ and $OA$ are perpendicular. Prove that $\angle BQP = \angle BOP$. % (BPOQ), done; in EGMO
+
+\item Let $ABCD$ be a convex cyclic quadrilateral. Let $M$ be the midpoint of arc $BC$ not containing $A$ or $D$. Let $E$ and $F$ be the intersections of $AM$ and $DM$ with $BC$, respectively. Prove that $\angle AED = \angle AFD$. % (AEFD), done
+
+\item (\href{https://artofproblemsolving.com/wiki/index.php/Simson_line}{Simson line}) Let $ABC$ be a triangle and $P$ be a point on $(ABC)$. Let $X$, $Y$, and $Z$ be the feet of the perpendiculars from $P$ onto $BC$, $CA$, and $AB$, respectively. Prove that $X$, $Y$, and $Z$ are collinear. % (PXYC), (PYZA), (PZXB)
+
+\item (\href{https://artofproblemsolving.com/community/c6h54823p341530}{IMO 1959/5}) Point $E$ lies on side $BC$ of a square $ABCD$. Square $BFGE$ is constructed outside $ABCD$. Lines $AE$ and $CF$ meet at point $P$. Prove that points $D$, $G$, and $P$ are collinear. % (ABCP), (EPGF).
+
+\item (\href{https://artofproblemsolving.com/community/c6h353662p1915250}{JBMO 2010/3}) Let $AL$ and $BK$ be angle bisectors of scalene triangle $ABC$. The perpendicular bisector of $BK$ intersects line $AL$ at $M$. Point $N$ lies on line $BK$ such that $LN$ is parallel to $MK$. Prove that $LN = NA$. % as M is the fact-five point of (ABK), we have (BKMA); by reim (ABLN); done
+
+\item (\href{https://artofproblemsolving.com/community/c6h2526706p21455215}{ELMO 2021/4}) Let $ABC$ be a triangle with incenter $I$ and let $D$ be an arbitrary point on the side $BC$. Let the line through $D$ perpendicular to $BI$ intersect $CI$ at $E$. Let the line through $D$ perpendicular to $CI$ intersect $BI$ at $F$. Prove that the reflection of $A$ across the line $EF$ lies on the line $BC$. % (AEFI), simson line of A wrt triangle EFI is BC
+
+\end{enumerate}
+
+\subsubsection*{Cut for session}
+
+\begin{enumerate}[resume]
+
+\item (\href{https://bmos.ukmt.org.uk/home/bmo1-2026-report.pdf}{BMO1 2026/4}) In $\triangle ABC$, let $M$ be the midpoint of side $BC$. The circle passing through $M$ tangent to $AB$ at $B$ and the circle passing through $M$ tangent to $AC$ at $C$ intersect again at $D$. Prove that $MA \times MD = MB \times MC$. % (ABCD), M(MD cap (ABC)) = MA
+
+% \item (\href{https://artofproblemsolving.com/community/c6h530264p3025732}{Russia 1996/10.1}) Points $E$ and $F$ are given on the side $BC$ of a convex quadrilateral $ABCD$ (with $E$ closer than $F$ to $B$). It is known that $\angle BAE = \angle CDF$ and $\angle EAF = \angle FDE$. Prove that $\angle CAF = \angle EDB$. % (AEFD) from statement, then DCE + BAD = 180, so (ABCD), then done. also in EGMO ch1
+
+\item Let $ABCD$ be a cyclic quadrilateral. The perpendiculars to $AD$ and $BC$ at $A$ and $C$ respectively meet at $M$, and the perpendiculars to $AD$ and $BC$ at $D$ and $B$ meet at $N$. If the lines $AD$ and $BC$ meet at $E$, prove that $\angle DEN = \angle CEM$. % (EBDN), (EACM)
+
+\item In triangle $ABC$, points $D$ and $E$ are located on the side $BC$ such that $AD$ is an altitude and $AE$ is an angle bisector. The point $M$ on $AE$ is such that $BM$ is perpendicular to $AE$ and the point $N$ on $AC$ is such that $EN$ is perpendicular to $AC$. Prove that the points $D$, $M$, and $N$ are collinear. % (ABDM), (ADEN), wts <BDM + <NDC = 0.
+
+\item (\href{https://artofproblemsolving.com/community/c6h1181533p5720174}{IMO 2013/4}) Let $ABC$ be an acute triangle with orthocenter $H$, and let $W$ be a point on the side $BC$, between $B$ and $C$. The points $M$ and $N$ are the feet of the altitudes drawn from $B$ and $C$, respectively. $\omega_1$ is the circumcircle of triangle $BWN$ and $X$ is a point such that $WX$ is a diameter of $\omega_1$. Similarly, $\omega_2$ is the circumcircle of triangle $CWM$ and $Y$ is a point such that $WY$ is a diameter of $\omega_2$. Show that the points $X$, $Y$, and $H$ are collinear. % let w1 cap w2 = P. Then (AMNP), but <APH = 90d, but also <XPW = 90d.
+
+% \item (???) Convex quadrilateral $ABCD$ satisfies $AB = AC = AD$ and $AB \parallel CD$. The line through $A$ perpendicular to $CD$ intersects lines $BC$ and $BD$ at points $P$ and $Q$, respectively. Prove that lines $AB$, $CQ$, and $DP$ are concurrent. % ACD is just the orthic triangle of BP[concurrency point], where Q is orthocenter
+% % i think this is "own" technically
+
+\item Triangle $ABC$ is acute-angled with circumcircle $\Gamma$ and orthocentre $H$ so that $AB ̸= AC$. Let $AH$ meet $BC$ and $\Gamma$ at $D$ and $E$, respectively. Let $F$ be the midpoint of $BC$. The line tangent to circle $DEF$ at $D$ meets the lines $AB$ and $AC$ at $M$ and $L$, respectively. Prove that $MD = DL$.
+
+\item (\href{https://artofproblemsolving.com/community/c6h3135896p28425667}{BMO1 2014/5}) Let $ABCD$ be a cyclic quadrilateral. Let $F$ be the midpoint of the arc $AB$ of its circumcircle which does not contain $C$ or $D$. Let the lines $DF$ and $AC$ meet at $P$ and the lines $CF$ and $BD$ meet at $Q$. Prove that the lines $PQ$ and $AB$ are parallel. % (PQCD)
+
+% \item (\href{https://artofproblemsolving.com/community/c6h545085p3151962}{ELMO SL 2013/G3}) In $\triangle ABC$, a point $D$ lies on line $BC$. The circumcircle of $ABD$ meets $AC$ at $F$ (other than $A$), and the circumcircle of $ADC$ meets $AB$ at $E$ (other than $A$). Prove that as $D$ varies, the circumcircle of $AEF$ always passes through a fixed point other than $A$, and that this point lies on the median from $A$ to $BC$.
+% the legendary A-humpty config
+% https://github.com/vEnhance/oly-geoguessr/blob/main/asy/201-TSTST-2016/2-Miquel-TSTST.asy
+
+\item (\href{https://artofproblemsolving.com/community/c6h3598814p35195606}{JBMO SL 2024/G7}) Let $ABC$ be an acute and scalene triangle, and $D$ a point on side $BC$. Points $E$ and $F$ lie on $AD$ such that $EB \perp AB$ and $FC \perp AC$. Points $S$ and $T$ lie on $BC$ such that $SE \parallel AC$ and $TF \parallel AB$. Suppose the circumcircle of $\triangle BSE$ intersects $AB$ again at $M$, and the circumcircle of $\triangle CTF$ intersects $AC$ again at $N$. Prove that lines $MS$, $NT$, and $AD$ are concurrent. % if P = AD cap (ABC), then (BSEMP), (CTFNP), M-P-N perp AD, etc.
+
+\item (\href{https://artofproblemsolving.com/community/c6h3368244p31340843}{APMO 2024/1}) Let $ABC$ be an acute triangle. Let $D$ be a point on side $AB$ and $E$ be a point on side $AC$ such that lines $BC$ and $DE$ are parallel. Let $X$ be an interior point of $BCED$. Suppose rays $DX$ and $EX$ meet side $BC$ at points $P$ and $Q$, respectively, such that both $P$ and $Q$ lie between $B$ and $C$. Suppose that the circumcircles of triangles $BQX$ and $CPX$ intersect at a point $Y \neq X$. Prove that the points $A, X$, and $Y$ are collinear. % (DXE) cap (BQX) lies on AB, sim. (DXE) cap (CPX) lies on AC, use rad ax. might have to rewrite
+
+\item (\href{https://artofproblemsolving.com/community/c6h3190974p29111134}{Korea 2023/4}) Pentagon $ABCDE$ is inscribed in circle $\Omega$. Line $AD$ meets $CE$ at $F$, and $P (\neq E, F)$ is a point on segment $EF$. The circumcircle of triangle $AFP$ meets $\Omega$ at $Q(\neq A)$ and $AC$ at $R(\neq A)$. Line $AD$ meets $BQ$ at $S$, and the circumcircle of triangle $DES$ meets line $BQ, BD$ at $T(\neq S), U(\neq D)$, respectively. Prove that if $F, P, T, S$ are concyclic, then $P, T, R, U$ are concyclic. % (TPEQ), thus (TRQP)
+
+\item (\href{https://artofproblemsolving.com/community/c6h2140034p15706437}{APMO 2020/1}) Let $\Gamma$ be the circumcircle of $\triangle ABC$. Let $D$ be a point on the side $BC$. The tangent to $\Gamma$ at $A$ intersects the parallel line to $BA$ through $D$ at point $E$. The segment $CE$ intersects $\Gamma$ again at $F$. Suppose $B$, $D$, $F$, $E$ are concyclic. Prove that $AC$, $BF$, $DE$ are concurrent. % (ACDE) cyclic, use rad ax
+
+\item (\href{https://artofproblemsolving.com/community/c6h1226672p6171514}{EGMO 2016/2}) Let $ABCD$ be a cyclic quadrilateral, and let diagonals $AC$ and $BD$ intersect at $X$.Let $C_1,D_1$ and $M$ be the midpoints of segments $CX,DX$ and $CD$, respecctively. Lines $AD_1$ and $BC_1$ intersect at $Y$, and line $MY$ intersects diagonals $AC$ and $BD$ at different points $E$ and $F$, respectively. Prove that line $XY$ is tangent to the circle through $E,F$ and $X$. % (ABC_1D_1), erase C and D
+
+\end{enumerate}
+
+\subsubsection*{Sketches}
+
+\begin{enumerate}
+
+\item TODO ABCD AED AFD
+\begin{center}
+\begin{tsqx}{4cm}
+A = dir 130
+B = dir 210
+C = dir 330
+D = dir 20
+M = dir 270
+E = extension A M B C
+F = extension D M B C
+
+A--B--C--D--cycle
+circumcircle A B C
+A--M--D
+\end{tsqx}
+\end{center}
+
+\item TODO Simson line
+\begin{center}
+\begin{tsqx}{4cm}
+A = dir 120
+B = dir 210
+C = dir 330
+P = dir 70
+X = foot P B C
+Y W = foot P C A
+Z = foot P A B
+
+A--B--C--cycle
+circumcircle A B C
+P--X^^P--Y^^P--Z
+A--Z
+
+rightanglemark C X P
+rightanglemark C Y P
+rightanglemark A Z P
+\end{tsqx}
+\end{center}
+
+\item There's several ways to angle chase $\angle CPA = 90\dg$, which shows $(ABCDP)$; similarly $(BEFGP)$. The former gives $\angle DPE = \angle DPA = \angle DBA = 45\dg$, and the latter gives $\angle EPG = 180\dg - \angle EBG = 135\dg$, so $\angle DPE + \angle EPG = 180\dg$.
+\begin{center}
+\begin{tsqx}{4cm}
+A = dir 135
+B = dir 225
+C = dir 315
+D = dir 45
+E NE = relpoint (line B C) 0.6
+F SE = relpoint (line B A) -0.6
+G = minus (plus E F) B
+P = extension A E C F
+
+A--B--C--D--cycle
+B--F--G--E
+A--P^^C--F
+\end{tsqx}
+\end{center}
+
+\item TODO JBMO 2010/3
+\begin{center}
+\begin{tsqx}{6cm}
+A = dir 160
+B = dir 220
+C = dir 320
+L = `bisectorpoint(triangle(A, B, C).BC)`
+K N = `bisectorpoint(triangle(A, B, C).CA)`
+BK := midpoint B--K
+M SW = intersectionpoint (bisector (segment B K)) (line A L)
+N NE = intersectionpoint (parallel L (line M K)) (line B K)
+
+A--B--C--cycle
+A--L / dashed
+B--N
+L--N
+M--K
+BK--M
+
+rightanglemark B BK M
+pathticks B--BK
+pathticks BK--K
+\end{tsqx}
+\end{center}
+
+\item TODO ELMO 2021/4
+\begin{center}
+\begin{tsqx}{5cm}
+A = dir 110
+B = dir 210
+C = dir 330
+I N = incenter A B C
+D = (plus B (mult 0.5 (minus C B)))
+E' := foot D B I
+E N = extension D E' C I
+F' := foot D C I
+F N = extension D F' B I
+A' = mult (reflect (line E F)) A
+
+A--B--C--cycle
+D--E--C
+D--F--B
+A--A' / dashed
+E--F
+
+rightanglemark B (extension D E B F) D
+rightanglemark D (extension D F C E) C
+\end{tsqx}
+\end{center}
+
+\item TODO BMO1 2026/4
+\begin{center}
+\begin{tsqx}{5cm}
+A = dir 110
+B = dir 210
+C = dir 330
+\end{tsqx}
+\end{center}
+
+\item TODO cyclic ABCD DEN CEM
+\begin{center}
+\begin{tsqx}{5cm}
+A = dir 110
+B = dir 210
+C = dir 330
+\end{tsqx}
+\end{center}
+
+\item TODO D M N collinear
+\begin{center}
+\begin{tsqx}{5cm}
+A = dir 110
+B = dir 210
+C = dir 330
+\end{tsqx}
+\end{center}
+
+\item TODO IMO 2013/4
+\begin{center}
+\begin{tsqx}{5cm}
+A = dir 110
+B = dir 210
+C = dir 330
+\end{tsqx}
+\end{center}
+
+\item TODO ABC MD DL
+\begin{center}
+\begin{tsqx}{5cm}
+A = dir 110
+B = dir 210
+C = dir 330
+\end{tsqx}
+\end{center}
+
+\item TODO BMO1 2014/5
+\begin{center}
+\begin{tsqx}{5cm}
+A = dir 110
+B = dir 210
+C = dir 330
+\end{tsqx}
+\end{center}
+
+\item TODO JBMO SL 2024/G7
+\begin{center}
+\begin{tsqx}{5cm}
+A = dir 110
+B = dir 210
+C = dir 330
+\end{tsqx}
+\end{center}
+
+\item TODO APMO 2024/1
+\begin{center}
+\begin{tsqx}{5cm}
+A = dir 110
+B = dir 210
+C = dir 330
+\end{tsqx}
+\end{center}
+
+\item TODO Korea 2023/4
+\begin{center}
+\begin{tsqx}{5cm}
+A = dir 110
+B = dir 210
+C = dir 330
+\end{tsqx}
+\end{center}
+
+\item TODO APMO 2021/1
+\begin{center}
+\begin{tsqx}{5cm}
+A = dir 110
+B = dir 210
+C = dir 330
+\end{tsqx}
+\end{center}
+
+\item TODO EGMO 2016/2
+\begin{center}
+\begin{tsqx}{5cm}
+A = dir 110
+B = dir 210
+C = dir 330
+\end{tsqx}
+\end{center}
+
+\end{enumerate}
+
+\end{document}

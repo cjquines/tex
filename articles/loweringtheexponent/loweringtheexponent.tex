@@ -1,0 +1,243 @@
+\documentclass[11pt,paper=letter]{scrartcl}
+\usepackage[alttitle]{cjquines}
+
+\begin{document}
+
+\title{Lowering the exponent}
+\author{CJ Quines}
+\date{May 10, 2026}
+
+\maketitle
+
+\subsubsection*{Valuation}
+
+Define $\nu_p \from \NN \to \NN^0$ for positive integers $n$ as
+$$\nu_p(n) = k \quad \iff \quad p^k \mid n,\,p^{k+1}\nmid n.$$
+This is known as the $p$-adic valuation of $n$.\footnote{A notation more common in older texts is $p^k \parallel n$.} Note that this is $\nu_p$ with the Greek letter $\nu$ (spelled nu, pronounced ``new'').\footnote{This is sometimes written as $v_p$ with the English letter $v$. I don't think this is standard, as I see more sources use $\nu_p$. I don't even know why $\nu$ is the letter chosen for this, other than its superficial similarity to the letter $v$.} Some properties that you should convince yourself are true:
+\begin{itemize}
+  \item $\nu_p(ab) = \nu_p(a) + \nu_p(b)$.
+  \item Similarly $\nu_p\del{\frac ab} = \nu_p(a) - \nu_p(b)$. We can use this to extend the definition of $\nu_p$ to be a function from $\QQ^{\neq 0} \to \ZZ$.
+
+  What should $\nu_p(0)$ be? To satisfy the product rule, we can pick $\nu_p(0) = \infty$.
+
+  \item $\nu_p(a + b) \ge \min\cbr{\nu_p(a), \nu_p(b)}$, equality holds if $\nu_p(a) \neq \nu_p(b)$.
+  \item $\nu_p(a - b) \ge e \iff a \equiv b \pmod{p^e}$ from the previous.
+  \item $\nu_p(\gcd(a, b)) = \min\cbr{\nu_p(a), \nu_p(b)}$.
+  \item $\nu_p(\lcm(a, b)) = \max\cbr{\nu_p(a), \nu_p(b)}$.
+  \item $a = b \iff \nu_p(a) = \nu_p(b)$ for all $p$.
+  \item More generally, $a \mid b \iff \nu_p(a) \le \nu_p(b)$ for all $p$.
+\end{itemize}
+
+\subsubsection*{Examples}
+
+\begin{enumerate}
+  \item Prove that $\displaystyle \gcd(a, b, c) = \frac{abc\cdot\lcm(a, b, c)}{\lcm(a, b)\lcm(b, c)\lcm(c, a)}$.
+
+  \textbf{Sketch:} Pick a prime $p$, idea is to show $\nu_p$ of LHS and RHS are the same. Let $x = \nu_p(a)$, $y = \nu_p(b)$, and $z = \nu_p(c)$. In the LHS you have $\min\cbr{x, y, z}$, on the RHS you have $x + y + z + \max\cbr{x, y, z} - \max\cbr{x, y} - \max\cbr{y, z} - \max\cbr{z, x}$. But these are equal.
+
+  \item Suppose $a \mid b^2 \mid a^3 \mid b^4 \mid a^5 \mid \cdots$. Prove that $a = b$.
+
+  \textbf{Sketch:} This is an easy problem, but it's a bit hard to write up. Using $\nu_p$ makes it easier. We have
+  $$a^{2n - 1} \mid b^{2n} \implies (2n-1)\nu_p(a) \le 2n\nu_p(b) \implies \nu_p(a) \le \frac{2n}{2n-1} \nu_p(b).$$
+  Taking the limit as $n \to \infty$ means $\nu_p(a) \le \nu_p(b)$; similarly we can prove $\nu_p(b) \le \nu_p(a)$. This shows $\nu_p(a) = \nu_p(b)$.
+\end{enumerate}
+
+\subsubsection*{Bare hands}
+
+\begin{enumerate}
+
+\item Positive integers $a$, $b$, and $c$ satisfy $a \mid b^3$, $b \mid c^3$, and $c \mid a^3$. Prove that $abc \mid (a + b + c)^{13}$.
+% v_p, done
+
+\item Let $n \ge 3$. Positive integers $a_1, \ldots, a_n$ satisfy $(a_1, \ldots, a_n)[a_1, \ldots, a_n] = a_1 \cdots a_n$. Prove that $(a_i, a_j) = 1$ for all $i \ne j$.
+% v_p, done
+
+\item (\href{https://artofproblemsolving.com/community/c6h356076p1935854}{IMO 2010/3}) Find all functions $g \from \NN \to \NN$ such that \[(g(m) + n)(g(n) + m)\] is a perfect square for all $m, n \in \NN$.
+% i guess the motivation is "injective over p" => "consider v_p"
+% https://artofproblemsolving.com/community/c6h356076p29502580
+
+\item (\href{https://artofproblemsolving.com/community/c6h1671291p10632353}{IMO 2018/5}) Let $a_1$, $a_2$, $\ldots$ be an infinite sequence of positive integers. Suppose that there is an integer $N > 1$ such that, for each $n \geq N$, the number $$\frac{a_1}{a_2} + \frac{a_2}{a_3} + \cdots + \frac{a_{n-1}}{a_n} + \frac{a_n}{a_1}$$is an integer. Prove that there is a positive integer $M$ such that $a_m = a_{m+1}$ for all $m \geq M$.
+% look at common diff, consider v_p, show it's non-inc
+% https://artofproblemsolving.com/community/c6h1671291p10634217
+
+\item (\href{https://artofproblemsolving.com/community/c6h3804650p37636484}{Turkey TST 2026/5--}) Find all infinite integer sequences $a_1,a_2,\dots$ such that \[a_i > 1 \quad \text{and} \quad \varphi(a_i)\varphi(a_{i+1})=a_i^2\]hold for all positive integers $i$.
+% if odd p | a_i, then all a_{>i} is div by a higher power of p
+% https://artofproblemsolving.com/community/c6h3804650p37693938
+
+\item (\href{https://artofproblemsolving.com/community/c6h1446913p8271420}{APMO 2017/4}) Call a rational number $r$ \textit{powerful} if $r$ can be expressed in the form $p^k/q$ for some relatively prime positive integers $p, q$ and some integer $k >1$. Let $a, b, c$ be positive rational numbers such that $abc = 1$. Suppose there exist positive integers $x, y, z$ such that $a^x + b^y + c^z$ is an integer. Prove that $a, b, c$ are all powerful.
+% show y*v_p(b) = z*v_p(c)
+% https://artofproblemsolving.com/community/c6h1446913p13072422
+% in OTIS excerpts walkthroughs (P152)
+
+\item (\href{https://artofproblemsolving.com/community/c6h1492528p8768207}{Iran 3rd 2017/1.NT.1}) Let $n$ be a positive integer and $P$ a (possibly empty) set of prime numbers. Let $A$ be the set of all positive integers less than $n$ not divisible by a prime in $P$. If $|A| > 1$, show that the sum of the reciprocals of the elements of $A$ is not an integer.
+% let p be the smallest prime not in P. pick a such that v_p(a) = k is maximal. suppose v_p(b) = k. then n > max{a, b} > c*p^k > p^{k+1} contrad. so p^k must divide the denom.
+
+\item (\href{https://artofproblemsolving.com/community/c6h1799942p11944591}{China TST 2019/1.4}) Call a sequence of positive integers $\{a_n\}$ good if for any distinct positive integers $m$ and $n$, one has $$\gcd(m,n) \mid a_m^2 + a_n^2 \quad \text{and} \quad \gcd(a_m,a_n) \mid m^2 + n^2.$$Call a positive integer $a$ to be $k$-good if there exists a good sequence such that $a_k = a$. Does there exists a $k$ such that there are exactly $2019$ $k$-good positive integers?
+% A sequence of integers $\{a_k \}$ is good if and only if $m \mid a_m^2$ and $a_m \mid m^2$, for each $m \in \mathbb{N}$.
+% (equiv to v_p(n)/2 <= v_p(a_n) <= 2v_p(n))
+
+\item (\href{https://artofproblemsolving.com/community/c6h214712p36825075}{ISL 2007/N2}) Let $b,n > 1$ be integers. Suppose that for each $k > 1$ there exists an integer $a_k$ such that $b - a^n_k$ is divisible by $k$. Prove that $b = A^n$ for some integer $A$.
+% Suppose otherwise, that $n \nmid \nu_p(b)$ for some prime $p.$ Let $\nu_p(b) = qn + r$ where $0 < r < n.$ Choose $k = p^{(q+1)n}.$ If $p^{(q+1)n} \mid b - a_k^n$ then we must have $\nu_p(b - a_k^n) \ge (q+1)n.$ Because $\nu_p(b) < (q+1)n$, we must have $\nu_p(b) = \nu_p(a_k^n) = qn + r.$ However, $n \mid n\nu_p(a_k) = \nu_p(a_k^n)$, a contradiction.
+
+\item (\href{https://artofproblemsolving.com/community/c6h1268859p13945809}{ISL 2015/N1}) Determine all positive integers $M$ such that the sequence $a_0, a_1, a_2, \cdots$ defined by \[ a_0 = M + \frac{1}{2} \quad \textrm{and} \quad a_{k+1} = a_k\lfloor a_k \rfloor \quad \textrm{for} \, k = 0, 1, 2, \cdots \]contains at least one integer term.
+% see also BMO2 2020/1
+% https://artofproblemsolving.com/community/c6h1268859p37304440
+% this one kinda already, just by playing with it, tells you that you should look at nu_2?
+
+\item (\href{https://artofproblemsolving.com/community/c6h3610437p35340905}{ISL 2024/N3}) Determine all sequences $a_1, a_2, \dots$ of positive integers such that for any pair of positive integers $m\leqslant n$, the arithmetic and geometric means \[ \frac{a_m + a_{m+1} + \cdots + a_n}{n-m+1}\quad\text{and}\quad (a_ma_{m+1}\cdots a_n)^{\frac{1}{n-m+1}}\]are both integers.
+
+\item (\href{https://artofproblemsolving.com/community/c6h1863137p12608512}{TSTST 2019/7}) Let $f: \mathbb Z\to \{1, 2, \dots, 10^{100}\}$ be a function satisfying $$\gcd(f(x), f(y)) = \gcd(f(x), x-y)$$for all integers $x$ and $y$. Show that there exist positive integers $m$ and $n$ such that $f(x) = \gcd(m+x, n)$ for all integers $x$.
+% the idea is really "function is determined by values at every prime exponent"
+
+\item (\href{https://artofproblemsolving.com/community/c291h1904123p13026024}{BAMO 2018/4}) Show that if $a, b, c$ are nonzero integers such that $a/b + b/c + c/a$ is an integer, then $abc$ is a perfect cube.
+% in OTIS excerpts 2019, problem 157
+
+\item (\href{https://artofproblemsolving.com/community/c1068820h2015396p14143702}{Poland 1983/4}) Positive integers $a$, $b$, $c$, and $d$ satisfy $ab = cd$. Prove that $$\frac{\gcd(a,c)\gcd(a,d)}{\gcd(a,b,c,d)} = a.$$
+% the spam also gives OTIS vibes sigh
+
+\item (\href{https://artofproblemsolving.com/community/c6h1871281p12694557}{Poland 2nd 2019/3}) The functions $f^1, f^2, \ldots \from \QQ \to \QQ$ satisfy \[
+  f^1(x) = x^3 + x \quad \text{and} \quad f^n(x) = f(f^{n-1}(x)) \text{ for all positive integers }n.
+\]
+Does there exist $x, y \in \QQ$ and $m, n \in \NN$ such that $xy = 3$ and $f^m(x) = f^n(y)$?
+% look at v_3. i suppose it's not *that* motivated to look at v_3 specifically
+
+\item (\href{https://artofproblemsolving.com/community/c6h2317634p18471128}{USEMO 2020/1}) Which positive integers can be written in the form \[\frac{\operatorname{lcm}(x, y) + \operatorname{lcm}(y, z)}{\operatorname{lcm}(x, z)}\]for positive integers $x$, $y$, $z$?
+% quiz prob
+
+\item (\href{https://artofproblemsolving.com/community/c6h3429772p33040073}{USEMO 2024/2}) Let $k$ be a fixed positive integer. For each integer $i \in \{1, 2, 3, 4\}$, let $x_i$ and $y_i$ be positive integers such that $\lcm(x_i, y_i) = k$. Suppose that the four points $(x_1, y_1)$, $(x_2, y_2)$, $(x_3, y_3)$, $(x_4, y_4)$ are the vertices of a non-degenerate rectangle in the Cartesian plane. Prove that $x_1x_2x_3x_4$ is a perfect square.
+% just consider v_p and bash
+
+\item (\href{https://artofproblemsolving.com/community/c6h2078501p14933592}{Fake USAMO 2020/1}) Let $C$ be a positive integer, and $a_1,a_2,a_3,\hdots$ an infinite sequence of positive integers. Suppose that for all positive integers $n$, $$a_{n+1}=\sqrt{a_n^3-Ca_n}.$$ Prove that there is a positive integer $M$ such that $a_m = a_{m+1}$ for all $m \ge M$.
+% the main claim is a_n | C, via v_p, then show eventually constant via bounding i guess
+% https://artofproblemsolving.com/community/c6h2078501p37600983
+
+\item (\href{https://artofproblemsolving.com/community/c6h573989p3379016}{India Regional 2013/Mumbai.5}) Let $a_1$, $b_1$, and $c_1$ be positive integers. Define \[
+  a_2 = \gcd(b_1, c_1), \quad b_2 = \gcd(c_1, a_1), \quad c_2 = \gcd(a_1, b_1),
+\] and \[
+  a_3 = \lcm(b_2, c_2), \quad b_3 = \lcm(c_2, a_2), \quad c_3 = \lcm(a_2, b_2).
+\]
+Show that $\gcd(b_3,c_3)=a_2$.
+% bash, not hard
+
+\item (\href{https://artofproblemsolving.com/community/c6h3814392p37803319}{Thailand Online 2026/5}) Determine all positive integers $c$ for which the infinite sequence of positive integers $a_1,a_2,a_3,\dots$ such that $a_{n+1}=c \cdot\varphi(a_n)$ for all positive integers $n$ is eventually periodic for all choices of $a_1$.
+
+\end{enumerate}
+
+\end{document}
+
+
+
+
+
+\item Show that $H_n$ is an integer only when $n = 1$.
+% v_2, done ish. i mean, it's a special case of Iran 3rd 2017/1.NT.1
+
+\item (\href{https://artofproblemsolving.com/community/c6h288838p1561571}{IMO 2009/1}) Let $ n$ be a positive integer and let $ a_1,a_2,a_3,\ldots,a_k$ $ ( k\ge 2)$ be distinct integers in the set $ { 1,2,\ldots,n}$ such that $ n$ divides $ a_i(a_{i + 1} - 1)$ for $ i = 1,2,\ldots,k - 1$. Prove that $ n$ does not divide $ a_k(a_1 - 1).$
+% this is an algebraic symmetry manip kinda problem
+
+% (China TST 2009/6.1) LTE problem
+
+% ISL 2012 N6
+
+\item (\href{https://artofproblemsolving.com/community/c6h2882583p25627819}{ISL 2021/N1}) Find all positive integers $n\geq1$ such that there exists a pair $(a,b)$ of positive integers, such that $a^2+b+3$ is not divisible by the cube of any prime, and $$n=\frac{ab+3b+8}{a^2+b+3}.$$
+% this is again an algebraic manip problem, also more about bounding than v_p
+
+\item (\href{https://artofproblemsolving.com/community/c6h2882536p25627492}{ISL 2021/N5}) Show that $n!=a^{n-1}+b^{n-1}+c^{n-1}$ has only finitely many solutions in positive integers.
+% too LTE pilled i think
+
+\item (\href{https://artofproblemsolving.com/community/c5h274378p1485204}{USA 2009/6}) Let $s_1, s_2, s_3, \dots$ and $t_1, t_2, t_3, \dots$ be two infinite, nonconstant sequences of rational numbers. Suppose that $(s_i - s_j)(t_i - t_j)$ is an integer for all $i$ and $j$. Prove that there exists a rational number $r$ such that $(s_i - s_j)r$ and $(t_i - t_j)/r$ are integers for all $i$ and $j$.
+% https://artofproblemsolving.com/community/c5h274378p18881830
+% more of an algebraic manip problem again
+
+\item (\href{https://artofproblemsolving.com/community/c6h1472061p8547101}{ELMO SL 2017/N3}) For each integer $C>1$ decide whether there exist pairwise distinct positive integers $a_1,a_2,a_3,\ldots$ such that for every $k\ge 1$, $a_{k+1}^k$ divides $C^ka_1a_2\cdots a_k$.
+% seems like an OTIS problem based on posts lmao
+% also, really more about bounding than it is about v_p
+
+\item (\href{https://artofproblemsolving.com/community/c6h3600470p35215480}{ELMO 2025/3}) Let $n$ be a positive integer and $p$ be a prime. In terms of $n$ and $p$, find the largest nonnegative integer $k$ for which there exists a polynomial $P(x)$ with integer coefficients satisfying the following conditions:
+\begin{itemize}
+\item The $x^n$ coefficient of $P(x)$ is $1$.
+\item $p^k$ divides $P(x)$ for all integers $x$.
+\end{itemize}
+% more about polynomials and such
+
+\item (\href{https://artofproblemsolving.com/community/c6h1248050p6412925}{Austria 2016/2.6}) Let $a,b,c$ be three integers for which the sum \[ \frac{ab}{c}+ \frac{ac}{b}+ \frac{bc}{a}\]is integer. Prove that each of the three numbers \[ \frac{ab}{c}, \quad \frac{ac}{b},\quad \frac{bc}{a}\]is integer.
+% kind of a worse BAMO 2018/4
+
+\item (\href{https://artofproblemsolving.com/community/c6h3388115p31770685}{MEMO 2024/Team.8}) Let $k$ be a positive integer and $a_1,a_2,\dots$ an infinite sequence of positive integers. Suppose that for all positive integers $i$, $$a_ia_{i+1} \mid k-a_i^2.$$ Prove that there is a positive integer $M$ such that $a_m=a_{m+1}$ for all integers $m \ge M$.
+% too similar to IMO 2018/5
+
+\item (\href{https://artofproblemsolving.com/community/c6h2946618p26379812}{USEMO 2022/5}) Let $\tau(n)$ denote the number of positive integer divisors of a positive integer $n$. Given a polynomial $P(x)$ with integer coefficients, define a sequence $a_1, a_2,\ldots$ of nonnegative integers by setting \[a_n =\begin{cases}\gcd(P(n), \tau (P(n)))&\text{if }P(n) > 0\\0 &\text{if }P(n) \leq0\end{cases}\]for each positive integer $n$. We then say the sequence has \textit{limit infinity} if every integer occurs in this sequence only finitely many times (possibly not at all). Does there exist a choice of $P(x)$ for which the sequence $a_1, a_2, \dots$ has limit infinity?
+% requires prime density results eckkkk
+
+\item (\href{https://artofproblemsolving.com/community/c6h1978376p13737797}{Sozopol 2015/4.2}) Let $a_0, a_1, \ldots$ be a sequence of positive integers such that $a_n^2 \mid a_{n-1}a_{n+1}$ for all positive integers $n$. Suppose there exists some integer $k \ge 2$ such that $a_1$ and $a_k$ are relatively prime. Show that $a_1 \mid a_0$.
+% another an algebraic symmetry manip kinda problem
+
+\item (\href{https://artofproblemsolving.com/community/c6h3789022p37397441}{BMO2 1998/3}) Let $x$, $y$, and $z$ be positive integers satisfying $1/x - 1/y = 1/z$. Let $g=\gcd(x,y,z)$. Prove that $gxyz$ and $g(y-x)$ are perfect squares.
+% i feel like p and p^2 isn't really a v_p problem. it also appears in https://cjquines.com/files/parallelsum.pdf
+% yeah it's more of an alg manip
+
+\item (\href{https://artofproblemsolving.com/community/c6h3805154p37644607}{Korea Final 2026/3}) Show that there exists a positive integer $M(\ge 3)$ such that the following holds: For any integer $n(\ge M)$ and any positive integers $a$, $b$, $c$ with $1 \le a < b < c \le n$, $$ \gcd(a+b+c, ab+bc+ca, abc) < 3n - \sqrt{3n} - 2^{2026}. $$
+% more of a manip / bounding problem
+
+\item (\href{https://artofproblemsolving.com/community/c6h3812645p37772190}{Czech 2026/4}) Let $a$ and $b$ be distinct positive integers such that the numbers $a^2 + 1$ and $ab + 1$ have the same sets of prime divisors. Prove that $a^2 + b^2 + 2$ is divisible by the square of some prime.
+% okay this is p and p^2 but again idk. more of an alg manip again. similar to BMO2 1998/3 or the optic equation one
+
+
+\subsubsection*{Factorials}
+
+\begin{enumerate}
+
+\item (\href{https://artofproblemsolving.com/community/c6h21614p139664}{IMO 1972/3}) Let $m$ and $n$ be non-negative integers. Prove that $m!n!(m+n)!$ divides $(2m)!(2n)!$.
+
+\item (\href{https://artofproblemsolving.com/community/c6h1876742p12752761}{IMO 2019/4}) Find all pairs $(k,n)$ of positive integers such that \[ k!=(2^n-1)(2^n-2)(2^n-4)\cdots(2^n-2^{n-1}). \]
+
+\item (\href{https://artofproblemsolving.com/community/c6h2883217p25635158}{IMO 2022/5}) Find all triples $(a,b,p)$ of positive integers with $p$ prime and \[ a^p=b!+p. \]
+
+\item (Erdos) Prove there exists some $c \in \RR$ such that, for $a, b, n \in \NN$ satisfying $(a!b!) \mid n!$, we have $a + b < n + c \log n$.
+% also in Modern Olympiad Number Theory, p170
+
+\item (Tuymaada?) $\frac1{10^n} = \frac1{n_1!} + \cdots$ has no solution
+% also in MONT, no real cit
+
+\item (\href{https://artofproblemsolving.com/community/c6h434915p2454185}{Canada 1985/4}) Find all positive integers $n$ such that $2^{n-1}$ divides $n!$.
+
+\item (\href{https://artofproblemsolving.com/community/c7h413609p2325386}{Putnam 2003/B3}) Show that for each positive integer $n$, \[n!=\prod_{i=1}^n \lcm\cbr{1, 2, \ldots, \floor{\frac{n}{i}}}.\]
+% in OTIS excerpts 2019 (P156)
+
+\item (\href{https://artofproblemsolving.com/community/c6h553555p3215962}{Turkey TST 1990/5}) Let $b_m$ be numbers of factors $2$ of the number $m!$ (that is, $2^{b_m}|m!$ and $2^{b_m+1}\nmid m!$). Find the least $m$ such that $m-b_m = 1990$.
+
+\item (\href{https://artofproblemsolving.com/community/c6h338376p1810898}{USA 1975/1}) Prove that \[ \frac{(5m)!(5n)!}{m!n!(3m+n)!(3n+m)!}\] is integral for all positive integral $ m$ and $ n$.
+
+\item (\href{https://artofproblemsolving.com/community/c5h1230499p6213627}{USA 2016/2}) Prove that for any positive integer $k$, \[(k^2)!\cdot\displaystyle\prod_{j=0}^{k-1}\frac{j!}{(j+k)!}\]is an integer.
+% in OTIS excerpts 2019, problem 158. the famous hook-length formula problem
+
+\item (\href{https://artofproblemsolving.com/community/c6h412692p2317203}{Austria 2004/1.3}) For natural numbers $a, b$, define $Z(a,b)=\frac{(3a)!\cdot (4b)!}{a!^4 \cdot b!^3}$. (a) Prove that $Z(a, b)$ is an integer for $a \leq b$. (b) Prove that for each natural number $b$ there are infinitely many natural numbers a such that $Z(a, b)$ is not an integer.
+
+\item (\href{https://artofproblemsolving.com/community/c6h3041815p27388474}{Christmas JMO 2023/1}) Find all triples of positive integers \((a,b,p)\) with \(p\) prime and \[a^p+b^p=p!.\]
+
+\item (\href{https://artofproblemsolving.com/community/c6h1623902p10173495}{InfinityDots 2018/1}) Determine whether there exists a finite set $S$ of primes such that for all positive integers $m$, there exists a positive integer $n$ and prime $p\in S$ such that $p^m\mid n!$ but $p^{m+1}\nmid n!$.
+
+\item (\href{https://artofproblemsolving.com/community/c6h1215111p6043322}{China TST 2016/2.4}) Set positive integer $m=2^k\cdot t$, where $k$ is a non-negative integer, $t$ is an odd number, and let $f(m)=t^{1-k}$. Prove that for any positive integer $n$ and for any positive odd number $a\le n$, $\prod_{m=1}^n f(m)$ is a multiple of $a$.
+
+\item (\href{https://artofproblemsolving.com/community/c6h54194p338285}{Romania TST 1988/9}) Prove that for all positive integers $n\geq 1$ the number $$\prod^n_{k=1} k^{2k-n-1}$$ is also an integer.
+
+\end{enumerate}
+
+\subsubsection*{Binomial coefficients}
+
+\begin{enumerate}
+
+\item (Belarus TST 1999) Determine all positive integers $n$ such that $\binom{n - k}{k}$ is even for $k = 1, \dots, \floor{\frac{n}{2}}$.
+% in IMO compendium
+
+\item (\href{https://artofproblemsolving.com/community/c6h144901p820422}{Hungary--Israel 2000/2}) Prove or disprove: For any positive integer $k$ there exists an integer $n > 1$ such that the binomial coeffcient $\binom{n}{i}$ is divisible by $k$ for any $1 \leq i \leq n-1$.
+
+\item (\href{https://artofproblemsolving.com/community/c7h2878018p25578313}{Putnam 1956/A7}) Prove that the number of odd binomial coefficients in any finite binomial expansion is a power of $2$.
+
+\item (\href{https://artofproblemsolving.com/community/c7h429342p2429218}{Putnam 2000/B2}) Prove that the expression \[ \frac{\gcd(m, n)}{n}\binom{n}{m} \] is an integer for all pairs of integers $ n \ge m \ge 1 $.
+
+\item (\href{https://artofproblemsolving.com/community/c6h263020p1428715}{RMM 2009/1}) For $ a_i \in \mathbb{Z}^ +$, $ i = 1, \ldots, k$, and $ n = \sum^k_{i = 1} a_i$, let $ d = \gcd(a_1, \ldots, a_k)$ denote the greatest common divisor of $ a_1, \ldots, a_k$. Prove that $ \frac {d} {n} \cdot \frac {n!}{\prod\limits^k_{i = 1} (a_i!)}$ is an integer.
+
+\item (\href{https://artofproblemsolving.com/community/c6h2713064p23586679}{TSTST 2021/3}) Find all positive integers $k > 1$ for which there exists a positive integer $n$ such that $\tbinom{n}{k}$ is divisible by $n$, and $\tbinom{n}{m}$ is not divisible by $n$ for $2\leq m < k$.
+
+\end{enumerate}
