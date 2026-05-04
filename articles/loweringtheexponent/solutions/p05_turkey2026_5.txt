@@ -1,0 +1,41 @@
+#1 by bin_sherlo  https://artofproblemsolving.com/community/c6h3804650p37636484
+Find all infinite positive integer sequences $a_1,a_2,\dots$ such that
+\[\varphi(a_i)\varphi(a_{i+1})=a_i^2\]holds for all positive integers $i$.
+
+[i]Note: For each posiitve integer $n$, define $\varphi(n)$ as the number of positive integers coprime with $n$ which are at most $n$.[/i]
+
+---
+
+#11 by cubres  https://artofproblemsolving.com/community/c6h3804650p37693938
+$\mathfrak{The \;First\; Of\; April,\; 2026}$ ʕ•ᴥ•ʔ
+Here is a sketch since I am sleepy :sleeping: 
+[hide=Solution - grinding Nats]
+$${\color{red}\Large \spadesuit \boxed{\textbf{Answer.}} \spadesuit}$$
+We will assume that all terms are greater than $1$ since $\varphi(1)$ is not too well-defined and since I do not want to deal with the additional cases.
+For any integers $u \geq 1$ and $v \geq 1$,
+$$
+a_i=2^u 3^{v+2(i-1)} \quad(i \geq 1)
+$$
+is a solution.
+For any $u \geq 1$, the sequence
+$$
+a_i=2^{u+2(i-1)} \quad(i \geq 1)
+$$
+is also a solution, and more generally, for any $u \geq 1$ and any $t \geq 1$,
+$$
+a_i=2^{u+2(i-1)} \quad(1 \leq i \leq t),
+$$
+followed by
+$$
+a_{t+j}=2^{u+2 t-1} 3^{2 j-1} \quad(j \geq 1),
+$$
+is also a solution. We claim those are all of the solutions.
+$${\color{magenta}\Large \heartsuit \boxed{\textbf{Solution.}} \heartsuit}$$
+First of all, notice that all $a_i$ must be even, otherwise we have a contradiction with parity. This motivates considering $\nu_2$.
+Assume some $a_i$ has a prime divisor $p>3$, $\nu_p(a_i)=\alpha$ and thus $\nu_p(\varphi(a_i))=\alpha-1$. We have that
+$$\varphi(a_i) \cdot \varphi(a_{i+1})=a_i^2 \implies \nu_p(\varphi(a_{i+1}))=\alpha+1 \implies p \mid a_r, \: \forall r \ge i.$$
+However, notice that this is impossible due to $\nu_2$ descent - notice that
+$$\nu_2(\varphi(n))=\nu_2(n)-1+\sum_{\substack{r \mid n \\ r \text { odd prime }}} \nu_2(r-1)$$
+and thus for a sufficiently large $j$, we have
+$$2 \nu_2 (a_j) = \nu_2(\varphi(a_j))+\nu_2(\varphi(a_{j+1})) \ge (\nu_2 (a_j)+1)+(\nu_2 (a_{j+1})+1),$$
+so $\nu_2(a_{j+1}) \le \nu_2(a_j)-2$ for all sufficiently large $j$, but this can obviously not go on forever - thus, all numbers have just $2$ and $3$ as their prime factors, and manually checking leads to the answer. We are done.

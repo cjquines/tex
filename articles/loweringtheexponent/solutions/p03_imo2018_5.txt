@@ -1,0 +1,25 @@
+#1 by orthocentre  https://artofproblemsolving.com/community/c6h1671291p10632353
+Let $a_1$, $a_2$, $\ldots$ be an infinite sequence of positive integers. Suppose that there is an integer $N > 1$ such that, for each $n \geq N$, the number
+$$\frac{a_1}{a_2} + \frac{a_2}{a_3} + \cdots + \frac{a_{n-1}}{a_n} + \frac{a_n}{a_1}$$
+is an integer. Prove that there is a positive integer $M$ such that $a_m = a_{m+1}$ for all $m \geq M$.
+
+[i]Proposed by Bayarmagnai Gombodorj, Mongolia[/i]
+
+---
+
+#12 by 62861  https://artofproblemsolving.com/community/c6h1671291p10634217
+The difference $\frac{a_{n+1}}{a_1} - \frac{a_n}{a_1} + \frac{a_n}{a_{n+1}}$ is also an integer for $n \ge N$.
+Hence
+\[a_1 a_{n+1} \mid a_{n+1}^2 - a_n a_{n+1} + a_1 a_n \equiv (a_{n+1} - a_1)(a_{n+1} - a_n).\]
+
+[b]Lemma.[/b] If $a$, $x$, $y$ are positive integers with $ay \mid (y - a)(y - x)$ and $p$ is a prime, then
+\[\min\big(\nu_p(a), \nu_p(x)\big) \le \nu_p(y) \le \max\big(\nu_p(a), \nu_p(x)\big).\]
+This can be easily proved by examining the possibilities $\nu_p(y) < \min\big(\nu_p(a), \nu_p(x)\big)$ and $\nu_p(y) > \max\big(\nu_p(a), \nu_p(x)\big)$; both lead to $\nu_p$ contradictions in the divisibility.
+
+[b]Corollary 1.[/b] $\gcd(a_1, a_n) \mid a_{n+1} \mid \mathrm{lcm}(a_1, a_n)$ for $n \ge N$.
+
+[b]Corollary 2.[/b] $\gcd(a_1, a_n) \mid \gcd(a_1, a_{n+1})$ and $\mathrm{lcm}(a_1, a_{n+1}) \mid \mathrm{lcm}(a_1, a_n)$ for $n \ge N$.
+
+Hence $\{\gcd(a_1, a_n)\}_{n \ge N}$ and $\{\mathrm{lcm}(a_1, a_n)\}_{n \ge N}$ are increasing and decreasing sequences (respectively) bounded by $a_1$. Thus they are eventually constant; say $\gcd(a_1, a_m) = u$ and $\mathrm{lcm}(a_1, a_m) = v$ for $m \ge M$. Then
+\[a_m = \frac{\gcd(a_1, a_m) \cdot \mathrm{lcm}(a_1, a_m)}{a_1} = \frac{uv}{a_1}\]
+for all $m \ge M$, as desired.

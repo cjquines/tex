@@ -1,0 +1,67 @@
+#1 by Quidditch  https://artofproblemsolving.com/community/c6h3814392p37803319
+Determine all positive integers $c$ for which the infinite sequence of positive integers $a_1,a_2,a_3,\dots$ such that $a_{n+1}=c\, \cdot\varphi(a_n)$ for all positive integers $n$ is eventually periodic for all choices of $a_1$.
+    
+[i]Note. $\varphi(n)$ is the number of integers in $\{1,2,3,\dots,n\}$ which are relatively prime to $n$. A sequence $a_1,a_2,a_3,\dots$ is eventually periodic if there exists positive integers $N$ and $m$ such that $a_{n+m} = a_n$ for all integer $n>N$.[/i]
+
+---
+
+#2 by Tkn  https://artofproblemsolving.com/community/c6h3814392p37803975
+[hide="Solution"]
+Note that $n=1$ actually satisfies as $\varphi(\varphi(\dots \varphi(a_1)\dots))$ is decreasing until it hits $1$. So, the sequence $(a_n)$ is eventually become constant $1$. Henceforth, we may assume $c>1$.\\
+[rule]
+[b][color=#f00]Claim.[/color][/b] $\nu_p(c)\leqslant 1$ for every prime number $p$.\\
+[i]Proof.[/i] Note that for every prime numbers $p$ and a positive integer $n$, we have $\nu_p(\varphi(n))\geqslant \nu_p(n)-1$. For any positive integer $k$, we have
+$$a_{k+1}=c\cdot \varphi(a_k)\implies \nu_p(a_{k+1})\geqslant \nu_p(c)+\nu_p(\varphi(a_k))\geqslant \nu_p(c)+\nu_p(a_k)-1.$$
+If $\nu_p(c)\geqslant 2,$ then $\nu_{p}(a_{k+1})\geqslant 1+\nu_p(a_k)$. So, $\nu_p(a_{n})$ is increasing indefinitely, and contradicts the fact that $(a_n)$ is eventually periodic. It implies $\nu_p(c)\leqslant 1$.
+[rule]
+[b][color=#f00]Claim.[/color][/b] If $c$ is an odd integer, then $c$ is a prime number.\\
+[i]Proof.[/i] Let $k$ be a positive integer. Suppose that $c=p_1p_2\dots p_k$ where $p_1,p_2,\dots,p_k$ are distinct odd prime numbers. We then choose $a_1>10^{100}$ so that $\varphi(a_1)$ is an even integer. Note that
+$$\nu_2(\varphi(a_{n+1}))=\nu_2(\varphi(p_1p_2\dots p_k\cdot \varphi(a_n)))\geqslant \nu_2(\varphi(p_1p_2\dots p_k\cdot 2^{\nu_2(\varphi(a_n))}))\geqslant k+\nu_2(\varphi(a_n))-1.$$
+If $k\geqslant 2$, then $\nu_2(\varphi(a_{n}))$ is unbounded, so does $(a_n)$. Thus, $k\leqslant 1$. In other words, $c$ is a prime number.\\
+[rule]
+[b][color=#f00]Claim.[/color][/b] If $c$ is an even integer, then $c=2$ or $c=2p$ where $p$ is an odd prime number.\\
+[i]Proof.[/i] We proceed in the same as idea in the above claim, with $\varphi(2)=1$. We still have the same result that if $c=2\cdot p_1p_2\dots p_k$, then $k\leqslant 1$. It implies the result immediately.
+[rule]
+Assume that $c$ is an odd prime number. Let $a_1=1$, we will show that $\gcd(c,\varphi(a_n))=1$ and every divisors of $\varphi(a_n)$ is less than $c$, for all $n\geqslant 2$. For $n=2$, we have $\gcd(c,\varphi(a_2))=\gcd(c,c-1)=1$. Suppose that $\ell\geqslant 2$ be a positive integer, $\gcd(c,\varphi(a_\ell))=1$, and every prime divisor of $a_{\ell}$ is less than $c$. Notice that
+$$\gcd(c,\varphi(a_{\ell+1}))=\gcd(c,\varphi(c\cdot \varphi(a_{\ell})))=\gcd(c,(c-1)\varphi(\varphi(a_{\ell})))=\gcd(c,\varphi(\varphi(a_{\ell})))=1$$
+because every prime divisors of $\varphi(\varphi(a_\ell))$ is less than $c$, and $\varphi(a_{\ell+1})=(c-1)\varphi(\varphi(a_\ell))$. So, every prime divisor of $\varphi(a_{\ell+1})$ is less than $c$. So, $\gcd(c,\varphi(a_n))=1$ for every $n\geqslant 2$.\\
+
+Define a sequence $(b_n)$ such that $b_1=c-1$, and $b_{n+1}=(c-1)\varphi(b_n)$ for every $n\geqslant 1$. Since $(a_n)$ is eventually periodic, $(b_n)$ is also eventually periodic. We split into two cases as follow:\\
+[b]Case I.[/b] Suppose that $c-1$ is a power of two, said $c-1=2^r$ for some positive integer $r\geqslant 2$. It is easy to see that $(b_n)$ is a power of two for all $n=1,2,\dots$. Hence,
+$$\nu_{2}(b_{n+1})=\nu_2(c-1)+\nu_2(\varphi(b_{n}))\geqslant \nu_2(b_n)+r-1.$$
+It is impossible because $r\geqslant 2$.\\
+
+[b]Case II.[/b] Suppose that $c-1=2^ru$ for some odd integers $u>0$ and positive integer $r$. Note that
+$$\nu_2(b_{n+1})=\nu_2(c-1)+\nu_2(\varphi(b_{n}))\geqslant r+\nu_2(b_n),$$
+because $b_n$ contains at least one odd factor. It violates the boundedness of $(b_n)$.\\
+
+Combine two cases together we have $c=3$. For even integers $c$, suppose that $c=2p$ for some odd prime number $p$. Later let $a_1=1$, it yields
+$$\nu_2(a_{n+1})=\nu_2(2p\cdot \varphi(a_n))=1+\nu_2(\varphi(a_n))\geqslant \nu_2(a_n)+1$$
+because there exists an odd prime number that divides $a_n$, for every $n\geqslant 2$. Now, it left with $c\in\{2,3\}$. First, consider the case $c=2$. Since $\varphi(t)<t$ for every odd integers $t\geqslant 3$, there exists a large enough positive integer $N_1$ that makes $a_n=2^{\nu_2(a_n)}$ for every $n\geqslant N_1$. Therefore,
+$$a_{n+1}=2\cdot \varphi(a_n)=2\cdot \varphi(2^{\nu_2(a_n)})=2^{\nu_2(a_n)}=a_n.$$
+Similarly when $c=3$, there exists a large enough positive integer $N_2$ such that $a_n=2^{\nu_2(a_n)}\cdot 3^{\nu_3(a_n)}$ for all $n\geqslant N_2$. Thus,$$a_{n+1}=3\cdot \varphi(2^{\nu_2(a_n)}\cdot 3^{\nu_3(a_n)})=2^{\nu_2(a_n)}\cdot 3^{\nu_3(a_n)}=a_n.$$
+In conclusion, $c\in\{1,2,3\}$.
+[/hide]
+
+---
+
+#3 by TheOneAndOnlyOFT  https://artofproblemsolving.com/community/c6h3814392p37803992
+$c=1$ clearly works because for $n >1$ we have $\varphi(n) < n$.
+Claim: Let $n>1$, if $q$ is the biggest prime in $n$, $V_q( \varphi(n)) = V_q(n)-1$.
+Proof: Trivial.
+Therefore if $q$ is the biggest prime in $c$, any prime larger than $q$ will eventually go extinct in our series.
+$c=2$ works because if we reach $2^{\alpha}$ we stay there. If we reach $1$ we go to $2$ and stay there.
+$c=3$ works because if we reach $ 2^{\alpha} \times 3^{\beta}$ we stay there. If we reach $2^{\alpha + 1}$ we go to $ 2^{\alpha} \times 3$ and stay there. If we reach $2$ we go to $3$ and then $6$ and then stay there. If we reach $3^{\beta}$ we go to $2 \times  3^{\beta}$ and stay there. If we reach $1$ we go to $3$ and then $6$ and then stay there.
+Claim: If $p^2 | c$, $V_p()$ will constantly inrease.
+Proof: Trivial.
+So we have $c= p_1 \times \dots \times p_n$. $p_i | p_j - 1$ results in $V_{p_i}()$ constantly increasing  when we start with $c$ itself so $2$ isn't in $\{ p_1 , \dots , p_n \}$ unless  $c=2$. If $n \ge 2$, $V_2()$ constantly increases when we start with $c$ itself so $c=p$. We need to check for $p \ge 5$.
+
+Case $1$, $p-1$ isn't a power of $2$:
+Let $q$ be the biggest prime dividing $p-1$. If we start with $p$ itself, we go to $p(p-1)$. After that $V_q()$ and $V_p()$ stay constant. Therefore $V_2()$ constantly increases.
+Case $1$, $p-1$ is a power of $2$:
+$p= 2^m + 1$ for $m \ge 2$. If we start with $p$ itself we go to $p \times 2^m$ and then we go to $p \times 2^{2m-1}$ and then to $p \times 2^{3m-2}$ and so on. Since $m > 1$ contradiction.
+
+---
+
+#4 by TheOneAndOnlyOFT  https://artofproblemsolving.com/community/c6h3814392p37803995
+Sniped with a minute :dry: 

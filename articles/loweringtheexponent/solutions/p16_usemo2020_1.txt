@@ -1,0 +1,128 @@
+#1 by blacksheep2003  https://artofproblemsolving.com/community/c6h2317634p18471128
+Which positive integers can be written in the form \[\frac{\operatorname{lcm}(x, y) + \operatorname{lcm}(y, z)}{\operatorname{lcm}(x, z)}\] for positive integers $x$, $y$, $z$?
+
+---
+
+#2 by Aryan-23  https://artofproblemsolving.com/community/c6h2317634p18471132
+We claim that the answer is all even positive integers. It's easy to see that they work, say by taking $(x,y,z)=(k,k^2,k)$, we get $2k$ works for all $k\geq 1$. 
+
+We now claim that no odd works. The idea is to do $v_2$ analysis and spam the small [hide=fact]
+$$v_p(a+b) \geq \operatorname {min} (v_p(a),v_p(b))$$ with equality iff $v_p(a)\neq v_p(b)$ [/hide]
+---------------
+
+Assume that we have for some $x,y,z$ that:
+
+$$ \nu_2 \left (  \frac { \operatorname{lcm} (x,y) +\operatorname {lcm} (y,z) }{\operatorname {lcm} (z, x)}  \right) =0$$
+
+Set $v_p(x)=a$, $v_p(y)=b$ and $v_p(z)=c$. We have :
+
+$$ 0 = v_2 ( \operatorname {lcm} (x,y) + \operatorname {lcm} (y,z) ) - v_2 ( \operatorname {lcm} (x,z))$$
+$$\iff 0 \geq \operatorname {min} (\operatorname {max} (a,b) , \operatorname {max} (b,c)    ) - \operatorname {max} (a,c)$$
+
+With equality iff $$ \operatorname {max} (a,b) \neq \operatorname {max} (b,c)$$
+
+Hence we consider the following cases :
+-------------------
+[i] Case 1 : [/i]  $ \operatorname {max} (a,b) \neq \operatorname {max} (b,c)$
+
+Hence equality holds. We have :
+
+$$ \operatorname {min} (\operatorname {max} (a,b) , \operatorname {max} (b,c)    ) =\operatorname {max} (a,c)$$
+
+Consider the following cases based on size of $a,b,c$. 
+
+[list] 
+
+[*] $ b \geq a,c$
+
+Note that this gives $b= \operatorname {max} (a,c) \implies \operatorname {max} (a,b) = \operatorname {max} (b,c) (\rightarrow \leftarrow)$ 
+
+
+[*] $b$ lies between $a$ and $c$. WLOG $a\leq b \leq c$.
+ 
+We get $ \operatorname{min} (b,c) = b = c  (\rightarrow \leftarrow).$
+
+
+[*] $b \leq a,c$
+
+We get $\operatorname {min} (a,c) = \operatorname {max} (a,c) \implies a=c (\rightarrow \leftarrow) $
+
+[/list]
+-----------------
+[i] Case 2 : [/i]  $ \operatorname {max} (a,b) = \operatorname {max} (b,c)$
+
+We'll go through with the same casework again :
+
+[list] 
+
+[*] $ b \geq a,c$
+
+Note that this gives $0 \geq b- \operatorname {max} (a,c) \leq 0 $. 
+
+WLOG assume that $a=b$ and $a\geq c$. This gives the common values of the LCM to be $a=b$. 
+
+Finally we get:
+
+$$ \nu_2 \left (  \frac { \operatorname{lcm} (x,y) +\operatorname {lcm} (y,z) }{\operatorname {lcm} (z, x)}  \right) = v_2 \left( \tfrac {\operatorname { lcm } (x,y) } {2^b} +\tfrac {\operatorname { lcm } (z,y) } {2^b}  \right) >0 (\rightarrow \leftarrow)$$
+
+
+
+[*] $b$ lies between $a$ and $c$. WLOG $a\geq b \geq c$.
+ 
+This again gives $a= \operatorname {max} (a,b) = \operatorname {max} (b,c)=b$. This leads back to previous case.
+
+
+
+[*] $b \leq a,c$
+
+This case gives $a=c$. Then we get 
+
+$$ \nu_2 \left (  \frac { \operatorname{lcm} (x,y) +\operatorname {lcm} (y,z) }{\operatorname {lcm} (z, x)}  \right)  = v_2 \left( \tfrac {\operatorname { lcm } (x,y) } {2^a} +\tfrac {\operatorname { lcm } (z,y) } {2^a} \right)>0(\rightarrow \leftarrow)$$
+
+
+[/list]
+
+
+----------------
+
+Having exhausted all cases, we are done.$\blacksquare$ 
+
+---
+
+#3 by Imayormaynotknowcalculus  https://artofproblemsolving.com/community/c6h2317634p18471134
+[hide=Solution]We claim the answer is all even positive integers. To construct a given even positive integer $n=2k$, set $x=z=1$ and $y=k$ to get $\frac{k+k}{1}=2k=n$.
+
+Let $v_2$ denote the $2$-adic valuation. Now, suppose for the sake of contradiction that the given expression is an odd integer. Observe that we then need $v_2(\text{lcm}(x, y) + \text{lcm}(y, z))=v_2(\text{lcm}(x, z))$. 
+
+As $x$ and $z$ are interchangeable, WLOG $v_2(x)\ge v_2(z)$. We then want $v_2(\text{lcm}(x, y) + \text{lcm}(y, z))=v_2(x)$.
+
+We can finish with the following:
+[list]
+
+[*]If $v_2(y)\ge v_2(x)$, then for odd numbers $o_1,o_2$, the LHS can be written as $v_2(2^{v_2(y)}\cdot o_1+2^{v_2(y)}\cdot o_2)\ge v_2(y)+1\ne v_2(x)$.
+
+
+[*]If $v_2(x)> v_2(y)\ge v_2(z)$, then for odd numbers $o_3,o_4$, the LHS can be written as $v_2(2^{v_2(x)}\cdot o_3+2^{v_2(y)}\cdot o_4)=v_2(y)\ne v_2(x)$.
+
+
+[*]If $v_2(z)>v_2(y)$, then for odd numbers $o_5,o_6$, the LHS can be written as $v_2(2^{v_2(x)}\cdot o_5+2^{v_2(z)}\cdot o_6)$, which is at least $v_2(x)+1>v_2(x)$ if $v_2(x)=v_2(z)$ (since $o_5+o_6\equiv 0\pmod{2}$) and is $v_2(z)\ne v_2(x)$ otherwise.
+[/list][/hide]
+
+---
+
+#4 by franchester  https://artofproblemsolving.com/community/c6h2317634p18471145
+I don't care that this is the same as everyone else.
+
+The answer is all positive even integers.
+
+For the construction, take $(x,y,z)=(a,a^2,a)$ for some positive integer $a$: $$\frac{\text{lcm}(a,a^2)+\text{lcm}(a^2,a)}{\text{lcm}(a,a)}=\frac{a^2+a^2}{a}=2a$$ which can clearly take on any even value.
+
+Now I claim that if this expression is an integer, it can not be odd.
+
+Let $\nu_2(x)=a, \nu_2(y)=b, \nu_2(z)=c$. Suppose for now that $b$ is the maximum: in this case, we have our expression to be \[\frac{2^b\cdot \text{odd} + 2^b\cdot \text{odd}}{2^{\max(a,c)}\cdot \text{odd}}\] If $b=\max(a,c)$, the powers of two cancel, leaving a sum of two odd integers in the numerator and an odd integer in the denominator. This is even, which is a contradiction.
+
+Now suppose $b$ is not the maximum: WLOG, let $\max(a,b,c)=a$. We have two possible cases.
+
+If $a\geq b \geq c$, we have \[\frac{2^a\cdot \text{odd} + 2^b\cdot \text{odd}}{2^a\cdot \text{odd}}\] If $b=a$, then $b$ is the maximum, which we have shown yields an even value. Now suppose $a>b$: clearing $2^b$ leaves an even denominator but an odd numerator, so the expression can't be an integer.
+
+The case where $a\geq c\geq b$ is the exact same as the previous case. Having exhausted all cases, we see that the expression can only take on positive even integer values and can achieve all even integers, so we are done.

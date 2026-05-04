@@ -1,0 +1,15 @@
+#1 by djmathman  https://artofproblemsolving.com/community/c6h573989p3379016
+Let $a_1,b_1,c_1$ be natural numbers.  We define \[a_2=\gcd(b_1,c_1),\,\,\,\,\,\,\,\,b_2=\gcd(c_1,a_1),\,\,\,\,\,\,\,\,c_2=\gcd(a_1,b_1),\] and \[a_3=\operatorname{lcm}(b_2,c_2),\,\,\,\,\,\,\,\,b_3=\operatorname{lcm}(c_2,a_2),\,\,\,\,\,\,\,\,c_3=\operatorname{lcm}(a_2,b_2).\] Show that $\gcd(b_3,c_3)=a_2$.
+
+---
+
+#2 by tenniskidperson3  https://artofproblemsolving.com/community/c6h573989p3379217
+Let $(a_1, b_1, c_1)=g$ with $a_1=xg, b_1=yg, c_1=zg$ with $(x, y, z)=1$.  Let $(x, y)=d$, let $(y, z)=e$, let $(z, x)=f$.  Note that $(d, e)=(e, f)=(f, d)=1$, so $x=adf$, $y=bde$, $z=cef$ for some $a, b, c$.  Note that $(a, b)=(a, c)=(a, e)=(b, c)=(b, f)=(c, d)=1$.
+
+Then $a_1=adfg$, $b_1=bdeg$, $c_1=cefg$.  So $a_2=eg$, $b_2=fg$, $c_2=dg$.  Then $a_3=dfg$, $b_3=deg$, $c_3=efg$.  Then $\gcd(b_3, c_3)=eg=a_2$.
+
+---
+
+#4 by Adi1005247  https://artofproblemsolving.com/community/c6h573989p35830680
+#OFFICIAL SOLUTION
+

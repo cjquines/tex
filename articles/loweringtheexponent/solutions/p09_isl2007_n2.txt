@@ -1,0 +1,67 @@
+#1 by orl  https://artofproblemsolving.com/community/c6h214712p1187198
+Let $b,n > 1$ be integers. Suppose that for each $k > 1$ there exists an integer $a_k$ such that $b - a^n_k$ is divisible by $k$. Prove that $b = A^n$ for some integer $A$.
+
+[i]Author: Dan Brown, Canada[/i]
+
+---
+
+#81 by ray66  https://artofproblemsolving.com/community/c6h214712p36789950
+Let $k=b^2$ so that $b \equiv x^n \pmod {b^2}$ and $kb^2+b = x^n$ so $b$ must be an $n$th power. 
+
+---
+
+#82 by Eka01  https://artofproblemsolving.com/community/c6h214712p36820108
+Let $v_p (b)=m$ where $m$ is a positive integer( That is, we choose $p$ to be a prime divisor of $b$). Choose $k=p^{m+1}$ to get $n | m$. Cycling over all prime divisors of $b$ finishes.
+
+---
+
+#83 by maromex  https://artofproblemsolving.com/community/c6h214712p36825075
+Suppose otherwise, that $n \nmid \nu_p(b)$ for some prime $p.$ Let $\nu_p(b) = qn + r$ where $0 < r < n.$ Choose $k = p^{(q+1)n}.$ If $p^{(q+1)n} \mid b - a_k^n$ then we must have $\nu_p(b - a_k^n) \ge (q+1)n.$ Because $\nu_p(b) < (q+1)n$, we must have $\nu_p(b) = \nu_p(a_k^n) = qn + r.$ However, $n \mid n\nu_p(a_k) = \nu_p(a_k^n)$, a contradiction.
+
+---
+
+#84 by AlastorMoody  https://artofproblemsolving.com/community/c6h214712p36900333
+[hide=Storage][quote=ISL 2007 N2]Let $b,n > 1$ be integers. Suppose that for each $k > 1$ there exists an integer $a_k$ such that $b - a^n_k$ is divisible by $k$. Prove that $b = A^n$ for some integer $A$.
+
+[i]Author: Dan Brown, Canada[/i][/quote]
+Since $b$ $>$ $1$, therefore there must exist a prime $p$ such that $p$ $\mid$ $b$. Choose any such prime $p$.
+
+[b][color=#f00]Claim: [/color][/b] For any prime $p$ that divides $b$, we will always have $n$ $\mid$ $\nu_p \left( b \right)$
+
+[i]Proof. [/i] Using the division algorithm, we can write 
+  \[
+    \nu_p \left( b \right) = qn + r, \quad \text{where, } 0 \leq r < n
+  \]
+  If $r = 0$, we are done. Hence, assume $r > 0$ here onwards. Choose an integer $\ell$ such that $\ell n > qn + r$. If we set $k = p^{\ell n}$, then 
+  \begin{align*}
+      p^{\ell n} \mid b - a_k^n \implies \nu_p \left( b - a_k^n \right) \geq \ell n
+  \end{align*}
+  If $\nu_p (b) \neq \nu_p (a_k^n)$, then we must have $\min \left( \nu_p(b), \nu_p (a_k^n) \right)$ $\geq$ $\ell n$. However,
+  \begin{align*}
+    \nu_p (b) = qn + r < \ell n \implies \min \left( \nu_p (b), \nu_p (a_k^n) \right) < \ell n
+  \end{align*}
+  this implies that, we must have $\nu_p (b) = \nu_p (a_k^n)$. However, this would mean that
+  \begin{align*}
+    \nu_p(a_k^n) = n \nu_p (a_k) = \nu_p (b) = qn + r \implies n \mid qn + r
+  \end{align*}
+  which forces $n \mid r$. Given the bounds on $r$, this is impossible contradicting our assumption $r > 0$. Hence for any prime $p$ that divides $b$, we will always have $n$ $\mid$ $\nu_p (b)$. $\qquad \square$
+
+From the claim, we have that for any prime $p$, $\nu_p(b)$ is a multiple of $n$. Therefore, $b$ must be of the form $A^n$. $\qquad \square$
+[/hide]
+
+---
+
+#85 by bir_mat_oimpiyatcisi  https://artofproblemsolving.com/community/c6h214712p37055153
+It is easy to see that if \(b = A^n\) then we can have \(a_k=A\) for all \(k\). Now let's proceed by proving that there is no other solution.
+
+For the sake of the contradaction let's assume otherwise, then there exists a prime number q such that \(n \nmid v_{q}(b)\).
+
+Then as \(k |b-a_k^n\) we get \(v_p(b-a_k^n) \geq v_p(k)\) for all primes \(p\). In particular,
+
+\(v_q(b-a_k^n)\) \(= min(v_q(b), v_q(a_k^n))\) \(=min(v_q(b), n\cdot v_q(a_k)) \) \(\geq v_q(k)\).
+
+Note that we could say \(v_q(b-a_k^n)\) \(= min(v_q(b), v_q(a_k^n))\) instead of \(v_q(b-a_k^n)\) \(\geq min(v_q(b), v_q(a_k^n))\) as we know \(n |v_q(a_k^n) \) and \(n \nmid v_q(b) \) so that \(v_q(b) \neq v_q(a_k^n)\).
+
+Obverse that the ineqaulity above implies that \(v_q(k)\) is bounded which is a clear contradaction since \(k\) is whatever we want! We can just take \(k\) with \(v_q(k)=v_q(b)+1\) and it is easy to see that \(min(v_q(b), n\cdot v_q(a_k)) < v_q(b) +1\).
+
+This implies \(n | v_p(b)\) for all primes \(p\) and \(b = A^n\) for some integer A. \(\square\)

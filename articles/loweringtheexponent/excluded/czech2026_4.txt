@@ -1,0 +1,31 @@
+#1 by BR1F1SZ  https://artofproblemsolving.com/community/c6h3812645p37772190
+Let $a$ and $b$ be distinct positive integers such that the numbers $a^2 + 1$ and $ab + 1$ have the same sets of prime divisors. Prove that $a^2 + b^2 + 2$ is divisible by the square of some prime.
+
+---
+
+#2 by Oleivmor  https://artofproblemsolving.com/community/c6h3812645p37772327
+$gcd(a^{2}+1,ab+1)=gcd(a^{2}-ab,ab+1)=gcd(a-b,ab+1)$. Note that,
+
+$N=a^{2}+b^{2}+2=(a-b)^{2}+2(ab+1)$. Notice that if $ab+1$ is divisible by the square of some prime then $N$ is divisible by it too. İf $ab+1$ is square-free then we have $ab+1 \mid a-b$ hence $v_p(ab+1)=1\le v_p(a-b)$ for every prime divisor of $ab+1$ but it is impossible since $ab+1>a-b$ 
+
+---
+
+#3 by atdaotlohbh  https://artofproblemsolving.com/community/c6h3812645p37780574
+Notice that $ab+1 \mid a^2+1$ is impossible since $\frac{a^2+1}{ab+1} \equiv 1 \pmod a$ and $1 \neq \frac{a^2+1}{ab+1}<a$.
+Therefore for some prime $p$, $p^2 \mid ab+1$. Then $p \mid a^2+1$. Subtracting the two, we get $p \mid a(a-b)$, and since $a$ is coprime to $p$, we have $p \mid a-b$. Then $a^2+b^2+2=(a-b)^2+2(ab+1)$ is divisible by $p^2$.
+
+---
+
+#4 by son__im_crine  https://artofproblemsolving.com/community/c6h3812645p37782485
+let $S$ be the set of the prime divisors of $a^2+1$ and $ab+1$. if $p\in S$, then $p\mid a^2+1$, $p\mid ab+1$, so $p\mid a(a-b)$, i.e. $p\mid a-b$. now since $|a-b| < ab+1$ clearly, it follows that there exists some prime $p\in S$ with $\nu_p(ab+1) \geq 2$. then, for that prime, we have $$\nu_p(a^2+b^2+2) = \nu_p((a-b)^2+2(ab+1)) \geq 2,$$ as desired.
+
+---
+
+#5 by maromex  https://artofproblemsolving.com/community/c6h3812645p37782980
+Either $ab+1$ is divisible by the square of a prime or $ab+1$ divides $a^2+1.$
+
+Case 1: $p^2 \mid ab+1$ for some prime $p$
+Observe that $p$ also divides $a^2+1.$ As $p$ divides $a^2+1$ and $ab+1$, $p$ also divides their difference $a^2-ab = a(a-b).$ But $p$ does not divide $a$ because $p$ divides $a^2+1.$ So $p$ divides $a-b$ instead. This means $a \equiv b \pmod p.$ Let $k$ be the residue of $a$ (same as $b$) modulo $p.$ Also, let $r, s$ be integers such that \[a \equiv rp + k \pmod{p^2}, \qquad b \equiv sp+k \pmod {p^2}. \] We have \[ab +1\equiv (rp+k)(sp+k)+1 \equiv rpk + spk + k^2+1 \equiv 0 \pmod {p^2} \] which means \[a^2 + b^2 + 2 \equiv (rp+k)^2 + (sp+k)^2 + 2 \equiv 2rpk + 2spk + 2k^2 + 2 \equiv 2(rpk+spk+k^2+1) \equiv 0 \pmod {p^2}. \] So $p^2$ divides $a^2+b^2+2.$
+
+Case 2: $ab+1 \mid a^2+1.$
+This means $ab+1 \mid (a^2+1)-(ab+1) = a^2-ab = a(a-b).$ As $\gcd(ab+1,a) = 1$, we must have $ab+1 \mid a-b.$ Since we have \[|a-b| \le \max(a,b) < |ab+1|  \] the integer $\frac{a-b}{ab+1}$ is strictly between $-1$ and $1$ and therefore must be $0.$ That is, $a = b.$ However we're given that $a$ and $b$ are distinct, so this is a contradiction. Therefore this case can't actually happen.

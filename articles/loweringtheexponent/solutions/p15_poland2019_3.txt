@@ -1,0 +1,28 @@
+#1 by ryan17  https://artofproblemsolving.com/community/c6h1871281p12694557
+Let $f(t)=t^3+t$. Decide if there exist rational numbers $x, y$ and positive integers $m, n$ such that $xy=3$ and:
+\begin{align*}
+\underbrace{f(f(\ldots f(f}_{m \ times}(x))\ldots)) = \underbrace{f(f(\ldots f(f}_{n \ times}(y))\ldots)).
+\end{align*}
+
+---
+
+#2 by RagvaloD  https://artofproblemsolving.com/community/c6h1871281p12705094
+https://artofproblemsolving.com/community/q1h1785361p11785399
+
+---
+
+#3 by brokendiamond  https://artofproblemsolving.com/community/c6h1871281p15077257
+Any idea
+
+---
+
+#4 by math_pi_rate  https://artofproblemsolving.com/community/c6h1871281p15078442
+We prove a more general result-
+
+[quote]Let $p$ be an odd prime, and suppose $f(t)=t^p+t$. Then there do not exist rational numbers $x,y$ and positive integers $m,n$ with $xy=p$ and $f^m(x)=f^n(y)$.[/quote]
+
+We will use congruences and $p$-adic valuation for rationals. Note that, if $\nu_p(t)>0$, then $f(t) \equiv 0 \pmod{p}$. Also, if $\nu_p(t) \leq 0$, then $$p^{-p\nu_p(t)}f(t)=(p^{-\nu_p(t)}t)^p+p^{-p\nu_p(t)}t \equiv p^{-\nu_p(t)}t(1+p^{-(p-1)\nu_p(t)}) \not \equiv 0 \pmod{p}$$
+In particular, this gives that $\nu_p(f(t))>0$ iff $\nu_p(t)>0$. Return to the problem, and FTSOC assume such $x,y,m,n$ exist. Since $xy=p$, so WLOG assume $\nu_p(x)>0 \geq \nu_p(y)$. But that means that $\nu_p(f^m(x))>0$ and $\nu_p(f^n(y)) \leq 0$, giving the desired contradiction. $\blacksquare$
+-----------
+
+EDIT: In fact one can easily generalize this to any function of the form $f(t)=t^k+t$ where $k$ is a positive integer satisfying $k \equiv 1 \pmod{p-1}$.

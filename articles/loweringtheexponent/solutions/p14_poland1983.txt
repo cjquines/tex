@@ -1,0 +1,30 @@
+#1 by parmenides51  https://artofproblemsolving.com/community/c1068820h2015396p14143702
+Prove that if natural numbers $a,b,c,d$ satisfy the equality $ab = cd$, then $\frac{gcd(a,c)gcd(a,d)}{gcd(a,b,c,d)}= a$
+
+---
+
+#2 by naman12  https://artofproblemsolving.com/community/c1068820h2015396p14144303
+We shall consider the $v_p$, or the prime power, of any prime. We want to prove that $v_p(a)=\min(v_p(a),v_p(c))+\min(v_p(a),v_p(d))-\min(v_p(a),v_p(b),v_p(c),v_p(d))$.
+
+If $v_p(a)\leq v_p(c),v_p(d)$, then as $v_p(a)+v_p(b)=v_p(c)+v_p(d)$, we get $v_p(b)\geq v_p(c),v_p(d)$. Thus, in this case, we get $v_p(a)=v_p(a)+v_p(a)-v_p(a)$, obviously true. 
+
+Similarly, if $v_p(a)\geq v_p(c),v_p(d)$, then as $v_p(a)+v_p(b)=v_p(c)+v_p(d)$, we get $v_p(b)\leq v_p(c),v_p(d)$. Thus, in this case, we get $v_p(a)=v_p(c)+v_p(d)-v_p(b)$, obviously true.
+
+Finally, assume WLOG, $v_p(c)\leq v_p(d)$ and $v_p(c)\leq v_p(a)\leq v_p(d)$. Then, we see that as $v_p(a)+v_p(b)=v_p(c)+v_p(d)$, we get $ v_p(c)\leq v_p(b)\leq v_p(d)$. Thus, in this case, we get $v_p(a)=v_p(a)+v_p(c)-v_p(c)$, obviously true.
+
+---
+
+#3 by Mogmog8  https://artofproblemsolving.com/community/c1068820h2015396p25965022
+Consider Let $w=\nu_p(a),$ $x=\nu_p(b),$ $y=\nu_p(c),$ and $z=\nu_p(d)$ for a prime $p.$ Since $b=cd/a,$We rewrite the desired equation as $$\min\{w,y\}+\min\{w,z\}=w+\min\{w,y+z-w,y,z\}.$$ If $w\le y$ and $w\le z,$ then both sides are $2w$ as $y+(z-w)\ge y\ge w.$ If $y\le w\le z,$ then $y+(z-w)\ge y$ so both sides are $y+w.$ When $z\le w\le y,$ equality also holds by similar reasoning. If $w\ge y$ and $w\ge z,$ then $y+(z-w)\le y\le w$ and $(y-w)+z\le z$ so both sides are equal to $y+z.$ Since equality holds for all primes, we have the desired result. $\square$
+
+---
+
+#4 by Math4Life7  https://artofproblemsolving.com/community/c1068820h2015396p27636286
+For a certain $p$ we define $v_p(a)$, $v_p(a)$, $v_p(a)$, and $v_p(a)$ as $w$, $x$, $y$, and $z$ respectively. If we multiply both sides of the equation by $\gcd{a, b, c, d}$ we find that $v_p$ of the equation becomes $\min(w, y) + \min (w, z) = w + \min(w, x, y, z)$. We have $3$ different cases.
+
+$\textbf{Case 1: } w \leq y \leq z$. 
+Since $w+x = y+z$, this means that $2w = 2w$ which is obviously true
+
+$\textbf{Case 2: } y \leq w \leq z$. This is obviously the same as $z \leq w \leq y$. We cna see that we have $w+y = w+y$ due to $w + x = y+z$. 
+
+$\textbf{Case 3: } y \leq z \leq w$. This gives $y+z = w+x$ since this is true we see the result. $\blacksquare$

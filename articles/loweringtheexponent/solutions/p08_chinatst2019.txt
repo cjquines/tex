@@ -1,0 +1,57 @@
+#1 by fattypiggy123  https://artofproblemsolving.com/community/c6h1799942p11944591
+Call a sequence of positive integers $\{a_n\}$ good if for any distinct positive integers $m,n$, one has 
+$$\gcd(m,n) \mid a_m^2 + a_n^2 \text{ and } \gcd(a_m,a_n) \mid m^2 + n^2.$$
+Call a positive integer $a$ to be $k$-good if there exists a good sequence such that $a_k = a$. Does there exists a $k$ such that there are exactly $2019$ $k$-good positive integers?
+
+---
+
+#2 by Taha1381  https://artofproblemsolving.com/community/c6h1799942p11944792
+Wrong!!!
+
+---
+
+#3 by TLP.39  https://artofproblemsolving.com/community/c6h1799942p11944822
+@Above [hide]for any odd prime $p$, we have
+$p|(a_p^2+a_{2p}^2)-(a_{2p}^2+a_{3p}^2)+(a_p^2+a_{3p}^2)\implies p|a_p$
+which contradict your claim.[/hide]
+
+---
+
+#4 by MarkBcc168  https://artofproblemsolving.com/community/c6h1799942p11944873
+I think the answer is negative. First, let us narrow down all possible values of $a_n$.
+
+[b]Claim 1 : [/b] $n\mid 2a_n^2$ for any $n$.
+
+[b]Proof : [/b] Just notice that
+\begin{align*}
+n&\mid a_n^2 + a_{2n}^2 \\
+n&\mid a_{2n}^2 + a_{3n}^2 \\
+n&\mid a_n^2 + a_{3n}^2
+\end{align*}
+which is enough to imply $n\mid 2a_n^2$.
+------
+[b]Claim 2 :[/b] $\frac{\nu_p(n)}{2} \leqslant \nu_p(a_n) \leqslant 2\nu_p(n)$ for any prime $p$ and $n\in\mathbb{Z}^+$.
+
+[b]Proof :[/b] We first prove the lower bound by splitting into two cases.
+
+If $p$ is odd then by Claim 1, $\nu_p(2a_n^2) = 2\nu_p(a_n)\geqslant \nu_p(n)$ so we are done.
+
+If $p=2$ then by Claim 1, we get $\nu_2(a_n) \geqslant \tfrac{\nu_2(n)-1}{2}$. Now we have to improve a little bit. Let $t=\nu_2(n)$ and $M=2^{2019t}$. Thus $2^{1000t}\mid a_M$ (Claim 1) thus
+$$2^t\mid a_M^2 + a_n^2 \implies 2^t\mid a_n^2\implies \nu_2(a_n)\geqslant\frac{t}{2}.$$
+
+Now for the right side, let $t=\nu_p(a_n)$. Take $M=p^{2019t}$. Clearly, $\nu_p(a_M)>1000t$ thus
+$$\min\{\nu_p(a_n), \nu_p(a_M)\} \leqslant \nu_p(n^2+M^2) \leqslant 2t$$
+thus $\nu_p(a_n)\leqslant 2t$ as desired.
+-----
+Now, we need to focus on the existence of good sequences.
+
+[b]Claim 3 :[/b] A sequence is good as long as $\frac{\nu_p(n)}{2} \leqslant \nu_p(a_n) \leqslant 2\nu_p(n)$ for any prime $p$ and $n\in\mathbb{Z}^+$.
+
+[b]Proof :[/b] To get the first condition, just note that
+$$\nu_p(\gcd(m,n)) = \min\{\nu_p(m), \nu_p(n)\} \leqslant \min\{2\nu_p(a_m), 2\nu_p(a_n)\} \leqslant \nu_p(a_m^2+a_n^2)$$
+Now we proceed to verify the second condition.
+$$\nu_p(\gcd(a_m, a_n))\leqslant \min\{\nu_p(a_m), \nu_p(a_n)\} \leqslant \min\{2\nu_p(m), 2\nu_p(n)\}\leqslant\nu_p(m^2+n^2)$$
+-----
+Claim 2,3 implies that a sequence is good if and only if $\frac{\nu_p(n)}{2}\leqslant\nu_p(a_n)\leqslant 2\nu_p(n).$ for any prime $p$ and $n\in\mathbb{Z}^+$. Thus if $k=\prod\limits_{i=1}^r p_i^{e_i}$ where $p_1,p_2,...,p_r$ are primes and $e_1,e_2,...,e_r\in\mathbb{Z}+$. Then the total number of $k$-good number is
+$$\prod_{i=1}^r\left(2e_i - \left\lceil\frac{e_i}{2}\right\rceil + 1\right).$$
+Each factor is $3x+1$ if $e_i=2x$ and $3x+2$ if $e_i=2x+1$. This means the number of all $k$-good number is never divisible by $3$, contradiction.

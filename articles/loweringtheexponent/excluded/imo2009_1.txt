@@ -1,0 +1,32 @@
+#1 by orl  https://artofproblemsolving.com/community/c6h288838p1561571
+Let $ n$ be a positive integer and let $ a_1,a_2,a_3,\ldots,a_k$ $ ( k\ge 2)$ be distinct integers in the set $ { 1,2,\ldots,n}$ such that $ n$ divides $ a_i(a_{i + 1} - 1)$ for $ i = 1,2,\ldots,k - 1$. Prove that $ n$ does not divide $ a_k(a_1 - 1).$
+
+[i]Proposed by Ross Atkins, Australia [/i]
+
+---
+
+#2 by ychjae  https://artofproblemsolving.com/community/c6h288838p1561584
+Let $ n\equal{}pq$ such that $ p|a_1$ and $ q|a_2\minus{}1$. Suppose $ n$ divides $ a_k(a_1\minus{}1)$.
+Note $ q|a_2\minus{}1$ implies $ (q,a_2)\equal{}1$ and hence $ q|a_3\minus{}1$. Similarly one has $ q|a_i\minus{}1$ for all $ i$'s, in particular, $ p|a_1$ and $ q|a_1\minus{}1$ force $ (p,q)\equal{}1$. Now $ (p,a_1\minus{}1)\equal{}1$ gives $ p|a_k$, similarly one has $ p|a_i$ for all $ i$'s, that is $ a_i$'s satisfy $ p|a_i$ and $ q|a_i\minus{}1$, but there should be at most one such integer satisfies them within the range of $ {1,2,...,n}$ for $ n\equal{}pq$ and $ (p,q)\equal{}1$. A contradiction!!!
+
+---
+
+#3 by Erken  https://artofproblemsolving.com/community/c6h288838p1561588
+too easy no?
+
+$ a_1\equiv a_1\cdot a_2\equiv a_1\cdot a_2\cdot a_3\equiv \dots \equiv a_1\cdot\dots\cdot a_k\equiv a_1\cdot\dots\cdot a_{k \minus{} 2}\cdot a_k\equiv\dots\equiv a_1\cdot a_{k}\equiv a_k$. 
+
+Therefore, $ 0 < |a_1 \minus{} a_k| < n$ is divisible by $ n$. Contradiction.
+
+P.S Please add 's' in the statement, integer[b]s[/b]
+
+---
+
+#4 by TomciO  https://artofproblemsolving.com/community/c6h288838p1561593
+We prove inductively that $ n|a_1a_l \minus{} a_1$ for $ l\equal{}2, 3, \ldots, k$. We know that it's true for $ l\equal{}2$. Suppose that it's true for $ l$. Since $ n|a_1a_l\minus{}a_1$ and $ n|a_la_{l\plus{}1} \minus{} a_l$ we know that also $ n|(a_1a_l\minus{}a_1)a_{l\plus{}1} \minus{} a_1a_l\plus{}a_1$ and $ n|a_1a_la_{l\plus{}1} \minus{} a_1a_l$. Substracting gives exactly what we want and the induction proof is complete.
+Since $ n|a_1a_k \minus{} a_1$ we can't have $ n|a_k(a_1\minus{}1)\equal{}a_ka_1 \minus{} a_k$ since it would imply $ n|a_1\minus{}a_k$, which is impossible.
+
+---
+
+#5 by Bugi  https://artofproblemsolving.com/community/c6h288838p1561608
+It is an easy problem!!! I solved it!!! It's very similar to ychjae's, but I complicated stuff with prime factors of n...

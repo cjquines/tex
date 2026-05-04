@@ -1,0 +1,15 @@
+#1 by BartSimpsons  https://artofproblemsolving.com/community/c6h1446913p8271420
+Call a rational number $r$ [i]powerful[/i] if $r$ can be expressed in the form $\dfrac{p^k}{q}$ for some relatively prime positive integers $p, q$ and some integer $k >1$. Let $a, b, c$ be positive rational numbers such that $abc = 1$. Suppose there exist positive integers $x, y, z$ such that $a^x + b^y + c^z$ is an integer. Prove that $a, b, c$ are all [i]powerful[/i].
+
+[i]Jeck Lim, Singapore[/i]
+
+---
+
+#12 by yayups  https://artofproblemsolving.com/community/c6h1446913p13072422
+Say we had a prime $p$ such that $\nu_p(a)=0$, so $\nu_p(b)=-\nu_p(c)$. Then, $\nu_p(a^x+b^y+c^z)$ would be negative unless $\nu_p(b)=\nu_p(c)=0$. Thus, we can't have any of $(\nu_p(a),\nu_p(b),\nu_p(c))$ be $0$ unless they are all $0$.
+
+Suppose $\nu_p(a)<0$ and $\nu_p(b),\nu_p(c)>0$. Then, we have a problem as $\nu_p(a^x+b^y+c^z)=x\nu_p(a)<0$. Thus, we must have exactly two negatives and one positive in $(\nu_p(a),\nu_p(b),\nu_p(c))$.
+
+Suppose $p$ is some prime such that $\nu_p(a)>0$, so from above, we see that we must have $\nu_p(b),\nu_p(c)<0$. If $y\nu_p(b)\ne z\nu_p(c)$, then
+\[\nu_p(a^x+b^y+c^z)=\min\{y\nu_p(b),z\nu_p(c)\}<0,\]
+so we must in fact have $y\nu_p(b)=z\nu_p(c)$. Thus, $(\nu_p(b),\nu_p(c))=-k(z',y')$ where $k\in\mathbb{N}$ and $(y',z')=\frac{(y,z)}{\gcd(y,z)}$, so $\nu_p(a)=k(y'+z')$. Thus, if $\nu_p(a)>0$, then $y'+z'\mid a$, so the numerator of $a$ is a perfect power, as desired.

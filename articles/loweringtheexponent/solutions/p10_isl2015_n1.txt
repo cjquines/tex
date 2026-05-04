@@ -1,0 +1,21 @@
+#1 by va2010  https://artofproblemsolving.com/community/c6h1268859p6622268
+Determine all positive integers $M$ such that the sequence $a_0, a_1, a_2, \cdots$ defined by \[ a_0 = M + \frac{1}{2}   \qquad  \textrm{and} \qquad    a_{k+1} = a_k\lfloor a_k \rfloor   \quad \textrm{for} \, k = 0, 1, 2, \cdots \] contains at least one integer term. 
+
+---
+
+#105 by cursed_tangent1434  https://artofproblemsolving.com/community/c6h1268859p37304440
+The answer is all $M>1$. If $M=1$ the sequence stays constant at $\frac{3}{2}$ so we deal with larger $M$ in what follows.
+
+The idea is to observe that the sequence is composed of terms of the form $n+\frac{1}{2}$ for a positive integer $n$ or positive integers. This is clear from the iterative definition of the sequence. Note that if $\lfloor a_i \rfloor$ is even for some positive integer $i$, the next term is an integer, as it eliminates the denominators. Also, clearly the sequence is non-decreasing.
+
+Thus, if $M$ is even the result if obvious. Hence, assume that $M$ is odd. The following is the key claim.
+
+[color=#f00][b]Claim : [/b]The sequence $\nu_2(\lfloor a_i \rfloor - 1)$ decreases by one each step, until $\lfloor a_i \rfloor-1$ is odd. [/color]
+
+[i]Proof : [/i] Note that if $\lfloor a_i \rfloor > 1$ is odd, 
+\[a_{i+1}=a_i\lfloor a_i \rfloor = \left(\lfloor a_i \rfloor + \frac{1}{2} \right)\lfloor a_i \rfloor = \lfloor a_i \rfloor ^2 + \frac{\lfloor a_i \rfloor -1}{2} + \frac{1}{2}\]
+Then, 
+\[\nu_2\left(\lfloor a_i \rfloor ^2 + \frac{\lfloor a_i \rfloor -1}{2} -1 \right) = \nu_2\left(\left(\lfloor a_i \rfloor-1)(\lfloor a_i \rfloor +1 + \frac{1}{2}\right)\right) = \nu_2(\lfloor a_i \rfloor -1)-1\]
+which proves the claim.
+
+Thus, eventually we have a term where $\lfloor a_i \rfloor - 1$ is odd, and the immediately next term is an integer.

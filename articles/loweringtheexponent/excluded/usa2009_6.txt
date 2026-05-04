@@ -1,0 +1,54 @@
+#1 by tenniskidperson3  https://artofproblemsolving.com/community/c5h274378p1485204
+Let $s_1, s_2, s_3, \dots$ be an infinite, nonconstant sequence of rational numbers, meaning it is not the case that $s_1 = s_2 = s_3 = \dots.$  Suppose that $t_1, t_2, t_3, \dots$ is also an infinite, nonconstant sequence of rational numbers with the property that $(s_i - s_j)(t_i - t_j)$ is an integer for all $i$ and $j$.  Prove that there exists a rational number $r$ such that $(s_i - s_j)r$ and $(t_i - t_j)/r$ are integers for all $i$ and $j$.
+
+---
+
+#48 by Aryan-23  https://artofproblemsolving.com/community/c5h274378p18881830
+First we note a easy fact. If rationals $a,b$, satisfy $a+b , ab \in \mathbb Z$, then $a,b \in \mathbb Z$. 
+
+Proof : Define $f(x)= x^2-(a+b)x+ab)$. On one hand, $f(x)\in \mathbb Z[X]$, so $a,b \in \overline {\mathbb Z}$. Also $a,b \in \mathbb Q$. This gives $a,b \in \mathbb Q \cap \overline {\mathbb Z}\equiv \mathbb Z$, so the lemma holds. 
+
+We shift such that $s_1=t_1=0$. Also scaling the $s_i,t_i$'s doesnt change the truth of the statement, so WLOG $s_2=1$. 
+
+Next note that $s_it_i\in \mathbb Z$ and $s_it_j+s_jt_i \in \mathbb Z$ for all $i,j \in \mathbb N$. Using the fact on $s_it_j$ and $s_jt_i$, we get $s_it_j\in \mathbb Z$, for all $i,j$. This directly gives that $t_j$ are integers for all $j$. Note that $t_i\cdot s_j$ is a integer. This gives that the denominator of the $s_i$'s divides $t_j$ for all $i,j$. So divide the $t_i$ by their gcd and multiply the $s_i$ by the same and we are happy ! 
+
+---
+
+#49 by mathlogician  https://artofproblemsolving.com/community/c5h274378p20501880
+Solution with lots of help from @above.
+
+First we can subtract some rational from all the $s_i$ such that $s_1=0$, and similarly $t_1 = 0$. Moreover by multiplying each $s_i$ appropriately we can assume $s_n=1$ for some $n$. It follows that $s_it_i$ is an integer for all $i$, and as a result $s_it_j + s_jt_i$ is also an integer. But also $s_is_jt_it_j$ is an integer, so we can conclude that $s_it_j$ is an integer for all pairs $(i,j)$. (Here's a $\nu_p$ argument to see this: let $a = \nu_p(s_it_j)$ and $b = \nu_p(s_jt_i)$. Note that $\min(a,b) \geq 0$ is true unless $a=b$; but then $a+b \geq 0$ implies $a,b \geq 0$ anyways.)
+
+Let $e$ be the minimal $\nu_p$ of all the numbers in $\{s_i\}$: we will show that $\nu_p(t_i) \geq e$ for all $i$. But note that $\nu_p(s_it_j) \geq 0$ for all pairs $(i,j)$, done.
+
+---
+
+#50 by IAmTheHazard  https://artofproblemsolving.com/community/c5h274378p22619670
+For rational numbers $a,b$, we write $a\equiv b \pmod{k}$ if $k \mid a-b$, where $k$ is an integer. This replaces the conventional modulo meaning with all those inverses.
+We begin with the following claim:
+
+[b]Claim 1:[/b] For any prime $p$, the quantity $\nu_p(t_i-t_j)$ across all $i,j$ is bounded below.
+[b]Proof:[/b] I will prove that $\nu_p(t_i)$ across all $i$ is bounded below. Suppose otherwise. Then, there exist infinitely many positive integers $k>1$ such that $\nu_p(t_k)<\nu_p(t_i)$ for all $i<k$. Call such indices "mountainous". For every mountainous index $k$, we have $\nu_p(t_k-t_i)=\nu_p(t_k)$ for all $i<k$. It follows that for such $k$, we have $\nu_p(s_k-s_i)\geq -\nu_p(s_k)$ for all $i<k$. Then, for all $i,j<k$,
+$$\nu_p(s_i-s_j)=\nu_p((s_k-s_j)-(s_k-s_i))\geq -\nu_p(s_k).$$
+But since $-\nu_p(s_k)$ is unbounded above as $k$ grows large, it follows that $\nu_p(s_i-s_j)$ isn't bounded, so $s_i-s_j=0$. This implies $(s_n)$ is a constant sequence, which violates the condition. Thus $\nu_p(t_i)$ is bounded below, so $\nu_p(t_i-t_j)\geq \min\{\nu_p(t_i),\nu_p(t_j)\}$ is bounded below. $\blacksquare$
+
+Of course, this claim also applies to $\nu_p(s_i-s_j)$.
+
+We now prove the following claim, the purpose of which is to avoid issues with the fact that multiplying infinitely many rationals doesn't necessarily give a rational number. We will use the fact that if $q$ is rational and nonzero, then there are finitely many primes $p$ with $\nu_p(q) \neq 0$ [hide=(proof)]
+We can write $q=\tfrac{a}{b}$, where $a,b$ are integers and $\gcd(a,b)=1$. Then if a prime $p$ satisfies $\nu_p(q) \neq 0$, we must have $p \mid a$ or $p \mid b$.
+[/hide].
+
+[b]Claim 2:[/b] There are finitely many primes $p$ such that the minimum of $\nu_p(t_i-t_j)$ over all $i,j$ is nonzero.
+[b]Proof:[/b] Suppose otherwise. Then there are either infinitely many primes $p$ such that $\min\{\nu_p(t_i-t_j)\}$ is positive or infinitely many $p$ such that the quantity is negative. However, the former is impossible, since it would then follow that there are infinitely many $p$ such that $\nu_p(t_i-t_j)$ is positive for all $i,j$, so $t_i-t_j=0$ for all $i,j$ and $(t_n)$ is constant: contradiction. Thus we would need infinitely many $p$ with $\min\{\nu_p(t_i-t_j)\}<0$. As $\nu_p(t_i-t_j) \geq \min\{\nu_p(t_i),\nu_p(t_j)\}$, we would then have infinitely many $p$ with $\min\{\nu_p(t_i)\}<0$. By the first claim, for such $p$ $\min\{\nu_p(t_i)\}$ is bounded below, so let $\min\{\nu_p(t_i)\}$ be $f(p)<0$. Also let $S(p)$ denote the set of indices $i$ such that $\nu_p(t_i)=f(p)$. Pick some $k \in S(p)$. Then for all $i \neq j \not \in S(p)$, we have
+$$\nu_p(t_k-t_i)=\nu_p(t_k-t_j)=f(p),$$
+so $\nu_p(s_k-s_i)=\nu_p(s_k-s_j)\geq -f(p)$. It follows that $\nu_p(s_i-s_j)\geq -f(p)$ for all $i,j \not \in S(p)$, so $\nu_p(s_i-s_j) \geq -f(p)>0$ where $i$ and $j$ are not both in $S(p)$. If there exist $i \neq j$ such that $i,j$ are not both in $S(p)$ for infinitely many primes $p$, then $\nu_p(s_i-s_j)$ is positive for infinitely many primes $p$, which is impossible. Hence for every pair $(i,j)$ with $i \neq j$, there are finitely many primes $p$ such that $i,j$ are not both in $S(p)$, and thus infinitely many primes $p$ such that $i,j$ are both in $S(p)$. But this implies that there are infinitely many primes $p$ such that $i \in S(p)$ for all $i$, which means $\nu_p(t_i)=f(p)<0$ for infinitely many $p$. This is, however, impossible, as $t_i$ is rational. $\blacksquare$
+
+Observe that multiplying every element of $(s_n)$ by some rational $q$ and dividing every element of $(t_n)$ by $q$ changes nothing. Now, let $S$ be the set of all primes $p$ such that $\min\{\nu_p(t_i-t_j)\}$ over all $i,j$ is nonzero, which is finite by claim 2. Let
+$$q=\prod_{p \in S} \min\{\nu_p(t_i-t_j)\},$$
+which is rational as $S$ is finite. Then, multiply all elements of $(s_n)$ by $q$ and divide all elements of $(t_n)$ by $q$. We can also shift $(s_n)$ and $(t_n)$ such that $s_1=t_1=0$. After this transformation, I claim $r=1$ works. Since $\min\{\nu_p(t_i-t_j)\}=0$ for all $p$, it follows that $(t_i-t_j)/r=t_i-t_j$ has nonnegative $\nu_p$ and is therefore an integer. Now let $p$ be an arbitrary prime and let $\min\{\nu_p(s_i-s_j)\}=k$. If $k \geq 0$, then $r=1$ obviously works. Suppose $k<0$. Pick $i \neq j$ with $\nu_p(s_i-s_j)=k$, so $\nu_p(t_i-t_j)\geq -k$. Now for every $n \neq i,j$, we have
+$$\nu_p(s_i-s_j)=\nu_p((s_n-s_j)-(s_n-s_i))\geq \min\{\nu_p(s_n-s_i),\nu_p(s_n-s_j)\}.$$
+Since $\nu_p(s_n-s_i)\geq k$ and likewise for $s_j$, this means that either $\nu_p(s_n-s_i)=k$ or $\nu_p(s_n-s_j)=k$. If $\nu_p(s_n-s_i)=k$, then $\nu_p(t_n-t_i)\geq -k$. This also means $\nu_p(t_n-t_j)\geq -k$, otherwise $\nu_p((t_n-t_j)-(t_n-t_i))<-k$, contradicting the fact that it's also at least $-k$. Hence we have
+$$t_n \equiv t_i \equiv t_j \pmod{p^{-k}}$$
+for all $n \neq i,j$. But this means
+$$t_a \equiv t_b \pmod{p^{-k}} \implies p^{-k} \mid t_a-t_b,$$
+so $\nu_p(t_i-t_j)\geq -k>0$ for all $a,b$, which contradicts $\min\{\nu_p(t_i-t_j)\}=0$. Thus $\min\{\nu_p(s_i-s_j)\}\geq 0$, so $(s_i-s_j)r=s_i-s_j$ is an integer for all $i,j$, as desired. $\blacksquare$

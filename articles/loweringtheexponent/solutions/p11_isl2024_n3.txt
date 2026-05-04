@@ -1,0 +1,41 @@
+#1 by brainfertilzer  https://artofproblemsolving.com/community/c6h3610437p35340905
+Determine all sequences $a_1, a_2, \dots$ of positive integers such that for any pair of positive integers $m\leqslant n$, the arithmetic and geometric means
+\[ \frac{a_m + a_{m+1} + \cdots + a_n}{n-m+1}\quad\text{and}\quad (a_ma_{m+1}\cdots a_n)^{\frac{1}{n-m+1}}\]are both integers.
+
+---
+
+#2 by megarnie  https://artofproblemsolving.com/community/c6h3610437p35340912
+The answer is constant which works. 
+
+Claim: $i - j \mid a_i - a_j$ for each $i,j$. 
+Proof: Let $d = i - j$. Note that $a_i + a_{i + 1} + \cdots + a_{i + (d - 1)}$ and $a_{i + 1} + a_{i + 2} + \cdots + a_{i + d}$ are both multiples of $d$, so $a_i \equiv a_{i + d} \pmod d$. Iterating this gives the desired result. $\square$
+ 
+Claim: For all primes $p$, $i - j \mid \nu_p(a_i) - \nu_p(a_j)$ for each $i,j$. 
+Proof: Let $i - j = d$. Note that $a_i a_{i + 1} \cdots a_{i + (d-1)}$ is a $d$th power, so taking $\nu_p$ gives that $\nu_p(a_i) + \nu_p(a_{i + 1} ) + \cdots + \nu_p(a_{i + (d-1)})$ is divisible by $d$ and similarly, $\nu_p(a_{i + 1}) + \nu_p(a_{i + 2} ) + \cdots + \nu_p(a_{i + d})$ is divisible by $d$, so $\nu_p(a_i) \equiv \nu_p(a_{i + d}) \pmod d$. Iterating this gives the desired result. $\square$
+
+
+Claim: For all primes $p$ and positive integers $n$, we have $\nu_p(a_n) = \nu_p(a_1)$. 
+Proof: Let $C = \nu_p(a_1)$. Note that from the fact that $i - j \mid a_i - a_j$, we have that $p^{C+1} \mid (kp^{C+1} + 1) - 1 \mid a_{k p^{C+1} + 1}  - a_1$ for any positive integer $k$, so $\nu_p(a_{k p^{C+1} + 1}) = \nu_p(a_1) = C$.
+
+Setting $j = k p^{C+1}  + 1$ in the result from the previous claim gives that $i - (kp^{C+1} + 1) \mid \nu_p(a_i) - C$. Varying $k$ over positive integers gives that $\nu_p(a_i) - C$ has infinitely many divisors, so $\nu_p(a_i) = C$. $\square$
+
+Thus, the sequence is constant.
+
+---
+
+#3 by OronSH  https://artofproblemsolving.com/community/c6h3610437p35341144
+The answer is $\boxed{\text{only constants}}$, which clearly work.
+
+Fix a prime $p$. Note that \[\frac{a_{n+1}+\dots+a_{n+p}}p-\frac{a_n+\dots+a_{n+p-1}}p=\frac{a_{n+p}-a_n}p\] is an integer, so the sequence is periodic $\pmod p$ with period $p$.
+
+Similarly, we see \[\frac{(a_ma_{m+1}\cdots a_{m+p-2})^{\frac1{p-1}}}{(a_{m+1}a_{m+2}\cdots a_{m+p-1})^{\frac1{p-1}}}=\left(\frac{a_{m+p-1}}{a_m}\right)^{\frac1{p-1}}\] is rational, so $\tfrac{a_{m+p-1}}{a_m}$ is a rational $p-1$th power, and thus so is $\tfrac{a_{m+c(p-1)}}{a_m}$ for any $c$.
+
+[b][color=red]Claim:[/color][/b] If $a_i,a_j\not\equiv 0\pmod p$ then $a_i\equiv a_j\pmod p$.
+[i]Proof.[/i] By Chinese Remainder Theorem, we may pick $k$ such that $k\equiv i\pmod p$ and $k\equiv j\pmod{p-1}$. Then $\tfrac{a_k}{a_j}$ is a $p-1$th power, so Fermat's Little Theorem gives \[\frac{a_i}{a_j}\equiv\frac{a_k}{a_j}\equiv 1\pmod p\] as desired. $\blacksquare$
+
+Now if the sequence is nonconstant, there exist unequal $a_i,a_j$. However, for large enough $p$ we have $a_i\not\equiv a_j\pmod p$ and $p\nmid a_i,a_j$. This is a contradiction, so the sequence is constant as desired.
+
+---
+
+#4 by ihatemath123  https://artofproblemsolving.com/community/c6h3610437p35341219
+The answer is constant sequences only. WLOG, assume the sequence has GCD $1$. Assume FTSOC that $a_i$ is not identically $1$. Note that for any fixed prime $p$, the sequence $a_i \pmod{p}$ is periodic with period $p$. If we fix another prime $q$, the sequence $\nu_p (a_i) \pmod{q}$ is periodic with period $q$. If $a_i$ is not identically $1$, there exists a choice of $p$ and $q$, there must be one nonzero term in $a_i \pmod{p}$, as well as one nonzero term in $\nu_p (a_i) \pmod{q}$. But since the periods of the respective sequences are coprime, by CRT, there exists some $a_i$ which satisfies $\nu_p (a_i) \neq 0$ and $a_i \not \equiv 0 \pmod{p}$, contradiction.

@@ -1,0 +1,43 @@
+#1 by parmenides51  https://artofproblemsolving.com/community/c291h1904123p13026024
+(a) Find two quadruples of positive integers $(a,b, c,n)$, each with a different value of $n$ greater than $3$, such that
+$$\frac{a}{b} +\frac{b}{c} +\frac{c}{a} = n$$
+
+(b) Show that if $a,b, c$ are nonzero integers such that $\frac{a}{b} +\frac{b}{c} +\frac{c}{a}$ is an integer, then $abc$ is a perfect cube.  (A perfect cube is a number of the form $n^3$, where $n$ is an integer.)
+
+---
+
+#2 by parmenides51  https://artofproblemsolving.com/community/c291h1904123p13026106
+(b) solved [url=https://artofproblemsolving.com/community/c6h1698190p10897485]here[/url]
+
+---
+
+#3 by peatlo17  https://artofproblemsolving.com/community/c291h1904123p21603414
+Nice problem. Let $p$ be any prime. Let the $\nu_p$'s of $a, b, c$ be $x, y, z$ in some order. WLOG, let $x \le y \le z$. The problem is equivalent to proving that $x+y+z$ is a multiple of 3. 
+
+Rewriting the expression, we have that 
+\begin{align}
+a^2c + b^2a + c^2b = k \cdot abc
+\end{align}
+For some integer $k$. Taking $\nu_p$ on distinct elements of the LHS can either give us the tuple $(2x+z, 2y+x, 2z+y)$ or the tuple $(2x+y, 2y+z, 2z+x)$. On the right side, taking $\nu_p$ gives us some integer greater than or equal to $x+y+z$.
+
+Case 1: When the LHS gives us the tuple $(2x+y, 2y+z, 2z+x)$, if $x = y = z$, then we are done. Otherwise, observe that $2x+y \le x+y+z \le 2y+z, 2z+x$, so $2x+y < x+y+z$. Then three of the terms in (1) have $\nu_p \ge x+y+z$, while one term has $\nu_p < x+y+z$, contradiction.
+
+Case 2: When the LHS gives us the tuple $(2x+z, 2y+x, 2z+y)$, if $x = y = z$, then we are done. Otherwise, observe that $2x+z, 2y+x \le x+y+z \le 2z+y$, so WLOG, if $2x+z < 2y+x$, then three of the terms in (1) have $\nu_p \ge 2y+x$, while one term has $\nu_p < 2y+x$, contradiction. Thus, we must have that 
+$$2x+z=2y+x$$
+$$x+y+z = 3y$$
+So $\nu_p(abc) = x+y+z = 3y$ is a multiple of 3, done.
+
+
+---
+
+#4 by lahmacun  https://artofproblemsolving.com/community/c291h1904123p22026707
+Let $p$ be a prime and $A=v_p(a), B=v_p(b), C=v_p(c)$.  
+Then, $\frac{a}{b}+\frac{b}{c}+\frac{c}{a}=\frac{a^2c+b^2a+c^2b}{abc}$ is an integer, from which
+ $a\mid c^2b, b\mid a^2c, c\mid b^2a$, which in vp becomes $A\le 2C+B, C\le 2B+A, B\le 2A+C$.
+We can WLOG assume that $gcd(a,b,c)=1$. So, $0\in\{A, B, C\}$. WLOG $C=0$.
+The system of inequalitites then becomes $A\le B, B\le 2A$. So, $B\geq 0\geq A-B\geq -A$.
+[color=#f00][b]Claim:[/b] [/color] $2B=A$ or $2A=B$ 
+[i]proof:[/i] Otherwise all latter inequalities are strict:
+$B>A-B>-A$ and $0\le v_p(\frac{a}{b}+\frac{b}{c}+\frac{c}{a})=v_p(\frac{c}{a})=-A\le 0\implies A=0\implies -B>0$.
+Contradiction. $\blacksquare$.
+So, $v_p(abc)=A+B+C=A+B$ is divisible by $3$. Since this is true for any prime $p$, $abc$ must be a cube.

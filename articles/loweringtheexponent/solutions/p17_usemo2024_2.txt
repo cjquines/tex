@@ -1,0 +1,70 @@
+#1 by john0512  https://artofproblemsolving.com/community/c6h3429772p33040073
+Let $k$ be a fixed positive integer. For each integer $1 \leq i \leq 4$, let $x_i$ and $y_i$ be positive integers such that their least common multiple is $k$. Suppose that the four points $(x_1, y_1)$, $(x_2, y_2)$, $(x_3, y_3)$, $(x_4, y_4)$ are the vertices of a non-degenerate rectangle in the Cartesian plane. Prove that $x_1x_2x_3x_4$ is a perfect square.
+
+[i]Andrei Chirita[/i]
+
+---
+
+#2 by john0512  https://artofproblemsolving.com/community/c6h3429772p33040086
+[hide=sol???]
+Consider a prime $p$, and let $M=v_p(k)$. Then, each point has at least one coordinate with a $v_p$ of $M$, and the other one is at most $M$. Note that $x_1+x_3=x_2+x_4$ and $y_1+y_3=y_2+y_4$.\\
+
+Claim 1: If exactly two $x$-coordinates have a $v_p$ of $M$, then the $v_p$ of the other two are equal. If they are consecutive, say $x_1,x_2$, then $v_p(x_1+x_3)=v_p(x_3)$ and $v_p(x_2+x_4)=v_p(x_4)$ since $x_3,x_4$ have $v_p$ smaller than $M$, hence $v_p(x_3)=v_p(x_4)$. If they are opposite, say $x_1$ and $x_3$, then $v_p(x_2+x_4)\geq M$, but this can only happen if $v_p(x_2)=v_p(x_4)$ as individually they are less than $M$. In particular, this means the sum of all four $v_p$'s is even.\\
+
+WLOG at least as many $x$-coordinates have a $v_p$ of $M$ than $y$-coordinates (otherwise swap $x$ and $y$), and we will show that both $\sum v_p(x_i)$ and $\sum v_p(y_i)$ are even. Note there are at least two $x$-coordinates with $v_p$ of $M$. Since Claim 1 already resolves the case of two $M$s from each of $x$ and $y$, all remaining cases have at least three $M$s for $x$.\\
+
+Claim 2: We cannot have $v_p(x_1)=v_p(x_2)=v_p(x_3)=M$ and $v_p(x_4)<M$. Again, follows from $x_1+x_3=x_2+x_4$.\\
+
+Thus, all remaining cases have $v_p(x_1)=v_p(x_2)=v_p(x_3)=v_p(x_4)=M$. Let
+$$r=\max(v_p(y_i))\leq M.$$
+Assume WLOG that $v_p(y_2)=r$.\\
+
+Claim 3: We have either $v_p(y_1)=r$ or $v_p(y_3)=r$. Assume FTSOC that $v_p(y_1)=a$ and $v_p(y_3)=b$ for $a,b<r$. The perpendicularity expands out to 
+$$(x_2^2-x_2(x_1+x_3)+x_1x_3) + (y_2^2-y_2(y_1+y_3)+y_1y_3) = 0$$
+The six terms have $v_p$ of $2M$, at least $2M$, $2M$, $2r$, at least $r+\min(a,b)$, and $a+b$ respectively. If $a,b<r\leq M$, then $a+b$ is strictly the smallest, contradiction.\\
+
+Thus one of them is $r$, assume $v_p(y_1)$. Then, $y_1+y_3=y_2+y_4$ combined with $v_p(y_1)=v_p(y_2)=r$ implies $v_p(y_3)=v_p(y_4)$, as if they are not equal, say $a>b$, then $y_1+y_3$ will be at least $a$ but $y_2+y_4$ will be exactly $b$ as $b<r$. Thus we are done.
+[/hide]
+
+---
+
+#3 by pi_is_3.14  https://artofproblemsolving.com/community/c6h3429772p33041983
+Let $\nu_p(k) = m$. 
+
+[b]Case 1:[/b] All four $x_i$ have $\nu_p = m$, which is trivial.
+
+[b]Case 2: [/b]Three $x_i$ have $\nu_p = m$. This is impossible because one pair of opposite diagonal $x$-coordinates has $\nu_p$ value of $m$, while the other pair has a $\nu_p$ value of less than $m$.
+
+[b]Case 3: [/b]Two $x_i$ have $\nu_p = m$. If the "good" $x_i$ with $\nu_p = m$ are diagonally opposite, then the $\nu_p$ of the "bad" $x_i$ must be equal; otherwise, the $\nu_p$ of the sum of the "bad" $x_i$ would be less than $m$.
+
+[b]Case 4: [/b]Zero $x_i$ have $\nu_p = m$, meaning all four $y_i$ have $\nu_p = m$. By perpendicularity and dot products, we get 
+\[
+(y_4 - y_1)(y_2 - y_1) = -(x_4 - x_1)(x_2 - x_1),
+\]
+so the $\nu_p$ of the LHS is at least $2m$, implying that the $\nu_p$ of the RHS must also be at least $2m$. This further implies that at least one of $\nu_p(x_2) = \nu_p(x_1)$ (assume this holds without loss of generality) or $\nu_p(x_4) = \nu_p(x_1)$ must be true; otherwise, the RHS would have $\nu_p < 2m$.
+
+Similarly, at least one of $\nu_p(x_2) = \nu_p(x_3)$ or $\nu_p(x_3) = \nu_p(x_4)$ must hold. If the second condition is true, then we have an even sum of all $\nu_p(x_i)$ by pairing $x_1, x_2$ and $x_3, x_4$. If the first condition is true, then $\nu_p(x_1) = \nu_p(x_2) = \nu_p(x_3)$. Now, either $\nu_p(x_3) = \nu_p(x_4)$ or $\nu_p(x_4) = \nu_p(x_1)$ holds, which both imply $\nu_p(x_1) = \nu_p(x_2) = \nu_p(x_3) = \nu_p(x_4)$. This case works clearly.
+
+[b]Case 5: [/b]One $x_i$ has $\nu_p = m$, which implies that at least three $y_i$ have $\nu_p = m$. However, this also implies that all four $y_i$ have $\nu_p = m$, since the sum of opposite $y$-coordinates must have $\nu_p = m$ for both diagonals. 
+
+By the exact same logic as in the previous case (since $\nu_p(x_i - x_j) < m$ unless $\nu_p(x_i) = \nu_p(x_j)$ as only one of the $x$-coordinates has $\nu_p = m$), we conclude that all four $\nu_p(x_i) = m$.
+
+---
+
+#4 by NO_SQUARES  https://artofproblemsolving.com/community/c6h3429772p33046153
+In this solution we will use many times the following lemma:
+
+if $\nu_p(a) \not = \nu_p(b)$, then $\nu_p(a+b)=min\left(\nu_p(a), \nu_p(b)\right)$.
+
+Consider any prime divisor of $k$. It is enough to prove that $\nu_p(x_1x_2x_3x_4)$ is even (since another prime numbers can't divide $x_1x_2x_3x_4$). Since points in condition are vertices of rectangle, we have \[
+x_1 + x_3 = x_2 + x_4 \quad (1) \] \[y_1 + y_3 = y_2 + y_4 \quad (2) \] \[x_2x_4 - x_1x_3 + y_2y_4 - y_1y_3 = 0. \quad (3) \] 
+
+Let $\nu_p(k)=\ell$. In each pair $(x_i, y_i)$ one number must divide by $p^\ell$ and $\nu_p(x_i), \nu_p(y_i) \leq \ell$. 
+
+If some three of $x_i$, say, $x_1, x_2, x_3$, divide by $p^\ell$, then fourth is also since $x_4 = x_1 + x_3 - x_2$ and so $\nu_p(x_1x_2x_3x_4)=4\ell \vdots 2$. 
+
+If some three of $y_i$ are divide by $p^\ell$, then, similarly to above case, fourth is also. Then from $(3)$ we get $p^{2\ell} | x_2x_4-x_1x_3$ and, since $\nu_p(x_1x_3), \nu_p(x_2x_4) \leq 2\ell$, we get $\nu_p(x_1x_3)=\nu_p(x_2x_4)$ and also $2|\nu_p(x_1x_2x_3x_4)$.
+
+Then some two of $x_i$ are divide by $p^\ell$. If $p^\ell$ divide both $x_1$ and $x_2$ (or any similar cyclic case), then from $(1)$ we get $p^\ell | x_3-x_4$. Since $\nu_p(x_3), \nu_p(x_4) \leq \ell$, we get $\nu_p(x_3)=\nu_p(x_4)$ and now also $\nu_p(x_1x_2x_3x_4)$ is even.
+
+Finally, if $p^\ell | x_1, x_3$ (or second similar case), then from $(1)$ we get $p^\ell | x_2+x_4$ and, similar with aboce case, we get $\nu_p(x_2)=\nu_p(x_4)$ and $\nu_p(x_1x_2x_3x_4)$ is even. The problem is solved.

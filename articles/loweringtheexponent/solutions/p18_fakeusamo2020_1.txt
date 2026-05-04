@@ -1,0 +1,16 @@
+#1 by MarkBcc168  https://artofproblemsolving.com/community/c6h2078501p14933592
+Suppose that $C$ is a positive integer and $a_1,a_2,a_3,\hdots$ is an infinite sequence of positive integers satisfying
+$$a_{n+1}=\sqrt{a_n^3-Ca_n}$$
+for all positive integers $n$. Prove that this sequence must be eventually constant, i.e. there exists a positive integer $N$ such that $a_N = a_{N+1} = a_{N+2} = \hdots$.
+
+[i]Proposed by YRNG-BCC168.[/i]
+
+---
+
+#24 by Assassino9931  https://artofproblemsolving.com/community/c6h2078501p37600983
+Very instructive problem! The recurrence is $a_{n+1}^2 = a_n(a_n^2 - C)$. We firstly claim that $a_n$ divides $C$ for all $n$.
+
+Suppose the contrary, that there is an index $N$ and a prime $p$ such that $\nu_p(a_N) > \nu_p(C)$. We argue inductively that $\nu_p(a_n^2 - C) = \nu_p(C)$ and $\nu_p(C) < \nu_p(a_{n+1}) < \nu_p(a_n)$ for all $n
+\geq N$, which would give a contradiction as $\nu_p(a_n)$ would be a sequence of distinct integers for $n\geq N$, hence cannot be monotonic and bounded. Indeed, $\nu_p(a_N^2 - C) = \min(\nu_p(a_N^2), \nu_p(C)) = \nu_p(C)$ and $$2\nu_p(a_{n+1}) = \nu_p(a_n) + \nu_p(a_n^2 - C) = \nu_p(a_n) + \nu_p(C) < 2\nu_p(a_n)$$ thus $C < \nu_p(a_{n+1}) < \nu_p(a_n)$ and $\nu_p(a_{n+1}^2 - C) = \min(\nu_p(a_{n+1}^2), \nu_p(C)) = \nu_p(C)$. The claim is proven.
+
+Now let $p$ be a prime divisor of $C$ -- note that there are finitely many such, hence (as $a_n$ divides $C$ for all $n$) finitely many primes $p$, which divide at least one term of the sequence. Consider an index $n$ and note that $\nu_p(C) \geq \nu_p(a_n)$, hence $2\nu_p(a_{n+1}) = \nu_p(a_n^3 - Ca_n) \geq \min(3\nu_p(a_n), \nu_p(C) + \nu_p(a_n)) \geq 2\nu_p(a_n)$, so $\nu_p(a_{n+1}) \geq \nu_p(a_n)$. But also $\nu_p(a_{n+1}) \leq \nu_p(C)$ as $a_{n+1}$ divides $C$, so overall $\nu_p(a_n) \leq \nu_p(a_{n+1}) \leq \nu_p(C)$ for all $n$. Therefore $\nu_p(a_n)$ is an increasing bounded above sequence of integers, hence eventually constant. Since there are finitely many $p$, the sequences of $\nu_p$ are finitely many, so all $\nu_p$-s are equal from some term onwards, and from this term onwards the main sequence $a_n$ is constant.

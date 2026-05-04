@@ -1,0 +1,17 @@
+#1 by canada  https://artofproblemsolving.com/community/c6h356076p1935854
+Find all functions $g:\mathbb{N}\rightarrow\mathbb{N}$ such that \[\left(g(m)+n\right)\left(g(n)+m\right)\] is a perfect square for all $m,n\in\mathbb{N}.$
+
+[i]Proposed by Gabriel Carroll, USA[/i]
+
+---
+
+#54 by HamstPan38825  https://artofproblemsolving.com/community/c6h356076p29502580
+Despite the short and simple-looking solution, this problem is not straightforward at all.
+
+The answer is $g(n) = n+c$. The main claim is the following:
+
+[b][color=#f00]Claim.[/b][/color] If $g(a) \equiv g(b) \pmod p$ for any prime $p$, then $a \equiv b \pmod p$.
+
+[i]Proof.[/i] Take some integer $k$ such that $\nu_p(g(a) + k)$ and $\nu_p(g(b) + k)$ are both odd. (This is possible by taking $r = \nu_p(g(a) - g(b))$ then setting $k = Np-g(a)$ where $N$ is large) Then, it follows that $p \mid g(k) + a$ and $p \mid g(k) + b$ by the condition, or $a \equiv b \pmod p$. $\blacksquare$
+
+Hence no primes divide $g(n+1) - g(n)$ and it follows that $|g(n+1) - g(n)| = 1$. On the other hand, the possibility $g(k) = g(k+2) = r$ is impossible because $(r+k)(r+k+2)$ is never a perfect square. So $g$ is a linear function with slope $1$ as needed.

@@ -1,0 +1,43 @@
+#1 by pinetree1  https://artofproblemsolving.com/community/c6h1863137p12608512
+Let $f: \mathbb Z\to \{1, 2, \dots, 10^{100}\}$ be a function satisfying 
+$$\gcd(f(x), f(y)) = \gcd(f(x), x-y)$$ 
+for all integers $x$ and $y$. Show that there exist positive integers $m$ and $n$ such that $f(x) = \gcd(m+x, n)$ for all integers $x$. 
+
+[i]Ankan Bhattacharya[/i]
+
+---
+
+#2 by pinetree1  https://artofproblemsolving.com/community/c6h1863137p12608756
+Pretty fun problem! The key claim is the following. 
+
+[b]Claim:[/b] There exists some integer $r$ satisfying 
+$$r \equiv x\pmod {f(x)}$$ 
+for all $x$. 
+
+[i]Proof.[/i] We'll construct $r$ with CRT by computing the correct residue for $r$ modulo each prime power. For every prime $p$ dividing some $f(x)$, choose $x_p$ such that $\nu_p(f(x_p))$ is maximal. Then there is some $r$ satisfying 
+$$r\equiv x_p\pmod {p^{\nu_p(f(x_p))}}$$ 
+for all $p$. We want to show that $r\equiv y\pmod {f(y)}$ for all $y$, so it suffices to show that $r\equiv y\pmod {p^k}$ for any prime power $p^k\mid f(y)$. Indeed, since $p^k\mid f(x_p)$ and $f(y)$, we know that 
+\begin{align*}
+\gcd(f(x_p), f(y)) = \gcd(f(x_p), x_p-y) &\implies p^k\mid x_p-y \\
+&\implies r\equiv x_p\equiv y\pmod {p^k},
+\end{align*}
+which proves the claim. $\blacksquare$
+
+Now for any $x$, we have 
+$$\gcd(f(x), f(r)) = \gcd(f(x), x-r) = f(x) \implies f(x)\mid f(r).$$
+But then 
+$$f(x) = \gcd(f(x), f(r)) = \gcd(f(r), r-x).$$
+Thus, taking $n = f(r)$ and $m = k\cdot f(r) - r$ for sufficiently large $k$ gives positive $m$ and $n$ such that $f(x) = \gcd(m+x, n)$. 
+
+---
+
+#3 by Tintarn  https://artofproblemsolving.com/community/c6h1863137p12608767
+[hide=Solution]
+Clearly, the condition is multiplicative so we may assume that $f(x)=p^{g(x)}$ for some bounded function $g:\mathbb{Z} \to \{0,1,\dots,500\}$.
+The condition now is that $\min(g(x),g(y))=\min(g(x),v_p(x-y))$. Let $N:=\max g(x)$ and assume that $g(m)=N$. Then putting $x=m$ we have $g(y)=\min(N,v_p(m-x))$ which is what we wanted to prove.
+[/hide]
+
+---
+
+#4 by 62861  https://artofproblemsolving.com/community/c6h1863137p12608923
+Simple follow-up (and probably the question I should have asked instead): how many such functions are there?

@@ -1,0 +1,18 @@
+#1 by Pinko  https://artofproblemsolving.com/community/c6h1978376p13737797
+Let $a_0,a_1,a_2...$ be a sequence of natural numbers with the following property: $a_n^2$ divides $a_{n-1} a_{n+1}$ for $\forall$ $n\in \mathbb{N}$. Prove that, if for some natural $k\geq 2$ the numbers $a_1$ and $a_k$ are coprime, then $a_1$ divides $a_0$.
+
+---
+
+#2 by XbenX  https://artofproblemsolving.com/community/c6h1978376p13738476
+Let $p$ be any prime divisor of $a_1$, then we have $2\nu_{p}(a_n)\leq \nu_{p}(a_{n+1})+\nu_{p}(a_{n-1})$ for all $n\in \mathbb{N}$. Adding these inequalities till $n=k-1$ we get $$\nu_{p}(a_1) +\nu_{p}(a_{k-1})\leq \nu_{p} (a_0)+\nu_{p}(a_k)=\nu_{p}(a_0) \implies \nu_{p}(a_1)\leq \nu_{p}(a_0) - 
+ \nu_{p}(a_{k-1}) \leq \nu_{p}(a_0). \;\; \blacksquare $$
+
+---
+
+#3 by Assassino9931  https://artofproblemsolving.com/community/c6h1978376p37600873
+Let $p$ be a prime divisor of $a_1$ -- we want to prove $\nu_p(a_1) \leq \nu_p(a_0)$. Since $a_1$ and $a_k$ are coprime and $p$ divides $a_1$, we have $\nu_p(a_k) = 0$. The condition that $a_n^2$ divides $a_{n-1}a_{n+1}$ implies $2\nu_p(a_n) \leq \nu_p(a_{n-1}) + \nu_p(a_{n+1})$, i.e. $\nu_p(a_n) - \nu_p(a_{n-1}) \leq \nu_p(a_{n+1}) - \nu_p(a_n)$ for all $1 \leq n \leq k-1$. Summing through all $n$ yields $\nu_p(a_{k-1}) - \nu_p(a_0) \leq \nu_p(a_k) - \nu_p(a_1)$. Hence $\nu_p(a_1) \leq \nu_p(a_0) + \nu_p(a_k) - \nu_p(a_{k-1}) = \nu_p(a_0) - \nu_p(a_{k-1}) \leq \nu_p(a_0)$, as desired.
+
+---
+
+#4 by Assassino9931  https://artofproblemsolving.com/community/c6h1978376p37604577
+Actually, this problem turns out to have a trivial solution - if we multiply all divisibilities for $1\leq n \leq k-1$, we get $(a_1a_2\cdots a_{k-1})^2 \mid a_0a_1(a_2a_3\cdots a_{k-2})^2a_{k-1}a_k$, so $(a_1a_{k-1})^2 \mid a_0a_1a_{k-1}a_k$, thus $a_1a_{k-1} \mid a_0a_k$. In particular $a_1 \mid a_0a_k$, but since $a_1$ and $a_k$ are coprime, it follows that $a_1$ divides $a_0$.
