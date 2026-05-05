@@ -182,6 +182,12 @@ Does there exist $x, y \in \QQ$ and $m, n \in \NN$ such that $xy = 3$ and $f^m(x
 
 \item Let $ e := \nu_p(b) $ and take $k = p^{e + 1}$. This means $ \nu_p(b - a_k^n) \ge e + 1 $. If $ \nu_{p} (b) \ne \nu_p(a_k^n) $, then LHS is $\min \left\{ \nu_p(b), \nu_p(a_k^n) \right\} \le \nu_p(b) = e $, leading to $e \ge e + 1$, contradiction. So $\nu_p(b) = n \nu_p(a_k)$, and hence $n \mid \nu_p(b)$.
 
+\item We show sequence is constant. Scale to remove common factors, then take $p \mid a_1$. Take $(m, n) = (1, d + 1)$ and $(2, d + 2)$ and divide the geometric mean conditions to get $ d \mid \nu_p( a_{d + 1} ) - \nu_p( a_1 ) $. For arbitrarily large $d$, RHS must be zero, so $\nu_p(a_{d+1}) = \nu_p(a_1) > 0$, so the sequence is eventually $0$ mod $p$. But from $(m, n) = (i, p + i)$, the sum of every $p$ consecutive terms is $0$ mod $p$, so the whole sequence is $0$ mod $p$, contradiction.
+
+\item If $\nu_p(a), \nu_p(b), \nu_p(c)$ are all equal, then by $abc = 1$ they're all zero. Take $\nu_p(a) > 0$, WLOG $\nu_p(b) < 0$. If $\nu_p(c) \ge 0$, then $\nu_p(a^x + b^y + c^z) = \nu_p(b^y) < 0$, so it can't be an integer; thus $\nu_p(c) < 0$. Similarly, if $y \nu_p(b) \ne z \nu_p(c)$, we get $\nu_p(a^x + b^y + c^z) = \min\cbr{ y\nu_p(b), z \nu_p(c) } < 0$. Because $y \nu_p(b) = z \nu_p(c)$, we have some $d, y', z'$ such that $\nu_p(b) = -dz'$, $\nu_p(c) = -dy'$, and $\nu_p(a) = d(y' + z')$, which makes it powerful.
+
+\item Let $p := 3$. Suppose they were equal for $x, y$, we'll get a contradiction. WLOG, $\nu_p(x) > 0 \ge \nu_p(y)$. Note $\nu_p(f(x)) = \nu_p(x^p + x) = \nu_p(x) > 0$, so $p \mid f^m(x)$. Check if $\nu_p(y) \le 0$ we get $p \nmid f^n(y)$, contradiction.
+
 \end{enumerate}
 
 
