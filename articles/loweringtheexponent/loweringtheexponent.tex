@@ -20,8 +20,7 @@ This is known as the $p$-adic valuation of $n$.\footnote{A notation more common 
 
   What should $\nu_p(0)$ be? To satisfy the product rule, we can pick $\nu_p(0) = \infty$.
 
-  \item $\nu_p(a + b) \ge \min\cbr{\nu_p(a), \nu_p(b)}$, equality holds if $\nu_p(a) \neq \nu_p(b)$.
-  % TODO: equality is just false when p = 2?
+  \item $\nu_p(a + b) \ge \min\cbr{\nu_p(a), \nu_p(b)}$, equality holds iff $\nu_p(a) \neq \nu_p(b)$.
 
   \item $\nu_p(a - b) \ge e \iff a \equiv b \pmod{p^e}$ from the previous.
   \item $\nu_p(\gcd(a, b)) = \min\cbr{\nu_p(a), \nu_p(b)}$.
@@ -36,7 +35,7 @@ This is known as the $p$-adic valuation of $n$.\footnote{A notation more common 
 \begin{enumerate}
   \item Prove that $\displaystyle \gcd(a, b, c) = \frac{abc\cdot\lcm(a, b, c)}{\lcm(a, b)\lcm(b, c)\lcm(c, a)}$.
 
-  \textbf{Sketch:} Pick a prime $p$, idea is to show $\nu_p$ of LHS and RHS are the same. Let $x = \nu_p(a)$, $y = \nu_p(b)$, and $z = \nu_p(c)$. In the LHS you have $\min\cbr{x, y, z}$, on the RHS you have $x + y + z + \max\cbr{x, y, z} - \max\cbr{x, y} - \max\cbr{y, z} - \max\cbr{z, x}$. But these are equal.
+  \textbf{Sketch:} Pick a prime $p$, idea is to show $\nu_p$ of LHS and RHS are the same. Let $x, y, z := \nu_p(a), \nu_p(b), \nu_p(c)$ respectively. In the LHS you have $\min\cbr{x, y, z}$, on the RHS you have $x + y + z + \max\cbr{x, y, z} - \max\cbr{x, y} - \max\cbr{y, z} - \max\cbr{z, x}$. But these are equal.
 
   \item Suppose $a \mid b^2 \mid a^3 \mid b^4 \mid a^5 \mid \cdots$. Prove that $a = b$.
 
@@ -171,11 +170,17 @@ Does there exist $x, y \in \QQ$ and $m, n \in \NN$ such that $xy = 3$ and $f^m(x
 
 \item Condition is $\min_i\cbr{\nu_p(a_i)} + \max_i\cbr{\nu_p(a_i)} = \sum_i \nu_p(a_i)$. WLOG, suppose $\nu_p(a_1)$ is the minimum and $\nu_p(a_n)$ is the maximum. Then this is $\sum_{1 < i < n} \nu_p(a_i) = 0$, so all the middle $a_i$ (of which there are $\ge 1$, because $n \ge 3$) must all be $0$. So the minimum must also be $0$. This means, for each $p$, there's only one $a_i$ such that $p \mid a_i$; this proves the result.
 
-\item Let $w, x, y, z$ be $\nu_p(a), \nu_p(b), \nu_p(c), \nu_p(d)$ respectively. Want to show $\min\cbr{w, y} + \min\cbr{w, z} = w + \min{w, x, y, z}$. Per $ab = cd$, RHS here is $w + \min{w, y + z - w, y, z}$. Casework on relative sizes of $\cbr{w, y, z}$ finishes: symmetry of $y$ and $z$ rule out half the cases.
+\item Let $w, x, y, z := \nu_p(a), \nu_p(b), \nu_p(c), \nu_p(d)$ respectively. Want to show $\min\cbr{w, y} + \min\cbr{w, z} = w + \min{w, x, y, z}$. Per $ab = cd$, RHS here is $w + \min{w, y + z - w, y, z}$. Casework on relative sizes of $\cbr{w, y, z}$ finishes: symmetry of $y$ and $z$ rule out half the cases.
 
-\item Let $a, b, c$ be $\nu_p(a_1), \nu_p(b_1), \nu_p(c_1)$, respectively. WLOG $a \le b \le c$. Then $\nu_p(a_2) = b$ and $\nu_p(b_2) = \nu_p(c_2) = a$. Similarly, $\nu_p(a_3) = a$ and $\nu_p(b_3) = \nu_p(c_3) = b$. So $\nu_p(a_2 \gcd(b_2, c_2)) = a + b = \nu_p(a_3 \lcm(b_3, c_3))$.
+\item Let $a, b, c := \nu_p(a_1), \nu_p(b_1), \nu_p(c_1)$ respectively. WLOG $a \le b \le c$. Then $\nu_p(a_2) = b$ and $\nu_p(b_2) = \nu_p(c_2) = a$. Similarly, $\nu_p(a_3) = a$ and $\nu_p(b_3) = \nu_p(c_3) = b$. So $\nu_p(a_2 \gcd(b_2, c_2)) = a + b = \nu_p(a_3 \lcm(b_3, c_3))$.
 
-\item Even integers work: $(1, n, 1)$ gives $2n$. We show odd is impossible. Let $a, b, c$ be $\nu_2(x), \nu_2(y), \nu_2(z)$, respectively. If expression was odd, we have $\min\cbr{ \max\cbr{a, b} + \max\cbr{b, c} } = \max\cbr{a, c}$. By symmetry, WLOG $a \le c$. Do casework on relative sizes of $\cbr{a, b, c}$. For the case where $b$ isn't between $a$ and $c$, we have to go back to the original expression to handle equality, which is weird for $\nu_2$.
+\item Evens: $(1, \frac{n}{2}, 1)$. We show odd is impossible. Let $a, b, c := \nu_2(x), \nu_2(y), \nu_2(z)$, respectively. If expression was odd, we have $\min\cbr{ \max\cbr{a, b} + \max\cbr{b, c} } = \max\cbr{a, c}$. By symmetry, WLOG $a \le c$. Do casework on relative sizes of $\cbr{a, b, c}$. For the case where $b$ isn't between $a$ and $c$, we have to go back to the original expression to handle the cancellation properly.
+
+\item Note that $0 \le \nu_p(a/b + b/c + c/a) = \min\cbr{ \nu_p(a/b), \nu_p(b/c), \nu_p(c/a) }$, so $\nu_p(a/b)$, $\nu_p(b/c)$, and $\nu_p(c/a)$ are all $\ge 0$. But their sum is $\nu_p(1) = 0$, so they're all $0$, so $\nu_p(a) = \nu_p(b) = \nu_p(c)$.
+
+\item From parallelogram, $ x_1 + x_3 = x_2 + x_4 $ and $ y_1 + y_3 = y_2 + y_4 $. From perpendicularity, $ \abs{(x_1 - x_4 )(x_1 - x_2 ) } = \abs{(y_1 - y_4 )(y_1 - y_2 )} $. Take prime $p$ such that $n := \nu_p(x_1 x_2 x_3 x_4) > 0 $. Do casework on there being $ \left\{ 0, 1, 2, 3 \right\} $ values of $i$ such that $ \nu_p(x_i ) = n $, showing $n$ is even in all cases.
+
+\item Let $ e := \nu_p(b) $ and take $k = p^{e + 1}$. This means $ \nu_p(b - a_k^n) \ge e + 1 $. If $ \nu_{p} (b) \ne \nu_p(a_k^n) $, then LHS is $\min \left\{ \nu_p(b), \nu_p(a_k^n) \right\} \le \nu_p(b) = e $, leading to $e \ge e + 1$, contradiction. So $\nu_p(b) = n \nu_p(a_k)$, and hence $n \mid \nu_p(b)$.
 
 \end{enumerate}
 
