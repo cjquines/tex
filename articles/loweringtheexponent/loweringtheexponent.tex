@@ -188,6 +188,10 @@ Does there exist $x, y \in \QQ$ and $m, n \in \NN$ such that $xy = 3$ and $f^m(x
 
 \item Let $p := 3$. Suppose they were equal for $x, y$, we'll get a contradiction. WLOG, $\nu_p(x) > 0 \ge \nu_p(y)$. Note $\nu_p(f(x)) = \nu_p(x^p + x) = \nu_p(x) > 0$, so $p \mid f^m(x)$. Check if $\nu_p(y) \le 0$ we get $p \nmid f^n(y)$, contradiction.
 
+\item Only $g(n) = n + C$ works. We'll show $g$ is injective mod $p$. Suppose $p \mid g(b) - g(a)$. We choose $m$ to force $\nu_p(g(a) + m)$ and $\nu_p(g(b) + m)$ to be odd: if $p^2 \mid g(b) - g(a)$, take $m \equiv p - g(a) \pmod{p^2}$, otherwise take $m \equiv -g(b) \pmod{p^3}$. This shows $p \mid g(m) + a$ and $p \mid g(m) + b$, so $p \mid a - b$, done. From injectivity, we get $g(n + 1) - g(n) = \pm 1$. Taking $(m, n) = (n, n + 1)$ as a perfect square rules out the $-1$ case.
+
+\item 
+
 \end{enumerate}
 
 
