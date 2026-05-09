@@ -91,6 +91,7 @@
 
   \else
     \RequirePackage[T1]{fontenc}
+    \usepackage{unicode-math}
   \fi
 
   \ifcjqnoextlink
@@ -622,7 +623,13 @@
 \newcommand{\ul}{\underline}
 \newcommand{\ub}{\underbrace}
 
-\newcommand{\ts}[1]{\textsc{#1}}
+% unsatisfying because the copied text is still lowercase
+\ifcjqnoimport
+  \newcommand{\tsc}[1]{\textsc{\MakeLowercase{#1}}}
+\else
+  \microtypesetup{tracking=smallcaps}
+  \newcommand{\tsc}[1]{\textls{\textsc{\MakeLowercase{#1}}}}
+\fi
 \newcommand{\mf}[1]{\mathfrak{#1}}
 \newcommand{\tt}[1]{\mbox{\texttt{#1}}}
 
