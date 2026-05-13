@@ -11,55 +11,98 @@
 
 \subsubsection*{Valuation}
 
-Define $\nu_p \from \NN \to \NN^0$ for positive integers $n$ as
-$$\nu_p(n) = k \quad \iff \quad p^k \mid n,\,p^{k+1}\nmid n.$$
-This is known as the $p$-adic valuation of $n$.\footnote{A notation more common in older texts is $p^k \parallel n$.} Note that this is $\nu_p$ with the Greek letter $\nu$ (spelled nu, pronounced ``new'').\footnote{This is sometimes written as $v_p$ with the English letter $v$. I don't think this is standard, as I see more sources use $\nu_p$. I don't even know why $\nu$ is the letter chosen for this, other than its superficial similarity to the letter $v$.} Some properties that you should convince yourself are true:
-\begin{itemize}
-  \item $\nu_p(ab) = \nu_p(a) + \nu_p(b)$.
-  \item Similarly $\nu_p\del{\frac ab} = \nu_p(a) - \nu_p(b)$. We can use this to extend the definition of $\nu_p$ to be a function from $\QQ^{\neq 0} \to \ZZ$.
+Let $p$ be a prime. The \textbf{$\boldsymbol{p}$-adic valuation} of a positive integer $n$, written $\nu_p(n)$,\footnote{
+  The $\nu$ here is the Greek letter $\nu$ (spelled \textit{nu}, pronounced ``new''), presumably chosen for visual similarity to $v$, for \textit{valuation}. When reading aloud, I pronounce $\nu_p$ as ``vee pee''.
+} is the largest integer $e$ such that $p^e \mid n$.
+In particular, \[
+  \nu_p(n) = e \iff p^e \mid n,\,p^{e+1}\nmid n.
+\]
 
-  What should $\nu_p(0)$ be? To satisfy the product rule, we can pick $\nu_p(0) = \infty$.
+\subsubsection*{Warmup}
 
-  \item $\nu_p(a + b) \ge \min\cbr{\nu_p(a), \nu_p(b)}$, equality holds iff $\nu_p(a) \neq \nu_p(b)$.
+\begin{enumerate}
 
-  \item $\nu_p(a - b) \ge e \iff a \equiv b \pmod{p^e}$ from the previous.
-  \item $\nu_p(\gcd(a, b)) = \min\cbr{\nu_p(a), \nu_p(b)}$.
-  \item $\nu_p(\lcm(a, b)) = \max\cbr{\nu_p(a), \nu_p(b)}$.
-  \item $a = b \iff \nu_p(a) = \nu_p(b)$ for all $p$.
-  \item More generally, $a \mid b \iff \nu_p(a) \le \nu_p(b)$ for all $p$.
-\end{itemize}
+\item (Product rule) Prove that $\nu_p(ab) = \nu_p(a) + \nu_p(b)$. Use this to extend the definition of $\nu_p$ to $\QQ_{\ne 0} \to \ZZ$. By convention, we set $\nu_p(0) = \infty$.
+
+\item (Sum rule) Prove that $\nu_p(a + b) \ge \min\cbr{\nu_p(a), \nu_p(b)}$. Prove that if $\nu_p(a) \ne \nu_p(b)$, then equality holds. Find an example where $\nu_p(a) = \nu_p(b)$, yet equality holds.
+
+\item (\href{https://en.wikipedia.org/wiki/Hasse_principle}{Local--global principle}) Prove that $\nu_p(a) \le \nu_p(b)$ for all primes $p$ if and only if $a \mid b$. What does this tell you about $\nu_p(\gcd(a, b))$ and $\nu_p(\lcm(a, b))$?
+
+\item (\href{https://en.wikipedia.org/wiki/Ostrowski's_theorem}{Ostrowski's theorem}) Let $\nu \from \ZZ_{\ne 0} \to \NN \cup \{0\}$ be a non-constant function satisfying $\nu(ab) = \nu(a) + \nu(b)$ and $\nu(a + b) \ge \min\cbr{\nu(a), \nu(b)}$. Prove there's some prime $p$ such that $\nu = \nu_p$.
+
+\end{enumerate}
+
+\noindent
+These are all the $\nu_p$ properties we need. Some important results I won't discuss, but you should learn later: \href{https://en.wikipedia.org/wiki/Legendre's_formula}{Legendre's formula}, \href{https://en.wikipedia.org/wiki/Kummer's_theorem}{Kummer's theorem}, \href{https://cjquines.com/files/liftingtheexponent.pdf}{Lifting the exponent}.
 
 \subsubsection*{Examples}
 
-% TODO: move examples around, want one or two per theme
-\begin{enumerate}
-  \item Prove that $\displaystyle \gcd(a, b, c) = \frac{abc\cdot\lcm(a, b, c)}{\lcm(a, b)\lcm(b, c)\lcm(c, a)}$.
-
-  \textbf{Sketch:} Pick a prime $p$, idea is to show $\nu_p$ of LHS and RHS are the same. Let $x, y, z := \nu_p(a), \nu_p(b), \nu_p(c)$ respectively. In the LHS you have $\min\cbr{x, y, z}$, on the RHS you have $x + y + z + \max\cbr{x, y, z} - \max\cbr{x, y} - \max\cbr{y, z} - \max\cbr{z, x}$. But these are equal.
-
-  \item Suppose $a \mid b^2 \mid a^3 \mid b^4 \mid a^5 \mid \cdots$. Prove that $a = b$.
-
-  \textbf{Sketch:} This is an easy problem, but it's a bit hard to write up. Using $\nu_p$ makes it easier. We have
-  $$a^{2n - 1} \mid b^{2n} \implies (2n-1)\nu_p(a) \le 2n\nu_p(b) \implies \nu_p(a) \le \frac{2n}{2n-1} \nu_p(b).$$
-  Taking the limit as $n \to \infty$ means $\nu_p(a) \le \nu_p(b)$; similarly we can prove $\nu_p(b) \le \nu_p(a)$. This shows $\nu_p(a) = \nu_p(b)$.
-\end{enumerate}
-
-
-
-
-\subsubsection*{Problems 1}
-
-% translate problem into p-adic statement, bash and solution falls out
 \begin{enumerate}
 
 \item Positive integers $a$, $b$, and $c$ satisfy $a \mid b^3$, $b \mid c^3$, and $c \mid a^3$. Prove that $abc \mid (a + b + c)^{13}$.
-% v_p, done
 
-\item Let $n \ge 3$. Positive integers $a_1, \ldots, a_n$ satisfy $\gcd(a_1, \ldots, a_n)\lcm(a_1, \ldots, a_n) = a_1 \cdots a_n$. Prove that $a_1, \ldots, a_n$ are pairwise relatively prime.
-% v_p, done
+\textbf{Sketch:} It's enough to show for all primes $p$ that $\nu_p(abc) \le \nu_p\del{(a + b + c)^{13}}$, or that $\nu_p(abc) \le 13 \min\cbr{\nu_p(a), \nu_p(b), \nu_p(c)}$. The given conditions translate to \[
+  a \mid b^3,\;b \mid c^3,\;c \mid a^3 \iff \nu_p(a) \le 3 \nu_p(b),\;\nu_p(b) \le 3\nu_p(c),\;\nu_p(c) \le 3\nu_p(a).
+\]
+This means that \[
+  \nu_p(abc) = \nu_p(a) + \nu_p(b) + \nu_p(c) \le \nu_p(a) + 3\nu_p(c) + 3\nu_p(a) \le \nu_p(a) + 9\nu_p(a) + 3\nu_p(a),
+\]
+which is $13\nu_p(a)$. Similarly, $\nu_p(abc) \le 13\nu_p(b)$ and $\le 13\nu_p(c)$, so it's less than their minimum.
 
-\item (\href{https://artofproblemsolving.com/community/c1068820h2015396p14143702}{Poland 1983/4}) Positive integers $a$, $b$, $c$, and $d$ satisfy $ab = cd$. Prove that $$\frac{\gcd(a,c)\gcd(a,d)}{\gcd(a,b,c,d)} = a.$$
-% v_p, done
+\textbf{Remark 1:} Problems with divisibility, multiplication, exponentiation, or GCDs and LCMs, are good candidates for using $\nu_p$ on. It works less well with addition, but it can happen.
+
+\textbf{Remark 2:} I'm going to start omitting the \textit{it's enough to show that, for all primes $p$} part in the sketches, but you should definitely say it in full solutions.
+
+\item (\href{https://artofproblemsolving.com/community/c291h1904123p13026024}{BAMO 2018/4}) Show that if $a, b, c$ are nonzero integers such that $a/b + b/c + c/a$ is an integer, then $abc$ is a perfect cube.
+
+\textbf{Sketch:} Note that $abc$ is a perfect cube if and only if $3 \mid \nu_p(abc)$ for all primes $p$. Let $x, y, z := \nu_p(a), \nu_p(b), \nu_p(c)$ respectively; we want to show $3 \mid x + y + z$. Because it's an integer, we have $\nu_p(a/b + b/c + c/a) \ge 0$. By the sum rule, we also have \[
+  \nu_p(a/b + b/c + c/a) \ge \min\cbr{ \nu_p(a/b), \nu_p(b/c), \nu_p(c/a) } = \min\cbr{x-y, y-z, z-x},
+\]
+an inequality we can't use yet. We can make it an equality if we think about distinctness. Doing casework on the number of distinct integers in $\cbr{x-y, y-z, z-x}$:
+
+\begin{itemize}
+\item Suppose all were distinct. This gives the equality case: $0 \le \nu_p(a/b + b/c + c/a) = \min\cbr{x-y, y-z, z-x}$. As the three integers sum to $0$, if they're all distinct, one of them must be negative. Then their minimum would be negative, contradicting the fact that $\nu_p(a/b + b/c + c/a) \ge 0$.
+
+\item Otherwise, two of them are equal. WLOG $x-y = y-z$. Then $x + y + z = 3y$, which is divisible by $3$, as desired.
+
+\end{itemize}
+
+\textbf{Remark:} In general, an equality case of the sum rule is much more useful, and it's usually worth doing casework to make it happen.
+
+\item (\href{https://artofproblemsolving.com/community/c6h1871281p12694557}{Poland 2nd 2019/3--}) Two sequences of rational numbers $q_1, q_2, \ldots$, and $r_1, r_2, \ldots$ satisfy \[
+  q_1r_1 = 3, \quad
+  q_{n+1} = q_n^5 + q_n, \quad \text{and} \quad
+  r_{n+1} = r_n^7 + r_n.
+\]
+Can there exist positive integers $m$ and $n$ such that $q_m = r_n$?
+
+\textbf{Sketch:} No. We work entirely in $\nu_3$, and think about the sizes of terms in $\cbr{\nu_3(q_n)}$. We have \[
+  \nu_3(q_2) = \nu_3(q_1) + \nu_3(q_1^4 + 1) \ge \nu_3(q_1) + \min\cbr{4\nu_3(q_1), 0}.
+\]
+We do casework on the sign of $\nu_3(q_1)$, so we can get an equality case.
+
+\begin{itemize}
+
+\item Suppose $\nu_3(q_1) = 0$. Then $q_1 \perp 3$,\footnote{Here, $a \perp b$ means $a$ and $b$ are relatively prime.} so by Fermat's little, $q_1^4 + 1 \equiv (q_1^2)^2 + 1 \equiv 2 \pmod 3$, so $\nu_3(q_1^4 + 1) = 0$ as well. By the first equality above, we get $\nu_3(q_2) = \nu_3(q_1)$. We can then induct to get that $\cbr{\nu_3(q_n)}$ is constant.
+
+\item If $\nu_3(q_1) > 0$, we have $4\nu_3(q_1) \ne 0$, so we have the equality case. Then $\nu_3(q_2) = \nu_3(q_1) + \min\cbr{4\nu_3(q_1), 0} = \nu_3(q_1)$. Induction again shows $\cbr{\nu_3(q_n)}$ is constant.
+
+\item If $\nu_3(q_1) < 0$, we similarly get $\nu_3(q_2) = 5\nu_3(q_1) < \nu_3(q_1)$. In this case, induction shows $\cbr{\nu_3(q_n)}$ is decreasing.
+
+\end{itemize}
+
+Similar statements hold for $\cbr{\nu_3(r_n)}$.
+
+In $\nu_3(q_1) + \nu_3(r_1) = 1$, the two addends are integers, so WLOG $\nu_3(q_1) > 0 \ge \nu_3(r_1)$. Then $\nu_3(q_m) = \nu_3(q_1) > \nu_3(r_1) \ge \nu_3(r_n)$, so no two terms can be equal.
+
+\textbf{Remark:} This is a kinda contrived example, but the theme of ``$p$-adic valuation of sequence is monotonic'' appears often enough that I've made a separate section of problems for it. For a decreasing sequence of \textit{integers}, if there's a lower bound, it's eventually constant. This is helpful for $\nu_p$, because it's always an integer, and the $\nu_p$ of an integer is always $\ge 0$.
+
+\end{enumerate}
+
+\newpage
+\subsubsection*{Problems}
+
+\begin{enumerate}
 
 \item (\href{https://artofproblemsolving.com/community/c6h573989p3379016}{India Regional 2013/Mumbai.5'}) Let $a_1$, $b_1$, and $c_1$ be positive integers. Define \[
   a_2 = \gcd(b_1, c_1), \quad b_2 = \gcd(c_1, a_1), \quad c_2 = \gcd(a_1, b_1),
@@ -69,155 +112,216 @@ This is known as the $p$-adic valuation of $n$.\footnote{A notation more common 
 Show that $a_2\gcd(b_2, c_2) = a_3\lcm(b_3, c_3)$.
 % v_p, done
 
-\item (\href{https://artofproblemsolving.com/community/c6h2317634p18471128}{USEMO 2020/1}) Which positive integers can be written in the form \[\frac{\operatorname{lcm}(x, y) + \operatorname{lcm}(y, z)}{\operatorname{lcm}(x, z)}\]for positive integers $x$, $y$, $z$?
-% quiz prob; v_p-motivated construction
-
-
-
-
-% these are kinda "perfect powers" translation related
-
-\item (\href{https://artofproblemsolving.com/community/c291h1904123p13026024}{BAMO 2018/4}) Show that if $a, b, c$ are nonzero integers such that $a/b + b/c + c/a$ is an integer, then $abc$ is a perfect cube.
-% v_p, done. also in OTIS excerpts 2019, problem 157
-
-\item (\href{https://artofproblemsolving.com/community/c6h3429772p33040073}{USEMO 2024/2}) Let $k$ be a fixed positive integer. For each integer $i \in \{1, 2, 3, 4\}$, let $x_i$ and $y_i$ be positive integers such that $\lcm(x_i, y_i) = k$. Suppose that the four points $(x_1, y_1)$, $(x_2, y_2)$, $(x_3, y_3)$, $(x_4, y_4)$ are the vertices of a non-degenerate rectangle in the Cartesian plane. Prove that $x_1x_2x_3x_4$ is a perfect square.
+\item (\href{https://artofproblemsolving.com/community/c1068820h2015396p14143702}{Poland 1983/4}) Positive integers $a$, $b$, $c$, and $d$ satisfy $ab = cd$. Prove that $$\frac{\gcd(a,c)\gcd(a,d)}{\gcd(a,b,c,d)} = a.$$
 % v_p, done
 
-\item (\href{https://artofproblemsolving.com/community/c6h214712p36825075}{ISL 2007/N2}) Let $b,n > 1$ be integers. Suppose that for each $k > 1$ there exists an integer $a_k$ such that $b - a^n_k$ is divisible by $k$. Prove that $b = A^n$ for some integer $A$.
-% Suppose otherwise, that $n \nmid \nu_p(b)$ for some prime $p.$ Let $\nu_p(b) = qn + r$ where $0 < r < n.$ Choose $k = p^{(q+1)n}.$ If $p^{(q+1)n} \mid b - a_k^n$ then we must have $\nu_p(b - a_k^n) \ge (q+1)n.$ Because $\nu_p(b) < (q+1)n$, we must have $\nu_p(b) = \nu_p(a_k^n) = qn + r.$ However, $n \mid n\nu_p(a_k) = \nu_p(a_k^n)$, a contradiction.
+\item Let $n \ge 3$. Positive integers $a_1, \ldots, a_n$ satisfy $\gcd(a_1, \ldots, a_n)\lcm(a_1, \ldots, a_n) = a_1 \cdots a_n$. Prove that $a_1, \ldots, a_n$ are pairwise relatively prime.
+% v_p, done
 
-\item (\href{https://artofproblemsolving.com/community/c6h3610437p35340905}{ISL 2024/N3}) Determine all sequences $a_1, a_2, \dots$ of positive integers such that for any pair of positive integers $m\leqslant n$, the arithmetic and geometric means \[ \frac{a_m + a_{m+1} + \cdots + a_n}{n-m+1}\quad\text{and}\quad (a_ma_{m+1}\cdots a_n)^{\frac{1}{n-m+1}}\]are both integers.
-% (i - j) | (a_i - a_j), then (i - j) | v_p(a_i) - v_p(a_j), then show constancy
+\item (\href{https://artofproblemsolving.com/community/c6h1978376p13737797}{Sozopol 2015/4.2}) Let $a_0, a_1, \ldots$ be a sequence of positive integers such that $a_n^2 \mid a_{n-1}a_{n+1}$ for all positive integers $n$. Suppose there exists some integer $k \ge 2$ such that $a_1$ and $a_k$ are relatively prime. Show that $a_1 \mid a_0$. \hint{\ref{h:4-1}}
+% chain the divisibilities to go from a_1 to a_k
 
-\end{enumerate}
+\item (\href{https://artofproblemsolving.com/community/c6h2317634p18471128}{USEMO 2020/1}) Which positive integers can be written in the form \[\frac{\operatorname{lcm}(x, y) + \operatorname{lcm}(y, z)}{\operatorname{lcm}(x, z)}\]for positive integers $x$, $y$, $z$? \hint{\ref{h:5-1}}
+% v_2-motivated construction, like Poland 2nd's v_3 motivated
 
-
-
-\subsubsection*{Problems 2}
-
-% {multiplicative-like, power-related} things have global structure determined under p-adic valuation?
-% how is this different from the first set
-\begin{enumerate}[resume]
-
-\item (\href{https://artofproblemsolving.com/community/c6h1446913p8271420}{APMO 2017/4}) Call a rational number $r$ \textit{powerful} if $r$ can be expressed in the form $p^k/q$ for some relatively prime positive integers $p, q$ and some integer $k >1$. Let $a, b, c$ be positive rational numbers such that $abc = 1$. Suppose there exist positive integers $x, y, z$ such that $a^x + b^y + c^z$ is an integer. Prove that $a, b, c$ are all powerful.
-% show y*v_p(b) = z*v_p(c)
-% https://artofproblemsolving.com/community/c6h1446913p13072422
-% in OTIS excerpts walkthroughs (P152)
-
-\item (\href{https://artofproblemsolving.com/community/c6h1871281p12694557}{Poland 2nd 2019/3}) The functions $f^1, f^2, \ldots \from \QQ \to \QQ$ satisfy \[
-  f^1(x) = x^3 + x \quad \text{and} \quad f^n(x) = f(f^{n-1}(x)) \text{ for all positive integers }n.
-\]
-Does there exist $x, y \in \QQ$ and $m, n \in \NN$ such that $xy = 3$ and $f^m(x) = f^n(y)$?
-% look at v_3 to relate v_3 f(x) and v_3 x, then argue based on sizing ish
-
-\item (\href{https://artofproblemsolving.com/community/c6h356076p1935854}{IMO 2010/3}) Find all functions $g \from \NN \to \NN$ such that \[(g(m) + n)(g(n) + m)\] is a perfect square for all $m, n \in \NN$.
-% the motivation is "WTS injective over p" => "consider v_p". injectivity determines fn
-% https://artofproblemsolving.com/community/c6h356076p29502580
-
-\item (\href{https://artofproblemsolving.com/community/c6h1799942p11944591}{China TST 2019/1.4}) Call a sequence of positive integers $\{a_n\}$ good if for any distinct positive integers $m$ and $n$, one has $$\gcd(m,n) \mid a_m^2 + a_n^2 \quad \text{and} \quad \gcd(a_m,a_n) \mid m^2 + n^2.$$Call a positive integer $a$ to be $k$-good if there exists a good sequence such that $a_k = a$. Does there exists a $k$ such that there are exactly $2019$ $k$-good positive integers?
-% A sequence of integers $\{a_k \}$ is good if and only if $m \mid a_m^2$ and $a_m \mid m^2$, for each $m \in \mathbb{N}$. (equiv to v_p(n)/2 <= v_p(a_n) <= 2v_p(n))
-
-\item (\href{https://artofproblemsolving.com/community/c6h1863137p12608512}{TSTST 2019/7}) Let $f: \mathbb Z\to \{1, 2, \dots, 10^{100}\}$ be a function satisfying $$\gcd(f(x), f(y)) = \gcd(f(x), x-y)$$for all integers $x$ and $y$. Show that there exist positive integers $m$ and $n$ such that $f(x) = \gcd(m+x, n)$ for all integers $x$.
-% the idea is really "function is determined by values at every prime exponent", as motivated by the gcd thing
+\item (\href{https://artofproblemsolving.com/community/c6h3429772p33040073}{USEMO 2024/2}) Let $k$ be a fixed positive integer. For each integer $i \in \{1, 2, 3, 4\}$, let $x_i$ and $y_i$ be positive integers such that $\lcm(x_i, y_i) = k$. Suppose that the four points $(x_1, y_1)$, $(x_2, y_2)$, $(x_3, y_3)$, $(x_4, y_4)$ are the vertices of a non-degenerate rectangle in the Cartesian plane. Prove that $x_1x_2x_3x_4$ is a perfect square. \hint{\ref{h:6-1}}
+% v_p, bash, done
+% https://artofproblemsolving.com/community/c6h3429772p35672206
 
 \end{enumerate}
 
 
 
-\subsubsection*{Problems 3}
+\subsubsection*{Monotonicity problems}
 
-% v_p monotonicty / sizing things, dynamics?
 \begin{enumerate}[resume]
 
-\item (\href{https://artofproblemsolving.com/community/c6h1492528p8768207}{Iran 3rd 2017/1.NT.1}) Let $n$ be a positive integer and $P$ a (possibly empty) set of prime numbers. Let $A$ be the set of all positive integers less than $n$ not divisible by a prime in $P$. If $|A| > 1$, show that the sum of the reciprocals of the elements of $A$ is not an integer.
-% let p be the smallest prime not in P. pick a such that v_p(a) = k is maximal. suppose v_p(b) = k. then n > max{a, b} > c*p^k > p^{k+1} contrad. so p^k must divide the denom.
-
-\item (\href{https://artofproblemsolving.com/community/c6h1268859p6622268}{ISL 2015/N1}) Determine all positive integers $M$ such that the sequence $a_0, a_1, a_2, \cdots$ defined by \[ a_0 = M + \frac{1}{2} \quad \textrm{and} \quad a_{k+1} = a_k\lfloor a_k \rfloor \quad \textrm{for} \, k = 0, 1, 2, \cdots \]contains at least one integer term.
+\item (\href{https://artofproblemsolving.com/community/c6h1268859p6622268}{ISL 2015/N1}) Determine all positive integers $M$ such that the sequence $a_0, a_1, a_2, \cdots$ defined by \[ a_0 = M + \frac{1}{2} \quad \textrm{and} \quad a_{k+1} = a_k\lfloor a_k \rfloor \quad \textrm{for} \, k = 0, 1, 2, \cdots \]contains at least one integer term. \hints{\ref{h:7-1} \ref{h:7-2}}
 % see also BMO2 2020/1
 % https://artofproblemsolving.com/community/c6h1268859p37304440
 % this one kinda already, just by playing with it, tells you that you should look at nu_2?
 
-\item (\href{https://artofproblemsolving.com/community/c6h1978376p13737797}{Sozopol 2015/4.2}) Let $a_0, a_1, \ldots$ be a sequence of positive integers such that $a_n^2 \mid a_{n-1}a_{n+1}$ for all positive integers $n$. Suppose there exists some integer $k \ge 2$ such that $a_1$ and $a_k$ are relatively prime. Show that $a_1 \mid a_0$.
-% chain the divisibilities to go from a_1 to a_k
-
-\item (\href{https://artofproblemsolving.com/community/c6h2078501p14933592}{Fake USAMO 2020/1}) Let $C$ be a positive integer, and $a_1,a_2,a_3,\hdots$ an infinite sequence of positive integers. Suppose that for all positive integers $n$, $$a_{n+1}=\sqrt{a_n^3-Ca_n}.$$ Prove that there is a positive integer $M$ such that $a_m = a_{m+1}$ for all $m \ge M$.
+\item (\href{https://artofproblemsolving.com/community/c6h2078501p14933592}{Fake USAMO 2020/1}) Let $C$ be a positive integer, and $a_1,a_2,a_3,\hdots$ an infinite sequence of positive integers. Suppose that for all positive integers $n$, $$a_{n+1}=\sqrt{a_n^3-Ca_n}.$$ Prove that there is a positive integer $M$ such that $a_m = a_{m+1}$ for all $m \ge M$. \hints{\ref{h:8-1} \ref{h:8-2}}
 % the main claim is a_n | C, via v_p, then show eventually constant via bounding i guess
 % https://artofproblemsolving.com/community/c6h2078501p37600983
 
-\item (\href{https://artofproblemsolving.com/community/c6h1671291p10632353}{IMO 2018/5}) Let $a_1$, $a_2$, $\ldots$ be an infinite sequence of positive integers. Suppose that there is an integer $N > 1$ such that, for each $n \geq N$, the number $$\frac{a_1}{a_2} + \frac{a_2}{a_3} + \cdots + \frac{a_{n-1}}{a_n} + \frac{a_n}{a_1}$$is an integer. Prove that there is a positive integer $M$ such that $a_m = a_{m+1}$ for all $m \geq M$.
-% look at common diff, consider v_p, show it's non-inc
-% https://artofproblemsolving.com/community/c6h1671291p10634217
+\item (\href{https://artofproblemsolving.com/community/c6h3610437p35340905}{ISL 2024/N3}) Determine all sequences $a_1, a_2, \dots$ of positive integers such that for any pair of positive integers $m\leqslant n$, the arithmetic and geometric means \[ \frac{a_m + a_{m+1} + \cdots + a_n}{n-m+1}\quad\text{and}\quad (a_ma_{m+1}\cdots a_n)^{\frac{1}{n-m+1}}\]are both integers. \hints{\ref{h:9-1} \ref{h:9-2}}
+% (i - j) | (a_i - a_j), then (i - j) | v_p(a_i) - v_p(a_j), then show constancy
 
-\item (\href{https://artofproblemsolving.com/community/c6h3804650p37636484}{Turkey TST 2026/5--}) Find all infinite integer sequences $a_1,a_2,\dots$ such that \[a_i \not\in \cbr{2^0, 2^1, 2^2, \ldots} \quad \text{and} \quad \varphi(a_i)\varphi(a_{i+1})=a_i^2\]hold for all positive integers $i$.
-% if odd p | a_i, then all a_{>i} is div by a higher power of p
-% https://artofproblemsolving.com/community/c6h3804650p37693938
-
-\item (\href{https://artofproblemsolving.com/community/c6h3814392p37803319}{Thailand Online 2026/5}) Determine all positive integers $c$ for which the infinite sequence of positive integers $a_1,a_2,a_3,\dots$ such that $a_{n+1}=c \cdot\varphi(a_n)$ for all positive integers $n$ is eventually periodic for all choices of $a_1$.
+% TODO: swap with below?
+\item (\href{https://artofproblemsolving.com/community/c6h3814392p37803319}{Thailand Online 2026/5}) Determine all positive integers $c$ for which the infinite sequence of positive integers $a_1,a_2,a_3,\dots$ such that $a_{n+1}=c \cdot\varphi(a_n)$ for all positive integers $n$ is eventually periodic for all choices of $a_1$. \hints{\ref{h:10-1} \ref{h:10-2} \ref{h:10-3}}
 % exclude p>=5 via examining v_p of 2^a 3^b numbers
 
-\item (\href{https://artofproblemsolving.com/community/c6h3827467p38044666}{Balkan 2026/4}) Let $n \ge 2$ be an integer. Initially, the number $1$ is written $n$ times on a blackboard. An operation consists of choosing two numbers $a$ and $b$ currently on the blackboard, not both zero, and replacing them with the numbers \[ \frac{(a - b)^2}{a + b} \quad \text{and} \quad \frac{4ab}{a + b}. \]Determine all integers $n$ for which it is possible, after a finite number of operations, for the number $n$ to appear on the blackboard.
+\item (\href{https://artofproblemsolving.com/community/c6h1671291p10632353}{IMO 2018/5}) Let $a_1$, $a_2$, $\ldots$ be an infinite sequence of positive integers. Suppose that there is an integer $N > 1$ such that, for each $n \geq N$, the number $$\frac{a_1}{a_2} + \frac{a_2}{a_3} + \cdots + \frac{a_{n-1}}{a_n} + \frac{a_n}{a_1}$$is an integer. Prove that there is a positive integer $M$ such that $a_m = a_{m+1}$ for all $m \geq M$. \hints{\ref{h:11-1} \ref{h:11-2} \ref{h:11-3}}
+% look at common diff, consider v_p, show it's non-inc
+% https://artofproblemsolving.com/community/c6h1671291p10634217
 
 \end{enumerate}
 
 
 
+\subsubsection*{Harder problems}
 
+\begin{enumerate}[resume]
+
+\item (\href{https://artofproblemsolving.com/community/c6h214712p1187198}{ISL 2007/N2}) Let $b,n > 1$ be integers. Suppose that for each $k > 1$ there exists an integer $a_k$ such that $b - a^n_k$ is divisible by $k$. Prove that $b = A^n$ for some integer $A$. \hint{\ref{h:12-1}}
+% Suppose otherwise, that $n \nmid \nu_p(b)$ for some prime $p.$ Let $\nu_p(b) = qn + r$ where $0 < r < n.$ Choose $k = p^{(q+1)n}.$ If $p^{(q+1)n} \mid b - a_k^n$ then we must have $\nu_p(b - a_k^n) \ge (q+1)n.$ Because $\nu_p(b) < (q+1)n$, we must have $\nu_p(b) = \nu_p(a_k^n) = qn + r.$ However, $n \mid n\nu_p(a_k) = \nu_p(a_k^n)$, a contradiction.
+
+\item (\href{https://artofproblemsolving.com/community/c6h1446913p8271420}{APMO 2017/4}) Call a rational number $r$ \textit{powerful} if $r$ can be expressed in the form $p^k/q$ for some relatively prime positive integers $p, q$ and some integer $k >1$. Let $a, b, c$ be positive rational numbers such that $abc = 1$. Suppose there exist positive integers $x, y, z$ such that $a^x + b^y + c^z$ is an integer. Prove that $a, b, c$ are all powerful. \hints{\ref{h:13-1} \ref{h:13-2} \ref{h:13-3}}
+% show y*v_p(b) = z*v_p(c)
+% https://artofproblemsolving.com/community/c6h1446913p13072422
+% in OTIS excerpts walkthroughs (P152)
+
+\item (\href{https://artofproblemsolving.com/community/c6h3827467p38044666}{Balkan 2026/4}) Let $n \ge 2$ be an integer. Initially, the number $1$ is written $n$ times on a blackboard. An operation consists of choosing two numbers $a$ and $b$ currently on the blackboard, not both zero, and replacing them with the numbers \[ \frac{(a - b)^2}{a + b} \quad \text{and} \quad \frac{4ab}{a + b}. \]Determine all integers $n$ for which it is possible, after a finite number of operations, for the number $n$ to appear on the blackboard. \hints{\ref{h:14-1} \ref{h:14-2} \ref{h:14-3}}
+
+% TODO: swap this down?
+\item (\href{https://artofproblemsolving.com/community/c6h1799942p11944591}{China TST 2019/1.4}) Call a sequence of positive integers $\{a_n\}$ good if for any distinct positive integers $m$ and $n$, one has $$\gcd(m,n) \mid a_m^2 + a_n^2 \quad \text{and} \quad \gcd(a_m,a_n) \mid m^2 + n^2.$$Call a positive integer $a$ to be $k$-good if there exists a good sequence such that $a_k = a$. Does there exists a $k$ such that there are exactly $2019$ $k$-good positive integers? \hints{\ref{h:15-1} \ref{h:15-2} \ref{h:15-3}}
+% A sequence of integers $\{a_k \}$ is good if and only if $m \mid a_m^2$ and $a_m \mid m^2$, for each $m \in \mathbb{N}$. (equiv to v_p(n)/2 <= v_p(a_n) <= 2v_p(n))
+
+\item (\href{https://artofproblemsolving.com/community/c6h1863137p12608512}{TSTST 2019/7}) Let $f: \mathbb Z\to \{1, 2, \dots, 10^{100}\}$ be a function satisfying $$\gcd(f(x), f(y)) = \gcd(f(x), x-y)$$for all integers $x$ and $y$. Show that there exist positive integers $m$ and $n$ such that $f(x) = \gcd(m+x, n)$ for all integers $x$. \hints{\ref{h:16-1} \ref{h:16-2} \ref{h:16-3}}
+% the idea is really "function is determined by values at every prime exponent", as motivated by the gcd thing
+
+\item (\href{https://artofproblemsolving.com/community/c6h356076p1935854}{IMO 2010/3}) Find all functions $g \from \NN \to \NN$ such that \[(g(m) + n)(g(n) + m)\] is a perfect square for all $m, n \in \NN$. \hints{\ref{h:17-1} \ref{h:17-2} \ref{h:17-3} \ref{h:17-4}}
+% the motivation is "WTS injective over p" => "consider v_p". injectivity determines fn
+% https://artofproblemsolving.com/community/c6h356076p29502580
+
+\end{enumerate}
+
+
+
+\newpage
+\subsubsection*{Hints}
+
+\begin{enumerate}
+
+\item \label{h:4-1} \label{h:9-1} \label{h:11-1} Telescope the conditions.
+
+\item \label{h:5-1} To prove odd impossible, take $\nu_2$.
+
+\item \label{h:6-1} Do casework on number of $x_i$ such that $\nu_p(x_i) = \nu_p(k)$.
+
+\item \label{h:7-1} Show $\nu_2$ of something is strictly decreasing.
+
+\item \label{h:7-2} Look at $\nu_2(a_i - 3/2)$.
+
+\item \label{h:8-1} Show $a_n \mid C$.
+
+\item \label{h:8-2} If $a_n > \nu_p(C)$, show $\cbr{\nu_p(a_i)}_{i \ge n}$ is decreasing.
+
+\item \label{h:9-2} Divide geometric mean conditions for $(1, d+1)$ and $(2, d+2)$, and note $d$ is arbitrary.
+
+\item \label{h:10-1} Show $\nu_p(c) > 1$ is impossible due to eventual periodicity.
+
+\item \label{h:10-2} Show that $c$ having two distinct prime divisors is impossible when $a_1 = c$.
+
+\item \label{h:10-3} Show $c$ divisible by an odd prime $> 3$ is impossible.
+
+\item \label{h:11-2} Simplify the difference of terms. If you subtract $1$, the numerator factors.
+
+\item \label{h:11-3} Consider the sequences $\cbr{\gcd(a_1, a_n)}$ and $\cbr{\lcm(a_1, a_n)}$.
+
+\item \label{h:12-1} Let $e := \nu_p(b)$, and take $k = p^{e+1}$.
+
+\item \label{h:13-1} This is similar to BAMO 2018/4.
+
+\item \label{h:13-2} If $\nu_p(a) > 0$, WLOG $\nu_p(b) < 0$. Show $\nu_p(c) < 0$.
+
+\item \label{h:13-3} If $\nu_p(a) > 0$, show $y\nu_p(b) = z\nu_p(c)$.
+
+\item \label{h:14-1} What are the invariants?
+
+\item \label{h:14-2} The sum is invariant, and all numbers are non-negative.
+
+\item \label{h:14-3} At the start, all $\nu_p \le 0$; at the end, all $\nu_p > 0$.
+
+\item \label{h:15-1} Prove a sequence is good iff $n \mid a_n^2$ and $a_n \mid n^2$.
+
+\item \label{h:15-2} Combine $(n, 2n)$, $(2n, 3n)$, $(n, 3n)$ to get $n \mid 2a_n^2$.
+
+\item \label{h:15-3} Choose $(m, n)$ to try getting an equality case for the sum rule.
+
+\item \label{h:16-1} Take $x_p$ such that $e_p := \nu_p(f(x_p))$ is maximal.
+
+\item \label{h:16-2} Choose $n$ such that $\nu_p(n) = e_p$.
+
+\item \label{h:16-3} Use CRT to choose $m$ such that $\nu_p(x - x_p) = \nu_p(x + m)$.
+
+\item \label{h:17-1} Show $g$ is injective mod $p$.
+
+\item \label{h:17-2} Equivalently, show $p \mid g(b) - g(a)$ implies $p \mid a - b$.
+
+\item \label{h:17-3} Choose $m$ to force $\nu_p(g(a) + m)$ and $\nu_p(g(b) + m)$ to both be odd.
+
+\item \label{h:17-4} By injectivity, $p \nmid g(n+1) - g(n)$.
+
+\end{enumerate}
+
+
+
+\newpage
 \subsubsection*{Sketches}
 
 \begin{enumerate}
 
-\item Want to show $\nu_p(a) + \nu_p(b) + \nu_p(c) \le 13 \min\cbr{ \nu_p(a), \nu_p(b), \nu_p(c) }$. WLOG, suppose $\nu_p(a)$ is the minimum. Then $\nu_p(c) \le 3 \nu_p(a)$ and $\nu_p(b) \le 3 \nu_p(c) \le 9 \nu_p(a)$. So LHS is $\le 13\nu_p(a)$, as desired.
-
-\item Condition is $\min_i\cbr{\nu_p(a_i)} + \max_i\cbr{\nu_p(a_i)} = \sum_i \nu_p(a_i)$. WLOG, suppose $\nu_p(a_1)$ is the minimum and $\nu_p(a_n)$ is the maximum. Then this is $\sum_{1 < i < n} \nu_p(a_i) = 0$, so all the middle $a_i$ (of which there are $\ge 1$, because $n \ge 3$) must all be $0$. So the minimum must also be $0$. This means, for each $p$, there's only one $a_i$ such that $p \mid a_i$; this proves the result.
-
-\item Let $w, x, y, z := \nu_p(a), \nu_p(b), \nu_p(c), \nu_p(d)$ respectively. Want to show $\min\cbr{w, y} + \min\cbr{w, z} = w + \min{w, x, y, z}$. Per $ab = cd$, RHS here is $w + \min{w, y + z - w, y, z}$. Casework on relative sizes of $\cbr{w, y, z}$ finishes: symmetry of $y$ and $z$ rule out half the cases.
-
+% India Regional 2013
 \item Let $a, b, c := \nu_p(a_1), \nu_p(b_1), \nu_p(c_1)$ respectively. WLOG $a \le b \le c$. Then $\nu_p(a_2) = b$ and $\nu_p(b_2) = \nu_p(c_2) = a$. Similarly, $\nu_p(a_3) = a$ and $\nu_p(b_3) = \nu_p(c_3) = b$. So $\nu_p(a_2 \gcd(b_2, c_2)) = a + b = \nu_p(a_3 \lcm(b_3, c_3))$.
 
-\item Evens: $(1, \frac{n}{2}, 1)$. We show odd is impossible. Let $a, b, c := \nu_2(x), \nu_2(y), \nu_2(z)$, respectively. If expression was odd, we have $\min\cbr{ \max\cbr{a, b} + \max\cbr{b, c} } = \max\cbr{a, c}$. By symmetry, WLOG $a \le c$. Do casework on relative sizes of $\cbr{a, b, c}$. For the case where $b$ isn't between $a$ and $c$, we have to go back to the original expression to handle the cancellation properly.
+% Poland 1983
+\item Let $w, x, y, z := \nu_p(a), \nu_p(b), \nu_p(c), \nu_p(d)$ respectively. Want to show $\min\cbr{w, y} + \min\cbr{w, z} = w + \min\cbr{w, x, y, z}$. Per $ab = cd$, RHS here is $w + \min\cbr{w, y + z - w, y, z}$. Casework on relative sizes of $\cbr{w, y, z}$ finishes: symmetry of $y$ and $z$ rule out half the cases.
 
-\item Note that $0 \le \nu_p(a/b + b/c + c/a) = \min\cbr{ \nu_p(a/b), \nu_p(b/c), \nu_p(c/a) }$, so $\nu_p(a/b)$, $\nu_p(b/c)$, and $\nu_p(c/a)$ are all $\ge 0$. But their sum is $\nu_p(1) = 0$, so they're all $0$, so $\nu_p(a) = \nu_p(b) = \nu_p(c)$.
+  % (a1 ... an)[a1 ... an] = a1 ... an
+\item Condition is $\min_i\cbr{\nu_p(a_i)} + \max_i\cbr{\nu_p(a_i)} = \sum_i \nu_p(a_i)$. WLOG, suppose $\nu_p(a_1)$ is the minimum and $\nu_p(a_n)$ is the maximum. Then this is $\sum_{1 < i < n} \nu_p(a_i) = 0$, so all the middle $a_i$ (of which there are $\ge 1$, because $n \ge 3$) must all be $0$. So the minimum must also be $0$. This means, for each $p$, there's only one $a_i$ such that $p \mid a_i$; this proves the result.
 
-\item From parallelogram, $ x_1 + x_3 = x_2 + x_4 $ and $ y_1 + y_3 = y_2 + y_4 $. From perpendicularity, $ \abs{(x_1 - x_4 )(x_1 - x_2 ) } = \abs{(y_1 - y_4 )(y_1 - y_2 )} $. Take prime $p$ such that $n := \nu_p(x_1 x_2 x_3 x_4) > 0 $. Do casework on there being $ \left\{ 0, 1, 2, 3 \right\} $ values of $i$ such that $ \nu_p(x_i ) = n $, showing $n$ is even in all cases.
-
-\item Let $ e := \nu_p(b) $ and take $k = p^{e + 1}$. This means $ \nu_p(b - a_k^n) \ge e + 1 $. If $ \nu_{p} (b) \ne \nu_p(a_k^n) $, then LHS is $\min \left\{ \nu_p(b), \nu_p(a_k^n) \right\} \le \nu_p(b) = e $, leading to $e \ge e + 1$, contradiction. So $\nu_p(b) = n \nu_p(a_k)$, and hence $n \mid \nu_p(b)$.
-
-\item We show sequence is constant. Scale to remove common factors, then take $p \mid a_1$. Take $(m, n) = (1, d + 1)$ and $(2, d + 2)$ and divide the geometric mean conditions to get $ d \mid \nu_p( a_{d + 1} ) - \nu_p( a_1 ) $. For arbitrarily large $d$, RHS must be zero, so $\nu_p(a_{d+1}) = \nu_p(a_1) > 0$, so the sequence is eventually $0$ mod $p$. But from $(m, n) = (i, p + i)$, the sum of every $p$ consecutive terms is $0$ mod $p$, so the whole sequence is $0$ mod $p$, contradiction.
-
-\item If $\nu_p(a), \nu_p(b), \nu_p(c)$ are all equal, then by $abc = 1$ they're all zero. Take $\nu_p(a) > 0$, WLOG $\nu_p(b) < 0$. If $\nu_p(c) \ge 0$, then $\nu_p(a^x + b^y + c^z) = \nu_p(b^y) < 0$, so it can't be an integer; thus $\nu_p(c) < 0$. Similarly, if $y \nu_p(b) \ne z \nu_p(c)$, we get $\nu_p(a^x + b^y + c^z) = \min\cbr{ y\nu_p(b), z \nu_p(c) } < 0$. Because $y \nu_p(b) = z \nu_p(c)$, we have some $d, y', z'$ such that $\nu_p(b) = -dz'$, $\nu_p(c) = -dy'$, and $\nu_p(a) = d(y' + z')$, which makes it powerful.
-
-\item Let $p := 3$. Suppose they were equal for $x, y$, we'll get a contradiction. WLOG, $\nu_p(x) > 0 \ge \nu_p(y)$. Note $\nu_p(f(x)) = \nu_p(x^p + x) = \nu_p(x) > 0$, so $p \mid f^m(x)$. Check if $\nu_p(y) \le 0$ we get $p \nmid f^n(y)$, contradiction.
-
-\item Only $g(n) = n + C$ works. We'll show $g$ is injective mod $p$. Suppose $p \mid g(b) - g(a)$. We choose $m$ to force $\nu_p(g(a) + m)$ and $\nu_p(g(b) + m)$ to be odd: if $p^2 \mid g(b) - g(a)$, take $m \equiv p - g(a) \pmod{p^2}$, otherwise take $m \equiv -g(b) \pmod{p^3}$. This shows $p \mid g(m) + a$ and $p \mid g(m) + b$, so $p \mid a - b$, done. From injectivity, we get $g(n + 1) - g(n) = \pm 1$. Taking $(m, n) = (n, n + 1)$ as a perfect square rules out the $-1$ case.
-
-\item We show sequence is good iff $n \mid a_n^2$ and $a_n \mid n^2$; equivalently $\nu_p(n)/2 \le \nu_p(a_n) \le 2\nu_p(n)$. (If so, there's $2\nu_p(i) - \floor{\nu_p(i)/2}$ choices for $\nu_p(a_i)$, which is never divisible by $3$, so there can't be $2019$.) Combine $(m, n) = (n, 2n), (2n, 3n), (n, 3n)$ in statement to get $n \mid 2a_n^2$, equivalently $\nu_p(n) \le \nu_p(2) + 2\nu_p(a_n)$. Choose $m$ such that $\nu_p(n) \ll \nu_p(m)$ and, using previous, $\nu_p(a_n) < (\nu_p(m) - 1)/2 < \nu_p(a_m)$. Thus $\nu_p(n) = \nu_p(\gcd(m, n)) \le \nu_p(a_m^2 + a_n^2) = \nu_p(a_n^2)$, and $\nu_p(a_n) = \nu_p(\gcd(a_m, a_n)) \le \nu_p(m^2 + n^2) = \nu_p(n^2)$, as desired.
-
-\item Take $x_p$ such that $e_p := \nu_p(f(x_p))$ is maximal. Then $\nu_p(f(x)) = \nu_p(\gcd(f(x_p), f(x))) = \nu_p(\gcd(f(x_p), x - x_p)) = \min\cbr{\nu_p(x - x_p), e_p}$. Taking $n := \prod p^{e_p}$ and by CRT choose $m :\equiv -x_p \pmod{p^{e_p}}$ for all $p$. Then $\min\cbr{\nu_p(x - x_p), e_p} = \min\cbr{\nu_p(x + m), \nu_p(n)}$, which works.
-
-\item Let $p$ be the smallest prime not in $P$. Take $a \in A$ such that $k := \nu_p(a)$ is maximal. Suppose $a' \in A$ satisfies $\nu_p(a') = k$. Then $a' = cp^k$, where all prime divisors of $c$ are greater than $p$. If $c > 1$, then $c > p$ and $n > a' > p^{k+1}$, contradicting maximality of $k$. So $c = 1$ and $a' = p^k$, so $a$ is unique. This means $p^k$ divides the denominator of the sum.
-
-\item It's $M \ge 2$. We show $\nu_2(a_i - 3/2)$ decreases until it's $0$. Write $M = 2^ek + 1$. If $e = 0$, then $a_1$ is an integer and we're done. Otherwise $a_1 = M^2 + M/2 = 2^{2e}k^2 + 2^{e + 1}k + 2^{e - 1}k + 3/2$, and $\nu_2(a_0 - 3/2) = \nu_2(M - 1) = e > e-1 = \nu_2(a_1 - 3/2)$, as desired.
-
+% Sozopol 2015
 \item Take $p \mid a_1$ and add the inequalities $2 \nu_p(a_n) \le \nu_p(a_{n+1}) + \nu_p(a_{n-1})$ for $n = 1, 2, \ldots, k-1$ to get $\nu_p(a_1) + \nu_p(a_{k - 1}) \le \nu_p(a_0) + \nu_p(a_k)$. But $a_1 \perp a_k$ so $p \nmid a_k$, so $\nu_p(a_1) \le \nu_p(a_0)$.
 
-\item Note $2\nu_p(a_{n+1}) = \nu_p(a_n) + \nu_p(a_n^2 - C)$. We show $a_n \mid C$. Suppose otherwise: then $\nu_p(a_n) > \nu_p(C)$, and RHS is $\nu_p(a_n) + \nu_p(C)$, and we must have $\nu_p(C) < \nu_p(a_{n+1}) < \nu_p(a_n)$. This would mean $\cbr{\nu_p(a_n)}$ is decreasing, while $\nu_p(C)$ is constant, contradiction.
+% USEMO 2020
+\item Evens: $(1, \frac{n}{2}, 1)$. We show odd is impossible. Let $a, b, c := \nu_2(x), \nu_2(y), \nu_2(z)$, respectively. If expression was odd, we have $\min\cbr{ \max\cbr{a, b} + \max\cbr{b, c} } = \max\cbr{a, c}$. By symmetry, WLOG $a \le c$. Do casework on relative sizes of $\cbr{a, b, c}$. For the case where $b$ isn't between $a$ and $c$, we have to go back to the original expression to handle the cancellation properly.
 
+% USEMO 2024
+\item From parallelogram, $ x_1 + x_3 = x_2 + x_4 $ and $ y_1 + y_3 = y_2 + y_4 $. From equal-length diagonals, $ (x_1 - x_3 )^2 + (y_1 - y_3 )^2 = (x_2 - x_4 )^2 + (y_2 - y_4 )^2 $; combine with the first two equations to get $x_1x_3 + y_1y_3 = x_2x_4 + y_2y_4$. Do casework on there being $ \left\{ 0, 1, 2, 3, 4 \right\} $ values of $i$ such that $ \nu_p(x_i ) = \nu_p(k) $, show in each case $2 \mid \nu_p(x_1x_2x_3x_4)$.
+
+% ISL 2015
+\item It's $M \ge 2$. We show $\nu_2(a_i - 3/2)$ decreases until it's $0$. Write $M = 2^ek + 1$. If $e = 0$, then $a_1$ is an integer and we're done. Otherwise $a_1 = M^2 + M/2 = 2^{2e}k^2 + 2^{e + 1}k + 2^{e - 1}k + 3/2$, and $\nu_2(a_0 - 3/2) = \nu_2(M - 1) = e > e-1 = \nu_2(a_1 - 3/2)$, as desired.
+
+% Fake USAMO 2020
+\item Note $2\nu_p(a_{n+1}) = \nu_p(a_n) + \nu_p(a_n^2 - C)$. We show $a_n \mid C$. Suppose otherwise: then $\nu_p(a_n) > \nu_p(C)$, and RHS is $\nu_p(a_n) + \nu_p(C)$, and we must have $\nu_p(C) < \nu_p(a_{n+1}) < \nu_p(a_n)$. This would mean $\cbr{\nu_p(a_i)}_{i \ge n}$ is decreasing, while $\nu_p(C)$ is constant, contradiction.
+
+% ISL 2024
+\item We show sequence is constant. Scale to remove common factors, then take $p \mid a_1$. Take $(m, n) = (1, d + 1)$ and $(2, d + 2)$ and divide the geometric mean conditions to get $ d \mid \nu_p( a_{d + 1} ) - \nu_p( a_1 ) $. For arbitrarily large $d$, RHS must be zero, so $\nu_p(a_{d+1}) = \nu_p(a_1) > 0$, so the sequence is eventually $0$ mod $p$. But from $(m, n) = (i, p + i)$, the sum of every $p$ consecutive terms is $0$ mod $p$, so the whole sequence is $0$ mod $p$, contradiction.
+
+% Thailand Online 2026
+\item Note $c \in \cbr{1, 2, 3}$ work for size reasons; we claim that's it. Note $\nu_p(\varphi(n)) \ge \nu_p(n) - 1$, so $\nu_p(a_{n+1}) - \nu_p(a_n) \ge \nu_p(c) - 1$. If $\nu_p(c) > 1$, then $\nu_p(a_n)$ is increasing, and can't be eventually periodic. Similarly, if $c$ has more than one distinct odd prime divisor, then taking $a_1 = c$, we get $\nu_2(a_n)$ is increasing, and can't be eventually periodic. If $c$ is an odd prime $> 3$, then eventually all prime divisors of $a_n$ are at most $c$; from that point it's increasing, and can't be eventually periodic. Finally, if $c = 6$, taking $a_1 = 6$ gives an increasing sequence, which can't be eventually periodic.
+
+% IMO 2018
 \item For $n > N$, the difference $d_n := \frac{a_{n+1}}{a_1} - \frac{a_n}{a_1} + \frac{a_n}{a_{n+1}}$ is an integer. Then \[
   \ZZ \ni d_n - 1 = \frac{a_{n+1}^2 - a_na_{n+1} + a_na_1 + a_1a_{n+1}}{a_1a_{n+1}} \implies a_1a_{n+1} \mid (a_{n+1} - a_1)(a_{n+1} - a_n).
 \]
-Note this means $\min\cbr{ \nu_p(a_1 ), \nu_p(a_n ) } \le \nu_p(a_{n+1} ) \le \max \cbr{  \nu_p(a_1 ), \nu_p(a_n )  } $. Hence $ \gcd(a_1, a_n) \mid a_{n+1} \mid \lcm(a_1, a_n)$. So $\gcd(a_1, a_n)$ is non-decreasing, $\lcm(a_1, a_n)$ is non-increasing, and both are bounded by $a_1$, so they're eventually constant, and so is their product $a_1a_n$.
+Note this means $\min\cbr{ \nu_p(a_1 ), \nu_p(a_n ) } \le \nu_p(a_{n+1} ) \le \max \cbr{  \nu_p(a_1 ), \nu_p(a_n )  } $. Hence $ \gcd(a_1, a_n) \mid a_{n+1} \mid \lcm(a_1, a_n)$. So $\gcd(a_1, a_n)$ is increasing, $\lcm(a_1, a_n)$ is decreasing, and both are bounded by $a_1$, so they're eventually constant, and so is their product $a_1a_n$.
 
-\item If $a_i$ was odd, then LHS is even but RHS is odd, contradiction. So $a_i$ is even, and $\nu_2(\varphi(a_i)) \ge \nu_2(a_i) + \omega(a_i) - 2$, where $\omega(n)$ is the number of distinct prime divisors of $n$. By condition, $\nu_2(a_i) - \nu_2(a_{i+1}) \ge \omega(a_i) + \omega(a_{i+1}) - 4$. But $\omega(a_i) \ge 2$, as each $a_i$ is even and not a power of $2$. So, $\nu_2(a_i)$ is non-increasing and bounded below by zero, and thus eventually constant; and thus $\omega(a_i)$ is eventually always $2$. Work from this point forward to get the other prime divisor is $3$, and work backward to show all terms have prime divisors $2$ and $3$; this characterizes.
+% ISL 2007
+\item Let $ e := \nu_p(b) $ and take $k = p^{e + 1}$. This means $ \nu_p(b - a_k^n) \ge e + 1 $. If $ \nu_{p} (b) \ne \nu_p(a_k^n) $, then LHS is $\min \left\{ \nu_p(b), \nu_p(a_k^n) \right\} \le \nu_p(b) = e $, leading to $e \ge e + 1$, contradiction. So $\nu_p(b) = n \nu_p(a_k)$, and hence $n \mid \nu_p(b)$.
 
-\item Note $c \in \cbr{1, 2, 3}$ work for size reasons; we claim that's it. Note $\nu_p(\varphi(n)) \ge \nu_p(n) - 1$, so $\nu_p(a_{n+1}) - \nu_p(a_n) \ge \nu_p(c) - 1$. If $\nu_p(c) > 1$, then $\nu_p(a_n)$ is increasing, and can't be eventually periodic. Similarly, if $c$ has more than one distinct odd prime divisor, then taking $a_1 = c$, we get $\nu_2(a_n)$ is increasing, and can't be eventually periodic. If $c$ is an odd prime $> 3$, then eventually all prime divisors of $a_n$ are at most $c$; from that point it's increasing, and can't be eventually periodic. Finally, if $c = 6$, taking $a_1 = 6$ gives an increasing sequence, which can't be eventually periodic.
+% APMO 2017
+\item If $\nu_p(a), \nu_p(b), \nu_p(c)$ are all equal, then by $abc = 1$ they're all zero. Take $\nu_p(a) > 0$, WLOG $\nu_p(b) < 0$. If $\nu_p(c) \ge 0$, then $\nu_p(a^x + b^y + c^z) = \nu_p(b^y) < 0$, so it can't be an integer; thus $\nu_p(c) < 0$. Similarly, if $y \nu_p(b) \ne z \nu_p(c)$, we get $\nu_p(a^x + b^y + c^z) = \min\cbr{ y\nu_p(b), z \nu_p(c) } < 0$. Because $y \nu_p(b) = z \nu_p(c)$, we have some $d, y', z'$ such that $\nu_p(b) = -dz'$, $\nu_p(c) = -dy'$, and $\nu_p(a) = d(y' + z')$, which makes it powerful.
 
+% Balkan 2026
 \item Only powers of $2$: construct by pairing $1$s, then pairing $2$s, etc. Otherwise, some odd $p \mid n$. At the start, all numbers have $\nu_p \le 0$. At the end, because sum is invariant and all numbers are non-negative, the final state is one $n$ and $n-1$ zeroes, where all numbers have $\nu_p > 0$. So, at some point, we erase some $a$ and $b$, at least one with $\nu_p \le 0$, to get two numbers, \textit{both} with $\nu_p > 0$. But this is impossible: if both $a$ and $b$ have $\nu_p \le 0$, then $\nu_p\del{\frac{4ab}{a+b}} \le 0$, and if $\nu_p(a) \le 0 < \nu_p(b)$, then $\nu_p\del{\frac{(a - b)^2}{a + b}} \le 0$.
+
+% China TST 2019
+\item We show sequence is good iff $n \mid a_n^2$ and $a_n \mid n^2$; equivalently $\nu_p(n)/2 \le \nu_p(a_n) \le 2\nu_p(n)$. (If so, there's $2\nu_p(i) - \floor{\nu_p(i)/2}$ choices for $\nu_p(a_i)$, which is never divisible by $3$, so there can't be $2019$.) Combine $(m, n) = (n, 2n), (2n, 3n), (n, 3n)$ in statement to get $n \mid 2a_n^2$, equivalently $\nu_p(n) \le \nu_p(2) + 2\nu_p(a_n)$. Choose $m$ such that $\nu_p(n) \ll \nu_p(m)$ and, using previous, $\nu_p(a_n) < (\nu_p(m) - 1)/2 < \nu_p(a_m)$. Thus $\nu_p(n) = \nu_p(\gcd(m, n)) \le \nu_p(a_m^2 + a_n^2) = \nu_p(a_n^2)$, and $\nu_p(a_n) = \nu_p(\gcd(a_m, a_n)) \le \nu_p(m^2 + n^2) = \nu_p(n^2)$, as desired.
+
+% TSTST 2019
+\item Take $x_p$ such that $e_p := \nu_p(f(x_p))$ is maximal. Then $\nu_p(f(x)) = \nu_p(\gcd(f(x_p), f(x))) = \nu_p(\gcd(f(x_p), x - x_p)) = \min\cbr{\nu_p(x - x_p), e_p}$. Taking $n := \prod p^{e_p}$ and by CRT choose $m :\equiv -x_p \pmod{p^{e_p}}$ for all $p$. Then $\min\cbr{\nu_p(x - x_p), e_p} = \min\cbr{\nu_p(x + m), \nu_p(n)}$, which works.
+
+% IMO 2010
+\item Only $g(n) = n + C$ works. We'll show $g$ is injective mod $p$. Suppose $p \mid g(b) - g(a)$. We choose $m$ to force $\nu_p(g(a) + m)$ and $\nu_p(g(b) + m)$ to be odd: if $p^2 \mid g(b) - g(a)$, take $m \equiv p - g(a) \pmod{p^2}$, otherwise take $m \equiv -g(b) \pmod{p^3}$. This shows $p \mid g(m) + a$ and $p \mid g(m) + b$, so $p \mid a - b$, done. From injectivity, we get $g(n + 1) - g(n) = \pm 1$. Taking $(m, n) = (n, n + 1)$ as a perfect square rules out the $-1$ case.
 
 \end{enumerate}
 
 \subsubsection*{Acknowledgements}
 
-Thanks to Brian Reinhart for comments.
+Thanks to Brian Reinhart for comments. References: Look at the exponent from \href{https://web.evanchen.cc/textbooks/OTIS-Excerpts.pdf}{OTIS Excerpts}; Largest Exponent from \href{https://artofproblemsolving.com/community/c6h2344755}{Modern Olympiad Number Theory}.
 
 \end{document}
 
@@ -229,6 +333,9 @@ Thanks to Brian Reinhart for comments.
 
 \item Show that $H_n$ is an integer only when $n = 1$.
 % v_2, done ish. i mean, it's a special case of Iran 3rd 2017/1.NT.1
+
+\item (\href{https://artofproblemsolving.com/community/c6h1492528p8768207}{Iran 3rd 2017/1.NT.1}) Let $n$ be a positive integer and $P$ a set of prime numbers. Let $A$ be the set of all positive integers less than $n$ not divisible by a prime in $P$. If $|A| > 1$, show that the sum of the reciprocals of the elements of $A$ is not an integer.
+% Let $p$ be the smallest prime not in $P$ (which must exist as $|A| > 1$). Take $a \in A$ such that $k := \nu_p(a)$ is maximal. Suppose $a' \in A$ satisfies $\nu_p(a') = k$. Then $a' = cp^k$, where all prime divisors of $c$ are greater than $p$. If $c > 1$, then $c > p$ and $n > a' > p^{k+1}$, contradicting maximality of $k$. So $c = 1$ and $a' = p^k$, so $a$ is unique. This means $p^k$ divides the denominator of the sum.
 
 \item (\href{https://artofproblemsolving.com/community/c6h288838p1561571}{IMO 2009/1}) Let $ n$ be a positive integer and let $ a_1,a_2,a_3,\ldots,a_k$ $ ( k\ge 2)$ be distinct integers in the set $ { 1,2,\ldots,n}$ such that $ n$ divides $ a_i(a_{i + 1} - 1)$ for $ i = 1,2,\ldots,k - 1$. Prove that $ n$ does not divide $ a_k(a_1 - 1).$
 % this is an algebraic symmetry manip kinda problem
@@ -276,6 +383,14 @@ Thanks to Brian Reinhart for comments.
 \item (\href{https://artofproblemsolving.com/community/c6h1472061p8547101}{ELMO SL 2017/N3}) For each integer $C>1$ decide whether there exist pairwise distinct positive integers $a_1,a_2,a_3,\ldots$ such that for every $k\ge 1$, $a_{k+1}^k$ divides $C^ka_1a_2\cdots a_k$.
 % really more about bounding than it is about v_p, maybe?
 
+\item (\href{https://artofproblemsolving.com/community/c6h3804650p37636484}{Turkey TST 2026/5--}) Find all infinite integer sequences $a_1,a_2,\dots$ such that \[a_i \not\in \cbr{2^0, 2^1, 2^2, \ldots} \quad \text{and} \quad \varphi(a_i)\varphi(a_{i+1})=a_i^2\]hold for all positive integers $i$.
+% if odd p | a_i, then all a_{>i} is div by a higher power of p
+% https://artofproblemsolving.com/community/c6h3804650p37693938
+% too similar to Thailand Online 2026/5, i think
+% \item If $a_i$ was odd, then LHS is even but RHS is odd, contradiction. So $a_i$ is even, and $\nu_2(\varphi(a_i)) \ge \nu_2(a_i) + \omega(a_i) - 2$, where $\omega(n)$ is the number of distinct prime divisors of $n$. By condition, $\nu_2(a_i) - \nu_2(a_{i+1}) \ge \omega(a_i) + \omega(a_{i+1}) - 4$. But $\omega(a_i) \ge 2$, as each $a_i$ is even and not a power of $2$. So, $\nu_2(a_i)$ is non-increasing and bounded below by zero, and thus eventually constant; and thus $\omega(a_i)$ is eventually always $2$. Work from this point forward to get the other prime divisor is $3$, and work backward to show all terms have prime divisors $2$ and $3$; this characterizes.
+
+\item (\href{https://artofproblemsolving.com/community/c6h3780397p37325837}{RMM 2026/4}) For any positive integer $m$, let $\varphi(m)$ be the number of positive integers less than or equal to $m$ and coprime to $m$. Define $\varphi_0(m)=m$ and, for each positive integer $k$, $\varphi_k(m)=\varphi(\varphi_{k-1}(m))$. For any integer $n\geq 3$, prove that \[ \varphi_0(2^n-3)\cdot\varphi_1(2^n-3)\cdot\varphi_2(2^n-3)\cdot\ldots\cdot\varphi_n(2^n-3) \]has at most $n$ distinct prime divisors.
+% too similar to Turkey TST 2026/5
 
 \subsubsection*{Factorials}
 

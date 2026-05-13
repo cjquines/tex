@@ -15,8 +15,8 @@ import sys
 import urllib.request
 from html.parser import HTMLParser
 
-URL_RE = re.compile(r"/community/c(\d+)h(\d+)p(\d+)")
-BOOTSTRAP_RE = re.compile(r"AoPS\.bootstrap_data\s*=\s*(\{.*?\});", re.DOTALL)
+URL_RE = re.compile(r"/community/c(\d+)h(\d+)(?:p(\d+))?")
+BOOTSTRAP_PREFIX_RE = re.compile(r"AoPS\.bootstrap_data\s*=\s*\{")
 USER_AGENT = "Mozilla/5.0 (aops_fetch.py)"
 
 
@@ -27,10 +27,14 @@ def fetch_html(url: str) -> str:
 
 
 def parse_bootstrap(html: str) -> dict:
-    m = BOOTSTRAP_RE.search(html)
+    # The bootstrap blob can contain `};` inside string values, so a regex
+    # over the closing brace truncates. Anchor to the opening `{` and let
+    # JSONDecoder.raw_decode walk to the true end of the object.
+    m = BOOTSTRAP_PREFIX_RE.search(html)
     if not m:
         raise ValueError("bootstrap_data not found in page")
-    return json.loads(m.group(1))
+    obj, _ = json.JSONDecoder().raw_decode(html[m.end() - 1:])
+    return obj
 
 
 def post_url(category_id: int, topic_id: int, post_id: int) -> str:
@@ -60,8 +64,84 @@ def strip_html(s: str) -> str:
     return "".join(p.parts)
 
 
+# Simple inline bbcode tags whose content is kept; mapping gives (open, close).
+_INLINE_BBCODE = {
+    "b": (r"\textbf{", "}"),
+    "i": (r"\textit{", "}"),
+    "u": (r"\underline{", "}"),
+    "s": ("", ""),
+    "center": ("", ""),
+    "color": ("", ""),
+    "size": ("", ""),
+    "font": ("", ""),
+    "quote": ("", ""),
+    "hide": ("", ""),
+    "code": (r"\texttt{", "}"),
+}
+
+_TAG_RE = re.compile(
+    r"\[(/?)(\w+)(?:[=\s][^\]]*)?\]"
+)
+
+
+def bbcode_to_tex(s: str) -> str:
+    """Translate AoPS bbcode in canonical text to plain LaTeX.
+
+    Handles common tags (b/i/u, hide, quote, color, size, center, url, list).
+    Unknown tags are stripped while keeping their content.
+    """
+
+    # Lists: convert [list]...[/list] and [list=1]...[/list] to itemize/enumerate,
+    # with [*] items. Do this first so item bullets survive other rewrites.
+    def _list_repl(m: re.Match) -> str:
+        kind = m.group(1)
+        body = m.group(2)
+        env = "enumerate" if kind else "itemize"
+        items = re.split(r"\[\*\]", body)
+        items = [it.strip() for it in items if it.strip()]
+        inner = "\n".join(rf"  \item {it}" for it in items)
+        return f"\\begin{{{env}}}\n{inner}\n\\end{{{env}}}"
+
+    s = re.sub(
+        r"\[list(?:=([^\]]*))?\](.*?)\[/list\]",
+        _list_repl,
+        s,
+        flags=re.DOTALL,
+    )
+
+    # url tags: [url=LINK]TEXT[/url] -> \href{LINK}{TEXT}; [url]LINK[/url] -> \url{LINK}
+    s = re.sub(
+        r"\[url=([^\]]+)\](.*?)\[/url\]",
+        lambda m: rf"\href{{{m.group(1)}}}{{{m.group(2)}}}",
+        s,
+        flags=re.DOTALL,
+    )
+    s = re.sub(
+        r"\[url\](.*?)\[/url\]",
+        lambda m: rf"\url{{{m.group(1)}}}",
+        s,
+        flags=re.DOTALL,
+    )
+
+    # img tags: drop entirely.
+    s = re.sub(r"\[img\].*?\[/img\]", "", s, flags=re.DOTALL)
+
+    def _tag_repl(m: re.Match) -> str:
+        closing = m.group(1) == "/"
+        tag = m.group(2).lower()
+        if tag in _INLINE_BBCODE:
+            open_, close = _INLINE_BBCODE[tag]
+            return close if closing else open_
+        return ""
+
+    s = _TAG_RE.sub(_tag_repl, s)
+    return s
+
+
 def format_post(post: dict, category_id: int, topic_id: int, *, raw: bool) -> str:
     body = post["post_canonical"] if not raw else post["post_rendered"]
+    if not raw:
+        body = bbcode_to_tex(body)
     url = post_url(category_id, topic_id, post["post_id"])
     header = f"#{post['post_number']} by {post['username']}  {url}"
     return f"{header}\n{body}"
@@ -74,7 +154,9 @@ def collect_posts(
     m = URL_RE.search(url)
     if not m:
         raise ValueError(f"unrecognized AoPS URL: {url}")
-    category_id, topic_id, _ = map(int, m.groups())
+    cat_s, topic_s, post_s = m.groups()
+    category_id = int(cat_s)
+    topic_id = int(topic_s)
 
     html = fetch_html(url)
     data = parse_bootstrap(html)
