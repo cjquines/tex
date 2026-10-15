@@ -1,0 +1,129 @@
+% version published in Crux Mathematicorum Vol. 52, No. 7, September 2026
+\documentclass[11pt]{article}
+
+\usepackage{amsmath, amssymb, amsthm}
+
+\theoremstyle{definition}
+\newtheorem{example}{Example}
+\newtheorem{problem}{Problem}
+
+\title{On $p$-adic valuations of sums}
+\author{CJ Quines}
+\date{May 13, 2026}
+
+\begin{document}
+
+\maketitle
+
+\section{Valuations}
+
+Let $p$ be a prime. The \textbf{$\boldsymbol{p}$-adic valuation} of a positive integer $n$, written $\nu_p(n)$, is the largest integer $e$ such that $p^e \mid n$. We extend this to nonzero rational numbers via $\nu_p(a/b) = \nu_p(a) - \nu_p(b)$. For nonzero rational numbers $a_1, a_2, \ldots, a_n$, two key properties of $\nu_p$ are:
+
+\begin{itemize}
+\item $\nu_p(a_1a_2 \cdots a_n) = \nu_p(a_1) + \nu_p(a_2) + \cdots + \nu_p(a_n)$.
+\item $\nu_p(a_1 + a_2 + \cdots + a_n) \ge \min\{ \nu_p(a_1) , \nu_p(a_2), \ldots \nu_p(a_n) \}$. If the minimum is unique, then equality holds.
+\end{itemize}
+
+We'll call these the \textit{product rule} and the \textit{sum rule}, respectively. While the most famous application of $p$-adic valuation to mathematical olympiads is the \textit{lifting-the-exponent lemma} (see \cite{parvardi}), we can solve several problems using only these two properties.
+
+In this note, we'll focus on the \textit{equality case} of the sum rule, which is more useful than the inequality. All solutions have the same shape: translate the problem to a $p$-adic condition, then use the sum rule, handling the equality case as needed.
+
+\section{Examples}
+
+\begin{example}
+Let $n \ge 2$ be an integer. Show that $
+  H_n = 1/1 + 1/2 + \cdots + 1/n
+$ is not an integer.
+\end{example}
+
+\begin{proof}
+We will show that $\nu_2(H_n)$ is negative. As all integers have non-negative $p$-adic valuations, this finishes. By the sum rule,
+\begin{align*}
+  \nu_2(H_n)
+  &\ge \min\{\nu_2(1/1), \nu_2(1/2), \ldots, \nu_2(1/n)\} \\
+  &= \min\{-\nu_2(1), -\nu_2(2), \ldots, -\nu_2(n)\} \\
+  &= -\max\{\nu_2(1), \nu_2(2), \ldots, \nu_2(n)\}.
+\end{align*}
+Let $2^k$ be the largest power of $2$ that's at most $n$. We claim $2^k$ is the only positive integer $a \le n$ such that $\nu_p(a) = k$. If there was another such $a$, we'd have $a = a'2^k$ for some positive integer $a'$. As $a$ is different from $2^k$, we have $a' \ge 2$. Then $n \ge a \ge 2 \cdot 2^k = 2^{k+1}$, contradicting our choice of $2^k$ as the largest power of $2$ that's at most $n$.
+
+Thus, the minimum in $\{\nu_2(1/1), \nu_2(1/2), \ldots, \nu_2(1/n)\}$ is $\nu_2(1/2^k)$, which is unique. This means we have equality in the sum rule, so $\nu_2(H_n) = -k$. As $n \ge 2$, we have $k \ge 1$, so $\nu_2(H_n)$ is negative, as desired.
+\end{proof}
+
+\begin{example}[Bay Area MO 2018 P4b]
+Show that if $a, b, c$ are nonzero integers such that $a/b + b/c + c/a$ is an integer, then $abc$ is a perfect cube.
+\end{example}
+
+\begin{proof}
+Note that $abc$ is a perfect cube if and only if $3 \mid \nu_p(abc)$ for all primes $p$. Let $p$ be a prime, and let $x$, $y$, and $z$ be $\nu_p(a)$, $\nu_p(b)$, and $\nu_p(c)$, respectively. We will show that $3 \mid x + y + z$.
+
+Because it's an integer, we have $\nu_p(a/b + b/c + c/a) \ge 0$. By the sum rule, we also have
+\begin{align*}
+  \nu_p(a/b + b/c + c/a)
+  &\ge \min\left\{ \nu_p(a/b), \nu_p(b/c), \nu_p(c/a) \right\} \\
+  &= \min\left\{ x-y, y-z, z-x \right\}.
+\end{align*}
+We can't combine these two inequalities, so we reach for the equality case by reasoning about uniqueness.
+
+\begin{itemize}
+\item \textbf{Case 1.} The three integers $x-y$, $y-z$, and $z-x$ are all distinct. Then the minimum must be unique, and we have the equality case of the sum rule, and thus $\nu_p(a/b + b/c + c/a) = \min\left\{ x-y, y-z, z-x \right\}$. These are three distinct integers that sum to zero, so one of them must be negative. But this contradicts $\nu_p(a/b + b/c + c/a) \ge 0$, so this case is impossible.
+
+\item \textbf{Case 2.} Two of these integers are equal. Suppose we had $x - y = y -z$. Then $x + y + z = 3y$, which is divisible by $3$, as desired. The cases $y - z = z - x$ and $z - x = x - y$ are similar.
+\end{itemize}
+\end{proof}
+
+\begin{example}[Polish MO 2019, 2nd Round, P3]
+Let $f(t)=t^3+t$. Decide if there exist rational numbers $x, y$ and positive integers $m, n$ such that $xy = 3$ and $f^m(x) = f^n(y)$. (Here, $f^m(x) = \underbrace{f(f(\cdots f}_{m \text{ times}}(x) \cdots))$.)
+\end{example}
+
+\begin{proof}
+There do not. We proceed by contradiction, examining $\nu_3(f^m(x))$ and $\nu_3(f^n(y))$. By the sum rule,
+\begin{align*}
+  \nu_3(f(x))
+  \ge \min\{ \nu_3(x^3), \nu_3(x) \}
+  = \min\{ 3 \nu_3(x), \nu_3(x) \}.
+\end{align*}
+To get the equality case for the sum rule, we do casework on the sign of $\nu_3(x)$. We have three cases.
+
+\begin{itemize}
+
+\item \textbf{Case 1.} $\nu_3(x) > 0$. Then the minimum in $\{ 3\nu_3(x), \nu_3(x) \}$ is $\nu_3(x)$, which is unique. We have the equality case of the sum rule, so $\nu_3(f(x)) = \nu_3(x) > 0$. By induction, $\nu_3(f^m(x)) > 0$.
+
+\item \textbf{Case 2.} $\nu_3(x) < 0$. This is similar to the first case. The minimum is $3\nu_3(x)$, which is unique, so we have the equality case, and $\nu_3(f(x)) = 3\nu_3(x) < 0$. By induction, $\nu_3(f^m(x)) < 0$.
+
+\item \textbf{Case 3.} $\nu_3(x) = 0$. The sum rule doesn't help in this case, so we can examine $f(x)$ directly. As $\nu_3(x) = 0$, we must have $x \not\equiv 0 \pmod 3$. By Fermat's little theorem, \[
+  f(x) \equiv x^3 + x \equiv x + x \equiv 2x \not\equiv 0 \pmod{3},
+\]
+so $f(x)$ and $3$ are again relatively prime, and $\nu_3(f(x)) = 0$. By induction, $\nu_3(f^m(x)) = 0$.
+
+\end{itemize}
+
+Across the cases, we see that $\nu_3(x)$ and $\nu_3(f^m(x))$ have the same sign. So if, for the sake of contradiction, $\nu_3(f^m(x)) = \nu_3(f^n(y))$, then $\nu_3(x)$ and $\nu_3(y)$ must also have the same sign.
+
+As $xy = 3$, we have $\nu_3(x) + \nu_3(y) = 1$. As the two addends are integers, they cannot have the same sign, contradiction.
+\end{proof}
+
+\section{Problems}
+
+\begin{problem}[Iranian MO 2017, 3rd Round, 1st Number Theory, P1]
+Let $n$ be a positive integer and $P$ a set of prime numbers. Let $A$ be the set of all positive integers less than $n$ not divisible by a prime in $P$. If $|A| > 1$, show that the sum of the reciprocals of the elements of $A$ is not an integer.
+\end{problem}
+
+\begin{problem}[Austrian MO 2016, Part 2, P6]
+Let $a$, $b$, and $c$ be nonzero integers such that $ab/c + bc/a + ca/b$ is an integer. Prove that each of the three numbers $ab/c$, $bc/a$, and $ca/b$ are integers.
+\end{problem}
+
+\begin{problem}[IMO Shortlist 2007 N2]
+Let $b, n > 1$ be integers. Suppose that for each $k > 1$ there exists an integer $a_k$ such that $b - a^n_k$ is divisible by $k$. Prove that $b = A^n$ for some integer $A$.
+\end{problem}
+
+\begin{problem}[APMO 2017 P4]
+Call a rational number $r$ \textit{powerful} if $r$ can be expressed in the form $p^k/q$ for some relatively prime positive integers $p, q$ and some integer $k > 1$. Let $a, b, c$ be positive rational numbers such that $abc = 1$. Suppose there exist positive integers $x, y, z$ such that $a^x + b^y + c^z$ is an integer. Prove that $a, b, c$ are all powerful.
+\end{problem}
+
+\begin{thebibliography}{99}
+
+\bibitem{parvardi} Parvardi, Amir H. (2011). ``Lifting the Exponent Lemma (LTE)''. \texttt{https://s3.amazonaws.com/aops-cdn.artofproblemsolving.com/resources/articles/lifting-the-exponent.pdf}
+
+\end{thebibliography}
+
+\end{document}
