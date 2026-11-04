@@ -309,19 +309,19 @@ That's fine. But what is $\lnot A$? Is it ``There exists irrational $a$ and $b$ 
 
 % Now, is it true that $\hat{\pi} - \pi$ is either positive, negative, or zero? Perhaps a proof of this would begin by saying that there are two cases: either there are a million consecutive zeroes or there aren't. But that's not \emph{quite} true---only one of these cases holds in the first place, and we don't know which one.
 
-We are getting at the heart of the distinction between \textbf{constructive logic} and classical logic. In classical logic, every proposition $A$ must be true or false, so $\lnot A$ is just the opposite. In classical logic, a proposition must be true or false, whether or not we can prove it. But in constructive logic:
+We are getting at the heart of the distinction between \textbf{constructive logic} and classical logic. In classical logic, a proposition must be true or false, whether or not we can prove it. But in constructive logic:
 \begin{itemthin}
 \item To say $A$ is to prove $A$.
 \item To say $\lnot A$ is to prove that $A$ gives $\false$.
-\item To say $A$ is false is to prove that $A$ gives $\false$.
-\item To say $\lnot A$ is false is to prove that $\lnot A$ gives $\false$.
-\item To say $\lnot A$ is false is to prove that (proving that $A$ gives $\false$), gives $\false$.
-\item To say $\lnot A$ is false is to prove that there's no proof that $A$ gives $\false$.
-\item To say $\lnot \lnot A$ is true is to prove that there's no proof that $A$ gives $\false$.
+\item To say $\lnot A$ is to prove that $A$ leads to a contradiction.
+\item To say $A$ is false is to prove that $A$ leads to a contradiction.
+\item To say $\lnot A$ is false is to prove that $\lnot A$ leads to a contradiction.
+\item To say $\lnot A$ is false is to prove that (a proof that $A$ gives $\false$) leads to a contradiction.
+\item To say $\lnot \lnot A$ is to prove that (a proof that $A$ gives $\false$) leads to a contradiction.
 \end{itemthin}
-In constructive logic, $A$ and $\lnot\lnot A$ mean different things, and it's not always true that $\lnot\lnot A \to A$! This actually makes sense, given Gödel's incompleteness theorems, which say that there will always be some true statements we can't prove.
+In constructive logic, $A$ and $\lnot\lnot A$ mean different things, and it's not always true that $\lnot\lnot A \to A$! In fact, we've already seen this for $A$ as ``There exists irrational $a$ and $b$ such that $a^b$ is rational.'' We've shown that its negation, ``For all irrational $a$ and $b$, $a^b$ is irrational'' is false, so $\lnot A \to \false$, and we've proven $\lnot\lnot A$. But again, we haven't proven $A$, because we don't have $a$ and $b$.
 
-This means that, in constructive logic, statements like the law of excluded middle ($A \lor \lnot A$) or double negation elimination ($\lnot \lnot A \to A$) aren't true for all $A$. On the other hand, even if double negation \emph{elimination} is false, double negation \emph{introduction} ($A \to \lnot\lnot A$) is true. Our constructive logic is positive implicational logic with $\lnot$, so we can still use the deduction theorem. To prove $A \to \lnot\lnot A$, we need to prove $A \to (A \to \false) \to \false$. But this follows from $\sf{MP}$, and deduction twice.
+This means that, in constructive logic, statements like the law of excluded middle ($A \lor \lnot A$) or double negation elimination ($\lnot \lnot A \to A$) isn't provable for all $A$. On the other hand, even if we don't have double negation \emph{elimination}, we do have double negation \emph{introduction} ($A \to \lnot\lnot A$). Our constructive logic is positive implicational logic with $\lnot$, so we can still use the deduction theorem. To prove $A \to \lnot\lnot A$, we need to prove $A \to (A \to \false) \to \false$. But this follows from $\sf{MP}$, and deduction twice.
 \begin{align*}
 \vc{\infer[^\sf{MP}]
 {\false}
